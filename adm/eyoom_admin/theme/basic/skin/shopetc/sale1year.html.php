@@ -46,7 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<$cnt; $i++) { ?>
         {
             주문년도: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=sale1month&amp;fr_month=<?php echo preg_replace('/-/','',$list[$i]['od_date']); ?>01&amp;to_month=<?php echo preg_replace('/-/','',$list[$i]['od_date']); ?>12'><?php echo $list[$i]['od_date']; ?></a>",
             주문수: "<?php echo number_format($list[$i]['count']); ?>",

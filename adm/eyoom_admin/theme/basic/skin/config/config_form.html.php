@@ -95,7 +95,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <th class="table-form-th">
                                 <label for="cf_eyoom_admin_theme" class="label">이윰관리자 테마설정<strong class="sound_only">필수</strong></label>
                             </th>
-                            <td colspan="3">
+                            <td>
                                 <label class="select form-width-250px">
                                     <select name="cf_eyoom_admin_theme" id="cf_eyoom_admin_theme" required>
                                         <option value="">선택</option>
@@ -105,6 +105,17 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     </select><i></i>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 이윰 관리자모드의 테마를 설정하합니다.</div>
+                            </td>
+                        <?php if (G5_IS_MOBILE) { ?>
+                        </tr>
+                        <tr>
+                        <?php } ?>
+                            <th class="table-form-th border-left-th">
+                                <label for="cf_permit_level" class="label">사이트 접속 최소 레벨</label>
+                            </th>
+                            <td>
+                                <label class="select form-width-250px"><?php echo get_member_level_select('cf_permit_level', 1, 10, $config['cf_permit_level']) ?><i></i></label>
+                                <div class="note"><strong>Note:</strong> 회원제 사이트를 운영하고자 할 경우, 홈페이지에 접근 가능한 최소 레벨을 설정합니다.</div>
                             </td>
                         </tr>
                         <input type="hidden" name="cf_eyoom_mobile_skin" value="2">

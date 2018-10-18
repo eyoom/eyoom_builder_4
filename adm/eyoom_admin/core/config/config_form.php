@@ -273,6 +273,14 @@ if (!isset($config['cf_eyoom_admin'])) {
 }
 
 /**
+ * 회원제 사이트 설정 필드 추가
+ */
+if (!isset($config['cf_permit_level'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_permit_level` tinyint(4) NOT NULL DEFAULT '1' AFTER `cf_eyoom_mobile_skin` ", true);
+}
+
+/**
  * 슬랙 토큰정보 필드 추가
  */
 if (!isset($config['cf_slack_token'])) {

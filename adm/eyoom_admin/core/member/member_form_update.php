@@ -233,6 +233,18 @@ else if ($w == 'u')
 else
     alert('제대로 된 값이 넘어오지 않았습니다.');
 
+$lev = clean_xss_tags(trim($_POST['lev']));
+$cert = clean_xss_tags(trim($_POST['cert']));
+$open = clean_xss_tags(trim($_POST['open']));
+$adt = clean_xss_tags(trim($_POST['adt']));
+$mail = clean_xss_tags(trim($_POST['mail']));
+$sms = clean_xss_tags(trim($_POST['sms']));
+$sdt = clean_xss_tags(trim($_POST['sdt']));
+$fr_date = trim($_POST['fr_date']);
+$to_date = trim($_POST['to_date']);
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
+
 $qstr .= $wmode ? '&amp;wmode=1': '';
 $qstr .= $lev ? '&amp;lev='.$lev: '';
 $qstr .= $cert ? '&amp;cert='.$cert: '';

@@ -11,7 +11,7 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
     /**
      * 최고관리자 메뉴
      */
-    if ($is_admin == 'super') {
+    if ($is_admin == 'super' || $is_auth) {
         $menu['menu999'] = array (
             array('999000', '테마설정관리', G5_ADMIN_URL.'/eyoom_admin/theme_list.php', 'eyoom_theme'),
             array('999100', '테마관리', G5_ADMIN_URL.'/eyoom_admin/theme_list.php', 'eyb_theme'),
@@ -24,6 +24,7 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
             array('999600', 'EB슬라이더관리', G5_ADMIN_URL.'/eyoom_admin/ebslider_list.php', 'eyb_ebslider'),
             array('999610', 'EB콘텐츠관리', G5_ADMIN_URL.'/eyoom_admin/ebcontents.php', 'eyb_ebcontents'),
             array('999620', 'EB최신글관리', G5_ADMIN_URL.'/eyoom_admin/eblatest_list.php', 'eyb_eblatest'),
+            //array('999630', 'EB배너관리', G5_ADMIN_URL.'/eyoom_admin/ebbanner_list.php', 'eyb_ebbanner'),
             array('999700', '태그관리', G5_ADMIN_URL.'/eyoom_admin/tag_list.php', 'eyb_tag'),
             array('999800', '이윰레벨 환경설정', G5_ADMIN_URL.'/eyoom_admin/level_config.php', 'eyb_level')
         );

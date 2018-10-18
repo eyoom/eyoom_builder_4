@@ -38,6 +38,7 @@ $sql = " update {$g5['config_table']}
                 cf_add_script = '{$_POST['cf_add_script']}',
                 cf_eyoom_admin_theme = '{$_POST['cf_eyoom_admin_theme']}',
                 cf_eyoom_mobile_skin = '{$_POST['cf_eyoom_mobile_skin']}',
+                cf_permit_level = '{$_POST['cf_permit_level']}',
                 cf_use_point = '{$_POST['cf_use_point']}',
                 cf_point_term = '{$_POST['cf_point_term']}',
                 cf_use_copy_log = '{$_POST['cf_use_copy_log']}',

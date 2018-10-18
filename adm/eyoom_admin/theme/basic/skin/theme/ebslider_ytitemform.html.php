@@ -186,7 +186,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                     <tr>
                     <?php } ?>
                         <th class="table-form-th border-left-th">
-                            <label class="label">마지막 플레이 위치 기억</label>
+                            <label class="label">동영상 종료위치</label>
                         </th>
                         <td>
                             <label for="ei_etime" class="input">

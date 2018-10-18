@@ -15,7 +15,7 @@ $tm_name        = clean_xss_tags(get_text(trim($_POST['tm_name'])));
 $eyoom_config   = $eb->decrypt_md5(trim($_POST['eyoom_config']));
 
 if (!$tm_name) alert('잘못된 접근입니다.');
-if (!$tm_key || strlen($tm_key) != 50) alert('잘못된 접근입니다.');
+if (!$tm_key) alert('잘못된 접근입니다.');
 if (!$cm_key) alert('잘못된 접근입니다.');
 if (!$cm_salt) alert('잘못된 접근입니다.');
 if (!$eyoom_config) alert('잘못된 접근입니다.');

@@ -4,7 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-global $is_admin;
+global $is_admin, $eyoom;
 
 /**
  * 상품진열

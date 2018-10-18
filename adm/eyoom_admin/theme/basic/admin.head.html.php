@@ -76,7 +76,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
                     <p class="side-info-title">설치된 이윰빌더 버전</p>
                     <h5 class="side-info-cont">
                         <strong class="color-yellow"><?php echo EYOOM_VERSION; ?></strong>
-                        <small>최신버전 : <a href="<?php echo EYOOM_SITE . '/page/?pid=download4'; ?>" target="_blank">다운로드</a></small>
+                        <small>최신버전 : <a href="<?php echo EYOOM_SITE . '/bbs/board.php?bo_table=eb4_download'; ?>" target="_blank">다운로드</a></small>
                     </h5>
                 </div>
                 <div class="side-info-item margin-bottom-15">
@@ -162,7 +162,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
                 <?php if ($is_youngcart) { ?>
                 <li><a href="<?php echo G5_SHOP_URL; ?>/?shop_theme=<?php echo $eyoom_default['shop_theme']; ?>">쇼핑몰</a></li>
                 <?php } ?>
+                <?php if ($is_admin == 'super') { ?>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/admin.mode.php?to=gnu">그누관리자</a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="eb-header-right">

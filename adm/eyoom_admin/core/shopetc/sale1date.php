@@ -36,6 +36,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
 if (!$sale_data) $sale_data = array();
 
+$i=0;
 foreach($sale_data as $od_date => $data) {
     $sale_info = get_sale_info($data);
 
@@ -44,6 +45,7 @@ foreach($sale_data as $od_date => $data) {
     $list[$i]['count'] = $sale_info['count'];
     $i++;
 }
+$cnt = count($list);
 
 function get_sale_info($row_array) {
     global $tot;

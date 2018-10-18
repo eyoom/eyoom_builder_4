@@ -157,8 +157,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
             <div class="margin-bottom-20"></div>
             <div class="member-point">
                 <div class="width-50 pull-left">
-                    <p class="margin-bottom-0"><?php echo $levelset['gnu_name']; ?> - <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u>내역보기</u></span></p>
-                    <p class="color-red font-size-12"><?php echo $point; ?></p></a>
+                    <p class="margin-bottom-0"><?php echo $levelset['gnu_name']; ?> - <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u>내역보기</u></a></p>
+                    <p class="color-red font-size-12"><?php echo $point; ?></p>
                 </div>
                 <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
                 <div class="widht-50 pull-right text-right">

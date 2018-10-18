@@ -520,7 +520,7 @@ function poll_result(url) {
 .sidebar-right-mask {display:none}
 .sidebar-right-mask.active {display:block;position:fixed;top:0;bottom:0;left:0;right:0;z-index:1006;background:#000;opacity:0.5}
 .sidebar.right .sidebar-right-content {position:relative;height:100%;width:100%}
-.sidebar.right .sidebar-title-wrap {position:fixed;top:0;width:280px;z-index:1}
+.sidebar.right .sidebar-title-wrap {position:absolute;top:0;width:280px;z-index:1}
 .sidebar.right .sidebar-title {background:#454545;height:40px;line-height:40px;padding:0 15px;font-size:14px;color:#fff;font-weight:bold;margin-top:0;margin-bottom:0;text-align:right}
 .sidebar.right .sidebar-config-wrap {position:relative;overflow:hidden;min-height:400px;padding:55px 0 55px 15px}
 .sidebar.right .sidebar-config-wrap label {font-size:12px}

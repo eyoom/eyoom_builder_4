@@ -92,6 +92,8 @@ $item_view = 'zoom';
                             </label>
                         </div>
                     </li>
+                <?php } ?>
+                <?php if ($is_admin || $is_auth) { // 관리자일 경우 ?>
                     <li><a href="<?php echo G5_ADMIN_URL; ?>"><i class="fas fa-cog margin-right-5"></i>관리자</a></li>
                 <?php } ?>
                 <?php if ($is_member) { // 회원일 경우 ?>

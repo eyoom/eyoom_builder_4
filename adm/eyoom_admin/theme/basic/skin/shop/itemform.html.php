@@ -95,6 +95,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
     <input type="hidden" name="sod"  value="<?php echo $sod; ?>">
     <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
     <input type="hidden" name="stx"  value="<?php echo $stx; ?>">
+    <input type="hidden" name="sdt"  value="<?php echo $sdt; ?>">
+    <input type="hidden" name="fr_date"  value="<?php echo $fr_date; ?>">
+    <input type="hidden" name="to_date"  value="<?php echo $to_date; ?>">
+    <input type="hidden" name="ituse"  value="<?php echo $ituse; ?>">
+    <input type="hidden" name="itsoldout"  value="<?php echo $itsoldout; ?>">
+    <input type="hidden" name="itype"  value="<?php echo $itype; ?>">
+    <input type="hidden" name="cate_a" value="<?php echo $cate_a; ?>">
+    <input type="hidden" name="cate_b" value="<?php echo $cate_b; ?>">
+    <input type="hidden" name="cate_c" value="<?php echo $cate_c; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
     <input type="hidden" name="uploading" id="uploading" value="">

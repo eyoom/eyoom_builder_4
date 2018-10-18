@@ -47,20 +47,26 @@ if ($sdt_target && $fr_date && $to_date) {
  * 서브 카테고리
  */
 $cate2 = $cate3 = $cate4 = array();
+$cate_a = clean_xss_tags(trim($_GET['cate_a']));
+$cate_b = clean_xss_tags(trim($_GET['cate_b']));
+$cate_c = clean_xss_tags(trim($_GET['cate_c']));
 if ($cate_a) {
     $sql_cate = " and (a.ca_id like '{$cate_a}%' or a.ca_id2 like '{$cate_a}%' or a.ca_id3 like '{$cate_a}%') ";
     $w = " (1) and ca_id like '{$cate_a}%' and length(ca_id)=4";
     $cate2 = $shop->get_goods_category($fields, $w);
+    $qstr .= "&amp;cate_a={$cate_a}";
 }
 if ($cate_a && $cate_b) {
     $sql_cate = " and (a.ca_id like '{$cate_b}%' or a.ca_id2 like '{$cate_b}%' or a.ca_id3 like '{$cate_b}%') ";
     $w = " (1) and ca_id like '{$cate_b}%' and length(ca_id)=6";
     $cate3 = $shop->get_goods_category($fields, $w);
+    $qstr .= "&amp;cate_b={$cate_b}";
 }
 if ($cate_a && $cate_b && $cate_c) {
     $sql_cate = " and (a.ca_id like '{$cate_c}%' or a.ca_id2 like '{$cate_c}%' or a.ca_id3 like '{$cate_c}%') ";
     $w = " (1) and ca_id like '{$cate_c}%' and length(ca_id)=8";
     $cate4 = $shop->get_goods_category($fields, $w);
+    $qstr .= "&amp;cate_c={$cate_c}";
 }
 
 $sql_search .= $sql_cate;

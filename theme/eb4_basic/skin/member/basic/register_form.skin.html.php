@@ -662,10 +662,13 @@ function fregisterform_submit(f)
 }
 
 function check_duplication(target) {
-    var mb_id = $('#reg_mb_id').val();
-
     switch(target) {
         case 'mb_id':
+            var mb_id = $('#reg_mb_id').val();
+            if (!mb_id) {
+                alert('아이디를 입력해 주세요.');
+                return false;
+            }
             var msg = reg_mb_id_check();
             if (msg) {
                 swal({
@@ -692,6 +695,11 @@ function check_duplication(target) {
             }
             break;
         case 'mb_nick':
+            var mb_nick = $('#reg_mb_nick').val();
+            if (!mb_nick) {
+                alert('닉네임을 입력해 주세요.');
+                return false;
+            }
             var msg = reg_mb_nick_check();
             if (msg) {
                 swal({
@@ -718,6 +726,11 @@ function check_duplication(target) {
             }
             break;
         case 'mb_email':
+            var mb_email = $('#reg_mb_email').val();
+            if (!mb_email) {
+                alert('이메일을 입력해 주세요.');
+                return false;
+            }
             var msg = reg_mb_email_check();
             if (msg) {
                 swal({

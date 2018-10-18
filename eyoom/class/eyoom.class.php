@@ -136,7 +136,7 @@ class eyoom extends qfile
         $memo_not_read = $row['cnt'];
 
         $is_auth = false;
-        $sql = " select count(*) as cnt from {$this->g5['auth_table']} where mb_id = '{$member['mb_id']}' ";
+        $sql = " select count(*) as cnt from {$this->g5['auth_table']} where mb_id = '{$mb_id}' ";
         $row = sql_fetch($sql);
         if ($row['cnt'])
             $is_auth = true;

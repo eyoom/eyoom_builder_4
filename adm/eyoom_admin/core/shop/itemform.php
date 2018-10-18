@@ -72,7 +72,28 @@ else
     alert();
 }
 
+$cate_a = clean_xss_tags(trim($_GET['cate_a']));
+$cate_b = clean_xss_tags(trim($_GET['cate_b']));
+$cate_c = clean_xss_tags(trim($_GET['cate_c']));
+$sdt = clean_xss_tags(trim($_GET['sdt']));
+$fr_date = trim($_GET['fr_date']);
+$to_date = trim($_GET['to_date']);
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
+$ituse = clean_xss_tags(trim($_GET['ituse']));
+$itsoldout = clean_xss_tags(trim($_GET['itsoldout']));
+$itype = clean_xss_tags(trim($_GET['itype']));
+
 $qstr  = $qstr.'&amp;sca='.$sca.'&amp;page='.$page;
+if ($cate_a) $qstr .= "&amp;cate_a={$cate_a}";
+if ($cate_a && $cate_b) $qstr .= "&amp;cate_b={$cate_b}";
+if ($cate_a && $cate_b && $cate_c) $qstr .= "&amp;cate_c={$cate_c}";
+if ($sdt) $qstr .= "&amp;sdt={$sdt}";
+if ($fr_date) $qstr .= "&amp;fr_date={$fr_date}";
+if ($to_date) $qstr .= "&amp;to_date={$to_date}";
+if ($ituse) $qstr .= "&amp;ituse={$ituse}";
+if ($itsoldout) $qstr .= "&amp;itsoldout={$itsoldout}";
+if ($itype) $qstr .= "&amp;itype={$itype}";
 
 // 분류리스트
 $category_select = '';

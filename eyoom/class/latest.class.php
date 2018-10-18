@@ -29,22 +29,6 @@ class latest extends qfile
              */
             @mkdir($this->latest_path, G5_DIR_PERMISSION);
             @chmod($this->latest_path, G5_DIR_PERMISSION);
-
-            /**
-             * g5_board_new 테이블에 wr_hit 필드 추가
-             */
-            if(!sql_query(" select wr_hit from {$this->g5['board_new_table']} limit 1 ", false)) {
-                $sql = " alter table `{$this->g5['board_new_table']}`
-                            add `wr_hit` int(11) NOT NULL default '0' after `mb_id`,
-                            add `wr_comment` int(11) NOT NULL default '0' after `wr_hit`
-                ";
-                sql_query($sql, true);
-
-                /**
-                 * 추가된 wr_id에 실제 히트수 업데이트
-                 */
-                $this->update_wr_id();
-            }
         }
     }
 

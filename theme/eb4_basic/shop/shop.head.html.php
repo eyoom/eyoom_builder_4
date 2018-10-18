@@ -43,7 +43,9 @@ $item_view = 'zoom';
             <div class="topbar-left">
                 <ul class="list-unstyled left-menu">
                     <li><a href="<?php echo G5_SHOP_URL; ?>" class="active">쇼핑몰</a></li>
+                    <?php if ($eyoom['use_shop_index'] == 'n') { ?>
                     <li><a href="<?php echo G5_URL; ?>">커뮤니티</a></li>
+                    <?php } ?>
                     <?php if (!G5_IS_MOBILE) { ?>
                     <li>
                         <a id="bookmarkme" href="javascript:void(0);" rel="sidebar" title="bookmark this page">북마크</a>

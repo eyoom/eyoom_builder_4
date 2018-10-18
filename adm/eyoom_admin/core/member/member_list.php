@@ -61,7 +61,7 @@ if ($cert) {
 $open = $_GET['open'] ? (int) $_GET['open']: '';
 if ($open) {
     $open_val = $open-1 == 1 ? 1:'';
-    $sql_search .= " and mb_openify = '{$open_val}' ";
+    $sql_search .= " and mb_open = '{$open_val}' ";
     $qstr .= "&amp;open={$open}";
     if ($open == '1') {
         $mb_open_no = 'checked';

@@ -53,6 +53,19 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     if (!$is_admin) $eb->under_construction();
 
     /**
+     * 회원제 사이트인가?
+     */
+    if (isset($config['cf_permit_level']) && $config['cf_permit_level'] > 1) {
+        if (!preg_match("/(login|logout|regist|captcha|password_lost)/i", $_SERVER['REQUEST_URI'])) {
+            if (!$is_member) {
+                header("location:".G5_BBS_URL."/login.php");  
+            } else if ($member['mb_level'] < $config['cf_permit_level']) {
+                goto_url(G5_BBS_URL."/logout.php");
+            }
+        }
+    }
+
+    /**
      * 커뮤니티 테마
      */
     $theme = $loaded_theme['comm'];

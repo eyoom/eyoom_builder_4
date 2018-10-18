@@ -568,7 +568,28 @@ if($all_fields) {
     sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");
 }
 
+$cate_a = clean_xss_tags(trim($_POST['cate_a']));
+$cate_b = clean_xss_tags(trim($_POST['cate_b']));
+$cate_c = clean_xss_tags(trim($_POST['cate_c']));
+$sdt = clean_xss_tags(trim($_POST['sdt']));
+$fr_date = trim($_POST['fr_date']);
+$to_date = trim($_POST['to_date']);
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
+$ituse = clean_xss_tags(trim($_POST['ituse']));
+$itsoldout = clean_xss_tags(trim($_POST['itsoldout']));
+$itype = clean_xss_tags(trim($_POST['itype']));
+
 $qstr = "$qstr&amp;sca=$sca&amp;page=$page";
+if ($cate_a) $qstr .= "&amp;cate_a={$cate_a}";
+if ($cate_a && $cate_b) $qstr .= "&amp;cate_b={$cate_b}";
+if ($cate_a && $cate_b && $cate_c) $qstr .= "&amp;cate_c={$cate_c}";
+if ($sdt) $qstr .= "&amp;sdt={$sdt}";
+if ($fr_date) $qstr .= "&amp;fr_date={$fr_date}";
+if ($to_date) $qstr .= "&amp;to_date={$to_date}";
+if ($ituse) $qstr .= "&amp;ituse={$ituse}";
+if ($itsoldout) $qstr .= "&amp;itsoldout={$itsoldout}";
+if ($itype) $qstr .= "&amp;itype={$itype}";
 $qstr .= $wmode ? '&amp;wmode=1':'';
 
 if ($w == "u") {
