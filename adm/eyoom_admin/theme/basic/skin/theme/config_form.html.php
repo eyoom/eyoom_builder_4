@@ -59,10 +59,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td colspan="3">
                                 <div class="inline-group">
-                                    <label for="bootstrap1" class="radio"><input type="radio" name="bootstrap" id="bootstrap1" value="1" <?php echo $eyoom['bootstrap'] == '1' ? 'checked': '';?>><i></i> 반응형</label>
-                                    <label for="bootstrap2" class="radio"><input type="radio" name="bootstrap" id="bootstrap2" value="0" <?php echo $eyoom['bootstrap'] == '0' ? 'checked': '';?>><i></i> 비반응형</label>
+                                    <label for="is_responsive1" class="radio"><input type="radio" name="is_responsive" id="is_responsive1" value="1" <?php echo $eyoom['is_responsive'] == '1' ? 'checked': '';?>><i></i> 반응형</label>
+                                    <label for="is_responsive2" class="radio"><input type="radio" name="is_responsive" id="is_responsive2" value="0" <?php echo $eyoom['is_responsive'] == '0' ? 'checked': '';?>><i></i> 비반응형</label>
                                 </div>
-                                <div class="note"><strong>Note:</strong> 비반응형으로 설정할 경우 모바일용 스킨이 설정되어 있는지 체크해 주셔야 합니다.</div>
+                                <div class="note"><strong>Note:</strong> 테마를 반응형으로 할지 비반응형으로 할지 설정합니다.</div>
                             </td>
                         </tr>
                         <?php if ($is_youngcart) { ?>

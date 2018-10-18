@@ -246,7 +246,7 @@
 .footer .footer-left > ul > li:last-child a:hover {text-decoration:underline}
 .footer .footer-left .footer-info-btn {display:inline-block;cursor:pointer;box-shadow:none}
 .footer .footer-left .dropup .dropdown-menu > li > a {font-size:11px}
-.footer .footer-right {text-align:right;padding-right:14px;overflow:hidden}
+.footer .footer-right {text-align:right;padding-right:0;overflow:hidden}
 .footer .footer-right p {color:#656565;font-size:11px;line-height:34px;margin-bottom:0}
 
 /*---------- Page Title ----------*/

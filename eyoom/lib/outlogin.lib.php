@@ -39,6 +39,7 @@ function eb_outlogin ($skin_dir = 'basic') {
     /**
      * 아웃로그인 스킨폴더
      */
+    $skin_dir = !$skin_dir ? 'basic': $skin_dir;
     if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
         $outlogin_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/outlogin/'.$skin_dir;
         if (!is_dir($outlogin_skin_path))

@@ -25,7 +25,7 @@ $use_eyoom_builder = true; //false
 /**
  * 소셜로그인일 경우 리턴
  */
-if (preg_match("/(oauth|social)/i", $_SERVER['SCRIPT_NAME'])) $use_eyoom_builder = false;
+if (preg_match("/(oauth|social)/i", $_SERVER['SCRIPT_NAME']) && !preg_match("/register_member/i", $_SERVER['SCRIPT_NAME'])) $use_eyoom_builder = false;
 
 /**
  * 이윰빌더를 사용하지 않기

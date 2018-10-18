@@ -266,4 +266,4 @@ if ($all_fields) {
 }
 
 $qstr = $wmode ? '&amp;wmode=1':'';
-alert("정상적으로 적용하였습니다.", G5_ADMIN_URL . "/?dir=theme&amp;pid=board_form&amp;w=u&amp;bo_table={$bo_table}&thema={$theme}{$qstr}");
+alert("정상적으로 적용하였습니다.", G5_ADMIN_URL . "/?dir=theme&amp;pid=board_form&amp;w=u&amp;bo_table={$bo_table}&amp;{$qstr}");

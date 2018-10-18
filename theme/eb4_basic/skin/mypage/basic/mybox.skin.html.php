@@ -22,7 +22,7 @@ $lv = $eb->level_info($lvset);
 .my-info {position:relative;margin-bottom:30px}
 .my-info .info-title {position:relative;margin:0 0 10px}
 .my-info .info-title-btn {text-align:right;padding-top:9px}
-.my-info .info-box {position:relative;margin-bottom:30px;padding:15px;border:1px solid #e5e5e5}
+.my-info .info-box {position:relative;margin-bottom:30px;padding:15px;border:1px solid #e5e5e5;min-height:200px;}
 .my-info .info-photo {position:absolute;top:15px;left:0;width:190px;height:190px;padding:0 15px;border-right:1px solid #f2f2f2}
 .my-info .info-photo-circle {position:relative;overflow:hidden;width:100px;height:100px;margin:20px auto 20px;text-align:center;background-color:#a5a5a5;border:3px solid #fff;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;box-shadow:0 0 1px rgba(0,0,0,.3)}
 .my-info .info-photo img {display:block;width:100% \9;max-width:100%;height:auto}
@@ -31,6 +31,7 @@ $lv = $eb->level_info($lvset);
 .my-info .info-follow p {padding:3px 0;font-size:12px}
 .my-info .info-follow span.badge {padding:3px 10px;min-width:80px;text-align:right}
 .my-info .info-box-bottom {position:relative;padding:15px;border:1px solid #e5e5e5;font-size:12px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 767px) {
     .my-info .info-title-name, .my-info .info-title-btn {text-align:center}
 }
@@ -39,6 +40,7 @@ $lv = $eb->level_info($lvset);
     .my-info .info-photo-circle {width:80px;height:80px;margin:30px auto 20px}
     .my-info .info-content {margin-left:120px}
 }
+<?php } ?>
 </style>
 
 <div class="my-info">
@@ -69,18 +71,22 @@ $lv = $eb->level_info($lvset);
             </div>
             <a href="#" class="btn-e btn-e-default btn-e-block" data-toggle="modal" data-target=".profile-modal">사진 변경</a>
         </div>
+
         <div class="info-content">
             <div class="info-point">
                 <div class="width-50 pull-left font-size-12">
                     <p class="margin-bottom-0"><?php echo $levelset['gnu_name']; ?> - <a <?php if (!G5_IS_MOBILE) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u>내역보기</u></span></p>
                     <p class="color-red font-size-13"><?php echo number_format($member['mb_point']); ?></p></a>
                 </div>
+                <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
                 <div class="widht-50 pull-right font-size-12 text-right">
                     <p class="margin-bottom-0"><?php echo $levelset['eyoom_name']; ?></p>
                     <p class="color-red font-size-13"><?php echo number_format($eyoomer['level_point']); ?></p>
                 </div>
+                <?php } ?>
                 <div class="clearfix"></div>
             </div>
+            <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
             <div class="info-statistics">
                 <span class="progress-info-left">[레벨 <?php echo $eyoomer['level']; ?>] - 진행률</span>
                 <span class="progress-info-right"><?php echo $lvinfo['ratio']; ?>%</span>
@@ -89,6 +95,8 @@ $lv = $eb->level_info($lvset);
                     </div>
                 </div>
             </div>
+            <?php } ?>
+            <?php if ($eyoom['is_community_theme'] == 'y') { ?>
             <div class="info-follow">
                 <p><span class="pull-left">&middot; 맞팔친구</span><a href="<?php echo G5_URL; ?>/?<?php echo $member['mb_id']; ?>&friends"><span class="badge badge-yellow pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="맞팔친구"><?php if ($eyoomer['cnt_friends']) { ?><?php echo $eyoomer['cnt_friends']; ?>명<?php } else { ?>0명<?php } ?></span></a></p>
                 <div class="clearfix"></div>
@@ -97,8 +105,10 @@ $lv = $eb->level_info($lvset);
                 <p><span class="pull-left">&middot; 팔로윙</span><a href="<?php echo G5_URL; ?>/?<?php echo $member['mb_id']; ?>&following"><span class="badge badge-dark pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="팔로윙"><?php if ($eyoomer['cnt_following']) { ?><?php echo $eyoomer['cnt_following']; ?>명<?php } else { ?>0명<?php } ?></span></a></p>
                 <div class="clearfix"></div>
             </div>
+            <?php } ?>
         </div>
     </div>
+
     <div class="info-box-bottom">
         - <strong>가입일</strong> : <?php echo $member['mb_datetime']; ?>
         <div class="margin-hr-10"></div>

@@ -114,11 +114,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <tr>
                         <th class="table-form-th">
                             <label for="me_link" class="label">메뉴링크</label>
+                            <?php if ($meinfo['me_link']) { ?>
+                            <div><a href="<?php echo $meinfo['me_url']; ?>" target="_blank" class="btn-e btn-e-xs btn-e-pink"><i class="fas fa-link"></i> GO</a></div>
+                            <?php } ?>
                         </th>
                         <td colspan="3">
                             <label class="input">
                                 <i class="icon-append fas fa-link"></i>
-                                <input type="text" name="me_link" id="me_link" value="<?php echo $meinfo['me_link']; ?>">
+                                <input type="text" name="me_link" id="me_link" value="<?php echo $meinfo['me_url']; ?>">
                             </label>
                             <label class="select form-width-100px">
                                 <select name="me_target" id="me_target">

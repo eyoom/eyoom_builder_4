@@ -5,18 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<style>
-.notice-roll-shop-wrap {position:relative}
-.notice-roll-shop {position:relative;overflow:hidden;height:35px;text-align:left}
-.notice-roll-shop .label {position:absolute;top:10px;left:0}
-.notice-roll-shop .label-red {background:#FF4948}
-.notice-roll-shop ul {position:absolute;width:100%;list-style:none;margin:0;padding:0}
-.notice-roll-shop ul li {position:relative;height:35px;box-sizing:content-box}
-.notice-roll-shop ul li a {line-height:36px;font-size:12px;margin-left:43px}
-.notice-roll-shop ul li span {line-height:36px;font-size:12px;margin-left:43px}
-.notice-roll-shop ul li .notice-date {position:absolute;top:0;right:0;background:#fff;padding-left:10px}
-</style>
-
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 <div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
     <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-8px;text-align:left;z-index:99">
@@ -31,6 +19,18 @@ if (!defined('_EYOOM_')) exit;
 <?php } ?>
 
 <?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
+<style>
+.notice-roll-shop-wrap {position:relative}
+.notice-roll-shop {position:relative;overflow:hidden;height:35px;text-align:left}
+.notice-roll-shop .label {position:absolute;top:10px;left:0}
+.notice-roll-shop .label-red {background:#FF4948}
+.notice-roll-shop ul {position:absolute;width:100%;list-style:none;margin:0;padding:0}
+.notice-roll-shop ul li {position:relative;height:35px;box-sizing:content-box}
+.notice-roll-shop ul li a {line-height:36px;font-size:12px;margin-left:43px}
+.notice-roll-shop ul li span {line-height:36px;font-size:12px;margin-left:43px}
+.notice-roll-shop ul li .notice-date {position:absolute;top:0;right:0;background:#fff;padding-left:10px}
+</style>
+
 <div class="notice-roll-shop-wrap">
     <?php if (is_array($el_item)) { foreach ($el_item as $k => $eb_latest) { ?>
     <div class="notice-roll-shop">
@@ -51,14 +51,14 @@ if (!defined('_EYOOM_')) exit;
             <?php } ?>
         </ul>
     </div>
-    
+
     <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
     <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-8px;text-align:right">
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_itemform&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;li_no=<?php echo $eb_latest['li_no']; ?>&amp;w=u&amp;iw=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-dark"><i class="far fa-edit"></i> EB최신글 아이템 설정</a>
     </div>
     <?php } ?>
     <?php }} ?>
-    
+
     <?php if ($el_default) { ?>
     <div class="notice-roll-shop">
         <span class="label label-red">공지</span>

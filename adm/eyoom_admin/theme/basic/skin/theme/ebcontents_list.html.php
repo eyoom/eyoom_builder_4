@@ -81,10 +81,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         <?php for ($i=0; $i<count($list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ec_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['ec_no']; ?>'><input type='hidden' name='ec_code[<?php echo $i; ?>]' value='<?php echo $list[$i]['ec_code']; ?>'>",
-            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_form&amp;thema=<?php echo $_theme; ?>&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_itemlist&amp;thema=<?php echo $_theme; ?>&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>아이템관리</u></a>",
+            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_form&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_itemlist&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>아이템관리</u></a>",
             스킨: "<?php if ($list[$i]['ec_skin_img']) { ?><img src='<?php echo $list[$i]['ec_skin_img']; ?>' class='img-responsive'><?php } ?><?php echo get_text($list[$i]['ec_skin']); ?>",
             콘텐츠마스터명: "<?php echo get_text($list[$i]['ec_name']); ?>",
-            치환코드: "<div class='eb-clipboard'><div id='subs_code' class='eb-clipboard-cont'><?php echo $list[$i]['ec_chg_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code'>코드복사</div></div>",
+            치환코드: "<div class='eb-clipboard'><div id='subs_code_<?php echo $i; ?>' class='eb-clipboard-cont'><?php echo $list[$i]['ec_chg_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code_<?php echo $i; ?>'>코드복사</div></div>",
             <?php if ($meinfo) { ?>
             출력순서: "<label class='input'><input type='text' name='ec_sort[<?php echo $i; ?>]' id='ec_sort_<?php echo $i; ?>' value='<?php echo $list[$i]['ec_sort']; ?>'><input type='hidden' name='ec_sort_old[<?php echo $i; ?>]' value='<?php echo $list[$i]['ec_sort']; ?>'></label>",
             <?php } ?>

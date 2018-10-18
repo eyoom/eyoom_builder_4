@@ -111,7 +111,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <?php if (0) { // 향후 모바일 전용테마 서비스를 제공할 때 기능 재구현 예정 ?>
                         <tr>
                             <th class="table-form-th border-left-th">
-                                <label for="cf_point_term" class="label">모바일 스킨설정</label>
+                                <label for="cf_eyoom_mobile_skin" class="label">모바일 스킨설정</label>
                             </th>
                             <td>
                                 <label class="select form-width-250px">

@@ -44,8 +44,7 @@ sql_query($sql, false);
 /**
  * 디렉토리가 없다면 생성
  */
-@mkdir(G5_DATA_PATH.'/ebcontents/'.$this_theme.'/', G5_DIR_PERMISSION);
-@chmod(G5_DATA_PATH.'/ebcontents/'.$this_theme.'/', G5_DIR_PERMISSION);
+$qfile->make_directory(G5_DATA_PATH.'/ebcontents/'.$this_theme.'/');
 
 /**
  * EB Contents 정보 가져오기

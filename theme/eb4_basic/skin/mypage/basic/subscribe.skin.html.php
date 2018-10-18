@@ -43,6 +43,7 @@ if (!defined('_EYOOM_')) exit;
 .my-subscribe .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
 .my-subscribe .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 767px) {
     .my-subscribe .subscribe-select-left {position:absolute;top:-50px;right:115px;width:110px}
     .my-subscribe .subscribe-select-right {position:absolute;top:-50px;right:0;width:110px}
@@ -59,6 +60,7 @@ if (!defined('_EYOOM_')) exit;
     .subscribe-box .subscribe-info .subscribe-member .subscribe-nick .sv_wrap > a {display:inherit;overflow:inherit;white-space:inherit;word-wrap:inherit;text-overflow:inherit;color:#252525;width:auto}
     .subscribe-box .subscribe-info .subscribe-member .subscribe-nick .sv_wrap > .dropdown-menu {margin-top:5px}
 }
+<?php } ?>
 @media (min-width: 768px) {
     .my-subscribe-modal {width:720px;margin:10px auto}
     .my-subscribe-modal .modal-header, .my-subscribe-modal .modal-body, .my-subscribe-modal .modal-footer {padding:10px 20px}

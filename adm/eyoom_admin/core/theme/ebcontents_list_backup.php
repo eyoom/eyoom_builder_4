@@ -39,10 +39,7 @@ sql_query($sql, false);
  * EB 컨텐츠 아이템 파일 저장 경로
  */
 $ebcontents_folder = G5_DATA_PATH.'/ebcontents/';
-if(!@is_dir($ebcontents_folder) ) {
-    @mkdir($ebcontents_folder, G5_DIR_PERMISSION);
-    @chmod($ebcontents_folder, G5_DIR_PERMISSION);
-}
+$qfile->make_directory($ebcontents_folder);
 
 /**
  * 배너 테이블에서 작업테마의 배너/광고 레코드 정보 가져오기

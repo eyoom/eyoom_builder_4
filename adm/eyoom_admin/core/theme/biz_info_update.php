@@ -137,4 +137,4 @@ $qstr = '';
 $qstr .= "&amp;amode={$amode}";
 $qstr .= "&amp;wmode={$wmode}";
 
-alert("기본정보를 적용하였습니다.", G5_ADMIN_URL. '/?dir=theme&amp;pid=biz_info&amp;thema='. $this_theme . $qstr);
+alert("기본정보를 적용하였습니다.", G5_ADMIN_URL. '/?dir=theme&amp;pid=biz_info&amp;'.$qstr);

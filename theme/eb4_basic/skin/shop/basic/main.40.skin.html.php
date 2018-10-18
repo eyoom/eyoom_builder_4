@@ -50,6 +50,7 @@ if (!defined('_EYOOM_')) exit;
 .product-main-40 .slick-next:before, .product-main-40 .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#000;font-size:16px}
 .product-main-40 .slick-next:before {content:"\f054"}
 .product-main-40 .slick-prev:before {content:"\f053"}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (min-width:768px) and (max-width:1199px) {
 	.product-main-40-in {margin-left:-5px;margin-right:-5px}
 	.product-main-40 .item-main-40 {padding-left:5px;padding-right:5px}
@@ -61,6 +62,7 @@ if (!defined('_EYOOM_')) exit;
 	.product-main-40 .product-description .title-price {font-size:13px}
 	.product-main-40 .product-description .line-through {font-size:11px}
 }
+<?php } ?>
 </style>
 
 <div class="product-main-40">
@@ -159,6 +161,7 @@ $('.product-main-40-in').slick({
     slidesToScroll: 4,
     autoplay: true,
     autoplaySpeed: 4000,
+    <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
     responsive: [
         {
             breakpoint: 992,
@@ -175,5 +178,6 @@ $('.product-main-40-in').slick({
             }
         }
     ]
+    <?php } ?>
 });
 </script>

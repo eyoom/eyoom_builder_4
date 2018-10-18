@@ -101,4 +101,4 @@ $es_ytitem_file = G5_DATA_PATH . '/ebslider/'.$ei_theme.'/es_ytitem_' . $es_code
  */
 $qfile->save_file('es_ytitem', $es_ytitem_file, $es_ytitem, true);
 
-alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_ytitemform&amp;es_code='.$es_code.'&amp;'.$qstr.'&amp;thema='.$ei_theme.'&amp;w=u&amp;iw=u&amp;wmode=1&amp;ei_no='.$ei_no);
+alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_ytitemform&amp;es_code='.$es_code.'&amp;'.$qstr.'&amp;w=u&amp;iw=u&amp;wmode=1&amp;ei_no='.$ei_no);

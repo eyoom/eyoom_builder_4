@@ -25,9 +25,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
 .shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
 .shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
 }
+<?php } ?>
 <?php if (!G5_IS_MOBILE) { // 모바일이 아닐경우 ?>
 .shop-cart .eyoom-form .checkbox i {top:2px}
 .shop-cart .table-list-eb .table {margin-bottom:0}
@@ -65,10 +67,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-cart .shop-cart-total .cart-total-box strong {color:#000}
 .shop-cart .shop-cart-total .cart-total-box .cart-total-price {color:#FF4848;font-size:16px}
 .shop-cart .cart-act-btn {margin-top:30px;text-align:center}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-cart .shop-cart-total .cart-total-box {font-size:13px}
     .shop-cart .shop-cart-total .cart-total-box .cart-total-price {font-size:14px}
 }
+<?php } ?>
 </style>
 
 <script src="<?php echo G5_JS_URL; ?>/shop.js"></script>

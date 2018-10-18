@@ -19,6 +19,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     <form id="fsearch" name="fsearch" class="eyoom-form" method="get">
     <input type="hidden" name="dir" value="<?php echo $dir; ?>" id="dir">
     <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
+    <input type="hidden" name="thema" value="<?php echo $this_theme; ?>" id="thema">
     <input type="hidden" name="sst" id="sst" value="<?php echo $sst; ?>">
     <input type="hidden" name="sod" id="sod" value="<?php echo $sod; ?>">
 
@@ -178,11 +179,9 @@ window.closeModal = function(){
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=board_form&amp;w=u&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a>",
-            <?php if (!(G5_IS_MOBILE || $wmode)) { ?>
-            게시판: "<a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;'><u>보기</u></a> <a href='<?php echo G5_BBS_URL; ?>/write.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>글쓰기</u></a>",
-            <?php } ?>
+            게시판: "<a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;'><u>보기</u></a> <a href='<?php echo G5_BBS_URL; ?>/write.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>글쓰기</u></a> <a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;theme=<?php echo $this_theme; ?>' target='_blank' class='margin-left-5'><u>바로가기</u></a>",
             그룹: "<?php echo $list[$i]['gr_subject']; ?>",
-            테이블아이디: "<input type='hidden' name='board_table[<?php echo $i; ?>]' value='<?php echo $list[$i]['bo_table']; ?>'><a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_form&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['bo_table']; ?></strong></a>",
+            테이블아이디: "<input type='hidden' name='board_table[<?php echo $i; ?>]' value='<?php echo $list[$i]['bo_table']; ?>'><a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_form&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['bo_table']; ?></strong></a>",
             제목: "<?php echo get_text($list[$i]['bo_subject']); ?>",
             글작성회수제한: "<label class='input'><input type='text' name='bo_write_limit[<?php echo $i; ?>]' id='bo_write_limit_<?php echo $i; ?>' value='<?php echo $list[$i]['bo_write_limit']; ?>'></label>",
             이윰스킨: "<label class='select'><?php echo $list[$i]['bo_skin_select']; ?><i></i></label>",
@@ -208,9 +207,7 @@ $(function() {
         fields         : [
             { name: "체크", type: "text", width: 40 },
             { name: "관리", type: "text", align: "center", width: 80, headercss: "set-btn-header", css: "set-btn-field" },
-            <?php if (!(G5_IS_MOBILE || $wmode)) { ?>
-            { name: "게시판", type: "text", align: "center", width: 100 },
-            <?php } ?>
+            { name: "게시판", type: "text", align: "center", width: 130 },
             { name: "그룹", type: "text", width: 150 },
             { name: "테이블아이디", type: "text", width: 150 },
             { name: "제목", type: "text", width: 200 },

@@ -77,4 +77,4 @@ if ($wmode) {
     exit;
 }
 
-alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebgoods_form&amp;'.$qstr.'&amp;thema='.$_POST['theme'].'&amp;w=u&amp;eg_code='.$eg_code);
+alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebgoods_form&amp;'.$qstr.'&amp;w=u&amp;eg_code='.$eg_code);

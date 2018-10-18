@@ -87,7 +87,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='eg_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['eg_no']; ?>'><input type='hidden' name='eg_code[<?php echo $i; ?>]' value='<?php echo $list[$i]['eg_code']; ?>'>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_form&amp;thema=<?php echo $this_theme; ?>&amp;eg_code=<?php echo $list[$i]['eg_code']; ?>&amp;w=u'><u>수정</u></a>",
             상품마스터제목: "<?php echo get_text($list[$i]['eg_subject']); ?>",
-            치환코드: "<div class='eb-clipboard'><div id='subs_code' class='eb-clipboard-cont'><?php echo $list[$i]['eg_chg_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code'>코드복사</div></div>",
+            치환코드: "<div class='eb-clipboard'><div id='subs_code_<?php echo $i; ?>' class='eb-clipboard-cont'><?php echo $list[$i]['eg_chg_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code_<?php echo $i; ?>'>코드복사</div></div>",
             상태: "<label for='eg_state_<?php echo $i; ?>' class='select'><select name='eg_state[<?php echo $i; ?>]' id='eg_state_<?php echo $i; ?>'><option value=''>선택</option><option value='1' <?php echo  $list[$i]['eg_state'] == '1' ? 'selected':''; ?>>보이기</option><option value='2' <?php echo  $list[$i]['eg_state'] == '2' ? 'selected':''; ?>>숨기기</option></select><i></i></label>",
             등록일: "<?php echo substr($list[$i]['eg_regdt'], 0, 10); ?>",
         },

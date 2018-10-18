@@ -58,4 +58,4 @@ foreach ($_POST as $key => $val) {
  */
 $qfile->save_file('eyoom', $eyoom_config_file, $eyoom);
 
-alert('설정을 사용테마에 적용하였습니다.', G5_ADMIN_URL.'/?dir=theme&amp;pid=config_form&amp;thema='.$theme);
+alert('설정을 사용테마에 적용하였습니다.', G5_ADMIN_URL.'/?dir=theme&amp;pid=config_form');

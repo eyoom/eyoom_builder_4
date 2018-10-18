@@ -21,6 +21,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-mypage .mypage-wishlist-box .mypage-wishlist-img img {display:block;width:100% \9;max-width:100%;height:auto}
 .shop-mypage .mypage-wishlist-box h5 {font-size:15px}
 .shop-mypage .mypage-wishlist-box .mypage-wishlist-date {font-size:13px;color:#959595}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-mypage-wishlist .mypage-wishlist-box {width:33.33333%}
 }
@@ -31,6 +32,7 @@ if (!defined('_EYOOM_')) exit;
     .shop-mypage .mypage-wishlist-box {width:50%}
     .shop-mypage .mypage-wishlist-box-pd {padding:5px}
 }
+<?php } ?>
 </style>
 
 <div id="fakeloader"></div>

@@ -63,6 +63,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
 .board-list .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px) {
     .board-gallery .gallery-item, .board-gallery .gallery-sizer {width:50%}
     .board-gallery .gallery-item-in .gallery-item-category {padding:5px}
@@ -73,6 +74,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .board-gallery .gallery-item .gallery-item-bottom .pull-left {padding:5px}
     .board-gallery .gallery-item .gallery-item-bottom .pull-right {padding:5px}
 }
+<?php } ?>
 @media (min-width: 768px) {
     .board-view-modal {width:720px;margin:10px auto}
     .board-view-modal .modal-header, .board-view-modal .modal-body, .board-view-modal .modal-footer {padding:10px 20px}

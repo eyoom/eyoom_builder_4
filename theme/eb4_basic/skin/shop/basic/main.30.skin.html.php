@@ -44,6 +44,7 @@ if (!defined('_EYOOM_')) exit;
 .product-main-30 .rgba-banner {height:14px;width:60px;line-height:14px;color:#fff;font-size:10px;text-align:center;font-weight:normal;position:relative;text-transform:uppercase;margin-bottom:1px}
 .product-main-30 .item-main-30:hover .product-img:after {opacity:1}
 .product-main-30 .item-main-30:hover .product-name a {text-decoration:underline}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (min-width:768px) and (max-width:1199px) {
     .product-main-30.row {margin-left:-5px;margin-right:-5px}
     .product-main-30 .col-sm-3 {width:33.33333%;float:left;padding-left:5px;padding-right:5px}
@@ -61,6 +62,7 @@ if (!defined('_EYOOM_')) exit;
     .product-main-30 .product-description .title-price {font-size:13px}
     .product-main-30 .product-description .line-through {font-size:11px}
 }
+<?php } ?>
 </style>
 
 <div class="product-main-30 row">

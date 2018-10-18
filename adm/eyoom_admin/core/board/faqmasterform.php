@@ -28,6 +28,7 @@ if ($w == "u")
 else
 {
     $html_title .= ' 입력';
+    $fm = array();
 }
 
 // 모바일 상하단 내용 필드추가

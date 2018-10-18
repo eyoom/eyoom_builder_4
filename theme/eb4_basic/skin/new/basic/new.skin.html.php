@@ -20,6 +20,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .table-list-eb .td-mobile td {position:relative}
 .new-list .table-list-eb .td-mobile td > span {margin-right:5px}
 .new-list .table-list-eb .td-mobile td > span i {color:#959595}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 1199px) {
     .new-list .table-list-eb .td-subject {width:240px}
 }
@@ -28,6 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .new-list .table-list-eb .td-width {width:inherit}
     .new-list .table-list-eb .td-subject {width:300px}
 }
+<?php } ?>
 </style>
 
 <div class="new-list">

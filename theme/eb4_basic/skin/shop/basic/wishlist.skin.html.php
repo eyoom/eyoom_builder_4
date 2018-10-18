@@ -22,6 +22,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-wishlist .wishlist-bottom .wishlist-del-btn {position:absolute;top:0;right:0;width:30px;height:30px;line-height:30px;text-align:center;color:#fff;background:#4B4B4D}
 .shop-wishlist .wishlist-bottom .wishlist-del-btn:hover {background:#2B2B2E}
 .shop-wishlist .wishlist-act-btn {margin-top:30px;text-align:center}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-wishlist .wishlist-box {width:33.33333%}
 }
@@ -31,6 +32,7 @@ if (!defined('_EYOOM_')) exit;
     .shop-wishlist .wishlist-box-pd {padding:5px}
     .shop-wishlist .wishlist-desc h5 {font-size:13px;height:38px}
 }
+<?php } ?>
 </style>
 
 <?php /* ---------- 위시리스트 시작 ---------- */ ?>

@@ -20,7 +20,9 @@ if($theme && $me_code) {
     $g5_url = parse_url(G5_URL);
     $meinfo['me_link'] = str_replace($g5_url['path'],'',$meinfo['me_link']);
     if(!preg_match('/(http|https):/i',$meinfo['me_link'])) {
-        $meinfo['me_link'] = G5_URL.$meinfo['me_link'];
+        $meinfo['me_url'] = G5_URL.$meinfo['me_link'];
+    } else {
+        $meinfo['me_url'] = $meinfo['me_link'];
     }
 }
 

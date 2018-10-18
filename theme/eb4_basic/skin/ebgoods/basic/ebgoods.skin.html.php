@@ -5,6 +5,20 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
+<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
+<div class="position-relative <?php if ($eg_master['eg_state'] == '2') { ?>eb-hidden-space<?php } ?>">
+    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
+        <div class="btn-group">
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_form&amp;thema=<?php echo $theme; ?>&amp;eg_code=<?php echo $eg_master['eg_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB상품 마스터 설정</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_form&amp;thema=<?php echo $theme; ?>&amp;eg_code=<?php echo $eg_master['eg_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
+                <i class="far fa-window-maximize"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<?php }?>
+
+<?php if (isset($eg_master) && $eg_master['eg_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <style>
 .ebgoods-basic-wrap {position:relative}
 .ebgoods-basic-wrap .nav-tabs {border-bottom:0}
@@ -63,6 +77,7 @@ if (!defined('_EYOOM_')) exit;
 .ebgoods-basic .rgba-banner {height:14px;width:60px;line-height:14px;color:#fff;font-size:10px;text-align:center;font-weight:normal;position:relative;text-transform:uppercase;margin-bottom:1px}
 .ebgoods-basic .goods-box:hover .goods-img:after {opacity:1}
 .ebgoods-basic .goods-box:hover .goods-name a {text-decoration:underline}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (min-width:768px) and (max-width:1199px) {
     .ebgoods-basic.row {margin-left:-5px;margin-right:-5px}
     .ebgoods-basic .col-sm-4 {width:33.33333%;float:left;padding-left:5px;padding-right:5px}
@@ -77,22 +92,9 @@ if (!defined('_EYOOM_')) exit;
     .ebgoods-basic .goods-description .goods-description-in {padding:0 5px 10px}
     .ebgoods-basic .goods-description-bottom {padding:7px 5px}
 }
+<?php } ?>
 </style>
 
-<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-<div class="position-relative <?php if ($eg_master['eg_state'] == '2') { ?>eb-hidden-space<?php } ?>">
-    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
-        <div class="btn-group">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_form&amp;thema=<?php echo $theme; ?>&amp;eg_code=<?php echo $eg_master['eg_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB상품 마스터 설정</a>
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_form&amp;thema=<?php echo $theme; ?>&amp;eg_code=<?php echo $eg_master['eg_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
-                <i class="far fa-window-maximize"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<?php }?>
-
-<?php if (isset($eg_master) && $eg_master['eg_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <div class="headline-short">
     <h4>
         <?php if ($eg_master['eg_link']) { ?>
@@ -203,7 +205,6 @@ if (!defined('_EYOOM_')) exit;
         <?php }} ?>
     </div>
 </div>
-<?php } ?>
 
 <script>
 $(document).ready(function() {
@@ -223,3 +224,4 @@ $(document).ready(function() {
     });
 });
 </script>
+<?php } ?>

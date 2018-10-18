@@ -5,6 +5,20 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
+<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
+<div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
+    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
+        <div class="btn-group">
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB최신글 마스터 설정</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
+                <i class="far fa-window-maximize"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <style>
 .basic-best .nav-tabs {border-bottom:0}
 .basic-best .nav-tabs li {margin-bottom:20px}
@@ -41,26 +55,14 @@ if (!defined('_EYOOM_')) exit;
 .basic-best .best-num.best-num-1 {background:#FF4848}
 .basic-best .best-num.best-num-2 {background:#FDAB29}
 .basic-best .best-num.best-num-3 {background:#FDAB29}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 650px) {
     .basic-best .nav-tabs li a {font-size:12px}
     .basic-best .tab-content li {padding:3px 15px}
 }
+<?php } ?>
 </style>
 
-<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-<div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
-    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
-        <div class="btn-group">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB최신글 마스터 설정</a>
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
-                <i class="far fa-window-maximize"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<?php } ?>
-
-<?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <div class="headline-short">
     <h4>
         <?php if ($el_master['el_link']) { ?>
@@ -195,7 +197,6 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
 </div>
-<?php } ?>
 
 <script>
 $(document).ready(function() {
@@ -215,3 +216,4 @@ $(document).ready(function() {
     });
 });
 </script>
+<?php } ?>

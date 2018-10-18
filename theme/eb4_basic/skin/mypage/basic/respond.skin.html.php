@@ -30,6 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .respond-list .table-list-eb .respond-del-btn {color:#fff;text-decoration:none}
 .respond-list .table-list-eb .td-mobile td {border-top:1px solid #e5e5e5;padding:5px 5px !important;font-size:11px;color:#959595;background:#fbfbfb}
 .respond-list .table-list-eb .td-mobile td span {margin-right:5px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 1199px) {
     .respond-list .table-list-eb .td-mention {width:240px}
     .respond-list .table-list-eb .td-subject {width:240px}
@@ -37,6 +38,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 @media (max-width: 767px) {
     .respond-list .table-list-eb .td-width {width:inherit}
 }
+<?php } ?>
 </style>
 
 <?php

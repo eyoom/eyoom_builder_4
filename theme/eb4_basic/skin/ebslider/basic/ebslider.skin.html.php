@@ -7,6 +7,20 @@ if (!defined('_EYOOM_')) exit;
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/slick.min.css" type="text/css" media="screen">',0);
 ?>
 
+<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
+<div class="position-relative <?php if ($es_master['es_state'] == '2') { ?>eb-hidden-space<?php } ?>">
+    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
+        <div class="btn-group">
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_form&thema=<?php echo $theme; ?>&es_code=<?php echo $es_code; ?>&w=u&wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB슬라이더 마스터 설정</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_form&thema=<?php echo $theme; ?>&es_code=<?php echo $es_code; ?>&w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
+                <i class="far fa-window-maximize"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php if (isset($es_master) && $es_master['es_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <style>
 .eb-slider-basic-wrap-<?php echo $es_code; ?> {position:relative;margin-bottom:30px}
 .eb-slider-basic-wrap-<?php echo $es_code; ?> .slick-dotted.slick-slider {margin-bottom:0}
@@ -27,6 +41,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 .eb-slider-basic-in .eb-slider-basic .slick-next:before, .eb-slider-basic-in .eb-slider-basic .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#fff;font-size:18px}
 .eb-slider-basic-in .eb-slider-basic .slick-next:before {content:"\f054"}
 .eb-slider-basic-in .eb-slider-basic .slick-prev:before {content:"\f053"}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px) {
     .eb-slider-basic-in .eb-slider-basic .eb-slider-basic-item {padding:0}
     .eb-slider-basic-in .eb-slider-basic .eb-slider-basic-item .eb-slider-basic-cont {height:170px;padding:10px}
@@ -34,22 +49,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     .eb-slider-basic-in .eb-slider-basic .eb-slider-basic-item .eb-slider-basic-cont h2 {font-size:20px;margin-top:10px}
     .eb-slider-basic-in .eb-slider-basic .eb-slider-basic-item .eb-slider-basic-cont p {display:none}
 }
+<?php } ?>
 </style>
 
-<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-<div class="position-relative <?php if ($es_master['es_state'] == '2') { ?>eb-hidden-space<?php } ?>">
-    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
-        <div class="btn-group">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_form&thema=<?php echo $theme; ?>&es_code=<?php echo $es_code; ?>&w=u&wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB슬라이더 마스터 설정</a>
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_form&thema=<?php echo $theme; ?>&es_code=<?php echo $es_code; ?>&w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
-                <i class="far fa-window-maximize"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<?php } ?>
-
-<?php if (isset($es_master) && $es_master['es_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <div class="eb-slider-basic-wrap-<?php echo $es_code; ?>">
     <div class="eb-slider-basic-in">
         <div class="eb-slider-basic">
@@ -123,6 +125,7 @@ $(window).load(function(){
         dots: true,
         autoplay: true,
         autoplaySpeed: 5000,
+        <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
         responsive: [
             {
                 breakpoint: 768,
@@ -135,6 +138,7 @@ $(window).load(function(){
                 }
             }
         ]
+        <?php } ?>
     });
 });
 </script>

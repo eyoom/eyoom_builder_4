@@ -5,6 +5,20 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
+<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
+<div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
+    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
+        <div class="btn-group">
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB최신글 마스터 설정</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
+                <i class="far fa-window-maximize"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<?php }?>
+
+<?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <style>
 .basic-latest .nav-tabs {border-bottom:0}
 .basic-latest .nav-tabs li {margin-bottom:20px}
@@ -40,20 +54,6 @@ if (!defined('_EYOOM_')) exit;
 .basic-latest .tab-content li .blind-subj {color:#a5a5a5}
 </style>
 
-<?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-<div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
-    <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
-        <div class="btn-group">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-xs btn-e-red btn-e-split"><i class="far fa-edit"></i> EB최신글 마스터 설정</a>
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=eblatest_form&amp;thema=<?php echo $theme; ?>&amp;el_code=<?php echo $el_master['el_code']; ?>&amp;w=u" target="_blank" class="btn-e btn-e-xs btn-e-red btn-e-split-red dropdown-toggle" title="새창 열기">
-                <i class="far fa-window-maximize"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<?php }?>
-
-<?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <div class="headline-short">
     <h4>
         <?php if ($el_master['el_link']) { ?>
@@ -154,7 +154,6 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
 </div>
-<?php } ?>
 
 <script>
 $(document).ready(function() {
@@ -174,3 +173,4 @@ $(document).ready(function() {
     });
 });
 </script>
+<?php } ?>

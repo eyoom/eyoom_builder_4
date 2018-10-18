@@ -11,6 +11,14 @@ if (!$bo_table) exit;
 if (!$skin) exit;
 
 /**
+ * 게시판 여유필드 확장수 저장 필드 추가
+ */
+if(!sql_query(" select bo_ex_cnt from {$g5['board_table']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['board_table']}` add `bo_ex_cnt` int(5) NOT NULL default '0' after `bo_sort_field` ";
+    sql_query($sql, true);
+}
+
+/**
  * 이윰게시판 설정에서 쇼핑몰 스킨사용체크 필드 추가
  */
 if(!sql_query(" select use_shop_skin from {$g5['eyoom_board']} limit 1 ", false)) {
@@ -64,4 +72,14 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
     sql_query($sql, true);
 }
 
-sql_query("update {$g5['eyoom_board']} set bo_skin = '{$skin}' where bo_table = '{$bo_table}' ");
+/**
+ * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
+ */
+$board = sql_fetch("select * from {$g5['board_table']} where bo_table = '{$bo_table}' ");
+$tmp = sql_fetch("select bo_table from {$g5['eyoom_board']} where bo_table='{$bo_table}' and bo_theme='{$theme}'",false);
+if(!$tmp['bo_table']) {
+    sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bo_table}', gr_id='{$board['gr_id']}', bo_theme='{$theme}', bo_skin='basic', use_gnu_skin='n'");
+}
+
+$sql = "update {$g5['eyoom_board']} set bo_skin = '{$skin}' where bo_table = '{$bo_table}' ";
+sql_query($sql);

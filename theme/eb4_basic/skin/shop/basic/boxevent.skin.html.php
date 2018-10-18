@@ -23,6 +23,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-boxevent .boxevent-item-box-in .boxevent-item-desc span {color:#E52700;font-weight:bold}
 .shop-boxevent .boxevent-item-box-in:hover h5 {text-decoration:underline}
 .shop-boxevent .boxevent-no-item {text-align:center;height:250px;line-height:250px;color:#959595}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-boxevent .boxevent-box-title {width:280px;height:175px}
     .shop-boxevent .boxevent-box-title .box-title-txt {width:280px;height:175px;font-size:15px}
@@ -37,6 +38,7 @@ if (!defined('_EYOOM_')) exit;
     .shop-boxevent .boxevent-item-box {width:50%}
     .shop-boxevent .boxevent-item-box-in {padding:0 5px 10px}
 }
+<?php } ?>
 </style>
 
 <section id="sev" class="shop-boxevent-wrap">

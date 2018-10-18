@@ -7,35 +7,6 @@ if (!defined('_EYOOM_')) exit;
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/slick.min.css" type="text/css" media="screen">',0);
 ?>
 
-<style>
-.es-shop-basic-wrap-<?php echo $es_code; ?> {position:relative}
-.es-shop-basic-wrap-<?php echo $es_code; ?> .slick-dotted.slick-slider {margin-bottom:0}
-.es-shop-basic-in {position:relative;overflow:hidden;display:none}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item {position:relative;outline:none}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont {position:absolute;top:0;left:0;width:100%;height:220px;background:rgba(0, 0, 0, 0.4);padding:20px 40px}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h3 {padding:0;margin:0;color:#fff;font-size:20px;font-weight:bold}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h2 {padding:0;margin:20px 0 0;color:#fff;font-size:26px;font-weight:bold}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont p {padding:0;margin:20px 0 0;color:#fff}
-.es-shop-basic-in .es-shop-basic .es-shop-basic-item img {display:block;width:100% \9;max-width:100%;height:auto}
-.es-shop-basic-in .es-shop-basic .slick-dots {bottom:10px;z-index:2}
-.es-shop-basic-in .es-shop-basic .slick-dots li button:before {color:#fff;font-size:14px;opacity:0.45}
-.es-shop-basic-in .es-shop-basic .slick-dots li.slick-active button:before {opacity:0.85}
-.es-shop-basic-in .es-shop-basic .slick-next, .es-shop-basic-in .es-shop-basic .slick-prev {width:50px;height:50px;top:50%;background:RGBA(0, 0, 0, 0.4);z-index:1;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
-.es-shop-basic-in .es-shop-basic .slick-next {right:5px}
-.es-shop-basic-in .es-shop-basic .slick-prev {left:5px}
-.es-shop-basic-in .es-shop-basic .slick-next:hover, .es-shop-basic-in .es-shop-basic .slick-prev:hover {background:RGBA(0, 0, 0, 0.5)}
-.es-shop-basic-in .es-shop-basic .slick-next:before, .es-shop-basic-in .es-shop-basic .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#fff;font-size:18px}
-.es-shop-basic-in .es-shop-basic .slick-next:before {content:"\f054"}
-.es-shop-basic-in .es-shop-basic .slick-prev:before {content:"\f053"}
-@media (max-width:767px) {
-    .es-shop-basic-in .es-shop-basic .es-shop-basic-item {padding:0}
-    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont {height:170px;padding:10px}
-    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h3 {font-size:16px}
-    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h2 {font-size:20px;margin-top:10px}
-    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont p {display:none}
-}
-</style>
-
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 <div class="position-relative <?php if ($es_master['es_state'] == '2') { ?>eb-hidden-space<?php } ?>">
     <div class="adm-edit-btn btn-edit-mode hidden-xs hidden-sm" style="top:-22px;text-align:right">
@@ -57,6 +28,37 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php } ?>
 
 <?php if (isset($es_master) && $es_master['es_state'] == '1') { // 보이기 상태에서만 출력 ?>
+<style>
+.es-shop-basic-wrap-<?php echo $es_code; ?> {position:relative}
+.es-shop-basic-wrap-<?php echo $es_code; ?> .slick-dotted.slick-slider {margin-bottom:0}
+.es-shop-basic-in {position:relative;overflow:hidden;display:none}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item {position:relative;outline:none}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont {position:absolute;top:0;left:0;width:100%;height:220px;background:rgba(0, 0, 0, 0.4);padding:20px 40px}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h3 {padding:0;margin:0;color:#fff;font-size:20px;font-weight:bold}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h2 {padding:0;margin:20px 0 0;color:#fff;font-size:26px;font-weight:bold}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont p {padding:0;margin:20px 0 0;color:#fff}
+.es-shop-basic-in .es-shop-basic .es-shop-basic-item img {display:block;width:100% \9;max-width:100%;height:auto}
+.es-shop-basic-in .es-shop-basic .slick-dots {bottom:10px;z-index:2}
+.es-shop-basic-in .es-shop-basic .slick-dots li button:before {color:#fff;font-size:14px;opacity:0.45}
+.es-shop-basic-in .es-shop-basic .slick-dots li.slick-active button:before {opacity:0.85}
+.es-shop-basic-in .es-shop-basic .slick-next, .es-shop-basic-in .es-shop-basic .slick-prev {width:50px;height:50px;top:50%;background:RGBA(0, 0, 0, 0.4);z-index:1;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
+.es-shop-basic-in .es-shop-basic .slick-next {right:5px}
+.es-shop-basic-in .es-shop-basic .slick-prev {left:5px}
+.es-shop-basic-in .es-shop-basic .slick-next:hover, .es-shop-basic-in .es-shop-basic .slick-prev:hover {background:RGBA(0, 0, 0, 0.5)}
+.es-shop-basic-in .es-shop-basic .slick-next:before, .es-shop-basic-in .es-shop-basic .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#fff;font-size:18px}
+.es-shop-basic-in .es-shop-basic .slick-next:before {content:"\f054"}
+.es-shop-basic-in .es-shop-basic .slick-prev:before {content:"\f053"}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
+@media (max-width:767px) {
+    .es-shop-basic-in .es-shop-basic .es-shop-basic-item {padding:0}
+    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont {height:170px;padding:10px}
+    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h3 {font-size:16px}
+    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont h2 {font-size:20px;margin-top:10px}
+    .es-shop-basic-in .es-shop-basic .es-shop-basic-item .es-shop-basic-cont p {display:none}
+}
+<?php } ?>
+</style>
+
 <div class="es-shop-basic-wrap-<?php echo $es_code; ?>">
     <div class="es-shop-basic-in">
         <div class="es-shop-basic">
@@ -130,6 +132,7 @@ $(window).load(function(){
         dots: true,
         autoplay: true,
         autoplaySpeed: 5000,
+        <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
         responsive: [
             {
                 breakpoint: 768,
@@ -142,6 +145,7 @@ $(window).load(function(){
                 }
             }
         ]
+        <?php } ?>
     });
 });
 </script>

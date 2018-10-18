@@ -3,8 +3,6 @@
  * skin file : /theme/THEME_NAME/skin/push/basic/push.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
 ?>
 
 <style>

@@ -5,17 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<style>
-.notice-roll-header-wrap {position:relative;padding:0 10px;border:1px solid #e5e5e5;background:#fff;margin:0 15px}
-.notice-roll-header {position:relative;overflow:hidden;height:35px}
-.notice-roll-header .label {position:absolute;top:10px;left:0}
-.notice-roll-header .label-red {background:#FF4948}
-.notice-roll-header ul {position:absolute;width:100%;list-style:none;margin:0;padding:0}
-.notice-roll-header ul li {position:relative;height:35px;box-sizing:content-box}
-.notice-roll-header ul li a {line-height:36px;font-size:12px;margin-left:43px}
-.notice-roll-header ul li span {line-height:36px;font-size:12px;margin-left:43px}
-</style>
-
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 <div class="position-relative <?php if ($el_master['el_state'] == '2') { ?>eb-hidden-space<?php } ?>">
     <div class="adm-edit-btn btn-edit-mode" style="top:0;text-align:left;z-index:99">
@@ -30,6 +19,17 @@ if (!defined('_EYOOM_')) exit;
 <?php } ?>
 
 <?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
+<style>
+.notice-roll-header-wrap {position:relative;padding:0 10px;border:1px solid #e5e5e5;background:#fff;margin:0 15px}
+.notice-roll-header {position:relative;overflow:hidden;height:35px}
+.notice-roll-header .label {position:absolute;top:10px;left:0}
+.notice-roll-header .label-red {background:#FF4948}
+.notice-roll-header ul {position:absolute;width:100%;list-style:none;margin:0;padding:0}
+.notice-roll-header ul li {position:relative;height:35px;box-sizing:content-box}
+.notice-roll-header ul li a {line-height:36px;font-size:12px;margin-left:43px}
+.notice-roll-header ul li span {line-height:36px;font-size:12px;margin-left:43px}
+</style>
+
 <div class="notice-roll-header-wrap">
     <?php if (is_array($el_item)) { foreach ($el_item as $k => $eb_latest) { ?>
     <div class="notice-roll-header">

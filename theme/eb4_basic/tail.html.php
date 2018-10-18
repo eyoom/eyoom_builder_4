@@ -131,10 +131,12 @@ if (!defined('_EYOOM_')) exit;
                                     <li><a href="<?php echo G5_URL; ?>/page/?pid=provision">이용약관</a></li>
                                     <li><a href="<?php echo G5_URL; ?>/page/?pid=privacy">개인정보처리방침</a></li>
                                     <li><a href="<?php echo G5_URL; ?>/page/?pid=noemail">이메일무단수집거부</a></li>
+                                    <li class="divider"></li>
+                                    <li><?php if (G5_IS_MOBILE) { ?><a href="<?php echo G5_URL; ?>/?device=pc">PC버전</a><?php } else { ?><a href="<?php echo G5_URL; ?>/?device=mobile">모바일버전</a><?php } ?></li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="hidden-xs"><a href="<?php echo G5_URL; ?>/page/?pid=aboutus">회사소개</a><a href="<?php echo G5_URL; ?>/page/?pid=provision">이용약관</a><a href="<?php echo G5_URL; ?>/page/?pid=privacy">개인정보처리방침</a><a href="<?php echo G5_URL; ?>/page/?pid=noemail">이메일무단수집거부</a></li>
+                        <li class="hidden-xs"><a href="<?php echo G5_URL; ?>/page/?pid=aboutus">회사소개</a><a href="<?php echo G5_URL; ?>/page/?pid=provision">이용약관</a><a href="<?php echo G5_URL; ?>/page/?pid=privacy">개인정보처리방침</a><a href="<?php echo G5_URL; ?>/page/?pid=noemail">이메일무단수집거부</a><a href="<?php echo G5_URL; ?>/page/?pid=privacy">개인정보처리방침</a><?php if (G5_IS_MOBILE) { ?><a href="<?php echo G5_URL; ?>/?device=pc" class="btn-e btn-e-xs btn-e-default color-white margin-left-5">PC버전</a><?php } else { ?><a href="<?php echo G5_URL; ?>/?device=mobile" class="btn-e btn-e-xs btn-e-default color-white margin-left-5">모바일버전</a><?php } ?></li>
                     </ul>
                 </div>
                 <div class="footer-right">

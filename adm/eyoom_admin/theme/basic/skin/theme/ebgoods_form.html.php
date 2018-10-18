@@ -25,7 +25,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 
     <form name="febgoodsform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return febgoodsform_submit(this);" enctype="multipart/form-data" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
-    <input type="hidden" name="theme" id="theme" value="<?php echo $this_theme ? $this_theme: $theme; ?>">
+    <input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">
     <input type="hidden" name="eg_no" id="eg_no" value="<?php echo $eg['eg_no']; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
@@ -264,7 +264,7 @@ window.closeModal = function(){
         <?php for ($i=0; $i<count($list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='gi_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['gi_no']; ?>'>",
-            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_itemform&amp;thema=<?php echo $this_theme; ?>&amp;eg_code=<?php echo $list[$i]['eg_code']; ?>&amp;gi_no=<?php echo $list[$i]['gi_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"EB상품 아이템관리\"); return false;'><u>수정</u></a>",
+            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_itemform&amp;eg_code=<?php echo $list[$i]['eg_code']; ?>&amp;gi_no=<?php echo $list[$i]['gi_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"EB상품 아이템관리\"); return false;'><u>수정</u></a>",
             타이틀: "<?php echo $list[$i]['gi_title'] ? get_text($list[$i]['gi_title']):'없음'; ?>",
             순서: "<label for='gi_sort_<?php echo $list[$i]['index']; ?>' class='input'><input type='text' name='gi_sort[<?php echo $i; ?>]' id='gi_sort_<?php echo $i; ?>' value='<?php echo $list[$i]['gi_sort']; ?>'></label>",
             상태: "<label for='gi_state_<?php echo $i; ?>' class='select'><select name='gi_state[<?php echo $i; ?>]' id='gi_state_<?php echo $i; ?>'><option value=''>선택</option><option value='1' <?php echo $list[$i]['gi_state'] == '1' ? 'selected':''; ?>>보이기</option><option value='2' <?php echo $list[$i]['gi_state'] == '2' ? 'selected': ''; ?>>숨기기</option></select><i></i></label>",

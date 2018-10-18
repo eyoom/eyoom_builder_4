@@ -19,6 +19,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <input type="hidden" name="theme" id="theme" value="<?php echo $theme; ?>">
 
     <h5 class="margin-bottom-20"><strong>테마 레이아웃 설정</strong></h5>
+    
+    <h6>테마유형 설정</h6>
+    <div class="inline-group">
+        <label for="is_responsive1" class="radio dark-radio"><input type="radio" name="is_responsive" id="is_responsive1" value="1" <?php echo $eyoom['is_responsive'] == '1' ? 'checked': '';?>><i></i> 반응형</label>
+        <label for="is_responsive2" class="radio dark-radio"><input type="radio" name="is_responsive" id="is_responsive2" value="0" <?php echo $eyoom['is_responsive'] == '0' ? 'checked': '';?>><i></i> 비반응형</label>
+    </div>
+    <div class="clearfix"></div>
+    <div class="margin-hr-5"></div>
 
     <h6>레이아웃 모양</h6>
     <div class="inline-group">

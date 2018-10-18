@@ -13,6 +13,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-personalpay .personalpay-box .personalpay-img {margin-bottom:15px}
 .shop-personalpay .personalpay-box h5 {font-size:14px}
 .shop-personalpay .personalpay-box .personalpay-cost {font-size:14px;color:#FF4848;font-weight:bold}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-personalpay .personalpay-box {width:33.33333%}
 }
@@ -20,7 +21,8 @@ if (!defined('_EYOOM_')) exit;
     .shop-personalpay .personalpay-container {margin-left:-5px;margin-right:-5px}
     .shop-personalpay .personalpay-box {width:50%}
     .shop-personalpay .personalpay-box-pd {padding:5px}
-}    
+}
+<?php } ?>
 </style>
 
 <div id="fakeloader"></div>
@@ -46,24 +48,6 @@ if (!defined('_EYOOM_')) exit;
     <p class="text-center font-size-14 color-grey margin-top-20"><i class="fas fa-exclamation-circle"></i> 등록된 개인결제가 없습니다.</p>
     <?php } ?>
 </div>
-
-<?php if(0) { ?>
-<div id="sct">
-    <?php if ($count > 0) { ?>
-    <ul class="sct sct_pv">
-        <?php for ($i=0; $i<$count; $i++) { ?>
-        <li>
-            <div class="sct_img"><a href="<?php echo $list[$i]['href']; ?>" class="sct_a"><img src="<?php echo EYOOM_THEME_SHOP_SKIN_URL; ?>/img/personal.jpg" alt=""></a></div>
-            <div class="sct_txt"><a href="<?php echo $list[$i]['href']; ?>" class="sct_a"><?php echo get_text($list[$i]['pp_name']).'님 개인결제'; ?></a></div>
-            <div class="sct_cost"><?php echo display_price($list[$i]['pp_price']); ?></div>
-        </li>
-        <?php } ?>
-    </ul>
-    <?php } else { ?>
-    <p class="sct_noitem">등록된 개인결제가 없습니다.</p>
-    <?php } ?>
-</div>
-<?php } ?>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>

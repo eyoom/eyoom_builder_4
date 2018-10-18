@@ -36,9 +36,11 @@ set_session('ss_personalpay_hash', '');
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
 .shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
 .shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
 }
+<?php } ?>
 .shop-order-form .sod-li-wrap {margin:0 0 30px}
 .shop-order-form .sod-li-wrap .sod-li {background:#fff;border:1px solid #e5e5e5;margin:0 0 20px}
 .shop-order-form .sod-li-wrap .li-name {border-bottom:1px solid #e5e5e5;line-height:1.5;padding:10px;font-size:14px;font-weight:bold}
@@ -123,10 +125,12 @@ set_session('ss_personalpay_hash', '');
 .shop-order-form #settle_bank .select {margin-bottom:10px}
 .shop-order-form #settle_bank .input {margin-bottom:0}
 .shop-order-form #settle_bank #od_deposit_name {text-align:left}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-order-form .order-table td {padding:5px 0}
 }
+<?php } ?>
 </style>
 
 <div class="shop-steps">

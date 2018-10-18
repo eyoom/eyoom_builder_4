@@ -18,3 +18,20 @@ if ($w == '') {
         $result = $slack->send();
     }
 }
+
+/**
+ * 한줄 게시판이라면 목록으로 이동
+ */
+if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1') {
+    delete_cache_latest($bo_table);
+    
+    if ($file_upload_msg)
+        alert($file_upload_msg, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr);
+    else
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr);
+}
+
+/**
+ * 사용자 프로그램
+ */
+@include_once(EYOOM_USER_PATH.'/board/write_update.tail.skin.php');

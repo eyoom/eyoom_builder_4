@@ -254,4 +254,9 @@ $paging = $eb->set_paging('./board.php?bo_table='.$bo_table.$qstr.'&amp;page=');
 /**
  * 이윰 테마파일 출력
  */
-include_once($eyoom_skin_path['board'].'/list.skin.html.php');
+$list_skin_file = $eyoom_skin_path['board'].'/list.skin.html.php';
+if (file_exists($list_skin_file)) {
+    include_once($list_skin_file);
+} else {
+    alert("현재 테마에는 게시판 스킨({$list_skin_file}) 파일이 존재하지 않습니다.");
+}

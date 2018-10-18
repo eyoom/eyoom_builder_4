@@ -106,7 +106,6 @@ for ($i=0; $i<count($_FILES['ei_img']['name']); $i++) {
         $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$ext;
         if (!preg_match("/(jpg|gif|png)$/i", $_FILES['ei_img']['name'][$i])) {
             $file_upload_msg .= $_FILES['ei_img']['name'][$i] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
-            continue;
         } else {
             $dest_path = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$file_name;
 

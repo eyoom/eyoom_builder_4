@@ -46,12 +46,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 <div class="margin-bottom-5">
                                     <label class="select form-width-150px">
                                         <select name="sfl" id="sfl">
-                                            <option value="mb_name"<?php echo get_selected($sfl, "mb_name"); ?>>이름</option>
-                                            <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>아이디</option>
-                                            <option value="mb_nick"<?php echo get_selected($sfl, "mb_nick"); ?>>닉네임</option>
-                                            <option value="mb_email"<?php echo get_selected($sfl, "mb_email"); ?>>E-MAIL</option>
-                                            <option value="mb_tel"<?php echo get_selected($sfl, "mb_tel"); ?>>전화번호</option>
-                                            <option value="mb_hp"<?php echo get_selected($sfl, "mb_hp"); ?>>휴대폰번호</option>
+                                            <option value="a.mb_name"<?php echo get_selected($sfl, "a.mb_name"); ?>>이름</option>
+                                            <option value="a.mb_id"<?php echo get_selected($sfl, "a.mb_id"); ?>>아이디</option>
+                                            <option value="a.mb_nick"<?php echo get_selected($sfl, "a.mb_nick"); ?>>닉네임</option>
+                                            <option value="a.mb_email"<?php echo get_selected($sfl, "a.mb_email"); ?>>E-MAIL</option>
+                                            <option value="a.mb_tel"<?php echo get_selected($sfl, "a.mb_tel"); ?>>전화번호</option>
+                                            <option value="a.mb_hp"<?php echo get_selected($sfl, "a.mb_hp"); ?>>휴대폰번호</option>
                                         </select><i></i>
                                     </label>
                                 </div>

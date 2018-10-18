@@ -36,10 +36,12 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f09d";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-personalpay-form .btn_confirm .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin-bottom:15px}
 .shop-personalpay-form .btn_confirm a.btn_cancel {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-personalpay-form .personal-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-personalpay-form .personal-table td {padding:5px 0}
 }
+<?php } ?>
 </style>
 
 <div class="shop-personalpay-form">

@@ -43,12 +43,14 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f09d";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-personalpay-form .btn_confirm .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin:15px 0}
 .shop-personalpay-form .btn_confirm a.btn01 {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-personalpay-form .personal-member-area {margin-right:0}
     .shop-personalpay-form .personal-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-personalpay-form .personal-table td {padding:5px 0}
     .shop-personalpay-form .personal-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
+<?php } ?>
 </style>
 
 <form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off" class="eyoom-form">

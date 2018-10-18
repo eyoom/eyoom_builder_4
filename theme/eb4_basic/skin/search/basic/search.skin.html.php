@@ -54,11 +54,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
                 <label for="sfl" class="sound_only">검색조건</label>
                 <label class="select">
                     <select name="sfl" id="sfl" class="form-control">
-                        <option value="wr_subject||wr_content" <?php echo get_selected($GET['sfl'], "wr_subject||wr_content"); ?>>제목+내용</option>
-                        <option value="wr_subject" <?php echo get_selected($GET['sfl'], "wr_subject"); ?>>제목</option>
-                        <option value="wr_content" <?php echo get_selected($GET['sfl'], "wr_content"); ?>>내용</option>
-                        <option value="mb_id" <?php echo get_selected($GET['sfl'], "mb_id"); ?>>회원아이디</option>
-                        <option value="wr_name" <?php echo get_selected($GET['sfl'], "wr_name"); ?>>이름</option>
+                        <option value="wr_subject||wr_content" <?php echo get_selected($_GET['sfl'], "wr_subject||wr_content"); ?>>제목+내용</option>
+                        <option value="wr_subject" <?php echo get_selected($_GET['sfl'], "wr_subject"); ?>>제목</option>
+                        <option value="wr_content" <?php echo get_selected($_GET['sfl'], "wr_content"); ?>>내용</option>
+                        <option value="mb_id" <?php echo get_selected($_GET['sfl'], "mb_id"); ?>>회원아이디</option>
+                        <option value="wr_name" <?php echo get_selected($_GET['sfl'], "wr_name"); ?>>이름</option>
                     </select>
                     <i></i>
                 </label>

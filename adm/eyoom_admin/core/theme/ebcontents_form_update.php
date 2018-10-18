@@ -23,7 +23,8 @@ $ec_text        = serialize($_POST['ec_text']);
 
 if ($_POST['me_id']) {
     $me_id = clean_xss_tags(trim($_POST['me_id']));
-    $meinfo = sql_fetch("select * from {$g5['eyoom_menu']} where me_id = '{$me_id}' ");
+    $sql_me_id = " and me_id = '{$me_id}' ";
+    $meinfo = sql_fetch("select * from {$g5['eyoom_menu']} where (1) {$sql_me_id} ");
 }
 
 $sql_common = "
@@ -56,7 +57,7 @@ if (empty($_POST)) {
  * 기존 파일정보
  */
 if ($w == 'u') {
-    $sql = "select ec_image, ec_file, ec_filename from {$g5['eyoom_contents']} where ec_code = '{$ec_code}' ";
+    $sql = "select ec_image, ec_file, ec_filename from {$g5['eyoom_contents']} where ec_code = '{$ec_code}' {$sql_me_id} limit 1";
     $ec = sql_fetch($sql);
     $ec_image = $ec['ec_image'];
     $ec_file = $ec['ec_file'];
@@ -156,7 +157,7 @@ if ($w == '') {
 } else if ($w == 'u') {
     $ec_sort = clean_xss_tags(trim($_POST['ec_sort']));
     $sql_common .= " ec_sort = '{$ec_sort}', ";
-    $sql = " update {$g5['eyoom_contents']} set {$sql_common} ec_regdt=ec_regdt where ec_code = '{$ec_code}' ";
+    $sql = " update {$g5['eyoom_contents']} set {$sql_common} ec_regdt=ec_regdt where ec_code = '{$ec_code}' {$sql_me_id} ";
     sql_query($sql);
     $msg = "EB컨텐츠 마스터를 수정하였습니다.";
 

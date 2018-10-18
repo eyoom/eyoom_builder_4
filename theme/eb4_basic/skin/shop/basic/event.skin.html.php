@@ -7,9 +7,11 @@ if (!defined('_EYOOM_')) exit;
 
 <style>
 .shop-list-sort-wrap {position:relative}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-list-sort-wrap .tab-scroll-category {margin-bottom:20px}
 }
+<?php } ?>
 </style>
 
 <div id="fakeloader"></div>

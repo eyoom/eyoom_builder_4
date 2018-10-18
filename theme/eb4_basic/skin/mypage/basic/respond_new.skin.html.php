@@ -25,6 +25,7 @@ if (!defined('_EYOOM_')) exit;
 .my-respond .timeline > li .timeline-photo img {height:30px;width:30px;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;background-color:#fff;background-size:cover}
 .my-respond .timeline > li .timeline-photo i {height:30px;width:30px;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;text-align:center;line-height:30px;background:#959595;color:#fff;font-size:15px}
 .my-respond .timeline > li .timeline-mention {margin-left:35px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media screen and (max-width: 767px) {
     .my-respond .timeline:before {display:none}
     .my-respond .timeline > li .timeline-date {width:100%;display:block;position:relative;overflow:hidden;padding:0 0 25px 0}
@@ -35,6 +36,7 @@ if (!defined('_EYOOM_')) exit;
     .my-respond .timeline > li .timeline-icon {left:auto;float:right;position:relative;margin:-55px 5px 0 0px}
     .my-respond .timeline > li .timeline-mention {margin-left:45px}
 }
+<?php } ?>
 </style>
 
 <div class="my-respond">

@@ -38,6 +38,7 @@ if (!defined('_EYOOM_')) exit;
 .my-timeline .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
 .my-timeline .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 991px) {
     .my-timeline .timeline:before {left:11px}
     .my-timeline .timeline > li {margin-bottom:15px;position:relative;width:100%;float:left;clear:left}
@@ -51,6 +52,7 @@ if (!defined('_EYOOM_')) exit;
     .my-timeline .timeline > li.timeline-inverted{float:left; clear:left;margin-top:15px;margin-bottom:30px}
     .my-timeline .timeline > li.timeline-inverted > .timeline-badge{left:3px}
 }
+<?php } ?>
 @media (min-width: 768px) {
     .my-timeline-modal {width:720px;margin:10px auto}
     .my-timeline-modal .modal-header, .my-timeline-modal .modal-body, .my-timeline-modal .modal-footer {padding:10px 20px}

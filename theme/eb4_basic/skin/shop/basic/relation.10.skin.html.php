@@ -30,6 +30,7 @@ if (!defined('_EYOOM_')) exit;
 .relation-10 .slick-next:before, .relation-10 .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#fff;font-size:16px}
 .relation-10 .slick-next:before {content:"\f054"}
 .relation-10 .slick-prev:before {content:"\f053"}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:1199px) {
     .relation-10-in {margin-left:-5px;margin-right:-5px}
     .relation-10 .item-relation-10 {padding-left:5px;padding-right:5px}
@@ -41,6 +42,7 @@ if (!defined('_EYOOM_')) exit;
     .relation-10 .product-description .title-price {font-size:13px}
     .relation-10 .product-description .line-through {font-size:11px}
 }
+<?php } ?>
 </style>
 
 <div class="relation-10">
@@ -116,6 +118,7 @@ $('.relation-10-in').slick({
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
+    <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
     responsive: [
         {
             breakpoint: 992,
@@ -132,5 +135,6 @@ $('.relation-10-in').slick({
             }
         }
     ]
+    <?php } ?>
 });
 </script>

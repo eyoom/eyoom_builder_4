@@ -99,7 +99,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
         <?php } ?>
     </div>
 
-    <?php if ($eyoom['is_community_theme'] == 'y' && !defined('_SHOP_')) { ?>
+    <?php if ($eyoom['is_community_theme'] == 'y') { ?>
     <div class="scroll-tabs">
         <div id="tab-member-nav">
             <span><a href="<?php echo G5_URL; ?>/mypage/" class="btn-e btn-e-xs bg-dark lighter">마이페이지</a></span>
@@ -153,14 +153,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                 <div class="clearfix"></div>
             </div>
             
-            <?php if ($eyoom['is_community_theme'] == 'y' && !defined('_SHOP_')) { ?>
+            <?php if ($eyoom['is_community_theme'] == 'y') { ?>
             <div class="margin-bottom-20"></div>
             <div class="member-point">
                 <div class="width-50 pull-left">
                     <p class="margin-bottom-0"><?php echo $levelset['gnu_name']; ?> - <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u>내역보기</u></span></p>
                     <p class="color-red font-size-12"><?php echo $point; ?></p></a>
                 </div>
-                <?php if (!defined('_SHOP_')) { ?>
+                <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
                 <div class="widht-50 pull-right text-right">
                     <p class="margin-bottom-0"><?php echo $levelset['eyoom_name']; ?></p>
                     <p class="color-red font-size-12"><?php echo number_format($eyoomer['level_point']); ?></p>
@@ -169,6 +169,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                 <div class="clearfix"></div>
             </div>
 
+            <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
             <div class="member-statistics">
                 <span class="progress-info-left">[레벨 <?php echo $eyoomer['level']; ?>] - 진행률</span>
                 <span class="progress-info-right"><?php echo $lvinfo['ratio']; ?>%</span>
@@ -177,6 +178,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                     </div>
                 </div>
             </div>
+            <?php } ?>
 
             <div class="member-follow">
                 <p><span class="pull-left color-grey">• 맞팔친구</span><a href="<?php echo G5_URL; ?>/?<?php echo $member['mb_id']; ?>&friends"><span class="badge bg-dark lighter pull-right"><?php echo number_format($eyoomer['cnt_friends']); ?>명</span></a></p>

@@ -34,9 +34,11 @@ if($od['od_pg'] == 'lg') {
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
 .shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
 .shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
 }
+<?php } ?>
 .shop-order-inquiry-view .order-num-box {border:3px solid #e5e5e5;background:#fff;padding:15px;font-size:15px;color:#959595;margin-bottom:30px}
 .shop-order-inquiry-view .order-num-box strong {margin-left:10px;color:#000}
 .shop-order-inquiry-view .table-list-eb .table {margin-bottom:10px}
@@ -72,10 +74,12 @@ if($od['od_pg'] == 'lg') {
 .shop-order-inquiry-view .order-payment-cancel .btn-e-xxlg {border:0}
 .shop-order-inquiry-view #sod_fin_test {padding:0;margin-top:20px}
 .shop-order-inquiry-view #sod_fin_test .btn-e-xxlg {border:0}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-inquiry-view .order-view-member-area {margin-right:0}
     .shop-order-inquiry-view .order-view-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
+<?php } ?>
 </style>
 
 <div class="shop-steps">

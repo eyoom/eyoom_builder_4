@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  * 최신글 추출
  */
 function eb_latest ($el_code) {
-    global $g5, $theme, $shop_theme, $member, $is_admin, $latest, $qfile, $eb, $config;
+    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $latest, $qfile, $eb, $config;
 
     /**
      * 쇼핑몰 테마인지 체크

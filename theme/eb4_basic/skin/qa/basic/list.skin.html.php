@@ -20,6 +20,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .qa-list .table-list-eb .table tbody > tr.td-mobile > td {border-top:1px solid #fff;padding:0 0 5px !important;font-size:11px;color:#959595}
 .qa-list .table-list-eb .td-mobile td {position:relative}
 .qa-list .table-list-eb .td-mobile td > span {margin-right:5px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 1199px) {
     .qa-list .table-list-eb .td-subject {width:240px}
 }
@@ -28,6 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .qa-list .table-list-eb .td-subject {width:300px}
     .qa-list .table-list-eb .td-subject .subject {font-weight:bold}
 }
+<?php } ?>
 </style>
 
 <div class="qa-list">

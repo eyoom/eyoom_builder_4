@@ -18,6 +18,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-couponzone .couponzone-btn button:hover {background:#151515}
 .shop-couponzone .couponzone-btn button.disabled {background:#959595;border:1px solid #757575;cursor:not-allowed}
 .shop-couponzone .couponzone-btn button.disabled:hover {background:#959595}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-couponzone .couponzone-box {width:33.33333%}
 }
@@ -26,6 +27,7 @@ if (!defined('_EYOOM_')) exit;
     .shop-couponzone .couponzone-box {width:50%}
     .shop-couponzone .couponzone-box-pd {padding:5px}
 }
+<?php } ?>
 </style>
 
 <div id="fakeloader"></div>
@@ -106,66 +108,6 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
 </div>
-
-
-
-
-<?php if(0) { ?>
-<section class="couponzone_list">
-    <h2>다운로드 쿠폰</h2>
-    <p><?php echo $default['de_admin_company_name']; ?> 회원이시라면 쿠폰 다운로드 후 바로 사용하실 수 있습니다.</p>
-
-    <?php if ($dn_count > 0) { ?>
-    <ul>
-        <?php for ($i=0; $i<$dn_count; $i++) { ?>
-        <li>
-            <div class="coupon_img"><img src="<?php echo $dn_list[$i]['coupon_img']; ?>" alt="<?php echo $dn_list[$i]['coupon_tit']; ?>"></div>
-            <div class="coupon_tit"><?php echo $dn_list[$i]['coupon_tit']; ?></div>
-            <div class="coupon_date">기한 : 다운로드 후 <?php echo number_format($dn_list[$i]['cz_period']); ?>일</div>
-            <div class="coupon_target">
-                <?php if ($dn_list[$i]['coupon_tit'] < 2) { ?>
-                적용 : <a href="<?php echo $dn_list[$i]['link_href']; ?>"><?php echo $dn_list[$i]['link_text']; ?></a>
-                <?php } else { ?>
-                적용 : <?php echo $dn_list[$i]['cp_target']; ?>
-                <?php } ?>
-            </div>
-            <div class="coupon_btn"><button type="button" class="coupon_download btn02<?php echo $dn_list[$i]['btn_disabled']; ?>" data-cid="<?php echo $dn_list[$i]['cz_id']; ?>">쿠폰다운로드</button></div>
-        </li>
-        <?php } ?>
-    </ul>
-    <?php } else { ?>
-    <p class="no_coupon">사용할 수 있는 쿠폰이 없습니다.</p>
-    <?php } ?>
-</section>
-
-<section class="couponzone_list" id="point_coupon">
-    <h2>포인트 쿠폰</h2>
-    <p>보유하신 <?php echo $default['de_admin_company_name']; ?> 회원 포인트를 쿠폰으로 교환하실 수 있습니다.</p>
-
-    <?php if ($po_count > 0) { ?>
-    <ul>
-        <?php for ($i=0; $i<$po_count; $i++) { ?>
-        <li>
-            <div class="coupon_img"><img src="<?php echo $po_list[$i]['coupon_img']; ?>" alt="<?php echo $po_list[$i]['coupon_tit']; ?>"></div>
-            <div class="coupon_tit"><?php echo $po_list[$i]['coupon_tit']; ?></div>
-            <div class="coupon_date">기한 : 다운로드 후 <?php echo number_format($po_list[$i]['cz_period']); ?>일</div>
-            <div class="coupon_target">
-                <?php if ($po_list[$i]['coupon_tit'] < 2) { ?>
-                적용 : <a href="<?php echo $po_list[$i]['link_href']; ?>"><?php echo $po_list[$i]['link_text']; ?></a>
-                <?php } else { ?>
-                적용 : <?php echo $po_list[$i]['cp_target']; ?>
-                <?php } ?>
-            </div>
-            <div class="coupon_point">포인트 <?php echo number_format($po_list[$i]['cz_point']); ?>점 차감</div>
-            <div class="coupon_btn"><button type="button" class="coupon_download btn02<?php echo $po_list[$i]['btn_disabled']; ?>" data-cid="<?php echo $po_list[$i]['cz_id']; ?>">쿠폰다운로드</button></div>
-        </li>
-        <?php } ?>
-    </ul>
-    <?php } else { ?>
-    <p class="no_coupon">사용할 수 있는 쿠폰이 없습니다.</p>
-    <?php } ?>
-</section>
-<?php } ?>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>

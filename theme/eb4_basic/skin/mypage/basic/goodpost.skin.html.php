@@ -43,6 +43,7 @@ if (!defined('_EYOOM_')) exit;
 .my-goodpost .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
 .my-goodpost .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 767px) {
     .goodpost-head .goodpost-head-subj {text-align:center;padding-right:0}
     .goodpost-head .goodpost-head-info {display:none}
@@ -57,6 +58,7 @@ if (!defined('_EYOOM_')) exit;
     .goodpost-box .goodpost-info .goodpost-member .goodpost-nick .sv_wrap > a {display:inherit;overflow:inherit;white-space:inherit;word-wrap:inherit;text-overflow:inherit;color:#252525;width:auto}
     .goodpost-box .goodpost-info .goodpost-member .goodpost-nick .sv_wrap > .dropdown-menu {margin-top:5px}
 }
+<?php } ?>
 @media (min-width: 768px) {
     .my-goodpost-modal {width:720px;margin:10px auto}
     .my-goodpost-modal .modal-header, .my-goodpost-modal .modal-body, .my-goodpost-modal .modal-footer {padding:10px 20px}

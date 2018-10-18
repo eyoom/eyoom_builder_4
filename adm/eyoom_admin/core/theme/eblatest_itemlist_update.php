@@ -92,4 +92,4 @@ if ($_POST['act_button'] == "선택수정") {
  */
 $qstr .= $wmode ? '&amp;wmode=1': '';
 
-alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=eblatest_form&amp;el_code={$_POST['el_code']}&amp;thema='{$_POST['theme']}'&amp;w=u&amp;".$qstr);
+alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=eblatest_form&amp;el_code={$_POST['el_code']}&amp;w=u&amp;".$qstr);

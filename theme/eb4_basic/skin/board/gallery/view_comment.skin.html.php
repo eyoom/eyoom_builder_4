@@ -75,6 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 #bo_vc_send_sns li input{margin:10px 25px 10px 5px}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:10px;background:#000;opacity:0.6;color:#fff}
 #map_canvas {width:1000px;height:400px;display:none}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px) {
     .comment-area .comment-write .comment-write-option .comment-option-btn {padding:0 15px}
     .view-comment .view-comment-depth {height:110px}
@@ -89,6 +90,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .comment-area {font-size:12px}
     .view-comment .comment-item-content .comment-image {max-width:100%;float:none;margin-right:inherit}
 }
+<?php } ?>
 </style>
 
 <script>

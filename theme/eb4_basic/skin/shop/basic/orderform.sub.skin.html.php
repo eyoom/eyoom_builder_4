@@ -43,9 +43,11 @@ if($is_kakaopay_use) {
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
 .shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
 .shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
 }
+<?php } ?>
 .shop-order-form .table-list-eb .table {margin-bottom:0}
 .shop-order-form .table-list-eb .td-item-desc {position:relative;min-height:80px}
 .shop-order-form .table-list-eb .td-image {position:absolute;top:0;left:0;width:80px;height:80px;overflow:hidden}
@@ -123,12 +125,14 @@ if($is_kakaopay_use) {
 .shop-order-form #settle_bank .select {margin-bottom:10px}
 .shop-order-form #settle_bank .input {margin-bottom:0}
 .shop-order-form #settle_bank #od_deposit_name {text-align:left}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-member-area {margin-right:0}
     .shop-order-form .order-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-order-form .order-table td {padding:5px 0}
     .shop-order-form .order-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
+<?php } ?>
 </style>
 
 <div class="shop-steps">

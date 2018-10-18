@@ -9,15 +9,15 @@ if (!defined('_EYOOM_')) exit;
 .sub-page p, .sub-page li {word-break:keep-all;font-size:13px}
 .sub-title {position:relative;font-size:37px;color:#333;margin:10px 0 70px;font-weight:300}
 .sub-title small {display:block;margin-top:10px;font-size:13px;border-top:1px solid #333;padding-top:10px}
-@media (max-width:767px) {
-	.sub-title {margin-bottom:40px}
-}
 .contact-info h3 {margin:0;padding-left:5px;font-size:15px;font-weight:bold}
 .contact-info li {margin:3px 0;padding:5px;border-top:1px solid #aaa;color:#707070}
 .contact-info li span {display:inline-block;width:70px;color:#333;font-weight:bold;margin-right:10px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px){
+    .sub-title {margin-bottom:40px}
 	.contact-img {margin-bottom:20px;max-height:300px;overflow:hidden}
 }
+<?php } ?>
 </style>
 <div class="sub-page page-contact">
 	<h3 class="sub-title">Contact Us <small>초기 목표설정을 통해 계획적인 진행을 거쳐 임무를 완수할 수 있는 시스템을 만들어 내고 그 결과물로 한단계 더 성장합니다.</small></h3>

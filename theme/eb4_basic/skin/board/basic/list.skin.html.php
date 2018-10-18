@@ -53,6 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .board-btn-adm li {float:left;margin-right:5px}
 .board-list .favorite-setup {display:inline-block;width:100px;margin-left:15px}
 .board-list .favorite-setup .toggle {padding-right:37px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:1199px) {
     .board-list .table-list-eb .td-subject {width:240px}
 }
@@ -62,6 +63,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .board-list .table-list-eb .td-subject {width:300px}
     .board-list .table-list-eb .td-subject .subject {font-size:13px;font-weight:bold}
 }
+<?php } ?>
 </style>
 
 <div class="board-list">

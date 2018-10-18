@@ -20,7 +20,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/skin/shop/'.$ey
     <div id="sit_hhtml" class="margin-bottom-20"><?php echo conv_content($it['it_head_html'], 1); ?></div>
 
     <?php include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php'); ?>
-    
+
     <?php if($is_orderable) { ?>
     <script src="<?php echo G5_JS_URL; ?>/shop.js"></script>
     <?php } ?>

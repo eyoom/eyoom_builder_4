@@ -41,7 +41,7 @@ class eyoom extends qfile
      * 메인페이지 설정
      */
     public function print_mainpage() {
-        global $config, $eb, $bbs, $member, $user, $eyoomer, $levelset, $is_admin, $is_member, $eyoom_skin_path, $eyoom_skin_url;
+        global $config, $eyoom, $eb, $bbs, $member, $user, $eyoomer, $levelset, $is_admin, $is_member, $eyoom_skin_path, $eyoom_skin_url;
 
         /**
          * 메인페이지에서 $g5 변수 허용

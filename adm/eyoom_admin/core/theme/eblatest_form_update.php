@@ -82,4 +82,4 @@ if ($wmode) {
     exit;
 }
 
-alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_form&amp;'.$qstr.'&amp;thema='.$_POST['theme'].'&amp;w=u&amp;el_code='.$el_code);
+alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_form&amp;'.$qstr.'&amp;w=u&amp;el_code='.$el_code);

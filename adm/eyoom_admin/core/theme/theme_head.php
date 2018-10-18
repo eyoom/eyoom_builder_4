@@ -24,8 +24,11 @@ $shop_theme = $eyoom_default['shop_theme'];
  * 현재 작업중인 테마
  */
 $this_theme = $_GET['thema'];
-if(!$this_theme) $this_theme = $theme;
-if(!$this_shop_theme) $this_shop_theme = $shop_theme;
+if (!$this_theme) $this_theme = $_POST['thema'];
+if ($this_theme) set_session('work_theme', $this_theme);
+if (!$this_theme) $this_theme = get_session('work_theme');
+if (!$this_theme) $this_theme = $theme;
+if (!$this_shop_theme) $this_shop_theme = $shop_theme;
 
 /**
  * 작업중인 테마의 설정정보 가져오기

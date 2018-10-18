@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  * 최신글 추출
  */
 function eb_contents ($ec_code) {
-    global $g5, $theme, $shop_theme, $member, $is_admin, $qfile, $config, $bbs, $bizinfo;
+    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $qfile, $config, $bbs, $bizinfo;
 
     /**
      * 쇼핑몰 테마인지 체크
@@ -102,7 +102,7 @@ function eb_contents ($ec_code) {
         $mb_level = $member['mb_level'] ? $member['mb_level']: 1;
 
         /**
-         * 이미지 아이템
+         * 콘텐츠 아이템
          */
         $ebcontents_item = $ebcontents_path.'/ec_item_'.$ec_code.'.php';
         if (file_exists($ebcontents_item) && !is_dir($ebcontents_item)) {
@@ -188,5 +188,5 @@ function eb_contents ($ec_code) {
     /**
      * 스킨 출력
      */
-    include($ebcontents_skin_path.'/ebcontents.skin.html.php');
+    @include($ebcontents_skin_path.'/ebcontents.skin.html.php');
 }

@@ -9,9 +9,6 @@ if (!defined('_EYOOM_')) exit;
 .sub-page p, .sub-page li {word-break:keep-all;font-size:13px}
 .sub-title {position:relative;font-size:37px;color:#333;margin:10px 0 70px;font-weight:300}
 .sub-title small {display:block;margin-top:10px;font-size:13px;border-top:1px solid #333;padding-top:10px}
-@media (max-width:767px) {
-	.sub-title {margin-bottom:40px}
-}
 .aboutus-top {position:relative}
 .aboutus-img {position:absolute;top:50px;left:50px;max-height:480px}
 .aboutus-img:before {content:"";position:absolute;display:block;width:150px;height:150px;left:200px;bottom:-25px;background:#BD081C;z-index:1}
@@ -20,10 +17,7 @@ if (!defined('_EYOOM_')) exit;
 .aboutus-top .text-2 {padding:50px 50px 50px 430px;margin:0;color:#000;background:#DADFE5}
 .page-words {margin:70px 0}
 .page-words h4 {font-size:24px;line-height:28px;font-weight:bold;color:#34608D;text-align:center}
-@media (max-width:767px) {
-	.page-words {margin:40px 0}
-	.page-words h4 {font-size:16px;line-height:22px}
-}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (min-width:992px) and (max-width:1199px){
 	.aboutus-top .text-2 {padding:150px 50px 50px}
 }
@@ -31,15 +25,19 @@ if (!defined('_EYOOM_')) exit;
 	.aboutus-top .text-2 {padding:170px 50px 50px}
 }
 @media (max-width:767px) {
+    .sub-title {margin-bottom:40px}
+	.page-words {margin:40px 0}
+	.page-words h4 {font-size:16px;line-height:22px}
 	.aboutus-img {top:20px;left:20px}
 	.aboutus-img:before {left:165px;bottom:-15px}
 	.aboutus-img img {width:300px}
 	.aboutus-top .text-1 {padding:520px 20px 20px}
 	.aboutus-top .text-2 {padding:20px}
 }
+<?php } ?>
 </style>
+
 <div class="sub-page page-aboutus">
-    <?php echo eb_slider('1529646396'); ?>
 	<h3 class="sub-title">About Us <small>초기 목표설정을 통해 계획적인 진행을 거쳐 임무를 완수할 수 있는 시스템을 만들어 내고 그 결과물로 한단계 더 성장합니다.</small></h3>
 
 	<div class="aboutus-top">

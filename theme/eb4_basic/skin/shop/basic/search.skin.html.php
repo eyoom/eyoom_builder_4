@@ -29,6 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 .shop-search #sct_lst li {position:relative;float:left}
 .shop-search #sct_lst button {position:relative;margin:0;padding:0;width:40px;height:40px;border:1px solid #d5d5d5;cursor:pointer;background:#fff;font-size:15px;color:#454545}
 .shop-search #sct_lst button.product-type-list-btn {border-right:0}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-search .tab-scroll-category {margin-bottom:20px}
     .shop-search #sct_lst {position:relative;top:inherit;right:inherit;float:right;margin-bottom:20px}
@@ -39,6 +40,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 @media (max-width:550px) {
     .shop-search .search-cate li {width:50%}
 }
+<?php } ?>
 </style>
 
 <div id="fakeloader"></div>

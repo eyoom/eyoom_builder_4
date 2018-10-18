@@ -18,5 +18,21 @@ if ($eyoom_board['bo_write_limit'] && !$is_admin) {
     }
 }
 
-// 사용자 프로그램
+/**
+ * 한줄게시판 - 비회원 글수정일 경우 비밀번호 확인
+ */
+if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1' && $w == 'u') {
+    if (!$is_admin) {
+        $write = sql_fetch("select mb_id, wr_password from {$write_table} where wr_id = '{$wr_id}' ");
+        if (!$write['mb_id']) {
+            if (!check_password($_POST['wr_password'], $write['wr_password'])) {
+                alert('비밀번호가 틀립니다.');
+            }
+        }
+    }
+}
+
+/**
+ * 사용자 프로그램
+ */
 @include_once(EYOOM_USER_PATH.'/board/write_update.head.skin.php');

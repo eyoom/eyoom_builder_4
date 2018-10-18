@@ -46,7 +46,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="nw_subject" id="nw_subject" value="<?php echo stripslashes($nw['nw_subject']); ?>" required>
+                                    <input type="text" name="nw_subject" id="nw_subject" value="<?php echo get_sanitize_input($nw['nw_subject']); ?>" required>
                                 </label>
                             </td>
                         </tr>

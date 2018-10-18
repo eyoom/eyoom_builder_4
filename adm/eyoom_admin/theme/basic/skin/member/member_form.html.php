@@ -260,7 +260,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <div class="button bg-color-light-grey"><input type="file" id="mb_icon" name="mb_icon" value="파일선택" onchange="this.parentNode.nextSibling.value = this.value">파일선택</div><input type="text" readonly>
                             </label>
                             <?php if ($icon_url) { ?>
-                            <img src="<?php echo $icon_url; ?>" alt="">';
+                            <img src="<?php echo $icon_url; ?>" alt="">
                             <label for="del_mb_icon" class="checkbox"><input type="checkbox" id="del_mb_icon" name="del_mb_icon" value="1"><i></i> 삭제</label>
                             <?php } ?>
                             <div class="note"><strong>Note:</strong> 아이콘 크기는 <strong>넓이 <?php echo $config['cf_member_icon_width']; ?>픽셀 높이 <?php echo $config['cf_member_icon_height']; ?>픽셀</strong>로 해주세요.</div>
@@ -277,7 +277,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <div class="button bg-color-light-grey"><input type="file" id="mb_img" name="mb_img" value="파일선택" onchange="this.parentNode.nextSibling.value = this.value">파일선택</div><input type="text" readonly>
                             </label>
                             <?php if ($photo_url) { ?>
-                            <img src="<?php echo $photo_url; ?>" alt="">';
+                            <img src="<?php echo $photo_url; ?>" alt="">
                             <label for="del_mb_img" class="checkbox"><input type="checkbox" id="del_mb_img" name="del_mb_img" value="1"><i></i> 삭제</label>
                             <?php } ?>
                             <div class="note"><strong>Note:</strong> 이미지 크기는 <strong>넓이 <?php echo $config['cf_member_img_width']; ?>픽셀 높이 <?php echo $config['cf_member_img_height']; ?>픽셀</strong>로 해주세요.</div>

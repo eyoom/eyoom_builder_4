@@ -29,9 +29,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .shop-product-qa-list .product-qa-cont .product-qa-alp {position:absolute;top:15px;left:15px;font-size:24px;color:#959595;font-weight:bold}
 .shop-product-qa-list .product-qa-cont .product-qa-qaa {padding:20px;padding-left:45px;position:relative;min-height:100px;border-top:1px solid #e5e5e5}
 .shop-product-qa-list .product-qa-cont .product-qa-qaq {padding:20px;padding-left:45px;position:relative;min-height:100px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-product-qa-list .panel-body img {max-width:100%}
 }
+<?php } ?>
 </style>
 
 <?php /* ---------- 전체 상품 문의 목록 시작 ---------- */ ?>

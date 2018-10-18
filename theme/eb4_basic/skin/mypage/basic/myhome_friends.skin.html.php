@@ -11,9 +11,11 @@ if (!defined('_EYOOM_')) exit;
 .myhome-follow .follow-heading .owner-photo img {display:block;width:100% \9;max-width:100%;height:auto}
 .myhome-follow .infinite-container {position:relative;overflow:hidden;padding-bottom:50px;margin-left:-10px;margin-right:-10px}
 .myhome-follow .follow-item {position:relative;float:left;width:50%;padding-top:40px;padding-left:10px;padding-right:10px}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px) {
     .myhome-follow .follow-item {width:100%}
 }
+<?php } ?>
 .myhome-follow .follow-item-box {position:relative;height:auto;padding:15px;background:#fff;border:1px solid #e5e5e5;margin-bottom:20px}
 .myhome-follow .follow-photo {position:absolute;top:-40px;left:15px;overflow:hidden;width:80px;height:80px;border:5px solid #fff;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;box-shadow: 0 0 1px rgba(0, 0, 0, 0.5)}
 .myhome-follow .follow-photo img {display:block;width:100% \9;max-width:100%;height:auto}

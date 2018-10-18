@@ -12,7 +12,7 @@ if (!defined('_EYOOM_')) exit;
 .follow-panel .nav-tabs li a {text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:7px 5px;font-size:12px}
 .follow-panel .nav-tabs li:first-child a {margin-left:0}
 .follow-panel .nav-tabs li a:hover {background:#fff;border-bottom:1px solid #e5e5e5}
-.follow-panel .nav-tabs li.active a {z-index:1;background:#fff;font-weight:bold;color:#353535;border-bottom:0}  
+.follow-panel .nav-tabs li.active a {z-index:1;background:#fff;font-weight:bold;color:#353535;border-bottom:0}
 .follow-panel .tab-content {position:relative;border:1px solid #e5e5e5;border-top:0;padding:10px;background:#fff}
 .follow-panel .panel-default > .panel-heading {background:#fafafa}
 .follow-panel .follow-list {list-style-type:none;padding:0;margin-bottom:0}
@@ -22,10 +22,12 @@ if (!defined('_EYOOM_')) exit;
 .follow-panel .follow-list li span {display:inline-block;color:#fff;z-index:1;position:absolute;top:0;left:0;width:60px;line-height:60px;text-align:center;padding:0 5px;font-size:11px}
 .follow-panel .follow-list li:hover:after {display:none}
 .follow-panel .follow-list li:hover span {display:none}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:767px) {
     .follow-panel .follow-list li {width:50px;height:50px;margin:1px}
     .follow-panel .follow-list li span {width:50px;line-height:50px;font-size:11px}
 }
+<?php } ?>
 </style>
 
 <div class="follow-panel">

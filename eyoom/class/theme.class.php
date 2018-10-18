@@ -1143,7 +1143,9 @@ class theme extends qfile
             include($bizinfo_config);
             return $bizinfo;
         } else {
-            return $this->default_bizinfo();
+            $bizinfo = $this->default_bizinfo();
+            $this->save_file('bizinfo', $bizinfo_config, $bizinfo);
+            return $bizinfo;
         }
     }
 
@@ -1188,6 +1190,11 @@ class theme extends qfile
          * 설정된 정보를 파일로 저장 - 캐쉬 기능
          */
         $link_path = G5_DATA_URL.'/ebcontents';
+        
+        /**
+         * 디렉토리가 없다면 생성
+         */
+        $this->make_directory($link_path);
 
         $sql = "select * from {$this->g5['eyoom_contents_item']} where ec_code = '{$code}' and ci_theme = '{$theme}' and ci_state = '1' order by ci_sort asc ";
         $result = sql_query($sql, false);
@@ -1205,7 +1212,9 @@ class theme extends qfile
         /**
          * EB컨텐츠 아이템파일
          */
-        $ec_item_file = G5_DATA_PATH . '/ebcontents/'.$theme.'/ec_item_' . $code . '.php';
+        $ec_theme_path = G5_DATA_PATH . '/ebcontents/'.$theme;
+        $this->make_directory($ec_theme_path);
+        $ec_item_file = $ec_theme_path.'/ec_item_' . $code . '.php';
 
         /**
          * 설정파일 저장
@@ -1221,6 +1230,11 @@ class theme extends qfile
          * 설정된 정보를 파일로 저장 - 캐쉬 기능
          */
         $link_path = G5_DATA_URL.'/ebgoods';
+        
+        /**
+         * 디렉토리가 없다면 생성
+         */
+        $this->make_directory($link_path);
 
         $sql = "select * from {$this->g5['eyoom_goods_item']} where eg_code = '{$code}' and gi_theme = '{$theme}' and gi_state = '1' order by gi_sort asc ";
         $result = sql_query($sql, false);
@@ -1232,6 +1246,8 @@ class theme extends qfile
         /**
          * EB상품추출 아이템파일
          */
+        $eg_theme_path = G5_DATA_PATH . '/ebgoods/'.$theme;
+        $this->make_directory($eg_theme_path);
         $eg_item_file = G5_DATA_PATH . '/ebgoods/'.$theme.'/eg_item_' . $code . '.php';
 
         /**

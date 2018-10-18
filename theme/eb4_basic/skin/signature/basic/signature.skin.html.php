@@ -37,12 +37,14 @@ if (!defined('_EYOOM_')) exit;
 .member-signature-latest .signature-latest-subj {color:#252525}
 .member-signature-latest .signature-latest-li:hover .signature-latest-subj {text-decoration:underline}
 .member-signature-latest .signature-latest-date {position:absolute;top:0;right:0;width:90px;text-align:right;color:#757575}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:650px) {
     .member-signature {height:auto}
     .member-signature .member-signature-profile {width:100%;border-right:0;border-bottom:1px solid #e5e5e5}
     .member-signature .member-signature-latest {margin-left:0;margin-top:300px}
     .member-signature .member-signature-latest .tab-content {margin-bottom:15px}
 }
+<?php } ?>
 </style>
 
 <div class="member-signature">
@@ -64,10 +66,12 @@ if (!defined('_EYOOM_')) exit;
                 <?php if ($lv['gnu_icon']) { ?>
                 <span class="signature-lv-icon"><img src="<?php echo $lv['gnu_icon']; ?>" alt="레벨"></span>
                 <?php } ?>
+                <?php if ($levelset['use_eyoom_level'] != 'n') { // 이윰레벨을 사용하지 않음 ?>
                 <?php if ($lv['eyoom_icon']) { ?>
                 <span class="signature-lv-icon"><img src="<?php echo $lv['eyoom_icon']; ?>" alt="레벨"></span>
                 <?php } ?>
                 <span class="display-block">- 회원등급 : <?php if ($user['mb_level'] == 10) { ?>최고관리자<?php } else { ?><?php echo $lvuser['gnu_name']; ?> / <?php echo $lvuser['name']; ?><?php } ?></span>
+                <?php } ?>
             </div>
         </div>
         <div class="clearfix"></div>

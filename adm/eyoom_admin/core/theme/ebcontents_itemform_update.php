@@ -97,8 +97,7 @@ if ($iw == 'u') {
 /**
  * 디렉토리가 없다면 생성
  */
-@mkdir(G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/', G5_DIR_PERMISSION);
-@chmod(G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/', G5_DIR_PERMISSION);
+$qfile->make_directory(G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/');
 
 $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
 
@@ -128,7 +127,6 @@ for ($i=0; $i<count($_FILES['ci_img']['name']); $i++) {
         $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$ext;
         if (!preg_match("/(jpg|gif|png)$/i", $_FILES['ci_img']['name'][$i])) {
             $file_upload_msg .= $_FILES['ci_img']['name'][$i] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
-            continue;
         } else {
             $dest_path = G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/'.$file_name;
 

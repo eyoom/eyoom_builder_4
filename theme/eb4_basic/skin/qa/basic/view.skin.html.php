@@ -47,6 +47,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .draggable {display:block;width:100% \9;max-width:100%;height:auto;margin:0 auto}
 button.mfp-close {position:fixed;color:#fff !important}
 .mfp-figure .mfp-close {position:absolute}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width: 1199px) {
     .board-view-rel .table-list-eb .td-subject {width:240px}
 }
@@ -54,6 +55,7 @@ button.mfp-close {position:fixed;color:#fff !important}
     .board-view-rel .table-list-eb .table tbody > tr > td.td-subj-wrap {padding:10px 0}
     .board-view-rel .table-list-eb .td-subject {width:300px}
 }
+<?php } ?>
 </style>
 
 <article class="board-view">

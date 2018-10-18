@@ -85,7 +85,6 @@ if (is_uploaded_file($_FILES['es_image']['tmp_name'])) {
     $file_name = md5(time().$_FILES['es_image']['name']).".".$ext;
     if (!preg_match("/\.(jpg|gif|png)$/i", $_FILES['es_image']['name'])) {
         $file_upload_msg .= $_FILES['es_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
-        continue;
     } else {
         $dest_path = G5_DATA_PATH.'/ebslider/'.$es_master['es_theme'].'/img/'.$file_name;
 
@@ -144,4 +143,4 @@ if ($wmode) {
     exit;
 }
 
-alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_form&amp;'.$qstr.'&amp;thema='.$es_master['es_theme'].'&amp;w=u&amp;es_code='.$es_code);
+alert($msg, G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_form&amp;'.$qstr.'&amp;w=u&amp;es_code='.$es_code);

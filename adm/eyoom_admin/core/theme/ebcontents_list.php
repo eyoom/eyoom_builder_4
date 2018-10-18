@@ -41,10 +41,7 @@ sql_query($sql, false);
  * EB 컨텐츠 아이템 파일 저장 경로
  */
 $ebcontents_folder = G5_DATA_PATH.'/ebcontents/';
-if(!@is_dir($ebcontents_folder) ) {
-    @mkdir($ebcontents_folder, G5_DIR_PERMISSION);
-    @chmod($ebcontents_folder, G5_DIR_PERMISSION);
-}
+$qfile->make_directory($ebcontents_folder);
 
 /**
  * 적용 테마

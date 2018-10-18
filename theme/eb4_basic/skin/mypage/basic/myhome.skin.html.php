@@ -30,6 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .my-home-wallpaper .cover-img {display:block;overflow:hidden;text-align:center;margin:10px auto 20px;max-height:361px;background-color:#fff}
 .my-home-wallpaper .cover-img i {width:100%;height:250px;line-height:250px;color:#fff;font-size:64px;text-align:center;background:#d5d5d5}
 .my-home-wallpaper .cover-img img {display:block;width:100% \9;max-width:100%;height:auto}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:584px) {
     .my-home .my-introduce {top:10px;left:15px}
     .my-home .my-introduce h5 {font-size:15px;margin-bottom:15px}
@@ -42,6 +43,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .my-home .profile-btns {top:10px;right:10px}
     .my-home .my-wallpaper {height:215px}
 }
+<?php } ?>
 </style>
 
 <div class="my-home">

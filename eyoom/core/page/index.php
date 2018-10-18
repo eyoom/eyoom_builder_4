@@ -57,19 +57,23 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
     /**
      * EB컨텐츠 마스터 정보
      */
-    $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}'";
-    $result = sql_query($sql);
-    for ($i=0; $row=sql_fetch_array($result); $i++) {
-        $ec_master[$i] = $row;
+    if ($meinfo) {
+        $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}'";
+        $result = sql_query($sql);
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $ec_master[$i] = $row;
+        }
     }
 
     /**
-     * EB마스터가 있다면 기본 페이지 스킨 출력
+     * EB마스터 갯수
      */
     $ec_cnt = count($ec_master);
-    if ($ec_cnt > 0) {
-        include_once($page_default_path);
-    }
+
+    /**
+     * 기본 페이지 스킨 출력
+     */
+    include_once($page_default_path);
 }
 
 @include_once(EYOOM_THEME_PATH.'/page/page.tail.html.php');

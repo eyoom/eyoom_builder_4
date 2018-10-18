@@ -27,10 +27,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .shop-product-use-list .panel-body .use-reply-icon {position:absolute;top:15px;left:0px;width:15px;height:30px;text-indent:-999px;overflow:hidden;border-left:1px dotted #c5c5c5;border-bottom:1px dotted #c5c5c5}
 .shop-product-use-list .panel-body .use-reply-subj {font-size:14px;font-weight:bold;line-height:1.5;margin:0}
 .shop-product-use-list .panel-body .use-reply-name {font-size:12px;color:#959595;margin:5px 0}
+<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-product-use-list .heading-content .star-image {width:70px}
     .shop-product-use-list .panel-body img {max-width:100%}
 }
+<?php } ?>
 </style>
 
 <?php /* ---------- 전체 상품 사용후기 목록 시작 ---------- */ ?>
@@ -68,11 +70,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 	    </div>
 	</div>
     </form>
-    
+
     <?php if ($count > 0) { ?>
     <p class="font-size-12 color-grey"><i class="fas fa-info-circle"></i> 타이틀 이미지 클릭시 해당상품으로 이동</p>
     <?php } ?>
-    
+
     <div class="panel-group accordion-default panel-group-control panel-group-control-right" id="porduct-review">
         <?php for ($i=0; $i<$count; $i++) { ?>
         <div class="panel panel-default">

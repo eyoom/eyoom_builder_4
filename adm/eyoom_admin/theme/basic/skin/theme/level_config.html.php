@@ -31,7 +31,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="label">이윰레벨 사용</label>
                             <div class="inline-group">
                                 <label for="levelset_use_eyoom_level1" class="radio"><input type="radio" name="levelset[use_eyoom_level]" id="levelset_use_eyoom_level1" value="y" <?php echo $levelset['use_eyoom_level'] == 'y' || !$levelset['use_eyoom_level'] ? 'checked':''; ?>><i></i> 사용</label>
-                                <label for="levelset_use_eyoom_level2" class="radio"><input type="radio" name="levelset[use_eyoom_level]" id="levelset_use_eyoom_level2" value="n" <?php echo $levelset['use_eyoom_level'] == 'n' ? 'checked':''; ?>{? levelset.use_eyoom_level == 'n'}checked{/}><i></i>사용 안함</label>
+                                <label for="levelset_use_eyoom_level2" class="radio"><input type="radio" name="levelset[use_eyoom_level]" id="levelset_use_eyoom_level2" value="n" <?php echo $levelset['use_eyoom_level'] == 'n' ? 'checked':''; ?>><i></i>사용 안함</label>
                             </label>
                         </section>
                     </div>
