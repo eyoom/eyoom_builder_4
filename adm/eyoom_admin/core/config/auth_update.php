@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file    /adm/eyoom_admin/core/config/auth_update.php
+ */
+if (!defined('_EYOOM_IS_ADMIN_')) exit;
+
+$sub_menu = "100200";
+
+if ($is_admin != 'super')
+    alert('최고관리자만 접근 가능합니다.');
+
+$mb = get_member($mb_id);
+if (!$mb['mb_id'])
+    alert('존재하는 회원아이디가 아닙니다.');
+
+check_admin_token();
+
+$sql = " insert into {$g5['auth_table']}
+            set mb_id   = '{$_POST['mb_id']}',
+                au_menu = '{$_POST['au_menu']}',
+                au_auth = '{$_POST['r']},{$_POST['w']},{$_POST['d']}' ";
+$result = sql_query($sql, FALSE);
+if (!$result) {
+    $sql = " update {$g5['auth_table']}
+                set au_auth = '{$_POST['r']},{$_POST['w']},{$_POST['d']}'
+              where mb_id   = '{$_POST['mb_id']}'
+                and au_menu = '{$_POST['au_menu']}' ";
+    sql_query($sql);
+}
+
+//sql_query(" OPTIMIZE TABLE `$g5['auth_table']` ");
+
+goto_url(G5_ADMIN_URL . '/?dir=config&amp;pid=auth_list&amp;'.$qstr);

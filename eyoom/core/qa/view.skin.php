@@ -1,0 +1,37 @@
+<?php
+/**
+ * core file : /eyoom/core/qa/view.skin.php
+ */
+if (!defined('_EYOOM_')) exit;
+
+include_once(G5_LIB_PATH.'/thumbnail.lib.php');
+
+/**
+ * 첨부파일 다운로드
+ */
+for ($i=0; $i<$view['download_count']; $i++) {
+    $files[$i]['download_href'] = $view['download_href'][$i];
+    $files[$i]['download_source'] = $view['download_source'][$i];
+}
+
+/**
+ * 파일 출력
+ */
+if ($view['img_count']) {
+    for ($i=0; $i<$view['img_count']; $i++) {
+        $thumbs[$i] = get_view_thumbnail($view['img_file'][$i], $qaconfig['qa_image_width']);
+    }
+}
+
+$option = '';
+$option_hidden = '';
+
+/**
+ * 사용자 프로그램
+ */
+@include_once(EYOOM_USER_PATH.'/qa/view.skin.php');
+
+/**
+ * 출력
+ */
+include_once($eyoom_skin_path['qa'].'/view.skin.html.php');

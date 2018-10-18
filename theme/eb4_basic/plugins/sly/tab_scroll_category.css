@@ -1,0 +1,32 @@
+/* tab-scroll-category */
+.tab-scroll-category {position:relative;margin-bottom:30px}
+.tab-scroll-category #tab-category {position:relative;overflow:hidden;height:40px;line-height:30px;z-index:1}
+.tab-scroll-category #tab-category .category-list span {padding:0 20px;color:#858585;text-align:center;cursor:pointer;display:inline-block}
+.tab-scroll-category #tab-category .category-list span.fake-span {width:50px}
+.tab-scroll-category #tab-category .category-list span a {color:#858585;display:inline-block;height:40px}
+.tab-scroll-category #tab-category .category-list span.active a {color:#000;font-weight:bold;height:40px;border-bottom:1px solid #000;z-index:1}
+.tab-scroll-category .scrollbar {position:relative;height:2px;background:#eaeaea;line-height:0;margin-bottom:10px;border-radius:2px !important}
+.tab-scroll-category .scrollbar .handle {width:100px;height:100%;background:#757575;cursor:pointer;border-radius:2px !important}
+.tab-scroll-category .scrollbar .handle .mousearea {position:absolute;top:0;left:0;width:100%;height:15px}
+.tab-scroll-category .controls .btn {position:absolute;top:0;width:20px;height:30px;padding:0;font-size:16px;background:rgba(255, 255, 255, 0.8)}
+.tab-scroll-category .controls {display:none}
+.tab-scroll-category .controls .btn.disabled {display:none}
+.tab-scroll-category .controls .btn.prev {left:0}
+.tab-scroll-category .controls .btn.next {right:0}
+.tab-scroll-category .tab-category-divider {position:absolute;bottom:0;left:0;width:100%;height:1px;background:#eaeaea}
+/* tab-scroll-page-category */
+.tab-scroll-page-category {position:relative;padding:0;margin-top:25px}
+.tab-scroll-page-category #tab-page-category {position:relative;overflow:hidden;height:40px;line-height:30px;z-index:1}
+.tab-scroll-page-category #tab-page-category .page-category-list span {padding:0 20px;color:#858585;text-align:center;cursor:pointer;display:inline-block}
+.tab-scroll-page-category #tab-category .category-list span.fake-span {width:50px}
+.tab-scroll-page-category #tab-page-category .page-category-list span a {color:#858585;display:inline-block;height:40px}
+.tab-scroll-page-category #tab-page-category .page-category-list span.active a {color:#000;font-weight:bold;height:40px;border-bottom:1px solid #000;z-index:1}
+.tab-scroll-page-category .scrollbar {position:relative;height:2px;background:#eaeaea;line-height:0;margin-bottom:10px;border-radius:2px !important}
+.tab-scroll-page-category .scrollbar .handle {width:100px;height:100%;background:#757575;cursor:pointer;border-radius:2px !important}
+.tab-scroll-page-category .scrollbar .handle .mousearea {position:absolute;top:0;left:0;width:100%;height:15px}
+.tab-scroll-page-category .controls .btn {position:absolute;top:0;width:20px;height:30px;padding:0;font-size:16px;background:rgba(255, 255, 255, 0.8)}
+.tab-scroll-page-category .controls {display:none}
+.tab-scroll-page-category .controls .btn.disabled {display:none}
+.tab-scroll-page-category .controls .btn.prev {left:0}
+.tab-scroll-page-category .controls .btn.next {right:0}
+.tab-scroll-page-category .tab-page-category-divider {position:absolute;bottom:0;left:0;width:100%;height:1px;background:#eaeaea}

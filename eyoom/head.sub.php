@@ -1,0 +1,58 @@
+<?php
+/**
+ * file : /eyoom/head.sub.php
+ */
+if (!defined('_EYOOM_')) exit;
+
+/**
+ * 페이지 로딩 시작 시간
+ */
+$begin_time = get_microtime();
+
+/**
+ * 타이틀 정의 - 상태바에 표시될 제목
+ */
+if (!isset($g5['title'])) {
+    $g5['title'] = $config['cf_title'];
+    $g5_head_title = $g5['title'];
+} else {
+    $g5_head_title = $g5['title'];
+    $g5_head_title .= " | ".$config['cf_title'];
+}
+
+/**
+ * 현재 접속자
+ * 게시판 제목에 ' 포함되면 오류 발생
+ */
+$g5['lo_location'] = addslashes($g5['title']);
+if (!$g5['lo_location']) $g5['lo_location'] = addslashes(clean_xss_tags($_SERVER['REQUEST_URI']));
+
+$g5['lo_url'] = addslashes(clean_xss_tags($_SERVER['REQUEST_URI']));
+if (strstr($g5['lo_url'], '/'.G5_ADMIN_DIR.'/') || $is_admin == 'super') $g5['lo_url'] = '';
+
+/**
+ * CSS URL
+ */
+$shop_css = '';
+if (defined('_SHOP_')) $shop_css = '_shop';
+$css_href = G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').$shop_css.'.css?ver='.G5_CSS_VER;
+
+/**
+ * 회원이라면 로그인 중이라는 메세지를 출력해준다.
+ */
+if ($is_member) {
+    $sr_admin_msg = '';
+    if ($is_admin == 'super') $sr_admin_msg = "최고관리자 ";
+    else if ($is_admin == 'group') $sr_admin_msg = "그룹관리자 ";
+    else if ($is_admin == 'board') $sr_admin_msg = "게시판관리자 ";
+}
+
+/**
+ * 사용자 프로그램
+ */
+@include_once(EYOOM_USER_PATH . '/head.sub.php');
+
+/**
+ * 이윰 테마파일 출력
+ */
+include_once(EYOOM_THEME_PATH . '/head.sub.html.php');

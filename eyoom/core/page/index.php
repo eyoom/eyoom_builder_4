@@ -1,0 +1,75 @@
+<?php
+/**
+ * core file : /eyoom/core/page/index.php
+ */
+if (!defined('_EYOOM_')) exit;
+
+if(!$pid) alert('잘못된 접근입니다.');
+
+$_pid = clean_xss_tags(trim($pid));
+$pid = str_replace('|','/',$_pid);
+$core_file = $pid.'.php';
+$html_file = $pid.'.html.php';
+
+/**
+ * ebcontents 예약어처리
+ */
+if ($pid == 'ebcontents') {
+    alert('ebcontents 단어는 pid 값으로 사용하실 수 없습니다.');
+}
+
+/**
+ * $core_file : 개발로직
+ */
+@include_once(EYOOM_CORE_PATH . '/page/proc/'. $core_file);
+
+/**
+ * 테마 경로 지정
+ */
+if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
+    $page_html_path = EYOOM_THEME_MOBILE_PATH.'/page/'.$html_file;
+    $page_default_path = EYOOM_THEME_MOBILE_PATH.'/page/ebcontents.html.php';
+    $page_html_url = str_replace(G5_PATH, G5_URL, $page_skin_path);
+} else {
+    $page_html_path = EYOOM_THEME_PATH.'/page/'.$html_file;
+    $page_default_path = EYOOM_THEME_PATH.'/page/ebcontents.html.php';
+    $page_html_url = str_replace(G5_PATH, G5_URL, $page_skin_path);
+}
+
+@include_once(EYOOM_THEME_PATH.'/page/page.head.html.php');
+
+/**
+ * pid 관련 기본 파일이 있는지 체크
+ */
+if (file_exists($page_html_path) && !is_dir($page_html_path)) {
+    /**
+     * $html_file : 출력
+     */
+    @include_once($page_html_path);
+} else {
+    /**
+     * $html_file 이 없을 경우
+     * 메뉴정보 가져오기
+     */
+    $sql = "select * from {$g5['eyoom_menu']} where me_theme='{$theme}' and me_type='pid' and me_pid='{$_pid}' order by me_code desc limit 1";
+    $meinfo = sql_fetch($sql);
+    
+    /**
+     * EB컨텐츠 마스터 정보
+     */
+    $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}'";
+    $result = sql_query($sql);
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $ec_master[$i] = $row;
+    }
+
+    /**
+     * EB마스터가 있다면 기본 페이지 스킨 출력
+     */
+    $ec_cnt = count($ec_master);
+    if ($ec_cnt > 0) {
+        include_once($page_default_path);
+    }
+}
+
+@include_once(EYOOM_THEME_PATH.'/page/page.tail.html.php');

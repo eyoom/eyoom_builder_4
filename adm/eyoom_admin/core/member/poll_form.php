@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file    /adm/eyoom_admin/core/member/poll_form.php
+ */
+if (!defined('_EYOOM_IS_ADMIN_')) exit;
+
+$sub_menu = "200900";
+
+auth_check($auth[$sub_menu], 'w');
+
+$action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=poll_form_update&amp;smode=1';
+
+$po_id = isset($po_id) ? (int) $po_id : 0;
+
+$html_title = '';
+if ($w == '')
+    $html_title .= ' 생성';
+else if ($w == 'u')  {
+    $html_title .= ' 수정';
+    $sql = " select * from {$g5['poll_table']} where po_id = '{$po_id}' ";
+    $po = sql_fetch($sql);
+} else
+    alert('w 값이 제대로 넘어오지 않았습니다.');
+
+/**
+ * 버튼
+ */
+$frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
+$frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
+$frm_submit .= !$wmode ? ' <a href="' . G5_ADMIN_URL . '/?dir=member&amp;pid=poll_list&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ': '';
+$frm_submit .= '</div>';
