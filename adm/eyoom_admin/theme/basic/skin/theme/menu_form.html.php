@@ -212,7 +212,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                             <option value="group">게시판그룹</option>
                                             <option value="board">게시판</option>
                                             <option value="page">내용페이지</option>
-                                            <? if ($is_youngcart) { ?>
+                                            <?php if ($is_youngcart) { ?>
                                             <option value="shop">쇼핑몰분류</option>
                                             <?php } ?>
                                         </select><i></i>

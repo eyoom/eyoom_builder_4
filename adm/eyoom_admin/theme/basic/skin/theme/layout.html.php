@@ -60,6 +60,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <div class="clearfix"></div>
     <div class="margin-hr-5"></div>
 
+    <?php if ($eyoom['is_shop_theme'] == 'y' || $is_admin) { ?>
     <h6>쇼핑몰 메인 사이드</h6>
     <input type="hidden" name="use_shopmain_side_layout" id="use_shopmain_side_layout" value="<?php echo !$eyoom['use_shopmain_side_layout'] ? 'y': $eyoom['use_shopmain_side_layout']; ?>">
     <label class="toggle small-toggle green-toggle">
@@ -82,6 +83,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label for="pos_shopsub_side_layout2" class="radio dark-radio"><input type="radio" name="pos_shopsub_side_layout" id="pos_shopsub_side_layout2" value="right" <?php echo $eyoom['pos_shopsub_side_layout'] == 'right' ? 'checked': ''; ?>><i></i> 오른쪽</label>
     </div>
     <div class="clearfix"></div>
+    <?php } ?>
 
     <?php echo $frm_submit; ?>
 

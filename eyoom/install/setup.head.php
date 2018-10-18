@@ -1,7 +1,7 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
-if (!$title) $title = G5_VERSION." &amp; 이윰빌더 시즌4 설치";
+if (!isset($title)) $title = G5_VERSION." &amp; 이윰빌더 시즌4 설치";
 
 $gmnow = gmdate('D, d M Y H:i:s').' GMT';
 @header('Expires: 0');

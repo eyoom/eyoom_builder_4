@@ -1174,37 +1174,5 @@ $('.pg-anchor a').on('click', function(e) {
 
 function fconfigform_submit(f) {
     return true;
-    var wurl = f.work_url.value;
-    var rurl = f.real_url.value;
-    if (!(wurl || rurl)) {
-        alert("작업도메인이나 실제도메인중 하나는 입력해 주셔야 합니다.");
-        f.work_url.focus();
-        return false;
-    } else {
-        var tmkey = '<?php echo $this_tminfo['tm_key']; ?>';
-        var host = '<?php echo $_SERVER['HTTP_HOST'];?>';
-
-        $.ajax({
-            url: "<?php echo EYOOM3_AJAX_URL; ?>",
-            data: {tmkey: tmkey, host: host, wurl: wurl, rurl: rurl},
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            jsonpCallback: 'set_config',
-            success: function(){}
-        });
-        return false;
-    }
-}
-
-function set_config(data) {
-    var f = document.fconfigform;
-    if(data.cm_key) {
-        if (data.cm_key) f.cm_key.value = data.cm_key;
-        if (data.cm_salt) f.cm_salt.value = data.cm_salt;
-        f.submit();
-    } else {
-        alert(data.msg);
-        return false;
-    }
 }
 </script>

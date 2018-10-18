@@ -36,6 +36,7 @@ if (!$this_theme) {
 }
 unset($eyoom);
 @include($config_file);
+$_eyoom = $eyoom;
 
 /**
  * 게시판 설정 가져오기
@@ -75,7 +76,7 @@ $this_tminfo = $tminfo[$this_theme];
 $arr = get_skin_dir ('theme', G5_PATH);
 for ($i=0; $i<count($arr); $i++) {
     if (!preg_match("/^eb4_*/i", $arr[$i])) continue;
-    $config_file = $arr[$i] == 'basic' ? eyoom_config:G5_DATA_PATH.'/eyoom.'.$arr[$i].'.config.php';
+    $config_file = G5_DATA_PATH.'/eyoom.'.$arr[$i].'.config.php';
     if(file_exists($config_file)) {
         $tlist[$i]['is_setup'] = true;
         @include($config_file);
@@ -96,4 +97,5 @@ for ($i=0; $i<count($arr); $i++) {
     $tlist[$i]['theme_name']    = $arr[$i];
     $tlist[$i]['theme_alias']   = $tminfo[$arr[$i]]['tm_alias'];
 }
+$eyoom = $_eyoom;
 unset($arr);

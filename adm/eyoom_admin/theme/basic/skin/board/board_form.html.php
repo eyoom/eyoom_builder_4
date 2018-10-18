@@ -626,7 +626,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label for="bo_use_cert" class="select form-width-250px">
-                                    <select id="bo_use_secret" name="bo_use_secret">
+                                    <select id="bo_use_cert" name="bo_use_cert">
                                         <?php
                                         echo option_selected("",  $board['bo_use_cert'], "사용안함");
                                         if ($config['cf_cert_use']) {

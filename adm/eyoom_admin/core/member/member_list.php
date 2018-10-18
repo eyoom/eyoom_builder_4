@@ -162,7 +162,7 @@ $sql = " select count(*) as cnt {$sql_common} {$sql_search} and mb_intercept_dat
 $row = sql_fetch($sql);
 $intercept_count = $row['cnt'];
 
-$sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
+$sql = " select *, a.mb_id as mb_id {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++) {
 

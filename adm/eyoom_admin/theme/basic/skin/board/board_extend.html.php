@@ -121,7 +121,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 
     <div class="adm-headline adm-headline-btn">
         <h3>[ <span class="color-red"><?php echo $board['bo_subject']; ?></span> ] 확장필드 아이템 리스트</h3>
-        <?php if (!$wmode) { ?>
+        <?php if (!G5_IS_MOBILE) { ?>
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&pid=board_exform&amp;bo_table=<?php echo $bo_table; ?>&amp;wmode=1" onclick="exboard_modal(this.href, '확장필드 설정관리'); return false;" class="btn-e btn-e-red btn-e-lg"><i class="fas fa-plus"></i> 확장필드 추가하기</a>
         <?php } ?>
     </div>

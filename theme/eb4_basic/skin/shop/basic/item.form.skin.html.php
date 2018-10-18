@@ -247,7 +247,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                             <select id="it_option_1" class="it_option">
                                 <option value="">선택</option>
                                 <?php foreach ($optitem['select'] as $k => $select) { ?>
-                                <option value="<?php echo $select['io_id']; ?>,'<?php echo $select['io_price']; ?>,<?php echo $select['io_stock_qty']; ?>"><?php echo $select['io_id']; ?><?php echo $select['price']; ?><?php $select['soldout']; ?></option>
+                                <option value="<?php echo $select['io_id']; ?>,<?php echo $select['io_price']; ?>,<?php echo $select['io_stock_qty']; ?>"><?php echo $select['io_id']; ?><?php echo $select['price']; ?><?php $select['soldout']; ?></option>
                                 <?php } ?>
                             </select><i></i>
                         </label>

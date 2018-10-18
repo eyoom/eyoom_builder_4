@@ -15,10 +15,6 @@ check_admin_token();
 unset($theme);
 $theme      = clean_xss_tags(trim($_POST['theme']));
 $tm_alias   = clean_xss_tags(trim($_POST['tm_alias']));
-$tm_key     = clean_xss_tags(trim($_POST['tm_key']));
-$cm_key     = clean_xss_tags(trim($_POST['cm_key']));
-$tm_alias   = clean_xss_tags(trim($_POST['tm_alias']));
-$cm_salt    = clean_xss_tags(trim($_POST['cm_salt']));
 
 /**
  * 테마 별칭 중복 체크
@@ -56,19 +52,6 @@ foreach ($_POST as $key => $val) {
     if (in_array($key, $except)) continue;
     $eyoom[$key] = $val;
 }
-
-/**
- * 테마 정보 업데이트
- */
-$set = "
-    tm_alias = '{$tm_alias}',
-    tm_key = '{$tm_key}',
-    cm_key = '{$cm_key}',
-    cm_salt = '{$cm_salt}',
-    tm_last = '".G5_TIME_YMDHIS."'
-";
-$sql = "update {$g5['eyoom_theme']} set {$set} where tm_name = '{$theme}'";
-sql_query($sql);
 
 /**
  * 설정정보 업데이트

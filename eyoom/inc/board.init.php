@@ -13,7 +13,9 @@ if (!$bo_table) return;
  * SNS용 이미지/제목/내용 추가 메타태그
  */
 if (isset($wr_id) && $wr_id) {
-	$config['cf_add_meta'] .= $eb->sns_open_graph();
+	$og_meta = $eb->sns_open_graph();
+	if ($og_meta) $config['cf_add_meta'] = $og_meta;
+	unset($og_meta);
 }
 
 /**

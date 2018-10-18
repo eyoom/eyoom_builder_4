@@ -24,7 +24,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $respond_new[$i]['wr_subject'] = $row['wr_subject'];
     $respond_new[$i]['chk'] = $row['re_chk'];
     $respond_new[$i]['type'] = $reinfo['type'];
-    $respond_new[$i]['href'] = G5_URL.'/bbs/respond_chk.php?rid='.$row['rid'];
+    $respond_new[$i]['href'] = G5_URL.'/mypage/respond_chk.php?rid='.$row['rid'];
     $respond_new[$i]['delete'] = './respond_chk.php?rid='.$row['rid'].'&act=delete'.$get;
     $respond_new[$i]['datetime'] = $row['regdt'];
     $respond_new[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);

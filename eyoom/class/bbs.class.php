@@ -791,7 +791,7 @@ class bbs extends eyoom
             case 'youtube.com':
                 $path_name = mb_substr($video['key1'],0,11,"utf-8");
                 /**
-	             * maxresdefault.jpg (1260 X 720) : 사이즈가 너무 크고, 지원하지 않는 동영상이 많아 사용에 부적합 
+	             * maxresdefault.jpg (1260 X 720) : 사이즈가 너무 크고, 지원하지 않는 동영상이 많아 사용에 부적합
 	             * hqdefault.jpg (480 X 360) : 썸네일 상하단에 검은띠가 있어 사용할 수 없음
 	             * mqdefault.jpg (320 X 180) : 사이즈는 작으나 거의 모든 동영상에서 지원
 	             */
@@ -1004,7 +1004,12 @@ class bbs extends eyoom
      * 게시글보기 썸네일 생성
      */
     public function get_thumbnail($contents, $thumb_width=0) {
-        global $config, $exif;
+        global $config, $exif, $eyoom_board;
+
+        /**
+         * 게시판 추가설정 정보
+         */
+        if (!$this->eyoom_board) $this->eyoom_board = $eyoom_board;
 
         if (!$thumb_width) $thumb_width = $this->board['bo_image_width'];
 
@@ -1039,7 +1044,7 @@ class bbs extends eyoom
             if(is_file($srcfile)) {
                 // EXIF 정보
                 if($this->eyoom_board['bo_use_exif']) {
-                   $exif_info = $exif->get_exif_info($srcfile);
+                    $exif_info = $exif->get_exif_info($srcfile);
                 }
 
                 $size = @getimagesize($srcfile);

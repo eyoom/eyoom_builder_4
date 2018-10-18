@@ -18,6 +18,7 @@ $respond_skin_path  = EYOOM_CORE_PATH.'/respond';
 $mypage_skin_path   = EYOOM_CORE_PATH.'/mypage';
 $page_skin_path     = EYOOM_CORE_PATH.'/page';
 $tag_skin_path      = EYOOM_CORE_PATH.'/tag';
+$shop_skin_path     = EYOOM_CORE_PATH.'/shop';
 
 /**
  * Eyoom Skin 경로

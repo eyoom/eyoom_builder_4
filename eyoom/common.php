@@ -182,6 +182,6 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     /**
      * 이윰빌더 설치하기
      */
-    header('location:' . G5_URL . '/' . EYOOM_DIR . '/install/setup.php');
+    header('location:' . EYOOM_URL . '/install/setup.php');
     exit;
 }

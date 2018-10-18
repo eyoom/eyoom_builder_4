@@ -10,7 +10,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.$eyoom_skin_url['member'].'/style.memo.css" type="text/css">',0);
 ?>
 
 <style>
@@ -75,7 +74,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$eyoom_skin_url['member'].'/style
             <ul class="list-unstyled list-inline">
                 <li class="margin-bottom-10">
                     <span><?php echo $kind_str; ?>사람 : </span>
-                    <strong><?php echo eb_nameview($eyoom['nameview_skin'], $mb['mb_id'], $mb['mb_nick'], $mb['mb_email'], $mb['mb_homepage']); ?></strong>
+                    <strong><?php echo eb_nameview($mb['mb_id'], $mb['mb_nick'], $mb['mb_email'], $mb['mb_homepage']); ?></strong>
                 </li>
                 <li>
                     <span><?php echo $kind_date; ?>시간 : </span>

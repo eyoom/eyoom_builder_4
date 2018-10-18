@@ -382,8 +382,8 @@ window.closeModal = function(){
         <?php for ($i=0; $i<$bo_cnt; $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
-            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_form&amp;w=u&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_copy&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>복사</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_extend&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;<?php echo $qstr; ?>' class='margin-left-10'><u>확장필드</u></a>",
-            게시판: "<a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;'><u>보기</u></a> <a href='<?php echo G5_BBS_URL; ?>/write.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>글쓰기</u></a>",
+            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_form&amp;w=u&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_copy&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-5'><u>복사</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_extend&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&amp;<?php echo $qstr; ?>' class='margin-left-5'><u>확장필드(<?php echo number_format($list[$i]['bo_ex_cnt']); ?>)</u></a>",
+            게시판: "<a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;'><u>보기</u></a> <a href='<?php echo G5_BBS_URL; ?>/write.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-5'><u>글쓰기</u></a> <a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>' target='_blank' class='margin-left-5'><u>바로가기</u></a>",
             테이블아이디: "<input type='hidden' name='board_table[<?php echo $i; ?>]' value='<?php echo $list[$i]['bo_table']; ?>'><a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_form&amp;bo_table=<?php echo $list[$i]['bo_table']; ?>&w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['bo_table']; ?></strong></a>",
             그룹: "<label class='select'><?php echo $list[$i]['gr_select']; ?><i></i></label>",
             스킨: "<label class='select'><?php echo $list[$i]['skin_select']; ?><i></i></label>",
@@ -417,9 +417,9 @@ $(function() {
         height         : "auto",
         fields         : [
             { name: "체크", type: "text", width: 40 },
-            { name: "관리", type: "text", align: "center", width: 130, headercss: "set-btn-header", css: "set-btn-field" },
-            { name: "게시판", type: "text", align: "center", width: 90 },
-            { name: "테이블아이디", type: "text", width: 150 },
+            { name: "관리", type: "text", align: "center", width: 140, headercss: "set-btn-header", css: "set-btn-field" },
+            { name: "게시판", type: "text", align: "center", width: 130 },
+            { name: "테이블아이디", type: "text", width: 160 },
             { name: "그룹", type: "text", width: 150 },
             { name: "스킨", type: "text", width: 105 },
             { name: "모바일스킨", type: "number", width: 105 },

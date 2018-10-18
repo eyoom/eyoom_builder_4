@@ -51,15 +51,17 @@ if ($share == 'on') {
             // 관리자나 자신의 게시물일 경우 예외처리
             ;
         } else if ($board['bo_download_level'] >= 1) {
-            if ($member['mb_point'] - $finfo['bf_content'] < 0) {
-                // 다운로드를 위한 회원 포인트 부족
-                alert('보유하신 포인트('.number_format($member['mb_point']).')가 없거나 모자라서 다운로드('.number_format($finfo['bf_content']).')가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.');
-            } else {
-                // 다운로드 포인트 차감
-                insert_point($member['mb_id'], $finfo['bf_content']*(-1), "{$board['bo_subject']} $wr_id 파일 다운로드", $bo_table, $wr_id, "{$no}다운로드");
-
-                // 게시물 등록한 회원에게 수수료를 뺀 차액 포인트 적립
-                insert_point($finfo['mb_id'], ceil($finfo['bf_content']*(1-($ratio/100))), "{$board['bo_subject']} $wr_id 파일 다운로드 후원", $bo_table, $wr_id, "{$member['mb_id']}님-{$no}다운로드");
+            if ($is_member && $finfo['bf_content']>0) {
+                if ($member['mb_point'] - $finfo['bf_content'] < 0) {
+                    // 다운로드를 위한 회원 포인트 부족
+                    alert('보유하신 포인트('.number_format($member['mb_point']).')가 없거나 모자라서 다운로드('.number_format($finfo['bf_content']).')가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.');
+                } else {
+                    // 다운로드 포인트 차감
+                    insert_point($member['mb_id'], $finfo['bf_content']*(-1), "{$board['bo_subject']} $wr_id 파일 다운로드", $bo_table, $wr_id, "{$no}다운로드");
+    
+                    // 게시물 등록한 회원에게 수수료를 뺀 차액 포인트 적립
+                    insert_point($finfo['mb_id'], ceil($finfo['bf_content']*(1-($ratio/100))), "{$board['bo_subject']} $wr_id 파일 다운로드 후원", $bo_table, $wr_id, "{$member['mb_id']}님-{$no}다운로드");
+                }
             }
         }
     }

@@ -117,7 +117,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
             </a>
         </h5>
         <ul class="list-unstyled result-list">
-        <?php foreach ($slist[$i]['list'] as $key => $li) { ?>
+        <?php if (is_array($slist[$i]['list'])) { foreach ($slist[$i]['list'] as $key => $li) { ?>
             <li>
                 <h6>
                     <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" class="font-size-14"><?php echo $li['comment_def']; ?><?php echo $li['subject']; ?></a>
@@ -137,7 +137,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
                 </div>
                 <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['name']; ?><i class="fa fa-clock-o margin-left-10 margin-right-5"></i><?php echo $li['wr_datetime']; ?></p>
             </li>
-        <?php } ?>
+        <?php }} ?>
         </ul>
         <div class="text-right margin-bottom-30"><a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $slist[$i]['bo_subject']; ?>' 결과 더보기</a></div>
     <?php } ?>

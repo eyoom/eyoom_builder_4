@@ -2,6 +2,13 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 쇼핑몰 기능을 사용하지 않음 처리할 경우
+ */
+if ($eyoom['is_shop_theme'] == 'n' && !$is_admin) {
+    header("location:".G5_URL);
+}
+
+/**
  * 커뮤니티 레이아웃을 쇼핑몰에 적용하기
  */
 if (isset($eyoom['use_layout_community']) && $eyoom['use_layout_community'] == 'y') {
