@@ -14,7 +14,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 #hd_pop .slick-next:hover, #hd_pop .slick-prev:hover {background:#f2f2f2}
 #hd_pop .slick-next {right:-25px}
 #hd_pop .slick-prev {left:-25px}
-#hd_pop .slick-next:before, #hd_pop .slick-prev:before {font-family:FontAwesome;color:#000;font-size:16px}
+#hd_pop .slick-next:before, #hd_pop .slick-prev:before {font-family:'Font Awesome\ 5 Free';font-weight:900;color:#000;font-size:16px}
 #hd_pop .slick-next:before {content:"\f054"}
 #hd_pop .slick-prev:before {content:"\f053"}
 .modal-dialog {display:none}
@@ -40,8 +40,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="hd_pops_reject btn-e btn-e-indigo rounded" data-dismiss="modal">24시간 동안 열지 않기</button>
-                    <button type="button" class="btn-e btn-e-dark rounded" data-dismiss="modal">닫기</button>
+                    <button type="button" class="hd_pops_reject btn-e btn-e-dark" data-dismiss="modal">24시간 동안 열지 않기</button>
+                    <button type="button" class="btn-e btn-e-dark" data-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@ $(function() {
                 arrows: true
             });
         });
-    }, 3000);
+    }, 1000);
 
     $('#modal_hd_pop').on('hidden.bs.modal', function() {
         $('html').css({overflow: ''});

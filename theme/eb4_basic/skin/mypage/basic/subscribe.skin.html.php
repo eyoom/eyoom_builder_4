@@ -122,7 +122,7 @@ if (!defined('_EYOOM_')) exit;
         <article class="subscribe-box">
             <?php if ($li['wr_id'] == $li['wr_parent']) { ?>
             <div class="subscribe-list">
-                <a href="<?php echo $li['href']; ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="subscribe_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="subscribe_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <?php if ($li['wr_image']) { ?>
                     <div class="subscribe-img-box">
                         <div class="subscribe-img">
@@ -157,7 +157,7 @@ if (!defined('_EYOOM_')) exit;
             </div>
             <?php } else { ?>
             <div class="subscribe-list">
-                <a href="<?php echo $li['href']; ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="subscribe_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="subscribe_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <h5 class="subscribe-subj ellipsis">
                         <span class="subscribe-type">[ 댓글 ]</span>
                         <?php echo conv_subject($li['wr_content'],100,'…'); ?>

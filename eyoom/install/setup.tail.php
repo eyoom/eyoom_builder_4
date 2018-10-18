@@ -66,6 +66,29 @@ function frm_install_submit(f) {
         f.admin_id.focus();
         return false;
     }
+    
+    if (window.jQuery) {
+
+        var jqxhr = jQuery.post( "<?php echo $g5_install_url; ?>/ajax.install.check.php", $(f).serialize(), function(data) {
+            
+            if( data.error ){
+                alert(data.error);
+            } else if( data.exists ) {
+                if( confirm(data.exists) ){
+                    f.submit();
+                }
+            } else if( data.success ) {
+                f.submit();
+            }
+
+        }, "json");
+
+        jqxhr.fail(function(xhr) {
+            alert( xhr.responseText );
+        });
+
+        return false;
+    }
     <?php } ?>
 
     return true;

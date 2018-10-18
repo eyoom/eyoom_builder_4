@@ -892,7 +892,7 @@ class bbs extends eyoom
         $host = $extra_parse_url['host'];
         if ($host == $_SERVER['HTTP_HOST']) return false;
 
-        $path = trim($this->get_filename_from_url($extra_img_url));
+        $path = @trim($this->get_filename_from_url($extra_img_url));
         $filename = $path['filename'];
         $thumb_info = '/file/' . $bo_table . '/' . $prefix . '_thumb_' . $wr_id . '_' . $filename;
         $list_thumb_path = G5_DATA_PATH . $thumb_info;
@@ -1470,16 +1470,27 @@ class bbs extends eyoom
         $list['bo_table'] = $row['bo_table'];
 
         /**
-         * 별점 평가글 및 추천/비추천글은 원글만 출력
+         * 별점 평가글 및 추천/비추천글 원글만 출력
          */
         if (($row['rating'] || $row['bg_flag']) && !$list['wr_subject']) {
             return false;
+        }
+        
+        /**
+         * 비밀글의 댓글인지 체크
+         */
+        $list['is_secret_comment'] = false;
+        if ($bo_info[$row['bo_table']]['bo_use_secret'] && !$list['wr_subject']) {
+            $parent_write = get_write($write_table, $row['wr_parent']);
+            if (preg_match("/secret/",$parent_write['wr_option'])) {
+                $list['is_secret_comment'] = true;
+            }
         }
 
         /**
          * 비밀글인지 체크
          */
-        if (preg_match("/secret/",$write['wr_option']) && !$is_admin && $write['mb_id']!=$member['mb_id']) {
+        if ((preg_match("/secret/",$write['wr_option']) || $list['is_secret_comment']) && !$is_admin && $write['mb_id']!=$member['mb_id']) {
             $list['wr_subject'] = '비밀글입니다.';
             $list['wr_content'] = '비밀글입니다.';
             $list['href'] = "#";

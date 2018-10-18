@@ -20,9 +20,16 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .member-skin .eyoom-form fieldset {padding:0}
 .member-skin .member-agree {padding:15px}
 .member-skin .fregister-agree label {display:inline-block;margin-right:5px}
+.member-skin #sns_register {border:1px solid #d5d5d5;box-shadow:none;margin-bottom:30px}
+.member-skin #sns_register h2 {margin:0;padding:15px;font-weight:bold;background:#fafafa}
 </style>
 
 <div class="member-skin contents-box-inner">
+    <?php
+    // 소셜로그인 사용시 소셜로그인 버튼
+    @include_once(get_social_skin_path().'/social_register.skin.php');
+    ?>
+
     <form name="fregister" id="fregister" action="<?php echo $register_action_url; ?>" onsubmit="return fregister_submit(this);" method="POST" autocomplete="off" class="eyoom-form">
 
     <div class="content-box margin-bottom-30">

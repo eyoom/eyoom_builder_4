@@ -257,7 +257,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <?php } ?>
             </div>
         </div>
-        <input type="hidden" name="wr_tag" id="wr_tag" value="<?php $write['wr_tag']; ?>">
+        <input type="hidden" name="wr_tag" id="wr_tag" value="<?php echo $write['wr_tag']; ?>">
         <input type="hidden" name="del_tag" id="del_tag" value="">
     </section>
     <div class="margin-hr-10"></div>

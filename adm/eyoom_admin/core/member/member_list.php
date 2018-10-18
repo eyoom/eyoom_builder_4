@@ -216,6 +216,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $mb_level = get_member_level_select("mb_level[$i]", 1, $member['mb_level'], $row['mb_level']);
 
     $list[$i] = $row;
+    $list[$i]['intercept_date'] = $intercept_date;
 
     $list[$i]['mb_level_select'] = preg_replace("/(\\n|\\r)/","",str_replace('"', "'", $mb_level));
     if (preg_match('/[1-9]/', $row['mb_email_certify']) ) {

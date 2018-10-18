@@ -9,26 +9,7 @@ include_once ('../../lib/common.lib.php');
 $title = G5_VERSION." &amp; 이윰빌더 설치 완료";
 include_once ('./setup.head.php');
 include_once ('../class/qfile.class.php');
-
-if( ! function_exists('safe_install_string_check') ){
-    function safe_install_string_check( $str ) {
-        $is_check = false;
-
-        if(preg_match('#\);(passthru|eval|pcntl_exec|exec|system|popen|fopen|fsockopen|file|file_get_contents|readfile|unlink|include|include_once|require|require_once)\s?#i', $str)) {
-            $is_check = true;
-        }
-
-        if(preg_match('#\$_(get|post|request)\s?\[.*?\]\s?\)#i', $str)){
-            $is_check = true;
-        }
-
-        if($is_check){
-            die("입력한 값에 안전하지 않는 문자가 포함되어 있습니다. 설치를 중단합니다.");
-        }
-
-        return $str;
-    }
-}
+include_once('../../install/install.function.php');    // 인스톨 과정 함수 모음
 
 if (!$exists_db_config || !$exists_eyoom_config) {
     include_once ('./setup.tail.php');
@@ -722,6 +703,7 @@ $eyoom = array(
     "board_skin" => "basic",
     "emoticon_skin" => "basic",
     "tag_skin" => "basic",
+    "use_mobile_default" => "pc",
     "use_gnu_outlogin" => "n",
     "use_gnu_connect" => "n",
     "use_gnu_popular" => "n",

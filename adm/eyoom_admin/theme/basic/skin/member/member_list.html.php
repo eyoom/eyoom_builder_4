@@ -398,7 +398,7 @@ $(document).ready(function(){
             메일수신: "<label class='checkbox'><input type='checkbox' name='mb_mailling[<?php echo $i; ?>]' <?php if ($list[$i]['mb_mailling']) { ?>checked<?php } ?> value='1'><i></i></label>",
             SMS수신: "<label class='checkbox'><input type='checkbox' name='mb_sms[<?php echo $i; ?>]' <?php if ($list[$i]['mb_sms']) { ?>checked<?php } ?> value='1'><i></i></label>",
             성인인증: "<label class='checkbox'><input type='checkbox' name='mb_adult[<?php echo $i; ?>]' <?php if ($list[$i]['mb_adult']) { ?>checked<?php } ?> value='1'><i></i></label><input type='hidden' name='mb_certify[<?php echo $i; ?>]' value='<?php echo $list[$i]['mb_certify']; ?>'>",
-            접근차단: "<?php if (empty($list[$i]['mb_leave_date'])) { ?><label class='checkbox'><input type='checkbox' name='mb_intercept_date[<?php echo $i; ?>]' <?php if ($list[$i]['mb_intercept_date']) { ?>checked<?php } ?> value='<?php echo $list[$i]['mb_intercept_date']; ?>'><i></i></label><?php } ?>",
+            접근차단: "<?php if (empty($list[$i]['mb_leave_date'])) { ?><label class='checkbox'><input type='checkbox' name='mb_intercept_date[<?php echo $i; ?>]' <?php if ($list[$i]['mb_intercept_date']) { ?>checked<?php } ?> value='<?php echo $list[$i]['intercept_date']; ?>'><i></i></label><?php } ?>",
             상태: "<?php echo $list[$i]['mb_status']; ?>",
             가입일: "<?php echo substr($list[$i]['mb_datetime'],0,-9); ?>",
             최신로그인: "<?php echo substr($list[$i]['mb_today_login'],0,-9); ?>",

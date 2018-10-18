@@ -276,6 +276,11 @@ class latest extends qfile
 
                 if ($thumb['src']) {
                     $latest_list[$i]['wr_image'] = $thumb['src'];
+                } else {
+                    $thumb = $this->bbs->make_thumb_from_extra_image($row['bo_table'], $row['wr_id'], $write['wr_content'], $el_item['li_img_width'], $el_item['li_img_height']);
+                    if ($thumb) {
+                        $latest_list[$i]['wr_image'] = $thumb;
+                    }
                 }
             }
 

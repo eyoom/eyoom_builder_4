@@ -69,7 +69,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </th>
                         <td>
                             <label class="input form-width-300px">
-                                <input type="text" name="bn_alt" value="<?php echo $bn['bn_alt']; ?>" id="bn_alt">
+                                <input type="text" name="bn_alt" value="<?php echo get_text($bn['bn_alt']); ?>" id="bn_alt">
                             </label>
                             <div class="note"><strong>Note:</strong> img 태그의 alt, title 에 해당되는 내용입니다.<br>배너에 마우스를 오버하면 이미지의 설명이 나옵니다.</div>
                         </td>

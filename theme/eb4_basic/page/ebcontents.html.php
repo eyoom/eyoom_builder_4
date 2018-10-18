@@ -9,6 +9,8 @@ if (!defined('_EYOOM_')) exit;
 .page-ebcontents-wrap {position:relative}
 .page-ebcontents-box {position:relative;margin-bottom:30px}
 .page-ebcontents-box:last-child {margin-bottom:0}
+.page-ebcontents-box .map-content-wrap {width:100%;height:350px}
+.page-ebcontents-box .map-content-wrap > div {width:100%;height:350px}
 </style>
 
 <div class="page-ebcontents-wrap">

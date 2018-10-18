@@ -43,7 +43,15 @@ if (file_exists($ebcontents_sql_file)) {
 	$file = preg_replace('/`me_code` = \'([0-9]+)\'/', "`me_code` = '{$meinfo['me_code']}'", $file);
 	$file = preg_replace('/`ec_theme` = \'(eb4_[a-z0-9_]{5,10})\'/', "`ec_theme` = '{$ec_theme}'", $file);
 	$file = preg_replace('/`ci_theme` = \'(eb4_[a-z0-9_]{5,10})\'/', "`ci_theme` = '{$ec_theme}'", $file);
-	$file = preg_replace('/`ec_code` = \'([0-9]{10,15})\'/', "`ec_code` = '".time()."'", $file);
+
+	preg_match_all('/`ec_code` = \'([0-9]{10,15})\'/', $file, $matchs);
+	if (is_array($matchs[1])) {
+    	$add_code = date('H')*3600 + date('i')*60 + date('s') + (ceil(time()-$code)/86400)*86400;
+    	foreach ($matchs[1] as $k => $code) {
+        	$new_code = $code + $add_code;
+        	$file = str_replace("`ec_code` = '".$code."'", "`ec_code` = '".$new_code."'", $file);
+    	}
+	}
 
 	$q = explode('^|^', $file);
 

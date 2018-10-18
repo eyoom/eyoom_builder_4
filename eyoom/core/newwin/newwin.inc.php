@@ -18,7 +18,7 @@ $result = sql_query($sql, false);
 
 for ($i=0; $nw=sql_fetch_array($result); $i++) {
     // 이미 체크 되었다면 Continue
-    if ($_COOKIE["hd_pops_{$nw['nw_id']}"])
+    if ($_COOKIE["hd_pops_list"])
         continue;
 
     $newwin[$i] = $nw;

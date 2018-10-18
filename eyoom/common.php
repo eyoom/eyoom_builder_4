@@ -37,6 +37,15 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
      * 테마 로딩 : 적용테마, 미리보기테마를 자동으로 구분하여 로딩
      */
     $loaded_theme = $thema->loading_theme();
+    
+    /**
+     * 비반응형 테마 설정 및 모바일 기본을 PC로 설정할 경우
+     */
+    $default_device = get_session('ss_set_default_device');
+    if (!defined('G5_IS_ADMIN') && !$eyoom['is_responsive'] && (!$default_device || $default_device != $eyoom['use_mobile_default'])) {
+        set_session('ss_set_default_device', $eyoom['use_mobile_default']);
+        //header("location:".G5_URL."/?device={$eyoom['use_mobile_default']}");
+    }
 
     /**
      * 공사중으로 설정되어 있다면 공사중 페이지 출력

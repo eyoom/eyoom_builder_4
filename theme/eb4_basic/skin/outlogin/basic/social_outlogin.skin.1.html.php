@@ -56,7 +56,7 @@ if( G5_SOCIAL_USE_POPUP ) {
                 var newWin = window.open(
                     pop_url,
                     "social_sing_on",
-                    "location=0,status=0,scrollbars=0,width=600,height=500"
+                    "location=0,status=0,scrollbars=1,width=600,height=500"
                 );
 
                 if(!newWin || newWin.closed || typeof newWin.closed=='undefined')

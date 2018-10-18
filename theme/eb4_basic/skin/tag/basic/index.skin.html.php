@@ -6,8 +6,8 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.board-webzine .webzine-item {position:relative;font-size:13px;margin-bottom:30px;border:1px solid #d5d5d5;-webkit-border-radius:2px !important;-moz-border-radius:2px !important;border-radius:2px !important;background:#fff;width:100%}
-.board-webzine .webzine-item-heading {position:relative;padding:8px 15px;border-bottom:1px solid #e5e5e5;background:#f8f8f8;-webkit-border-radius:2px 2px 0 0 !important;-moz-border-radius:2px 2px 0 0 !important;border-radius:2px 2px 0 0 !important}
+.board-webzine .webzine-item {position:relative;font-size:13px;margin-bottom:30px;border:1px solid #d5d5d5;background:#fff;width:100%}
+.board-webzine .webzine-item-heading {position:relative;padding:8px 15px;border-bottom:1px solid #e5e5e5;background:#f8f8f8}
 .board-webzine .webzine-item-heading .webzine-photo {display:inline-block;width:26px;height:26px;margin-right:2px;border:1px solid #e5e5e5;padding:1px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
 .board-webzine .webzine-item-heading .webzine-photo img {width:100%;height:auto;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
 .board-webzine .webzine-item-heading .webzine-photo .webzine-user-icon {width:22px;height:22px;font-size:14px;line-height:22px;text-align:center;background:#959595;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;white-space:nowrap;vertical-align:baseline;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
@@ -54,7 +54,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
     <div class="content-box-body">
         <?php for ($i=0; $i<count($rel_tags); $i++) { ?>
-        <span><a href="<?php echo $rel_tags[$i]['href']; ?>" class="btn-e btn-e-xs btn-e-blue rounded"><?php echo $rel_tags[$i]['tag']; ?></a></span>
+        <span><a href="<?php echo $rel_tags[$i]['href']; ?>" class="btn-e btn-e-xs btn-e-default"><?php echo $rel_tags[$i]['tag']; ?></a></span>
         <?php } ?>
     </div>
 </div>
@@ -71,12 +71,12 @@ if (!defined('_EYOOM_')) exit;
                 <?php if ($list[$i]['mb_photo']) { ?>
                 <?php echo $list[$i]['mb_photo']; ?>
                 <?php } else { ?>
-                <span class="webzine-user-icon"><i class="fa fa-user"></i></span>
+                <span class="webzine-user-icon"><i class="fas fa-user"></i></span>
                 <?php } ?>
             </span>
-            <span><?php echo eb_nameview('basic', $list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['email'], $list[$i]['homepage']); ?></span>
+            <span><?php echo eb_nameview('basic', $list[$i]['mb_nick'], $list[$i]['mb_id'], $list[$i]['email'], $list[$i]['homepage']); ?></span>
             <span class="webzine-date">
-                <?php echo $eb->date_format('Y-m-d', $list[$i]['tw_datetime']); ?>
+                <i class="far fa-clock"></i> <?php echo $eb->date_format('Y-m-d', $list[$i]['tw_datetime']); ?>
             </span>
         </div>
         <div class="webzine-item-body">
@@ -101,14 +101,14 @@ if (!defined('_EYOOM_')) exit;
                 </h4>
                 <p class="webzine-cont"><?php echo $list[$i]['wr_content']; ?></p>
                 <div class="webzine-info">
-                    <span><i class="fa fa-eye"></i><strong class="color-black"><?php echo number_format($list[$i]['wr_hit']); ?></strong></span>
+                    <span><i class="fas fa-eye"></i><strong class="color-black"><?php echo number_format($list[$i]['wr_hit']); ?></strong></span>
                 </div>
             </div>
         </div>
     </div>
     <?php } ?>
     <?php if (count($list) == 0) { ?>
-    <div class="text-center color-grey font-size-14"><i class="fa fa-exclamation-circle"></i> 출력할 내용이 없습니다.</div>
+    <div class="text-center color-grey font-size-14"><i class="fas fa-exclamation-circle"></i> 출력할 내용이 없습니다.</div>
     <?php } ?>
 </div>
 

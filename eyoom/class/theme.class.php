@@ -754,6 +754,7 @@ class theme extends qfile
 
         if ($url['query']) {
             parse_str($url['query'],$query);
+            if ($query['pid'] && $query['theme']) unset($query['theme']);
             foreach ($query as $key => $val) {
                 if (in_array($key,array('theme', 'shop_theme', 'bo_table', 'gr_id', 'co_id', 'ca_id', 'it_id', 'pid', 'faq', 'fm_id', 'sca', 'sfl', 'tag', 'po_id', 'ev_id'))) {
                     switch($key) {

@@ -23,6 +23,9 @@ $qfile = new qfile;
 $is_config_setup = true;
 
 $tm_shop = file_exists('../../shop.config.php') ? 'y': 'n';
+
+$tmp_str = isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : '';
+$ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].$_SERVER['DOCUMENT_ROOT']);
 ?>
 
 <form name="frm_install" id="frm_install" method="post" action="./setup_db.php" autocomplete="off" onsubmit="return frm_install_submit(this)">
@@ -94,6 +97,7 @@ $tm_shop = file_exists('../../shop.config.php') ? 'y': 'n';
 
     <div class="ins_frm gnuboard_frm">
         <h3 class="ins_frm_title">최고관리자 정보입력</h3>
+        <input type="hidden" name="ajax_token" value="<?php echo $ajax_token; ?>" >
         <div class="margin-bottom-5">
             <label for="admin_id">회원 ID</label>
             <input name="admin_id" type="text" value="admin" id="admin_id">

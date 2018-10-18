@@ -97,7 +97,7 @@ if (!defined('_EYOOM_')) exit;
         <?php foreach ($list as $key => $li) { ?>
         <article class="starpost-box">
             <div class="starpost-list">
-                <a href="<?php echo $li['href']; ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="starpost_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="starpost_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <?php if ($li['wr_image']) { ?>
                     <div class="starpost-img-box">
                         <div class="starpost-img">

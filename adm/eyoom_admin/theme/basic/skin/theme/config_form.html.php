@@ -57,12 +57,26 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <th class="table-form-th">
                                 <label class="label">테마유형</label>
                             </th>
-                            <td colspan="3">
+                            <td>
                                 <div class="inline-group">
                                     <label for="is_responsive1" class="radio"><input type="radio" name="is_responsive" id="is_responsive1" value="1" <?php echo $eyoom['is_responsive'] == '1' ? 'checked': '';?>><i></i> 반응형</label>
                                     <label for="is_responsive2" class="radio"><input type="radio" name="is_responsive" id="is_responsive2" value="0" <?php echo $eyoom['is_responsive'] == '0' ? 'checked': '';?>><i></i> 비반응형</label>
                                 </div>
                                 <div class="note"><strong>Note:</strong> 테마를 반응형으로 할지 비반응형으로 할지 설정합니다.</div>
+                            </td>
+                        <?php if (G5_IS_MOBILE) { ?>
+                        </tr>
+                        <tr>
+                        <?php } ?>
+                            <th class="table-form-th border-left-th">
+                                <label class="label">모바일 디바이스 모드</label>
+                            </th>
+                            <td>
+                                <div class="inline-group">
+                                    <label for="use_mobile_default_1" class="radio"><input type="radio" name="use_mobile_default" id="use_mobile_default_1" value="pc" <?php echo $eyoom['use_mobile_default'] == 'pc' || !$eyoom['use_mobile_default'] ? 'checked': '';?>><i></i> PC모드</label>
+                                    <label for="use_mobile_default_2" class="radio"><input type="radio" name="use_mobile_default" id="use_mobile_default_2" value="mobile" <?php echo $eyoom['use_mobile_default'] == 'mobile' ? 'checked': '';?>><i></i> 모바일모드</label>
+                                </div>
+                                <div class="note"><strong>Note:</strong> 테마유형이 비반응형욿 설정되어 있을 경우, 모바일 기본 모드를 설정하실 수 있습니다.</div>
                             </td>
                         </tr>
                         <?php if ($is_youngcart) { ?>

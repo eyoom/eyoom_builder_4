@@ -338,13 +338,15 @@ class eyoom extends qfile
      * 전체 게시판 정보
      */
     public function get_bo_subject() {
-        $sql = "select a.bo_table, a.bo_subject, a.bo_list_level, b.gr_subject, b.gr_id from {$this->g5['board_table']} as a left join {$this->g5['group_table']} as b on a.gr_id = b.gr_id where 1 order by b.gr_subject asc, a.bo_subject asc";
+        $fields = 'a.bo_table, a.bo_subject, a.bo_list_level, a.bo_use_secret, b.gr_subject, b.gr_id';
+        $sql = "select {$fields} from {$this->g5['board_table']} as a left join {$this->g5['group_table']} as b on a.gr_id = b.gr_id where 1 order by b.gr_subject asc, a.bo_subject asc";
         $res = sql_query($sql, false);
         for ($i=0; $row=sql_fetch_array($res);$i++) {
             $bo_name[$row['bo_table']]['gr_id'] = $row['gr_id'];
             $bo_name[$row['bo_table']]['gr_name'] = $row['gr_subject'];
             $bo_name[$row['bo_table']]['bo_name'] = $row['bo_subject'];
             $bo_name[$row['bo_table']]['bo_list_level'] = $row['bo_list_level'];
+            $bo_name[$row['bo_table']]['bo_use_secret'] = $row['bo_use_secret'];
         }
         return $bo_name;
     }

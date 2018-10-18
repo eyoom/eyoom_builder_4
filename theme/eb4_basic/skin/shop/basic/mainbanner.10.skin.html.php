@@ -10,7 +10,7 @@ if (!defined('_EYOOM_')) exit;
         <?php for ($i=0; $i<$count; $i++) { ?>
         <li <?php echo $list[$i]['bn_first_class']; ?>>
             <a href="<?php echo $list[$i]['bn_url']; ?>">
-                <img src="<?php echo G5_DATA_URL; ?>'/banner/<?php echo $list[$i]['bn_id']; ?>" alt="<?php echo $list[$i]['bn_alt']; ?>"<?php echo $list[$i]['bn_border']; ?> class="img-responsive">
+                <img src="<?php echo G5_DATA_URL; ?>'/banner/<?php echo $list[$i]['bn_id']; ?>" alt="<?php echo get_text($list[$i]['bn_alt']); ?>"<?php echo $list[$i]['bn_border']; ?> class="img-responsive">
             </a>
         </li>
         <?php } ?>
