@@ -5,6 +5,11 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 게시판 썸네일 라이브러리
+ */
+@include_once(G5_LIB_PATH.'/thumbnail.lib.php');
+
+/**
  * 회원체크
  */
 if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);

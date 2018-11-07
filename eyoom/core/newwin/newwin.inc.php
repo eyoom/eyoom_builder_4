@@ -16,6 +16,8 @@ $sql = " select * from {$g5['new_win_table']}
           order by nw_id asc ";
 $result = sql_query($sql, false);
 
+$newwin = '';
+
 for ($i=0; $nw=sql_fetch_array($result); $i++) {
     // 이미 체크 되었다면 Continue
     if ($_COOKIE["hd_pops_list"])
@@ -24,12 +26,25 @@ for ($i=0; $nw=sql_fetch_array($result); $i++) {
     $newwin[$i] = $nw;
 }
 
-/**
- * 사용자 프로그램
- */
-@include_once(EYOOM_USER_PATH.'/newwin/newwin.inc.php');
-
-/**
- * 출력
- */
-include_once($eyoom_skin_path['newwin'].'/newwin.inc.html.php');
+if (is_array($newwin)) {
+    /**
+     * 스킨파일 출력
+     */
+    ob_start();
+    
+    /**
+     * 사용자 프로그램
+     */
+    @include_once(EYOOM_USER_PATH.'/newwin/newwin.inc.php');
+    
+    /**
+     * 팝업스킨
+     */
+    include_once($eyoom_skin_path['newwin'].'/newwin.inc.html.php');
+    
+    /**
+     * 스킨파일 출력
+     */
+    $newwin_contents = ob_get_contents();
+    ob_end_clean();
+}

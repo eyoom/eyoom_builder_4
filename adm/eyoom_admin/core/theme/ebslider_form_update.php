@@ -49,7 +49,7 @@ if (empty($_POST)) {
  * 기존 파일정보
  */
 if ($w == 'u') {
-    $es = sql_fetch("select es_image from {$g5['eyoom_ebslider']} where es_no = '{$es_no}' ");
+    $es = sql_fetch("select es_image from {$g5['eyoom_slider']} where es_no = '{$es_no}' ");
     $es_image = $es['es_image'];
 }
 

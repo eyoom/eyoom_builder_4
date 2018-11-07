@@ -20,6 +20,7 @@ function eb_slider ($es_code) {
      * EB슬라이더 마스터 파일이 있는지 체크
      */
     $ebslider_path = G5_DATA_PATH.'/ebslider/'.$theme;
+    $ebslider_url = G5_DATA_URL.'/ebslider/'.$theme;
     $master_file = $ebslider_path.'/es_master_'.$es_code.'.php';
     if (file_exists($master_file) && !is_dir($master_file)) {
         include($master_file);
@@ -60,6 +61,13 @@ function eb_slider ($es_code) {
      */
     if ($es_master['es_state'] == '1') {
         /**
+         * EB슬라이더 마스터 첨부 이미지
+         */
+        if ($es_master['es_image']) {
+            $es_master['es_img_url'] = $ebslider_url.'/img/'.$es_master['es_image'];
+        }
+
+        /**
          * 회원레벨
          */
         $mb_level = $member['mb_level'] ? $member['mb_level']: 1;
@@ -87,7 +95,7 @@ function eb_slider ($es_code) {
         }
 
         /**
-         * 이미지 아이템
+         * EB슬라이더 아이템
          */
         $ebslider_item = $ebslider_path.'/es_item_'.$es_code.'.php';
         if (file_exists($ebslider_item) && !is_dir($ebslider_item)) {

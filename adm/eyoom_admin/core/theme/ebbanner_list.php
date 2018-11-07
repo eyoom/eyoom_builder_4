@@ -16,20 +16,27 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebbanner_list_update&amp;smode=1';
 
 /**
- * EB최신글 테이블 생성
+ * EB배너 테이블 생성
  */
 $sql = "
     CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_banner'] . "` (
       `bn_no` int(10) unsigned NOT NULL,
       `bn_code` varchar(20) NOT NULL,
-      `bn_subject` varchar(255) NOT NULL,
-      `bn_theme` varchar(30) NOT NULL DEFAULT 'eb4_basic',
-      `bn_skin` varchar(50) NOT NULL DEFAULT 'basic',
+      `bn_type` enum('intra','extra') NOT NULL DEFAULT 'intra',
+      `bn_subject` varchar(255) NOT NULL DEFAULT '0',
+      `bn_link` text,
+      `bn_img` varchar(100) NOT NULL DEFAULT '',
+      `bn_target` varchar(20) NOT NULL DEFAULT '',
+      `bn_script` text NOT NULL,
+      `bn_sort` int(10) DEFAULT '0',
+      `bn_theme` varchar(30) NOT NULL DEFAULT 'default',
       `bn_state` smallint(1) NOT NULL DEFAULT '0',
-      `bn_cache` int(10) NOT NULL DEFAULT '0',
-      `bn_new` mediumint(3) NOT NULL DEFAULT '0',
-      `bn_link` varchar(255) NOT NULL,
-      `bn_target` varchar(10) NOT NULL,
+      `bn_period` char(1) NOT NULL DEFAULT '1',
+      `bn_start` varchar(10) NOT NULL,
+      `bn_end` varchar(10) NOT NULL,
+      `bn_exposed` mediumint(10) NOT NULL DEFAULT '0',
+      `bn_clicked` mediumint(10) NOT NULL DEFAULT '0',
+      `bn_view_level` tinyint(4) NOT NULL DEFAULT '1',
       `bn_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
       PRIMARY KEY  (`bn_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

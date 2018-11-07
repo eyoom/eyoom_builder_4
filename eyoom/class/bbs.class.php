@@ -407,8 +407,10 @@ class bbs extends eyoom
             case 'youtube.com':
                 if ($src[1]) {
                     $video['key1'] = $src[1];
-                } else {
+                } else if ($query['v']) {
                     $video['key1'] = $query['v'];;
+                } else {
+                    $video['key1'] = str_replace('/embed/', '', $info['path']);
                 }
                 break;
 
@@ -730,7 +732,7 @@ class bbs extends eyoom
             case 'youtu.be':
             case 'youtube.com':
                 $vlist = $video['key2'] ? '&list='.$video['key2'] : '';
-                $source = '<iframe width="'.$video['width'].'" height="'.$video['height'].'" src="http://www.youtube.com/embed/'.$video['key1'].'?wmode=opaque&autohide=1'.$vlist.'" frameborder="0" allowfullscreen></iframe>';
+                $source = '<iframe width="'.$video['width'].'" height="'.$video['height'].'" src="//www.youtube.com/embed/'.$video['key1'].'?wmode=opaque&autohide=1'.$vlist.'" frameborder="0" allowfullscreen></iframe>';
                 break;
             case 'tvcast.naver.com':
             case 'tv.naver.com':
@@ -1453,6 +1455,12 @@ class bbs extends eyoom
      */
     public function board_latest_record($row, $bo_info, $datetime='bn_datetime') {
         global $query_wmode;
+
+        /**
+         * 게시판 썸네일 라이브러리
+         */
+        @include_once(G5_LIB_PATH.'/thumbnail.lib.php');
+
         /**
          * 게시판 테이블
          */

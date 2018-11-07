@@ -98,6 +98,8 @@ class eyoom extends qfile
      * 메인페이지
      */
     private function go_index_page() {
+        global $eyoom;
+
         include_once(EYOOM_PATH.'/main.php');
     }
 

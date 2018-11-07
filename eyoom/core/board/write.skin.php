@@ -36,8 +36,9 @@ if ($is_member) {
     if ($w==''||$w=='r') {
         $eb_1 = $member['mb_level']."|".$eyoomer['level'];
     } else if ($w=='u') {
-        if ($eb_1) {
+        if ($eb_1 && $is_anonymous) {
             list($gnu_level,$eyoom_level,$anonymous) = explode('|',$eb_1);
+            $eb_1 = $gnu_level."|".$eyoom_level;
             if($anonymous == 'y') {
                 $anonymous_checked = 'checked="checked"';
             }

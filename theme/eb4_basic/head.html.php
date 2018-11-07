@@ -42,6 +42,13 @@ $item_view = 'zoom';
 
 <?php if (!$wmode) { ?>
 <div class="wrapper">
+    <?php
+    // 팝업창
+    if(defined('_INDEX_') && $newwin_contents) { // index에서만 실행
+        echo $newwin_contents;
+    }
+    ?>
+
     <?php /* Header Topbar */ ?>
     <header class="header-topbar">
         <div class="container position-relative">

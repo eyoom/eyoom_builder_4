@@ -661,3 +661,32 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_latest_item` (
   `li_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`li_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_banner`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_banner`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_banner` (
+  `bn_no` int(10) unsigned NOT NULL,
+  `bn_code` varchar(20) NOT NULL,
+  `bn_type` enum('intra','extra') NOT NULL DEFAULT 'intra',
+  `bn_subject` varchar(255) NOT NULL DEFAULT '0',
+  `bn_link` text,
+  `bn_img` varchar(100) NOT NULL DEFAULT '',
+  `bn_target` varchar(20) NOT NULL DEFAULT '',
+  `bn_script` text NOT NULL,
+  `bn_sort` int(10) DEFAULT '0',
+  `bn_theme` varchar(30) NOT NULL DEFAULT 'default',
+  `bn_state` smallint(1) NOT NULL DEFAULT '0',
+  `bn_period` char(1) NOT NULL DEFAULT '1',
+  `bn_start` varchar(10) NOT NULL,
+  `bn_end` varchar(10) NOT NULL,
+  `bn_exposed` mediumint(10) NOT NULL DEFAULT '0',
+  `bn_clicked` mediumint(10) NOT NULL DEFAULT '0',
+  `bn_view_level` tinyint(4) NOT NULL DEFAULT '1',
+  `bn_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bn_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
