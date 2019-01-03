@@ -101,8 +101,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td>
                             <label for="co_tag_filter_use" class="select form-width-250px">
                                 <select name="co_tag_filter_use" id="co_tag_filter_use">
-                                    <option value="1"<?php echo get_selected(1, $co['co_tag_filter_use']); ?>>사용함</option>
-                                    <option value="0"<?php echo get_selected(0, $co['co_tag_filter_use']); ?>>사용안함</option>
+                                    <option value="1"<?php echo get_selected($co['co_tag_filter_use'], 1); ?>>사용함</option>
+                                    <option value="0"<?php echo get_selected($co['co_tag_filter_use'], 0); ?>>사용안함</option>
                                 </select><i></i>
                             </label>
                             <div class="note"><strong>Note:</strong> 내용에서 iframe 등의 태그를 사용하려면 사용안함으로 선택해 주십시오.</div>

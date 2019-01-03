@@ -99,7 +99,6 @@ if (is_uploaded_file($_FILES['ec_image']['tmp_name'])) {
     $file_name = md5(time().$_FILES['ec_image']['name']).".".$ext;
     if (!preg_match("/\.(jpg|gif|png)$/i", $_FILES['ec_image']['name'])) {
         $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
-        continue;
     } else {
         $dest_path = G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/img/'.$file_name;
 

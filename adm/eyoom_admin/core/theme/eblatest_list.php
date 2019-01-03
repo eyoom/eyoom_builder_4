@@ -16,6 +16,22 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_list_update&amp;smode=1';
 
 /**
+ * g5_board_new 테이블에 wr_hit 및 wr_comment 필드 체크 후, 없다면 추가
+ */
+if(!sql_query(" select wr_hit from {$g5['board_new_table']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['board_new_table']}`
+                add `wr_hit` int(11) NOT NULL default '0' after `mb_id`,
+                add `wr_comment` int(11) NOT NULL default '0' after `wr_hit`
+    ";
+    sql_query($sql, true);
+
+    /**
+     * 추가된 wr_id에 실제 히트수 업데이트
+     */
+    $latest->update_wr_id();
+}
+
+/**
  * EB최신글 테이블 생성
  */
 $sql = "

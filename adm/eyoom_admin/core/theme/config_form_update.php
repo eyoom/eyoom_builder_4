@@ -28,6 +28,12 @@ if ($tm_alias) {
 }
 
 /**
+ * 테마 별칭 업데이트
+ */
+$sql = "update {$g5['eyoom_theme']} set tm_alias = '{$tm_alias}', tm_last = '".G5_TIME_YMDHIS."' where tm_name = '{$theme}'";
+sql_query($sql);   
+
+/**
  * $eyoom 변수파일 재정의
  */
 unset($eyoom);

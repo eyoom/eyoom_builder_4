@@ -115,7 +115,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     <input type="hidden" name="bo_cont" value="<?php echo $bo_cont; ?>">
     <input type="hidden" name="bo_list" value="<?php echo $bo_list; ?>">
     <input type="hidden" name="bo_sns" value="<?php echo $bo_sns; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
     <input type="hidden" name="token" value="<?php echo $token; ?>">
 
@@ -158,9 +157,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
     </div>
 </div>
-
-<?php /* 페이지 */ ?>
-<?php echo eb_paging($eyoom['paging_skin']);?>
 
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/jsgrid.js"></script>
@@ -205,7 +201,7 @@ window.closeModal = function(){
         <?php for ($i=0; $i<count($list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ex_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['ex_no']; ?>'>",
-            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_exform&amp;bo_table=<?php echo $bo_table; ?>&amp;ex_no=<?php echo $list[$i]['ex_no']; ?>&amp;w=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='exboard_modal(this.href); return false;'><u>수정</u></a>",
+            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_exform&amp;bo_table=<?php echo $bo_table; ?>&amp;ex_no=<?php echo $list[$i]['ex_no']; ?>&amp;w=u&amp;wmode=1' onclick='exboard_modal(this.href); return false;'><u>수정</u></a>",
             코드복사: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_excode&amp;bo_table=<?php echo $bo_table; ?>&amp;ex_no=<?php echo $list[$i]['ex_no']; ?>&amp;wmode=1' onclick='exboard_modal(this.href,\"코드복사하기\"); return false;' class='btn-e btn-e-xs btn-e-dark'>코드보기</a>",
             필드명: "<strong><?php echo $list[$i]['ex_fname']; ?></strong><input type='hidden' name='ex_fname[<?php echo $i; ?>]' value='<?php echo $list[$i]['ex_fname']; ?>'>",
             타이틀: "<label for='ex_subject' class='input'><input type='text' name='ex_subject[<?php echo $i; ?>]' id='ex_subject_<?php echo $i; ?>' value='<?php echo get_text($list[$i]['ex_subject']); ?>'></label>",
@@ -228,7 +224,7 @@ $(function() {
         controller     : db,
         deleteConfirm  : "정말로 삭제하시겠습니까?\n한번 삭제된 데이터는 복구할수 없습니다.",
         pageButtonCount: 5,
-        pageSize       : <?php echo $rows; ?>,
+        pageSize       : 30,
         width          : "100%",
         height         : "auto",
         fields         : [

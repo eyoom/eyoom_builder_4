@@ -2003,7 +2003,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_<?php echo $i; ?>" id="cf_<?php echo $i; ?>" value="<?php echo $config['cf_'. $i]; ?>">
+                                    <input type="text" name="cf_<?php echo $i; ?>" id="cf_<?php echo $i; ?>" value="<?php echo get_sanitize_input($config['cf_'.$i]); ?>">
                                 </label>
                             </td>
                         </tr>

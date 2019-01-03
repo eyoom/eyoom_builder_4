@@ -97,6 +97,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <div class="note"><strong>Note:</strong> 그누레벨 이상 회원에게 표시</div>
                         </td>
                     </tr>
+                    <tr>
+                        <th class="table-form-th">
+                            <label class="label">출력기간 재적용</label>
+                        </th>
+                        <td colspan="3">
+                            <label for="li_renew" class="checkbox"><input type="checkbox" name="li_renew" id="li_renew" value="y"><i></i> 최신글 추출일 적용하기</label>
+                            <div class="note"><strong>Note:</strong> 환경설정에서 적용한 <strong>최신게시물 삭제</strong>일수(<?php echo $config['cf_new_del']; ?>일)를 기준으로 최신글을 자동으로 적용해 줍니다.<br>게시물이 있는데 최신 게시물이 출력되지 않을 경우 체크하세요.</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <?php if (!G5_IS_MOBILE) { ?>

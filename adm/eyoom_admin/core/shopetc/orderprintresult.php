@@ -6,6 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500120";
 
+$fr_date = preg_replace('/[^0-9_\-]/', '', $fr_date);
+$to_date = preg_replace('/[^0-9_\-]/', '', $to_date);
+
 auth_check($auth[$sub_menu], "r");
 
 function conv_telno($t)

@@ -8,6 +8,8 @@ $sub_menu = "400650";
 
 include_once(G5_EDITOR_LIB);
 
+$is_id = preg_replace('/[^0-9]/', '', $is_id);
+
 auth_check($auth[$sub_menu], "w");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemuseformupdate&amp;smode=1';

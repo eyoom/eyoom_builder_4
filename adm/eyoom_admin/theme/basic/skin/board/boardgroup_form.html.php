@@ -128,7 +128,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="input">
-                                <input type="text" name="gr_<?php echo $i; ?>" id="gr_<?php echo $i; ?>" value="<?php echo $config['gr_'. $i]; ?>">
+                                <input type="text" name="gr_<?php echo $i; ?>" id="gr_<?php echo $i; ?>" value="<?php echo get_sanitize_input($gr['gr_'.$i]); ?>">
                             </label>
                         </td>
                     </tr>

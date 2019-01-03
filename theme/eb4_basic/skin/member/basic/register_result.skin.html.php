@@ -15,9 +15,9 @@ if (!defined('_EYOOM_')) exit;
         회원 가입 시 입력하신 이메일 주소로 인증메일이 발송되었습니다.<br>
         <strong class="color-red">발송된 인증메일을 확인하신 후 인증처리</strong>를 하시면 사이트를 원활하게 이용하실 수 있습니다.
     </p>
-    <blockquote class="hero hero-dark">
-        <p class="font-size-12">아이디 : <strong class="color-white"><?php echo $mb['mb_id']; ?></strong></p>
-        <p class="font-size-12">이메일 주소 : <strong class="color-white"><?php echo $mb['mb_email']; ?></strong></p>
+    <blockquote class="hero">
+        <p class="font-size-12">아이디 : <strong><?php echo $mb['mb_id']; ?></strong></p>
+        <p class="font-size-12">이메일 주소 : <strong><?php echo $mb['mb_email']; ?></strong></p>
     </blockquote>
     <p>
         이메일 주소를 잘못 입력하셨다면, 사이트 관리자에게 문의해주시기 바랍니다.<br>

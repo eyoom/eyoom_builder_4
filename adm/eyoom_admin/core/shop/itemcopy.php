@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400300";
 
+$ca_id = preg_replace('/[^0-9a-z]/i', '', $ca_id);
+
 auth_check($auth[$sub_menu], "r");
 
 /**

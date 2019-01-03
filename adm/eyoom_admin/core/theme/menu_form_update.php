@@ -22,6 +22,7 @@ switch($_POST['mode']) {
          */
         if($_POST['subme_name']) {
             $subme_info = $thema->get_menu_link($_POST['subme_link']);
+            $subme_info['me_link'] = preg_match('/^javascript/i', $subme_info['me_link']) ? G5_URL : strip_tags($subme_info['me_link']);
             $subme_path = $_POST['me_path'] ? $_POST['me_path'].' > '.$_POST['subme_name']:$_POST['subme_name'];
 
             $length = strlen($_POST['me_code'])+3;
@@ -71,6 +72,7 @@ switch($_POST['mode']) {
          */
         if ($_POST['me_name']) {
             $me_info = $thema->get_menu_link($_POST['me_link']);
+            $me_info['me_link'] = preg_match('/^javascript/i', $me_info['me_link']) ? G5_URL : strip_tags($me_info['me_link']);
 
             /**
              * 출력순서값이 수정될 경우, 입력된 순서 이상은 +1처리

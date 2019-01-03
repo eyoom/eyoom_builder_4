@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     <div class="margin-hr-15"></div>
     <section>
         <label class="label">자동등록방지</label>
-        <div class="vc-captcha"><?php captcha_html(); ?></div>
+        <div class="vc-captcha"><?php echo captcha_html(); ?></div>
     </section>
     <div class="text-center margin-bottom-20">
         <input type="submit" id="btn_submit" value="인증메일변경" class="btn-e btn-e-lg btn-e-red">

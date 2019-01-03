@@ -41,6 +41,7 @@ $li_use_date    = clean_xss_tags(trim($_POST['li_use_date']));
 $li_date_type   = clean_xss_tags(trim($_POST['li_date_type']));
 $li_date_kind   = clean_xss_tags(trim($_POST['li_date_kind']));
 $li_view_level  = clean_xss_tags(trim($_POST['li_view_level']));
+$li_renew       = clean_xss_tags(trim($_POST['li_renew']));
 
 /**
  * 제외 테이블
@@ -103,6 +104,42 @@ $li_table = array_unique($li_table);
  * 최신글 대상 게시판 테이블
  */
 $li_tables = implode(',', $li_table);
+
+/**
+ * 최신게시물 삭제일 조정 및 적용하기
+ */
+if ($li_renew == 'y' && is_array($li_table)) {
+    $li_fields = "wr_id, wr_parent, wr_datetime, mb_id, wr_hit, wr_comment";
+    
+    foreach ($li_table as $k => $_bo_table) {
+        unset($wr_new);
+        $write_table = $g5['write_prefix'] . $_bo_table;
+        $sql = "select wr_id from {$g5['board_new_table']} where bo_table = '{$_bo_table}' ";
+        $result = sql_query($sql);
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $wr_new[$i] = $row['wr_id'];
+        }
+        
+        $sql2 = "select {$li_fields} from {$write_table} where (TO_DAYS('".G5_TIME_YMDHIS."') - TO_DAYS(wr_datetime)) < '{$config['cf_new_del']}'";
+
+        $result2 = sql_query($sql2);
+        for ($i=0; $row2=sql_fetch_array($result2); $i++) {
+            unset($upset, $insert);
+            if (isset($wr_new) && is_array($wr_new) && in_array($row2['wr_id'], $wr_new)) continue;
+            $upset = "
+                bo_table = '{$_bo_table}',
+                wr_id = '{$row2['wr_id']}',
+                wr_parent = '{$row2['wr_parent']}',
+                bn_datetime = '{$row2['wr_datetime']}',
+                mb_id = '{$row2['mb_id']}',
+                wr_hit = '{$row2['wr_hit']}',
+                wr_comment = '{$row2['wr_comment']}'
+            ";
+            $insert = "insert into {$g5['board_new_table']} set {$upset}";
+            sql_query($insert);
+        }
+    }
+}
 
 $sql_common = "
     el_code = '{$el_code}',

@@ -874,7 +874,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                         </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label for="de_card_noint_use" class="label">신용카드 무이자할부사용</label>
+                                <label for="de_card_noint_use" class="label">신용카드 무이자할부사용<br>(KCP 만 해당)</label>
                             </th>
                             <td>
                                 <label class="select form-width-250px">
@@ -883,7 +883,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                         <option value="1" <?php echo get_selected($default['de_card_noint_use'], 1); ?>>사용</option>
                                     </select><i></i>
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 주문시 신용카드 무이자할부를 가능하게 할것인지를 설정합니다.<br>사용으로 설정하시면 PG사 가맹점 관리자 페이지에서 설정하신 무이자할부 설정이 적용됩니다.<br>사용안함으로 설정하시면 PG사 무이자 이벤트 카드를 제외한 모든 카드의 무이자 설정이 적용되지 않습니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 주문시 신용카드 무이자할부를 가능하게 할것인지를 설정합니다.<br>사용으로 설정하시면 KCP PG사 가맹점 관리자 페이지에서 설정하신 무이자할부 설정이 적용됩니다.<br>사용안함으로 설정하시면 PG사 무이자 이벤트 카드를 제외한 모든 카드의 무이자 설정이 적용되지 않습니다.</div>
                             </td>
                         </tr>
                         <tr>

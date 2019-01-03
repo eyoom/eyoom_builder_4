@@ -7,7 +7,7 @@ if (!defined('_EYOOM_')) exit;
 /**
  * 결재수단 초기설정
  */
-$multi_settle == 0;
+$multi_settle = 0;
 $checked = '';
 
 $escrow_title = "";

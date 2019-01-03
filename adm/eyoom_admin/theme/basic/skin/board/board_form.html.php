@@ -386,7 +386,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <i class="icon-append">개</i>
                                     <input type="text" name="bo_count_delete" id="bo_count_delete" value="<?php echo $board['bo_count_delete'] ?>" class="text-right" required>
                                 </label>
-                                <div class="note"><strong>Note:</strong> 댓글의 수가 설정 수 이상이면 원글을 삭제할 수 없습니다. 0으로 설정하시면 댓글 수에 관계없이 삭제할 수있습니다.</div>
+                                <div class="note"><strong>Note:</strong> 댓글의 수가 설정 수 이상이면 원글을 삭제할 수 없습니다. 원글 삭제 불가 댓글수는 1 이상 입력하셔야 합니다.</div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">

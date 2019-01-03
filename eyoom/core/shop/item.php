@@ -9,7 +9,7 @@ if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
     return;
 }
 
-$it_id = trim($_GET['it_id']);
+$it_id = get_search_string(trim($_GET['it_id']));
 
 include_once(G5_LIB_PATH.'/iteminfo.lib.php');
 

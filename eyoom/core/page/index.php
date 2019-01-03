@@ -24,6 +24,11 @@ if ($pid == 'ebcontents') {
 @include_once(EYOOM_CORE_PATH . '/page/proc/'. $core_file);
 
 /**
+ * smode 에서 스킨출력은 필요없음
+ */
+if ($smode) return;
+
+/**
  * 테마 경로 지정
  */
 if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {

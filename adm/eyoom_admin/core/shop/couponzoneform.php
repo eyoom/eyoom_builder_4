@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400810";
 
+$cz_id = (int) $cz_id;
+
 auth_check($auth[$sub_menu], "w");
 
 /**

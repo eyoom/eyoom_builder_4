@@ -51,15 +51,6 @@ $sql_search = " where bo_table='{$board['bo_table']}' ";
  */
 $sql_order = " order by ex_no asc ";
 
-$sql = " select count(*) as cnt {$sql_common} {$sql_search} {$sql_order} ";
-$row = sql_fetch($sql);
-$total_count = $row['cnt'];
-
-$rows = 100;
-$total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이지)
-$from_record = ($page - 1) * $rows; // 시작 열을 구함
-
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows}";
 $result = sql_query($sql);
 
@@ -91,11 +82,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
             break;
     }
 }
-
-/**
- * 페이징
- */
-$paging = $eb->set_paging('./?dir=board&amp;pid=board_extend&amp;'.$qstr.'&amp;page=');
 
 // query string
 $qstr .= $grid ? '&amp;grid='.$grid: '';
