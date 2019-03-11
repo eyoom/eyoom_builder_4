@@ -142,6 +142,28 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                         </tr>
                         <tr>
                             <th class="table-form-th">
+                                <label for="de_admin_company_zip" class="label">사업장우편번호</label>
+                            </th>
+                            <td>
+                                <label class="input form-width-250px">
+                                    <input type="text" name="de_admin_company_zip" value="<?php echo $default['de_admin_company_zip']; ?>" id="de_admin_company_zip">
+                                </label>
+                            </td>
+                        <?php if (G5_IS_MOBILE) { ?>
+                        </tr>
+                        <tr>
+                        <?php } ?>
+                            <th class="table-form-th border-left-th">
+                                <label for="de_admin_company_addr" class="label">사업장주소</label>
+                            </th>
+                            <td>
+                                <label class="input form-width-250px">
+                                    <input type="text" name="de_admin_company_addr" value="<?php echo $default['de_admin_company_addr']; ?>" id="de_admin_company_addr">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
                                 <label for="de_admin_info_name" class="label">정보관리책임자명</label>
                             </th>
                             <td>
@@ -490,7 +512,8 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
     </div>
 
     <?php echo $frm_submit; ?>
-
+    
+    <?php if(0) { //모바일 쇼핑몰 초기화면 설정 숨김 처리 시작 (해당 기능 불필요) ?>
     <div id="anc_mscf_index">
         <div class="pg-anchor">
         <?php echo adm_pg_anchor('anc_mscf_index'); ?>
@@ -756,6 +779,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
     </div>
 
     <?php echo $frm_submit; ?>
+    <?php } //모바일 쇼핑몰 초기화면 설정 숨김 처리 끝 ?>
     <?php } ?>
 
     <?php if (!$amode) { ?>
@@ -1216,7 +1240,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label for="de_naverpay_button_key" class="input form-width-250px">
-                                    <input type="text" name="de_naverpay_cert_key" value="<?php echo $default['de_naverpay_button_key']; ?>" id="de_naverpay_button_key" maxlength="100">
+                                    <input type="text" name="de_naverpay_button_key" value="<?php echo $default['de_naverpay_button_key']; ?>" id="de_naverpay_button_key" maxlength="100">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 네이버페이 가맹점 인증키를 입력합니다.</div>
                             </td>
@@ -2376,15 +2400,28 @@ if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] 
         $log_path = G5_LGXPAY_PATH.'/lgdacom/log';
 
         if(!is_dir($log_path)) {
-            echo '<script>'.PHP_EOL;
-            echo 'alert("'.str_replace(G5_PATH.'/', '', G5_LGXPAY_PATH).'/lgdacom 폴더 안에 log 폴더를 생성하신 후 쓰기권한을 부여해 주십시오.\n> mkdir log\n> chmod 707 log");'.PHP_EOL;
-            echo '</script>'.PHP_EOL;
-        } else {
-            if(!is_writable($log_path)) {
+
+            if( is_writable(G5_LGXPAY_PATH.'/lgdacom/') ){
+                // 디렉토리가 없다면 생성합니다. (퍼미션도 변경하구요.)
+                @mkdir($log_path, G5_DIR_PERMISSION);
+                @chmod($log_path, G5_DIR_PERMISSION);
+            }
+
+            if(!is_dir($log_path)){
                 echo '<script>'.PHP_EOL;
-                echo 'alert("'.str_replace(G5_PATH.'/', '',$log_path).' 폴더에 쓰기권한을 부여해 주십시오.\n> chmod 707 log");'.PHP_EOL;
+                echo 'alert("'.str_replace(G5_PATH.'/', '', G5_LGXPAY_PATH).'/lgdacom 폴더 안에 log 폴더를 생성하신 후 쓰기권한을 부여해 주십시오.\n> mkdir log\n> chmod 707 log");'.PHP_EOL;
                 echo '</script>'.PHP_EOL;
             }
+        }
+
+        if(is_writable($log_path)) {
+            if( function_exists('check_log_folder') ){
+                check_log_folder($log_path);
+            }
+        } else {
+            echo '<script>'.PHP_EOL;
+            echo 'alert("'.str_replace(G5_PATH.'/', '',$log_path).' 폴더에 쓰기권한을 부여해 주십시오.\n> chmod 707 log");'.PHP_EOL;
+            echo '</script>'.PHP_EOL;
         }
     }
 
@@ -2425,6 +2462,10 @@ if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] 
                 echo '<script>'.PHP_EOL;
                 echo 'alert("'.str_replace(G5_PATH.'/', '',$log_path).' 폴더에 쓰기권한을 부여해 주십시오.\n> chmod 707 log");'.PHP_EOL;
                 echo '</script>'.PHP_EOL;
+            } else {
+                if( function_exists('check_log_folder') && is_writable($log_path) ){
+                    check_log_folder($log_path);
+                }
             }
         }
     }
@@ -2442,6 +2483,10 @@ if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] 
                 echo '<script>'.PHP_EOL;
                 echo 'alert("'.str_replace(G5_PATH.'/', '',$log_path).' 폴더에 쓰기권한을 부여해 주십시오.\n> chmod 707 log");'.PHP_EOL;
                 echo '</script>'.PHP_EOL;
+            } else {
+                if( function_exists('check_log_folder') && is_writable($log_path) ){
+                    check_log_folder($log_path);
+                }
             }
         }
     }

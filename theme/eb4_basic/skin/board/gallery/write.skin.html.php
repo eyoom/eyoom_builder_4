@@ -142,7 +142,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <div class="col col-3">
                 <label for="wr_email" class="label">이메일</label>
                 <label class="input margin-bottom-10">
-                    <i class="icon-append fas fa-envelope-o"></i>
+                    <i class="icon-append fas fa-envelope"></i>
                     <input type="text" name="wr_email" value="<?php echo $email; ?>" id="wr_email" size="50" maxlength="100">
                 </label>
             </div>

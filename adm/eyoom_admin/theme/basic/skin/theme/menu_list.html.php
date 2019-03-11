@@ -143,11 +143,22 @@ function goHistoryForward() {
 <?php } ?>
 
 function fmenu_check(f) {
-    if(f.me_name.value == '') {
-        alert('메뉴명은 필수항목입니다.');
-        f.me_name.focus();
-        f.me_name.select();
-        return false;
+    if (document.pressed == '메뉴생성') {
+        if(f.subme_name.value == '') {
+            alert('메뉴명은 필수항목입니다.');
+            f.subme_name.focus();
+            f.subme_name.select();
+            return false;
+        }        
+    }
+    
+    if (document.pressed == '메뉴수정') {
+        if(f.me_name.value == '') {
+            alert('메뉴명은 필수항목입니다.');
+            f.me_name.focus();
+            f.me_name.select();
+            return false;
+        }        
     }
 }
 function view_select_list(type) {

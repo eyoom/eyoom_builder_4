@@ -33,6 +33,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
     <?php } ?>
 
+    <?php if ($it['it_info_use'] == 1) { ?>
     <?php if ($it['it_info_value'] && is_array($item_info)) { ?>
     <h3 class="h-hidden">상품 정보 고시</h3>
     <div class="table-list-eb item-info-table">
@@ -55,6 +56,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
     <?php } else if ($is_admin) { ?>
     <p>상품 정보 고시 정보가 올바르게 저장되지 않았습니다.<br>config.php 파일의 G5_ESCAPE_FUNCTION 설정을 addslashes 로<br>변경하신 후 관리자 &gt; 상품정보 수정에서 상품 정보를 다시 저장해주세요. </p>
+    <?php } ?>
     <?php } ?>
 
 </section>

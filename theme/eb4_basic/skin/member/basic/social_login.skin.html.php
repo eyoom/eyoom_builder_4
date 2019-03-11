@@ -23,28 +23,47 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
 <style>
 #sns_login {margin-top:15px;padding:5px 0 0;border-top:1px dotted #e5e5e5}
 #sns_login h5 {text-align:center;color:#959595;font-size:13px;margin-bottom:15px}
+#sns_login .social-login {list-style:none;margin:0 -3px;padding:0}
+#sns_login .social-login:after {content:"";display:block;clear:both}
+#sns_login .social-login li {position:relative;overflow:hidden;float:left;width:50%;height:35px;padding:0 3px;margin-bottom:6px;box-sizing:border-box}
+#sns_login .social-login li a {display:block;line-height:35px;color:#fff;font-size:12px;font-weight:bold}
+#sns_login .social-login li a:hover {text-decoration:none}
+#sns_login .social-login li img {width:35px;height:35px;border-right:1px solid rgba(255, 255, 255, 0.2)}
+#sns_login .social-login li span {margin-left:10px}
+#sns_login .social-login li .naver-sl-btn {background:#03C73C}
+#sns_login .social-login li .kakao-sl-btn {background:#FFEB04}
+#sns_login .social-login li .kakao-sl-btn span {color:#3C1E1D}
+#sns_login .social-login li .kakao-sl-btn img {border-right:1px solid rgba(0, 0, 0, 0.1)}
+#sns_login .social-login li .facebook-sl-btn {background:#5E82D1}
+#sns_login .social-login li .google-sl-btn {background:#EA5E4C}
+#sns_login .social-login li .twitter-sl-btn {background:#40BFF5}
+#sns_login .social-login li .payco-sl-btn {background:#FA2829}
+@media (max-width: 500px) {
+    #sns_login .social-login {margin:0}
+    #sns_login .social-login li {width:100%;padding:0}
+}
 </style>
 
 <div id="sns_login">
-    <h5><strong>소셜로그인</strong></h5>
-    <ul class="sns-wrap social-icons text-center">
+    <h5><strong>SNS 계정으로 로그인하기</strong></h5>
+    <ul class="social-login">
         <?php if( social_service_check('naver') ) {     //네이버 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=naver&amp;url=<?php echo $urlencode;?>" class="social_link social_naver" title="네이버"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=naver&amp;url=<?php echo $urlencode;?>" class="social_link naver-sl-btn" title="네이버"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/naver.png"><span>네이버 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('kakao') ) {     //카카오 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=kakao&amp;url=<?php echo $urlencode;?>" class="social_link social_kakao" title="카카오"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=kakao&amp;url=<?php echo $urlencode;?>" class="social_link kakao-sl-btn" title="카카오"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/kakao.png"><span>카카오 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('facebook') ) {     //페이스북 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=facebook&amp;url=<?php echo $urlencode;?>" class="social_link social_facebook" title="페이스북"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=facebook&amp;url=<?php echo $urlencode;?>" class="social_link facebook-sl-btn" title="페이스북"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/facebook.png"><span>페이스북 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('google') ) {     //구글 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=google&amp;url=<?php echo $urlencode;?>" class="social_link social_google" title="구글"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=google&amp;url=<?php echo $urlencode;?>" class="social_link google-sl-btn" title="구글"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/google.png"><span>구글+ 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('twitter') ) {     //트위터 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=twitter&amp;url=<?php echo $urlencode;?>" class="social_link social_twitter" title="트위터"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=twitter&amp;url=<?php echo $urlencode;?>" class="social_link twitter-sl-btn" title="트위터"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/twitter.png"><span>트위터 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('payco') ) {     //페이코 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=payco&amp;url=<?php echo $urlencode;?>" class="social_link social_payco" title="페이코"></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=payco&amp;url=<?php echo $urlencode;?>" class="social_link payco-sl-btn" title="페이코"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/payco.png"><span>페이코 로그인</span></a></li>
         <?php }     //end if ?>
     </ul>
 
@@ -53,7 +72,7 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
     ?>
     <script>
         jQuery(function($){
-            $(".sns-wrap").on("click", "a.social_link", function(e){
+            $(".social-login").on("click", "a.social_link", function(e){
                 e.preventDefault();
 
                 var pop_url = $(this).attr("href");

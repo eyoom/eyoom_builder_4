@@ -151,7 +151,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 						<td>
 							<label for="es_link_cnt" class="input form-width-250px">
 								<i class="icon-append">개</i>
-						        <input type="text" name="es_link_cnt" id="es_link_cnt" value="<?php echo $es['es_link_cnt'] ? $es['es_link_cnt']: 2; ?>" required maxlength="2">
+						        <input type="text" name="es_link_cnt" id="es_link_cnt" value="<?php echo $es['es_link_cnt'] ? $es['es_link_cnt']: 1; ?>" required maxlength="2">
 							</label>
 						</td>
 					<?php if (G5_IS_MOBILE) { ?>
@@ -164,7 +164,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 						<td>
 							<label for="es_image_cnt" class="input form-width-250px">
 								<i class="icon-append">개</i>
-						        <input type="text" name="es_image_cnt" id="es_image_cnt" value="<?php echo $es['es_image_cnt'] ? $es['es_image_cnt']: 5; ?>" required maxlength="2">
+						        <input type="text" name="es_image_cnt" id="es_image_cnt" value="<?php echo $es['es_image_cnt'] ? $es['es_image_cnt']: 1; ?>" required maxlength="2">
 							</label>
 						</td>
 					</tr>
@@ -257,6 +257,39 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 	new Clipboard('.eb-clipboard-box-btn');
 	</script>
 
+	<div class="admin-ebslider-itemlist">
+		<form name="febslideritemlist" id="febslideritemlist" action="<?php echo $action_url3; ?>" method="post" onsubmit="return febslideritemlist_submit(this);" class="eyoom-form">
+		<input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">
+		<input type="hidden" name="es_code" id="es_code" value="<?php echo $es['es_code']; ?>">
+		<input type="hidden" name="page" value="<?php echo $page; ?>">
+		<input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
+		<input type="hidden" name="token" value="<?php echo $token; ?>">
+
+		<div class="adm-headline adm-headline-btn">
+			<h3>EB 슬라이더 - 아이템 관리</h3>
+			<?php if (!$wmode) { ?>
+			<a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_itemform&amp;es_code=<?php echo $es['es_code']; ?>&amp;thema=<?php echo $this_theme; ?>&amp;wmode=1" onclick="eb_modal(this.href, 'EB슬라이더 아이템'); return false;" class="btn-e btn-e-red btn-e-lg"><i class="fas fa-plus"></i> EB슬라이더 아이템 추가</a>
+			<div class="clearfix"></div>
+			<?php } ?>
+		</div>
+
+		<?php if (G5_IS_MOBILE) { ?>
+		<p class="font-size-11 color-grey text-right margin-bottom-5"><i class="fas fa-info-circle"></i> Note! 좌우스크롤 가능 (<i class="fas fa-arrows-alt-h"></i>)</p>
+		<?php } ?>
+
+		<div id="ebslider-itemlist"></div>
+
+		<div class="margin-top-20">
+		    <input type="submit" name="act_button" value="선택수정" class="btn-e btn-e-xs btn-e-red" onclick="document.pressed=this.value">
+		    <?php if ($is_admin == 'super') { ?>
+		    <input type="submit" name="act_button" value="선택삭제" class="btn-e btn-e-xs btn-e-dark" onclick="document.pressed=this.value">
+		    <?php } ?>
+		</div>
+		</form>
+	</div>
+
+	<div class="margin-bottom-40"></div>
+
 	<?php if ($w == 'u' && $es_code) { ?>
 	<div class="admin-ebslider-YTitemlist margin-top-40">
 		<form name="febsliderytitemlist" id="febsliderytitemlist" action="<?php echo $action_url2; ?>" method="post" onsubmit="return febsliderytitemlist_submit(this);" class="eyoom-form">
@@ -267,9 +300,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 		<input type="hidden" name="token" value="<?php echo $token; ?>">
 
 		<div class="adm-headline adm-headline-btn">
-			<h3>EB 슬라이더 - 유튜브동영상 아이템 관리</h3>
+			<h3>EB 슬라이더 - 동영상 아이템 관리</h3>
 			<?php if (!$wmode) { ?>
-			<a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_ytitemform&amp;es_code=<?php echo $es['es_code']; ?>&amp;thema=<?php echo $this_theme; ?>&amp;wmode=1" onclick="eb_modal(this.href, '유튜브동영상 아이템'); return false;" class="btn-e btn-e-red btn-e-lg"><i class="fas fa-plus"></i> 유튜브동영상 아이템 추가</a>
+			<a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_ytitemform&amp;es_code=<?php echo $es['es_code']; ?>&amp;thema=<?php echo $this_theme; ?>&amp;wmode=1" onclick="eb_modal(this.href, '유튜브동영상 아이템'); return false;" class="btn-e btn-e-teal btn-e-lg"><i class="fas fa-plus"></i> 유튜브동영상 아이템 추가</a>
 			<div class="clearfix"></div>
 			<?php } ?>
 		</div>
@@ -284,39 +317,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 		<?php } ?>
 
 		<div id="ebslider-ytitemlist"></div>
-
-		<div class="margin-top-20">
-		    <input type="submit" name="act_button" value="선택수정" class="btn-e btn-e-xs btn-e-red" onclick="document.pressed=this.value">
-		    <?php if ($is_admin == 'super') { ?>
-		    <input type="submit" name="act_button" value="선택삭제" class="btn-e btn-e-xs btn-e-dark" onclick="document.pressed=this.value">
-		    <?php } ?>
-		</div>
-		</form>
-	</div>
-
-	<div class="margin-bottom-40"></div>
-
-	<div class="admin-ebslider-itemlist">
-		<form name="febslideritemlist" id="febslideritemlist" action="<?php echo $action_url3; ?>" method="post" onsubmit="return febslideritemlist_submit(this);" class="eyoom-form">
-		<input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">
-		<input type="hidden" name="es_code" id="es_code" value="<?php echo $es['es_code']; ?>">
-		<input type="hidden" name="page" value="<?php echo $page; ?>">
-		<input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
-		<input type="hidden" name="token" value="<?php echo $token; ?>">
-
-		<div class="adm-headline adm-headline-btn">
-			<h3>EB 슬라이더 - 아이템 관리</h3>
-			<?php if (!$wmode) { ?>
-			<a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_itemform&amp;es_code=<?php echo $es['es_code']; ?>&amp;thema=<?php echo $this_theme; ?>&amp;wmode=1" onclick="eb_modal(this.href, 'EB슬라이더 아이템'); return false;" class="btn-e btn-e-yellow btn-e-lg"><i class="fas fa-plus"></i> EB슬라이더 아이템 추가</a>
-			<div class="clearfix"></div>
-			<?php } ?>
-		</div>
-
-		<?php if (G5_IS_MOBILE) { ?>
-		<p class="font-size-11 color-grey text-right margin-bottom-5"><i class="fas fa-info-circle"></i> Note! 좌우스크롤 가능 (<i class="fas fa-arrows-alt-h"></i>)</p>
-		<?php } ?>
-
-		<div id="ebslider-itemlist"></div>
 
 		<div class="margin-top-20">
 		    <input type="submit" name="act_button" value="선택수정" class="btn-e btn-e-xs btn-e-red" onclick="document.pressed=this.value">
@@ -428,11 +428,13 @@ window.closeModal = function(){
 	        체크: "<label for='ytchk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='ytchk[]' id='ytchk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ei_no[<?php echo $i; ?>]' value='<?php echo $yt_list[$i]['ei_no']; ?>'>",
 	        관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_ytitemform&amp;thema=<?php echo $this_theme; ?>&amp;es_code=<?php echo $yt_list[$i]['es_code']; ?>&amp;ei_no=<?php echo $yt_list[$i]['ei_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"유튜브동영상 설정관리\"); return false;'><u>수정</u></a>",
 	        유튜브동영상_URL: "<a href='https://youtu.be/<?php echo $yt_list[$i]['ei_ytcode']; ?>' target='_blank'>https://youtu.be/<?php echo $yt_list[$i]['ei_ytcode']; ?></a>",
+	        <?php if(0) { // 숨기기 시작 ?>
 	        자동실행: "<label class='checkbox'><input type='checkbox' name='ei_autoplay[<?php echo $i; ?>]' value='1' <?php echo $yt_list[$i]['ei_autoplay'] == '1' ? 'checked':''; ?>><i></i></label>",
 	        제어판: "<label class='checkbox'><input type='checkbox' name='ei_control[<?php echo $i; ?>]' value='1' <?php echo $yt_list[$i]['ei_control'] == '1' ? 'checked':''; ?>><i></i></label>",
 	        반복재생: "<label class='checkbox'><input type='checkbox' name='ei_loop[<?php echo $i; ?>]' value='1' <?php echo $yt_list[$i]['ei_loop'] == '1' ? 'checked':''; ?>><i></i></label>",
 	        음소거: "<label class='checkbox'><input type='checkbox' name='ei_mute[<?php echo $i; ?>]' value='1' <?php echo $yt_list[$i]['ei_mute'] == '1' ? 'checked':''; ?>><i></i></label>",
 	        투명패턴: "<label class='checkbox'><input type='checkbox' name='ei_raster[<?php echo $i; ?>]' value='1' <?php echo $yt_list[$i]['ei_raster'] == '1' ? 'checked':''; ?>><i></i></label>",
+	        <?php } // 숨기기 종료 ?>
 	        순서: "<label for='ei_sort_<?php echo $yt_list[$i]['index']; ?>' class='input'><input type='text' name='ei_sort[<?php echo $i; ?>]' id='ei_sort_<?php echo $i; ?>' value='<?php echo $yt_list[$i]['ei_sort']; ?>'></label>",
 	        상태: "<label for='ei_state_<?php echo $i; ?>' class='select'><select name='ei_state[<?php echo $i; ?>]' id='ei_state_<?php echo $i; ?>'><option value=''>선택</option><option value='1' <?php echo $yt_list[$i]['ei_state'] == '1' ? 'selected':''; ?>>보이기</option><option value='2' <?php echo $yt_list[$i]['ei_state'] == '2' ? 'selected':''; ?>>숨기기</option></select><i></i></label>",
 	        보기권한: "<label class='select'><?php echo $yt_list[$i]['view_level']; ?><i></i></label>",
@@ -487,11 +489,13 @@ $(function() {
             { name: "체크", type: "text", width: 40 },
             { name: "관리", type: "text", align: "center", width: 60, headercss: "set-btn-header", css: "set-btn-field" },
             { name: "유튜브동영상_URL", type: "text", align: "center", width: 230 },
+            <?php if(0) { // 숨기기 시작 ?>
             { name: "자동실행", type: "text", align: "center", width: 60 },
             { name: "제어판", type: "text", align: "center", width: 60 },
             { name: "반복재생", type: "text", align: "center", width: 60 },
             { name: "음소거", type: "text", align: "center", width: 60 },
             { name: "투명패턴", type: "text", align: "center", width: 60 },
+            <?php } // 숨기기 종료 ?>
             { name: "순서", type: "number",width: 60 },
             { name: "상태", type: "text", align: "center", width: 110 },
             { name: "보기권한", type: "text", align: "center", width: 90 },

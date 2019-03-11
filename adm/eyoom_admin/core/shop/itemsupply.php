@@ -37,8 +37,8 @@ if($ps_run) {
         } // for
     } else {
         for($i=0; $i<$subject_count; $i++) {
-            $spl_subject = preg_replace('/[\'\"]/', '', trim(stripslashes($_POST['subject'][$i])));
-            $spl_val = explode(',', preg_replace('/[\'\"]/', '', trim(stripslashes($_POST['supply'][$i]))));
+            $spl_subject = preg_replace(G5_OPTION_ID_FILTER, '', trim(stripslashes($_POST['subject'][$i])));
+            $spl_val = explode(',', preg_replace(G5_OPTION_ID_FILTER, '', trim(stripslashes($_POST['supply'][$i]))));
             $spl_count = count($spl_val);
 
             for($j=0; $j<$spl_count; $j++) {
@@ -55,7 +55,7 @@ if($ps_run) {
 
                     // 기존에 설정된 값이 있는지 체크
                     if($_POST['w'] == 'u') {
-                        $sql = " select io_price, io_stock_qty, io_noti_qty, io_use from {$g5['g5_shop_item_option_table']} where it_id = '{$_POST['it_id']}' and io_id = '$spl_id' and io_type = '1' ";
+                        $sql = " select io_price, io_stock_qty, io_noti_qty, io_use from {$g5['g5_shop_item_option_table']} where it_id = '{$_POST['it_id']}' and io_id = '{$itsupply[$m]['spl_id']}' and io_type = '1' ";
                         $row = sql_fetch($sql);
 
                         if($row) {

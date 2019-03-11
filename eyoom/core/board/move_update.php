@@ -31,7 +31,14 @@ $result = sql_query($sql);
 while ($row = sql_fetch_array($result)) {
     $wr_num = $row['wr_num'];
     for ($i=0; $i<count($_POST['chk_bo_table']); $i++) {
-        $move_bo_table = $_POST['chk_bo_table'][$i];
+        $move_bo_table = preg_replace('/[^a-z0-9_]/i', '', $_POST['chk_bo_table'][$i]);
+
+        // 취약점 18-0075 참고
+        $sql = "select * from {$g5['board_table']} where bo_table = '".sql_real_escape_string($move_bo_table)."' ";
+        $move_board = sql_fetch($sql);
+        // 존재하지 않다면
+        if( !$move_board['bo_table'] ) continue;
+
         $move_write_table = $g5['write_prefix'] . $move_bo_table;
 
         $src_dir = G5_DATA_PATH.'/file/'.$bo_table; // 원본 디렉토리
@@ -47,19 +54,15 @@ while ($row = sql_fetch_array($result)) {
         while ($row2 = sql_fetch_array($result2)) {
             $nick = cut_str($member['mb_nick'], $config['cf_cut_name']);
             if (!$row2['wr_is_comment'] && $config['cf_use_copy_log']) {
-                if (strstr($row2['wr_option'], 'html')) {
+                if(strstr($row2['wr_option'], 'html')) {
                     $log_tag1 = '<div class="content_'.$sw.'">';
                     $log_tag2 = '</div>';
                 } else {
-                    $log_tag1 = '\n';
+                    $log_tag1 = "\n";
                     $log_tag2 = '';
                 }
 
-                if (defined('G5_AUTOMOVE')) {
-                    $row2['wr_content'] .= '\n'.$log_tag1.'[이 게시물은 '.$auto_type.' 조건을 충족하여 자동으로 '.G5_TIME_YMDHIS.' '.$board['bo_subject'].'에서 '.($sw == 'copy' ? '복사' : '이동').' 됨]'.$log_tag2;
-                } else {
-                    $row2['wr_content'] .= '\n'.$log_tag1.'[이 게시물은 '.$nick.'님에 의해 '.G5_TIME_YMDHIS.' '.$board['bo_subject'].'에서 '.($sw == 'copy' ? '복사' : '이동').' 됨]'.$log_tag2;
-                }
+                $row2['wr_content'] .= "\n".$log_tag1.'[이 게시물은 '.$nick.'님에 의해 '.G5_TIME_YMDHIS.' '.$board['bo_subject'].'에서 '.($sw == 'copy' ? '복사' : '이동').' 됨]'.$log_tag2;
             }
 
             // 게시글 추천, 비추천수
@@ -115,9 +118,6 @@ while ($row = sql_fetch_array($result)) {
 
                 // 메뉴에서 해당 게시물 정보 가져옮
                 $eyoom_tag = sql_fetch("select * from {$g5['eyoom_tag_write']} where tw_theme='{$theme}' and bo_table='$bo_table' and wr_id='{$row2['wr_id']}'");
-                $eyoom_new = sql_fetch("select * from {$g5['eyoom_new']} where bo_table='$bo_table' and wr_id='{$row2['wr_id']}'");
-                $en_image = unserialize($eyoom_new['wr_image']);
-                unset($en_image['bf']);
 
                 $sql3 = " select * from {$g5['board_file_table']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' order by bf_no ";
                 $result3 = sql_query($sql3);
@@ -127,7 +127,7 @@ while ($row = sql_fetch_array($result)) {
                         // 제이프로님 코드제안 적용
                         $copy_file_name = ($bo_table !== $move_bo_table) ? $row3['bf_file'] : $row2['wr_id'].'_copy_'.$insert_id.'_'.$row3['bf_file'];
                         @copy($src_dir.'/'.$row3['bf_file'], $dst_dir.'/'.$copy_file_name);
-                        @chmod($dst_dir/$row3['bf_file'], G5_FILE_PERMISSION);
+                        @chmod($dst_dir.'/'.$row3['bf_file'], G5_FILE_PERMISSION);
                     }
 
                     $sql = " insert into {$g5['board_file_table']}
@@ -148,9 +148,7 @@ while ($row = sql_fetch_array($result)) {
                     if ($sw == 'move' && $row3['bf_file']) {
                         $save[$cnt]['bf_file'][$k] = $src_dir.'/'.$row3['bf_file'];
                     }
-                    $en_image['bf'][$k] = str_replace(G5_PATH,'',$dst_dir.'/'.$row3['bf_file']);
                 }
-                $wr_image = serialize($en_image); // 이윰 새글에 적용
 
                 $count_write++;
 
@@ -164,9 +162,6 @@ while ($row = sql_fetch_array($result)) {
                     // 추천데이터 이동
                     sql_query(" update {$g5['board_good_table']} set bo_table = '$move_bo_table', wr_id = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
 
-                    // 이윰 새글 이동
-                    sql_query(" update {$g5['eyoom_new']} set bo_table = '$move_bo_table', wr_id = '$save_parent', wr_parent = '$save_parent', wr_image='{$wr_image}' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
-
                     // 이윰 내글반응 이동
                     sql_query(" update {$g5['eyoom_respond']} set bo_table = '$move_bo_table', wr_id = '$save_parent', pr_id = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
 
@@ -178,26 +173,8 @@ while ($row = sql_fetch_array($result)) {
                     }
                 }
 
-                // 이윰 새글 복사
+                // 이윰 태그 복사
                 if ($sw == 'copy') {
-                    if (is_array($eyoom_new)) {
-                        unset($copy_set);
-                        foreach ($eyoom_new as $key => $val) {
-                            if ($key=='bn_id' || $key == 'bn_datetime') continue;
-                            else {
-                                if ($key == 'bo_table') $val = $move_bo_table;
-                                if ($key == 'wr_id') $val = $insert_id;
-                                if ($key == 'wr_parent') $val = $insert_id;
-                                if ($key == 'wr_image') $val = $wr_image;
-                                if ($key == 'wr_subject' || $key == 'wr_content') {
-                                    $val = addslashes(stripslashes($val));
-                                }
-                                $copy_set .= "{$key} = '{$val}', ";
-                            }
-                        }
-                        $copy_set .= "bn_datetime='".G5_TIME_YMDHIS."'";
-                        sql_query("insert into {$g5['eyoom_new']} set {$copy_set}");
-                    }
 
                     if ($eyoom_tag['wr_tag']) {
                         unset($copy_set);
@@ -224,9 +201,6 @@ while ($row = sql_fetch_array($result)) {
                 if ($sw == 'move') {
                     // 최신글 이동
                     sql_query(" update {$g5['board_new_table']} set bo_table = '$move_bo_table', wr_id = '$insert_id', wr_parent = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
-
-                    // 이윰 새글 이동
-                    sql_query(" update {$g5['eyoom_new']} set bo_table = '$move_bo_table', wr_id = '$insert_id', wr_parent = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
                 }
             }
 

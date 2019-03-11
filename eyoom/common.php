@@ -44,7 +44,7 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     $default_device = get_session('ss_set_default_device');
     if (!defined('G5_IS_ADMIN') && !$eyoom['is_responsive'] && (!$default_device || $default_device != $eyoom['use_mobile_default'])) {
         set_session('ss_set_default_device', $eyoom['use_mobile_default']);
-        //header("location:".G5_URL."/?device={$eyoom['use_mobile_default']}");
+        header("location:".G5_URL."/?device={$eyoom['use_mobile_default']}");
     }
 
     /**

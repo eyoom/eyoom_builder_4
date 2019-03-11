@@ -20,9 +20,11 @@ if( G5_SOCIAL_USE_POPUP ) {
 
 <style>
 .ol-social-icons {margin-top:15px}
+.ol-social-icons h6 {text-align:center;margin:0 0 10px;padding:0;font-size:12px;color:#757575}
 </style>
 
 <div class="ol-social-icons">
+    <h6><strong>SNS 계정으로 로그인</strong></h6>
     <ul class="sns-wrap social-icons text-center">
         <?php if( social_service_check('naver') ) {     //네이버 로그인을 사용한다면 ?>
         <li><a href="<?php echo $self_url;?>?provider=naver&amp;url=<?php echo $urlencode;?>" class="social_link social_naver" title="네이버"></a></li>

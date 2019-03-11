@@ -122,12 +122,12 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
     <div class="member-signature-latest">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs eb-signature-tabs">
             <li class="active"><a href="#signature-tlb-1" data-toggle="tab">글쓴이의 최신글</a></li>
             <li><a href="#signature-tlb-2" data-toggle="tab">글쓴이의 최신댓글</a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="signature-tlb-1">
+            <div class="tab-pane in active" id="signature-tlb-1">
                 <?php if ($mb_write_cnt > 0) { ?>
                 <ul class="list-unstyled">
                     <?php foreach ($mb_write as $k => $li) { ?>
@@ -146,7 +146,7 @@ if (!defined('_EYOOM_')) exit;
                 <p class="text-center color-grey font-size-12 margin-top-10"><i class="fas fa-exclamation-circle"></i> 최신글이 없습니다.</p>
                 <?php }?>
             </div>
-            <div class="tab-pane fade in" id="signature-tlb-2">
+            <div class="tab-pane in" id="signature-tlb-2">
                 <?php if ($mb_cmt_cnt > 0) { ?>
                 <ul class="list-unstyled">
                     <?php foreach ($mb_cmt as $k => $li) { ?>
@@ -169,3 +169,12 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 <div class="clearfix"></div>
+
+<script>
+$(document).ready(function() {
+    $('.eb-signature-tabs li a').hover(function (e) {
+        e.preventDefault()
+        $(this).tab('show');
+    });
+});
+</script>

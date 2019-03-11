@@ -148,6 +148,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </div>
                             </td>
                         </tr>
+                        <?php if(0) { //베스트 최근글 사용 숨김 처리 시작 (해당 기능 불필요) ?>
                         <tr>
                             <th class="table-form-th">
                                 <label class="label">베스트 최근글 사용</label>
@@ -165,6 +166,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </div>
                             </td>
                         </tr>
+                        <?php } // 베스트 최근글 사용 숨김 처리 끝 ?>
                         <tr>
                             <th class="table-form-th">
                                 <label class="label">익명글쓰기 사용</label>

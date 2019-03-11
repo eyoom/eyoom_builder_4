@@ -63,7 +63,7 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
      * EB컨텐츠 마스터 정보
      */
     if ($meinfo) {
-        $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}'";
+        $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}' order by ec_sort asc";
         $result = sql_query($sql);
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $ec_master[$i] = $row;

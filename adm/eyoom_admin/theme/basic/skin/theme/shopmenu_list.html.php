@@ -70,63 +70,48 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/e
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/easyui/jquery.easyui.min.js"></script>
 <script>
 $(function() {
-	$('#menutree').tree('expandAll');
-	$('#menutree').tree({
-		dnd: false,
-		onDrop: function(targetNode, source, point) {
-			var targetId = $('#menutree').tree('getNode', targetNode).id;
-			var targetOrder = $('#menutree').tree('getNode', targetNode).order;
-			$.ajax({
-				url: '...',
-				type: 'post',
-				dataType: 'json',
-				data: {
-					id: source.id,
-					targetId: targetId,
-					point: point
-				}
-			});
-		},
-		onClick: function(source) {
-			var url="<?php echo EYOOM_ADMIN_CORE_URL; ?>/theme/menu_form.php";
-			var thema = '<?php echo $this_theme; ?>';
-			var $menu_form = $("#menu_form");
+    $('#menutree').tree('expandAll');
+    $('#menutree').tree({
+        dnd: false,
+        onDrop: function(targetNode, source, point) {
+            var targetId = $('#menutree').tree('getNode', targetNode).id;
+            var targetOrder = $('#menutree').tree('getNode', targetNode).order;
+            $.ajax({
+                url: '...',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    id: source.id,
+                    targetId: targetId,
+                    point: point
+                }
+            });
+        },
+        onClick: function(source) {
+            var url="<?php echo EYOOM_ADMIN_CORE_URL; ?>/theme/menu_form.php";
+            var thema = '<?php echo $this_theme; ?>';
+            var $menu_form = $("#menu_form");
 
             $.post(url, { id: source.id, thema: thema, me_shop: <?php echo $me_shop; ?> }, function(data) {
                 $menu_form.empty().html(data);
             });
-		}
-	});
+        }
+    });
 });
 function collapseAll() {
-	$('#menu').tree('collapseAll');
+    $('#menu').tree('collapseAll');
 }
 function expandAll() {
-	$('#menu').tree('expandAll');
+    $('#menu').tree('expandAll');
 }
 
 function check_menu_reset() {
-	if (confirm("현재 설정된 메뉴를 모두 초기화합니다.\n\n정말로 설정 메뉴를 초기화 하시겠습니까?")) {
-		return true;
-	} else {
-		return false;
-	}
+    if (confirm("현재 설정된 메뉴를 모두 초기화합니다.\n\n정말로 설정 메뉴를 초기화 하시겠습니까?")) {
+        return true;
+    } else {
+        return false;
+    }
 }
-
-function delete_menu() {
-    if(confirm("본 메뉴를 삭제하시면 하위메뉴까지 모두 삭제됩니다.\n\n그래도 삭제하시겠습니까?")) {
-        var form = document.fmenu;
-        var token = get_ajax_token();
-        if(!token) {
-            alert("토큰 정보가 올바르지 않습니다.");
-            return false;
-        }
-        form.token.value = token;
-        form.mode.value = 'delete';
-        form.submit();
-    } else return false;
-}
-
 <?php if (!(G5_IS_MOBILE || $wmode)) { ?>
 function eb_modal(href, title) {
     $('.admin-iframe-modal').modal('show').on('hidden.bs.modal', function () {
@@ -146,5 +131,95 @@ function eb_modal(href, title) {
 window.closeModal = function(){
     $('.admin-iframe-modal').modal('hide');
 };
+
+function goHistoryBack() {
+    window.history.back();
+}
+function goHistoryForward() {
+    window.history.forward();
+}
 <?php } ?>
+
+function fmenu_check(f) {
+    if (document.pressed == '메뉴생성') {
+        if(f.subme_name.value == '') {
+            alert('메뉴명은 필수항목입니다.');
+            f.subme_name.focus();
+            f.subme_name.select();
+            return false;
+        }        
+    }
+    
+    if (document.pressed == '메뉴수정') {
+        if(f.me_name.value == '') {
+            alert('메뉴명은 필수항목입니다.');
+            f.me_name.focus();
+            f.me_name.select();
+            return false;
+        }        
+    }
+}
+function view_select_list(type) {
+    var theme = '<?php echo $this_theme; ?>';
+    var url = "<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=menu_ajax&smode=1";
+    $.post(url, {type:type, theme:theme}, function(data) {
+        if(data.pid) {
+            var pid_str = data.pid;
+            var name_str = data.name;
+            var pid = pid_str.split("|");
+            var name = name_str.split("|");
+            if(pid.length>0) {
+                var select = "<select name='select_item' id='select_item' onchange='set_item_value(this.value)'><option value=''>::선택해주세요::</option>";
+                for(var i=0; i<pid.length;i++) {
+                    var nbsp = '';
+                    if (type == 'shop') {
+                        for(var j=2; j<pid[i].length; j++) nbsp += '&nbsp;&nbsp;';
+                    }
+                    select += "<option value=\""+pid[i]+"|"+name[i]+"\">"+nbsp+''+name[i]+"</option>";
+                }
+                select += "</select><i></i>";
+            }
+            $("#selbox").html(select);
+        }
+    },"json");
+}
+function set_item_value(str) {
+    var type = $("#subme_type > option:selected").val();
+    var data = str.split("|");
+    switch(type) {
+        case 'group':
+            var url = '<?php echo G5_BBS_URL; ?>/group.php?gr_id='+data[0];
+            var name = data[1];
+            break;
+        case 'board':
+            var url = '<?php echo G5_BBS_URL; ?>/board.php?bo_table='+data[0];
+            var path = data[1].split(' > ');
+            var name = path[1];
+            break;
+        case 'page':
+            var url = '<?php echo G5_BBS_URL; ?>/content.php?co_id='+data[0];
+            var name = data[1];
+            break;
+        case 'shop':
+            var url = '<?php echo G5_SHOP_URL; ?>/list.php?ca_id='+data[0];
+            var name = data[1];
+            break;
+    }
+    $("#subme_link").val(url);
+    $("#subme_name").val(name);
+}
+function delete_menu() {
+    if(confirm("본 메뉴를 삭제하시면 하위메뉴까지 모두 삭제됩니다.\n\n그래도 삭제하시겠습니까?")) {
+        var form = document.fmenu;
+        var token = get_ajax_token();
+        if(!token) {
+            alert("토큰 정보가 올바르지 않습니다.");
+            return false;
+        }
+        form.token.value = token;
+        form.mode.value = 'delete';
+        form.submit();
+    } else return false;
+}
+</script>
 </script>

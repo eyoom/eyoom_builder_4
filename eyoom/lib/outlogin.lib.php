@@ -78,6 +78,13 @@ function eb_outlogin ($skin_dir = 'basic') {
         } else {
             $profile_photo = '<i class="fa fa-user"></i>';
         }
+        
+        /**
+         * 소셜정보
+         */
+        $eyoomer['cnt_friends']   = $eb->count_friends($member['mb_id']);
+        $eyoomer['cnt_follower']  = $eb->count_follower($member['mb_id']);
+        $eyoomer['cnt_following'] = $eb->count_following($member['mb_id']);
 
         /**
          * Eyoom 레벨

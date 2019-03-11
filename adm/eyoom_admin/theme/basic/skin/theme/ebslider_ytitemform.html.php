@@ -196,6 +196,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <div class="note"><strong>Note:</strong> 끝까지 플레이할 경우: 0</div>
                         </td>
                     </tr>
+                    <?php if(0) { // 숨기기 시작 ?>
                     <tr>
                         <th class="table-form-th">
                             <label class="label">동영상 시작위치</label>
@@ -206,6 +207,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </label>
                         </td>
                     </tr>
+                    <?php } // 숨기기 종료 ?>
                     <tr>
                         <th class="table-form-th">
                             <label class="label">노출 방식</label>

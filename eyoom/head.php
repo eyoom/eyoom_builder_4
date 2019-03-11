@@ -30,7 +30,7 @@ if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
  * 게시판의 설정이 쇼핑몰 레이아웃 적용일때
  */
 if (G5_COMMUNITY_USE === false || (isset($eyoom_board['use_shop_skin']) && $eyoom_board['use_shop_skin'] == 'y' && $eyoom['use_layout_community'] == 'n')) {
-    @include_once(G5_THEME_SHOP_PATH . '/shop/shop.head.php');
+    @include_once(G5_THEME_SHOP_PATH . '/shop.head.php');
     return;
 }
 

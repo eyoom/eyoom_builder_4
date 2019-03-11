@@ -53,6 +53,14 @@ if ($_POST['act_button'] == "선택수정") {
         $k = $_POST['chk'][$i];
         $del_el_no[$i] = $_POST['el_no'][$k];
         $del_el_code[$i] = $_POST['el_code'][$k];
+        
+        /**
+         * EB최신글 마스터 설정파일 삭제
+         */
+        $el_master_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_master_' . $_POST['el_code'][$k] . '.php';
+        $el_item_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_item_' . $_POST['el_code'][$k] . '.php';
+        @unlink ($el_master_file);
+        @unlink ($el_item_file);
     }
 
     /**

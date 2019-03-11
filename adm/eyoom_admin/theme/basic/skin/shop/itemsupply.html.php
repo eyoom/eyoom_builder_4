@@ -54,10 +54,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </div>
                 </th>
                 <td>
-                    <div class="opt-cell"><?php echo $supply['spl_subject']; ?></div>
+                    <div class="opt-cell spl-subject-cell"><?php echo $supply['spl_subject']; ?></div>
                 </td>
                 <td>
-                    <div class="opt-cell"><?php echo $supply['spl']; ?></div>
+                    <div class="opt-cell spl-cell"><?php echo $supply['spl']; ?></div>
                 </td>
                 <td>
                     <label for="spl_price_<?php echo $key; ?>" class="input">

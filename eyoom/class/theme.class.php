@@ -815,12 +815,8 @@ class theme extends qfile
         $url = $this->compare_host_from_link($link);
         if ($url) {
             $info = $this->get_meinfo_link($url);
-            if (preg_match('/qa/i', $info['me_pid']) && $info['me_pid'] != 'qa') {
-                $info['me_link'] = '/bbs/qalist.php';
-            } else if (preg_match('/respond/i', $info['me_pid'])) {
-                $info['me_link'] = '/mypage/respond.php';
-            } else if (preg_match('/memo/i', $info['me_pid'])) {
-                $info['me_link'] = '/bbs/memo.php';
+            if (preg_match('/qa/i', $info['me_pid']) && $info['me_pid'] != 'qa' || preg_match('/(respond|memo)/i', $info['me_pid']) ) {
+                $info['me_link'] = $url['path'];
             }
         } else {
             $info['me_pid'] = 'extra';

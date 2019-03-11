@@ -83,7 +83,7 @@ for ($i=0; $i<$upload_count; $i++) {
  * 기존 파일정보
  */
 if ($iw == 'u') {
-    $ei = sql_fetch("select ei_img from {$g5['eyoom_ebslider_item']} where ei_no = '{$ei_no}' ");
+    $ei = sql_fetch("select ei_img from {$g5['eyoom_slider_item']} where ei_no = '{$ei_no}' ");
     $ei_img = unserialize($ei['ei_img']);
 }
 

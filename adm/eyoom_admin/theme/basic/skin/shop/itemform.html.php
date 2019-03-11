@@ -51,6 +51,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 .admin-shop-itemform .sit_option {margin:0 0 20px;padding:0;border:1px solid #dadada;background:#fff}
 .admin-shop-itemform .sit_option .sit-option-list {padding:10px;border-bottom:1px solid #dadada}
 .admin-shop-itemform .sit_option .sit-option-item {float:left;width:50%;box-sizing:border-box}
+.admin-shop-itemform .sit_option #sit_option_addfrm_btn {text-align:center;padding:10px 0;border-bottom:1px solid #dadada}
+.admin-shop-itemform .sit_option #sit_option_addfrm_btn button {position:relative;top:inherit;right:inherit}
 @media (max-width: 600px) {
     .admin-shop-itemform .sit_option .sit-option-item {float:inherit;width:100%;box-sizing:border-box}
     .admin-shop-itemform .scrollbar-container {position:relative;display:block}
@@ -1101,7 +1103,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                         $seq = $i + 1;
                                     ?>
                                     <div class="sit-option-list">
-                                        <div class="sit-option-item">
+                                        <div class="sit-option-item sit-opt-l">
                                             <div class="inline-group">
                                                 <span class="form-width-70px"><label for="spl_subject_<?php echo $seq; ?>" class="label">추가<?php echo $seq; ?></label></span>
                                                 <span>
@@ -1111,7 +1113,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="sit-option-item">
+                                        <div class="sit-option-item  sit-opt-r">
                                             <div class="inline-group">
                                                 <span class="form-width-70px"><label for="spl_item_<?php echo $seq; ?>" class="label"><b>추가<?php echo $seq; ?> 항목</b></label></span>
                                                 <span>
@@ -1120,7 +1122,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                                     </label>
                                                 </span>
                                                 <span>
-                                                    <button type="button" id="add_supply_row" class="btn-e btn-e-yellow">옵션추가</button>
                                                     <?php if ($i > 0) { ?>
                                                     <button type="button" id="del_supply_row" class="btn-e btn-e-dark">삭제</button>
                                                     <?php } ?>
@@ -1133,8 +1134,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                         $i++;
                                     } while($i < $spl_count);
                                     ?>
+                                    <div id="sit_option_addfrm_btn"><button type="button" id="add_supply_row" class="btn-e btn-e-yellow">옵션추가</button></div>
                                     <div class="text-center margin-top-10 margin-bottom-10">
-                                        <button type="button" id="supply_table_create" class="btn-e btn-e-md btn-e-purple">추가옵션 목록생성</button>
+                                        <button type="button" id="supply_table_create" class="btn-e btn-e-md btn-e-purple">옵션목록생성</button>
                                     </div>
                                 </div>
                                 <?php if (G5_IS_MOBILE) { ?>
@@ -1172,25 +1174,34 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                     <?php } ?>
                                     // 입력필드추가
                                     $("#add_supply_row").click(function() {
-                                        var $el = $("#sit_supply_frm tr:last");
+                                        var $el = $("#sit_supply_frm .sit-option-list:last");
 
-                                        var fld = "<tr>\n";
-                                        fld += "<th style=\"width:250px;\">\n";
+                                        var fld = "<div class=\"sit-option-list\">\n";
+                                        fld += "<div class=\"sit-option-item sit-opt-l\">\n";
                                         fld += "<div class=\"inline-group\">\n";
-                                        fld += "<span><label for=\"\" class=\"label\">추가 항목</label></span>\n";
-                                        fld += "<span><label class=\"input form-width-200px\">\n";
+                                        fld += "<span class=\"form-width-70px\"><label class=\"label\" for=\"\">추가</label></span>\n";
+                                        fld += "<span>\n";
+                                        fld += "<label class=\"input form-width-200px\">\n";
                                         fld += "<input type=\"text\" name=\"spl_subject[]\" value=\"\">\n";
-                                        fld += "</label></span>\n";
+                                        fld += "</label>\n";
+                                        fld += "</span>\n";
                                         fld += "</div>\n";
-                                        fld += "</th>\n";
-                                        fld += "<td>\n";
+                                        fld += "</div>\n";
+                                        fld += "<div class=\"sit-option-item sit-opt-r\">\n";
                                         fld += "<div class=\"inline-group\">\n";
-                                        fld += "<span><label for=\"\" class=\"label\"><b>추가 항목</b></label></span>\n";
-                                        fld += "<span><label class=\"input form-width-250px\"><input type=\"text\" name=\"spl[]\" value=\"\"></label></span>\n";
-                                        fld += "<span><button type=\"button\" id=\"del_supply_row\" class=\"btn-e btn-e-dark\">삭제</button></span>\n";
+                                        fld += "<span class=\"form-width-70px\"><label class=\"label\" for=\"\"><b>추가 항목</b></label></span>\n";
+                                        fld += "<span>\n";
+                                        fld += "<label class=\"input form-width-200px\">\n";
+                                        fld += "<input type=\"text\" name=\"spl[]\" value=\"\">\n";
+                                        fld += "</label>\n";
+                                        fld += "</span>\n";
+                                        fld += "<span>\n";
+                                        fld += "<button type=\"button\" id=\"del_supply_row\" class=\"btn-e btn-e-dark\">삭제</button>\n";
+                                        fld += "</span>\n";
                                         fld += "</div>\n";
-                                        fld += "</td>\n";
-                                        fld += "</tr>";
+                                        fld += "</div>\n";
+                                        fld += "<div class=\"clearfix\"></div>\n";
+                                        fld += "</div>";
 
                                         $el.after(fld);
 
@@ -1199,7 +1210,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 
                                     // 입력필드삭제
                                     $(document).on("click", "#del_supply_row", function() {
-                                        $(this).closest("tr").remove();
+                                        $(this).closest(".sit-option-list").remove();
 
                                         supply_sequence();
                                     });
@@ -1309,17 +1320,17 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 
                                 function supply_sequence()
                                 {
-                                    var $tr = $("#sit_supply_frm tr");
+                                    var $tr = $("#sit_supply_frm .sit-option-list");
                                     var seq;
                                     var th_label, td_label;
 
                                     $tr.each(function(index) {
                                         seq = index + 1;
-                                        $(this).find("th .label").attr("for", "spl_subject_"+seq).text("추가"+seq);
-                                        $(this).find("th input").attr("id", "spl_subject_"+seq);
-                                        $(this).find("td .label").attr("for", "spl_item_"+seq);
-                                        $(this).find("td .label b").text("추가"+seq+" 항목");
-                                        $(this).find("td input").attr("id", "spl_item_"+seq);
+                                        $(this).find(".sit-opt-l .label").attr("for", "spl_subject_"+seq).text("추가"+seq);
+                                        $(this).find(".sit-opt-l input").attr("id", "spl_subject_"+seq);
+                                        $(this).find(".sit-opt-r .label").attr("for", "spl_item_"+seq);
+                                        $(this).find(".sit-opt-r .label b").text("추가"+seq+" 항목");
+                                        $(this).find(".sit-opt-r input").attr("id", "spl_item_"+seq);
                                     });
                                 }
                                 </script>

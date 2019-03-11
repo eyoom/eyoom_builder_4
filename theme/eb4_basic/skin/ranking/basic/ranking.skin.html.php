@@ -29,13 +29,13 @@ if (!defined('_EYOOM_')) exit;
 </style>
 
 <div class="ranking-box">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs eb-ranking-tabs">
         <li class="active"><a href="#rank-1" data-toggle="tab">오늘<?php echo $levelset['gnu_name']; ?></a></li>
         <li><a href="#rank-2" data-toggle="tab">전체<?php echo $levelset['gnu_name']; ?></a></li>
         <li><a href="#rank-3" data-toggle="tab"><?php echo $levelset['eyoom_name'] ? $levelset['eyoom_name']: '경험치'; ?></a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade active in" id="rank-1">
+        <div class="tab-pane active in" id="rank-1">
             <div class="ranking-content">
                 <ul class="list-unstyled">
                     <?php foreach ($ranking['today'] as $key => $rankinfo) { ?>
@@ -66,7 +66,7 @@ if (!defined('_EYOOM_')) exit;
                 </ul>
             </div>
         </div>
-        <div class="tab-pane fade in" id="rank-2">
+        <div class="tab-pane in" id="rank-2">
             <div class="ranking-content">
                 <ul class="list-unstyled">
                     <?php foreach ($ranking['total'] as $key => $rankinfo) { ?>
@@ -97,7 +97,7 @@ if (!defined('_EYOOM_')) exit;
                 </ul>
             </div>
         </div>
-        <div class="tab-pane fade in" id="rank-3">
+        <div class="tab-pane in" id="rank-3">
             <div class="ranking-content">
                 <ul class="list-unstyled">
                     <?php foreach ($ranking['level'] as $key => $rankinfo) { ?>
@@ -130,3 +130,12 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.eb-ranking-tabs li a').hover(function (e) {
+        e.preventDefault()
+        $(this).tab('show');
+    });
+});
+</script>

@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .member-skin .member-agree {padding:15px}
 .member-skin .fregister-agree label {display:inline-block;margin-right:5px}
 .member-skin #sns_register {border:1px solid #d5d5d5;box-shadow:none;margin-bottom:30px}
-.member-skin #sns_register h2 {margin:0;padding:15px;font-weight:bold;background:#fafafa}
+.member-skin #sns_register h2 {margin:0;padding:15px;font-weight:bold;background:#fafafa;font-size:15px}
 </style>
 
 <div class="member-skin contents-box-inner">

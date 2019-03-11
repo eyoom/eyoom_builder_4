@@ -35,6 +35,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
     <input type="hidden" name="theme" id="theme" value="<?php echo $this_theme ? $this_theme: $theme; ?>">
     <input type="hidden" name="ec_no" id="ec_no" value="<?php echo $ec['ec_no']; ?>">
     <input type="hidden" name="me_id" id="me_id" value="<?php echo $ec['me_id'] ? $ec['me_id']: $_GET['me_id']; ?>">
+    <input type="hidden" name="ec_sort" id="ec_sort" value="<?php echo $ec['ec_sort']; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
     <input type="hidden" name="token" value="">

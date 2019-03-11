@@ -16,7 +16,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
 /**
  * 로그인 백그라운드 타입 : 'color' || 'image'
  */
-$login_background = 'color';
+$login_background = 'image';
 
 /**
  * 로그인 사이드바 타입 : 'color' || 'image'
@@ -33,7 +33,7 @@ $login_sidebar = 'image';
 .eb-login .login-btn .btn-e-lg:hover {background:#43434d;border:1px solid #43434d}
 .login-box {color:#fff;padding:30px 20px;width:100%;position:relative;z-index:1}
 .login-box a:hover {text-decoration:underline}
-.login-box .login-box-in {margin:0 auto;background:#fff;margin-bottom:0;max-width:940px;padding:0;height:550px;position:relative;overflow:hidden}
+.login-box .login-box-in {margin:0 auto;background:rgba(255, 255, 255, 0.9);margin-bottom:0;max-width:940px;padding:0;height:auto;position:relative;overflow:hidden}
 .login-box .login-box-in .login-form {padding:30px 120px;color:#171C29;margin-right:300px}
 .login-box .login-box-in .login-form-margin-bottom {margin-bottom:20px}
 .login-box .login-box-in .login-form h1 {font-size:42px;font-weight:bold;text-align:center;margin:10px 0 20px}
@@ -42,15 +42,18 @@ $login_sidebar = 'image';
 .login-box .login-box-in .login-link a:hover {text-decoration:none}
 .login-box .login-box-in .login-link a:before {content:"|";margin-left:7px;margin-right:7px;color:#d5d5d5}
 .login-box .login-box-in .login-link a:first-child:before {display:none}
+.login-box .login-box-in #sns_login h5 {text-align:center;color:#353535;font-size:13px;margin-bottom:15px}
 .login-box .login-box-in .login-sidebar {width:300px;background:#757578;position:absolute;top:0;right:0;bottom:0;background-size:cover;background-position:center center}
-.login-box .login-box-in .login-sidebar-opacity:after {content:"";position:absolute;z-index:1;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.25)}
+.login-box .login-box-in .login-sidebar-opacity:after {content:"";position:absolute;z-index:1;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.4)}
 .login-box .login-box-in .login-sidebar-content {position:absolute;top:0;left:0;z-index:2;padding:50px 40px 40px}
 .login-box .login-box-in .login-sidebar-content-title {margin-bottom:20px;font-size:24px;font-weight:bold}
 .login-box .login-box-in .login-sidebar-content-item {padding-left:20px;border-left:2px solid #83848b;margin-bottom:20px;color:#fff}
 .login-box .login-box-in .login-sidebar-bottom {font-size:11px;font-weight:200;position:absolute;z-index:2;bottom:40px;left:40px}
 .login-box .login-box-in .non-members {padding:30px 120px;color:#171C29}
-.login-box .login-box-in .non-members .scroll-box-login {position:relative;overflow:hidden;border:1px solid #b5b5b5;padding:10px}
+.login-box .login-box-in .non-members .scroll-box-login {position:relative;overflow:hidden;border:1px solid #b5b5b5;padding:10px;height:150px}
 .login-box .login-box-in .non-member-order {padding:90px 120px;color:#171C29}
+.login-box .login-box-in .non-members .btn-e-lg {width:250px;padding:10px 0;border-radius:2px !important;font-weight:bold;font-size:16px}
+.login-box .login-box-in .non-members .btn-e-lg:hover {text-decoration:none}
 .eyoom-form .btn-e {box-sizing:border-box;-moz-box-sizing:border-box}
 @media (max-width: 991px) {
     .login-box .login-box-in .login-form {padding:30px 60px}
@@ -68,7 +71,7 @@ $login_sidebar = 'image';
 }
 
 <?php if ($login_background == 'color') { ?>
-.backstretch {background:#ebebef}
+.backstretch {background:#e2e2e2}
 .backstretch img {display:none !important}
 <?php } ?>
 </style>
@@ -165,7 +168,7 @@ $login_sidebar = 'image';
                     </div>
 
                     <div class="margin-top-15 text-center">
-                        <a href="javascript:guest_submit(document.flogin);" class="btn-e btn-e-lg btn-e-purple">비회원으로 구매하기</a>
+                        <a href="javascript:guest_submit(document.flogin);" class="no-member-btn btn-e btn-e-lg btn-e-red">비회원으로 구매하기</a>
                     </div>
 
                     <script>
@@ -195,7 +198,7 @@ $login_sidebar = 'image';
             <div class="login-box-in">
                 <div class="non-member-order">
                     <div class="heading heading-e4 margin-bottom-30"><h4><strong>비회원 주문조회</strong></h4></div>
-                    <form name="forderinquiry" method="post" action="{=urldecode($url)}" autocomplete="off" class="eyoom-form">
+                    <form name="forderinquiry" method="post" action="<?php echo urldecode($url); ?>" autocomplete="off" class="eyoom-form">
                     <section>
                         <label for="od_id" class="label"><strong class="font-size-14">주문서번호</strong><strong class="sound_only"> 필수</strong></label>
                         <label class="input">
@@ -238,7 +241,7 @@ $login_sidebar = 'image';
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
-$.backstretch(["<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/login_bg_2.jpg", "<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/login_bg_1.jpg"], {fade: 1000, duration: 7000});
+$.backstretch(["<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/login_bg_1.jpg", "<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/login_bg_2.jpg"], {fade: 1000, duration: 7000});
 
 jQuery.fn.center = function () {
     this.css("position","absolute");

@@ -82,6 +82,7 @@
 .sit_option {padding:10px 0;border-bottom:1px solid #e5e5e5}
 .sit_option label {display:block;margin:0 0 5px;color:#656565}
 .sit_option.eyoom-form .select select {background:#f5f5f5}
+.sit_option.eyoom-form .select select:disabled {opacity:0.4;cursor:not-allowed}
 .sit_option.eyoom-form .select i {background:#f5f5f5}
 .sit_option h3 {font-size:14px;margin:0 0 10px}
 .sit_sel_btn {position:relative} /* 선택옵션용 추가 버튼 */

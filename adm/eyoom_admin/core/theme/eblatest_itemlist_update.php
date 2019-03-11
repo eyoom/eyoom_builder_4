@@ -36,7 +36,7 @@ if ($_POST['act_button'] == "선택수정") {
         /**
          * EB최신글 master 파일 경로
          */
-        $master_file = $eblatest_path.'/'.$_POST['theme'].'/el_master_'.$_POST['el_code'].'.php';
+        $master_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_master_'.$_POST['el_code'].'.php';
 
         /**
          * g5_eyoom_latest 테이블에서 정보 추출
@@ -71,8 +71,14 @@ if ($_POST['act_button'] == "선택수정") {
     for ($i=0; $i<count($_POST['chk']); $i++) {
         // 실제 번호를 넘김
         $k = $_POST['chk'][$i];
-        $del_li_no[$i] = $_POST['li_no'][$k];
+        $del_li_no[$i] = $_POST['li_no'][$k]; 
     }
+
+    /**
+     * EB최신글 master 파일 경로
+     */
+    $el_item_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_item_'.$_POST['el_code'].'.php';
+    @unlink($el_item_file);
 
     /**
      * 쿼리 조건문

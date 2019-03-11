@@ -222,8 +222,8 @@ if($is_member) {
         $val1 = $row['ad_name'].$sep.$row['ad_tel'].$sep.$row['ad_hp'].$sep.$row['ad_zip1'].$sep.$row['ad_zip2'].$sep.$row['ad_addr1'].$sep.$row['ad_addr2'].$sep.$row['ad_addr3'].$sep.$row['ad_jibeon'].$sep.$row['ad_subject'];
 
         $latest_addr[$i]['val1'] = get_text($val1);
-        $latest_addr[$i]['ad_subject'] = $row['ad_subject'];
-        $latest_addr[$i]['ad_name'] = $row['ad_name'];
+        $latest_addr[$i]['ad_subject'] = get_text($row['ad_subject']);
+        $latest_addr[$i]['ad_name'] = get_text($row['ad_name']);
     }
 }
 

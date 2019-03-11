@@ -230,27 +230,27 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                     <?php for($i=0; $i<$option_count; $i++) { ?>
                     <div class="get_item_options">
                         <label for="it_option_<?php echo $optitem[$i]['seq']; ?>"><?php echo $optitem[$i]['subject']; ?></label>
-                        <label class="select">
+                        <div class="select margin-bottom-10">
                             <select id="it_option_<?php echo $optitem[$i]['seq']; ?>" class="it_option" <?php echo $optitem[$i]['disabled']; ?>>
                                 <option value="">선택</option>
                                 <?php foreach ($optitem[$i]['select'] as $k => $select) { ?>
                                 <option value="<?php echo $select['opt_val']; ?>"><?php echo $select['opt_val']; ?></option>
                                 <?php } ?>
                             </select><i></i>
-                        </label>
+                        </div>
                     </div>
                     <?php } ?>
                     <?php } else { ?>
                     <div class="get_item_options">
                         <label for="it_option_1"><?php echo $optitem['subject']; ?></label>
-                        <label class="select">
+                        <div class="select margin-bottom-10">
                             <select id="it_option_1" class="it_option">
                                 <option value="">선택</option>
                                 <?php foreach ($optitem['select'] as $k => $select) { ?>
                                 <option value="<?php echo $select['io_id']; ?>,<?php echo $select['io_price']; ?>,<?php echo $select['io_stock_qty']; ?>"><?php echo $select['io_id']; ?><?php echo $select['price']; ?><?php $select['soldout']; ?></option>
                                 <?php } ?>
                             </select><i></i>
-                        </label>
+                        </div>
                     </div>
                     <?php } ?>
                 </div>
@@ -264,14 +264,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                     <?php for($i=0; $i<$supply_count; $i++) { ?>
                     <div class="get_item_supply">
                         <label for="it_supply_<?php echo $supitem[$i]['seq']; ?>"><?php echo $supitem[$i]['subject']; ?></label>
-                        <label class="select">
+                        <div class="select margin-bottom-10">
                             <select id="it_supply_<?php echo $supitem[$i]['seq']; ?>" class="it_supply">
                                 <option value="">선택</option>
                                 <?php foreach ($supitem[$i]['select'] as $k => $select) { ?>
                                 <?php echo $select['opt_val']; ?>
                                 <?php } ?>
                             </select><i></i>
-                        </label>
+                        </div>
                     </div>
                     <?php } ?>
                 </div>

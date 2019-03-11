@@ -31,6 +31,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .search-result-list .result-list .result-list-image {position:absolute;overflow:hidden;top:0;left:0;width:100px;height:58px}
 .search-result-list .result-list .result-list-text {position:relative;overflow:hidden;height:58px;margin-bottom:10px}
 .search-result-list .result-list .result-list-text.result-list-text-margin {margin-left:115px}
+.search-result-list .result-list .search-result-image img {display:block;width:100% \9;max-width:100%;height:auto}
 .search-result-list .sch_word {color:#0068c1;font-weight:bold}
 </style>
 
@@ -71,7 +72,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
             <section class="col col-12 margin-bottom-0">
                 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
                 <div class="input input-button search-input">
-                    <i class="icon-prepend fa fa-search"></i>
+                    <i class="icon-prepend fas fa-search"></i>
                     <input type="text" name="stx" value="<?php echo $text_stx; ?>" id="stx" required maxlength="20">
                     <div class="button"><input type="submit" value="검색">검색</div>
                 </div>
@@ -104,7 +105,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
         </ul>
     </div>
         <?php } else { ?>
-    <div class="text-center color-grey font-size-14 margin-top-30"><i class="fa fa-exclamation-circle"></i> 검색된 자료가 없습니다.</div>
+    <div class="text-center color-grey font-size-14 margin-top-30"><i class="fas fa-exclamation-circle"></i> 검색된 자료가 없습니다.</div>
         <?php } ?>
     <?php } ?>
     <div class="margin-bottom-30"></div>
@@ -113,7 +114,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <?php for ($i=0; $i<count($slist); $i++) { ?>
         <h5>
             <a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>">
-                <strong><i class="fa fa-search"></i> '<u><?php echo $slist[$i]['bo_subject']; ?></u>' 게시판 내 결과</strong>
+                <strong><i class="fas fa-search"></i> '<u><?php echo $slist[$i]['bo_subject']; ?></u>' 게시판 내 결과</strong>
             </a>
         </h5>
         <ul class="list-unstyled result-list">
@@ -121,7 +122,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
             <li>
                 <h6>
                     <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" class="font-size-14"><?php echo $li['comment_def']; ?><?php echo $li['subject']; ?></a>
-                    <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" target="_blank" class="font-size-12 pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="새창"><i class="fa fa-external-link"></i></a>
+                    <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" target="_blank" class="font-size-12 pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="새창"><i class="fas fa-external-link-alt"></i></a>
                 </h6>
                 <div class="result-list-box">
                     <?php if ($li['img_content']) { ?>
@@ -135,11 +136,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
                         <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['content']; ?></p>
                     </div>
                 </div>
-                <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['name']; ?><i class="fa fa-clock-o margin-left-10 margin-right-5"></i><?php echo $li['wr_datetime']; ?></p>
+                <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['name']; ?><i class="far fa-clock margin-left-10 margin-right-5"></i><?php echo $li['wr_datetime']; ?></p>
             </li>
         <?php }} ?>
         </ul>
-        <div class="text-right margin-bottom-30"><a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $slist[$i]['bo_subject']; ?>' 결과 더보기</a></div>
+        <div class="text-right margin-top-5 margin-bottom-30"><a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $slist[$i]['bo_subject']; ?>' 결과 더보기</a></div>
     <?php } ?>
     <?php if (count($slist) == 0) { ?>
         <?php if ($stx && $board_count) { ?>
