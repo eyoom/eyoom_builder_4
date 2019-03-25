@@ -8,6 +8,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 <style>
 .admin-shop-itemqaform .input-fake {padding:4px 10px;border:1px solid #d5d5d5;margin-bottom:10px}
+.admin-shop-itemqaform .input-fake .info-photo {display:inline-block;width:26px;height:26px;margin-right:2px;border:1px solid #e5e5e5;padding:1px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
+.admin-shop-itemqaform .input-fake .info-photo img {width:100%;height:auto;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
+.admin-shop-itemqaform .input-fake .info-photo .info-icon {width:22px;height:22px;font-size:12px;line-height:22px;text-align:center;background:#959595;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;white-space:nowrap;vertical-align:baseline;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
 </style>
 
 <div class="admin-shop-itemqaform">
@@ -47,7 +50,12 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <div class="input-fake">
-                                <?php echo $name; ?>
+                                <?php if($mb_photo) { ?>
+                                <span class="info-photo"><?php echo $mb_photo ?></span>
+                                <?php } else { ?>
+                                <span class="info-icon"><i class="fas fa-user"></i></span>
+                                <?php } ?>
+                                <span class="info-name"><?php echo $name; ?></span>
                             </div>
                         </td>
                     </tr>

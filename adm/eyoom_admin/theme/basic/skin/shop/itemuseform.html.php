@@ -7,11 +7,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 ?>
 
 <style>
-.admin-shop-itemqaform .input-fake {padding:4px 10px;border:1px solid #d5d5d5;margin-bottom:10px}
+.admin-shop-itemuseform .input-fake {padding:4px 10px;border:1px solid #d5d5d5;margin-bottom:10px}
+.admin-shop-itemuseform .input-fake .info-photo {display:inline-block;width:26px;height:26px;margin-right:2px;border:1px solid #e5e5e5;padding:1px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
+.admin-shop-itemuseform .input-fake .info-photo img {width:100%;height:auto;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
+.admin-shop-itemuseform .input-fake .info-photo .info-icon {width:22px;height:22px;font-size:12px;line-height:22px;text-align:center;background:#959595;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;white-space:nowrap;vertical-align:baseline;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
 </style>
 
-<div class="admin-shop-itemqaform">
-    <form name="fitemqaform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return fitemuseform_submit(this);" class="eyoom-form">
+<div class="admin-shop-itemuseform">
+    <form name="fitemuseform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return fitemuseform_submit(this);" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="is_id" value="<?php echo $is_id; ?>">
     <input type="hidden" name="sca" value="<?php echo $sca; ?>">
@@ -54,7 +57,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="label">이름</label>
                         </th>
                         <td>
-                            <?php echo $name; ?>
+                            <div class="input-fake">
+                                <?php if($mb_photo) { ?>
+                                <span class="info-photo"><?php echo $mb_photo ?></span>
+                                <?php } else { ?>
+                                <span class="info-icon"><i class="fas fa-user"></i></span>
+                                <?php } ?>
+                                <span class="info-name"><?php echo $name; ?></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>

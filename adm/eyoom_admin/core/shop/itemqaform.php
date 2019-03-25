@@ -19,7 +19,10 @@ $sql = " select *
 $iq = sql_fetch($sql);
 if (!$iq['iq_id']) alert('등록된 자료가 없습니다.');
 
-$name = get_sideview($iq['mb_id'], get_text($iq['iq_name']), $iq['mb_email'], $iq['mb_homepage']);
+$mb_photo = $eb->mb_photo($iq['mb_id']);
+//$name = get_sideview($iq['mb_id'], get_text($iq['iq_name']), $iq['mb_email'], $iq['mb_homepage']);
+$board['bo_use_sideview'] = 'y';
+$name = eb_nameview($iq['mb_id'], get_text($iq['iq_name']), $iq['mb_email'], $iq['mb_homepage']);
 
 $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca;
 
