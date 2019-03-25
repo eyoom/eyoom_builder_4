@@ -8,6 +8,14 @@ $theme      = clean_xss_tags(trim($_POST['thema']));
 $me_code    = $_POST['id'];
 $depth      = strlen($me_code)/3;
 
+/**
+ * 영카트5 인가?
+ */
+$is_youngcart = false;
+if (defined('G5_YOUNGCART_VER')) {
+    $is_youngcart = true;
+}
+
 if($theme && $me_code) {
     $sql = "select * from {$g5['eyoom_menu']} where me_theme='{$theme}' and me_code='{$me_code}' and me_shop = '{$me_shop}'";
     $meinfo = sql_fetch($sql, false);

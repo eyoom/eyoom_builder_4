@@ -226,8 +226,10 @@ delete_cache_latest($bo_table);
 
 if ($sw == 'move') {
     for ($i=0; $i<count($save); $i++) {
-        for ($k=0; $k<count($save[$i]['bf_file']); $k++)
-            @unlink($save[$i]['bf_file'][$k]);
+        if( isset($save[$i]['bf_file']) && $save[$i]['bf_file'] ){
+            for ($k=0; $k<count($save[$i]['bf_file']); $k++)
+                @unlink($save[$i]['bf_file'][$k]);
+        }
 
         sql_query(" delete from $write_table where wr_parent = '{$save[$i]['wr_id']}' ");
         sql_query(" delete from {$g5['board_new_table']} where bo_table = '$bo_table' and wr_id = '{$save[$i]['wr_id']}' ");
@@ -249,7 +251,6 @@ if (!defined('G5_AUTOMOVE')) {
         $opener_script = "opener.document.location.href = \"".$opener_href."\";";
     }
 
-
     echo "
         <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">
         <script>
@@ -266,6 +267,11 @@ if (!defined('G5_AUTOMOVE')) {
     ";
     exit;
 }
+
+/**
+ * 최신글 캐시 스위치온
+ */
+$latest->make_switch_on($bo_table, $theme);
 
 $msg = '해당 게시물을 선택한 게시판으로 '.$act.' 하였습니다.';
 $opener_href  = './board.php?bo_table='.$bo_table.'&amp;page='.$page.'&amp;'.$qstr;
@@ -285,5 +291,4 @@ window.close();
 <a href="$opener_href">돌아가기</a>
 </noscript>
 HEREDOC;
-}
 ?>

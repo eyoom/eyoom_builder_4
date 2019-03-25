@@ -20,18 +20,24 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .search-result .search-tab .scroll_tabs_container div.scroll_tab_inner li {padding-left:10px;padding-right:10px}
 .search-result .search-tab .scroll_tabs_container div.scroll_tab_inner li.active a {font-weight:bold}
 .search-result .search-tab .scroll_tabs_container div.scroll_tab_inner span {padding-left:2px;padding-right:0}
-.search-result-list .result-list li {padding:10px 0;border-bottom:1px dotted #e5e5e5}
-.search-result-list .result-list li:hover {background:#fbfbfb}
-.search-result-list .result-list li:first-child {border-top:1px dotted #e5e5e5}
-.search-result-list .result-list li h6 {font-size:14px}
-.search-result-list .result-list li h6 a {color:#1E88E5}
-.search-result-list .result-list li h6 a:hover {color:#0068c1;text-decoration:underline}
-.search-result-list .result-list li h6 i {color:#959595}
+.search-result-list .result-list > li {padding:10px 0;border-bottom:1px dotted #e5e5e5}
+.search-result-list .result-list > li:hover {background:#fbfbfb}
+.search-result-list .result-list > li:first-child {border-top:1px dotted #e5e5e5}
+.search-result-list .result-list > li h6 {font-size:14px}
+.search-result-list .result-list > li h6 a {color:#1E88E5}
+.search-result-list .result-list > li h6 a:hover {color:#0068c1;text-decoration:underline}
+.search-result-list .result-list > li h6 i {color:#959595}
 .search-result-list .result-list .result-list-box {position:relative}
 .search-result-list .result-list .result-list-image {position:absolute;overflow:hidden;top:0;left:0;width:100px;height:58px}
 .search-result-list .result-list .result-list-text {position:relative;overflow:hidden;height:58px;margin-bottom:10px}
 .search-result-list .result-list .result-list-text.result-list-text-margin {margin-left:115px}
 .search-result-list .result-list .search-result-image img {display:block;width:100% \9;max-width:100%;height:auto}
+.search-result-list .result-list .result-list-info {font-size:12px;color:#959595;margin-bottom:0}
+.search-result-list .result-list .result-list-info .info-photo img {width:17px;height:17px;margin-right:2px;display:inline-block}
+.search-result-list .result-list .result-list-info .info-icon {width:17px;height:17px;line-height:17px;font-size:11px;text-align:center;background:#858585;color:#fff;margin-right:2px;display:inline-block}
+.search-result-list .result-list .result-list-info .info-name {font-size:12px;color:#353535}
+.search-result-list .result-list .result-list-info .info-name:hover a {color:#000}
+.search-result-list .result-list .result-list-info .info-name .open a {color:#000}
 .search-result-list .sch_word {color:#0068c1;font-weight:bold}
 </style>
 
@@ -111,41 +117,84 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <div class="margin-bottom-30"></div>
 
     <?php if ($stx && $board_count) { ?><section class="search-result-list"><?php } ?>
-    <?php for ($i=0; $i<count($slist); $i++) { ?>
+    <?php for ($idx=$table_index, $k=0; $idx<count($search_table) && $k<$rows; $idx++) { ?>
         <h5>
-            <a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>">
-                <strong><i class="fas fa-search"></i> '<u><?php echo $slist[$i]['bo_subject']; ?></u>' 게시판 내 결과</strong>
+            <a href="./board.php?bo_table=<?php echo $search_table[$idx] ?>&amp;<?php echo $search_query; ?>">
+                <strong><i class="fas fa-search"></i> '<u><?php echo $bo_subject[$idx] ?></u>' 게시판 내 결과</strong>
             </a>
         </h5>
         <ul class="list-unstyled result-list">
-        <?php if (is_array($slist[$i]['list'])) { foreach ($slist[$i]['list'] as $key => $li) { ?>
+        <?php
+        for ($i=0; $i<count($list[$idx]) && $k<$rows; $i++, $k++) {
+            if ($list[$idx][$i]['wr_is_comment']) {
+                $comment_def = '<span class="cmt_def">댓글 | </span>';
+                $comment_href = '#c_'.$list[$idx][$i]['wr_id'];
+            } else {
+                $comment_def = '';
+                $comment_href = '';
+            }
+
+            $level = $list[$idx][$i]['eb_1'] ? $eb->level_info($list[$idx][$i]['eb_1']):'';
+            if (is_array($level) && $level['anonymous']) {
+                $data['mb_id'] = 'anonymous';
+                $data['name'] = '익명';
+            } else {
+                $data['mb_photo'] = $eb->mb_photo($list[$idx][$i]['mb_id']);
+                $data['name'] = eb_nameview($list[$idx][$i]['mb_id'], $list[$idx][$i]['wr_name'], $list[$idx][$i]['wr_email'], $list[$idx][$i]['homepage']);
+            }
+
+            /**
+             * 이미지 사용일 경우
+             */
+            if ($eyoom['use_search_image'] == 'y') {
+                unset($data['img_content'], $data['img_src']);
+                $thumb = get_list_thumbnail($search_table[$idx], $list[$idx][$i]['wr_id'],$eyoom['search_image_width'], $eyoom['search_image_height']);
+                if ($tpl_name == 'bs') {
+                    if ($thumb['src']) {
+                        $data['img_content'] = '<img class="img-responsive" src="'.$thumb['src'].'" alt="'.$thumb['alt'].'">';
+                        $data['img_src'] = $thumb['src'];
+                    }
+                } else {
+                    if ($thumb['src']) {
+                        $data['img_content'] = '<img src="'.$thumb['src'].'" alt="'.$thumb['alt'].'" width="'.$board['bo_gallery_width'].'" height="'.$board['bo_gallery_height'].'">';
+                        $data['img_src'] = $thumb['src'];
+                    }
+                }
+            }
+        ?>
             <li>
                 <h6>
-                    <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" class="font-size-14"><?php echo $li['comment_def']; ?><?php echo $li['subject']; ?></a>
-                    <a href="<?php echo $li['href']; ?><?php echo $li['comment_href']; ?>" target="_blank" class="font-size-12 pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="새창"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="<?php echo $list[$idx][$i]['href'] ?><?php echo $comment_href ?>" class="font-size-14"><?php echo $comment_href ?><?php echo $list[$idx][$i]['subject'] ?></a>
+                    <a href="<?php echo $list[$idx][$i]['href'] ?><?php echo $comment_href ?>" target="_blank" class="font-size-12 pull-right tooltips" data-placement="left" data-toggle="tooltip" data-original-title="새창"><i class="fas fa-external-link-alt"></i></a>
                 </h6>
                 <div class="result-list-box">
-                    <?php if ($li['img_content']) { ?>
+                    <?php if ($data['img_content']) { ?>
                     <div class="result-list-image">
-                        <a class="search-result-image" href="<?php echo $li['img_src']; ?>">
-                            <?php echo $li['img_content']; ?>
+                        <a class="search-result-image" href="<?php echo $data['img_src']; ?>">
+                            <?php echo $data['img_content']; ?>
                         </a>
                     </div>
                     <?php } ?>
-                    <div class="result-list-text <?php if ($li['img_content']) { ?>result-list-text-margin<?php } ?>">
-                        <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['content']; ?></p>
+                    <div class="result-list-text <?php if ($data['img_content']) { ?>result-list-text-margin<?php } ?>">
+                        <p class="color-grey font-size-12 margin-bottom-0"><?php echo $list[$idx][$i]['content'] ?></p>
                     </div>
                 </div>
-                <p class="color-grey font-size-12 margin-bottom-0"><?php echo $li['name']; ?><i class="far fa-clock margin-left-10 margin-right-5"></i><?php echo $li['wr_datetime']; ?></p>
+                <div class="result-list-info">
+                    <?php if($data['mb_photo']) { ?>
+                    <span class="info-photo"><?php echo $data['mb_photo'] ?></span>
+                    <?php } else { ?>
+                    <span class="info-icon"><i class="fas fa-user"></i></span>
+                    <?php } ?>
+                    <span class="info-name"><?php echo $data['name'] ?></span>
+                    <span class="info-date"><i class="far fa-clock margin-left-10 margin-right-5"></i><?php echo $list[$idx][$i]['wr_datetime'] ?></span>
+                </div>
             </li>
-        <?php }} ?>
-        </ul>
-        <div class="text-right margin-top-5 margin-bottom-30"><a href="./board.php?bo_table=<?php echo $slist[$i]['bo_table']; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $slist[$i]['bo_subject']; ?>' 결과 더보기</a></div>
-    <?php } ?>
-    <?php if (count($slist) == 0) { ?>
-        <?php if ($stx && $board_count) { ?>
-        </section>
         <?php } ?>
+        </ul>
+        <div class="text-right margin-top-5 margin-bottom-30"><a href="./board.php?bo_table=<?php echo $search_table[$idx]; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $bo_subject[$idx]; ?>' 결과 더보기</a></div>
+    <?php } ?>
+    <?php if ($stx && $board_count) { ?>
+    </section>
     <?php } ?>
 
     <?php /* 페이지 */ ?>

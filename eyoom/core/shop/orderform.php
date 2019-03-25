@@ -14,6 +14,8 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
  */
 add_javascript('<script src="'.G5_JS_URL.'/shop.order.js"></script>', 0);
 
+$sw_direct = preg_replace('/[^a-z0-9_]/i', '', $sw_direct);
+
 /**
  * 모바일 주문인지
  */

@@ -2,7 +2,7 @@
 $sub_menu = '400400';
 
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
-include_once(EYOOM_ADMIN_INC_PATH.'/admin.shop.lib.php');
+include_once(G5_ADMIN_PATH.'/shop_admin/admin.shop.lib.php');
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 
 check_admin_token();
@@ -55,7 +55,7 @@ for ($i=0; $i<count($_POST['chk']); $i++)
 
             // 메일
             if($config['cf_email_use'] && $_POST['od_send_mail'])
-                include './ordermail.inc.php';
+                include G5_ADMIN_PATH.'/shop_admin/ordermail.inc.php';
 
             break;
 
@@ -88,7 +88,7 @@ for ($i=0; $i<count($_POST['chk']); $i++)
 
             // 메일
             if($config['cf_email_use'] && $_POST['od_send_mail'])
-                include './ordermail.inc.php';
+                include G5_ADMIN_PATH.'/shop_admin/ordermail.inc.php';
 
             // 에스크로 배송
             if($_POST['send_escrow'] && $od['od_tno'] && $od['od_escrow']) {
@@ -201,7 +201,5 @@ $qstr .= "&amp;od_receipt_price=$od_receipt_price";
 $qstr .= "&amp;od_receipt_point=$od_receipt_point";
 $qstr .= "&amp;od_receipt_coupon=$od_receipt_coupon";
 //$qstr .= "&amp;page=$page";
-
-//exit;
 
 alert("선택한 주문정보를 수정하였습니다.", G5_ADMIN_URL . "/?dir=shop&amp;pid=orderlist&amp;$qstr");

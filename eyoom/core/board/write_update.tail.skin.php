@@ -32,6 +32,16 @@ if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1') {
 }
 
 /**
+ * 리스트 화면으로 리턴
+ */
+if ($_POST['golist'] == '1') {
+    echo "
+        <script>parent.document.location.href = '".G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table."'</script>
+    ";
+    exit;
+}
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/write_update.tail.skin.php');
