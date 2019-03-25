@@ -91,7 +91,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                     <option value="highres" <?php echo $es_item['ei_quality'] == 'highres' ? 'selected':''; ?>>highres</option>
                                 </select><i></i>
                             </label>
-                            <div class="note"><strong>Note:</strong> 트래픽을 고려하여 적당한 품질의 동영상으로 선택해 주세요. (모바일의 경우 자동으로 small 적용)</div>
+                            <div class="note"><strong>Note:</strong> 트래픽을 고려하여 적당한 품질의 동영상으로 선택해 주세요.</div>
                         </td>
                     </tr>
                     <tr>
@@ -124,7 +124,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label for="ei_loop" class="checkbox">
                                 <input type="checkbox" name="ei_loop" id="ei_loop" value="1" <?php echo $es_item['ei_loop'] == '1' || $w == '' ? 'checked':''; ?>><i></i> 반복 재생하기
                             </label>
-                            <div class="note"><strong>Note:</strong> 반복 재생하기 체크 시 동영상 등록을 2개 이상 할 경우 다음 동영상으로 연결 안됨</div>
                         </td>
                     <?php if (G5_IS_MOBILE) { ?>
                     </tr>
@@ -197,17 +196,18 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <div class="note"><strong>Note:</strong> 끝까지 플레이할 경우: 0</div>
                         </td>
                     </tr>
+                    <?php if(0) { // 숨기기 시작 ?>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">디스플레이 최적화</label>
+                            <label class="label">동영상 시작위치</label>
                         </th>
                         <td colspan="3">
                             <label for="ei_remember" class="checkbox">
-                                <input type="checkbox" name="ei_remember" id="ei_remember" value="1" <?php echo $es_item['ei_remember'] == '1' || $iw == '' ? 'checked':''; ?>><i></i> 최적화
+                                <input type="checkbox" name="ei_remember" id="ei_remember" value="1" <?php echo $es_item['ei_remember'] == '1' || $iw == '' ? 'checked':''; ?>><i></i> 기억하기
                             </label>
-                            <div class="note"><strong>Note:</strong> 최적화는 원본보다 동영상 화면을 확대하여 유튜브 광고를 숨김처리 (체크 해제 시 원본 크기로 출력되며 유튜브 광고가 있을 경우 출력되며 광고는 지울 수 없습니다.)</div>
                         </td>
                     </tr>
+                    <?php } // 숨기기 종료 ?>
                     <tr>
                         <th class="table-form-th">
                             <label class="label">노출 방식</label>

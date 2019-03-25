@@ -51,7 +51,7 @@ $sql_search = " where bo_table='{$board['bo_table']}' ";
  */
 $sql_order = " order by ex_no asc ";
 
-$sql = " select * {$sql_common} {$sql_search} {$sql_order}";
+$sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows}";
 $result = sql_query($sql);
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {

@@ -288,42 +288,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                         <select name="level_icon_gnu" id="level_icon_gnu">
                                             <option value="">선택</option>
                                             <?php foreach ($icons['gnuboard'] as $gnu_icon) { ?>
-                                            <option value="<?php echo $gnu_icon; ?>" <?php echo get_selected($eyoom['level_icon_gnu'], $gnu_icon); ?>><?php echo $gnu_icon; ?></option>
+                                            <option value="<?php echo $gnu_icon; ?>" <?php echo get_selected($eyoom['level_icon_eyoom'], $gnu_icon); ?>><?php echo $gnu_icon; ?></option>
                                             <?php } ?>
                                         </select><i></i>
                                     </label>
-                                    <div class="inline-group">
-                                        <label for="use_level_icon_gnu1" class="radio"><input type="radio" name="use_level_icon_gnu" id="use_level_icon_gnu1" value="y" <?php echo $eyoom['use_level_icon_gnu'] == 'y' ? 'checked':''; ?>><i></i> 사용</label>
-                                        <label for="use_level_icon_gnu2" class="radio"><input type="radio" name="use_level_icon_gnu" id="use_level_icon_gnu2" value="n" <?php echo $eyoom['use_level_icon_gnu'] == 'n' || !$eyoom['use_level_icon_gnu'] ? 'checked':''; ?>><i></i> 사용하지 않음</label>
-                                    </div>
+                                    <label for="use_level_icon_eyoom" class="checkbox"><input type="checkbox" name="use_level_icon_eyoom" id="use_level_icon_eyoom" value="y" <?php echo $eyoom['use_level_icon_eyoom'] == 'y' ? 'checked':''; ?>><i></i> 사용</label>
                                 </div>
                                 <?php } else { ?>
                                 <div>테마에 그누레벨 아이콘이 존재하지 않습니다.</div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th">
-                                <label for="level_icon_eyoom" class="label">이윰레벨 아이콘</label>
-                            </th>
-                            <td colspan="3">
-                                <?php if ($icons['eyoom']) { ?>
-                                <div class="inline-group">
-                                    <label class="select form-width-250px">
-                                        <select name="level_icon_eyoom" id="level_icon_eyoom">
-                                            <option value="">선택</option>
-                                            <?php foreach ($icons['eyoom'] as $eyoom_icon) { ?>
-                                            <option value="<?php echo $eyoom_icon; ?>" <?php echo get_selected($eyoom['level_icon_eyoom'], $eyoom_icon); ?>><?php echo $eyoom_icon; ?></option>
-                                            <?php } ?>
-                                        </select><i></i>
-                                    </label>
-                                    <div class="inline-group">
-                                        <label for="use_level_icon_eyoom1" class="radio"><input type="radio" name="use_level_icon_eyoom" id="use_level_icon_eyoom1" value="y" <?php echo $eyoom['use_level_icon_eyoom'] == 'y' ? 'checked':''; ?>><i></i> 사용</label>
-                                        <label for="use_level_icon_eyoom2" class="radio"><input type="radio" name="use_level_icon_eyoom" id="use_level_icon_eyoom2" value="n" <?php echo $eyoom['use_level_icon_eyoom'] == 'n' || !$eyoom['use_level_icon_eyoom'] ? 'checked':''; ?>><i></i> 사용하지 않음</label>
-                                    </div>
-                                </div>
-                                <?php } else { ?>
-                                <div>테마에 이윰레벨 아이콘이 존재하지 않습니다.</div>
                                 <?php } ?>
                             </td>
                         </tr>

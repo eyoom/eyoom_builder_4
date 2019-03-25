@@ -1018,7 +1018,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea id="bo_insert_content" name="bo_insert_content" rows="5"><?php echo html_purifier($board['bo_insert_content']); ?></textarea>
+                                    <textarea id="bo_insert_content" name="bo_insert_content" rows="5"><?php echo $board['bo_insert_content'] ?></textarea>
                                 </label>
                             </td>
                             <td class="table-chk-td">

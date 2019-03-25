@@ -33,17 +33,15 @@ for ($i=count($tmp_array)-1; $i>=0; $i--) {
         ;
     } else continue;   // 나머지는 삭제 불가
 
+    // 이윰 새글 삭제
+    sql_query(" delete from {$g5['eyoom_new']} where bo_table = '{$bo_table}' and wr_parent = '{$tmp_array[$i]}' ");
+
     /**
      * 태그글 작성 테이블에서 해당 글 삭제
      * 태그 사용여부와 상관없이 처리 - 태그사용 후, 사용안한 게시물들의 태그글도 삭제하기 위함
      */
     sql_query(" delete from {$g5['eyoom_tag_write']} where tw_theme = '{$theme}' and bo_table = '{$bo_table}' and wr_id = '{$tmp_array[$i]}' ", false);
 }
-
-/**
- * 최신글 캐시 스위치온
- */
-$latest->make_switch_on($bo_table, $theme);
 
 /**
  * 사용자 프로그램

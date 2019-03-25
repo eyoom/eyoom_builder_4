@@ -202,12 +202,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                 <div class="clearfix"></div>
             </div>
             <ul class="list-unstyled statistics-list">
-                <li><span>• 최대방문자 :</span><strong><?php echo $visit['visit_max']; ?></strong></li>
-                <li><span>• 전체방문자 :</span><strong><?php echo $visit['visit_total']; ?></strong></li>
-                <li><span>• 신규회원수 :</span><strong><?php echo $visit['newby']; ?></strong></li>
-                <li><span>• 전체회원수 :</span><strong><?php echo $visit['members']; ?></strong></li>
-                <li><span>• 전체게시물 :</span><strong><?php echo $visit['total_write']; ?></strong></li>
-                <li><span>• 전체코멘트 :</span><strong><?php echo $visit['total_comment']; ?></strong></li>
+                <li><span>• 최대방문자 :</span><strong><?php echo number_format($visit['visit_max']); ?></strong></li>
+                <li><span>• 전체방문자 :</span><strong><?php echo number_format($visit['visit_total']); ?></strong></li>
+                <li><span>• 신규회원수 :</span><strong><?php echo number_format($visit['newby']); ?></strong></li>
+                <li><span>• 전체회원수 :</span><strong><?php echo number_format($visit['members']); ?></strong></li>
+                <li><span>• 전체게시물 :</span><strong><?php echo number_format($visit['total_write']); ?></strong></li>
+                <li><span>• 전체코멘트 :</span><strong><?php echo number_format($visit['total_comment']); ?></strong></li>
             </ul>
         </div>
         <?php /* 사이트 통계 끝 */?>
@@ -315,7 +315,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         <div class="main-latest-wrap">
             <div class="main-latest">
                 <?php for ($i=0; $i<count($item_qa); $i++) { ?>
-                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_qa[$i]['is_answer'] == '') { ?>main-latest-no-answer<?php } ?>">
+                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>" class="main-latest-link <?php if (!$item_qa[$i]['is_answer'] == '') { ?>main-latest-no-answer<?php } ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$item_qa[$i]['mb_photo']) { ?>
                         <i class="fas fa-user-circle"></i>

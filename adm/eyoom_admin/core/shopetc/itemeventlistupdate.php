@@ -12,18 +12,16 @@ auth_check($auth[$sub_menu], "w");
 
 for ($i=0; $i<count($_POST['it_id']); $i++)
 {
-    $iit_id = preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$i]);
-
     $sql = " delete from {$g5['g5_shop_event_item_table']}
               where ev_id = '$ev_id'
-                and it_id = '{$iit_id}' ";
+                and it_id = '{$_POST['it_id'][$i]}' ";
     sql_query($sql);
 
-    if (isset($_POST['ev_chk'][$i]) && $_POST['ev_chk'][$i])
+    if ($_POST['chk'][$i])
     {
         $sql = "insert into {$g5['g5_shop_event_item_table']}
                    set ev_id = '$ev_id',
-                       it_id = '{$iit_id}' ";
+                       it_id = '{$_POST['it_id'][$i]}' ";
         sql_query($sql);
     }
 

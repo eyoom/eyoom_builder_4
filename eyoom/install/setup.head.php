@@ -9,6 +9,29 @@ $gmnow = gmdate('D, d M Y H:i:s').' GMT';
 @header('Cache-Control: no-store, no-cache, must-revalidate');
 @header('Cache-Control: pre-check=0, post-check=0, max-age=0');
 @header('Pragma: no-cache');
+
+function g5_path()
+{
+    $chroot = substr($_SERVER['SCRIPT_FILENAME'], 0, strpos($_SERVER['SCRIPT_FILENAME'], dirname(__FILE__)));
+    $result['path'] = str_replace('\\', '/', $chroot.dirname(__FILE__));
+    $tilde_remove = preg_replace('/^\/\~[^\/]+(.*)$/', '$1', $_SERVER['SCRIPT_NAME']);
+    $document_root = str_replace($tilde_remove, '', $_SERVER['SCRIPT_FILENAME']);
+    $pattern = '/' . preg_quote($document_root, '/') . '/i';
+    $root = preg_replace($pattern, '', $result['path']);
+    $port = ($_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443) ? '' : ':'.$_SERVER['SERVER_PORT'];
+    $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 's' : '') . '://';
+    $user = str_replace(preg_replace($pattern, '', $_SERVER['SCRIPT_FILENAME']), '', $_SERVER['SCRIPT_NAME']);
+    $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+    if(isset($_SERVER['HTTP_HOST']) && preg_match('/:[0-9]+$/', $host))
+        $host = preg_replace('/:[0-9]+$/', '', $host);
+    $host = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", '', $host);
+    $result['url'] = $http.$host.$port.$user.$root;
+    return $result;
+}
+
+$g5_path = g5_path();
+$g5_install_url = str_replace('eyoom/','',$g5_path['url']);
+unset($g5_path);
 ?>
 <!doctype html>
 <html lang="ko">
