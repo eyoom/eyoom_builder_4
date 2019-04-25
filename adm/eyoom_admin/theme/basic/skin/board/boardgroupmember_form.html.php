@@ -120,10 +120,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     db.clients   = [
         <?php for ($i=0; $i<count($list); $i++) { ?>
         {
-            체크: "<input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $row['gm_id'] ?>'><i></i></label>",
+            체크: "<input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['gm_id'] ?>'><i></i></label>",
             그룹아이디: "<a href='<?php echo G5_BBS_URL; ?>/group.php?gr_id=<?php echo $list[$i]['gr_id']; ?>'><?php echo $list[$i]['gr_id']; ?></a>",
-            그룹: "<?php echo $row['gr_subject'] ?>",
-            처리일시: "<?php echo $row['gm_datetime'] ?>",
+            그룹: "<?php echo $list[$i]['gr_subject'] ?>",
+            처리일시: "<?php echo $list[$i]['gm_datetime'] ?>",
         },
         <?php } ?>
     ]

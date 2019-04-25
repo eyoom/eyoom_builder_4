@@ -832,6 +832,7 @@ class theme extends qfile
         $url = parse_url($link);
         if ($url['host']) {
             $host = preg_replace('/www\./i','',$url['host']);
+            if ($url['port']) $host .= ':' . $url['port'];
             $_host = preg_replace('/www\./i','',$_SERVER['HTTP_HOST']);
             if ($host != $_host) return false;
         }

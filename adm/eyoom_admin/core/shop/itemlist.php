@@ -136,6 +136,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['href'] = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
     $list[$i]['image'] = str_replace("\"","'",get_it_image($row['it_id'], 160, 160));
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
 
     // 총판매수
     $sales = sql_fetch("select sum(ct_qty) as qty from {$g5['g5_shop_cart_table']} where find_in_set(ct_status, '입금,준비,배송,완료') > 0 and it_id = '{$row['it_id']}' ");

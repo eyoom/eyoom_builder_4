@@ -19,7 +19,9 @@ if (file_exists($countdown_config_file) && !is_dir($countdown_config_file)) {
 /**
  * 오픈 예정일
  */
-$open_date = $eb->mktime_countdown_date($countdown['cd_opendate']);
+if ($countdown['cd_use'] == 'y') {
+    $open_date = $eb->mktime_countdown_date($countdown['cd_opendate']);
+}
 
 /**
  * 공사중 스킨

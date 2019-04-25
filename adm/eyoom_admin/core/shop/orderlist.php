@@ -245,6 +245,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     }
 
     $list[$i] = $row;
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['disp_od_id'] = $disp_od_id;
     $list[$i]['uid'] = $uid;
     $list[$i]['od_cnt'] = $od_cnt;

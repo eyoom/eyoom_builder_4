@@ -193,11 +193,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                 </div>
                 <div class="statistics-box">
                     <h6>오늘방문자</h6>
-                    <p><strong class="color-orange"><?php echo number_format($visit['visit_today']); ?></strong></p>
+                    <p><strong class="color-orange"><?php echo $visit['visit_today']; ?></strong></p>
                 </div>
                 <div class="statistics-box">
                     <h6>어제방문자</h6>
-                    <p><strong class="color-teal"><?php echo number_format($visit['visit_yesterday']); ?></strong></p>
+                    <p><strong class="color-teal"><?php echo $visit['visit_yesterday']; ?></strong></p>
                 </div>
                 <div class="clearfix"></div>
             </div>

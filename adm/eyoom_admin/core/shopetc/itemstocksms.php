@@ -88,7 +88,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $it_name = '상품정보 없음';
 
     $list[$i] = $row;
-    $list[$i]['it_name'] = $it_name;
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $it_name);
 }
 
 /**

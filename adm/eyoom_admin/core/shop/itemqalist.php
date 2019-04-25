@@ -101,6 +101,7 @@ $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca.'&amp;save_stx='.$stx;
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['iq_subject'] = cut_str($row['iq_subject'], 30, "...");
     $list[$i]['href'] = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
     $list[$i]['image'] = str_replace("\"","'",get_it_image($row['it_id'], 160, 160));

@@ -15,7 +15,7 @@ if (!defined('_EYOOM_')) exit;
         <li class="stv-item c<?php echo $info['k']; ?>">
             <div class="prd-img"><?php echo $info['img']; ?></div>
             <div class="prd-name"><?php echo cut_str($info['it_name'], 10, ''); ?></div>
-            <div class="prd-cost"><?php echo number_format($info['price']); ?></div>
+            <div class="prd-cost"><?php echo $info['price']; ?></div>
         </li>
         <?php } ?>
         <?php } ?>

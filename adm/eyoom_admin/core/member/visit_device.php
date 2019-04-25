@@ -42,7 +42,7 @@ while ($row=sql_fetch_array($result)) {
 }
 
 $i = 0;
-$ㅓ = 0;
+$j = 0;
 $k = 0;
 $save_count = -1;
 $tot_count = 0;

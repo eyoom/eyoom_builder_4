@@ -128,11 +128,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $it_stock_qty_st = ''; // 스타일 정의
     if($row['it_stock_qty'] <= $row['it_noti_qty']) {
         $it_stock_qty_st = ' sit_stock_qty_alert';
-        $it_stock_qty = ''.$it_stock_qty.' !<span class="sound_only"> 재고부족 </span>';
+        $it_stock_qty = ''.$it_stock_qty.' <span class=\"sound_only\"> 재고부족 </span>';
     }
 
     $list[$i] = $row;
-
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['href'] = $href;
     $list[$i]['wait_qty'] = $wait_qty;
     $list[$i]['temporary_qty'] = $temporary_qty;

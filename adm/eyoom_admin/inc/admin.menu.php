@@ -22,6 +22,7 @@ $dir_icon = array(
     'board'     => 'fa-list-alt',
     'shop'      => 'fa-shopping-cart',
     'shopetc'   => 'fa-chart-pie',
+    'sms'       => 'fa-mobile',
     'theme'     => 'fa-puzzle-piece',
 );
 
@@ -42,7 +43,7 @@ $i = 0;
 foreach ($amenu as $key => $value) {
     if (!$is_youngcart && ($key == 400 || $key == 500)) continue;
 
-    if (!$_dirname[$key] || $key == 900 || !$menu['menu'.$key][0][2]) continue;
+    if (!$_dirname[$key] || !$menu['menu'.$key][0][2]) continue;
     else {
         $_dir = $_dirname[$key];
         $tmp  = explode('/',$menu['menu'.$key][0][2]);

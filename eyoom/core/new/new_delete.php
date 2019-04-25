@@ -8,12 +8,13 @@ include_once($g5_path.'/common.php');
 //print_r2($_POST); exit;
 
 if ($is_admin != 'super')
-    alert('최고관리자만 접근이 가능합니다.');
+    alert("최고관리자만 접근이 가능합니다.");
 
 $board = array();
 $save_bo_table = array();
 
-for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
+for($i=0;$i<count($_POST['chk_bn_id']);$i++)
+{
     // 실제 번호를 넘김
     $k = $_POST['chk_bn_id'][$i];
 
@@ -32,7 +33,8 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
     if (!$write) continue;
 
     // 원글 삭제
-    if ($write['wr_is_comment']==0) {
+    if ($write['wr_is_comment']==0)
+    {
         $len = strlen($write['wr_reply']);
         if ($len < 0) $len = 0;
         $reply = substr($write['wr_reply'], 0, $len);
@@ -40,9 +42,11 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
         // 나라오름님 수정 : 원글과 코멘트수가 정상적으로 업데이트 되지 않는 오류를 잡아 주셨습니다.
         $sql = " select wr_id, mb_id, wr_is_comment from $write_table where wr_parent = '{$write['wr_id']}' order by wr_id ";
         $result = sql_query($sql);
-        while ($row = sql_fetch_array($result)) {
+        while ($row = sql_fetch_array($result))
+        {
             // 원글이라면
-            if (!$row['wr_is_comment']) {
+            if (!$row['wr_is_comment'])
+            {
                 if (!delete_point($row['mb_id'], $bo_table, $row['wr_id'], '쓰기'))
                     insert_point($row['mb_id'], $board['bo_write_point'] * (-1), "{$board['bo_subject']} {$row['wr_id']} 글삭제");
 
@@ -56,7 +60,9 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
                 sql_query(" delete from {$g5['board_file_table']} where bo_table = '$bo_table' and wr_id = '{$row['wr_id']}' ");
 
                 $count_write++;
-            } else {
+            }
+            else
+            {
                 // 코멘트 포인트 삭제
                 if (!delete_point($row['mb_id'], $bo_table, $row['wr_id'], '코멘트'))
                     insert_point($row['mb_id'], $board['bo_comment_point'] * (-1), "{$board['bo_subject']} {$write['wr_id']}-{$row['wr_id']} 코멘트삭제");
@@ -76,9 +82,6 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
         // 최근게시물 삭제
         sql_query(" delete from {$g5['board_new_table']} where bo_table = '$bo_table' and wr_parent = '{$write['wr_id']}' ");
 
-        // 이윰 NEW 삭제
-        sql_query(" delete from {$g5['eyoom_new']} where bo_table = '$bo_table' and wr_parent = '{$write['wr_id']}' ");
-
         // 스크랩 삭제
         sql_query(" delete from {$g5['scrap_table']} where bo_table = '$bo_table' and wr_id = '{$write['wr_id']}' ");
 
@@ -90,7 +93,7 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
             if ((int)$write['wr_id'] != (int)$notice_array[$k])
                 $bo_notice .= $nl.$notice_array[$k];
 
-            if ($bo_notice)
+            if($bo_notice)
                 $lf = ',';
         }
         $bo_notice = trim($bo_notice);
@@ -102,7 +105,9 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
                 sql_query(" update {$g5['board_table']} set bo_count_write = bo_count_write - '$count_write', bo_count_comment = bo_count_comment - '$count_comment' where bo_table = '$bo_table' ");
             }
         }
-    } else { // 코멘트 삭제
+    }
+    else // 코멘트 삭제
+    {
         //--------------------------------------------------------------------
         // 코멘트 삭제시 답변 코멘트 까지 삭제되지는 않음
         //--------------------------------------------------------------------
@@ -127,17 +132,19 @@ for ($i=0;$i<count($_POST['chk_bn_id']);$i++) {
         $row = sql_fetch($sql);
 
         // 원글의 코멘트 숫자를 감소
-        sql_query(" update $write_table set wr_comment = wr_comment - 1, wr_last = '$row[wr_last]' where wr_id = '{$write['wr_parent']}' ");
+        sql_query(" update $write_table set wr_comment = wr_comment - 1, wr_last = '{$row['wr_last']}' where wr_id = '{$write['wr_parent']}' ");
 
         // 코멘트 숫자 감소
         sql_query(" update {$g5['board_table']} set bo_count_comment = bo_count_comment - 1 where bo_table = '$bo_table' ");
 
         // 새글 삭제
         sql_query(" delete from {$g5['board_new_table']} where bo_table = '$bo_table' and wr_id = '$comment_id' ");
-
-        // 이윰 NEW 삭제
-        sql_query(" delete from {$g5['eyoom_new']} where bo_table = '$bo_table' and wr_id = '$comment_id' ");
     }
+
+    /**
+     * 최신글 캐시 스위치온
+     */
+    $latest->make_switch_on($bo_table, $theme);
 }
 
 $save_bo_table = array_unique($save_bo_table);

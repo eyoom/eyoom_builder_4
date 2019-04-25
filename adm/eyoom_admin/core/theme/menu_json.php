@@ -4,10 +4,6 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-$sub_menu = '800300';
-
-auth_check($auth[$sub_menu], 'r');
-
 $theme      = clean_xss_tags(trim($_GET['thema']));
 $me_shop    = clean_xss_tags(trim($_GET['me_shop']));
 if(!$me_shop) $me_shop = 2;

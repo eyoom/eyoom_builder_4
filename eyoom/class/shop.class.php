@@ -103,7 +103,7 @@ class shop extends eyoom
     }
 
     public function get_listcategory($ca_id='') {
-        $listcategory = '';
+        $listcategory = array();
         $ca_id_len = strlen($ca_id);
         $len2 = $ca_id_len + 2;
         $len4 = $ca_id_len + 4;

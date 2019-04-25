@@ -87,6 +87,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $num = $rank + $i + 1;
 
     $list[$i] = $row;
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['num'] = $num;
     $list[$i]['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));
     $list[$i]['href'] = $href;

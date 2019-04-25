@@ -127,12 +127,12 @@ if($info['od_misu'] == 0 && $od_status == '배송') {
 
 // 메일발송
 define("_ORDERMAIL_", true);
-include "./ordermail.inc.php";
+include G5_ADMIN_PATH . "/shop_admin/ordermail.inc.php";
 
 
 // SMS 문자전송
 define("_ORDERSMS_", true);
-include "./ordersms.inc.php";
+include G5_ADMIN_PATH . "/shop_admin/ordersms.inc.php";
 
 
 // 에스크로 배송처리

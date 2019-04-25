@@ -35,7 +35,10 @@ if ($tv_datas) {
 
         $tv_list[$i]['it_name'] = get_text($rowx['it_name']);
         $tv_list[$i]['img'] = get_it_image($tv_it_id, $tv_div['img_width'], $tv_div['img_height'], $tv_it_id, '', $it_name);
-        $tv_list[$i]['price'] = get_price($rowx);
+        $it_price = get_price($rowx);
+        $print_price = is_int($it_price) ? number_format($it_price) : $it_price;
+        
+        $tv_list[$i]['price'] = $print_price;
         $tv_list[$i]['k'] = $k;
 
         $tv_tot_count++;

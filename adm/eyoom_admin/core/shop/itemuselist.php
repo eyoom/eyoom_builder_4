@@ -103,6 +103,7 @@ $k=0;
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['href'] = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
 
     $list[$i]['is_content'] = str_replace('"', "'", get_view_thumbnail(conv_content(str_replace(array("\n","\r"),"",$row['is_content']), 1), 300));
     $list[$i]['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));

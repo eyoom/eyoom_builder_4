@@ -1,11 +1,12 @@
 <?php
 include_once('./_common.php');
 
-if(!$_GET['pid']) {
+if(!$_REQUEST['pid']) {
     alert('잘못된 접근입니다.');
     exit;
 } else {
-    $pid = $_GET['pid'];
+    $pid = preg_replace('/[^a-z0-9_|]/i', '', trim($_REQUEST['pid']));
+    $pid = substr($pid, 0, 20);
 }
 
 define('_PAGE_',true);

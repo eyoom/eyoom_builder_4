@@ -93,6 +93,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $ev = sql_fetch($sql);
 
     $list[$i] = $row;
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));
     $list[$i]['href'] = $href;
     $list[$i]['is_ev_item'] = $ev['ev_id'] ? true: false;

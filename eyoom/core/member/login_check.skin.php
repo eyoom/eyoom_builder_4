@@ -18,6 +18,13 @@ $act_contents['ip'] = $_SERVER['REMOTE_ADDR'];
 $eb->insert_activity($mb['mb_id'],'login',$act_contents);
 
 /**
+ * 첫번째 로그인일 경우, 로그인 경험치 적용하기
+ */
+if (substr($member['mb_today_login'], 0, 10) != G5_TIME_YMD) {
+    $eb->level_point($levelset['login']);
+}
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/member/login_check.skin.php');

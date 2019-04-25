@@ -4,6 +4,22 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
+/**
+ * $pid 변수 정의
+ */
+if($_REQUEST['dir']) {
+    $dir = preg_replace('/[^a-z0-9_]/i', '', trim($_REQUEST['dir']));
+    $dir = substr($dir, 0, 20);
+}
+
+/**
+ * $pid 변수 정의
+ */
+if($_REQUEST['pid']) {
+    $pid = preg_replace('/[^a-z0-9_|]/i', '', trim($_REQUEST['pid']));
+    $pid = substr($pid, 0, 50);
+}
+
 $is_subpage = true;
 $act_file = EYOOM_ADMIN_CORE_PATH . "/{$dir}/{$pid}.php";
 

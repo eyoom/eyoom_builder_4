@@ -4,8 +4,7 @@ include_once($g5_path.'/common.php');
 
 if (!$is_admin) exit;
 
-$bo_table   = $_POST['bo_table'];
-$skin       = $_POST['skin'];
+$skin = $_POST['skin'];
 
 if (!$bo_table) exit;
 if (!$skin) exit;
@@ -75,7 +74,6 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
 /**
  * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
  */
-$board = sql_fetch("select * from {$g5['board_table']} where bo_table = '{$bo_table}' ");
 $tmp = sql_fetch("select bo_table from {$g5['eyoom_board']} where bo_table='{$bo_table}' and bo_theme='{$theme}'",false);
 if(!$tmp['bo_table']) {
     sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bo_table}', gr_id='{$board['gr_id']}', bo_theme='{$theme}', bo_skin='basic', use_gnu_skin='n'");
