@@ -41,7 +41,7 @@ if(!sql_query(" select co_skin from {$g5['content_table']} limit 1 ", false)) {
 }
 
 $html_title = "";
-
+$readonly = '';
 if ($w == "u")
 {
     $html_title .= " 수정";

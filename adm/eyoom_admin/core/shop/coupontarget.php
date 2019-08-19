@@ -9,7 +9,7 @@ $sub_menu = "400800";
 auth_check($auth[$sub_menu], "w");
 
 $sch_target = substr(preg_replace('/[^a-zA-Z0-9]/', '', strip_tags($_GET['sch_target'])), 0, 1);
-$sch_word   = clean_xss_tags($_GET['sch_word']);
+$sch_word   = clean_xss_tags(strip_tags($_GET['sch_word']));
 
 if($_GET['sch_target'] == 1) {
     $html_title = '분류';
@@ -29,14 +29,14 @@ if($sch_target == 1) {
     $sql_common = " from {$g5['g5_shop_category_table']} ";
     $sql_where = " where ca_use = '1' and ca_nocoupon = '0' ";
     if($sch_word)
-        $sql_where .= " and ca_name like '%$sch_word%' ";
+        $sql_where .= " and ca_name like '%".sql_real_escape_string($sch_word)."%' ";
     $sql_select = " select ca_id as t_id, ca_name as t_name ";
     $sql_order = " order by ca_order, ca_name ";
 } else {
     $sql_common = " from {$g5['g5_shop_item_table']} ";
     $sql_where = " where it_use = '1' and it_nocoupon = '0' ";
     if($sch_word)
-        $sql_where .= " and it_name like '%$sch_word%' ";
+        $sql_where .= " and it_name like '%".sql_real_escape_string($sch_word)."%' ";
     $sql_select = " select it_id as t_id, it_name as t_name ";
     $sql_order = " order by it_order, it_name ";
 }

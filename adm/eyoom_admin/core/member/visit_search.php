@@ -69,7 +69,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         }
 
         $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), $referer);
-        $link = "<a href='".$row['vi_referer']."' target='_blank' title='".$title."'>";
+        $link = '<a href="'.get_text($row['vi_referer']).'" target="_blank" title="'.$title.'">';
     }
 
     if ($is_admin == 'super')

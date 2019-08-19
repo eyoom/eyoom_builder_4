@@ -101,6 +101,14 @@ if (!defined('_EYOOM_')) exit;
                         <span>대표 : <?php echo $bizinfo['bi_company_ceo']; ?></span>
                         <span class="info-divider">|</span>
                         <span>사업자등록번호 : <?php echo $bizinfo['bi_company_bizno']; ?></span>
+                        <?php if($bizinfo['bi_company_sellno']) { ?>
+                        <span class="info-divider">|</span>
+                        <span>통신판매신고번호 : <?php echo $bizinfo['bi_company_sellno']; ?></span>
+                        <?php } ?>
+                        <?php if($bizinfo['bi_company_bugano']) { ?>
+                        <span class="info-divider">|</span>
+                        <span>부가통신사업자 : <?php echo $bizinfo['bi_company_bugano']; ?></span>
+                        <?php } ?>
                         <span class="info-divider">|</span>
                         <span>주소 : <?php echo $bizinfo['bi_company_zip']; ?> <?php echo $bizinfo['bi_company_addr1']; ?> <?php echo $bizinfo['bi_company_addr2']; ?> <?php echo $bizinfo['bi_company_addr3']; ?><a href="<?php echo G5_URL; ?>/page/?pid=contactus" class="btn-e btn-e-xs btn-e-default margin-left-5">상세지도</a></span>
                         <span class="info-divider">|</span>
@@ -238,12 +246,7 @@ if ($is_member && $eyoomer['onoff_push'] == 'on') {
 }
 ?>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery.bootstrap-hover-dropdown.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sidebar/jquery.sidebar.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sticky-kit/sticky-kit.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/js/shop_app.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/js/shop-app.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script>
 $(document).ready(function() {
     ShopApp.init();
@@ -291,8 +294,3 @@ $(document).ready(function() {
 });
 <?php } ?>
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->

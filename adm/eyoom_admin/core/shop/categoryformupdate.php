@@ -91,34 +91,36 @@ switch($_POST['mode']) {
             $row2 = sql_fetch($sql);
             $ca_order = $row2['max'] + 1;
 
+            $p_subca_name = strip_tags($_POST['subca_name']);
+            
             $set = "
-                ca_id                   = '{$subid}',
-                ca_order                = '{$ca_order}',
-                ca_name                 = '{$_POST['subca_name']}',
-                ca_mb_id                = '{$_POST['subca_mb_id']}',
-                ca_skin                 = '{$_POST['subca_skin']}',
-                ca_mobile_skin          = '{$_POST['subca_mobile_skin']}',
-                ca_img_width            = '{$_POST['subca_img_width']}',
-                ca_img_height           = '{$_POST['subca_img_height']}',
-                ca_mobile_img_width     = '{$_POST['subca_mobile_img_width']}',
-                ca_mobile_img_height    = '{$_POST['subca_mobile_img_height']}',
-                ca_list_mod             = '{$_POST['subca_list_mod']}',
-                ca_list_row             = '{$_POST['subca_list_row']}',
-                ca_mobile_list_mod      = '{$_POST['subca_mobile_list_mod']}',
-                ca_mobile_list_row      = '{$_POST['subca_mobile_list_row']}',
-                ca_sell_email           = '{$_POST['subca_sell_email']}',
-                ca_use                  = '{$_POST['subca_use']}',
-                ca_stock_qty            = '{$_POST['subca_stock_qty']}',
-                ca_explan_html          = '{$_POST['subca_explan_html']}',
-                ca_head_html            = '{$_POST['subca_head_html']}',
-                ca_tail_html            = '{$_POST['subca_tail_html']}',
-                ca_mobile_head_html     = '{$_POST['subca_mobile_head_html']}',
-                ca_mobile_tail_html     = '{$_POST['subca_mobile_tail_html']}',
-                ca_include_head         = '{$_POST['subca_include_head']}',
-                ca_include_tail         = '{$_POST['subca_include_tail']}',
-                ca_cert_use             = '{$_POST['subca_cert_use']}',
-                ca_adult_use            = '{$_POST['subca_adult_use']}',
-                ca_nocoupon             = '{$_POST['subca_nocoupon']}'
+                ca_id                   = '".sql_real_escape_string(strip_tags($subid))."',
+                ca_order                = '".sql_real_escape_string(strip_tags($ca_order))."',
+                ca_name                 = '".$p_subca_name."',
+                ca_mb_id                = '".sql_real_escape_string(strip_tags($_POST['subca_mb_id']))."',
+                ca_skin                 = '".sql_real_escape_string(strip_tags($_POST['subca_skin']))."',
+                ca_mobile_skin          = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_skin']))."',
+                ca_img_width            = '".sql_real_escape_string(strip_tags($_POST['subca_img_width']))."',
+                ca_img_height           = '".sql_real_escape_string(strip_tags($_POST['subca_img_height']))."',
+                ca_mobile_img_width     = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_img_width']))."',
+                ca_mobile_img_height    = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_img_height']))."',
+                ca_list_mod             = '".sql_real_escape_string(strip_tags($_POST['subca_list_mod']))."',
+                ca_list_row             = '".sql_real_escape_string(strip_tags($_POST['subca_list_row']))."',
+                ca_mobile_list_mod      = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_list_mod']))."',
+                ca_mobile_list_row      = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_list_row']))."',
+                ca_sell_email           = '".sql_real_escape_string(strip_tags($_POST['subca_sell_email']))."',
+                ca_use                  = '".sql_real_escape_string(strip_tags($_POST['subca_use']))."',
+                ca_stock_qty            = '".sql_real_escape_string(strip_tags($_POST['subca_stock_qty']))."',
+                ca_explan_html          = '".sql_real_escape_string(strip_tags($_POST['subca_explan_html']))."',
+                ca_head_html            = '".sql_real_escape_string(strip_tags($_POST['subca_head_html']))."',
+                ca_tail_html            = '".sql_real_escape_string(strip_tags($_POST['subca_tail_html']))."',
+                ca_mobile_head_html     = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_head_html']))."',
+                ca_mobile_tail_html     = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_tail_html']))."',
+                ca_include_head         = '".sql_real_escape_string(strip_tags($_POST['subca_include_head']))."',
+                ca_include_tail         = '".sql_real_escape_string(strip_tags($_POST['subca_include_tail']))."',
+                ca_cert_use             = '".sql_real_escape_string(strip_tags($_POST['subca_cert_use']))."',
+                ca_adult_use            = '".sql_real_escape_string(strip_tags($_POST['subca_adult_use']))."',
+                ca_nocoupon             = '".sql_real_escape_string(strip_tags($_POST['subca_nocoupon']))."'
             ";
             $insert = "insert into {$g5['g5_shop_category_table']} set $set";
             sql_query($insert,false);
@@ -148,33 +150,36 @@ switch($_POST['mode']) {
                 }
                 sql_query($sql, false);
             }
+
+            $p_ca_name = strip_tags($_POST['ca_name']);
+
             $set = "
-                ca_order                = '{$ca_order}',
-                ca_name                 = '{$_POST['ca_name']}',
-                ca_mb_id                = '{$_POST['ca_mb_id']}',
-                ca_skin                 = '{$_POST['ca_skin']}',
-                ca_mobile_skin          = '{$_POST['ca_mobile_skin']}',
-                ca_img_width            = '{$_POST['ca_img_width']}',
-                ca_img_height           = '{$_POST['ca_img_height']}',
-                ca_mobile_img_width     = '{$_POST['ca_mobile_img_width']}',
-                ca_mobile_img_height    = '{$_POST['ca_mobile_img_height']}',
-                ca_list_mod             = '{$_POST['ca_list_mod']}',
-                ca_list_row             = '{$_POST['ca_list_row']}',
-                ca_mobile_list_mod      = '{$_POST['ca_mobile_list_mod']}',
-                ca_mobile_list_row      = '{$_POST['ca_mobile_list_row']}',
-                ca_sell_email           = '{$_POST['ca_sell_email']}',
-                ca_use                  = '{$_POST['ca_use']}',
-                ca_stock_qty            = '{$_POST['ca_stock_qty']}',
-                ca_explan_html          = '{$_POST['ca_explan_html']}',
-                ca_head_html            = '{$_POST['ca_head_html']}',
-                ca_tail_html            = '{$_POST['ca_tail_html']}',
-                ca_mobile_head_html     = '{$_POST['ca_mobile_head_html']}',
-                ca_mobile_tail_html     = '{$_POST['ca_mobile_tail_html']}',
-                ca_include_head         = '{$_POST['ca_include_head']}',
-                ca_include_tail         = '{$_POST['ca_include_tail']}',
-                ca_cert_use             = '{$_POST['ca_cert_use']}',
-                ca_adult_use            = '{$_POST['ca_adult_use']}',
-                ca_nocoupon             = '{$_POST['ca_nocoupon']}'
+                ca_order                = '".sql_real_escape_string(strip_tags($ca_order))."',
+                ca_name                 = '".$p_ca_name."',
+                ca_mb_id                = '".sql_real_escape_string(strip_tags($_POST['ca_mb_id']))."',
+                ca_skin                 = '".sql_real_escape_string(strip_tags($_POST['ca_skin']))."',
+                ca_mobile_skin          = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_skin']))."',
+                ca_img_width            = '".sql_real_escape_string(strip_tags($_POST['ca_img_width']))."',
+                ca_img_height           = '".sql_real_escape_string(strip_tags($_POST['ca_img_height']))."',
+                ca_mobile_img_width     = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_img_width']))."',
+                ca_mobile_img_height    = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_img_height']))."',
+                ca_list_mod             = '".sql_real_escape_string(strip_tags($_POST['ca_list_mod']))."',
+                ca_list_row             = '".sql_real_escape_string(strip_tags($_POST['ca_list_row']))."',
+                ca_mobile_list_mod      = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_list_mod']))."',
+                ca_mobile_list_row      = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_list_row']))."',
+                ca_sell_email           = '".sql_real_escape_string(strip_tags($_POST['ca_sell_email']))."',
+                ca_use                  = '".sql_real_escape_string(strip_tags($_POST['ca_use']))."',
+                ca_stock_qty            = '".sql_real_escape_string(strip_tags($_POST['ca_stock_qty']))."',
+                ca_explan_html          = '".sql_real_escape_string(strip_tags($_POST['ca_explan_html']))."',
+                ca_head_html            = '".sql_real_escape_string(strip_tags($_POST['ca_head_html']))."',
+                ca_tail_html            = '".sql_real_escape_string(strip_tags($_POST['ca_tail_html']))."',
+                ca_mobile_head_html     = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_head_html']))."',
+                ca_mobile_tail_html     = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_tail_html']))."',
+                ca_include_head         = '".sql_real_escape_string(strip_tags($_POST['ca_include_head']))."',
+                ca_include_tail         = '".sql_real_escape_string(strip_tags($_POST['ca_include_tail']))."',
+                ca_cert_use             = '".sql_real_escape_string(strip_tags($_POST['ca_cert_use']))."',
+                ca_adult_use            = '".sql_real_escape_string(strip_tags($_POST['ca_adult_use']))."',
+                ca_nocoupon             = '".sql_real_escape_string(strip_tags($_POST['ca_nocoupon']))."'
             ";
 
             $update = "update {$g5['g5_shop_category_table']} set $set where ca_id='{$_POST['ca_id']}' ";

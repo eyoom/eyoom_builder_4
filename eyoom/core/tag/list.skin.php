@@ -8,11 +8,16 @@ if (!defined('_TAG_')) exit;
 /**
  * 기본쿼리
  */
-$sql_common = " from {$g5['eyoom_tag']} where (1) and tg_theme = '{$theme}' ";
+$sql_common = " from {$g5['eyoom_tag']} ";
+$sql_search = " where (1) and tg_theme = '{$theme}' ";
+
+if ($stx) {
+    $sql_search .= " and tg_word like '%{$stx}%' ";
+}
 
 $sql_order = " order by tg_word asc, tg_regdt desc ";
 
-$sql = " select count(*) as cnt {$sql_common}";
+$sql = " select count(*) as cnt {$sql_common} {$sql_search}";
 $row = sql_fetch($sql);
 $total_count = $row['cnt'];
 
@@ -22,7 +27,7 @@ if(!$page_rows) $page_rows = $config['cf_page_rows'] * 10;
 $total_page  = ceil($total_count / $page_rows);  // 전체 페이지 계산
 $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
-$sql = "select * {$sql_common} {$sql_order} limit {$from_record}, {$page_rows}";
+$sql = "select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$page_rows}";
 $result = sql_query($sql);
 for($i=0; $row=sql_fetch_array($result); $i++) {
     unset($heading);
@@ -43,7 +48,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./list.php?');
+$paging = $eb->set_paging('./list.php?'.$qstr);
 
 /**
  * 사용자 프로그램

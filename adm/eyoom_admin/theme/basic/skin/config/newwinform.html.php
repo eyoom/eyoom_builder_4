@@ -174,7 +174,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <?php echo editor_html('nw_content', get_text($nw['nw_content'], 0)); ?>
+                                    <?php echo editor_html('nw_content', get_text(html_purifier($nw['nw_content']), 0)); ?>
                                 </label>
                             </td>
                         </tr>

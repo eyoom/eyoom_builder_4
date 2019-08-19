@@ -256,18 +256,21 @@ class shop extends eyoom
         $output = '';
         if(is_array($arr)) {
             $output .= ',"children":[';
+            $i=0;
             foreach($arr as $key => $val) {
                 if(is_array($val)) {
                     if(strlen($val['ca_id'])<2) continue;
                     unset($blind);
+                    $ca_order = $val['ca_order'].$i;
                     if($val['ca_use'] != '1') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-                    $_output[$val['ca_order']] .= '{';
-                    $_output[$val['ca_order']] .= '"id":"'.$val['ca_id'].'",';
-                    $_output[$val['ca_order']] .= '"order":"'.$val['ca_order'].'",';
-                    $_output[$val['ca_order']] .= '"text":"'.$val['ca_name'].$blind.'"';
-                    if(is_array($val) && count($val)>3) $_output[$val['ca_order']] .= $this->category_json($val);
-                    $_output[$val['ca_order']] .= '}';
+                    $_output[$ca_order] .= '{';
+                    $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
+                    $_output[$ca_order] .= '"order":"'.$ca_order.'",';
+                    $_output[$ca_order] .= '"text":"'.$val['ca_name'].$blind.'"';
+                    if(is_array($val) && count($val)>3) $_output[$ca_order] .= $this->category_json($val);
+                    $_output[$ca_order] .= '}';
                 }
+                $i++;
             }
             @ksort($_output);
             $output .= @implode(',',$_output);

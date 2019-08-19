@@ -381,7 +381,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('ev_head_html', get_text($ev['ev_head_html'], 0)); ?>
+                                <?php echo editor_html('ev_head_html', get_text(html_purifier($ev['ev_head_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -391,7 +391,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('ev_tail_html', get_text($ev['ev_tail_html'], 0)); ?>
+                                <?php echo editor_html('ev_tail_html', get_text(html_purifier($ev['ev_tail_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>

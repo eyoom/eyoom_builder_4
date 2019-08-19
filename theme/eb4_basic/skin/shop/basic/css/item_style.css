@@ -12,6 +12,7 @@
 #sit_qa {margin:30px 0}
 #sit_dvr {margin:30px 0}
 #sit_ex {margin:30px 0}
+#sit_dvr img, #sit_ex img {display:block;width:100% \9;max-width:100%;height:auto}
 @media (max-width:1199px) {
     #sit_rel {padding:20px 10px 10px}
 }
@@ -178,7 +179,7 @@
 .product-use-cmd {text-align:right}
 @media (max-width:767px) {
     .product-use-list {padding-left:10px}
-    .product-use-dl {position:relative;top:inherit;left:inherit;padding-top:10px;margin-top:10px;border-top:1px dotted #e5e5e5}
+    .product-use-dl {position:relative;top:inherit;left:inherit;padding-top:10px;margin-top:10px;margin-bottom:15px;border-top:1px dotted #e5e5e5}
     .product-use-dl dd {float:left;display:inline-block;margin-right:10px}
     .product-use-dl .product-use-star {margin:0 10px 0 0}
 }

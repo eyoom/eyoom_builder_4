@@ -16,7 +16,7 @@ $sql = " select * from {$g5['new_win_table']}
           order by nw_id asc ";
 $result = sql_query($sql, false);
 
-$newwin = '';
+$newwin = array();
 
 for ($i=0; $nw=sql_fetch_array($result); $i++) {
     // 이미 체크 되었다면 Continue
@@ -26,7 +26,7 @@ for ($i=0; $nw=sql_fetch_array($result); $i++) {
     $newwin[$i] = $nw;
 }
 
-if (is_array($newwin)) {
+if (is_array($newwin) && count($newwin) > 0) {
     /**
      * 스킨파일 출력
      */

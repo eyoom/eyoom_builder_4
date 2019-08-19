@@ -5,24 +5,11 @@
 if (!defined('_EYOOM_')) exit;
 
 if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css?ver='.G5_CSS_VER.'">',0);
 } else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap-nr.min.css" type="text/css" media="screen">',0);
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style-nr.css?ver='.G5_CSS_VER.'">',0);
 }
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-
-if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-} else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form-nr.min.css" type="text/css" media="screen">',0);
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common-nr.css" type="text/css" media="screen">',0);
-    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style-nr.css" type="text/css" media="screen">',0);
-}
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css?ver='.G5_CSS_VER.'">',0);
 
 /**
  * 로고 타입 : 'image' || 'text'
@@ -377,73 +364,6 @@ $item_view = 'zoom';
 
         <?php /* Basic Body */ ?>
         <div class="basic-body container <?php if (!defined('_INDEX_')) { echo 'page-padding'; if ($footer_top == 'yes') { echo ' ft-padding'; }} ?>">
-            <?php if ($eyoom['use_shop_itemtype'] == 'y') { ?>
-            <?php /* Quick Menu */ ?>
-            <div class="quick-menu-wrap">
-                <div class="quick-menu <?php if (defined('_INDEX_')) echo 'quick-menu-main'; ?>">
-                    <a href="<?php echo G5_SHOP_URL; ?>/cart.php">
-                        <div class="quick-menu-box">
-                            <i class="fas fa-shopping-basket"></i>
-                            <span>장바구니</span>
-                        </div>
-                    </a>
-                    <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php">
-                        <div class="quick-menu-box">
-                            <i class="fas fa-heart"></i>
-                            <span>위시리스트</span>
-                        </div>
-                    </a>
-                    <a href="<?php echo G5_SHOP_URL; ?>/orderinquiry.php">
-                        <div class="quick-menu-box">
-                            <i class="fas fa-truck-moving"></i>
-                            <span>주문/배송</span>
-                        </div>
-                    </a>
-                    <a href="<?php echo G5_BBS_URL; ?>/faq.php">
-                        <div class="quick-menu-box">
-                            <i class="fas fa-question-circle"></i>
-                            <span>FAQ</span>
-                        </div>
-                    </a>
-                    <div class="quick-menu-box heading-current">
-                        <span><strong>오늘본상품</strong></span>
-                    </div>
-                    <div class="quick-menu-box current-view">
-                        <div class="quick-carousel">
-                            <div id="quickCarousel" class="carousel slide carousel-e1 item-carousel">
-                                <div class="carousel-inner">
-                                <?php $index = 0; ?>
-                                <?php if (is_array($tv_list)) { ?>
-                                    <?php foreach ($tv_list as $index => $bitem) { ?>
-                                    <div class="item <?php if ($index === 0) echo 'active'; ?>">
-                                        <?php echo $bitem['img']; ?>
-                                    </div>
-                                    <?php } ?>
-                                <?php } else { ?>
-                                    <div class="item active"><p>최근 본 상품이 없습니다.</p></div>
-                                <?php } ?>
-                                </div>
-                                <div class="carousel-arrow">
-                                    <a class="left carousel-control pull-left" href="#quickCarousel" data-slide="prev">이전</a>
-                                    <a class="right carousel-control pull-right" href="#quickCarousel" data-slide="next">다음</a>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="quick-scroll-btn top-btn">
-                        <i class="fas fa-caret-up"></i>
-                        <span>TOP</span>
-                    </div>
-                    <div class="quick-scroll-btn down-btn">
-                        <span>DOWN</span>
-                        <i class="fas fa-caret-down"></i>
-                    </div>
-                </div>
-            </div>
-            <?php /* End quick menu */ ?>
-            <?php } ?>
-
             <?php if (!defined('_INDEX_')) { ?>
             <div class="basic-body-page">
                 <?php /* 페이지 카테고리 시작, 서브페이지 사이드 레이아웃 사용 + 991px 이하에서만 출력 */ ?>

@@ -90,7 +90,7 @@ class latest extends qfile
             /**
              * g5_eyoom_latest_item 테이블에서 정보 추출
              */
-            $el_item = $this->save_item($el_code, $theme);
+            $el_item = $this->save_item($code, $theme);
         }
 
         /**

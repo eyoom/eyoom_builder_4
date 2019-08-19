@@ -166,47 +166,11 @@ if ($is_member && $eyoomer['onoff_push'] == 'on') {
 }
 ?>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery.bootstrap-hover-dropdown.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sidebar/jquery.sidebar.min.js"></script>
-<?php if ($eyoom['use_shop_itemtype'] == 'y') { ?>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sticky-kit/sticky-kit.min.js"></script>
-<?php } ?>
-<script src="<?php echo EYOOM_THEME_URL; ?>/js/app.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/js/app.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script>
 $(document).ready(function() {
     App.init();
 });
-
-<?php if ($eyoom['use_shop_itemtype'] == 'y') { ?>
-function item_wish_for_list(it_id) {
-    var f = document.fitem_for_list;
-    f.url.value = "<?php echo G5_SHOP_URL; ?>/wishupdate.php?it_id="+it_id;
-    f.it_id.value = it_id;
-    f.action = "<?php echo G5_SHOP_URL; ?>/wishupdate.php";
-    f.submit();
-}
-
-// 쇼핑몰 퀵메뉴
-$(document).ready(function() {
-    $(".quick-menu-wrap").stick_in_parent({
-        <?php if ($eyoom['sticky'] == 'y') { ?> // 메뉴바 sticky 적용
-            <?php if (defined('_INDEX_')) { ?> // 메뉴바 sticky 적용 메인일때
-                offset_top:92
-            <?php } else { ?> // 메뉴바 sticky 적용 메인이 아닐때
-                offset_top:118
-            <?php } ?>
-        <?php } else { ?> // 메뉴바 sticky 미적용
-            <?php if (defined('_INDEX_')) { ?> // 메뉴바 sticky 미적용 메인일때
-                offset_top:32
-            <?php } else { ?> // 메뉴바 sticky 미적용 메인이 아닐때
-                offset_top:58
-            <?php } ?>
-        <?php } ?>
-    });
-});
-<?php } ?>
 
 <?php if ($is_admin == 'super') { ?>
 $(document).ready(function() {
@@ -232,11 +196,6 @@ $(document).ready(function() {
 });
 <?php } ?>
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->
 
 <?php
 if ( $config['cf_analytics'] ) echo $config['cf_analytics'];

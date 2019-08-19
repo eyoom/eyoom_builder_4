@@ -20,7 +20,7 @@ $mysql_host         = defined('G5_MYSQL_HOST') ? G5_MYSQL_HOST: safe_install_str
 $mysql_user         = defined('G5_MYSQL_USER') ? G5_MYSQL_USER: safe_install_string_check($_POST['mysql_user']);
 $mysql_pass         = defined('G5_MYSQL_PASSWORD') ? G5_MYSQL_PASSWORD: safe_install_string_check($_POST['mysql_pass']);
 $mysql_db           = defined('G5_MYSQL_DB') ? G5_MYSQL_DB: safe_install_string_check($_POST['mysql_db']);
-$table_prefix       = defined('G5_TABLE_PREFIX') ? G5_TABLE_PREFIX: safe_install_string_check($_POST['table_prefix']);
+$table_prefix       = defined('G5_TABLE_PREFIX') ? G5_TABLE_PREFIX: safe_install_string_check(preg_replace('/[^a-zA-Z0-9_]/', '_', $_POST['table_prefix']));
 $admin_id           = $_POST['admin_id'];
 $admin_pass         = $_POST['admin_pass'];
 $admin_name         = $_POST['admin_name'];
@@ -59,6 +59,10 @@ if ($tm_shop == 'y' && defined('G5_YOUNGCART_VER')) {
     $g5_shop_install= $_POST['g5_shop_install'];
 } else {
     $g5_shop_install = false;
+}
+
+if (preg_match("/[^0-9a-z_]+/i", $admin_id)) {
+    die('<div class="ins_inner"><p>관리자 아이디는 영문자, 숫자, _ 만 입력하세요.</p><div class="inner_btn"><a href="./install_config.php">뒤로가기</a></div></div>');
 }
 
 /*************************************

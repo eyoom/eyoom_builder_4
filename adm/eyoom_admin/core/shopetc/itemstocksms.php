@@ -30,7 +30,15 @@ if(!sql_query(" select ss_id from {$g5['g5_shop_item_stocksms_table']} limit 1",
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ", true);
 }
 
-$sql_common = "  from {$g5['g5_shop_item_stocksms_table']} ";
+$doc = strip_tags($doc);
+$sort1 = strip_tags($sort1);
+$sel_field = strip_tags($sel_field);
+$search = get_search_string($search);
+
+$sel_field = in_array($sel_field, array('it_id', 'ss_hp', 'ss_send')) ? $sel_field : 'it_id';
+if ($sort1 == "") $sort1 = "ss_send";
+if (!in_array($sort1, array('it_id', 'ss_hp', 'ss_send', 'ss_send_time', 'ss_datetime'))) $sort1 = "ss_send";
+if ($sort2 == "" || $sort2 != "desc") $sort2 = "asc";
 
 $sql_search = " where (1) ";
 if ($stx != "") {
@@ -53,6 +61,8 @@ if (!$sst) {
     $sod = "asc";
 }
 $sql_order = "order by $sst $sod";
+
+$sql_common = "  from {$g5['g5_shop_item_stocksms_table']} ";
 
 // 미전송 건수
 $sql = " select count(*) as cnt " . $sql_common . " $sql_search and ss_send = '0' ";

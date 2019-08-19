@@ -132,9 +132,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </label>
                             </td>
                             <td class="text-right"><?php echo number_format($opt[$k]['opt_price']); ?></td>
-                            <td class="text-right"><?php echo number_format($opt[$k]['ct_price)']); ?></td>
-                            <td class="text-right"><?php echo number_format($opt[$k]['cp_price)']); ?></td>
-                            <td class="text-right"><?php echo number_format($opt[$k]['ct_point)']); ?></td>
+                            <td class="text-right"><?php echo number_format($opt[$k]['ct_price']); ?></td>
+                            <td class="text-right"><?php echo number_format($opt[$k]['cp_price']); ?></td>
+                            <td class="text-right"><?php echo number_format($opt[$k]['ct_point']); ?></td>
                             <td><?php echo $list[$i]['ct_send_cost']; ?></td>
                             <td><?php echo get_yn($opt[$k]['ct_point_use']); ?></td>
                             <td><?php echo get_yn($opt[$k]['ct_stock_use']); ?></td>

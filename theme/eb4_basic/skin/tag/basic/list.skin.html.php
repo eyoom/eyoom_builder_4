@@ -21,6 +21,25 @@ if (!defined('_EYOOM_')) exit;
 .tag-list .font-kind-1 {font-size:11px;color:#B5B5B5}
 </style>
 
+<form name="ftag" method="get" action="" onsubmit="return ftag_search(this);" class="eyoom-form">
+    <div class="row">
+        <div class="col col-4">
+            <div class="input input-button">
+                <input type="text" name="stx" id="stx" value="<?php echo $stx; ?>">
+                <div class="button"><input type="submit" value="검색">검색</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tag-list-tab margin-bottom-20">
+        <ul class="list-inline">
+            <?php for ($i=0; $i<count($fccate); $i++) { ?>
+            <li class="<?php echo $sca == $fccate[$i]['fccate_no'] ? 'active': '';?>"><a href="javascript:;" onclick="set_fccate('<?php echo $fccate[$i]['fccate_no']; ?>');" class="btn-e btn-e-xs btn-e-<?php echo $sca == $fccate[$i]['fccate_no'] ? 'red': 'dark';?>"><?php echo $fccate[$i]['fccate_name']; ?></a></li>
+            <?php } ?>
+        </ul>
+    </div>
+</form>
+
 <div class="margin-bottom-20 font-size-12 color-grey">
     <u>전체 <?php echo number_format($total_count); ?> 건 - <?php echo $page; ?> 페이지</u>
 </div>
@@ -33,3 +52,13 @@ if (!defined('_EYOOM_')) exit;
 
 <?php /* 페이지 */ ?>
 <?php echo eb_paging($eyoom['paging_skin']);?>
+
+<script>
+function ftag_search(f) {
+    if (f.stx.value == '') {
+        alert("검색 태그명을 입력해 주세요.");
+        f.stx.focus();
+        return false;
+    }
+}
+</script>

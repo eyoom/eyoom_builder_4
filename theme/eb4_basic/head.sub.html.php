@@ -22,6 +22,23 @@ if ($config['cf_add_meta']) echo $config['cf_add_meta'];
 
 <title><?php echo $g5_head_title; ?></title>
 <link rel="stylesheet" href="<?php echo $css_href; ?>">
+<?php
+if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css?ver='.G5_CSS_VER.'">',0);
+} else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap-nr.min.css?ver='.G5_CSS_VER.'">',0);
+}
+
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css?ver='.G5_CSS_VER.'">',0);
+
+if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css?ver='.G5_CSS_VER.'">',0);
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css?ver='.G5_CSS_VER.'">',0);
+} else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form-nr.min.css?ver='.G5_CSS_VER.'">',0);
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common-nr.css?ver='.G5_CSS_VER.'">',0);
+}
+?>
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
@@ -51,5 +68,13 @@ var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 <?php
 if (!defined('G5_IS_ADMIN')) echo $config['cf_add_script'];
 ?>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery.bootstrap-hover-dropdown.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sidebar/jquery.sidebar.min.js"></script>
+<!--[if lt IE 9]>
+    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
+    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
+<![endif]-->
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>

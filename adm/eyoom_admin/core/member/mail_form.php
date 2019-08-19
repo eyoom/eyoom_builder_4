@@ -21,6 +21,8 @@ if ($w == 'u') {
     $html_title .= '수정';
     $readonly = ' readonly';
 
+    $ma_id = (int) $ma_id;
+    
     $sql = " select * from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
     $ma = sql_fetch($sql);
     if (!$ma['ma_id'])

@@ -1114,7 +1114,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <label for="de_inicis_sign_key" class="input form-width-250px">
                                     <input type="text" name="de_inicis_sign_key" value="<?php echo $default['de_inicis_sign_key']; ?>" id="de_inicis_sign_key">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.<br>관리자 페이지의 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.\nKG이니시스 상점관리자 > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
                             </td>
                         </tr>
                         <tr class="pg_info_fld inicis_info_fld">
@@ -1478,7 +1478,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label for="de_baesong_content" class="textarea">
-                                    <?php echo editor_html('de_baesong_content', get_text($default['de_baesong_content'], 0)); ?>
+                                    <?php echo editor_html('de_baesong_content', get_text(html_purifier($default['de_baesong_content']), 0)); ?>
                                 </label>
                             </td>
                         </tr>
@@ -1488,7 +1488,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label for="de_change_content" class="textarea">
-                                    <?php echo editor_html('de_change_content', get_text($default['de_change_content'], 0)); ?>
+                                    <?php echo editor_html('de_change_content', get_text(html_purifier($default['de_change_content']), 0)); ?>
                                 </label>
                             </td>
                         </tr>
@@ -1937,7 +1937,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label for="de_guest_privacy" class="textarea">
-                                    <?php echo editor_html('de_guest_privacy', get_text($default['de_guest_privacy'], 0)); ?>
+                                    <?php echo editor_html('de_guest_privacy', get_text(html_purifier($default['de_guest_privacy']), 0)); ?>
                                 </label>
                             </td>
                         </tr>
@@ -2180,7 +2180,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             <input type="checkbox" name="de_sms_use<?php echo $i; ?>" value="1" id="de_sms_use<?php echo $i; ?>" <?php echo ($default["de_sms_use".$i] ? " checked" : ""); ?>><i></i> 사용 <span class="sound_only"><?php echo $scf_sms_title[$i]; ?></span>
                         </label>
                         <div class="scf_sms_img">
-                            <textarea id="de_sms_cont<?php echo $i; ?>" name="de_sms_cont<?php echo $i; ?>" ONKEYUP="byte_check('de_sms_cont<?php echo $i; ?>', 'byte<?php echo $i; ?>');"><?php echo $default['de_sms_cont'.$i]; ?></textarea>
+                            <textarea id="de_sms_cont<?php echo $i; ?>" name="de_sms_cont<?php echo $i; ?>" ONKEYUP="byte_check('de_sms_cont<?php echo $i; ?>', 'byte<?php echo $i; ?>');"><?php echo html_purifier($default['de_sms_cont'.$i]); ?></textarea>
                         </div>
                         <span id="byte<?php echo $i; ?>" class="scf_sms_cnt">0 / 80 바이트</span>
                     </section>

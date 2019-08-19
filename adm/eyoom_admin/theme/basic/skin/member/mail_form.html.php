@@ -32,7 +32,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         </label>
         <label class="label">메일 내용</label>
         <label class="textarea">
-            <?php echo editor_html("ma_content", get_text($ma['ma_content'], 0)); ?>
+            <?php echo editor_html("ma_content", get_text(html_purifier($ma['ma_content']), 0)); ?>
         </label>
     </div>
 

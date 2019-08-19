@@ -4,6 +4,7 @@
 
 /*---------- Reset Styles ----------*/
 * {border-radius:0 !important}
+html {overflow-y:scroll;height:inherit}
 body {color:#353535;font-size:13px;line-height:1.6;font-family:"Roboto",Dotum,Arial,sans-serif}
 p,li,li a {color:#252525;word-break:keep-all}
 a {color:#000;text-decoration:none}

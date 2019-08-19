@@ -55,6 +55,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 .admin-shop-itemform .sit_option #sit_option_addfrm_btn button {position:relative;top:inherit;right:inherit}
 @media (max-width: 600px) {
     .admin-shop-itemform .sit_option .sit-option-item {float:inherit;width:100%;box-sizing:border-box}
+    .admin-shop-itemform #scrollbar_container_1 {position:relative;overflow:hidden;display:block}
+    .admin-shop-itemform #scrollbar_container_2 {position:relative;overflow:hidden;display:block}
     .admin-shop-itemform .scrollbar-container {position:relative;display:block}
     .admin-shop-itemform .relation-sbox-margin-top {margin-top:inherit}
     .admin-shop-itemform .table-form-thumb-img {float:inherit}
@@ -303,7 +305,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="input">
-                                    <input type="text" name="it_basic" value="<?php echo get_text($it['it_basic']); ?>" id="it_basic">
+                                    <input type="text" name="it_basic" value="<?php echo get_text(html_purifier($it['it_basic'])); ?>" id="it_basic">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력합니다. HTML 입력도 가능합니다.</div>
                             </td>
@@ -503,7 +505,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td colspan="2">
                                 <label class="textarea">
-                                    <?php echo editor_html('it_explan', get_text($it['it_explan'], 0)); ?>
+                                    <?php echo editor_html('it_explan', get_text(html_purifier($it['it_explan']), 0)); ?>
                                 </label>
                             </td>
                         </tr>
@@ -513,7 +515,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td colspan="2">
                                 <label class="textarea">
-                                    <?php echo editor_html('it_mobile_explan', get_text($it['it_mobile_explan'], 0)); ?>
+                                    <?php echo editor_html('it_mobile_explan', get_text(html_purifier($it['it_mobile_explan']), 0)); ?>
                                 </label>
                             </td>
                         </tr>
@@ -540,7 +542,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="it_shop_memo" id="it_shop_memo"><?php echo $it['it_shop_memo']; ?></textarea>
+                                    <textarea name="it_shop_memo" id="it_shop_memo"><?php echo html_purifier($it['it_shop_memo']); ?></textarea>
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -961,8 +963,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <?php if (G5_IS_MOBILE) { ?>
                                 <div class="font-size-11 color-grey margin-bottom-5"><i class="fas fa-info-circle"></i> Note! 좌우스크롤 가능 (<i class="fas fa-arrows-alt-h"></i>)</div>
                                 <?php } ?>
-                                <div class="scrollbar-container">
-                                    <div id="sit_option_frm"><?php include_once(EYOOM_ADMIN_CORE_PATH.'/shop/itemoption.php'); ?></div>
+                                <div id="scrollbar_container_1">
+                                    <div class="scrollbar-container">
+                                        <div id="sit_option_frm"><?php include_once(EYOOM_ADMIN_CORE_PATH.'/shop/itemoption.php'); ?></div>
+                                    </div>
                                 </div>
 
                                 <script>
@@ -1142,8 +1146,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <?php if (G5_IS_MOBILE) { ?>
                                 <div class="font-size-11 color-grey margin-bottom-5"><i class="fas fa-info-circle"></i> Note! 좌우스크롤 가능 (<i class="fas fa-arrows-alt-h"></i>)</div>
                                 <?php } ?>
-                                <div class="scrollbar-container">
-                                    <div id="sit_option_addfrm"><?php include_once(EYOOM_ADMIN_CORE_PATH.'/shop/itemsupply.php'); ?></div>
+                                <div id="scrollbar_container_2">
+                                    <div class="scrollbar-container">
+                                        <div id="sit_option_addfrm"><?php include_once(EYOOM_ADMIN_CORE_PATH.'/shop/itemsupply.php'); ?></div>
+                                    </div>
                                 </div>
 
                                 <script>
@@ -1836,7 +1842,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html('it_head_html', get_text($it['it_head_html'], 0)); ?>
+                                    <?php echo editor_html('it_head_html', get_text(html_purifier($it['it_head_html']), 0)); ?>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 상품상세설명 페이지 상단에 출력하는 HTML 내용입니다.</div>
                             </td>
@@ -1853,7 +1859,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html('it_tail_html', get_text($it['it_tail_html'], 0)); ?>
+                                    <?php echo editor_html('it_tail_html', get_text(html_purifier($it['it_tail_html']), 0)); ?>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 상품상세설명 페이지 하단에 출력하는 HTML 내용입니다.</div>
                             </td>
@@ -1870,7 +1876,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html('it_mobile_head_html', get_text($it['it_mobile_head_html'], 0)); ?>
+                                    <?php echo editor_html('it_mobile_head_html', get_text(html_purifier($it['it_mobile_head_html']), 0)); ?>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 모바일 상품상세설명 페이지 상단에 출력하는 HTML 내용입니다.</div>
                             </td>
@@ -1887,7 +1893,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html('it_mobile_tail_html', get_text($it['it_mobile_tail_html'], 0)); ?>
+                                    <?php echo editor_html('it_mobile_tail_html', get_text(html_purifier($it['it_mobile_tail_html']), 0)); ?>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 모바일 상품상세설명 페이지 하단에 출력하는 HTML 내용입니다.</div>
                             </td>
@@ -2011,7 +2017,8 @@ $(function(){
     <?php if (G5_IS_MOBILE) { ?>
     var scrollCont = $('#it_name').width();
     $('.scrollbar-container').css('width', scrollCont);
-    $('.scrollbar-container').perfectScrollbar();
+    new PerfectScrollbar('#scrollbar_container_1');
+    new PerfectScrollbar('#scrollbar_container_2');
     <?php } ?>
 
     <?php if (G5_IS_MOBILE || $wmode) { ?>

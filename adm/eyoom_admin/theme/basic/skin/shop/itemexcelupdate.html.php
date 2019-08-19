@@ -29,7 +29,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <tbody>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">총상품수</label>
+                            총상품수
                         </th>
                         <td>
                             <?php echo number_format($total_count); ?>
@@ -37,7 +37,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </tr>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">완료건수</label>
+                            완료건수
                         </th>
                         <td>
                             <?php echo number_format($succ_count); ?>
@@ -45,7 +45,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </tr>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">실패건수</label>
+                            실패건수
                         </th>
                         <td>
                             <?php echo number_format($fail_count); ?>
@@ -54,7 +54,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <?php if($fail_count > 0) { ?>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">실패상품코드</label>
+                            실패상품코드
                         </th>
                         <td>
                             <?php echo implode(', ', $fail_it_id); ?>
@@ -64,7 +64,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <?php if($dup_count > 0) { ?>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">상품코드중복건수</label>
+                            상품코드중복건수
                         </th>
                         <td>
                             <?php echo number_format($dup_count); ?>
@@ -72,7 +72,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </tr>
                     <tr>
                         <th class="table-form-th">
-                            <label class="label">중복상품코드</label>
+                            중복상품코드
                         </th>
                         <td>
                             <?php echo implode(', ', $dup_it_id); ?>

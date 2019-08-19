@@ -953,7 +953,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html("bo_content_head", get_text($board['bo_content_head'], 0)); ?>
+                                    <?php echo editor_html("bo_content_head", get_text(html_purifier($board['bo_content_head']), 0)); ?>
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -969,7 +969,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html("bo_content_tail", get_text($board['bo_content_tail'], 0)); ?>
+                                    <?php echo editor_html("bo_content_tail", get_text(html_purifier($board['bo_content_tail']), 0)); ?>
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -985,7 +985,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html("bo_mobile_content_head", get_text($board['bo_mobile_content_head'], 0)); ?>
+                                    <?php echo editor_html("bo_mobile_content_head", get_text(html_purifier($board['bo_mobile_content_head']), 0)); ?>
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -1001,7 +1001,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <?php echo editor_html("bo_mobile_content_tail", get_text($board['bo_mobile_content_tail'], 0)); ?>
+                                    <?php echo editor_html("bo_mobile_content_tail", get_text(html_purifier($board['bo_mobile_content_tail']), 0)); ?>
                                 </label>
                             </td>
                             <td class="table-chk-td">

@@ -2,6 +2,11 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 쇼핑몰 상수가 없다면 재정의
+ */
+if (!defined('_SHOP_')) define('_SHOP_', true);
+
+/**
  * 쇼핑몰 기능을 사용하지 않음 처리할 경우
  */
 if ($eyoom['is_shop_theme'] == 'n' && !$is_admin) {

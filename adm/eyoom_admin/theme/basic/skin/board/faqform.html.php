@@ -51,7 +51,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fa_subject', get_text($fa['fa_subject'], 0)); ?>
+                                <?php echo editor_html('fa_subject', get_text(html_purifier($fa['fa_subject']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -61,7 +61,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fa_content', get_text($fa['fa_content'], 0)); ?>
+                                <?php echo editor_html('fa_content', get_text(html_purifier($fa['fa_content']), 0)); ?>
                             </label>
                         </td>
                     </tr>

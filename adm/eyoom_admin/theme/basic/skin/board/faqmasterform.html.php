@@ -49,7 +49,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <?php if ($w == 'u') { ?>
                                 <span>
                                     <a href="<?php echo G5_BBS_URL; ?>/faq.php?fm_id=<?php echo $fm_id; ?>" target="_blank" class="btn-e btn-e-md btn-e-dark">보기</a>
-                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqlist&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-md btn-e-red"><i class="fas fa-plus"></i> 상세보기 내용추가</a>
+                                    <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqlist&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-md btn-e-red"><i class="fas fa-plus"></i> 상세보기 내용추가</a>
                                 </span>
                                 <?php } ?>
                             </div>
@@ -90,7 +90,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fm_head_html', get_text($fm['fm_head_html'], 0)); ?>
+                                <?php echo editor_html('fm_head_html', get_text(html_purifier($fm['fm_head_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -100,7 +100,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fm_tail_html', get_text($fm['fm_tail_html'], 0)); ?>
+                                <?php echo editor_html('fm_tail_html', get_text(html_purifier($fm['fm_tail_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -110,7 +110,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fm_mobile_head_html', get_text($fm['fm_mobile_head_html'], 0)); ?>
+                                <?php echo editor_html('fm_mobile_head_html', get_text(html_purifier($fm['fm_mobile_head_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -120,7 +120,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('fm_mobile_tail_html', get_text($fm['fm_mobile_tail_html'], 0)); ?>
+                                <?php echo editor_html('fm_mobile_tail_html', get_text(html_purifier($fm['fm_mobile_tail_html']), 0)); ?>
                             </label>
                         </td>
                     </tr>

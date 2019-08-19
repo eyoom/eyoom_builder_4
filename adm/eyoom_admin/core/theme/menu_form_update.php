@@ -21,22 +21,25 @@ switch($_POST['mode']) {
          * 메뉴 생성하기
          */
         if($_POST['subme_name']) {
-            $subme_info = $thema->get_menu_link($_POST['subme_link']);
+            $subme_info = $thema->get_menu_link(clean_xss_tags($_POST['subme_link']));
             $subme_info['me_link'] = preg_match('/^javascript/i', $subme_info['me_link']) ? G5_URL : strip_tags($subme_info['me_link']);
             $subme_path = $_POST['me_path'] ? $_POST['me_path'].' > '.$_POST['subme_name']:$_POST['subme_name'];
 
-            $length = strlen($_POST['me_code'])+3;
-            $where = " me_theme='{$_POST['theme']}' and me_code like '$_POST[me_code]%' and length(me_code)=$length and me_shop='{$_POST[me_shop]}'";
+            $subme_code = strip_tags($_POST['me_code']);
+            $subme_name = strip_tags($_POST['subme_name']);
+
+            $length = strlen($subme_code)+3;
+            $where = " me_theme='{$_POST['theme']}' and me_code like '{$subme_code}%' and length(me_code)=$length and me_shop='{$_POST[me_shop]}'";
             $row = sql_fetch("select max(me_code) as max from {$g5['eyoom_menu']} where $where");
             $max = $row['max'];
-            if (!$max) $max = $_POST['me_code']."000";
+            if (!$max) $max = $subme_code."000";
             $me_code = sprintf("%0{$length}s",$max+1);
 
             $row2 = sql_fetch("select max(me_order) as max from {$g5['eyoom_menu']} where $where");
             $me_order = $row2['max'] + 1;
 
             if(!$_POST['subme_use_nav']) {
-                $_me_code = str_split($_POST['me_code'],3);
+                $_me_code = str_split($subme_code,3);
                 $row3 = sql_fetch("select * from {$g5['eyoom_menu']} where me_theme='{$_POST['theme']}' and me_code='{$_me_code[0]}' and me_shop='{$_POST[me_shop]}'");
                 $me_use_nav = $row3['me_use_nav'];
                 if(!$me_use_nav) $me_use_nav = 'y';
@@ -50,7 +53,7 @@ switch($_POST['mode']) {
                 me_order        = '{$me_order}',
                 me_icon         = '{$_POST['subme_icon']}',
                 me_shop         = '{$_POST['me_shop']}',
-                me_name         = '{$_POST['subme_name']}',
+                me_name         = '{$subme_name}',
                 me_path         = '{$subme_path}',
                 me_type         = '{$subme_info['me_type']}',
                 me_pid          = '{$subme_info['me_pid']}',
@@ -71,15 +74,18 @@ switch($_POST['mode']) {
          * 메뉴 수정하기
          */
         if ($_POST['me_name']) {
-            $me_info = $thema->get_menu_link($_POST['me_link']);
+            $me_info = $thema->get_menu_link(clean_xss_tags($_POST['me_link']));
             $me_info['me_link'] = preg_match('/^javascript/i', $me_info['me_link']) ? G5_URL : strip_tags($me_info['me_link']);
+
+            $me_code = strip_tags($_POST['me_code']);
+            $me_name = strip_tags($_POST['me_name']);
 
             /**
              * 출력순서값이 수정될 경우, 입력된 순서 이상은 +1처리
              */
             if($_POST['me_order'] != $_POST['me_order_prev']) {
-                $_code = substr($_POST['me_code'],0,-3);
-                if($_code) $where = " and me_code like '{$_code}%' and length(me_code)=".strlen($_POST['me_code']);
+                $_code = substr($me_code,0,-3);
+                if($_code) $where = " and me_code like '{$_code}%' and length(me_code)=".strlen($me_code);
                 else $where = " and length(me_code)=3 ";
                 $where .= " and me_shop='{$_POST[me_shop]}' ";
 
@@ -94,7 +100,7 @@ switch($_POST['mode']) {
             }
 
             if(!$_POST['me_use_nav']) {
-                $_me_code = str_split($_POST['me_code'],3);
+                $_me_code = str_split($me_code,3);
                 $row3 = sql_fetch("select * from {$g5['eyoom_menu']} where me_theme='{$_POST['theme']}' and me_code='{$_me_code[0]}' and me_shop='{$_POST[me_shop]}'");
                 $me_use_nav = $row3['me_use_nav'];
                 if(!$me_use_nav) $me_use_nav = 'y';
@@ -108,7 +114,7 @@ switch($_POST['mode']) {
                 me_order        = '{$_POST['me_order']}',
                 me_icon         = '{$_POST['me_icon']}',
                 me_shop         = '{$_POST['me_shop']}',
-                me_name         = '{$_POST['me_name']}',
+                me_name         = '{$me_name}',
                 me_path         = '{$_POST['me_path']}',
                 me_type         = '{$me_info['me_type']}',
                 me_pid          = '{$me_info['me_pid']}',
@@ -121,7 +127,7 @@ switch($_POST['mode']) {
                 me_use_nav      = '{$me_use_nav}'
             ";
 
-            $update = "update {$g5['eyoom_menu']} set $set where me_theme='{$_POST['theme']}' and me_code='{$_POST['me_code']}' and me_shop='{$_POST[me_shop]}'";
+            $update = "update {$g5['eyoom_menu']} set $set where me_theme='{$_POST['theme']}' and me_code='{$me_code}' and me_shop='{$_POST[me_shop]}'";
             sql_query($update,false);
 
             /**
@@ -130,7 +136,7 @@ switch($_POST['mode']) {
             if($_POST['me_name'] != $_POST['me_name_prev']) {
                 $sql = "select me_id, me_path, me_code from {$g5['eyoom_menu']} where me_theme='{$_POST['theme']}' and me_code like '$_POST[me_code]%' and me_shop='{$_POST[me_shop]}'";
                 $res = sql_query($sql,false);
-                $depth = strlen($_POST['me_code'])/3 - 1;
+                $depth = strlen($me_code)/3 - 1;
                 for($i=0;$row=sql_fetch_array($res);$i++) {
                     unset($path,$_path);
                     $path = explode(">",$row['me_path']);
@@ -147,7 +153,7 @@ switch($_POST['mode']) {
              * 보이기, 감추기 서브에도 일괄적용
              */
             if($_POST['me_use'] == 'n') {
-                $sql = "update {$g5['eyoom_menu']} set me_use = '{$_POST['me_use']}' where me_theme='{$_POST['theme']}' and me_code like '{$_POST['me_code']}%' and me_shop='{$_POST[me_shop]}'";
+                $sql = "update {$g5['eyoom_menu']} set me_use = '{$_POST['me_use']}' where me_theme='{$_POST['theme']}' and me_code like '{$me_code}%' and me_shop='{$_POST[me_shop]}'";
                 sql_query($sql,false);
             }
         }

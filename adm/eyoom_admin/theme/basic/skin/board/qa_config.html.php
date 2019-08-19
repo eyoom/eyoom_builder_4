@@ -271,7 +271,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="textarea">
-                                <?php echo editor_html("qa_content_head", get_text($qaconfig['qa_content_head'], 0)); ?>
+                                <?php echo editor_html("qa_content_head", get_text(html_purifier($qaconfig['qa_content_head']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -281,7 +281,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="textarea">
-                                <?php echo editor_html("qa_content_tail", get_text($qaconfig['qa_content_tail'], 0)); ?>
+                                <?php echo editor_html("qa_content_tail", get_text(html_purifier($qaconfig['qa_content_tail']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -291,7 +291,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="textarea">
-                                <?php echo editor_html("qa_mobile_content_head", get_text($qaconfig['qa_mobile_content_head'], 0)); ?>
+                                <?php echo editor_html("qa_mobile_content_head", get_text(html_purifier($qaconfig['qa_mobile_content_head']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -301,7 +301,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="textarea">
-                                <?php echo editor_html("qa_mobile_content_tail", get_text($qaconfig['qa_mobile_content_tail'], 0)); ?>
+                                <?php echo editor_html("qa_mobile_content_tail", get_text(html_purifier($qaconfig['qa_mobile_content_tail']), 0)); ?>
                             </label>
                         </td>
                     </tr>

@@ -60,7 +60,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('co_content', get_text($co['co_content'], 0)); ?>
+                                <?php echo editor_html('co_content', get_text(html_purifier($co['co_content']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -70,7 +70,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <?php echo editor_html('co_mobile_content', get_text($co['co_mobile_content'], 0)); ?>
+                                <?php echo editor_html('co_mobile_content', get_text(html_purifier($co['co_mobile_content']), 0)); ?>
                             </label>
                         </td>
                     </tr>
@@ -94,6 +94,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </label>
                         </td>
                     </tr>
+                    <!--
                     <tr>
                         <th class="table-form-th">
                             <label class="label">태그 필터링 사용</label>
@@ -108,6 +109,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <div class="note"><strong>Note:</strong> 내용에서 iframe 등의 태그를 사용하려면 사용안함으로 선택해 주십시오.</div>
                         </td>
                     </tr>
+                    -->
                     <tr>
                         <th class="table-form-th">
                             <label for="co_include_head" class="label">상단 파일 경로</label>

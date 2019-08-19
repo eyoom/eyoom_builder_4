@@ -86,7 +86,7 @@ $(document).ready(function() {
         controller     : db,
         deleteConfirm  : "정말로 삭제하시겠습니까?\n한번 삭제된 데이터는 복구할수 없습니다.",
         pageButtonCount: 5,
-        pageSize       : 15,
+        pageSize       : <?php echo $config['cf_page_rows']; ?>,
         width          : "100%",
         height         : "auto",
         fields         : [
@@ -103,7 +103,7 @@ $(document).ready(function() {
     });
 });
 
-$(function() {
+jQuery(function($) {
     $(".sbn_img_view").on("click", function() {
         $(this).closest(".td_img_view").find(".sbn_image").slideToggle();
     });

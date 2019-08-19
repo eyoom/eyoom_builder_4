@@ -126,10 +126,12 @@ function eb_latest ($el_code) {
                  * 캐시 스위치온 체크
                  */
                 $switch_on_file = $eblatest_path.'/switch_'.$el_code.'_'.$li_no.'.php';
-                if (!file_exists($switch_on_file)) {
-                    $make_cache = false;
-                } else if ($is_timeover) {
-                    $make_cache = true;
+                if (file_exists($switch_on_file)) { // 캐시 스위치온 파일이 존재할때만 캐시
+                    if ($is_timeover) { // 설정한 캐시 시간을 초과했을 경우 캐시
+                        $make_cache = true;
+                    } else {
+                        $make_cache = false;
+                    }
                 }
 
                 /**

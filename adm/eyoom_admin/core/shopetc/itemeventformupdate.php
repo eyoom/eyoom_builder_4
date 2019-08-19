@@ -23,6 +23,7 @@ if ($ev_timg_del)  @unlink(G5_DATA_PATH."/event/{$ev_id}_t");
 
 $ev_skin = preg_replace('#\.+(\/|\\\)#', '', $ev_skin);
 $ev_mobile_skin = preg_replace('#\.+(\/|\\\)#', '', $ev_mobile_skin);
+$ev_subject = strip_tags($ev_subject);
 
 $skin_regex_patten = "^list.[0-9]+\.skin\.php";
 
