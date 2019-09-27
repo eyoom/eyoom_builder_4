@@ -27,8 +27,12 @@ if (!defined('_EYOOM_')) exit;
     <div class="product-use-wrap">
         <?php foreach ($item_use as $k => $info) { ?>
         <div class="product-use-list">
+            <?php if ($info['is_thumb']) { ?>
+            <div class="product-use-thumbnail"><?php echo $info['is_thumb']; ?></div>
+            <?php } ?>
             <div class="product-use-title"><?php echo $info['is_subject']; ?></div>
             <button type="button" class="product-use-more">내용보기 <i class="fas fa-caret-down" aria-hidden="true"></i></button>
+            <div class="clearfix"></div> 
             <dl class="product-use-dl">
                 <dt>평점<dt>
                 <dd class="product-use-star"><img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $info['is_star']; ?>.png" alt="별<?php echo $info['is_star']; ?>개" width="75"></dd>

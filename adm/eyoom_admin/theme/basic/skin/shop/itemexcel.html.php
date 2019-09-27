@@ -27,7 +27,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
         <fieldset>
             <div class="text-center margin-top-10 margin-bottom-10">
-                <a href="<?php echo G5_URL; ?>/<?php echo G5_LIB_DIR; ?>/Excel/itemexcel.xls" class="btn btn-e-md btn-e-dark"><i class="fas fa-file-alt"></i> 상품일괄등록용 엑셀파일 다운로드</a>
+                <a href="<?php echo G5_URL; ?>/<?php echo G5_LIB_DIR; ?>/Excel/itemexcel_eyoom.xls" class="btn btn-e-md btn-e-dark"><i class="fas fa-file-alt"></i> 상품일괄등록용 엑셀파일 다운로드</a>
             </div>
         </fieldset>
 

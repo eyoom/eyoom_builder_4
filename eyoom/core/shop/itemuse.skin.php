@@ -21,6 +21,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $item_use[$i]['is_reply_content'] = !empty($row['is_reply_content']) ? get_view_thumbnail(conv_content($row['is_reply_content'], 1), $thumbnail_width) : '';
     $item_use[$i]['link_edit']  = $itemuse_form."&amp;is_id={$row['is_id']}&amp;w=u";
     $item_use[$i]['link_del']   = $itemuse_formupdate."&amp;is_id={$row['is_id']}&amp;w=d&amp;hash={$hash}";
+    $item_use[$i]['is_thumb'] = get_itemuselist_thumbnail($it_id, $item_use[$i]['is_content'], 160, 160);
 }
 $use_cnt = count($item_use);
 

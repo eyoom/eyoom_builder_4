@@ -104,7 +104,7 @@ $qstr .= "&amp;ev_id={$ev_id}";
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=itemeventlist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('./?dir=shopetc&amp;pid=itemeventlist&amp;'.$qstr.'&amp;page=');
 
 /**
  * 검색버튼

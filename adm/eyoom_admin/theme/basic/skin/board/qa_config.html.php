@@ -311,7 +311,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="textarea">
-                                <textarea id="qa_insert_content" name="qa_insert_content" rows="10"><?php echo $qaconfig['qa_insert_content']; ?></textarea>
+                                <textarea id="qa_insert_content" name="qa_insert_content" rows="10"><?php echo html_purifier($qaconfig['qa_insert_content']); ?></textarea>
                             </label>
                         </td>
                     </tr>

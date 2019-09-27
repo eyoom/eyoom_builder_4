@@ -93,6 +93,10 @@ if($_FILES['excelfile']['tmp_name']) {
         $it_origin          = addslashes($data->sheets[0]['cells'][$i][$j++]);
         $it_brand           = addslashes($data->sheets[0]['cells'][$i][$j++]);
         $it_model           = addslashes($data->sheets[0]['cells'][$i][$j++]);
+        $it_option1         = addslashes($data->sheets[0]['cells'][$i][$j++]);
+        $it_option2         = addslashes($data->sheets[0]['cells'][$i][$j++]);
+        $it_option3         = addslashes($data->sheets[0]['cells'][$i][$j++]);
+        $it_opt_set         = addslashes($data->sheets[0]['cells'][$i][$j++]);
         $it_type1           = addslashes($data->sheets[0]['cells'][$i][$j++]);
         $it_type2           = addslashes($data->sheets[0]['cells'][$i][$j++]);
         $it_type3           = addslashes($data->sheets[0]['cells'][$i][$j++]);
@@ -151,6 +155,53 @@ if($_FILES['excelfile']['tmp_name']) {
             continue;
         }
 
+        // 옵션처리
+        if ($it_option1 && $it_opt_set) {
+            unset($it_option_subject);
+            $opt_set = explode('|', $it_opt_set);
+            
+            $ii=0;
+            $opt1 = get_option_set($it_option1);
+            $opt_subject[$ii] = $opt1['opt_subject'];
+            $ii++;
+
+            if ($it_option2) {
+                $opt2 = get_option_set($it_option2);
+                $opt_subject[$ii] = $opt2['opt_subject'];
+                $ii++;
+                
+                if ($it_option3) {
+                    $opt3 = get_option_set($it_option3);
+                    $opt_subject[$ii] = $opt3['opt_subject'];
+                    
+                    foreach ($opt1['opt_item'] as $opt1_val) {
+                        foreach ($opt2['opt_item'] as $opt2_val) {
+                            foreach ($opt3['opt_item'] as $opt3_val) {
+                                $opt_set_subject = "{$opt1_val}".chr(30)."{$opt2_val}".chr(30)."{$opt3_val}";
+                                insert_option_data($opt_set_subject, $opt_set);
+                            }
+                        }
+                    }
+                } else {
+                    foreach ($opt1['opt_item'] as $opt1_val) {
+                        foreach ($opt2['opt_item'] as $opt2_val) {
+                            $opt_set_subject = "{$opt1_val}".chr(30)."{$opt2_val}";
+                            insert_option_data($opt_set_subject, $opt_set);
+                        }
+                    }
+                }
+            } else {
+                foreach ($opt1['opt_item'] as $opt1_val) {
+                    $opt_set_subject = "{$opt1_val}";
+                    insert_option_data($opt_set_subject, $opt_set);
+                }
+            }
+
+            if (is_array($opt_subject)) {
+                $it_option_subject = implode(',', $opt_subject);
+            }
+        }
+
         $sql = " INSERT INTO {$g5['g5_shop_item_table']}
                      SET it_id = '$it_id',
                          ca_id = '$ca_id',
@@ -170,6 +221,7 @@ if($_FILES['excelfile']['tmp_name']) {
                          it_explan = '$it_explan',
                          it_explan2 = '$it_explan2',
                          it_mobile_explan = '$it_mobile_explan',
+                         it_option_subject = '$it_option_subject',
                          it_cust_price = '$it_cust_price',
                          it_price = '$it_price',
                          it_point = '$it_point',
@@ -198,4 +250,29 @@ if($_FILES['excelfile']['tmp_name']) {
 
         $succ_count++;
     }
+}
+
+function get_option_set($row_data) {
+    $temp1 = explode('|', $row_data);
+    $output['opt_subject'] = $temp1[0];
+    
+    $temp2 = explode(',', $temp1[1]);
+    $output['opt_item'] = $temp2;
+    
+    return $output;
+}
+
+function insert_option_data($io_id_subject, $opt_set) {
+    global $g5, $it_id;
+    
+    $m=0;
+    $io_set[$m++] = " io_id = '{$io_id_subject}' ";
+    $io_set[$m++] = " io_price = '{$opt_set[0]}' ";
+    $io_set[$m++] = " io_stock_qty = '{$opt_set[1]}' ";
+    $io_set[$m++] = " io_noti_qty = '{$opt_set[2]}' ";
+    $io_set[$m++] = " io_use = '{$opt_set[3]}' ";
+    $io_upset = implode(',', $io_set);
+    
+    $io_sql = "insert into {$g5['g5_shop_item_option_table']} set it_id = '{$it_id}', {$io_upset}";
+    sql_query($io_sql);
 }

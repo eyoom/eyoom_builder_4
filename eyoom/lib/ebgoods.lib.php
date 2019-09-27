@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  * 상품 추출
  */
 function eb_goods ($eg_code) {
-    global $g5, $theme, $shop_theme, $member, $is_admin, $qfile, $eb, $config, $shop, $eyoom;
+    global $g5, $theme, $shop_theme, $member, $is_admin, $qfile, $eb, $config, $shop, $eyoom, $thema;
     
     /**
      * 쇼핑몰 테마가 아니면 패스

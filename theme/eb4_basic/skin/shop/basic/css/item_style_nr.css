@@ -133,6 +133,8 @@
 .product-use-top .product-use-btn {float:right}
 .product-use-wrap {border-top:1px solid #eaeaea}
 .product-use-list {position:relative;padding:10px;padding-left:150px;min-height:85px;border:1px solid #eaeaea;border-top:0}
+.product-use-thumbnail {float:left;margin-right:10px}
+.product-use-thumbnail img {max-width:70px;height:auto}
 .product-use-title {font-weight:bold;font-size:14px}
 .product-use-more {border:1px solid #d5d5d5;padding:3px 15px;color:#656565;font-size:12px;margin:10px 0;background:#fff}
 .product-use-more:hover {background:#FF4848;border-color:#FF4848;color:#fff}
@@ -143,7 +145,7 @@
 .product-use-dl dd i {color:#c5c5c5;margin-right:5px}
 .product-use-dl .product-use-star {margin:0 0 5px}
 .product-use-cont {display:none}
-.product-use-p {margin:0 0 10px}
+.product-use-p {margin:10px 0}
 .product-use-cmd {text-align:right}
 .product-use-reply {position:relative;border-top:1px dotted #e5e5e5;margin:10px 0 0;padding:10px 0 0 40px}
 .product-use-reply-icon {position:absolute;top:15px;left:10px;width:15px;height:30px;text-indent:-999px;overflow:hidden;border-left:1px dotted #c5c5c5;border-bottom:1px dotted #c5c5c5}

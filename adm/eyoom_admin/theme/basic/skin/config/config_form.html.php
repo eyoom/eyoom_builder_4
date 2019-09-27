@@ -1511,7 +1511,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label class="checkbox">
                                     <input type="checkbox" name="cf_social_servicelist[]" id="check_social_kakao" value="kakao" <?php echo option_array_checked('kakao', $config['cf_social_servicelist']); ?>><i></i> 카카오 로그인을 사용합니다.
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오 웹 Redirect Path : <?php echo get_social_callbackurl('kakao', true); ?></div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오 로그인 Redirect URI : <?php echo get_social_callbackurl('kakao', true); ?></div>
                             </td>
                         </tr>
                         <tr>
