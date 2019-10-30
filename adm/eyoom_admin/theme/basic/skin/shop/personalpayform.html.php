@@ -106,7 +106,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="pp_content" id="pp_content" rows="8"><?php echo $pp['pp_content']; ?></textarea>
+                                    <textarea name="pp_content" id="pp_content" rows="8"><?php echo html_purifier($pp['pp_content']); ?></textarea>
                                 </label>
                             </td>
                         </tr>

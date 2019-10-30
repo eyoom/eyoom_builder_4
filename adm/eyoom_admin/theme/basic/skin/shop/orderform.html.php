@@ -741,7 +741,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 		</div>
 
 		<label for="od_shop_memo" class="textarea textarea-resizable">
-			<textarea name="od_shop_memo" id="od_shop_memo" rows="8"><?php echo stripslashes($od['od_shop_memo']); ?></textarea>
+			<textarea name="od_shop_memo" id="od_shop_memo" rows="8"><?php echo html_purifier(stripslashes($od['od_shop_memo'])); ?></textarea>
 		</label>
 
 		<div class="text-center margin-top-30 margin-bottom-30">

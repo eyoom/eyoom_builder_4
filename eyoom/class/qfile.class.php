@@ -28,7 +28,7 @@ class qfile
         /**
          * EYOOM 테마체크 URL 정의
          */
-        define('EYOOM_SITE','http://eyoom.net');
+        define('EYOOM_SITE','https://eyoom.net');
 
         /**
          * 테마체크 URL 정의

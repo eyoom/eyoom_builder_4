@@ -457,8 +457,8 @@ class theme extends qfile
                                     @ksort($cate2);
                                 } else {
                                     $cate1[$mk2]['sub'] = 'on';
-                                    $cate2[$mk3]['subsub'] = 'on';
-                                    $cate3 = &$cate1[$mk2]['ssubsub'];
+                                    $cate2[$mk3]['sub'] = 'on';
+                                    $cate3 = &$cate2[$mk3]['ssubsub'];
                                     foreach ($subsub as $o => $ssubsub) {
                                         if (!is_array($ssubsub)) {
                                             if ($member['mb_level'] < $subsub['me_permit_level']) continue;
