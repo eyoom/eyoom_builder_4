@@ -29,7 +29,7 @@ if(is_array($eyoom_menu)) {
         $_output[$me_order] .= '{';
         $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
         $_output[$me_order] .= '"order":"'.$me_order.'",';
-        $_output[$me_order] .= '"text":"'.$val['me_name'].$blind.'"';
+        $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
         if(is_array($val) && count($val)>3) $_output[$me_order] .= $thema->eyoom_menu_json($val);
         $_output[$me_order] .= '}';
         $i++;

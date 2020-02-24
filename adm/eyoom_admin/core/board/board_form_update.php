@@ -21,6 +21,11 @@ if (!$bo_table) { alert('게시판 TABLE명은 반드시 입력하세요.'); }
 if (!preg_match("/^([A-Za-z0-9_]{1,20})$/", $bo_table)) { alert('게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)'); }
 if (!$_POST['bo_subject']) { alert('게시판 제목을 입력하세요.'); }
 
+// 게시판명이 금지된 단어로 되어 있으면
+if ( $w == '' && in_array($bo_table, get_bo_table_banned_word()) ){
+    alert('입력한 게시판 TABLE명을 사용할수 없습니다. 다른 이름으로 입력해 주세요.');
+}
+
 $bo_include_head = preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($bo_include_head, 0, 255));
 $bo_include_tail = preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($bo_include_tail, 0, 255));
 
@@ -75,12 +80,12 @@ $f = @fopen($file, 'w');
 // 분류에 & 나 = 는 사용이 불가하므로 2바이트로 바꾼다.
 $src_char = array('&', '=');
 $dst_char = array('＆', '〓');
-$bo_category_list = str_replace($src_char, $dst_char, $bo_category_list);
+$bo_category_list = isset($_POST['bo_category_list']) ? str_replace($src_char, $dst_char, $_POST['bo_category_list']) : '';
 //https://github.com/gnuboard/gnuboard5/commit/f5f4925d4eb28ba1af728e1065fc2bdd9ce1da58 에 따른 조치
-$str_bo_category_list = isset($_POST['bo_category_list']) ? preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", $_POST['bo_category_list']) : '';
+$str_bo_category_list = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", $bo_category_list);
 
-$_POST['bo_subject'] = strip_tags($_POST['bo_subject']);
-$_POST['bo_mobile_subject'] = strip_tags($_POST['bo_mobile_subject']);
+$_POST['bo_subject'] = strip_tags(clean_xss_attributes($_POST['bo_subject']));
+$_POST['bo_mobile_subject'] = strip_tags(clean_xss_attributes($_POST['bo_mobile_subject']));
 
 $sql_common = " gr_id               = '{$gr_id}',
                 bo_subject          = '{$_POST['bo_subject']}',
@@ -196,6 +201,8 @@ if ($w == '') {
 
     // 게시판 테이블 생성
     $file = file(G5_ADMIN_PATH . '/sql_write.sql');
+    $file = get_db_create_replace($file);
+
     $sql = implode($file, "\n");
 
     $create_table = $g5['write_prefix'] . $bo_table;
@@ -294,7 +301,7 @@ if (is_checked('chk_grp_write_point'))          $grp_fields .= " , bo_write_poin
 if (is_checked('chk_grp_comment_point'))        $grp_fields .= " , bo_comment_point = '{$bo_comment_point}' ";
 if (is_checked('chk_grp_download_point'))       $grp_fields .= " , bo_download_point = '{$bo_download_point}' ";
 if (is_checked('chk_grp_category_list')) {
-    $grp_fields .= " , bo_category_list = '{$bo_category_list}' ";
+    $grp_fields .= " , bo_category_list = '{$str_bo_category_list}' ";
     $grp_fields .= " , bo_use_category = '{$bo_use_category}' ";
 }
 if (is_checked('chk_grp_use_sideview'))         $grp_fields .= " , bo_use_sideview = '{$bo_use_sideview}' ";
@@ -383,7 +390,7 @@ if (is_checked('chk_all_write_point'))          $all_fields .= " , bo_write_poin
 if (is_checked('chk_all_comment_point'))        $all_fields .= " , bo_comment_point = '{$bo_comment_point}' ";
 if (is_checked('chk_all_download_point'))       $all_fields .= " , bo_download_point = '{$bo_download_point}' ";
 if (is_checked('chk_all_category_list')) {
-    $all_fields .= " , bo_category_list = '{$bo_category_list}' ";
+    $all_fields .= " , bo_category_list = '{$str_bo_category_list}' ";
     $all_fields .= " , bo_use_category = '{$bo_use_category}' ";
 }
 if (is_checked('chk_all_use_sideview'))         $all_fields .= " , bo_use_sideview = '{$bo_use_sideview}' ";
@@ -472,5 +479,7 @@ $qstr .= $wmode ? '&amp;wmode=1': '';
 
 if(function_exists('get_admin_captcha_by'))
     get_admin_captcha_by('remove');
+
+run_event('admin_board_form_update', $bo_table, $w);
 
 alert($msg, G5_ADMIN_URL . "/?dir=board&amp;pid=board_form&amp;w=u&bo_table={$bo_table}&amp;{$qstr}");

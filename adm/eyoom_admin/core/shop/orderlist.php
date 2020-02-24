@@ -139,6 +139,10 @@ if(!sql_query(" select mb_id from {$g5['g5_shop_order_delete_table']} limit 1 ",
                     ADD `de_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `de_ip` ", true);
 }
 
+if( function_exists('pg_setting_check') ){
+	pg_setting_check(true);
+}
+
 $k=0;
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
@@ -148,7 +152,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $row['it_name'] = $info['it_name'];
     if ($cnt['cnt'] > 1) $row['it_name'] .= " 외 (" . ($cnt['cnt']-1) . ")건";
     $row['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));
-    $row['href'] = G5_SHOP_URL . '/item.php?it_id=' . $row['it_id'];
+    $row['href'] = shop_item_url($row['it_id']);
 
     // 결제 수단
     $s_receipt_way = $s_br = "";
@@ -270,7 +274,7 @@ if (($od_status == '' || $od_status == '완료' || $od_status == '전체취소' 
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=orderlist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

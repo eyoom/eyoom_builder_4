@@ -22,7 +22,7 @@ if(is_array($category)) {
         $_output[$ca_order] .= '{';
         $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
         $_output[$ca_order] .= '"order":"'.$ca_order.'",';
-        $_output[$ca_order] .= '"text":"'.$val['ca_name'].$blind.'"';
+        $_output[$ca_order] .= '"text":"'.trim($val['ca_name']).$blind.'"';
         if(is_array($val) && count($val)>3) $_output[$ca_order] .= $shop->category_json($val);
         $_output[$ca_order] .= '}';
         $i++;

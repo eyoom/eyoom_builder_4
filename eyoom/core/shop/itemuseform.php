@@ -4,11 +4,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/itemuseform.php');
-    return;
-}
-
 include_once(G5_EDITOR_LIB);
 
 if (!$is_member) {
@@ -27,8 +22,7 @@ $is_id = preg_replace('/[^0-9]/', '', trim($_REQUEST['is_id']));
 /**
  * 상품정보체크
  */
-$sql = " select it_id from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
-$row = sql_fetch($sql);
+$row = get_shop_item($it_id, true);
 if(!$row['it_id']) {
     if (G5_IS_MOBILE) {
         alert_close("상품정보가 존재하지 않습니다.");

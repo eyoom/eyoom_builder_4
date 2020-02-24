@@ -52,15 +52,8 @@ function eb_latest ($el_code) {
         /**
         * 스킨정보
         */
-        if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-            $eblatest_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/eblatest/'.$el_master['el_skin'];
-            if (!is_dir($eblatest_skin_path))
-                $eblatest_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/eblatest/'.$el_master['el_skin'];
-            $eblatest_skin_url = str_replace(G5_PATH, G5_URL, $eblatest_skin_path);
-        } else {
-            $eblatest_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/eblatest/'.$el_master['el_skin'];
-            $eblatest_skin_url = str_replace(G5_PATH, G5_URL, $eblatest_skin_path);
-        }
+        $eblatest_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/eblatest/'.$el_master['el_skin'];
+        $eblatest_skin_url = str_replace(G5_PATH, G5_URL, $eblatest_skin_path);
 
         /**
          * 회원레벨
@@ -173,11 +166,11 @@ function eb_latest ($el_code) {
                     $loop[$k]['is_cmt'] = false;
                     if (!$row['wr_subject']) {
                         $loop[$k]['wr_subject'] = cut_str(preg_replace("/(\\n|\\r)/",'',htmlspecialchars_decode($row['wr_content'])), $cut_subject, '…');
-                        $loop[$k]['href'] = G5_BBS_URL . "/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}#c_{$row['wr_id']}";
+                        $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],'#c_'.$row['wr_id']);
                         $loop[$k]['is_cmt'] = true;
                     } else {
                         $loop[$k]['wr_subject'] = conv_subject($row['wr_subject'], $cut_subject, '…');
-                        $loop[$k]['href'] = G5_BBS_URL . "/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}";
+                        $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id']);
                     }
 
                     /**

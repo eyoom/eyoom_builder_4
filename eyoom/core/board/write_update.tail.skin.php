@@ -12,7 +12,7 @@ if ($w == '') {
 
         $slack->setChannel("#{$config['cf_slack_channel']}"); // 메세지를 전송할 Slack 채널명
         $slack->setUsername('[게시글] '.$wr_name);
-        $slack->setMessage($wr_content, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_id='.$wr_id);
+        $slack->setMessage($wr_content, get_eyoom_pretty_url($bo_table,$wr_id));
 
 
         $result = $slack->send();
@@ -26,9 +26,9 @@ if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1') {
     delete_cache_latest($bo_table);
     
     if ($file_upload_msg)
-        alert($file_upload_msg, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr);
+        alert($file_upload_msg, get_eyoom_pretty_url($bo_table,'',$qstr));
     else
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr);
+        goto_url(get_eyoom_pretty_url($bo_table,'',$qstr));
 }
 
 /**
@@ -36,7 +36,7 @@ if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1') {
  */
 if ($_POST['golist'] == '1') {
     echo "
-        <script>parent.document.location.href = '".G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table."'</script>
+        <script>parent.document.location.href = '".get_eyoom_pretty_url($bo_table)."'</script>
     ";
     exit;
 }

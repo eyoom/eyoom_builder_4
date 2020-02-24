@@ -36,7 +36,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" 
         <?php } ?>
     </h1>
 
-    <form name="fitemqa" method="post" action="./itemqaformupdate.php" onsubmit="return fitemqa_submit(this);" autocomplete="off" class="eyoom-form">
+    <form name="fitemqa" method="post" action="<?php echo G5_SHOP_URL; ?>/itemqaformupdate.php" onsubmit="return fitemqa_submit(this);" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
     <input type="hidden" name="iq_id" value="<?php echo $iq_id; ?>">

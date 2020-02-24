@@ -82,7 +82,7 @@ if (!defined('_EYOOM_')) exit;
         <div class="webzine-item-body">
             <?php if ($list[$i]['image']) { ?>
             <div class="webzine-img">
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wr_id=<?php echo $list[$i]['wr_id']; ?>">
+                <a href="<?php echo get_eyoom_pretty_url($list[$i]['bo_table'],$list[$i]['wr_id']); ?>">
                     <div class="webzine-img-box">
                         <div class="webzine-img-box-in">
                             <img class="img-responsive" src="<?php echo $list[$i]['image']; ?>" alt="">
@@ -95,7 +95,7 @@ if (!defined('_EYOOM_')) exit;
             <div class="webzine-noimg-desc">
             <?php } ?>
                 <h4 class="ellipsis">
-                    <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>&wr_id=<?php echo $list[$i]['wr_id']; ?>">
+                    <a href="<?php echo get_eyoom_pretty_url($list[$i]['bo_table'],$list[$i]['wr_id']); ?>">
                         <strong><?php echo $list[$i]['wr_subject']; ?></strong>
                     </a>
                 </h4>

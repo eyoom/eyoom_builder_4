@@ -116,7 +116,7 @@
 
 #sit_sel_option h3 {position:absolute;font-size:0;line-height:0;overflow:hidden}
 #sit_opt_added {margin:0;padding:0;border-bottom:0;background:#fff;list-style:none}
-#sit_opt_added li {padding: 15px 0;padding-right:220px;border-bottom:1px solid #e5e5e5;position:relative}
+#sit_opt_added li {padding: 15px 0;padding-right:220px;margin:0;border-width:0 0 1px;border-style:solid;border-color:#e5e5e5;background:none;position:relative}
 #sit_opt_added li .opt_name {line-height:20px;font-weight:bold}
 #sit_opt_added li .opt_count {position:absolute;top:50%;right:0;margin-top:-15px}
 #sit_opt_added button {float:left;width:30px;height:30px;border:1px solid #cdcdcd;background:#fff;color:#656565;font-size:12px}

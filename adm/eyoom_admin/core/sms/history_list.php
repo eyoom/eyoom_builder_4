@@ -43,7 +43,7 @@ $sms_count = is_array($list) ? count($list): 0;
 /**
  * 페이징
  */
-$paging = $eb->set_paging(G5_ADMIN_URL.'/?dir=sms&amp;pid=history_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

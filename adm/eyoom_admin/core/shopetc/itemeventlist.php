@@ -85,7 +85,7 @@ while ($row1=sql_fetch_array($result1)) {
 }
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $href = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $href = shop_item_url($row['it_id']);
 
     $sql = " select ev_id from {$g5['g5_shop_event_item_table']}
               where it_id = '{$row['it_id']}'
@@ -104,7 +104,7 @@ $qstr .= "&amp;ev_id={$ev_id}";
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shopetc&amp;pid=itemeventlist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

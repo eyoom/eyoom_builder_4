@@ -98,7 +98,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=config&amp;pid=newwinlist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

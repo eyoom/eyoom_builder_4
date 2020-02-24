@@ -11,8 +11,7 @@ if($is_guest)
 $pattern = '#[/\'\"%=*\#\(\)\|\+\&\!\$~\{\}\[\]`;:\?\^\,]#';
 $it_id  = preg_replace($pattern, '', $_POST['it_id']);
 $sw_direct = $_POST['sw_direct'];
-$sql = " select it_id, ca_id, ca_id2, ca_id3 from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
-$it = sql_fetch($sql);
+$it = get_shop_item($it_id, true);
 
 // 상품 총 금액
 if($sw_direct)
@@ -42,27 +41,29 @@ $sql = " select *
 $result = sql_query($sql);
 $count = sql_num_rows($result);
 
-$k=0;
-for($i=0; $row=sql_fetch_array($result); $i++) {
-    // 사용한 쿠폰인지 체크
-    if(is_used_coupon($member['mb_id'], $row['cp_id']))
-        continue;
-
-    $dc = 0;
-    if($row['cp_type']) {
-        $dc = floor(($item_price * ($row['cp_price'] / 100)) / $row['cp_trunc']) * $row['cp_trunc'];
-    } else {
-        $dc = $row['cp_price'];
+if ($count > 0) {
+    $k=0;
+    for($i=0; $row=sql_fetch_array($result); $i++) {
+        // 사용한 쿠폰인지 체크
+        if(is_used_coupon($member['mb_id'], $row['cp_id']))
+            continue;
+    
+        $dc = 0;
+        if($row['cp_type']) {
+            $dc = floor(($item_price * ($row['cp_price'] / 100)) / $row['cp_trunc']) * $row['cp_trunc'];
+        } else {
+            $dc = $row['cp_price'];
+        }
+    
+        if($row['cp_maximum'] && $dc > $row['cp_maximum'])
+            $dc = $row['cp_maximum'];
+    
+        $list[$k] = $row;
+        $list[$k]['dc'] = $dc;
+        $k++;
     }
-
-    if($row['cp_maximum'] && $dc > $row['cp_maximum'])
-        $dc = $row['cp_maximum'];
-
-    $list[$k] = $row;
-    $list[$k]['dc'] = $dc;
-    $k++;
+    $cp_count = count($list);
 }
-$cp_count = count($list);
 
 /**
  * 이윰 테마파일 출력

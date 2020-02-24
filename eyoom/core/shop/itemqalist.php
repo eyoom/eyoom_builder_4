@@ -9,11 +9,6 @@ if( isset($sfl) && ! in_array($sfl, array('b.it_name', 'a.it_id', 'a.iq_subject'
     $sfl = '';
 }
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/itemqalist.php');
-    return;
-}
-
 $g5['title'] = '상품문의';
 include_once('./_head.php');
 

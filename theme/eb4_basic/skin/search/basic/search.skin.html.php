@@ -119,7 +119,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <?php if ($stx && $board_count) { ?><section class="search-result-list"><?php } ?>
     <?php for ($idx=$table_index, $k=0; $idx<count($search_table) && $k<$rows; $idx++) { ?>
         <h5>
-            <a href="./board.php?bo_table=<?php echo $search_table[$idx] ?>&amp;<?php echo $search_query; ?>">
+            <a href="<?php echo get_eyoom_pretty_url($search_table[$idx], '', $search_query); ?>">
                 <strong><i class="fas fa-search"></i> '<u><?php echo $bo_subject[$idx] ?></u>' 게시판 내 결과</strong>
             </a>
         </h5>
@@ -191,7 +191,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
             </li>
         <?php } ?>
         </ul>
-        <div class="text-right margin-top-5 margin-bottom-30"><a href="./board.php?bo_table=<?php echo $search_table[$idx]; ?>&amp;<?php echo $search_query; ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $bo_subject[$idx]; ?>' 결과 더보기</a></div>
+        <div class="text-right margin-top-5 margin-bottom-30"><a href="<?php echo get_eyoom_pretty_url($search_table[$idx], '', $search_query); ?>" class="btn-e btn-e-dark btn-e-xs">'<?php echo $bo_subject[$idx]; ?>' 결과 더보기</a></div>
     <?php } ?>
     <?php if ($stx && $board_count) { ?>
     </section>

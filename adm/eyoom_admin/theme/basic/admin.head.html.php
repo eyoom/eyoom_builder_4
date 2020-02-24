@@ -18,7 +18,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
 <?php if (!$wmode) { ?>
 <div class="wrapper">
     <div class="eb-logo waves-effect waves-light">
-        <a href="<?php echo G5_ADMIN_URL; ?>">
+        <a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>">
             <span>ADMINISTRATOR<span>
         </a>
     </div>
@@ -43,7 +43,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
         <label class="eb-sidebar-title margin-top-20 margin-bottom-10">NAVIGATION</label>
         <ul class="eb-sidebar-left-menu">
             <li class="eb-menu-item menu-item-home <?php if (!$pid) { ?>active<?php } ?>">
-                <a href="<?php echo G5_ADMIN_URL; ?>" class="eb-menu-link waves-effect waves-light">
+                <a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>" class="eb-menu-link waves-effect waves-light">
                     <i class="menu-item-icon fas fa-th-large"></i>
                     <span class="menu-item-text"><strong class="menu-item-main">관리자 메인</strong></span>
                 </a>
@@ -153,7 +153,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
         <div class="eb-header-nav">
             <ul class="list-unstyled list-inline">
                 <li><a href="<?php echo G5_BBS_URL; ?>/logout.php">로그아웃</a></li>
-                <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>">관리자메인</a></li>
+                <li class="hidden-xs"><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>">관리자메인</a></li>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&pid=config_form">기본환경설정</a></li>
                 <?php if ($is_youngcart) { ?>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=configform">쇼핑몰환경설정</a></li>

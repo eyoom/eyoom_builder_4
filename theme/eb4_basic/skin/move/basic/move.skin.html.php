@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
 </style>
 
 <div class="copy-move">
-    <form name="fboardmoveall" method="post" action="./move_update.php" onsubmit="return fboardmoveall_submit(this);" class="eyoom-form">
+    <form name="fboardmoveall" method="post" action="<?php echo G5_BBS_URL; ?>/move_update.php" onsubmit="return fboardmoveall_submit(this);" class="eyoom-form">
     <input type="hidden" name="sw" value="<?php echo $sw; ?>">
     <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
     <input type="hidden" name="wr_id_list" value="<?php echo $wr_id_list; ?>">

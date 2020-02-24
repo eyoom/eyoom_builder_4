@@ -99,4 +99,4 @@ $qstr .= "&amp;page=";
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=member&amp;pid=visit_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);

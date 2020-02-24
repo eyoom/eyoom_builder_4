@@ -5,9 +5,14 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 후킹 이벤트 실행
+ */
+run_event('head_sub');
+
+/**
  * 페이지 로딩 시작 시간
  */
-$begin_time = get_microtime();
+$g5_debug['php']['begin_time'] = $begin_time = get_microtime();
 
 /**
  * 타이틀 정의 - 상태바에 표시될 제목
@@ -15,7 +20,8 @@ $begin_time = get_microtime();
 if (!isset($g5['title'])) {
     $g5['title'] = $config['cf_title'];
     $g5_head_title = $g5['title'];
-} else {
+}
+else {
     $g5_head_title = $g5['title'];
     $g5_head_title .= " | ".$config['cf_title'];
 }
@@ -35,7 +41,12 @@ if (strstr($g5['lo_url'], '/'.G5_ADMIN_DIR.'/') || $is_admin == 'super') $g5['lo
  */
 $shop_css = '';
 if (defined('_SHOP_')) $shop_css = '_shop';
-$css_href = G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').$shop_css.'.css?ver='.G5_CSS_VER;
+$css_href = run_replace('head_css_url', G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').$shop_css.'.css?ver='.G5_CSS_VER, G5_URL);
+
+/**
+ * body 태그 추가 스크립트
+ */
+$body_script = isset($g5['body_script']) ? $g5['body_script'] : '';
 
 /**
  * 회원이라면 로그인 중이라는 메세지를 출력해준다.

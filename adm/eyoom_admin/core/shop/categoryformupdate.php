@@ -24,8 +24,17 @@ if ($file = $_POST['ca_include_tail']) {
 
 if( isset($_POST['ca_id']) ){
     $ca_id = preg_replace('/[^0-9a-z]/i', '', $ca_id);
+    $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+    $ca = sql_fetch($sql);
+
+    if (($ca['ca_include_head'] !== $_POST['ca_include_head'] || $ca['ca_include_tail'] !== $_POST['ca_include_tail']) && function_exists('get_admin_captcha_by') && get_admin_captcha_by()){
+        include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
+
+        if (!chk_captcha()) {
+            alert('자동등록방지 숫자가 틀렸습니다.');
+        }
+    }
 }
-$wmode = clean_xss_tags(trim($_POST['wmode']));
 
 if(!is_include_path_check($_POST['ca_include_head'], 1)) {
     alert('상단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
@@ -34,6 +43,22 @@ if(!is_include_path_check($_POST['ca_include_head'], 1)) {
 if(!is_include_path_check($_POST['ca_include_tail'], 1)) {
     alert('하단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
 }
+
+$check_keys = array('ca_skin_dir', 'ca_mobile_skin_dir', 'ca_skin', 'ca_mobile_skin'); 
+
+foreach( $check_keys as $key ){
+    if( isset($$key) && preg_match('#\.+(\/|\\\)#', $$key) ){
+        alert('스킨명 또는 경로에 포함시킬수 없는 문자열이 있습니다.');
+    }
+}
+
+$check_str_keys = array('ca_name', 'ca_mb_id', 'ca_sell_email');
+foreach( $check_str_keys as $key ){
+    $$key = $_POST[$key] = strip_tags(clean_xss_attributes($_POST[$key]));
+}
+
+$ca_include_head = $_POST['ca_include_head'];
+$ca_include_tail = $_POST['ca_include_tail'];
 
 if ($w == "u" || $w == "d")
     check_demo();

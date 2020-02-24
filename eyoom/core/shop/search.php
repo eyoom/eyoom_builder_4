@@ -4,10 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/search.php');
-    return;
-}
+define('IS_SHOP_SEARCH', true);
 
 $g5['title'] = "상품 검색 결과";
 include_once('./_head.php');
@@ -175,7 +172,7 @@ $query_string = 'qname='.$qname.'&amp;qexplan='.$qexplan.'&amp;qid='.$qid;
 if($qfrom && $qto) $query_string .= '&amp;qfrom='.$qfrom.'&amp;qto='.$qto;
 $query_string .= '&amp;qcaid='.$qcaid.'&amp;q='.urlencode($q);
 $query_string .='&amp;qsort='.$qsort.'&amp;qorder='.$qorder;
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME'].'?'.$query_string.'&amp;page=');
+$paging = $eb->set_paging('itemsearch', '', $query_string);
 
 /**
  * 이윰 테마파일 출력

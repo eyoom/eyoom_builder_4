@@ -107,7 +107,7 @@ $qstr  = $qstr.'&amp;sca='.$sca.'&amp;page='.$page.'&amp;save_stx='.$stx;
 // 리스트
 $k = 0;
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $href = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $href = shop_item_url($row['it_id']);
 
     $list[$i] = $row;
 
@@ -122,7 +122,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=itemtypelist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

@@ -20,6 +20,9 @@ $logo = 'image';
  * 상품 이미지 미리보기 종류 : 'zoom' || 'slider'
  */
 $item_view = 'zoom';
+
+add_javascript('<script src="'.G5_JS_URL.'/owlcarousel/owl.carousel.min.js"></script>', 10);
+add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carousel.css">', 0);
 ?>
 
 <?php if (!$wmode) { ?>
@@ -362,13 +365,13 @@ $item_view = 'zoom';
                                     </ul>
                                 </li>
                                 <li class="visible-xs visible-sm nav-li-space"></li>
-                                <li class="nav-mo-half"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1">히트상품</a></li>
-                                <li class="nav-mo-half board-right-none"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=2">추천상품</a></li>
+                                <li class="nav-mo-half"><a href="<?php echo shop_type_url(1); ?>">히트상품</a></li>
+                                <li class="nav-mo-half board-right-none"><a href="<?php echo shop_type_url(2); ?>">추천상품</a></li>
                                 <div class="clearfix visible-xs visible-sm "></div>
-                                <li class="nav-mo-half"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3">최신상품</a></li>
-                                <li class="nav-mo-half board-right-none"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=4">인기상품</a></li>
+                                <li class="nav-mo-half"><a href="<?php echo shop_type_url(3); ?>">최신상품</a></li>
+                                <li class="nav-mo-half board-right-none"><a href="<?php echo shop_type_url(4); ?>">인기상품</a></li>
                                 <div class="clearfix visible-xs visible-sm "></div>
-                                <li class="nav-mo-half"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5">할인상품</a></li>
+                                <li class="nav-mo-half"><a href="<?php echo shop_type_url(5); ?>">할인상품</a></li>
                                 <li class="nav-mo-half board-right-none"><a href="<?php echo G5_SHOP_URL; ?>/couponzone.php">쿠폰존</a></li>
                                 <div class="clearfix"></div>
                                 <?php /* ---------- 모바일용 컨텐츠 시작 // 991픽셀 이하에서만 출력 ---------- */ ?>

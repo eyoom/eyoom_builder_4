@@ -188,7 +188,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
         <div class="text-center margin-top-30 margin-bottom-30">
             <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-lg btn-e-red" accesskey="s">
-            <a href="./?dir=config&pid=newwinlist&amp;<?php echo $qstr; ?>" class="btn-e btn-e-lg btn-e-dark">목록</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&pid=newwinlist&amp;<?php echo $qstr; ?>" class="btn-e btn-e-lg btn-e-dark">목록</a>
         </div>
     </div>
     </form>

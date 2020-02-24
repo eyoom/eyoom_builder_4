@@ -30,15 +30,8 @@ function eb_popular($skin_dir='basic', $pop_cnt=7, $date_cnt=3) {
         $popular[$i] = $row;
     }
 
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $popular_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/popular/'.$skin_dir;
-        if (!is_dir($popular_skin_path))
-            $popular_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/popular/'.$skin_dir;
-        $popular_skin_url = str_replace(G5_PATH, G5_URL, $popular_skin_path);
-    } else {
-        $popular_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/popular/'.$skin_dir;
-        $popular_skin_url = str_replace(G5_PATH, G5_URL,$popular_skin_path);
-    }
+    $popular_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/popular/'.$skin_dir;
+    $popular_skin_url = str_replace(G5_PATH, G5_URL,$popular_skin_path);
 
     ob_start();
     include_once ($popular_skin_path.'/popular.skin.html.php');

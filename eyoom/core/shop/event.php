@@ -11,11 +11,6 @@ if( isset($sort) && ! in_array($sort, array('it_sum_qty', 'it_price', 'it_use_av
     $sort='';
 }
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/event.php');
-    return;
-}
-
 $sql = " select * from {$g5['g5_shop_event_table']}
           where ev_id = '$ev_id'
             and ev_use = 1 ";
@@ -109,7 +104,7 @@ if (file_exists($list_file)) {
 }
 
 $qstr .= 'skin='.$skin.'&amp;ev_id='.$ev_id.'&amp;sort='.$sort.'&amp;sortodr='.$sortodr;
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('event', '', $qstr);
 
 /**
  * 이벤트 테일 이미지

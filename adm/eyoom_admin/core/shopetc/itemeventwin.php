@@ -18,7 +18,7 @@ $sql = " select b.it_id, b.it_name, b.it_use from {$g5['g5_shop_event_item_table
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
-    $href = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $href = shop_item_url($row['it_id']);
 
     $list[$i] = $row;
     $list[$i]['image'] = str_replace('"', "'", get_it_image($row['it_id'], 50, 50));

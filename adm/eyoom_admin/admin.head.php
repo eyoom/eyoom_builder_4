@@ -4,7 +4,7 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit; // 개별 페이지 접근 불가
 
-$begin_time = get_microtime();
+$g5_debug['php']['begin_time'] = $begin_time = get_microtime();
 
 /**
  * 폼전송 모드일 때 헤더 출력 방지

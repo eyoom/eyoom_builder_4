@@ -130,12 +130,14 @@ class eyoom extends qfile
     /**
      * 읽지 않은 쪽지수
      */
-    public function check_memo_auth($mb_id) {
-        global $memo_not_read, $is_auth;
+    public function check_memo_auth($member) {
+        global $is_auth;
 
-        $sql = " select count(*) as cnt from {$this->g5['memo_table']} where me_recv_mb_id = '{$mb_id}' and me_read_datetime = '0000-00-00 00:00:00' ";
-        $row = sql_fetch($sql);
-        $memo_not_read = $row['cnt'];
+        if( isset($member['mb_memo_cnt']) ){
+            $memo_not_read = $member['mb_memo_cnt'];
+        } else {
+            $memo_not_read = get_memo_not_read($member['mb_id']);
+        }
 
         $is_auth = false;
         $sql = " select count(*) as cnt from {$this->g5['auth_table']} where mb_id = '{$mb_id}' ";
@@ -1024,10 +1026,107 @@ class eyoom extends qfile
     /**
      * 리스트용 페이징 설정정보
      */
-    public function set_paging($url) {
+    public function set_paging($folder, $no='', $id='', $qstr='') {
+        global $config;
+
+        if ($folder == 'admin') {
+            $qstr = '&amp;'.$qstr;
+            $url = G5_ADMIN_URL.'/?dir='.$no.'&amp;pid='.$id.$qstr;
+        } else {
+            $qstr = $qstr ? $qstr: $id;
+
+            // 짧은 주소 사용
+            if ($config['cf_bbs_rewrite']) {
+                switch ($folder) {
+                    case 'board':
+                        $url = get_eyoom_pretty_url($no, '', $qstr);
+                        break;
+                    case 'respond':
+                        $url = G5_URL.'/mypage/'.$folder.'.php';
+                        break;
+                    case 'taglist':
+                    case 'tagview':
+                        $url = G5_URL.'/page/?pid='.$folder;
+                        break;
+                    case 'tag':
+                        $url = G5_URL.'/tag/';
+                        break;
+                    case 'tag_list':
+                        $url = G5_URL.'/tag/list.php';
+                        break;
+                    case 'event':
+                    case 'itemqalist':
+                    case 'itemuselist':
+                    case 'orderaddress':
+                    case 'orderinquiry':
+                    case 'personalpay':
+                        $url = G5_SHOP_URL.'/'.$folder.'.php';
+                        break;
+                    case 'itemlist':
+                        $url = shop_category_url($no);
+                        break;
+                    case 'itemtype':
+                        $url = shop_type_url($no);
+                        break;
+                    case 'itemsearch':
+                        $url = G5_SHOP_URL.'/search.php';
+                        break;
+                    default:
+                        $url = G5_BBS_URL.'/'.$folder.'.php';
+                        break;
+                }
+            }
+            // 짧은 주소 미사용
+            else {
+                switch ($folder) {
+                    case 'board':
+                        $url = G5_BBS_URL.'/board.php?bo_table='.$no.$qstr.'&amp;page=';
+                        break;
+                    case 'memo':
+                        $url = G5_BBS_URL.'/memo.php?kind='.$no.$qstr.'&amp;page=';
+                        break;
+                    case 'respond':
+                        $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr.'&amp;page=';
+                        break;
+                    case 'taglist':
+                    case 'tagview':
+                        $url = G5_URL.'/page/?pid='.$folder.$qstr.'&amp;page=';
+                        break;
+                    case 'tag':
+                        $url = G5_URL.'/tag/?'.$qstr.'&amp;page=';
+                        break;
+                    case 'tag_list':
+                        $url = G5_URL.'/tag/list.php?'.$qstr.'&amp;page=';
+                        break;
+                    case 'event':
+                    case 'itemqalist':
+                    case 'itemuselist':
+                    case 'orderaddress':
+                    case 'orderinquiry':
+                    case 'personalpay':
+                        $url = G5_SHOP_URL.'/'.$folder.'.php?'.$qstr.'&amp;page=';
+                        break;
+                    case 'itemlist':
+                        $url = G5_SHOP_URL.'/list.php?ca_id='.$no.$qstr.'&amp;page=';
+                        break;
+                    case 'itemtype':
+                        $url = G5_SHOP_URL.'/listtype.php?type='.$no.$qstr.'&amp;page=';
+                        break;
+                    case 'itemsearch':
+                        $url = G5_SHOP_URL.'/search.php?'.$qstr.'&amp;page=';
+                        break;
+                    default:
+                        $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr.'&amp;page=';
+                        break;
+                }
+            }
+        }
+
         $pg_pages = G5_IS_MOBILE ? $this->config['cf_mobile_pages']: $this->config['cf_write_pages'];
-        $paging['pages'] = $pg_pages;
+        $paging['ptype'] = $folder;
         $paging['url'] = $url;
+        $paging['qstr'] = $qstr;
+        $paging['pages'] = $pg_pages;
 
         return $paging;
     }
@@ -1163,7 +1262,7 @@ class eyoom extends qfile
             $sitem = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '".$it_id."'");
             $head_title = strip_tags(conv_subject($sitem['it_name'], 255)) . ' | ' . $config['cf_title'];
             $sns_image = G5_DATA_URL . '/item/'.$sitem['it_img1'];
-            $target_url = G5_SHOP_URL.'/item.php?it_id='.$it_id;
+            $target_url = shop_item_url($it_id);
             $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$sitem['it_explan'])))),200, '…');
         } else {
             /**
@@ -1174,7 +1273,7 @@ class eyoom extends qfile
             $head_title = strip_tags(conv_subject($write['wr_subject'], 255)) . ' > ' . $board['bo_subject'] . ' | ' . $config['cf_title'];
             $first_image = get_list_thumbnail($bo_table, $wr_id, 600, 0);
             $sns_image = $first_image['src'];
-            $target_url = G5_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id;
+            $target_url = get_eyoom_pretty_url($bo_table,$wr_id);
             $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$write['wr_content'])))),200, '…');
         }
 

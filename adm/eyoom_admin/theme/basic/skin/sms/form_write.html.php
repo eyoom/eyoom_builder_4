@@ -50,7 +50,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <th scope="row"><label for="fo_name">제목<strong class="sound_only"> 필수</strong></label></th>
                         <td>
                             <label class="input required-mark">
-                                <input type="text" name="fo_name" id="fo_name" required value="<?php echo $write['fo_name']?>" class="form-required" size="70">
+                                <input type="text" name="fo_name" id="fo_name" required value="<?php echo get_sanitize_input($write['fo_name']); ?>" class="form-required" size="70">
                             </label>
                         </td>
                     </tr>

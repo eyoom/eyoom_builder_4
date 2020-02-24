@@ -70,7 +70,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_name" value="<?php echo $default['de_admin_company_name'] ?>" id="de_admin_company_name" maxlength="50">
+                                    <input type="text" name="de_admin_company_name" value="<?php echo get_sanitize_input($default['de_admin_company_name']); ?>" id="de_admin_company_name" maxlength="50">
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -82,7 +82,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_saupja_no" value="<?php echo $default['de_admin_company_saupja_no'] ?>" id="de_admin_company_saupja_no">
+                                    <input type="text" name="de_admin_company_saupja_no" value="<?php echo get_sanitize_input($default['de_admin_company_saupja_no']); ?>" id="de_admin_company_saupja_no">
                                 </label>
                             </td>
                         </tr>
@@ -92,7 +92,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td colspan="3">
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_owner" value="<?php echo $default['de_admin_company_owner'] ?>" id="de_admin_company_owner">
+                                    <input type="text" name="de_admin_company_owner" value="<?php echo get_sanitize_input($default['de_admin_company_owner']); ?>" id="de_admin_company_owner">
                                 </label>
                             </td>
                         </tr>
@@ -102,7 +102,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_tel" value="<?php echo $default['de_admin_company_tel'] ?>" id="de_admin_company_tel" maxlength="50">
+                                    <input type="text" name="de_admin_company_tel" value="<?php echo get_sanitize_input($default['de_admin_company_tel']); ?>" id="de_admin_company_tel" maxlength="50">
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -114,7 +114,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_fax" value="<?php echo $default['de_admin_company_fax'] ?>" id="de_admin_company_fax">
+                                    <input type="text" name="de_admin_company_fax" value="<?php echo get_sanitize_input($default['de_admin_company_fax']); ?>" id="de_admin_company_fax">
                                 </label>
                             </td>
                         </tr>
@@ -124,7 +124,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_tongsin_no" value="<?php echo $default['de_admin_tongsin_no'] ?>" id="de_admin_tongsin_no">
+                                    <input type="text" name="de_admin_tongsin_no" value="<?php echo get_sanitize_input($default['de_admin_tongsin_no']); ?>" id="de_admin_tongsin_no">
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -136,7 +136,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_buga_no" value="<?php echo $default['de_admin_buga_no'] ?>" id="de_admin_buga_no">
+                                    <input type="text" name="de_admin_buga_no" value="<?php echo get_sanitize_input($default['de_admin_buga_no']); ?>" id="de_admin_buga_no">
                                 </label>
                             </td>
                         </tr>
@@ -146,7 +146,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_zip" value="<?php echo $default['de_admin_company_zip']; ?>" id="de_admin_company_zip">
+                                    <input type="text" name="de_admin_company_zip" value="<?php echo get_sanitize_input($default['de_admin_company_zip']); ?>" id="de_admin_company_zip">
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -158,7 +158,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_company_addr" value="<?php echo $default['de_admin_company_addr']; ?>" id="de_admin_company_addr">
+                                    <input type="text" name="de_admin_company_addr" value="<?php echo get_sanitize_input($default['de_admin_company_addr']); ?>" id="de_admin_company_addr">
                                 </label>
                             </td>
                         </tr>
@@ -168,7 +168,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_info_name" value="<?php echo $default['de_admin_info_name'] ?>" id="de_admin_info_name">
+                                    <input type="text" name="de_admin_info_name" value="<?php echo get_sanitize_input($default['de_admin_info_name']); ?>" id="de_admin_info_name">
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -180,7 +180,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="de_admin_info_email" value="<?php echo $default['de_admin_info_email'] ?>" id="de_admin_info_email">
+                                    <input type="text" name="de_admin_info_email" value="<?php echo get_sanitize_input($default['de_admin_info_email']); ?>" id="de_admin_info_email">
                                 </label>
                             </td>
                         </tr>
@@ -936,6 +936,17 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                     </select><i></i>
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 관리자는 설정에 관계없이 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=orderlist">주문내역</a> &gt; 보기에서 발급이 가능합니다.<br>현금영수증 발급 취소는 PG사에서 지원하는 현금영수증 취소 기능을 사용하시기 바랍니다.</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label for="de_taxsave_types" class="label">현금영수증 적용수단</label>
+                            </th>
+                            <td>
+                                <label class="checkbox" for="de_taxsave_types_account"><input type="checkbox" id="de_taxsave_types_account" name="de_taxsave_types_account" value="account" <?php echo $account_checked; ?> ><i></i> 무통장입금</label>
+                                <label class="checkbox" for="de_taxsave_types_vbank"><input type="checkbox" id="de_taxsave_types_vbank" name="de_taxsave_types_vbank" value="vbank" <?php echo $vbank_checked; ?> ><i></i> 가상계좌</label>
+                                <label class="checkbox" for="de_taxsave_types_transfer"><input type="checkbox" id="de_taxsave_types_transfer" name="de_taxsave_types_transfer" value="transfer" <?php echo $transfer_checked; ?> ><i></i> 실시간계좌이체</label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 현금영수증 발급 사용일 경우 해당됩니다.<br>현금 영수증 발급은 무통장입금, 가상계좌, 실시간계좌에만 적용됩니다.<br>아래 체크된 수단에 한해서 회원이 직접 주문 보기 페이지에서 현금영수증을 발급 받을수 있습니다.<br>!!! 만약 PG사 상점관리자에서 가상계좌 또는 실시간계좌이체가 자동으로 현금영수증이 발급되는 경우이면, 아래 가상계좌와 실시간계좌이체 체크박스를 해제하여 사용해 주세요.( 중복으로 발급되는 것을 막기 위함입니다.</div>
                             </td>
                         </tr>
                         <tr>
@@ -2229,10 +2240,65 @@ function fconfig_check(f)
     <?php echo get_editor_js('de_change_content'); ?>
     <?php echo get_editor_js('de_guest_privacy'); ?>
 
-    return true;
+	var msg = "",
+		pg_msg = "";
+
+	if( f.de_pg_service.value == "kcp" ){
+		if( f.de_kcp_mid.value && f.de_kcp_site_key.value && parseInt(f.de_card_test.value) > 0 ){
+			pg_msg = "NHN KCP";
+		}
+	} else if ( f.de_pg_service.value == "lg" ) {
+		if( f.cf_lg_mid.value && f.cf_lg_mert_key.value && parseInt(f.de_card_test.value) > 0 ){
+			pg_msg = "LG유플러스";
+		}
+	} else if ( f.de_pg_service.value == "inicis" ) {
+		if( f.de_inicis_mid.value && f.de_inicis_sign_key.value && parseInt(f.de_card_test.value) > 0 ){
+			pg_msg = "KG이니시스";
+		}
+	}
+
+	if( pg_msg ){
+		msg += "(주의!) "+pg_msg+" 결제의 결제 설정이 현재 테스트결제 로 되어 있습니다.\n쇼핑몰 운영중이면 반드시 실결제로 설정하여 운영하셔야 합니다.\n실결제로 변경하려면 결제설정 탭 -> 결제 테스트에서 실결제를 선택해 주세요.\n정말로 테스트결제로 설정하시겠습니까?";
+	}
+
+	if( msg ){
+		if (confirm(msg)){
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		return true;
+	}
 }
 
 $(function() {
+	$(document).ready(function () {
+        function hash_goto_scroll(hash=""){
+            var $elem = hash ? $("#"+hash) : $('#' + window.location.hash.replace('#', ''));
+            if($elem.length) {
+
+                var admin_head_height = $("#hd_top").height() + $("#container_title").height() + 30;
+
+                $('html, body').animate({
+                    scrollTop: ($elem.offset().top - admin_head_height) + 'px'
+                }, 500, 'swing');
+            }
+        }
+
+        hash_goto_scroll();
+
+        $(document).on("click", ".pg_test_conf_link", function(e){
+            e.preventDefault();
+
+            var str_hash = this.href.split("#")[1];
+
+            if( str_hash ){
+                hash_goto_scroll(str_hash);
+            }
+        });
+    });
+
     //$(".pg_info_fld").hide();
     $(".pg_vbank_url").hide();
     <?php if($default['de_pg_service']) { ?>
@@ -2351,6 +2417,20 @@ $(function() {
             }
         });
     });
+
+	$(document).on("change", "#de_taxsave_use", function(e){
+		var $val = $(this).val();
+		
+		if( parseInt($val) > 0 ){
+			$("#de_taxsave_types").show();
+		} else {
+			$("#de_taxsave_types").hide();
+		}
+	});
+	
+	// 현금영수증 발급수단 중 무통장입금은 무조건 체크처리
+	document.getElementById("de_taxsave_types_account").checked = true;
+	document.getElementById("de_taxsave_types_account").disabled = true;
 });
 </script>
 

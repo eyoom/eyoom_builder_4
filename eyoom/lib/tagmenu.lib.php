@@ -46,15 +46,8 @@ function eb_tagmenu($skin_dir='basic') {
     }
     $cnt = count($list);
 
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $tagmenu_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/tagmenu/'.$skin_dir;
-        if (!is_dir($tagmenu_skin_path))
-            $tagmenu_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/tagmenu/'.$skin_dir;
-        $tagmenu_skin_url = str_replace(G5_PATH, G5_URL, $tagmenu_skin_path);
-    } else {
-        $tagmenu_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/tagmenu/'.$skin_dir;
-        $tagmenu_skin_url = str_replace(G5_PATH, G5_URL, $tagmenu_skin_path);
-    }
+    $tagmenu_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/tagmenu/'.$skin_dir;
+    $tagmenu_skin_url = str_replace(G5_PATH, G5_URL, $tagmenu_skin_path);
 
     ob_start();
     include_once ($tagmenu_skin_path.'/tagmenu.skin.html.php');

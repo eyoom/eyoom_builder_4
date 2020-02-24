@@ -6,11 +6,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MOBILE_PATH.'/group.php');
-    return;
-}
-
 if (!$is_admin && $group['gr_device'] == 'mobile')
     alert($group['gr_subject'].' 그룹은 모바일에서만 접근할 수 있습니다.');
 
@@ -47,11 +42,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
         if (!$row2['wr_subject']) {
             $loop[$k]['wr_subject'] = conv_subject($row2['wr_content'], 30, '…');
-            $loop[$k]['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row2['wr_id']}#c_{$row['wr_id']}";
+            $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'], $row2['wr_id'], '#c_'.$row['wr_id']);
         } else {
             $loop[$k]['wr_subject'] = conv_subject($row2['wr_subject'], 30, '…');
             $loop[$k]['wr_content'] = conv_subject($row2['wr_content'], 30, '…');
-            $loop[$k]['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row2['wr_parent']}";
+            $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'],$row2['wr_id']);
         }
         $loop[$k]['datetime'] = $row2['wr_datetime'];
     }
@@ -62,15 +57,8 @@ $group_cnt = count($list);
 /**
  * 테마 경로 지정
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    $group_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/group/basic';
-    if (!is_dir($group_skin_path))
-        $group_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/group/basic';
-    $group_skin_url = str_replace(G5_PATH, G5_URL, $group_skin_path);
-} else {
-    $group_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/group/basic';
-    $group_skin_url = str_replace(G5_PATH, G5_URL, $group_skin_path);
-}
+$group_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/group/basic';
+$group_skin_url = str_replace(G5_PATH, G5_URL, $group_skin_path);
 
 if (!file_exists($group_skin_path.'/group.skin.html.php')) die('skin error');
 @include_once ($group_skin_path.'/group.skin.html.php');

@@ -29,7 +29,7 @@ if(sql_num_rows($hresult)) {
         $loop = &$ev_list[$i]['ev_prd'];
         for($k=1; $row2=sql_fetch_array($result2); $k++) {
             $loop[$k] = $row2;
-            $loop[$k]['item_href'] = G5_SHOP_URL.'/item.php?it_id='.$row2['it_id'];
+            $loop[$k]['item_href'] = shop_item_url($row2['it_id']);
             $loop[$k]['it_price'] = display_price(get_price($row2), $row2['it_tel_inq']);
         }
     }

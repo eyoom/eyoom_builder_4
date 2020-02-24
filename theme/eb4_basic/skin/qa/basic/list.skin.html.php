@@ -78,7 +78,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
     <?php /* 게시판 카테고리 끝 */ ?>
 
-    <form name="fqalist" id="fqalist" action="./qadelete.php" onsubmit="return fqalist_submit(this);" method="post" class="eyoom-form">
+    <form name="fqalist" id="fqalist" action="<?php echo G5_BBS_URL; ?>/qadelete.php" onsubmit="return fqalist_submit(this);" method="post" class="eyoom-form">
     <input type="hidden" name="stx" value="<?php echo $stx; ?>">
     <input type="hidden" name="sca" value="<?php echo $sca; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">

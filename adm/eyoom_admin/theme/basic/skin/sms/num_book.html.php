@@ -106,9 +106,9 @@ function no_hp_click(val) {
             <label class="select">
                 <select name="bg_no" id="bg_no" onchange="location.href='<?php echo G5_ADMIN_URL; ?>/?dir=sms&pid=num_book&bg_no='+this.value;">
                     <option value=""<?php echo get_selected('', $bg_no); ?>> 전체 </option>
-                    <option value="<?php echo $no_group['bg_no']?>"<?php echo get_selected($bg_no, $no_group['bg_no']); ?>> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?> 명) </option>
+                    <option value="<?php echo $no_group['bg_no']?>"<?php echo get_selected($no_group['bg_no'], $bg_no); ?>> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?> 명) </option>
                     <?php for($i=0; $i<count($group); $i++) {?>
-                    <option value="<?php echo $group[$i]['bg_no']?>"<?php echo get_selected($bg_no, $group[$i]['bg_no']);?>> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?> 명) </option>
+                    <option value="<?php echo $group[$i]['bg_no']?>"<?php echo get_selected($group[$i]['bg_no'], $bg_no);?>> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?> 명) </option>
                     <?php } ?>
                 </select>
                 <i></i>

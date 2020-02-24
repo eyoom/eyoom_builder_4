@@ -28,11 +28,6 @@ sql_query($sql);
 
 $cart_action_url = G5_SHOP_URL.'/cartupdate.php';
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/cart.php');
-    return;
-}
-
 /**
  * 상단 레이아웃
  */

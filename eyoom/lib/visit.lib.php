@@ -53,15 +53,8 @@ function eb_visit($skin_dir='basic', $return=true)
     $counter['comment']         = number_format($comment['total']);
 
     if ($return) {
-        if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-            $visit_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/visit/'.$skin_dir;
-            if (!is_dir($visit_skin_path))
-                $visit_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/visit/'.$skin_dir;
-            $visit_skin_url = str_replace(G5_PATH, G5_URL, $visit_skin_path);
-        } else {
-            $visit_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/visit/'.$skin_dir;
-            $visit_skin_url = str_replace(G5_PATH, G5_URL, $visit_skin_path);
-        }
+        $visit_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/visit/'.$skin_dir;
+        $visit_skin_url = str_replace(G5_PATH, G5_URL, $visit_skin_path);
 
         ob_start();
         include_once ($visit_skin_path.'/visit.skin.html.php');

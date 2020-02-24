@@ -37,7 +37,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="input">
-                                <input type="text" name="po_subject" id="po_subject" value="<?php echo $po['po_subject']; ?>" required maxlength="125">
+                                <input type="text" name="po_subject" id="po_subject" value="<?php echo get_sanitize_input($po['po_subject']); ?>" required maxlength="125">
                             </label>
                         </td>
                     </tr>

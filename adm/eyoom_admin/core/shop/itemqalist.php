@@ -103,7 +103,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
     $list[$i]['iq_subject'] = cut_str($row['iq_subject'], 30, "...");
-    $list[$i]['href'] = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $list[$i]['href'] = shop_item_url($row['it_id']);;
     $list[$i]['image'] = str_replace("\"","'",get_it_image($row['it_id'], 160, 160));
     //$list[$i]['name'] = get_sideview($row['mb_id'], get_text($row['iq_name']), $row['mb_email'], $row['mb_homepage']);
     $list[$i]['answer'] = $row['iq_answer'] ? 'Y' : '&nbsp;';
@@ -118,7 +118,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=itemqalist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

@@ -104,7 +104,7 @@ $qstr = $qstr1.'&amp;page='.$page;
 $k = 0;
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
-    $href = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
+    $href = shop_item_url($row['it_id']);
 
     // 선택옵션이 있을 경우 주문대기 수량 계산하지 않음
     $sql2 = " select count(*) as cnt from {$g5['g5_shop_item_option_table']} where it_id = '{$row['it_id']}' and io_type = '0' and io_use = '1' ";
@@ -148,7 +148,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=itemstocklist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

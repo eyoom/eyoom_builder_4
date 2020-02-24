@@ -53,8 +53,7 @@ $k = 0;
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     switch($row['cp_method']) {
         case '0':
-            $sql3 = " select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['cp_target']}' ";
-            $row3 = sql_fetch($sql3);
+            $row3 = get_shop_item($row['cp_target'], true);
             $cp_method = '개별상품할인';
             $cp_target = get_text($row3['it_name']);
             break;
@@ -93,7 +92,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=couponlist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

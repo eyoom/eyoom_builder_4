@@ -82,6 +82,6 @@ $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
 $frm_submit .= !$wmode ? ' <a href="' . G5_ADMIN_URL . '/?dir=theme&amp;pid=board_list&amp;page='.$page.'&amp;thema='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ': '';
 if ($w == 'u') {
-    $frm_submit .= !$wmode ? ' <a href="'.G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;theme='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> ': '';
+    $frm_submit .= !$wmode ? ' <a href="'.get_eyoom_pretty_url($board['bo_table']).'?theme='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> ': '';
 }
 $frm_submit .= '</div>';

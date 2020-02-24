@@ -21,15 +21,8 @@ function eb_connect($skin_dir='basic', $return=true)
     $row = sql_fetch($sql);
 
     if ($return) {
-        if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-            $connect_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/connect/'.$skin_dir;
-            if(!is_dir($connect_skin_path))
-                $connect_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/connect/'.$skin_dir;
-            $connect_skin_url = str_replace(G5_PATH, G5_URL, $connect_skin_path);
-        } else {
-            $connect_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/connect/'.$skin_dir;
-            $connect_skin_url = str_replace(G5_PATH, G5_URL, $connect_skin_path);
-        }
+        $connect_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/connect/'.$skin_dir;
+        $connect_skin_url = str_replace(G5_PATH, G5_URL, $connect_skin_path);
 
         ob_start();
         include_once ($connect_skin_path.'/connect.skin.html.php');

@@ -15,15 +15,9 @@ add_javascript('<script src="'.G5_JS_URL.'/shop.couponzone.js"></script>', 100);
 $g5['title'] = '쿠폰존';
 include_once(G5_SHOP_PATH.'/_head.php');
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    define('G5_SHOP_CSS_URL', G5_MSHOP_SKIN_URL);
-    $skin_dir = EYOOM_CORE_MOBILE_PATH.'/'.G5_SHOP_DIR;
-    $skin_file = $skin_dir.'/couponzone.10.skin.php';
-} else {
-    define('G5_SHOP_CSS_URL', G5_SHOP_SKIN_URL);
-    $skin_dir = EYOOM_CORE_PATH.'/'.G5_SHOP_DIR;
-    $skin_file = $skin_dir.'/couponzone.10.skin.php';
-}
+define('G5_SHOP_CSS_URL', G5_SHOP_SKIN_URL);
+$skin_dir = EYOOM_CORE_PATH.'/'.G5_SHOP_DIR;
+$skin_file = $skin_dir.'/couponzone.10.skin.php';
 
 if (is_file($skin_file)) {
     include_once($skin_file);

@@ -67,7 +67,8 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
         if (!preg_match("/(login|logout|regist|captcha|password_lost|ajax.mb)/i", $_SERVER['REQUEST_URI'])) {
             if (!$is_member) {
                 header("location:".G5_BBS_URL."/login.php");  
-            } else if ($member['mb_level'] < $config['cf_permit_level']) {
+            }
+            else if ($member['mb_level'] < $config['cf_permit_level']) {
                 goto_url(G5_BBS_URL."/logout.php");
             }
         }
@@ -115,13 +116,18 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
         /**
          * 읽지 않은 메모 및 관리권한 체크
          */
-        $memo_not_read = $eb->check_memo_auth($member['mb_id']);
+        $memo_not_read = $eb->check_memo_auth($member);
 
         /**
          * 내글 반응
          */
         $respond_not_read = $eyoomer['respond'];
     }
+
+    /**
+     * 라이브러리 함수
+     */
+    include_once(EYOOM_INC_PATH.'/lib.functions.php');
 
     /**
      * 게시판이라면 이윰게시판 설정정보 가져오기
@@ -141,11 +147,6 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     if (!defined('_INDEX_')) {
         include(EYOOM_INC_PATH . '/skin.path.php');
     }
-
-    /**
-     * 라이브러리 함수
-     */
-    include_once(EYOOM_INC_PATH.'/lib.functions.php');
 
     /**
      * 일정 기간이 지난 DB 데이터 삭제 및 최적화
@@ -198,7 +199,8 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
         include_once(EYOOM_INC_PATH.'/shop.init.php');
     }
 
-} else {
+}
+else {
     /**
      * 클래스 초기화
      */

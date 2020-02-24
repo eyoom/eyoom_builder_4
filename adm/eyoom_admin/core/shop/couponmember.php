@@ -47,4 +47,4 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=couponmember&amp;wmode=1&amp;'.$qstr1.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr1.'&amp;wmode=1');

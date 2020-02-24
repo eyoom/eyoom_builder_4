@@ -31,15 +31,9 @@ if ($smode) return;
 /**
  * 테마 경로 지정
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    $page_html_path = EYOOM_THEME_MOBILE_PATH.'/page/'.$html_file;
-    $page_default_path = EYOOM_THEME_MOBILE_PATH.'/page/ebcontents.html.php';
-    $page_html_url = str_replace(G5_PATH, G5_URL, $page_skin_path);
-} else {
-    $page_html_path = EYOOM_THEME_PATH.'/page/'.$html_file;
-    $page_default_path = EYOOM_THEME_PATH.'/page/ebcontents.html.php';
-    $page_html_url = str_replace(G5_PATH, G5_URL, $page_skin_path);
-}
+$page_html_path = EYOOM_THEME_PATH.'/page/'.$html_file;
+$page_default_path = EYOOM_THEME_PATH.'/page/ebcontents.html.php';
+$page_html_url = str_replace(G5_PATH, G5_URL, $page_skin_path);
 
 @include_once(EYOOM_THEME_PATH.'/page/page.head.html.php');
 

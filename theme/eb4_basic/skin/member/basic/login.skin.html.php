@@ -105,7 +105,7 @@ $login_sidebar = 'image';
                     </label>
                     <div class="margin-bottom-20"></div>
                     <div class="login-link margin-bottom-10">
-                        <a href="./register.php">회원가입</a>
+                        <a href="<?php echo G5_BBS_URL; ?>/register.php">회원가입</a>
                         <a href="<?php echo G5_BBS_URL;?>/password_lost.php" id="ol_password_lost">아이디/비밀번호찾기</a>
                     </div>
                     <div class="login-btn">
@@ -274,7 +274,7 @@ $(document).ready(function(){
     }
 });
 
-$(function(){
+jQuery(function($){
     $("#login_auto_login").click(function(){
         if ($(this).is(":checked")) {
             swal({
@@ -301,7 +301,10 @@ $(function(){
 });
 
 function flogin_submit(f) {
-    return true;
+    if( $( document.body ).triggerHandler( 'login_sumit', [f, 'flogin'] ) !== false ){
+        return true;
+    }
+    return false;
 }
 </script>
 <!--[if lt IE 9]>

@@ -41,7 +41,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </span>
                                 <?php if ($w=='u') { ?>
                                 <span>
-                                    <a href="<?php echo G5_BBS_URL; ?>/group.php?gr_id=<?php echo $group['gr_id']; ?>" target="_blank" class="btn-e btn-e-yellow">게시판 그룹 바로가기</a>
+                                    <a href="<?php echo get_eyoom_pretty_url(G5_GROUP_DIR,$group['gr_id']); ?>" target="_blank" class="btn-e btn-e-yellow">게시판 그룹 바로가기</a>
                                 </span>
                                 <?php } ?>
                             </div>
@@ -104,7 +104,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="checkbox" style="width:120px;">
-                                <input type="checkbox" name="gr_use_access" value="1" id="gr_use_access" <?php echo $gr['gr_use_access'] ? 'checked':''; ?>><i></i> 사용 <strong class="color-orange">[ 접근회원수 : <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=groupmember_list&amp;gr_id=<?php echo $gr_id; ?>"><?php echo number_format($grmember_cnt); ?></a> ]</strong>
+                                <input type="checkbox" name="gr_use_access" value="1" id="gr_use_access" <?php echo $gr['gr_use_access'] ? 'checked':''; ?>><i></i> 사용 <strong class="color-orange">[ 접근회원수 : <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=boardgroupmember_list&amp;gr_id=<?php echo $gr_id; ?>"><?php echo number_format($grmember_cnt); ?></a> ]</strong>
                             </label>
                             <div class="note margin-bottom-10"><strong>Note:</strong> 사용에 체크하시면 이 그룹에 속한 게시판은 접근가능한 회원만 접근이 가능합니다.</div>
                         </td>

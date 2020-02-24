@@ -95,7 +95,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging("./respond.php?".$qstr."&amp;page=");
+$paging = $eb->set_paging('respond', '', $qstr);
 
 /**
  * 사용자 프로그램

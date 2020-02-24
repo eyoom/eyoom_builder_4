@@ -177,7 +177,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 <div class="clear"></div>
                 <div class="col col-12">
                     <div class="alert alert-warning padding-all-10 margin-top-10">
-                        <strong>Note:</strong> 공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상) | 닉네임을 바꾸시면 앞으로 <?php $config['cf_nick_modify']*1; ?>일 이내에는 변경 할 수 없습니다.
+                        <strong>Note:</strong> 공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상) | 닉네임을 바꾸시면 앞으로 <?php echo $config['cf_nick_modify']*1; ?>일 이내에는 변경 할 수 없습니다.
                     </div>
                 </div>
             </div>

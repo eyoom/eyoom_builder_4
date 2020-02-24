@@ -264,7 +264,7 @@ $bo_cnt = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=board&amp;pid=board_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

@@ -97,8 +97,8 @@ window.closeModal = function(){
         {
             체크: "<div class='eyoom-form'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['ma_id']; ?>'><i></i></label></div>",
             번호: "<?php echo $list[$i]['num']; ?>",
-            수정: "<a href='./?dir=member&amp;pid=mail_form&amp;w=u&amp;ma_id=<?php echo $list[$i]['ma_id']; ?>' class='btn-e btn-e-xs btn-e-yellow'>메일수정</a>",
-            발송대상: "<a href='./?dir=member&amp;pid=mail_select_form&amp;ma_id=<?php echo $list[$i]['ma_id']; ?>' class='btn-e btn-e-xs btn-e-pink'>메일발송 대상선택</a>",
+            수정: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=mail_form&amp;w=u&amp;ma_id=<?php echo $list[$i]['ma_id']; ?>' class='btn-e btn-e-xs btn-e-yellow'>메일수정</a>",
+            발송대상: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=mail_select_form&amp;ma_id=<?php echo $list[$i]['ma_id']; ?>' class='btn-e btn-e-xs btn-e-pink'>메일발송 대상선택</a>",
             제목: "<?php echo $list[$i]['ma_subject']; ?>",
             작성일시: "<?php echo $list[$i]['ma_time']; ?>",
             테스트: "<a href='<?php echo G5_ADMIN_URL; ?>/mail_test.php?ma_id=<?php echo $list[$i]['ma_id']; ?>' class='btn-e btn-e-xs btn-e-indigo'>테스트</a>",

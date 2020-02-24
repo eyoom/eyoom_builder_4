@@ -102,7 +102,7 @@ $qstr = $qstr1.'&amp;page='.$page;
 $k = 0;
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
-    $href = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
+    $href = shop_item_url($row['it_id']);
 
     $sql1 = " select SUM(ct_qty) as sum_qty
                 from {$g5['g5_shop_cart_table']}
@@ -164,7 +164,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shop&amp;pid=optionstocklist&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

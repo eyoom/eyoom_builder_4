@@ -25,16 +25,16 @@ if ($config['cf_add_meta']) echo $config['cf_add_meta'];
 <?php
 if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css?ver='.G5_CSS_VER.'">',0);
-} else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
+}
+else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap-nr.min.css?ver='.G5_CSS_VER.'">',0);
 }
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css?ver='.G5_CSS_VER.'">',0);
 
 if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css?ver='.G5_CSS_VER.'">',0);
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css?ver='.G5_CSS_VER.'">',0);
-} else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
+}
+else if ($eyoom['is_responsive'] == '0' && !G5_IS_MOBILE) { // 비반응형이면서 PC버전일때
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form-nr.min.css?ver='.G5_CSS_VER.'">',0);
     add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common-nr.css?ver='.G5_CSS_VER.'">',0);
 }
@@ -53,28 +53,39 @@ var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
 var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+var g5_shop_url  = "<?php echo G5_SHOP_URL; ?>";
+<?php if(defined('G5_IS_ADMIN')) { ?>
+var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
+<?php } ?>
 </script>
-<script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
-<?php if (defined('_SHOP_')) { if (!G5_IS_MOBILE) { ?>
-<script src="<?php echo G5_JS_URL ?>/jquery.shop.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<?php }} else { ?>
-<script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<?php } ?>
-<script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<?php if (G5_IS_MOBILE) { ?>
-<script src="<?php echo G5_JS_URL ?>/modernizr.custom.70111.js"></script>
-<?php } ?>
 <?php
+add_javascript('<script src="'.G5_JS_URL.'/jquery-1.12.4.min.js"></script>', 0);
+add_javascript('<script src="'.G5_JS_URL.'/jquery-migrate-1.4.1.min.js"></script>', 0);
+if (defined('_SHOP_')) { if (!G5_IS_MOBILE) { 
+    add_javascript('<script src="'.G5_JS_URL.'/jquery.shop.menu.js?ver='.G5_JS_VER.'"></script>', 0);
+}}
+else {
+    add_javascript('<script src="'.G5_JS_URL.'/jquery.menu.js?ver='.G5_JS_VER.'"></script>', 0);
+}
+add_javascript('<script src="'.G5_JS_URL.'/common.js?ver='.G5_JS_VER.'"></script>', 0);
+add_javascript('<script src="'.G5_JS_URL.'/wrest.js?ver='.G5_JS_VER.'"></script>', 0);
+add_javascript('<script src="'.G5_JS_URL.'/placeholders.min.js"></script>', 0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css?ver='.G5_CSS_VER.'">',0);
+if (G5_IS_MOBILE) { 
+    add_javascript('<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>', 1); // overflow scroll 감지
+}
+add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/bootstrap/js/bootstrap.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/jquery.bootstrap-hover-dropdown.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/sidebar/jquery.sidebar.min.js"></script>', 0);
+add_javascript("<!--[if lt IE 9]>\n<script src=\"".EYOOM_THEME_URL."/plugins/respond.min.js\"></script>\n<script src=\"".EYOOM_THEME_URL."/plugins/eyoom-form/js/eyoom-form-ie8.js\"></script>\n<![endif]-->", 0);
 if (!defined('G5_IS_ADMIN')) echo $config['cf_add_script'];
 ?>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery.bootstrap-hover-dropdown.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sidebar/jquery.sidebar.min.js"></script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->
 </head>
-<body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
+
+<body<?php echo $body_script; ?>>
+<?php
+if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.
+    echo '<div id="hd_login_msg">'.$sr_admin_msg.get_text($member['mb_nick']).'님 로그인 중 ';
+    echo '<a href="'.G5_BBS_URL.'/logout.php">로그아웃</a></div>';
+}
+?>

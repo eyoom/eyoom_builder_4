@@ -4,11 +4,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/coupon.php');
-    return;
-}
-
 if ($is_guest)
     alert_close('회원만 조회하실 수 있습니다.');
 

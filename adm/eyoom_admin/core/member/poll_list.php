@@ -53,7 +53,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $row2 = sql_fetch($sql2);
     $po_etc = ($row['po_etc']) ? "사용" : "미사용";
 
-    $s_mod = "<a href='./poll_form.php?".$qstr."&amp;w=u&amp;po_id=".$row['po_id']."' class='btn btn_03'>수정</a>";
+    $s_mod = "<a href='".G5_ADMIN_URL."/?dir=member&amp;pid=poll_form&amp;".$qstr."&amp;w=u&amp;po_id=".$row['po_id']."' class='btn-e btn-e-red btn-e-sm'>수정</a>";
 
     $list[$i] = $row;
     $list[$i]['po_etc'] = $po_etc;
@@ -63,7 +63,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=member&amp;pid=poll_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

@@ -11,18 +11,10 @@ if (!defined('_EYOOM_')) exit;
 if (!defined('_EYOOM_COMMON_')) include(EYOOM_PATH.'/common.php');
 
 /**
- * 1:1문의 라면 스킨 재설정
+ * 1:1문의 스킨 재설정
  */
 if (isset($qaconfig) && $eyoom['use_gnu_qa'] == 'n') {
     $qa_skin_path = EYOOM_CORE_PATH.'/qa';
-}
-
-/**
- * 모바일일 경우 & device=mobile
- */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_THEME_MOBILE_PATH . '/head.php');
-    return;
 }
 
 /**
@@ -61,6 +53,8 @@ if ($eyoom['use_shop_itemtype'] == 'y') {
 
 /**
  * 테마용 head.sub.php 파일 인크루드
+ * 이윰빌더 사용시 G5_THEME_PATH 는 /eyoom/ 폴더의 path로 재정의 됨
+ * 결국 /eyoom/head.sub.php 파일을 인크루드 함
  */
 include_once(G5_THEME_PATH.'/head.sub.php');
 
@@ -92,13 +86,15 @@ $menu = $thema->menu_create($menu_flag);
 if (!defined('_INDEX_')) {
     $subinfo = $thema->subpage_info($menu);
     if ($subinfo['registed'] == 'y') $sidemenu = $thema->submenu_create($menu_flag);
-} else {
+}
+else {
     /**
      * 팝업창
      */
     if ($eyoom['use_gnu_newwin'] == 'n') {
         @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
-    } else {
+    }
+    else {
         @include_once(G5_BBS_PATH.'/newwin.inc.php');
     }
 }
@@ -131,19 +127,22 @@ if (!$eyoom_myhome || 1) {
                 $side_layout['use'] = 'yes';
                 $side_layout['pos'] = $eyoom['pos_shopmain_side_layout'];
             }
-        } else { // 커뮤니티
+        }
+        else { // 커뮤니티
             if ($eyoom['use_main_side_layout'] == 'y') {
                 $side_layout['use'] = 'yes';
                 $side_layout['pos'] = $eyoom['pos_main_side_layout'];
             }
         }
-    } else { // 모든 서브페이지
+    }
+    else { // 모든 서브페이지
         if (defined('_SHOP_')) { // 쇼핑몰
             if ($subinfo['sidemenu'] != 'n' && $eyoom['use_shopsub_side_layout'] == 'y') {
                 $side_layout['use'] = 'yes';
                 $side_layout['pos'] = $eyoom['pos_shopsub_side_layout'];
             }
-        } else { // 커뮤니티
+        }
+        else { // 커뮤니티
             if ($subinfo['sidemenu'] != 'n' && $eyoom['use_sub_side_layout'] == 'y') {
                 $side_layout['use'] = 'yes';
                 $side_layout['pos'] = $eyoom['pos_sub_side_layout'];

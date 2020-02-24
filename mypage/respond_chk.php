@@ -55,7 +55,7 @@ switch($act) {
             @unlink($push_file);
         }
 
-        $go_url = G5_BBS_URL.'/board.php?bo_table='.$row['bo_table'].'&wr_id='.$row['wr_id'];
+        $go_url = get_eyoom_pretty_url($row['bo_table'],$row['wr_id']);
         $go_url .= $row['wr_cmt'] ? '#c_'.$row['wr_cmt']:'';
         break;
 

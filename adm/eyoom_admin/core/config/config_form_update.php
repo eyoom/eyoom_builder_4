@@ -30,7 +30,7 @@ if(!$_POST['cf_cert_use']) {
 
 $cf_social_servicelist = !empty($_POST['cf_social_servicelist']) ? implode(',', $_POST['cf_social_servicelist']) : '';
 
-$_POST['cf_title'] = strip_tags($_POST['cf_title']);
+$_POST['cf_title'] = strip_tags(clean_xss_attributes($_POST['cf_title']));
 
 $check_keys = array('cf_lg_mid', 'cf_lg_mert_key', 'cf_cert_kcb_cd', 'cf_cert_kcp_cd', 'cf_editor', 'cf_recaptcha_site_key', 'cf_recaptcha_secret_key', 'cf_naver_clientid', 'cf_naver_secret', 'cf_facebook_appid', 'cf_facebook_secret', 'cf_twitter_key', 'cf_twitter_secret', 'cf_google_clientid', 'cf_google_secret', 'cf_googl_shorturl_apikey', 'cf_kakao_rest_key', 'cf_kakao_client_secret', 'cf_kakao_js_apikey', 'cf_payco_clientid', 'cf_payco_secret');
 
@@ -47,7 +47,6 @@ $sql = " update {$g5['config_table']}
                 cf_admin_email_name = '{$_POST['cf_admin_email_name']}',
                 cf_add_script = '{$_POST['cf_add_script']}',
                 cf_eyoom_admin_theme = '{$_POST['cf_eyoom_admin_theme']}',
-                cf_eyoom_mobile_skin = '{$_POST['cf_eyoom_mobile_skin']}',
                 cf_permit_level = '{$_POST['cf_permit_level']}',
                 cf_use_point = '{$_POST['cf_use_point']}',
                 cf_point_term = '{$_POST['cf_point_term']}',
@@ -76,6 +75,7 @@ $sql = " update {$g5['config_table']}
                 cf_add_meta = '{$_POST['cf_add_meta']}',
                 cf_syndi_token = '{$_POST['cf_syndi_token']}',
                 cf_syndi_except = '{$_POST['cf_syndi_except']}',
+                cf_bbs_rewrite = '{$_POST['cf_bbs_rewrite']}',
                 cf_slack_token = '{$_POST['cf_slack_token']}',
                 cf_slack_channel = '{$_POST['cf_slack_channel']}',
                 cf_map_google_id = '{$_POST['cf_map_google_id']}',
@@ -198,5 +198,13 @@ $sql = " update {$g5['config_table']}
 sql_query($sql);
 
 //sql_query(" OPTIMIZE TABLE `$g5[config_table]` ");
+
+if( isset($_POST['cf_bbs_rewrite']) ){
+    g5_delete_all_cache();
+}
+
+run_event('admin_config_form_update');
+
+update_eyoom_rewrite_rules();
 
 alert('설정정보를 정상적으로 적용하였습니다.', G5_ADMIN_URL . '/?dir=config&amp;pid=config_form', false);

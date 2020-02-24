@@ -18,15 +18,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
         <div class="category-list">
             <span<?php if ($mpid == 'mypage' && !$tg) { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/">마이페이지</a></span>
             <span<?php if ($mpid == 'respond') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/respond.php">내글반응</a></span>
-            <span<?php if ($tg == 'timeline') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=timeline">타임라인</a></span>
-            <span<?php if ($tg == 'favorite') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=favorite">관심게시판</a></span>
+            <span<?php if ($tg == 'timeline') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'timeline'); ?>">타임라인</a></span>
+            <span<?php if ($tg == 'favorite') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'favorite'); ?>">관심게시판</a></span>
             <?php if ($eyoom['is_community_theme'] == 'y') { ?>
-            <span<?php if ($tg == 'followinggul') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=followinggul">팔로윙글</a></span>
+            <span<?php if ($tg == 'followinggul') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'followinggul'); ?>">팔로윙글</a></span>
             <?php } ?>
-            <span<?php if ($tg == 'subscribe') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=subscribe">구독글</a></span>
-            <span<?php if ($tg == 'pinboard') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=pinboard">핀보드</a></span>
-            <span<?php if ($tg == 'goodpost') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=goodpost">추천/비추천</a></span>
-            <span<?php if ($tg == 'starpost') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/?t=starpost">별점평가글</a></span>
+            <span<?php if ($tg == 'subscribe') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'subscribe'); ?>">구독글</a></span>
+            <span<?php if ($tg == 'pinboard') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'pinboard'); ?>">핀보드</a></span>
+            <span<?php if ($tg == 'goodpost') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'goodpost'); ?>">추천/비추천</a></span>
+            <span<?php if ($tg == 'starpost') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'starpost'); ?>">별점평가글</a></span>
             <span<?php if ($mpid == 'activity') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/activity.php">활동기록</a></span>
             <span<?php if ($mpid == 'config') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/config.php">환경설정</a></span>
             <span class="fake-span"></span>

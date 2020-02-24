@@ -38,9 +38,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         </div>
         <div id="tab-category">
             <div class="category-list">
-                <span><a href="./memo.php?kind=recv">받은쪽지</a></span>
-                <span><a href="./memo.php?kind=send">보낸쪽지</a></span>
-                <span class="active"><a href="./memo_form.php">쪽지쓰기</a></span>
+                <span><a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=recv">받은쪽지</a></span>
+                <span><a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=send">보낸쪽지</a></span>
+                <span class="active"><a href="<?php echo G5_BBS_URL; ?>/memo_form.php">쪽지쓰기</a></span>
                 <span class="fake-span"></span>
             </div>
             <div class="controls">

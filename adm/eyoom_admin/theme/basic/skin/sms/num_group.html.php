@@ -137,19 +137,19 @@ function num_group_submit(f) {
             비회원: "<?php echo number_format($no_group['bg_nomember'])?>",
             수신: "<?php echo number_format($no_group['bg_receipt'])?>",
             거부: "<?php echo number_format($no_group['bg_reject'])?>",
-            이동: "<label class='select'><select name='select_bg_no_999' onchange=\"move(<?php echo $no_group['bg_no']?>, '<?php echo $no_group['bg_name']?>', this);\"><option value=''></option><?php for ($i=0; $i<count($group); $i++) { ?><option value='<?php echo $group[$i]['bg_no']?>'> <?php echo $group[$i]['bg_name']?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_bg_no_999' onchange=\"move(<?php echo $no_group['bg_no']?>, '<?php echo $no_group['bg_name']?>', this);\"><option value=''></option><?php for ($i=0; $i<count($group); $i++) { ?><option value='<?php echo $group[$i]['bg_no']?>'> <?php echo get_sanitize_input($group[$i]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
         },
         <?php for ($i=0; $i<$count; $i++) { ?>
         {
             체크: "<input type='hidden' name='bg_no[<?php echo $i; ?>]' value='<?php echo $group[$i]['bg_no']; ?>' id='bg_no_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             보기: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=sms&amp;pid=num_book&amp;bg_no=<?php echo $group[$i]['bg_no']?>'><u>보기</u></a>",
-            그룹명: "<label class='input'><input type='text' name='bg_name[<?php echo $i; ?>]' value='<?php echo $group[$i]['bg_name']?>' id='bg_name_<?php echo $i; ?>'></label>",
+            그룹명: "<label class='input'><input type='text' name='bg_name[<?php echo $i; ?>]' value='<?php echo get_sanitize_input($group[$i]['bg_name']); ?>' id='bg_name_<?php echo $i; ?>'></label>",
             총: "<?php echo number_format($group[$i]['bg_count'])?>",
             회원: "<?php echo number_format($group[$i]['bg_member'])?>",
             비회원: "<?php echo number_format($group[$i]['bg_nomember'])?>",
             수신: "<?php echo number_format($group[$i]['bg_receipt'])?>",
             거부: "<?php echo number_format($group[$i]['bg_reject'])?>",
-            이동: "<label class='select'><select name='select_bg_no[<?php echo $i; ?>]' id='select_bg_no_<?php echo $i; ?>' onchange=\"move(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', this);\"><option value=''></option><option value='<?php echo $no_group['bg_no']?>'><?php echo $no_group['bg_name']?></option><?php for ($j=0; $j<count($group); $j++) { ?><?php if ($group[$i]['bg_no']==$group[$j]['bg_no']) continue; ?><option value='<?php echo $group[$j]['bg_no']?>'> <?php echo $group[$j]['bg_name']?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_bg_no[<?php echo $i; ?>]' id='select_bg_no_<?php echo $i; ?>' onchange=\"move(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', this);\"><option value=''></option><option value='<?php echo $no_group['bg_no']?>'><?php echo $no_group['bg_name']?></option><?php for ($j=0; $j<count($group); $j++) { ?><?php if ($group[$i]['bg_no']==$group[$j]['bg_no']) continue; ?><option value='<?php echo $group[$j]['bg_no']?>'> <?php echo get_sanitize_input($group[$j]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
         },
         <?php } ?>
     ]

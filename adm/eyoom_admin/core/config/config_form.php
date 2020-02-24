@@ -263,14 +263,6 @@ if(!sql_query(" DESC {$g5['social_profile_table']} ", false)) {
 }
 
 /**
- * 회원제 사이트 설정 필드 추가
- */
-if (!isset($config['cf_permit_level'])) {
-    sql_query("ALTER TABLE `{$g5['config_table']}`
-                ADD `cf_permit_level` tinyint(4) NOT NULL DEFAULT '1' AFTER `cf_eyoom_mobile_skin` ", true);
-}
-
-/**
  * 슬랙 토큰정보 필드 추가
  */
 if (!isset($config['cf_slack_token'])) {
@@ -289,6 +281,24 @@ if (!isset($config['cf_map_google_id'])) {
                 ADD `cf_map_daum_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_naver_id` ", true);
 }
 
+// 짧은 URL 주소를 사용 여부 필드 추가
+if (!isset($config['cf_bbs_rewrite'])) {
+    sql_query(" ALTER TABLE `{$g5['config_table']}`
+                    ADD `cf_bbs_rewrite` tinyint(4) NOT NULL DEFAULT '0' AFTER `cf_link_target` ", true);
+}
+
+// 읽지 않은 메모 수 칼럼 추가
+if(!isset($member['mb_memo_cnt'])) {
+    sql_query(" ALTER TABLE `{$g5['member_table']}`
+                ADD `mb_memo_cnt` int(11) NOT NULL DEFAULT '0' AFTER `mb_memo_call`", true);
+}
+
+// 스크랩 읽은 수 추가
+if(!isset($member['mb_scrap_cnt'])) {
+    sql_query(" ALTER TABLE `{$g5['member_table']}`
+                ADD `mb_scrap_cnt` int(11) NOT NULL DEFAULT '0' AFTER `mb_memo_cnt`", true);
+}
+
 /**
  * FAQ 스킨설정
  */
@@ -302,7 +312,8 @@ $pg_anchor = array(
     'anc_cf_basic' => '기본환경',
     'anc_cf_board' => '게시판기본',
     'anc_cf_join' => '회원가입',
-    'anc_cf_cert' => '본인인증',
+    'anc_cf_cert' => '본인확인',
+    'anc_cf_url' => '짧은주소',
     'anc_cf_mail' => '메일환경설정',
     'anc_cf_sns' => 'SNS&amp;지도',
     'anc_cf_layout' => '레이아웃 추가설정',
@@ -334,6 +345,46 @@ $cf_editor  = get_skin_dir('', G5_EDITOR_PATH);
  * 음성 캡챠
  */
 $cf_captcha_mp3 = get_skin_dir('mp3', str_replace(array('recaptcha_inv', 'recaptcha'), 'kcaptcha', G5_CAPTCHA_PATH));
+
+/**
+ * _rewrite_config_form.php 영역
+ */
+{
+    $is_use_apache = (stripos($_SERVER['SERVER_SOFTWARE'], 'apache') !== false);
+
+    $is_use_nginx = (stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false);
+
+    $is_use_iis = !$is_use_apache && (stripos($_SERVER['SERVER_SOFTWARE'], 'microsoft-iis') !== false);
+
+    $is_write_file = false;
+    $is_apache_need_rules = false;
+    $is_apache_rewrite = false;
+
+    if( !($is_use_apache || $is_use_nginx || $is_use_iis) ){    // 셋다 아니면 다 출력시킨다.
+        $is_use_apache = true;
+        $is_use_nginx = true;
+    }
+
+    if ( $is_use_nginx ){
+        $is_write_file = false;
+    }
+
+    if ( $is_use_apache ){
+        $is_write_file = (is_writable(G5_PATH) || (file_exists(G5_PATH.'/.htaccess') && is_writable(G5_PATH.'/.htaccess'))) ? true : false;
+        $is_apache_need_rules = check_need_rewrite_rules();
+        $is_apache_rewrite = function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules());
+    }
+
+    $get_path_url = parse_url( G5_URL );
+
+    $base_path = isset($get_path_url['path']) ? $get_path_url['path'].'/' : '/';
+
+    $short_url_arrs = array(
+        '0'=>array('label'=>'사용안함', 'url'=>G5_URL.'/board.php?bo_table=free&wr_id=123'),
+        '1'=>array('label'=>'숫자', 'url'=>G5_URL.'/free/123'),
+        //'2'=>array('label'=>'글 이름', 'url'=>G5_URL.'/free/안녕하세요/'),
+    );
+}
 
 /**
  * 버튼

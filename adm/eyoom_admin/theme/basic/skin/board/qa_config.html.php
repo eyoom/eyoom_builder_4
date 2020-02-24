@@ -30,7 +30,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <div class="inline-group">
                                 <span>
                                     <label class="input form-width-250px">
-                                        <input type="text" name="qa_title" value="<?php echo $qaconfig['qa_title']; ?>" id="qa_title" required>
+                                        <input type="text" name="qa_title" value="<?php echo get_sanitize_input($qaconfig['qa_title']); ?>" id="qa_title" required>
                                     </label>
                                 </span>
                                 <span>
@@ -45,7 +45,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_category" value="<?php echo $qaconfig['qa_category']; ?>" id="qa_category" required>
+                                <input type="text" name="qa_category" value="<?php echo get_sanitize_input($qaconfig['qa_category']); ?>" id="qa_category" required>
                             </label>
                             <div class="note"><strong>Note:</strong> 분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])</div>
                         </td>
@@ -112,7 +112,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_send_number" value="<?php echo $qaconfig['qa_send_number']; ?>" id="qa_send_number">
+                                <input type="text" name="qa_send_number" value="<?php echo get_sanitize_input($qaconfig['qa_send_number']); ?>" id="qa_send_number">
                             </label>
                             <div class="note margin-bottom-10"><strong>Note:</strong> SMS 알림 전송시 발신번호로 사용됩니다.</div>
                         </td>
@@ -123,7 +123,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_admin_hp" value="<?php echo $qaconfig['qa_admin_hp']; ?>" id="qa_admin_hp">
+                                <input type="text" name="qa_admin_hp" value="<?php echo get_sanitize_input($qaconfig['qa_admin_hp']); ?>" id="qa_admin_hp">
                             </label>
                             <div class="note margin-bottom-10"><strong>Note:</strong> 관리자 휴대폰번호를 입력하시면 문의글 등록시 등록하신 번호로 SMS 알림이 전송됩니다.<br>SMS 알림을 사용하지 않으시면 알림이 전송되지 않습니다.</div>
                         </td>
@@ -134,7 +134,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_admin_email" value="<?php echo $qaconfig['qa_admin_email']; ?>" id="qa_admin_email">
+                                <input type="text" name="qa_admin_email" value="<?php echo get_sanitize_input($qaconfig['qa_admin_email']); ?>" id="qa_admin_email">
                             </label>
                             <div class="note margin-bottom-10"><strong>Note:</strong> 관리자 이메일을 입력하시면 문의글 등록시 등록하신 이메일로 알림이 전송됩니다.</div>
                         </td>

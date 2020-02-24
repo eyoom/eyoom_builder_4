@@ -92,15 +92,8 @@ for ($i=0; $row2=sql_fetch_array($result); $i++) {
 /**
  * 테마 경로 지정
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    $poll_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-    if (!is_dir($poll_skin_path))
-        $poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-    $poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
-} else {
-    $poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-    $poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
-}
+$poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
+$poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
 
 include_once(EYOOM_PATH.'/head.sub.php');
 

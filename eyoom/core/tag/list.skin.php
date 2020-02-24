@@ -48,7 +48,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./list.php?'.$qstr);
+$paging = $eb->set_paging('tag_list', '', $qstr);
 
 /**
  * 사용자 프로그램

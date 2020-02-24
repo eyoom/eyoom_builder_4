@@ -53,7 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         <div id="tab-category">
             <div class="category-list">
                 <span <?php if ($kind == 'recv') { ?>class="active"<?php } ?>>
-                    <a href="./memo.php?kind=recv">
+                    <a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=recv">
                         <?php if ($kind == 'recv') { ?>
                         <strong>받은쪽지</strong>
                         <?php } else { ?>
@@ -62,7 +62,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                     </a>
                 </span>
                 <span <?php if ($kind == 'send') { ?>class="active"<?php } ?>>
-                    <a href="./memo.php?kind=send">
+                    <a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=send">
                         <?php if ($kind == 'send') { ?>
                         <strong>보낸쪽지</strong>
                         <?php } else { ?>
@@ -70,7 +70,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                         <?php } ?>
                     </a>
                 </span>
-                <span><a href="./memo_form.php">쪽지쓰기</a></span>
+                <span><a href="<?php echo G5_BBS_URL; ?>/memo_form.php">쪽지쓰기</a></span>
                 <span class="fake-span"></span>
             </div>
             <div class="controls">

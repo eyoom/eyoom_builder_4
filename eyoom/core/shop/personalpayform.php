@@ -16,12 +16,11 @@ if(!$pp['pp_id'])
 if($pp['pp_tno'])
     alert('이미 결제하신 개인결제 내역입니다.');
 
+$pp['pp_name'] = strip_tags($pp['pp_name']);
+
 $g5['title'] = $pp['pp_name'].'님 개인결제';
 
-if(G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1')
-    include_once(G5_MSHOP_PATH.'/_head.php');
-else
-    include_once(G5_SHOP_PATH.'/_head.php');
+include_once(G5_SHOP_PATH.'/_head.php');
 
 // 개인결제 체크를 위한 hash
 $hash_data = md5($pp['pp_id'].$pp['pp_price'].$pp['pp_time']);
@@ -56,7 +55,4 @@ if($is_mobile_pay) {
     require_once($skin_dir.'/personalpayform.sub.php');
 }
 
-if(G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1')
-    include_once(G5_MSHOP_PATH.'/_tail.php');
-else
-    include_once(G5_SHOP_PATH.'/_tail.php');
+include_once(G5_SHOP_PATH.'/_tail.php');

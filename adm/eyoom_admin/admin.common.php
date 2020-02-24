@@ -19,6 +19,11 @@ if( isset($token) ){
 }
 
 /**
+ * 이벤트 후킹
+ */
+run_event('admin_common');
+
+/**
  * 영카트5 인가?
  */
 $is_youngcart = false;
@@ -102,11 +107,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
             $datetime2 = substr($datetime2,5,5);
     }
 
-    $new_post[$i]['gr_href']    = G5_BBS_URL . '/new.php?gr_id=' . $row['gr_id'];
+    $new_post[$i]['gr_href']    = get_eyoom_pretty_url(G5_GROUP_DIR,$row['gr_id']);
     $new_post[$i]['group']      = cut_str($row['gr_subject'], 10);
-    $new_post[$i]['bo_href']    = G5_BBS_URL . '/board.php?bo_table=' . $row['bo_table'];
+    $new_post[$i]['bo_href']    = get_eyoom_pretty_url($row['bo_table']);
     $new_post[$i]['board']      = cut_str($row['bo_subject'], 20);
-    $new_post[$i]['view_url']   = G5_BBS_URL . '/board.php?bo_table=' . $row['bo_table'] . '&amp;wr_id=' . $row2['wr_id'] . $comment_link;
+    $new_post[$i]['view_url']   = get_eyoom_pretty_url($row['bo_table'],$row2['wr_id'], $comment_link);
     $new_post[$i]['subject']    = $comment . conv_subject($row2['wr_subject'], 100);
     $new_post[$i]['name']       = $name;
     $new_post[$i]['mb_photo']   = $eb->mb_photo($row['mb_id']);

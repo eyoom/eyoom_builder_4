@@ -91,7 +91,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $link1 = $link2 = '';
     if (!preg_match("/^\@/", $row['po_rel_table']) && $row['po_rel_table']) {
-        $link1 = '<a href="'.G5_BBS_URL.'/board.php?bo_table='.$row['po_rel_table'].'&amp;wr_id='.$row['po_rel_id'].'" target="_blank">';
+        $link1 = '<a href="'.get_eyoom_pretty_url($row['po_rel_table'], $row['po_rel_id']).'" target="_blank">';
         $link2 = '</a>';
     }
 
@@ -117,7 +117,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=member&amp;pid=point_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

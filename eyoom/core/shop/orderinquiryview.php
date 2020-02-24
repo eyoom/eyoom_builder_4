@@ -30,11 +30,6 @@ if (!$od['od_id'] || (!$is_member && md5($od['od_id'].$od['od_time'].$od['od_ip'
 // 결제방법
 $settle_case = $od['od_settle_case'];
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/orderinquiryview.php');
-    return;
-}
-
 $g5['title'] = '주문상세내역';
 include_once('./_head.php');
 
@@ -142,7 +137,7 @@ $receipt_price  = $od['od_receipt_price']
 $cancel_price   = $od['od_cancel_price'];
 
 $misu = true;
-$misu_price = $tot_price - $receipt_price - $cancel_price;
+$misu_price = $tot_price - $receipt_price;
 
 if ($misu_price == 0 && ($od['od_cart_price'] > $od['od_cancel_price'])) {
     $wanbul = " (완불)";
@@ -194,6 +189,10 @@ if($od['od_settle_case'] == '신용카드' || $od['od_settle_case'] == 'KAKAOPAY
 } else if($od['od_settle_case'] == '가상계좌' || $od['od_settle_case'] == '계좌이체') {
     $app_no_subj = '거래번호';
     $app_no = $od['od_tno'];
+
+    if( function_exists('shop_is_taxsave') && $misu_price == 0 && shop_is_taxsave($od, true) === 2 ){
+        $disp_receipt = true;
+    }
 }
 
 /**
@@ -215,7 +214,7 @@ if($disp_receipt) {
         }
 	}
 	
-	if($od['od_settle_case'] == '신용카드' || is_inicis_order_pay($od['od_settle_case']) ) {
+    if($od['od_settle_case'] == '신용카드' || is_inicis_order_pay($od['od_settle_case']) || (shop_is_taxsave($od, true) && $misu_price == 0) ) {
         if($od['od_pg'] == 'lg') {
             require_once G5_SHOP_PATH.'/settle_lg.inc.php';
             $LGD_TID      = $od['od_tno'];
@@ -231,12 +230,12 @@ if($disp_receipt) {
 	}
 	
 	if($od['od_settle_case'] == 'KAKAOPAY') {
-		$card_receipt_script = 'window.open(\'https://mms.cnspay.co.kr/trans/retrieveIssueLoader.do?TID='.$od['od_tno'].'&type=0\', \'popupIssue\', \'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=420,height=540\');';
+        $card_receipt_script = 'window.open(\'https://mms.cnspay.co.kr/trans/retrieveIssueLoader.do?TID='.$od['od_tno'].'&type=0\', \'popupIssue\', \'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=420,height=540\');';
 	}
 }
 
 // 현금영수증 발급을 사용하는 경우에만
-if ($default['de_taxsave_use']) {
+if (function_exists('shop_is_taxsave') && shop_is_taxsave($od)) {
     // 미수금이 없고 현금일 경우에만 현금영수증을 발급 할 수 있습니다.
     if ($misu_price == 0 && $od['od_receipt_price'] && ($od['od_settle_case'] == '무통장' || $od['od_settle_case'] == '계좌이체' || $od['od_settle_case'] == '가상계좌')) {
         if ($od['od_cash']) {

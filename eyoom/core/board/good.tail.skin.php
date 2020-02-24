@@ -39,7 +39,7 @@ switch($good) {
         break;
 
     case 'nogood' :
-        $eb->level_point($levelset['nogood'], write['mb_id'], $levelset['renogood']);
+        $eb->level_point($levelset['nogood'], $write['mb_id'], $levelset['renogood']);
         break;
 }
 

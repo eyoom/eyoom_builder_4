@@ -4,11 +4,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/itemrecommend.php');
-    return;
-}
-
 if (!$is_member)
     alert_close('회원만 메일을 발송할 수 있습니다.');
 
@@ -16,8 +11,7 @@ if (!$is_member)
 $token = md5(uniqid(rand(), true));
 set_session("ss_token", $token);
 
-$sql = " select it_name from {$g5['g5_shop_item_table']} where it_id='$it_id' ";
-$it = sql_fetch($sql);
+$it = get_shop_item($it_id, true);
 if (!$it['it_name'])
     alert_close("등록된 상품이 아닙니다.");
 

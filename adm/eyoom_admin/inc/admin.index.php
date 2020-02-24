@@ -11,7 +11,7 @@ if (!isset($config['cf_eyoom_admin'])) {
     sql_query("ALTER TABLE `{$g5['config_table']}`
                 ADD `cf_eyoom_admin` enum('y','n') NOT NULL DEFAULT 'y' AFTER `cf_add_script`,
                 ADD `cf_eyoom_admin_theme` varchar(255) NOT NULL DEFAULT 'basic' AFTER `cf_eyoom_admin`,
-                ADD `cf_eyoom_mobile_skin` tinyint(4) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme` ", true);
+                ADD `cf_permit_level` tinyint(4) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme` ", true);
 }
 
 /**

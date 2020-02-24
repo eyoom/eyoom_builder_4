@@ -65,7 +65,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql2 = " select count(*) as cnt from {$g5['board_table']} where gr_id = '{$row['gr_id']}' ";
     $row2 = sql_fetch($sql2);
 
-    $s_upd = '<a href="./boardgroup_form.php?'.$qstr.'&amp;w=u&amp;gr_id='.$row['gr_id'].'">수정</a>';
+    $s_upd = '<a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=boardgroup_form&amp;'.$qstr.'&amp;w=u&amp;gr_id='.$row['gr_id'].'">수정</a>';
 
     $list[$i] = $row;
     $list[$i]['board_cnt'] = $row2['cnt'];
@@ -75,7 +75,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=board&amp;pid=boardgroup_list&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

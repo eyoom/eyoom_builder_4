@@ -10,7 +10,7 @@ if (!defined("_ORDERINQUIRY_")) exit; // 개별 페이지 접근 불가
  * 주문내역
  */
 $sql = " select *
-           from {$g5['g5_shop_order_table']}
+          from {$g5['g5_shop_order_table']}
           where mb_id = '{$member['mb_id']}'
           order by od_id desc
           $limit ";
@@ -60,7 +60,7 @@ $count = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('orderinquiry', '', $qstr);
 
 /**
  * 이윰 테마파일 출력

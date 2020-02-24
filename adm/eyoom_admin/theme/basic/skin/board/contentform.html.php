@@ -37,7 +37,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </span>
                                 <?php if ($w == 'u') { ?>
                                 <span>
-                                    <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=<?php echo $co_id; ?>" class="btn-e btn-e-md btn-e-dark">내용확인</a>
+                                    <a href="<?php echo get_eyoom_pretty_url('content', $co_id); ?>" class="btn-e btn-e-md btn-e-dark">내용확인</a>
                                 </span>
                                 <?php } ?>
                             </div>

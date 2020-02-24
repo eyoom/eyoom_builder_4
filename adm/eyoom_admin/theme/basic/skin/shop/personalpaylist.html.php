@@ -153,7 +153,7 @@ function eb_modal(href) {
         {
             체크: "<input type='hidden' name='pp_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['pp_id']; ?>' id='pp_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' value='<?php echo $i; ?>' id='chk_<?php echo $i; ?>'><i></i></label>",
             관리: "<div class='text-center'><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=personalpayform&w=u&pp_id=<?php echo $list[$i]['pp_id']; ?><?php echo $qstr ? '&'.$qstr:''?>'><u>수정</u></a><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=personalpaycopy&pp_id=<?php echo $list[$i]['pp_id']; ?>&wmode=1' onclick='return eb_modal(this.href);' class='margin-left-10'><u>복사</u></a></div>",
-            제목: "<?php echo $list[$i]['pp_name']; ?>",
+            제목: "<?php echo get_text($list[$i]['pp_name']); ?>",
             주문번호: "<?php if ($list[$i]['od_id']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderform&od_id=<?php echo $list[$i]['od_id']; ?>' target='_blank'><?php echo $list[$i]['od_id']; ?></a><?php } ?>",
             주문금액: "<?php echo number_format($list[$i]['pp_price']); ?>",
             입금금액: "<?php echo number_format($list[$i]['pp_receipt_price']); ?>",

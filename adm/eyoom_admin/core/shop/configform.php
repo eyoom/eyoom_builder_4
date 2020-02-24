@@ -19,6 +19,8 @@ if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
     $userinfo = get_icode_userinfo($config['cf_icode_id'], $config['cf_icode_pw']);
 }
 
+check_log_folder(G5_SHOP_PATH.'/inicis/key', false);
+
 /**
  * 탭메뉴
  */
@@ -162,6 +164,43 @@ if(!isset($default['de_listtype_list_skin'])) {
                     ADD `de_mobile_listtype_list_row` int(11) NOT NULL DEFAULT '0' AFTER `de_mobile_listtype_list_mod`,
                     ADD `de_mobile_listtype_img_width` int(11) NOT NULL DEFAULT '0' AFTER `de_mobile_listtype_list_row`,
                     ADD `de_mobile_listtype_img_height` int(11) NOT NULL DEFAULT '0' AFTER `de_mobile_listtype_img_width` ", true);
+}
+
+// 임시저장 테이블이 없을 경우 생성
+if(!sql_query(" DESC {$g5['g5_shop_post_log_table']} ", false)) {
+    sql_query(" CREATE TABLE IF NOT EXISTS `{$g5['g5_shop_post_log_table']}` (
+                  `oid` bigint(20) unsigned NOT NULL,
+                  `mb_id` varchar(255) NOT NULL DEFAULT '',
+                  `post_data` text NOT NULL,
+                  `ol_code` varchar(255) NOT NULL DEFAULT '',
+                  `ol_msg` varchar(255) NOT NULL DEFAULT '',
+                  `ol_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+                  `ol_ip` varchar(25) NOT NULL DEFAULT '',
+                  PRIMARY KEY (`oid`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8; ", false);
+}
+
+
+// 현금영수증 발급 조건 추가
+if(!isset($default['de_taxsave_types'])) {
+    sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
+                    ADD `de_taxsave_types` set('account','vbank','transfer') NOT NULL DEFAULT 'account' AFTER `de_taxsave_use` ", true);
+}
+
+if( function_exists('pg_setting_check') ){
+	pg_setting_check(true);
+}
+
+$account_checked = $vbank_checked = $transfer_checked = '';
+
+if (strstr($default['de_taxsave_types'], 'account')) {
+    $account_checked = 'checked="checked"';
+}
+if (strstr($default['de_taxsave_types'], 'vbank')) {
+    $vbank_checked = 'checked="checked"';
+}
+if (strstr($default['de_taxsave_types'], 'transfer')) {
+    $transfer_checked = 'checked="checked"';
 }
 
 /**

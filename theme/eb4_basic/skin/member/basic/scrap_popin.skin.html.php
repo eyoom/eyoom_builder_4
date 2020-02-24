@@ -22,7 +22,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         <p><i class="fas fa-exclamation-circle"></i> 제목 확인 및 댓글 쓰기</p>
     </div>
 
-    <form name="f_scrap_popin" action="./scrap_popin_update.php" method="post" class="eyoom-form">
+    <form name="f_scrap_popin" action="<?php echo G5_BBS_URL; ?>/scrap_popin_update.php" method="post" class="eyoom-form">
     <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
     <input type="hidden" name="wr_id" value="<?php echo $wr_id; ?>">
     <section>

@@ -36,11 +36,6 @@ if(!sql_num_rows($result))
 
 $order_action_url = G5_HTTPS_SHOP_URL.'/orderaddressupdate.php';
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/orderaddress.php');
-    return;
-}
-
 $g5['title'] = '배송지 목록';
 include_once(G5_PATH.'/head.sub.php');
 
@@ -67,7 +62,7 @@ $count = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME']."?".$qstr."&amp;page=");
+$paging = $eb->set_paging('orderaddress', '', $qstr);
 
 /**
  * 스킨 출력

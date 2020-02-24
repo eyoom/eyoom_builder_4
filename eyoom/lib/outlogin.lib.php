@@ -40,15 +40,8 @@ function eb_outlogin ($skin_dir = 'basic') {
      * 아웃로그인 스킨폴더
      */
     $skin_dir = !$skin_dir ? 'basic': $skin_dir;
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $outlogin_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/outlogin/'.$skin_dir;
-        if (!is_dir($outlogin_skin_path))
-            $outlogin_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/outlogin/'.$skin_dir;
-        $outlogin_skin_url = str_replace(G5_PATH, G5_URL, $outlogin_skin_path);
-    } else {
-        $outlogin_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/outlogin/'.$skin_dir;
-        $outlogin_skin_url = str_replace(G5_PATH, G5_URL, $outlogin_skin_path);
-    }
+    $outlogin_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/outlogin/'.$skin_dir;
+    $outlogin_skin_url = str_replace(G5_PATH, G5_URL, $outlogin_skin_path);
 
     /**
      * 경로 지정
@@ -68,6 +61,8 @@ function eb_outlogin ($skin_dir = 'basic') {
         if (!$eyoomer['mb_id']) {
             sql_query(" insert into {$g5['eyoom_member']} set mb_id = '{$member['mb_id']}' ");
         }
+
+        $mb_scrap_cnt = isset($member['mb_scrap_cnt']) ? (int) $member['mb_scrap_cnt'] : '';
 
         /**
          * 프로필 사진 정보
@@ -108,5 +103,5 @@ function eb_outlogin ($skin_dir = 'basic') {
     $content = ob_get_contents();
     ob_end_clean();
 
-    return $content;
+    return run_replace('outlogin_content', $content, $is_auth, $outlogin_url, $outlogin_action_url);
 }

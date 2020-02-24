@@ -61,7 +61,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php if ($li['type'] == 'new') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 새글을 작성하셨습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_id']?>&wmode=1" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_id'],'&amp;wmode=1'); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <h6 class="font-bold"><?php echo stripslashes($li['subject']); ?></h6>
                         <p><?php echo conv_subject($li['content'],80,'…'); ?></p>
@@ -70,7 +70,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php } else if ($li['type'] == 'reply') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 답변글을 작성하셨습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_id']?>&wmode=1" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_id'],'&amp;wmode=1'); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <h6 class="font-bold"><?php echo stripslashes($li['subject']); ?></h6>
                         <p><?php echo conv_subject($li['content'],80,'…'); ?></p>
@@ -85,7 +85,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php } else if ($li['type'] == 'cmt') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 댓글을 작성하였습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_parent']?>&wmode=1#c_<?php echo $li['wr_id']?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_parent'],'&amp;wmode=1#c_'.$li['wr_id']); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <p><?php echo conv_subject($li['content'],80,'…'); ?></p>
                     </div>
@@ -93,7 +93,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php } else if ($li['type'] == 'cmt_re') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 대댓글을 작성하였습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_parent']?>&wmode=1#c_<?php echo $li['wr_id']?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_parent'],'&amp;wmode=1#c_'.$li['wr_id']); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <p><?php echo conv_subject($li['content'],80,'…'); ?></p>
                     </div>
@@ -101,7 +101,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php } else if ($li['type'] == 'good') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 게시글을 추천하였습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_id']?>&wmode=1" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_id'],'&amp;wmode=1'); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <p><u><?php echo $li['bo_name']?></u> 게시판의 게시글을 추천</p>
                     </div>
@@ -109,7 +109,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
             <?php } else if ($li['type'] == 'nogood') { ?>
                 <span class="timeline-date"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d H:i',$li['datetime']); ?></span>
                 <h5><u><?php echo $li['bo_name']?></u> 게시판의 게시글을 비추천하였습니다.</h5>
-                <a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $li['bo_table']?>&amp;wr_id=<?php echo $li['wr_id']?>&wmode=1" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                <a href="<?php echo get_eyoom_pretty_url($li['bo_table'],$li['wr_id'],'&amp;wmode=1'); ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="activity_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                     <div class="timeline-panel">
                         <p><u><?php echo $li['bo_name']?></u> 게시판의 게시글을 비추천</p>
                     </div>

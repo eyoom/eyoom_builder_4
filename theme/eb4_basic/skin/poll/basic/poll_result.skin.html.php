@@ -79,7 +79,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
             <?php } ?>
             <?php } ?>
             <?php if ($member['mb_level'] >= $po['po_level']) { ?>
-            <form name="fpollresult" action="./poll_etc_update.php" onsubmit="return fpollresult_submit(this);" method="post" autocomplete="off" class="eyoom-form">
+            <form name="fpollresult" action="<?php echo G5_BBS_URL; ?>/poll_etc_update.php" onsubmit="return fpollresult_submit(this);" method="post" autocomplete="off" class="eyoom-form">
             <input type="hidden" name="po_id" value="<?php echo $po_id; ?>">
             <input type="hidden" name="w" value="">
             <input type="hidden" name="skin_dir" value="<?php echo $skin_dir; ?>">
@@ -125,7 +125,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
             <ul>
                 <?php if (is_array($list3) ) { ?>
                 <?php foreach ($list3 as $key => $pores) { ?>
-                <li><a href="./poll_result.php?po_id=<?php echo $pores['po_id']; ?>&amp;skin_dir=<?php echo $skin_dir; ?>"><span class="color-grey">[<?php echo $pores['date']; ?>]</span> <?php echo $pores['subject']; ?></a></li>
+                <li><a href="<?php echo G5_BBS_URL; ?>/poll_result.php?po_id=<?php echo $pores['po_id']; ?>&amp;skin_dir=<?php echo $skin_dir; ?>"><span class="color-grey">[<?php echo $pores['date']; ?>]</span> <?php echo $pores['subject']; ?></a></li>
                 <?php } ?>
                 <?php } ?>
             </ul>

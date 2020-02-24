@@ -4,14 +4,15 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/item.php');
-    return;
-}
-
 $it_id = get_search_string(trim($_GET['it_id']));
+$it_seo_title = isset($it_seo_title) ? $it_seo_title : '';
 
-include_once(G5_LIB_PATH.'/iteminfo.lib.php');
+$it = get_shop_item_with_category($it_id, $it_seo_title);
+$it_id = $it['it_id'];
+
+if( isset($row['it_seo_title']) && ! $row['it_seo_title'] ){
+    shop_seo_title_update($row['it_id']);
+}
 
 /**
  * 분류사용, 상품사용하는 상품의 정보를 얻음
@@ -24,6 +25,8 @@ if (!($it['ca_use'] && $it['it_use'])) {
     if (!$is_admin)
         alert('현재 판매가능한 상품이 아닙니다.');
 }
+
+include_once(G5_LIB_PATH.'/iteminfo.lib.php');
 
 /**
  * 분류 테이블에서 분류 상단, 하단 코드를 얻음
@@ -104,7 +107,7 @@ if(defined('G5_THEME_USE_ITEM_CATEGORY') && G5_THEME_USE_ITEM_CATEGORY){
 if (G5_HTTPS_DOMAIN)
     $action_url = G5_HTTPS_DOMAIN.'/'.G5_SHOP_DIR.'/cartupdate.php';
 else
-    $action_url = './cartupdate.php';
+    $action_url = G5_SHOP_URL.'/cartupdate.php';
 
 /**
  * 이전 상품보기
@@ -113,7 +116,7 @@ $sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id > '$
 $row = sql_fetch($sql);
 if ($row['it_id']) {
     $prev_title = $row['it_name'];
-    $prev_href = "./item.php?it_id=".$row['it_id'];
+    $prev_href = shop_item_url($row['it_id']);
 } else {
     $prev_title = '';
     $prev_href = '';
@@ -126,7 +129,7 @@ $sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id < '$
 $row = sql_fetch($sql);
 if ($row['it_id']) {
     $next_title = $row['it_name'];
-    $next_href = "./item.php?it_id=".$row['it_id'];
+    $next_href = shop_item_url($row['it_id']);
 } else {
     $next_title = '';
     $next_href = '';
@@ -164,7 +167,7 @@ if($default['de_rel_list_use']) {
  * 소셜 관련
  */
 $sns_title = get_text($it['it_name']).' | '.get_text($config['cf_title']);
-$sns_url  = G5_SHOP_URL.'/item.php?it_id='.$it['it_id'];
+$sns_url  = shop_item_url($it['it_id']);
 $sns_share_links .= get_sns_share_link('facebook', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/facebook.png').' ';
 $sns_share_links .= get_sns_share_link('twitter', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/twitter.png').' ';
 $sns_share_links .= get_sns_share_link('googleplus', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/gplus.png');

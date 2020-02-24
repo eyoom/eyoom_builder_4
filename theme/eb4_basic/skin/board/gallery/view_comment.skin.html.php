@@ -267,7 +267,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     </div>
     <?php if ($eyoom_board['bo_use_cmt_infinite'] == '1') { ?>
     <div id="infinite_pagination">
-        <a class="next" href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $bo_table; ?>&wr_id=<?php echo $wr_id; ?>&sca=<?php echo $sca; ?>&cpage=<?php echo ($cpage+1); ?>"></a>
+        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_table,$wr_id,'&amp;sca='.$sca.'&amp;cpage='.($cpage+1)); ?>"></a>
     </div>
     <?php if (count($cmt_list) > 20 ) { ?>
     <div class="view-comment-more">
@@ -280,7 +280,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     <?php /* 댓글 쓰기 시작 */ ?>
     <?php if ($is_comment_write) { ?>
     <div id="view-comment-write" class="view-comment-write">
-        <form name="fviewcomment" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off" class="eyoom-form view-comment-write-box" enctype="multipart/form-data">
+        <form name="fviewcomment" action="<?php echo G5_BBS_URL; ?>/write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off" class="eyoom-form view-comment-write-box" enctype="multipart/form-data">
             <input type="hidden" name="w" value="<?php echo !$w ? 'c': $w; ?>" id="w">
             <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
             <input type="hidden" name="wr_id" value="<?php echo $wr_id; ?>">

@@ -41,7 +41,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         <div id="tab-category">
             <div class="category-list">
                 <span <?php if ($kind == 'recv') { ?>class="active"<?php } ?>>
-                    <a href="./memo.php?kind=recv">
+                    <a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=recv">
                         <?php if ($kind == 'recv') { ?>
                         <strong>받은쪽지</strong>
                         <?php } else { ?>
@@ -50,7 +50,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                     </a>
                 </span>
                 <span <?php if ($kind == 'send') { ?>class="active"<?php } ?>>
-                    <a href="./memo.php?kind=send">
+                    <a href="<?php echo G5_BBS_URL; ?>/memo.php?kind=send">
                         <?php if ($kind == 'send') { ?>
                         <strong>보낸쪽지</strong>
                         <?php } else { ?>
@@ -58,7 +58,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                         <?php } ?>
                     </a>
                 </span>
-                <span><a href="./memo_form.php">쪽지쓰기</a></span>
+                <span><a href="<?php echo G5_BBS_URL; ?>/memo_form.php">쪽지쓰기</a></span>
                 <span class="fake-span"></span>
             </div>
             <div class="controls">
@@ -97,7 +97,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         <?php } ?>
         <a href="<?php echo $list_link ?>" class="btn-e btn-e-dark">목록보기</a>
         <?php if ($kind == 'recv') { ?>
-        <a href="./memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id']; ?>&amp;me_id=<?php echo $memo['me_id']; ?>" class="btn-e btn-e-red">답장</a>
+        <a href="<?php echo G5_BBS_URL; ?>/memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id']; ?>&amp;me_id=<?php echo $memo['me_id']; ?>" class="btn-e btn-e-red">답장</a>
         <?php } ?>
         <?php if (G5_IS_MOBILE) { ?>
         <div class="text-center margin-top-30">

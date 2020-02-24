@@ -90,7 +90,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=member&amp;pid=visit_search&amp;'.$qstr.'&amp;domain='.$domain.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, 'domain='.$domain.'&amp;'.$qstr);
 
 /**
  * 검색버튼

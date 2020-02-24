@@ -12,7 +12,7 @@ if (!defined('_EYOOM_')) exit;
         <?php foreach ($wish_list as $k => $info) { ?>
         <li>
             <div class="prd-img"><?php echo $info['it_img']; ?></div>
-            <a href="<?php echo G5_SHOP_URL; ?>/item.php?it_id=<?php echo $info['it_id']; ?>"><?php echo get_text($info['it_name']); ?></a>
+            <a href="<?php echo shop_item_url($info['it_id']); ?>"><?php echo get_text($info['it_name']); ?></a>
         </li>
         <?php } ?>
         <?php } ?>

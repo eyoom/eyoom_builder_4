@@ -11,17 +11,10 @@ $emoticon = $bbs->get_emoticon($emo);
 $emo_type = $qfile->get_sub_dir('emoticon', EYOOM_THEME_PATH);
 
 /**
- * 테마 경로 지정
+ * 스킨 경로 지정
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    $emoticon_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/emoticon/basic';
-    if (!is_dir($emoticon_skin_path))
-        $emoticon_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/emoticon/basic';
-    $emoticon_skin_url = str_replace(G5_PATH, G5_URL, $emoticon_skin_path);
-} else {
-    $emoticon_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/emoticon/basic';
-    $emoticon_skin_url = str_replace(G5_PATH, G5_URL, $emoticon_skin_path);
-}
+$emoticon_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/emoticon/basic';
+$emoticon_skin_url = str_replace(G5_PATH, G5_URL, $emoticon_skin_path);
 
 include_once(G5_PATH.'/head.sub.php');
 

@@ -7,11 +7,6 @@ if (!defined('_EYOOM_')) exit;
 if (!$is_member)
     goto_url(G5_BBS_URL."/login.php?url=".urlencode(G5_SHOP_URL.'/wishlist.php'));
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/wishlist.php');
-    return;
-}
-
 /**
  * 상단 디자인
  */

@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 <div class="board-view-ans">
     <?php if ($is_admin) { //#1 ?>
     <h4><strong>답변등록</strong></h4>
-    <form name="fanswer" method="post" action="./qawrite_update.php" onsubmit="return fwrite_submit(this);" autocomplete="off" class="eyoom-form">
+    <form name="fanswer" method="post" action="<?php echo G5_BBS_URL; ?>/qawrite_update.php" onsubmit="return fwrite_submit(this);" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="qa_id" value="<?php echo $view['qa_id']; ?>">
     <input type="hidden" name="w" value="a">
     <input type="hidden" name="sca" value="<?php echo $sca; ?>">

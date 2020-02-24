@@ -53,8 +53,10 @@ if($is_kakaopay_use) {
 .shop-order-form .table-list-eb .td-image {position:absolute;top:0;left:0;width:80px;height:80px;overflow:hidden}
 .shop-order-form .table-list-eb .td-image img {display:block;width:100% \9;max-width:100%;height:auto}
 .shop-order-form .table-list-eb .td-item-name {margin-left:90px}
+.sod_opt {padding:0;margin:0}
 .shop-order-form .table-list-eb .td-item-name .sod_opt ul {list-style:none;padding:0;margin:5px 0}
 .shop-order-form .table-list-eb .td-item-name .sod_opt ul li {color:#959595;font-size:12px;background:none;line-height:1.5;padding:0;font-weight:normal}
+.sod_opt li:before {display:none}
 .shop-order-form .table-list-eb .td-item-name .cp_btn {height:inherit;margin:5px 0 0}
 .shop-order-form .table-list-eb .td-item-name .cp_cancel {display:inline-block;margin:0 0 0 3px;font-weight:normal;text-align:center;background:#fff;border:1px solid #d5d5d5;padding:4px 12px;color:#757575;font-size:12px;line-height:1;height:inherit}
 .shop-order-form .order-member-payment {position:relative;border:1px solid #e5e5e5}
@@ -91,13 +93,13 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-info-box span {float:left}
 .shop-order-form .payment-info-box strong {color:#000;font-size:14px}
 .shop-order-form .payment-info-box .cp_cancel {display:inline-block;margin:0 0 0 3px;font-weight:normal;text-align:center;background:#fff;border:1px solid #d5d5d5;padding:4px 12px;color:#757575;font-size:12px;line-height:1;height:inherit}
-.shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;font-size:14px;line-height:inherit}
+.shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;font-size:14px;line-height:inherit;background:none}
 .shop-order-form #od_tot_price .print_price {color:#FF4848;font-size:14px}
 .shop-order-form .payment-select-wrap {position:relative;margin-top:20px}
 .shop-order-form .payment-select-title {margin:0 0 10px}
-.shop-order-form .payment-select-wrap fieldset {padding:0 0 0 2px;background:none}
+.shop-order-form .payment-select-wrap #sod_frm_paysel {padding:0 0 0 2px;background:none;border:0 none}
 .shop-order-form .payment-select-wrap input[type="radio"] {position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;text-indent:-999px;left:0;z-index:-1px}
-.shop-order-form .payment-select-wrap .payment-select-box {position:relative;overflow:hidden;float:left;width:50%;background:#fff;cursor:pointer;height:60px;box-sizing:border-box;border:1px solid #e5e5e5;margin:-1px 0 0 -1px;padding:20px 0 0 80px !important;text-indent:inherit !important}
+.shop-order-form .payment-select-wrap .payment-select-box {position:relative;overflow:hidden;float:left;width:50% !important;background:#fff;cursor:pointer;height:60px;box-sizing:border-box;border:1px solid #e5e5e5;margin:-1px 0 0 -1px;padding:20px 0 0 80px !important;text-indent:inherit !important}
 .shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #FF7070;z-index:3}
 .shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:5px;right:10px;color:#FF4848;font-size:16px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .bank_icon {background:#fff}
@@ -115,16 +117,19 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-select-wrap #sod_frm_paysel .KPAY {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/kpay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .PAYCO {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/payco.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .inicis_lpay {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/lpay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
-.shop-order-form .btn_confirm .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin-bottom:15px}
-.shop-order-form .btn_confirm a.btn01 {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
+#display_pay_button {background:none;padding:0;border:0 none}
+.shop-order-form #display_pay_button .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin-bottom:15px}
+.shop-order-form #display_pay_button a.btn01 {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
+#settle_bank label {float:none;width:auto;line-height:inherit}
 .shop-order-form .payment-point-use-box {margin-top:20px}
 .shop-order-form .payment-point-use {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;font-size:12px;color:#757575}
 .shop-order-form .payment-point-use label {line-height:30px;margin-bottom:0}
 .shop-order-form .payment-point-use .input {margin-bottom:0}
 .shop-order-form #settle_bank {position:relative;padding:15px;border:1px solid #FF7070;margin:20px 0 0;display:none}
 .shop-order-form #settle_bank .select {margin-bottom:10px}
+#settle_bank select {width:100%;border:1px solid #ccc}
 .shop-order-form #settle_bank .input {margin-bottom:0}
-.shop-order-form #settle_bank #od_deposit_name {text-align:left}
+.shop-order-form #settle_bank #od_deposit_name {width:100%;text-align:left;border:1px solid #ccc}
 <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-member-area {margin-right:0}
@@ -699,6 +704,24 @@ if( $default['de_inicis_lpay_use'] ){   //이니시스 L.pay 사용시
 var zipcode = "";
 var form_action_url = "<?php echo $order_action_url; ?>";
 
+function od_coupon_close(){
+    var $coupon_frm = jQuery("#od_coupon_frm");
+    if ( $coupon_frm.parent(".od_coupon_wrap").length ){
+        $coupon_frm.parent(".od_coupon_wrap").remove();
+    } else {
+        $coupon_frm.remove();
+    }
+}
+
+function cp_form_close(){
+    var $cp_frm = jQuery("#cp_frm");
+    if ( $cp_frm.parent(".od_coupon_wrap").length ){
+        $cp_frm.parent(".od_coupon_wrap").remove();
+    } else {
+        $cp_frm.remove();
+    }
+}
+
 $(function() {
     var $cp_btn_el;
     var $cp_row_el;
@@ -706,7 +729,7 @@ $(function() {
     $(".cp_btn").click(function() {
         $cp_btn_el = $(this);
         $cp_row_el = $(this).closest("tr");
-        $("#cp_frm").remove();
+        cp_form_close();
         var it_id = $cp_btn_el.closest("tr").find("input[name^=it_id]").val();
 
         $.post(
@@ -716,6 +739,10 @@ $(function() {
                 $("#modal_coupon_apply .modal-body").html(data);
             }
         );
+    });
+
+	$(document).on("click", "#cp_close", function() {
+        $(".od_coupon, .od_coupon_wrap").remove();
     });
 
     $(document).on("click", ".cp_apply", function() {
@@ -753,7 +780,7 @@ $(function() {
                 return false;
             } else {
                 coupon_cancel($cp_dup_el);
-                $("#cp_frm").remove();
+                cp_form_close();
                 $cp_dup_el.find(".cp_btn").text("쿠폰적용").focus();
                 $cp_dup_el.find(".cp_cancel").remove();
             }
@@ -771,27 +798,27 @@ $(function() {
         $cp_row_el.find("input[name^=cp_price]").val(price);
 
         calculate_total_price();
-        $("#cp_frm").remove();
+        cp_form_close();
         $cp_btn_el.text("쿠폰변경").focus();
         if(!$cp_row_el.find(".cp_cancel").size())
             $cp_btn_el.after("<button type=\"button\" class=\"cp_cancel\">취소</button>");
     });
 
     $(document).on("click", ".cp-close", function() {
-        $("#cp_frm").remove();
+        cp_form_close();
         $cp_btn_el.focus();
     });
 
     $(document).on("click", ".cp_cancel", function() {
         coupon_cancel($(this).closest("tr"));
         calculate_total_price();
-        $("#cp_frm").remove();
+        cp_form_close();
         $(this).closest("tr").find(".cp_btn").text("쿠폰적용").focus();
         $(this).remove();
     });
 
     $("#od_coupon_btn").click(function() {
-        $("#od_coupon_frm").remove();
+        od_coupon_close();
         var $this = $(this);
         var price = parseInt($("input[name=org_od_price]").val()) - parseInt($("input[name=item_coupon]").val());
         if(price <= 0) {
@@ -838,14 +865,14 @@ $(function() {
         $("#od_cp_price").text(number_format(String(price)));
         $("#sc_cp_price").text(0);
         calculate_order_price();
-        $("#od_coupon_frm").remove();
+        od_coupon_close();
         $("#od_coupon_btn").text("쿠폰변경").focus();
         if(!$("#od_coupon_cancel").size())
             $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"cp_cancel\">취소</button>");
     });
 
     $(document).on("click", ".od-coupon-close", function() {
-        $("#od_coupon_frm").remove();
+        od_coupon_close();
         $("#od_coupon_btn").focus();
     });
 
@@ -859,7 +886,7 @@ $(function() {
         $("#od_cp_price").text(0);
         $("#sc_cp_price").text(0);
         calculate_order_price();
-        $("#od_coupon_frm").remove();
+        od_coupon_close();
         $("#od_coupon_btn").text("쿠폰적용").focus();
         $(this).remove();
         $("#sc_coupon_btn").text("쿠폰적용");
@@ -1532,4 +1559,13 @@ $(function(){
     $("#od_hope_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", minDate: "+<?php echo (int)$default['de_hope_date_after']; ?>d;", maxDate: "+<?php echo (int)$default['de_hope_date_after'] + 6; ?>d;" });
 });
 <?php } ?>
+
+$(function(){
+	//tooltip
+    $(".tooltip_icon").click(function(){
+        $(this).next(".tooltip").fadeIn(400);
+    }).mouseout(function(){
+        $(this).next(".tooltip").fadeOut();
+    });
+});
 </script>

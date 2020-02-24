@@ -244,7 +244,7 @@ if (is_array($bo_favorite)) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./board.php?bo_table='.$bo_table.$qstr.'&amp;page=');
+$paging = $eb->set_paging('board', $bo_table, $qstr);
 
 /**
  * 사용자 프로그램

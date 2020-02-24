@@ -486,7 +486,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 
     <div class="text-center">
         <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xlg btn-e-red">
-        <a href="<?php echo $infinite_wmode ? "javascript:history.go(-1)": "./board.php?bo_table=".$bo_table; ?>" class="btn-e btn-e-xlg btn-e-dark">취소</a>
+        <a href="<?php echo $infinite_wmode ? "javascript:history.go(-1)": get_eyoom_pretty_url($bo_table, '', $qstr); ?>" class="btn-e btn-e-xlg btn-e-dark">취소</a>
     </div>
     </form>
 </div>

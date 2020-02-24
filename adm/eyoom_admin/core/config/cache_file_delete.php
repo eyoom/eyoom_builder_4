@@ -13,6 +13,8 @@ if(function_exists('social_log_file_delete')){
     social_log_file_delete();
 }
 
+run_event('adm_cache_file_delete_before');
+
 flush();
 
 if (!$directory=@opendir(G5_DATA_PATH.'/session')) {
@@ -23,6 +25,9 @@ $cnt=0;
 $print_html = array();
 
 $files = glob(G5_DATA_PATH.'/cache/latest-*');
+$content_files = glob(G5_DATA_PATH.'/cache/content-*');
+
+$files = array_merge($files, $content_files);
 if (is_array($files)) {
     foreach ($files as $cache_file) {
         $cnt++;
@@ -32,3 +37,5 @@ if (is_array($files)) {
         flush();
     }
 }
+
+run_event('adm_cache_file_delete');

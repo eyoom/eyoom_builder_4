@@ -39,20 +39,20 @@ if (!defined('_EYOOM_')) exit;
 <div id="fakeloader"></div>
 
 <div class="shop-wishlist">
-    <form name="fwishlist" method="post" action="./cartupdate.php">
-    <input type="hidden" name="act"       value="multi">
+    <form name="fwishlist" method="post" action="<?php echo G5_SHOP_URL; ?>/cartupdate.php">
+    <input type="hidden" name="act" value="multi">
     <input type="hidden" name="sw_direct" value="">
-    <input type="hidden" name="prog"      value="wish">
+    <input type="hidden" name="prog" value="wish">
 
     <div class="wishlist-container">
         <?php for ($i=0; $i<count($list); $i++) { ?>
         <div class="wishlist-box">
             <div class="wishlist-box-pd">
                 <div class="wishlist-box-in">
-                    <div class="wishlist-img"><a href="./item.php?it_id=<?php echo $list[$i]['it_id']; ?>"><?php echo $list[$i]['image']; ?></a></div>
+                    <div class="wishlist-img"><a href="<?php echo shop_item_url($list[$i]['it_id']); ?>"><?php echo $list[$i]['image']; ?></a></div>
                     <div class="wishlist-info">
                         <div class="wishlist-desc">
-                            <a href="./item.php?it_id=<?php echo $list[$i]['it_id']; ?>" class="info_link">
+                            <a href="<?php echo shop_item_url($list[$i]['it_id']); ?>" class="info_link">
                                 <h5><strong><?php echo stripslashes($list[$i]['it_name']); ?></strong></h5>
                             </a>
                             <div class="wishlist-desc-date">
@@ -73,9 +73,9 @@ if (!defined('_EYOOM_')) exit;
                                 <input type="hidden" name="io_type[<?php echo $list[$i]['it_id']; ?>][0]" value="0">
                                 <input type="hidden" name="io_id[<?php echo $list[$i]['it_id']; ?>][0]" value="">
                                 <input type="hidden" name="io_value[<?php echo $list[$i]['it_id']; ?>][0]" value="<?php echo $list[$i]['it_name']; ?>">
-                                <input type="hidden"   name="ct_qty[<?php echo $list[$i]['it_id']; ?>][0]" value="1">
+                                <input type="hidden" name="ct_qty[<?php echo $list[$i]['it_id']; ?>][0]" value="1">
                             </div>
-                            <a href="./wishupdate.php?w=d&amp;wi_id=<?php echo $list[$i]['wi_id']; ?>" class="wishlist-del-btn"><i class="fas fa-trash" aria-hidden="true"></i><span class="sound_only">삭제</span></a>
+                            <a href="<?php echo G5_SHOP_URL; ?>/wishupdate.php?w=d&amp;wi_id=<?php echo $list[$i]['wi_id']; ?>" class="wishlist-del-btn"><i class="fas fa-trash" aria-hidden="true"></i><span class="sound_only">삭제</span></a>
                         </div>
                    </div>
                 </div>

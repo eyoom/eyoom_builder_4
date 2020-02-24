@@ -173,19 +173,20 @@ class theme extends qfile
                 define('EYOOM_THEME_PAGE_URL', $theme_url . '/page');
                 define('EYOOM_CSS_URL', EYOOM_URL.'/'.G5_CSS_DIR);
 
-                if ($this->is_shop || $this->eyoom['use_layout_community'] == 'n') {
-                    define('G5_THEME_SHOP_PATH', EYOOM_PATH .'/'. G5_SHOP_DIR);
-                    define('G5_THEME_MSHOP_PATH', EYOOM_PATH.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
-                    define('EYOOM_THEME_SHOP_PATH', $theme_path .'/'.G5_SHOP_DIR);
-                    define('EYOOM_THEME_SHOP_URL', $theme_url.'/'. G5_SHOP_DIR);
-                    define('EYOOM_THEME_MSHOP_PATH', $theme_path.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
-                    define('EYOOM_THEME_MSHOP_URL', $theme_url.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
+                /**
+                 * 쇼핑몰 경로 정의
+                 */
+                define('G5_THEME_SHOP_PATH', EYOOM_PATH .'/'. G5_SHOP_DIR);
+                define('G5_THEME_MSHOP_PATH', EYOOM_PATH.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
+                define('EYOOM_THEME_SHOP_PATH', $theme_path .'/'.G5_SHOP_DIR);
+                define('EYOOM_THEME_SHOP_URL', $theme_url.'/'. G5_SHOP_DIR);
+                define('EYOOM_THEME_MSHOP_PATH', $theme_path.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
+                define('EYOOM_THEME_MSHOP_URL', $theme_url.'/'.G5_MOBILE_DIR.'/'.G5_SHOP_DIR);
 
-                    define('EYOOM_THEME_SHOP_SKIN_PATH', $theme_path .'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
-                    define('EYOOM_THEME_SHOP_SKIN_URL', $theme_url.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
-                    define('EYOOM_THEME_MSHOP_SKIN_PATH', $theme_path.'/'.G5_MOBILE_DIR.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
-                    define('EYOOM_THEME_MSHOP_SKIN_URL', $theme_url.'/'.G5_MOBILE_DIR.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
-                }
+                define('EYOOM_THEME_SHOP_SKIN_PATH', $theme_path .'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
+                define('EYOOM_THEME_SHOP_SKIN_URL', $theme_url.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
+                define('EYOOM_THEME_MSHOP_SKIN_PATH', $theme_path.'/'.G5_MOBILE_DIR.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
+                define('EYOOM_THEME_MSHOP_SKIN_URL', $theme_url.'/'.G5_MOBILE_DIR.'/skin/'.G5_SHOP_DIR.'/'.$this->eyoom['shop_skin']);
             }
         }
     }
@@ -398,6 +399,8 @@ class theme extends qfile
          * 메뉴생성
          */
         foreach ($menu_package as $key => $menuset) {
+            $menuset['me_link'] = $menuset['me_type'] == 'shop' ? shop_category_url($menuset['me_pid']): get_pretty_eyoom_menu_url($menuset['me_type'], $menuset['me_pid'], $menuset['me_link']);
+
             foreach ($menuset as $k => $menu_sub) {
                 if (!is_array($menu_sub)) {
                     if ($member['mb_level'] < $menuset['me_permit_level']) continue;
@@ -416,6 +419,7 @@ class theme extends qfile
                     @ksort($menu);
                 } else {
                     $cate1 = &$menu[$mk1]['submenu'];
+                    $menu_sub['me_link'] = $menu_sub['me_type'] == 'shop' ? shop_category_url($menu_sub['me_pid']): get_pretty_eyoom_menu_url($menu_sub['me_type'], $menu_sub['me_pid'], $menu_sub['me_link']);
                     foreach ($menu_sub as $m => $sub) {
                         if (!is_array($sub)) {
                             if ($member['mb_level'] < $menu_sub['me_permit_level']) continue;
@@ -436,6 +440,7 @@ class theme extends qfile
                         } else {
                             $cate1[$mk2]['sub'] = 'on';
                             $cate2 = &$cate1[$mk2]['subsub'];
+                            $sub['me_link'] = $sub['me_type'] == 'shop' ? shop_category_url($sub['me_pid']): get_pretty_eyoom_menu_url($sub['me_type'], $sub['me_pid'], $sub['me_link']);
                             foreach ($sub as $n => $subsub) {
                                 if (!is_array($subsub)) {
                                     if ($member['mb_level'] < $sub['me_permit_level']) continue;
@@ -459,6 +464,7 @@ class theme extends qfile
                                     $cate1[$mk2]['sub'] = 'on';
                                     $cate2[$mk3]['sub'] = 'on';
                                     $cate3 = &$cate2[$mk3]['ssubsub'];
+                                    $subsub['me_link'] = $subsub['me_type'] == 'shop' ? shop_category_url($subsub['me_pid']): get_pretty_eyoom_menu_url($subsub['me_type'], $subsub['me_pid'], $subsub['me_link']);
                                     foreach ($subsub as $o => $ssubsub) {
                                         if (!is_array($ssubsub)) {
                                             if ($member['mb_level'] < $subsub['me_permit_level']) continue;
@@ -701,7 +707,7 @@ class theme extends qfile
                     $_output[$me_order] .= '{';
                     $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
                     $_output[$me_order] .= '"order":"'.$me_order.'",';
-                    $_output[$me_order] .= '"text":"'.$val['me_name'].$blind.'"';
+                    $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
                     if (is_array($val) && count($val)>3) $_output[$me_order] .= $this->eyoom_menu_json($val);
                     $_output[$me_order] .= '}';
                 }
@@ -832,6 +838,12 @@ class theme extends qfile
 
     // 입력한 링크가 해당 도메인인지 아닌지 검토
     public function compare_host_from_link($link) {
+        global $config;
+
+        if($config['cf_bbs_rewrite']) {
+            $link = get_query_url_from_pretty_url($link);
+        }
+
         $url = parse_url($link);
         if ($url['host']) {
             $host = preg_replace('/www\./i','',$url['host']);

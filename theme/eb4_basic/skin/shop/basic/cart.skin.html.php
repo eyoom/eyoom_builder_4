@@ -118,7 +118,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         <th scope="col" class="width-30px">
                             <label for="ct_all" class="sound_only">상품 전체</label>
                             <label class="checkbox">
-                                <input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked"><i></i>
+                                <input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked" class="select_chk"><i></i>
                             </label>
                         </th>
                         <th scope="col">상품명</th>
@@ -141,12 +141,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         </td>
                         <td class="td-border">
                             <div class="td-item-desc">
-                                <div class="td-image"><a href="./item.php?it_id=<?php echo $list[$i]['it_id']; ?>"><?php echo $list[$i]['image']; ?></a></div>
+                                <div class="td-image"><a href="<?php echo shop_item_url($list[$i]['it_id']); ?>"><?php echo $list[$i]['image']; ?></a></div>
                                 <div class="td-item-name">
                                     <input type="hidden" name="it_id[<?php echo $i; ?>]"    value="<?php echo $list[$i]['it_id']; ?>">
                                     <input type="hidden" name="it_name[<?php echo $i; ?>]"  value="<?php echo $list[$i]['it_name']; ?>">
                                     <?php if ($list[$i]['it_options']) { ?>
-                                    <a href="./item.php?it_id=<?php echo $list[$i]['it_id']; ?>" class="font-size-14">
+                                    <a href="<?php echo shop_item_url($list[$i]['it_id']); ?>" class="font-size-14">
                                         <b><?php echo $list[$i]['it_name']; ?></b>
                                     </a>
                                     <div><?php echo $list[$i]['it_options']; ?></div>
@@ -193,7 +193,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
             <div class="li-item-wrap">
                 <div class="li-item-img">
-                    <a href="./item.php?it_id=<?php echo $list[$i]['it_id']; ?>">
+                    <a href="<?php echo shop_item_url($list[$i]['it_id']); ?>">
                         <?php echo $list[$i]['image']; ?>
                     </a>
                 </div>
@@ -247,10 +247,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         <?php if ($i == 0) { ?>
         <a href="<?php echo G5_SHOP_URL; ?>/" class="btn-e btn-e-brd btn-e-xxlg btn-e-default color-black">쇼핑 계속하기</a>
         <?php } else { ?>
-        <input type="hidden" name="url" value="./orderform.php">
+        <input type="hidden" name="url" value="<?php echo G5_SHOP_URL; ?>/orderform.php">
         <input type="hidden" name="records" value="<?php echo $i; ?>">
         <input type="hidden" name="act" value="">
-        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $continue_ca_id; ?>" class="btn-e btn-e-brd btn-e-xxlg btn-e-default color-black">쇼핑 계속하기</a>
+        <a href="<?php echo shop_category_url($continue_ca_id); ?>" class="btn-e btn-e-brd btn-e-xxlg btn-e-default color-black">쇼핑 계속하기</a>
         <button type="button" onclick="return form_check('buy');" class="btn-e btn-e-xxlg btn-e-red"><i class="fas fa-credit-card" aria-hidden="true"></i> 주문하기</button>
 
         <?php if ($naverpay_button_js) { ?>

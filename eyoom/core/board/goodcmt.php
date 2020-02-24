@@ -92,8 +92,7 @@ if($_POST['js'] == "on") {
 
     if (!$is_member)
     {
-        $href = './login.php?'.$qstr.'&amp;url='.urlencode('./board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id);
-
+        $href = G5_BBS_URL.'/login.php?'.$qstr.'&amp;url='.urlencode(get_eyoom_pretty_url($bo_table, $wr_id, $qstr));
         alert('회원만 가능합니다.', $href);
     }
 
@@ -146,8 +145,6 @@ if($_POST['js'] == "on") {
                 $status = '추천';
             else
                 $status = '비추천';
-
-            $href = './board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id.'#c_'.$c_id;
 
             alert("이 댓글을 $status 하셨습니다.", '', false);
         }

@@ -9,11 +9,6 @@ if( isset($sort) && ! in_array($sort, array('it_sum_qty', 'it_price', 'it_use_av
     $sort='';
 }
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/list.php');
-    return;
-}
-
 /**
  * 분류 체크
  */
@@ -136,9 +131,9 @@ if (file_exists($skin_file)) {
 /**
  * 페이징
  */
-$qstr1 .= 'ca_id='.$ca_id;
+//$qstr1 .= 'ca_id='.$ca_id;
 $qstr1 .='&amp;sort='.$sort.'&amp;sortodr='.$sortodr;
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME'].'?'.$qstr1.'&amp;page=');
+$paging = $eb->set_paging('itemlist', $ca_id, $qstr1);
 
 /**
  * 이윰 테마파일 출력

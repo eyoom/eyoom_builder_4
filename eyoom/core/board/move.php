@@ -56,17 +56,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 테마 경로 지정
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    $move_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/move/basic';
-    if (!is_dir($move_skin_path))
-        $move_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/move/basic';
-    $move_skin_url = str_replace(G5_PATH, G5_URL, $move_skin_path);
-} else {
-    $move_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/move/basic';
-    $move_skin_url = str_replace(G5_PATH, G5_URL, $move_skin_path);
-}
+$move_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/move/basic';
+$move_skin_url = str_replace(G5_PATH, G5_URL, $move_skin_path);
 
 if (!file_exists($move_skin_path.'/move.skin.html.php')) die('skin error');
 @include_once ($move_skin_path.'/move.skin.html.php');
 
+run_event('move_html_footer');
 include_once(G5_PATH.'/tail.sub.php');

@@ -28,13 +28,13 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
         case '0':
             $sql3 = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['cp_target']}' ";
             $row3 = sql_fetch($sql3);
-            $dn_list[$i]['link_href'] = './item.php?it_id='.$row3['it_id'];
+            $dn_list[$i]['link_href'] = shop_item_url($row3['it_id']);
             $dn_list[$i]['link_text'] = get_text($row3['it_name']);
             break;
         case '1':
             $sql3 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '{$row['cp_target']}' ";
             $row3 = sql_fetch($sql3);
-            $dn_list[$i]['link_href'] = './list.php?ca_id='.$row3['ca_id'];
+            $dn_list[$i]['link_href'] = shop_category_url($row3['ca_id']);
             $dn_list[$i]['link_text'] = get_text($row3['ca_name']);
             break;
         case '2':
@@ -80,13 +80,13 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
         case '0':
             $sql3 = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['cp_target']}' ";
             $row3 = sql_fetch($sql3);
-            $po_list[$i]['link_href'] = './item.php?it_id='.$row3['it_id'];
+            $po_list[$i]['link_href'] = shop_item_url($row3['it_id']);
             $po_list[$i]['link_text'] = get_text($row3['it_name']);
             break;
         case '1':
             $sql3 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '{$row['cp_target']}' ";
             $row3 = sql_fetch($sql3);
-            $po_list[$i]['link_href'] = './list.php?ca_id='.$row3['ca_id'];
+            $po_list[$i]['link_href'] = shop_category_url($row3['ca_id']);
             $po_list[$i]['link_text'] = get_text($row3['ca_name']);
             break;
         case '2':

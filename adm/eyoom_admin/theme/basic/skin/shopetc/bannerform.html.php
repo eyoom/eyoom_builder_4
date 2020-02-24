@@ -81,7 +81,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         <td>
                             <label class="input form-width-300px">
                                 <i class="icon-append fas fa-link"></i>
-                                <input type="text" name="bn_url" value="<?php echo $bn['bn_url']; ?>" id="bn_url">
+                                <input type="text" name="bn_url" value="<?php echo get_sanitize_input($bn['bn_url']); ?>" id="bn_url">
                             </label>
                             <div class="note"><strong>Note:</strong> 배너클릭시 이동하는 주소입니다.</div>
                         </td>

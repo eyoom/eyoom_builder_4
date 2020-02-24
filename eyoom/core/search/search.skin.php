@@ -22,7 +22,7 @@ $board['bo_use_sideview'] = 'y';
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['PHP_SELF'].'?'.$search_query.'&amp;gr_id='.$gr_id.'&amp;srows='.$srows.'&amp;onetable='.$onetable.'&amp;page=');
+$paging = $eb->set_paging('search', '', $search_query.'&amp;gr_id='.$gr_id.'&amp;srows='.$srows.'&amp;onetable='.$onetable);
 
 /**
  * 사용자 프로그램

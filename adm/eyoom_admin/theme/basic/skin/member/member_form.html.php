@@ -527,6 +527,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <?php
                         }   //end if
                     }   //end if
+
+                    run_event('admin_member_form_add', $mb, $w, 'table');
                     ?>
                 </tbody>
             </table>
@@ -590,3 +592,7 @@ function fmember_submit(f)
     return true;
 }
 </script>
+
+<?php 
+run_event('admin_member_form_after', $mb, $w);
+?>

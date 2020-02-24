@@ -26,15 +26,8 @@ function eb_poll($skin_dir='basic', $po_id=false) {
     if (!$po_id)
         return;
 
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $poll_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-        if (!is_dir($poll_skin_path))
-            $poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-        $poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
-    } else {
-        $poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
-        $poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
-    }
+    $poll_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/poll/'.$skin_dir;
+    $poll_skin_url = str_replace(G5_PATH, G5_URL, $poll_skin_path);
 
     $po = sql_fetch(" select * from {$g5['poll_table']} where po_id = '$po_id' ");
 

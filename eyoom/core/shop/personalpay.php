@@ -4,11 +4,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/personalpay.php');
-    return;
-}
-
 $g5['title'] = '개인결제 리스트';
 include_once('./_head.php');
 

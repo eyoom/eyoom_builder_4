@@ -28,12 +28,12 @@ class shop extends eyoom
             $count = sql_num_rows($result2);
 
             $menu[$i] = $row;
-            $menu[$i]['href'] = G5_SHOP_URL.'/list.php?ca_id='.$row['ca_id'];
+            $menu[$i]['href'] = shop_category_url($row['ca_id']);
             $menu[$i]['count'] = $count;
 
             $loop = &$menu[$i]['submenu'];
             for ($j=0; $row2=sql_fetch_array($result2); $j++) {
-                $row2['href'] = G5_SHOP_URL.'/list.php?ca_id='.$row2['ca_id'];
+                $row2['href'] = shop_category_url($row2['ca_id']);
                 $loop[$j] = $row2;
             }
             $menu[$i]['cnt'] = count($loop);
@@ -62,7 +62,7 @@ class shop extends eyoom
                     $sct_bg = 'sct_bg';
                 else $sct_bg = '';
 
-                $navigation .= $bar.'<a href="./list.php?ca_id='.$code.'" class="'.$sct_here.' '.$sct_bg.'">'.$row['ca_name'].'</a>';
+                $navigation .= $bar.'<a href="'.shop_category_url($code).'" class="'.$sct_here.' '.$sct_bg.'">'.$row['ca_name'].'</a>';
             }
         } else {
             $navigation = $this->g5['title'];
@@ -88,7 +88,7 @@ class shop extends eyoom
                 if ($ca_id == $code) // 현재 분류와 일치하면
                     $sct_here = 'active';
 
-                $navigation .= '<li class="'.$sct_here.'"><a href="./list.php?ca_id='.$code.'">'.$row['ca_name'].'</a></li>';
+                $navigation .= '<li class="'.$sct_here.'"><a href="'.shop_category_url($code).'">'.$row['ca_name'].'</a></li>';
                 if($i == $len) {
                     $nav['title'] = $row['ca_name'];
                 }
@@ -115,7 +115,7 @@ class shop extends eyoom
 
             $row2 = sql_fetch(" select count(*) as cnt from {$this->g5['g5_shop_item_table']} where (ca_id like '{$row['ca_id']}%' or ca_id2 like '{$row['ca_id']}%' or ca_id3 like '{$row['ca_id']}%') and it_use = '1'  ");
 
-            $listcategory[$i]['href'] = "./list.php?ca_id=".$row['ca_id'];
+            $listcategory[$i]['href'] = shop_category_url($row['ca_id']);
             $listcategory[$i]['ca_name'] = $row['ca_name'];
             $listcategory[$i]['cnt'] = $row2['cnt'];
             $i++;
@@ -266,7 +266,7 @@ class shop extends eyoom
                     $_output[$ca_order] .= '{';
                     $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
                     $_output[$ca_order] .= '"order":"'.$ca_order.'",';
-                    $_output[$ca_order] .= '"text":"'.$val['ca_name'].$blind.'"';
+                    $_output[$ca_order] .= '"text":"'.trim($val['ca_name']).$blind.'"';
                     if(is_array($val) && count($val)>3) $_output[$ca_order] .= $this->category_json($val);
                     $_output[$ca_order] .= '}';
                 }

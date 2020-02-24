@@ -91,7 +91,7 @@ $qstr .= '&amp;fr_date='.$fr_date.'&amp;to_date='.$to_date;
 
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
-    $href = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
+    $href = shop_item_url($row['it_id']);
     $num = $rank + $i + 1;
 
     $list[$i] = $row;
@@ -104,7 +104,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shopetc&amp;pid=itemsellrank&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

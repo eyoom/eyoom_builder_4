@@ -54,7 +54,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
         //$list[$i]['image'] = $latest->latest_image($row,'n');
 
     }
-    $list[$i]['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}";
+    $list[$i]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id']);
 
     $list[$i]['wr_hit'] = $row['wr_hit'];
     $list[$i]['datetime'] = $row['tw_datetime'];
@@ -111,7 +111,8 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?tag='.$tag);
+$qstr .= '&amp;tag='.$tag;
+$paging = $eb->set_paging('tag', '', $qstr);
 
 /**
  * 사용자 프로그램

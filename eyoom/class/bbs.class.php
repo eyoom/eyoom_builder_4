@@ -1529,12 +1529,12 @@ class bbs extends eyoom
              */
             if ($row['wr_parent']) {
                 if ($row['wr_id'] == $row['wr_parent']) { // 원본글
-                    $list['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}".$query_wmode;
+                    $list['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],$query_wmode);
                 } else { // 댓글
-                    $list['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_parent']}{$query_wmode}#c_{$row['wr_id']}";
+                    $list['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_parent'],$query_wmode.'#c_'.$row['wr_id']);
                 }
             } else {
-                $list['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}".$query_wmode;
+                $list['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],$query_wmode);
             }
 
             /**

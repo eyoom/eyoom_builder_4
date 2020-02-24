@@ -57,7 +57,7 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
             if (!$bo_table)
                 return $name;
 
-            $tmp_name = '<a href="'.G5_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;sca='.$sca.'&amp;sfl=wr_name,1&amp;stx='.$name.'" data-toggle="dropdown" title="'.$name.' 이름으로 검색" class="sv_guest" rel="nofollow" onclick="return false;">'.$name.'</a>';
+            $tmp_name = '<a href="'.get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;sfl=wr_name,1&amp;stx='.$name).'" data-toggle="dropdown" title="'.$name.' 이름으로 검색" class="sv_guest" rel="nofollow" onclick="return false;">'.$name.'</a>';
             $title_mb_id = '[비회원]';
         }
 
@@ -151,9 +151,9 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
          */
         if ($bo_table && !$wmode) {
             if ($mb_id) {
-                $str2 .= "<li><a href=\"".G5_BBS_URL."/board.php?bo_table=".$bo_table."&amp;sca=".$sca."&amp;sfl=mb_id,1&amp;stx=".$mb_id."\">아이디로 검색</a></li>\n";
+                $str2 .= "<li><a href=\"".get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;sfl=mb_id,1&amp;stx='.$mb_id)."\">아이디로 검색</a></li>\n";
             } else {
-                $str2 .= "<li><a href=\"".G5_BBS_URL."/board.php?bo_table=".$bo_table."&amp;sca=".$sca."&amp;sfl=wr_name,1&amp;stx=".$name."\">이름으로 검색</a></li>\n";
+                $str2 .= "<li><a href=\"".get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;sfl=wr_name,1&amp;stx='.$name)."\">이름으로 검색</a></li>\n";
             }
         }
 

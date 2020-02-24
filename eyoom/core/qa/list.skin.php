@@ -19,9 +19,18 @@ for ($i=0; $i<count($categories); $i++) {
 }
 
 /**
+ * 1:1문의 설정관리 링크 수정
+ */
+$admin_href = '';
+if($is_admin) {
+    $is_checkbox = true;
+    $admin_href = G5_ADMIN_URL.'/?dir=board&pid=qa_config';
+}
+
+/**
  * 페이징
  */
-$paging = $eb->set_paging('./qalist.php?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('qalist', '', $qstr);
 
 /**
  * 사용자 프로그램

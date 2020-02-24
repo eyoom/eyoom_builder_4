@@ -21,7 +21,8 @@ foreach ($faq_master_list as $k => $v ){
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['PHP_SELF'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('faq', '', $qstr);
+
 
 /**
  * 사용자 프로그램

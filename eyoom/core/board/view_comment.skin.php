@@ -101,8 +101,8 @@ for ($i=0; $i<$cmt_amt; $i++) {
             $cmt = sql_fetch($sql);
             $cmt[$i]['c_wr_content'] = $cmt['wr_content'];
         }
-        $cmt[$i]['c_reply_href'] = './board.php?'.$query_string.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=c#bo_vc_w';
-        $cmt[$i]['c_edit_href'] = './board.php?'.$query_string.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=cu#bo_vc_w';
+        $cmt[$i]['c_reply_href'] = $comment_common_url.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=c#bo_vc_w';
+        $cmt[$i]['c_edit_href'] = $comment_common_url.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=cu#bo_vc_w';
     }
 
     /**

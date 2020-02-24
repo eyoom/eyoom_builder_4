@@ -47,10 +47,7 @@ if($default['de_pg_service'] == 'inicis' || $default['de_inicis_lpay_use'])
 /**
  * 상단 레이아웃
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1')
-    include_once(G5_MSHOP_PATH.'/_head.php');
-else
-    include_once(G5_SHOP_PATH.'/_head.php');
+include_once(G5_SHOP_PATH.'/_head.php');
 
 /**
  * 희망배송일 지정
@@ -75,7 +72,4 @@ if($is_mobile_order) {
 /**
  * 하단 레이아웃
  */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1')
-    include_once(G5_MSHOP_PATH.'/_tail.php');
-else
-    include_once(G5_SHOP_PATH.'/_tail.php');
+include_once(G5_SHOP_PATH.'/_tail.php');

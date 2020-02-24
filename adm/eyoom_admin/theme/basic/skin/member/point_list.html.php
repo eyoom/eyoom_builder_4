@@ -10,7 +10,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 ?>
 
 <div class="admin-point-list">
-    <form name="fsearch" id="fsearch" action="./" class="eyoom-form" method="get">
+    <form name="fsearch" id="fsearch" class="eyoom-form" method="get">
     <input type="hidden" name="dir" id="dir" value="<?php echo $dir; ?>">
     <input type="hidden" name="pid" id="pid" value="<?php echo $pid; ?>">
 
@@ -306,7 +306,7 @@ window.closeModal = function(){
             회원아이디: "<span class='ellipsis'><?php echo $list[$i]['mb_id']; ?></span>",
             이름: "<strong><?php echo $list[$i]['mb_name']; ?></strong>",
             닉네임: "<span class='ellipsis'><?php echo $list[$i]['mb_nick']; ?></span>",
-            포인트내용: "<?php if ($list[$i]['link']) { ?><a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['po_rel_table']; ?>&amp;wr_id=<?php echo $list[$i]['po_rel_id']; ?>' target='_blank'><span class='ellipsis'><?php echo $list[$i]['po_content']; ?></span></a><?php } else { ?><span class='ellipsis'><?php echo $list[$i]['po_content']; ?></span><?php } ?>",
+            포인트내용: "<?php if ($list[$i]['link']) { ?><a href='<?php echo get_eyoom_pretty_url($list[$i]['po_rel_table'],$list[$i]['po_rel_id']); ?>' target='_blank'><span class='ellipsis'><?php echo $list[$i]['po_content']; ?></span></a><?php } else { ?><span class='ellipsis'><?php echo $list[$i]['po_content']; ?></span><?php } ?>",
             포인트: "<?php echo number_format($list[$i]['po_point']); ?>",
             일시: "<?php echo $list[$i]['po_datetime']; ?>",
             만료일: "<?php echo $list[$i]['expire_date']; ?>",

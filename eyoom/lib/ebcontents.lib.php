@@ -41,15 +41,8 @@ function eb_contents ($ec_code) {
     /**
     * 스킨설정
     */
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $ebcontents_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/ebcontents/'.$ec_skin;
-        if (!is_dir($ebcontents_skin_path))
-            $ebcontents_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebcontents/'.$ec_skin;
-        $ebcontents_skin_url = str_replace(G5_PATH, G5_URL, $ebcontents_skin_path);
-    } else {
-        $ebcontents_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebcontents/'.$ec_skin;
-        $ebcontents_skin_url = str_replace(G5_PATH, G5_URL, $ebcontents_skin_path);
-    }
+    $ebcontents_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebcontents/'.$ec_skin;
+    $ebcontents_skin_url = str_replace(G5_PATH, G5_URL, $ebcontents_skin_path);
     
     /**
      * EB콘텐츠 기본소스 출력 여부

@@ -7,7 +7,7 @@ if (!defined('_EYOOM_')) exit;
 /**
  * 페이징
  */
-$paging = $eb->set_paging("?{$qstr}&amp;page=");
+$paging = $eb->set_paging('scrap', '', $qstr);
 
 /**
  * 사용자 프로그램

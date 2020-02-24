@@ -28,7 +28,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <div class="adm-basic-form-wrap">
         <label for="ma_subject" class="label">메일 제목</label>
         <label class="input margin-bottom-20">
-            <input type="text" name="ma_subject" id="ma_subject" value="<?php echo stripslashes($ma['ma_subject']); ?>" required>
+            <input type="text" name="ma_subject" id="ma_subject" value="<?php echo get_sanitize_input($ma['ma_subject']); ?>" required>
         </label>
         <label class="label">메일 내용</label>
         <label class="textarea">

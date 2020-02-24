@@ -23,7 +23,7 @@ if ($_POST['act_button'] == "선택수정") {
         // 실제 번호를 넘김
         $k = $_POST['chk'][$i];
 
-        $p_it_name = is_array($_POST['it_name']) ? strip_tags($_POST['it_name'][$k]) : '';
+        $p_it_name = is_array($_POST['it_name']) ? strip_tags(clean_xss_attributes($_POST['it_name'][$k])) : '';
         $p_it_cust_price = is_array($_POST['it_cust_price']) ? strip_tags($_POST['it_cust_price'][$k]) : '';
         $p_it_price = is_array($_POST['it_price']) ? strip_tags($_POST['it_price'][$k]) : '';
         $p_it_stock_qty = is_array($_POST['it_stock_qty']) ? strip_tags($_POST['it_stock_qty'][$k]) : '';
@@ -51,6 +51,8 @@ if ($_POST['act_button'] == "선택수정") {
                         it_update_time = '".G5_TIME_YMDHIS."'
                 where it_id   = '{$_POST['it_id'][$k]}' ";
         sql_query($sql);
+
+		if( function_exists('shop_seo_title_update') ) shop_seo_title_update(preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$k]), true);
     }
     $msg = "선택한 상품을 수정하였습니다.";
 

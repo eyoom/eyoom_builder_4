@@ -40,7 +40,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label for="cp_subject" class="input form-width-250px">
-                                <input type="text" name="cp_subject" value="<?php echo stripslashes($cp['cp_subject']); ?>" id="cp_subject" required>
+                                <input type="text" name="cp_subject" value="<?php echo get_sanitize_input($cp['cp_subject']); ?>" id="cp_subject" required>
                             </label>
                         </td>
                     </tr>

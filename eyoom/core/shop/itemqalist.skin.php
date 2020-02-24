@@ -24,7 +24,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $iq_question = get_view_thumbnail(conv_content($row['iq_question'], 1), $thumbnail_width);
     }
 
-    $it_href = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
+    $it_href = shop_item_url($row['it_id']);
 
     if ($row['iq_answer']) {
         $iq_answer = get_view_thumbnail(conv_content($row['iq_answer'], 1), $thumbnail_width);
@@ -38,7 +38,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $is_answer = false;
     }
     
-	$list[$i]['it_href'] = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
+	$list[$i]['it_href'] = shop_item_url($row['it_id']);
 	$list[$i]['it_id'] = $row['it_id'];
 	$list[$i]['it_name'] = $row['it_name'];
 	$list[$i]['iq_name'] = $row['iq_name'];
@@ -56,7 +56,7 @@ $count = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['PHP_SELF'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('itemqalist', '', $qstr);
 
 /**
  * 스킨 출력

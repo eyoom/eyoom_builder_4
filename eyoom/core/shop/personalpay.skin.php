@@ -23,7 +23,7 @@ $count = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('personalpay', '', $qstr);
 
 /**
  * 이윰 테마파일 출력

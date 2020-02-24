@@ -104,7 +104,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=shopetc&amp;pid=itemstocksms&amp;'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

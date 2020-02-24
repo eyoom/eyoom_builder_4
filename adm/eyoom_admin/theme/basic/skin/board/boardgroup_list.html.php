@@ -132,9 +132,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         {
             체크: "<input type='hidden' name='group_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['gr_id']; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=boardgroup_form&amp;w=u&amp;gr_id=<?php echo $list[$i]['gr_id']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a>",
-            그룹아이디: "<a href='<?php echo G5_BBS_URL; ?>/group.php?gr_id=<?php echo $list[$i]['gr_id']; ?>'><?php echo $list[$i]['gr_id']; ?></a>",
+            그룹아이디: "<a href='<?php echo get_eyoom_pretty_url(G5_GROUP_DIR, $list[$i]['gr_id']); ?>' target='_blank'><?php echo $list[$i]['gr_id']; ?></a>",
             제목: "<label class='input'><input type='text' name='gr_subject[<?php echo $i; ?>]' id='gr_subject_<?php echo $i; ?>' value='<?php echo get_text($list[$i]['gr_subject']); ?>' required></label>",
-            그룹관리자: "<label class='input'><input type='text' name='gr_admin[<?php echo $i; ?>]' id='gr_admin<?php echo $i; ?>' value='<?php echo $list[$i]['gr_admin']; ?>' style='text-align:right;'></label>",
+            그룹관리자: "<?php if ($is_admin == 'super') { ?><label class='input'><input type='text' name='gr_admin[<?php echo $i; ?>]' id='gr_admin<?php echo $i; ?>' value='<?php echo get_sanitize_input($list[$i]['gr_admin']); ?>' style='text-align:right;'></label><?php } else { ?><input type='hidden' name='gr_admin[<?php echo $i ?>]' value='<?php echo get_sanitize_input($row['gr_admin']); ?>'><?php echo get_text($row['gr_admin']); ?><?php } ?>",
             게시판: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_list&amp;sfl=a.gr_id&amp;stx=<?php echo $list[$i]['gr_id']; ?>'><?php echo $list[$i]['board_cnt']; ?></a>",
             접근사용: "<label class='checkbox'><input type='checkbox' name='gr_use_access[<?php echo $i; ?>]' id='gr_use_access_<?php echo $i; ?>' value='1' <?php echo $list[$i]['gr_use_access'] ? 'checked':''; ?>><i></i></label>",
             접근회원수: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=boardgroupmember_list&amp;gr_id=<?php echo $list[$i]['gr_id']; ?>'><?php echo $list[$i]['member_cnt']; ?></a>",

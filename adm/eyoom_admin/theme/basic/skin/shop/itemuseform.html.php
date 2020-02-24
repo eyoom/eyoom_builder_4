@@ -49,7 +49,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="label">상품명</label>
                         </th>
                         <td>
-                            <a href="<?php echo G5_SHOP_URL; ?>/item.php?it_id=<?php echo $is['it_id']; ?>"><?php echo $is['it_name']; ?></a>
+                            <a href="<?php echo shop_item_url($is['it_id']); ?>"><?php echo $is['it_name']; ?></a>
                         </td>
                     </tr>
                     <tr>

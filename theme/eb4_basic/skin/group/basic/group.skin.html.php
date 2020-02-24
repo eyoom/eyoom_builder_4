@@ -24,7 +24,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
         <div class="col-sm-6 md-margin-bottom-20">
             <div class="headline-short">
-                <h5><strong><a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $list[$i]['bo_table']; ?>"><?php echo $list[$i]['bo_subject']; ?></a></strong></h5>
+                <h5><strong><a href="<?php echo get_eyoom_pretty_url($list[$i]['bo_table']); ?>"><?php echo $list[$i]['bo_subject']; ?></a></strong></h5>
             </div>
             <div class="group-latest">
                 <ul class="list-unstyled">

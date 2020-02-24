@@ -40,7 +40,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php if($default['de_type1_list_use']) { ?>
 <section class="margin-bottom-40">
     <div class="main-heading">
-        <h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1"><strong>히트상품</strong></a></h2>
+        <h2><a href="<?php echo shop_type_url(1); ?>"><strong>히트상품</strong></a></h2>
     </div>
     <?php
     $list = new item_list($skin_dir.'/'.$default['de_type1_list_skin']);
@@ -53,6 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     $list->set_view('it_price', true);
     $list->set_view('it_icon', true);
     $list->set_view('sns', true);
+    $list->set_view('star', true);
     echo $list->run();
     ?>
 </section>
@@ -74,7 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php if($default['de_type2_list_use']) { ?>
 <section class="margin-bottom-40">
     <div class="main-heading">
-        <h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=2"><strong>추천상품</strong></a></h2>
+        <h2><a href="<?php echo shop_type_url(2); ?>"><strong>추천상품</strong></a></h2>
     </div>
     <?php
     $list = new item_list($skin_dir.'/'.$default['de_type2_list_skin']);
@@ -86,6 +87,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     $list->set_view('it_price', true);
     $list->set_view('it_icon', true);
     $list->set_view('sns', true);
+    $list->set_view('star', true);
     echo $list->run();
     ?>
 </section>
@@ -111,7 +113,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php if($default['de_type3_list_use']) { ?>
 <section class="margin-bottom-40">
     <div class="main-heading">
-        <h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3"><strong>최신상품</strong></a></h2>
+        <h2><a href="<?php echo shop_type_url(3); ?>"><strong>최신상품</strong></a></h2>
     </div>
     <?php
     $list = new item_list($skin_dir.'/'.$default['de_type3_list_skin']);
@@ -123,6 +125,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     $list->set_view('it_price', true);
     $list->set_view('it_icon', true);
     $list->set_view('sns', true);
+    $list->set_view('star', true);
     echo $list->run();
     ?>
 </section>
@@ -144,7 +147,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php if($default['de_type4_list_use']) { ?>
 <section class="margin-bottom-40">
     <div class="main-heading">
-        <h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=4"><strong>인기상품</strong></a></h2>
+        <h2><a href="<?php echo shop_type_url(4); ?>"><strong>인기상품</strong></a></h2>
     </div>
     <?php
     $list = new item_list($skin_dir.'/'.$default['de_type4_list_skin']);
@@ -156,6 +159,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     $list->set_view('it_price', true);
     $list->set_view('it_icon', true);
     $list->set_view('sns', true);
+    $list->set_view('star', true);
     echo $list->run();
     ?>
 </section>
@@ -177,7 +181,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 <?php if($default['de_type5_list_use']) { ?>
 <section class="margin-bottom-40">
     <div class="main-heading">
-        <h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5"><strong>할인상품</strong></a></h2>
+        <h2><a href="<?php echo shop_type_url(5); ?>"><strong>할인상품</strong></a></h2>
     </div>
     <?php
     $list = new item_list($skin_dir.'/'.$default['de_type5_list_skin']);
@@ -189,6 +193,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
     $list->set_view('it_price', true);
     $list->set_view('it_icon', true);
     $list->set_view('sns', true);
+    $list->set_view('star', true);
     echo $list->run();
     ?>
 </section>

@@ -115,7 +115,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         <?php for ($i=0; $i<count($list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['po_id']; ?>'><i></i></label>",
-            관리: "<a href='./?dir=member&amp;pid=poll_form&amp;w=u&amp;po_id=<?php echo $list[$i]['po_id']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a>",
+            관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=poll_form&amp;w=u&amp;po_id=<?php echo $list[$i]['po_id']; ?>&amp;<?php echo $qstr; ?>'><u>수정</u></a>",
             번호: "<?php echo $list[$i]['po_id']; ?>",
             제목: "<span class='ellipsis'><?php echo get_text($list[$i]['po_subject']); ?></span>",
             투표권한: "<?php echo $list[$i]['po_level']; ?>",

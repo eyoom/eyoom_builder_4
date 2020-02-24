@@ -83,9 +83,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="ca_mb_id" class="label">관리회원 아이디</label>
                         </th>
                         <td>
+                            <?php if ($is_admin == 'super') { ?>
                             <label class="input form-width-250px">
-                                <input type="text" name="ca_mb_id" id="ca_mb_id" value="<?php echo $cainfo['ca_mb_id']; ?>">
+                                <input type="text" name="ca_mb_id" id="ca_mb_id" value="<?php echo get_sanitize_input($cainfo['ca_mb_id']); ?>">
                             </label>
+                            <?php } else { ?>
+                            <input type="hidden" name="ca_mb_id" value="<?php echo get_sanitize_input($ca['ca_mb_id']); ?>">
+                            <?php echo $ca['ca_mb_id']; ?>
+                            <?php } ?>
                         </td>
                     </tr>
                     <tr>
@@ -260,7 +265,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="input">
-                                <input type="text" name="ca_sell_email" id="ca_sell_email" value="<?php echo $cainfo['ca_sell_email']; ?>">
+                                <input type="text" name="ca_sell_email" id="ca_sell_email" value="<?php echo get_sanitize_input($cainfo['ca_sell_email']); ?>">
                             </label>
                             <div class="note"><strong>Note:</strong> 운영자와 판매자가 다른 경우에 사용합니다. 이 분류에 속한 상품을 등록할 경우에 기본값으로 입력됩니다.</div>
                         </td>

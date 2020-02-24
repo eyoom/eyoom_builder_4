@@ -183,7 +183,7 @@ $result = sql_query($sql);
 for($i=0; $row=sql_fetch_array($result); $i++) {
     // 상품이미지
     $row['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));
-    $row['href'] = G5_SHOP_URL . '/item.php?it_id=' . $row['it_id'];
+    $row['href'] = shop_item_url($row['it_id']);
 
     // 상품의 옵션정보
     $sql = " select ct_id, it_id, ct_price, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price $sql_common and it_id = '{$row['it_id']}' order by io_type asc, ct_id asc ";

@@ -22,15 +22,8 @@ function eb_ranking($skin_dir='basic', $cnt=10, $return=true) {
     $ranking['level'] = get_eyoom_ranking('level', $cnt);
 
     if ($return) {
-        if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-            $ranking_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/ranking/'.$skin_dir;
-            if (!is_dir($ranking_skin_path))
-                $ranking_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ranking/'.$skin_dir;
-            $ranking_skin_url = str_replace(G5_PATH, G5_URL, $ranking_skin_path);
-        } else {
-            $ranking_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ranking/'.$skin_dir;
-            $ranking_skin_url = str_replace(G5_PATH, G5_URL,$ranking_skin_path);
-        }
+        $ranking_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ranking/'.$skin_dir;
+        $ranking_skin_url = str_replace(G5_PATH, G5_URL,$ranking_skin_path);
 
         ob_start();
         include_once ($ranking_skin_path.'/ranking.skin.html.php');

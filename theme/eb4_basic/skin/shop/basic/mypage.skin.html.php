@@ -6,6 +6,7 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
+#smb_my {margin-bottom:0}
 .shop-mypage .panel-group {position:relative;margin-bottom:70px}
 .shop-mypage .panel-oc-btn {position:absolute;bottom:-30px;left:50%;width:50px;height:30px;margin-left:-25px;border:1px solid #d5d5d5;border-top:0;text-align:center;padding:5px 0 0;background:#f8f8f8}
 .shop-mypage .panel-oc-btn .fas {display:block;line-height:1;font-size:11px;color:#757575}
@@ -96,7 +97,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="margin-bottom-50">
         <div class="headline-short">
             <h4><strong>최근 주문내역</strong></h4>
-            <a href="./orderinquiry.php" class="headline-btn btn-e btn-e-brd btn-e-default"><i class="fas fa-plus"></i> 더보기</a>
+            <a href="<?php echo G5_SHOP_URL; ?>/orderinquiry.php" class="headline-btn btn-e btn-e-brd btn-e-default"><i class="fas fa-plus"></i> 더보기</a>
         </div>
         <?php
         // 최근 주문내역
@@ -112,7 +113,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="mypage-wishlist-wrap">
         <div class="headline-short">
             <h4><strong>최근 위시리스트</strong></h4>
-            <a href="./wishlist.php" class="headline-btn btn-e btn-e-brd btn-e-default"><i class="fas fa-plus"></i> 더보기</a>
+            <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php" class="headline-btn btn-e btn-e-brd btn-e-default"><i class="fas fa-plus"></i> 더보기</a>
         </div>
         <div class="mypage-wishlist-container">
             <?php for ($i=0; $i<$wish_count; $i++) { ?>
@@ -122,7 +123,7 @@ if (!defined('_EYOOM_')) exit;
                         <div class="mypage-wishlist-img">
                             <?php echo $wish_list[$i]['image']; ?>
                         </div>
-                        <h5><a href="./item.php?it_id=<?php echo $wish_list[$i]['it_id']; ?>"><strong><?php echo stripslashes($wish_list[$i]['it_name']); ?></strong></a></h5>
+                        <h5><a href="<?php echo shop_item_url($wish_list[$i]['it_id']); ?>"><strong><?php echo stripslashes($wish_list[$i]['it_name']); ?></strong></a></h5>
                         <div class="mypage-wishlist-date"><i class="far fa-clock"></i> <?php echo $wish_list[$i]['wi_time']; ?></div>
                     </div>
                 </div>

@@ -61,7 +61,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $row2 = sql_fetch($sql2);
     $group = "";
     if ($row2['cnt'])
-        $group = '<a href="./boardgroupmember_form.php?mb_id='.$row['mb_id'].'">'.$row2['cnt'].'</a>';
+        $group = '<a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=boardgroupmember_form&amp;mb_id='.$row['mb_id'].'">'.$row2['cnt'].'</a>';
     
     $list[$i] = $row;
     $list[$i]['cnt'] = $row2['cnt'];
@@ -70,7 +70,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 페이징
  */
-$paging = $eb->set_paging('./?dir=board&amp;pid=boardgroupmember_list&amp;'.$qstr.'&amp;gr_id='.$gr_id.'&amp;page=');
+$paging = $eb->set_paging('admin', $dir, $pid, 'gr_id='.$gr_id.'&amp;'.$qstr);
 
 /**
  * 검색버튼

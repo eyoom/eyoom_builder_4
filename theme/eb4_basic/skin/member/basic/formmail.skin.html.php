@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         <div class="clearfix"></div>
         <?php } ?>
     </h4>
-    <form name="fformmail" action="./formmail_send.php" onsubmit="return fformmail_submit(this);" method="post" enctype="multipart/form-data" class="eyoom-form">
+    <form name="fformmail" action="<?php echo G5_BBS_URL; ?>/formmail_send.php" onsubmit="return fformmail_submit(this);" method="post" enctype="multipart/form-data" class="eyoom-form">
     <input type="hidden" name="to" value="<?php echo $email; ?>">
     <input type="hidden" name="attach" value="2">
     <input type="hidden" name="token" value="<?php echo $token; ?>">

@@ -22,11 +22,6 @@ if( !isset($it) && !get_session("ss_tv_idx") ){
     */
 }
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/itemqa.php');
-    return;
-}
-
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // 현재페이지, 총페이지수, 한페이지에 보여줄 행, URL
@@ -71,9 +66,9 @@ if (!function_exists('itemqa_page'))
     }
 }
 
-$itemqa_list = "./itemqalist.php";
-$itemqa_form = "./itemqaform.php?it_id=".$it_id;
-$itemqa_formupdate = "./itemqaformupdate.php?it_id=".$it_id;
+$itemqa_list = G5_SHOP_URL."/itemqalist.php";
+$itemqa_form = G5_SHOP_URL."/itemqaform.php?it_id=".$it_id;
+$itemqa_formupdate = G5_SHOP_URL."/itemqaformupdate.php?it_id=".$it_id;
 
 $sql_common = " from `{$g5['g5_shop_item_qa_table']}` where it_id = '{$it_id}' ";
 

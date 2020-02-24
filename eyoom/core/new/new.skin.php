@@ -51,7 +51,7 @@ unset($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging("?gr_id={$gr_id}&amp;view={$view}&amp;mb_id={$mb_id}&amp;page=");
+$paging = $eb->set_paging('new', '', "&amp;gr_id={$gr_id}&amp;view={$view}&amp;mb_id={$mb_id}");
 
 /**
  * 사용자 프로그램

@@ -281,7 +281,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <?php } else { ?>
                                 <input type="hidden" name="it_id" value="<?php echo $it['it_id']; ?>">
                                 <label class="input">
-                                    <a href="<?php echo G5_SHOP_URL; ?>/item.php?it_id=<?php echo $it_id; ?>" target="_blank" class="btn-e btn-e-xs btn-e-dark">상품확인</a>
+                                    <a href="<?php echo shop_item_url($it_id); ?>" target="_blank" class="btn-e btn-e-xs btn-e-dark">상품확인</a>
                                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=itemuselist&sfl=a.it_id&stx=<?php echo $it['it_id']; ?>" class="btn-e btn-e-xs btn-e-dark">사용후기</a>
                                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=itemqalist&sfl=a.it_id&stx=<?php echo $it['it_id']; ?>" class="btn-e btn-e-xs btn-e-dark">상품문의</a>
                                 </label>
@@ -525,7 +525,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="it_sell_email" value="<?php echo $it['it_sell_email']; ?>" id="it_sell_email">
+                                    <input type="text" name="it_sell_email" value="<?php echo get_sanitize_input($it['it_sell_email']); ?>" id="it_sell_email">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 운영자와 실제 판매자가 다른 경우 실제 판매자의 e-mail을 입력하면, 상품 주문 시점을 기준으로 실제 판매자에게도 주문서를 발송합니다.</div>
                             </td>

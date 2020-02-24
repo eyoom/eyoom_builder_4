@@ -55,8 +55,7 @@ else if ($w == "u")
             alert("\'{$member['mb_id']}\' 님께서 수정 할 권한이 없는 상품입니다.");
     }
 
-    $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
-    $it = sql_fetch($sql);
+    $it = get_shop_item($it_id);
 
     if(!$it)
         alert('상품정보가 존재하지 않습니다.');
@@ -198,7 +197,8 @@ $spl_count = count($spl_subject);
  */
 for($i=1; $i<=10; $i++) {
     $it_img = G5_DATA_PATH.'/item/'.$it['it_img'.$i];
-    if(is_file($it_img) && $it['it_img'.$i]) {
+    $it_img_exists = run_replace('shop_item_image_exists', (is_file($it_img) && file_exists($it_img)), $it, $i);
+    if($it_img_exists) {
         $size = @getimagesize($it_img);
         $thumb = get_it_thumbnail($it['it_img'.$i], 300, 300);
         $gdimage[$i]['width'] = $size[0];
@@ -265,6 +265,6 @@ $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
 if (!$wmode) {
     $frm_submit .= ' <a href="' . G5_ADMIN_URL . '/?dir=shop&pid=itemlist&' . $qstr . '" class="btn-e btn-e-lg btn-e-dark">목록</a> ';
-    $frm_submit .= $w=='u' ? '<a href="' . G5_SHOP_URL . '/item.php?it_id='.$it['it_id'].'" class="btn-e btn-e-lg btn-e-dark">상품보기</a> ' : '';
+    $frm_submit .= $w=='u' ? '<a href="' . shop_item_url($it_id) . '" class="btn-e btn-e-lg btn-e-dark">상품보기</a> ' : '';
 }
 $frm_submit .= '</div>';

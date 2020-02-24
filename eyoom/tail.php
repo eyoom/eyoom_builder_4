@@ -5,14 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
- * 모바일일 경우 & device=mobile
- */
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_THEME_MOBILE_PATH.'/tail.php');
-    return;
-}
-
-/**
  * 커뮤니티 기능을 사용하지 않거나
  * 게시판의 설정이 쇼핑몰 레이아웃 적용일때
  */

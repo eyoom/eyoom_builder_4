@@ -222,7 +222,7 @@ if($option_count) {
     // 옵션명
     $opt1_cnt = $opt2_cnt = $opt3_cnt = 0;
     for($i=0; $i<$option_count; $i++) {
-        $_POST['opt_id'][$i] = preg_replace(G5_OPTION_ID_FILTER, '', $_POST['opt_id'][$i]);
+        $_POST['opt_id'][$i] = preg_replace(G5_OPTION_ID_FILTER, '', strip_tags($_POST['opt_id'][$i]));
 
         $opt_val = explode(chr(30), $_POST['opt_id'][$i]);
         if($opt_val[0])
@@ -250,7 +250,7 @@ if($supply_count) {
     // 추가옵션명
     $arr_spl = array();
     for($i=0; $i<$supply_count; $i++) {
-        $_POST['spl_id'][$i] = preg_replace(G5_OPTION_ID_FILTER, '', $_POST['spl_id'][$i]);
+        $_POST['spl_id'][$i] = preg_replace(G5_OPTION_ID_FILTER, '', strip_tags($_POST['spl_id'][$i]));
 
         $spl_val = explode(chr(30), $_POST['spl_id'][$i]);
         if(!in_array($spl_val[0], $arr_spl))
@@ -273,7 +273,7 @@ $it_info_value = addslashes(serialize($value_array));
 if(($it_point_type == 1 || $it_point_type == 2) && $it_point > 99)
     alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
 
-$it_name = strip_tags(trim($_POST['it_name']));
+$it_name = strip_tags(clean_xss_attributes(trim($_POST['it_name'])));
 
 // KVE-2019-0708
 $check_sanitize_keys = array(
@@ -305,7 +305,7 @@ $check_sanitize_keys = array(
 );
 
 foreach( $check_sanitize_keys as $key ){
-    $$key = isset($_POST[$key]) ? strip_tags($_POST[$key]) : '';
+    $$key = isset($_POST[$key]) ? strip_tags(clean_xss_attributes($_POST[$key])) : '';
 }
 
 if ($it_name == "")
@@ -330,7 +330,7 @@ $sql_common = " ca_id               = '$ca_id',
                 it_type5            = '$it_type5',
                 it_basic            = '$it_basic',
                 it_explan           = '$it_explan',
-                it_explan2          = '".strip_tags(trim($_POST['it_explan']))."',
+                it_explan2          = '".strip_tags(trim(clean_xss_attributes($_POST['it_explan'])))."',
                 it_mobile_explan    = '$it_mobile_explan',
                 it_cust_price       = '$it_cust_price',
                 it_price            = '$it_price',
@@ -605,6 +605,11 @@ if(is_checked('chk_all_10'))                     $all_fields .= " , it_10_subj =
 if($all_fields) {
     sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");
 }
+
+$is_seo_title_edit = $w ? true : false;
+if( function_exists('shop_seo_title_update') ) shop_seo_title_update($it_id, $is_seo_title_edit);
+
+run_event('shop_admin_itemformupdate', $it_id, $w);
 
 $cate_a = clean_xss_tags(trim($_POST['cate_a']));
 $cate_b = clean_xss_tags(trim($_POST['cate_b']));

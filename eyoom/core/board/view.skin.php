@@ -209,6 +209,7 @@ if ($board['bo_use_nogood']) {
     if (!$nogoods) $nogoods = array();
 }
 
+$list_href = get_eyoom_pretty_url($bo_table,'',$qstr);
 /**
  * Window Mode 사용시
  */

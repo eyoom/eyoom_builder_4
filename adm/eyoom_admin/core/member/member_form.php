@@ -144,16 +144,16 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 
 // 회원아이콘
 $mb_dir = substr($mb['mb_id'],0,2);
-$icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.$mb['mb_id'].'.gif';
+$icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb['mb_id']).'.gif';
 if (file_exists($icon_file)) {
-    $icon_url = G5_DATA_URL.'/member/'.$mb_dir.'/'.$mb['mb_id'].'.gif';
+    $icon_url = str_replace(G5_DATA_PATH, G5_DATA_URL, $icon_file);
 }
 
 // 회원이미지
 $mb_dir = substr($mb['mb_id'],0,2);
-$photo_file = G5_DATA_PATH.'/member_image/'.$mb_dir.'/'.$mb['mb_id'].'.gif';
+$photo_file = G5_DATA_PATH.'/member_image/'.$mb_dir.'/'.get_mb_icon_name($mb['mb_id']).'.gif';
 if (file_exists($photo_file)) {
-    $photo_url = G5_DATA_URL.'/member_image/'.$mb_dir.'/'.$mb['mb_id'].'.gif';
+    $photo_url = str_replace(G5_DATA_PATH, G5_DATA_URL, $photo_file);
 }
 
 // query string

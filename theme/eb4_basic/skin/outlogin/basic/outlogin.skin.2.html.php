@@ -103,13 +103,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
     <div class="scroll-tabs">
         <div id="tab-member-nav">
             <span><a href="<?php echo G5_URL; ?>/mypage/" class="btn-e btn-e-xs bg-dark lighter">마이페이지</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=timeline" class="btn-e btn-e-xs btn-e-default">내타임라인</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=favorite" class="btn-e btn-e-xs btn-e-default">관심게시판</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=followinggul" class="btn-e btn-e-xs btn-e-default">팔로윙글</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=subscribe" class="btn-e btn-e-xs btn-e-default">구독글</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=pinboard" class="btn-e btn-e-xs btn-e-default">핀보드</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=goodpost" class="btn-e btn-e-xs btn-e-default">추천/비추</a></span>
-            <span><a href="<?php echo G5_URL; ?>/mypage/?t=starpost" class="btn-e btn-e-xs btn-e-default">별점평가글</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'timeline'); ?>" class="btn-e btn-e-xs btn-e-default">내타임라인</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'favorite'); ?>" class="btn-e btn-e-xs btn-e-default">관심게시판</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'followinggul'); ?>" class="btn-e btn-e-xs btn-e-default">팔로윙글</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'subscribe'); ?>" class="btn-e btn-e-xs btn-e-default">구독글</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'pinboard'); ?>" class="btn-e btn-e-xs btn-e-default">핀보드</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'goodpost'); ?>" class="btn-e btn-e-xs btn-e-default">추천/비추</a></span>
+            <span><a href="<?php echo get_eyoom_pretty_url('mypage', 'starpost'); ?>" class="btn-e btn-e-xs btn-e-default">별점평가글</a></span>
             <span><a href="<?php echo G5_URL; ?>/mypage/activity.php" class="btn-e btn-e-xs btn-e-default">활동기록</a></span>
             <span><a href="<?php echo G5_URL; ?>/mypage/config.php" class="btn-e btn-e-xs btn-e-default">환경설정</a></span>
         </div>
@@ -138,6 +138,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                         </div>
                         <?php } ?>
                         <strong>내글반응</strong><span><?php echo $respond_not_read; ?></span>
+                    </a>
+                    <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="scrap_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/scrap.php" target="_blank"<?php } ?> class="info-btn">
+                        <?php if ( $mb_scrap_cnt >= 1 ) { ?>
+                        <div class="alarm-marker">
+                            <span class="alarm-effect"></span>
+                            <span class="alarm-point"></span>
+                        </div>
+                        <?php } ?>
+                        <strong>스크랩</strong><span><?php echo $mb_scrap_cnt; ?></span>
                     </a>
                     <?php } else { ?>
                     <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php" class="info-btn others-btn bg-dark">정보수정</a>

@@ -147,13 +147,13 @@ else
 if( $w == '' || $w == 'u' ){
 
     $mb_dir = substr($mb_id,0,2);
+    $mb_icon_img = get_mb_icon_name($mb_id).'.gif';
 
     // 회원 아이콘 삭제
     if ($del_mb_icon)
-        @unlink(G5_DATA_PATH.'/member/'.$mb_dir.'/'.$mb_id.'.gif');
+        @unlink(G5_DATA_PATH.'/member/'.$mb_dir.'/'.$mb_icon_img);
 
     $image_regex = "/(\.(gif|jpe?g|png))$/i";
-    $mb_icon_img = $mb_id.'.gif';
 
     // 아이콘 업로드
     if (isset($_FILES['mb_icon']) && is_uploaded_file($_FILES['mb_icon']['tmp_name'])) {
@@ -262,5 +262,7 @@ $qstr .= $sms ? '&amp;sms='.$sms: '';
 $qstr .= $sdt ? '&amp;sdt='.$sdt: '';
 $qstr .= $fr_date ? '&amp;fr_date='.$fr_date: '';
 $qstr .= $to_date ? '&amp;to_date='.$to_date: '';
+
+run_event('admin_member_form_update', $w, $mb_id);
 
 goto_url(G5_ADMIN_URL . '/?dir=member&amp;pid=member_form&amp;'.$qstr.'&amp;w=u&amp;mb_id='.$mb_id, false);

@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" 
         <button type="button" onclick="self.close();" class="win-close-btn"><i class="fas fa-times"></i></button>
     </h1>
 
-    <form name="fitemrecommend" method="post" action="./itemrecommendmail.php" autocomplete="off" onsubmit="return fitemrecommend_check(this);" class="eyoom-form">
+    <form name="fitemrecommend" method="post" action="<?php echo G5_SHOP_URL; ?>/itemrecommendmail.php" autocomplete="off" onsubmit="return fitemrecommend_check(this);" class="eyoom-form">
     <input type="hidden" name="token" value="<?php echo $token; ?>">
     <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
 

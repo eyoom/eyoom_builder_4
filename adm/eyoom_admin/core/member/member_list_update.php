@@ -16,6 +16,8 @@ auth_check($auth[$sub_menu], 'w');
 
 check_admin_token();
 
+$mb_datas = array();
+
 if ($_POST['act_button'] == "선택수정") {
 
     $rm = 0;
@@ -32,7 +34,7 @@ if ($_POST['act_button'] == "선택수정") {
         // 대상 회원아이디
         $mb_id = $_POST['mb_id'][$k];
 
-        $mb = get_member($mb_id);
+        $mb_datas[] = $mb = get_member($_POST['mb_id'][$k]);
 
         if (!$mb['mb_id']) {
             $msg .= $mb['mb_id'].' : 회원자료가 존재하지 않습니다.\\n';
@@ -125,7 +127,7 @@ if ($_POST['act_button'] == "선택수정") {
         // 실제 번호를 넘김
         $k = $_POST['chk'][$i];
 
-        $mb = get_member($_POST['mb_id'][$k]);
+        $mb_datas[] = $mb = get_member($_POST['mb_id'][$k]);
 
         if (!$mb['mb_id']) {
             $msg .= $mb['mb_id'].' : 회원자료가 존재하지 않습니다.\\n';
@@ -146,5 +148,7 @@ if ($_POST['act_button'] == "선택수정") {
 if ($msg)
     //echo '<script> alert("'.$msg.'"); </script>';
     alert($msg);
+
+run_event('admin_member_list_update', $_POST['act_button'], $mb_datas);
 
 alert($message, G5_ADMIN_URL . '/?dir=member&amp;pid=member_list&amp;'.$qstr);

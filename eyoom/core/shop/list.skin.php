@@ -22,7 +22,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
      * 상세페이지 경로
      */
     if($this->href) {
-        $row['href'] = $this->href . $row['it_id'];
+        $row['href'] = shop_item_url($row['it_id']);
     }
 
     /**
@@ -61,7 +61,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
      */
     if ($this->view_sns) {
         $row['sns_top'] = $this->img_height + 10;
-        $row['sns_url']  = urlencode(G5_SHOP_URL.'/item.php?it_id='.$row['it_id']);
+        $row['sns_url']  = urlencode(shop_item_url($row['it_id']));
         $row['sns_title'] = urlencode(get_text($row['it_name']).' | '.get_text($config['cf_title']));
     }
 

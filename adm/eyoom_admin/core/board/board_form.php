@@ -15,7 +15,7 @@ $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_form_update&amp;smode=1
 $sql = " select count(*) as cnt from {$g5['group_table']} ";
 $row = sql_fetch($sql);
 if (!$row['cnt'])
-    alert('게시판그룹이 한개 이상 생성되어야 합니다.', './boardgroup_form.php');
+    alert('게시판그룹이 한개 이상 생성되어야 합니다.', G5_ADMIN_URL . '/?dir=board&pid=boardgroup_form');
 
 $html_title = '게시판';
 
@@ -206,7 +206,7 @@ $frm_submit_fixed = ' <input type="submit" value="확인" class="admin-fixed-sub
 $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
 if ($bo_table && $w && !$wmode) {
-    $frm_submit .= ' <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_copy&amp;bo_table='.$board['bo_table'].'&amp;wmode=1" onclick="eb_modal(this.href); return false;" class="btn-e btn-e-lg btn-e-dark">게시판복사</a> <a href="'.G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_thumbnail_delete&amp;bo_table='.$board['bo_table'].'&amp;'.$qstr.'" onclick="return delete_confirm2(\"게시판 썸네일 파일을 삭제하시겠습니까?\");"  class="btn-e btn-e-lg btn-e-dark">게시판 썸네일 삭제</a>';
+    $frm_submit .= ' <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_copy&amp;bo_table='.$board['bo_table'].'&amp;wmode=1" onclick="eb_modal(this.href); return false;" class="btn-e btn-e-lg btn-e-dark">게시판복사</a> <a href="'.get_eyoom_pretty_url($board['bo_table']).'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_thumbnail_delete&amp;bo_table='.$board['bo_table'].'&amp;'.$qstr.'" onclick="return delete_confirm2(\"게시판 썸네일 파일을 삭제하시겠습니까?\");"  class="btn-e btn-e-lg btn-e-dark">게시판 썸네일 삭제</a>';
 }
 if (!$wmode) {
     $frm_submit .= ' <a href="' . G5_ADMIN_URL . '/?dir=board&amp;pid=board_list&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ';

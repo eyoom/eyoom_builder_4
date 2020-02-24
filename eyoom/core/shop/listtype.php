@@ -9,11 +9,6 @@ if( isset($sort) && ! in_array($sort, array('it_sum_qty', 'it_price', 'it_use_av
     $sort='';
 }
 
-if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-    include_once(G5_MSHOP_PATH.'/listtype.php');
-    return;
-}
-
 $type = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\s]/", "", $_REQUEST['type']);
 if ($type == 1)      $g5['title'] = '히트상품';
 else if ($type == 2) $g5['title'] = '추천상품';
@@ -104,8 +99,8 @@ if (file_exists($list_file)) {
     $total_page  = ceil($total_count / $items);
 }
 
-$qstr .= '&amp;type='.$type.'&amp;sort='.$sort;
-$paging = $eb->set_paging($_SERVER['SCRIPT_NAME']."?{$qstr}&amp;page=");
+$qstr .= '&amp;sort='.$sort;
+$paging = $eb->set_paging('itemtype', $type, $qstr);
 
 /**
  * 이윰 테마파일 출력

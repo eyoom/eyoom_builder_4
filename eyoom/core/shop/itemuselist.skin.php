@@ -19,7 +19,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
     
     $list[$i] = $row;
-    $list[$i]['it_href'] = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
+    $list[$i]['it_href'] = shop_item_url($row['it_id']);
     $list[$i]['it_id'] = $row['it_id'];
     $list[$i]['is_content'] = $row['is_content'];
     $list[$i]['is_tcontent'] = $is_content;
@@ -34,7 +34,7 @@ $count = count($list);
 /**
  * 페이징
  */
-$paging = $eb->set_paging($_SERVER['PHP_SELF'].'?'.$qstr.'&amp;page=');
+$paging = $eb->set_paging('itemuselist', '', $qstr);
 
 /**
  * 스킨 출력

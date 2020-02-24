@@ -41,15 +41,8 @@ function eb_slider ($es_code) {
     /**
     * 스킨설정
     */
-    if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-        $ebslider_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/ebslider/'.$es_skin;
-        if (!is_dir($ebslider_skin_path))
-            $ebslider_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebslider/'.$es_skin;
-        $ebslider_skin_url = str_replace(G5_PATH, G5_URL, $ebslider_skin_path);
-    } else {
-        $ebslider_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebslider/'.$es_skin;
-        $ebslider_skin_url = str_replace(G5_PATH, G5_URL, $ebslider_skin_path);
-    }
+    $ebslider_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebslider/'.$es_skin;
+    $ebslider_skin_url = str_replace(G5_PATH, G5_URL, $ebslider_skin_path);
 
     /**
      * EB슬라이더 기본소스 출력 여부

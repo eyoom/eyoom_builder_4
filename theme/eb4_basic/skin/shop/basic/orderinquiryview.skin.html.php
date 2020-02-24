@@ -67,10 +67,11 @@ if($od['od_pg'] == 'lg') {
 .shop-order-inquiry-view .total-box-in-box {position:relative;overflow:hidden;clear:both;padding:5px 10px;text-align:right;font-size:12px;color:#757575}
 .shop-order-inquiry-view .total-box-in-box span {float:left}
 .shop-order-inquiry-view .total-box-in-box strong {color:#000;font-size:12px}
-.shop-order-inquiry-view .order-payment-cancel {position:relative}
+#sod_cancel_pop {position:relative}
+#sod_fin_cancelfrm form {padding:0}
 .shop-order-inquiry-view .order-payment-cancel h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
 .shop-order-inquiry-view .order-payment-cancel button {height:40px;border:1px solid #959595;font-weight:bold;width:100%;background:#fff;color:#757575}
-.shop-order-inquiry-view .order-payment-cancel #sod_fin_cancelfrm {margin:20px 0 0;padding:0;background:none}
+.shop-order-inquiry-view .order-payment-cancel #sod_fin_cancelfrm {position:relative;top:inherit;left:inherit;width:100%;margin:20px 0 0;padding:0;background:none;box-shadow:0 0 0 #fff;border:0 none}
 .shop-order-inquiry-view .order-payment-cancel .btn-e-xxlg {border:0}
 .shop-order-inquiry-view #sod_fin_test {padding:0;margin-top:20px}
 .shop-order-inquiry-view #sod_fin_test .btn-e-xxlg {border:0}
@@ -289,7 +290,7 @@ if($od['od_pg'] == 'lg') {
                      </table>
                 </div>
             </div>
-
+            
             <div class="order-view-member-box">
                 <div class="headline-short"><h5><strong>주문하신 분</strong></h5></div>
                 <div class="table-list-eb">
@@ -397,28 +398,24 @@ if($od['od_pg'] == 'lg') {
                 <div class="payment-info-box">
                     <span>개별상품 쿠폰할인</span>
                     <strong><?php echo number_format($od['od_cart_coupon']); ?></strong>원
-
                 </div>
                 <?php } ?>
                 <?php if($od['od_coupon'] > 0) { ?>
                 <div class="payment-info-box">
                     <span>주문금액 쿠폰할인</span>
                     <strong><?php echo number_format($od['od_coupon']); ?></strong>원
-
                 </div>
                 <?php } ?>
                 <?php if ($od['od_send_cost'] > 0) { ?>
                 <div class="payment-info-box">
                     <span>배송비</span>
                     <strong><?php echo number_format($od['od_send_cost']); ?></strong>원
-
                 </div>
                 <?php } ?>
                 <?php if($od['od_send_coupon'] > 0) { ?>
                 <div class="payment-info-box">
                     <span>배송비 쿠폰할인</span>
                     <strong><?php echo number_format($od['od_send_coupon']); ?></strong>원
-
                 </div>
                 <?php } ?>
                 <?php if ($od['od_send_cost2'] > 0) { ?>
@@ -431,7 +428,6 @@ if($od['od_pg'] == 'lg') {
                 <div class="payment-info-box">
                     <span>취소금액</span>
                     <strong><?php echo number_format($od['od_cancel_price']); ?></strong>원
-
                 </div>
                 <?php } ?>
                 <div class="payment-info-box">
@@ -471,26 +467,38 @@ if($od['od_pg'] == 'lg') {
             </div>
 
             <div class="order-payment-cancel">
-                <h2>주문취소</h2>
                 <?php
                 // 취소한 내역이 없다면
                 if ($cancel_price == 0) {
                     if ($custom_cancel) {
                 ?>
-                <button type="button" onclick="document.getElementById('sod_fin_cancelfrm').style.display='block';">주문 취소하기</button>
+                <button type="button" class="sod_fin_c_btn">주문 취소하기</button>
 
-                <div id="sod_fin_cancelfrm">
-                    <form method="post" action="./orderinquirycancel.php" onsubmit="return fcancel_check(this);" class="eyoom-form">
-                    <input type="hidden" name="od_id"  value="<?php echo $od['od_id']; ?>">
-                    <input type="hidden" name="token"  value="<?php echo $token; ?>">
+                <div id="sod_cancel_pop">
+                    <div id="sod_fin_cancelfrm">
+                        <h2>주문취소</h2>
+                        <form method="post" action="<?php echo G5_SHOP_URL; ?>/orderinquirycancel.php" onsubmit="return fcancel_check(this);" class="eyoom-form">
+                        <input type="hidden" name="od_id"  value="<?php echo $od['od_id']; ?>">
+                        <input type="hidden" name="token"  value="<?php echo $token; ?>">
 
-                    <label for="cancel_memo" class="sound_only">취소사유</label>
-                    <label class="input required-mark">
-                        <input type="text" name="cancel_memo" id="cancel_memo" required size="40" maxlength="100" placeholder="취소사유">
-                    </label>
-                    <input type="submit" value="확인" class="btn-e btn-e-xxlg btn-e-dark btn-e-block margin-top-10">
-                    </form>
+                        <label for="cancel_memo" class="sound_only">취소사유</label>
+                        <label class="input required-mark">
+                            <input type="text" name="cancel_memo" id="cancel_memo" required size="40" maxlength="100" placeholder="취소사유">
+                        </label>
+                        <input type="submit" value="확인" class="btn-e btn-e-xxlg btn-e-dark btn-e-block margin-top-10">
+                        </form>
+                    </div>
                 </div>
+                <script>	
+                $(function (){
+                    $(".sod_fin_c_btn").on("click", function() {
+                        $("#sod_cancel_pop").show();
+                    });
+                    $(".sod_cls_btn").on("click", function() {
+                        $("#sod_cancel_pop").hide();
+                    });		
+                });
+                </script>
                 <?php
                     }
                 } else {

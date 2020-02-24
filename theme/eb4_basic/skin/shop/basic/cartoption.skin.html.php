@@ -12,18 +12,18 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-option .option-box {border:1px solid #d5d5d5;background:#f2f2f2;padding:10px;margin-bottom:20px}
 .shop-option .option-act-btn {text-align:center}
 .shop-option .option-act-btn .btn-e {width:250px;padding:12px 10px}
-#sit_opt_added {margin:0;padding:0;border-bottom:0;background:#fff;list-style:none}
-#sit_opt_added li {padding:15px 0;padding-right:220px;border-bottom:1px solid #e9e9e9;position:relative}
+#sit_opt_added {margin:0;padding:0;border-bottom:0;border-top:1px solid #e9e9e9;background:#fff;list-style:none}
+#sit_opt_added li {padding:15px 0;padding-right:220px;border:0 none;border-bottom:1px solid #e9e9e9;position:relative;background:none;margin:0}
 #sit_opt_added li .opt_name {line-height:20px;font-weight:bold}
 #sit_opt_added li .opt_count {position:absolute;top:50%;right:0;margin-top:-15px}
 #sit_opt_added button {float:left;width:30px;height:30px;border:1px solid #cdcdcd;background:#fff;color:#666;font-size:12px}
 #sit_opt_added button:hover {color:#000}
 #sit_opt_added .num_input {float:left;border:0;height:30px;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;text-align:center}
-#sit_opt_added .sit_opt_del {border:0;font-size:15px}
+#sit_opt_added .sit_opt_del {position:relative;border:0;font-size:15px}
 #sit_opt_added .sit_opt_del:hover {color:#be334a}
 #sit_opt_added .sit_opt_prc {display:inline-block;float:left;width:100px;padding:0 3px;text-align:right;line-height:30px;font-size:1.183em;font-weight:bold}
 #mod_option_frm #sit_sel_option {margin:0 0 20px}
-#mod_option_frm #sit_tot_price {margin:0 0 20px;text-align:right;font-size:15px;color:#757575}
+#mod_option_frm #sit_tot_price {display:block;float:none;margin:0 0 20px;text-align:right;font-size:15px;color:#757575}
 #mod_option_frm #sit_tot_price strong {color:#FF4848;font-size:19px;margin-left:10px}
 <?php if (G5_IS_MOBILE) { ?>
 .shop-option {padding:15px}
@@ -115,7 +115,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <div id="sit_tot_price"></div>
 
     <div class="option-act-btn">
-        <input type="submit" value="선택사항적용" class="btn-e btn-e-xxlg btn-e-red">
+        <input type="submit" value="확인" class="btn-e btn-e-xxlg btn-e-red">
     </div>
     </form>
 </div>

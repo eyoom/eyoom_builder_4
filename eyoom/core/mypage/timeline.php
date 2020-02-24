@@ -94,9 +94,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
      * 원글 링크 생성
      */
     if ($row['wr_id'] == $row['wr_parent']) { // 원본글
-        $list[$i]['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_id']}".$query_wmode;
+        $list[$i]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],$query_wmode);
     } else { // 댓글
-        $list[$i]['href'] = G5_BBS_URL."/board.php?bo_table={$row['bo_table']}&amp;wr_id={$row['wr_parent']}".$query_wmode."#c_{$row['wr_id']}";
+        $list[$i]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_parent'],$query_wmode.'#c_'.$row['wr_id']);
     }
     $list[$i]['datetime'] = $row['bn_datetime'];
     $list[$i]['bo_info'] = $bo_info[$row['bo_table']];

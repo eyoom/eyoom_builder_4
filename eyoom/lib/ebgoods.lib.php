@@ -57,15 +57,8 @@ function eb_goods ($eg_code) {
         /**
         * 스킨정보
         */
-        if (G5_IS_MOBILE && $config['cf_eyoom_mobile_skin'] == '1') {
-            $ebgoods_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/ebgoods/'.$eg_master['eg_skin'];
-            if (!is_dir($ebgoods_skin_path))
-                $ebgoods_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebgoods/'.$eg_master['eg_skin'];
-            $ebgoods_skin_url = str_replace(G5_PATH, G5_URL, $ebgoods_skin_path);
-        } else {
-            $ebgoods_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebgoods/'.$eg_master['eg_skin'];
-            $ebgoods_skin_url = str_replace(G5_PATH, G5_URL, $ebgoods_skin_path);
-        }
+        $ebgoods_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/ebgoods/'.$eg_master['eg_skin'];
+        $ebgoods_skin_url = str_replace(G5_PATH, G5_URL, $ebgoods_skin_path);
 
         /**
          * 회원레벨
@@ -85,11 +78,6 @@ function eb_goods ($eg_code) {
              */
             $eg_item = $thema->save_ebgoods_item($eg_code, $theme);
         }
-        
-        /**
-         * 상품 url
-         */
-        $it_url = G5_SHOP_URL . '/item.php?it_id=';
         
         /**
          * 전체 상품분류
@@ -149,7 +137,7 @@ function eb_goods ($eg_code) {
             $loop = &$eg_item[$i]['list'];
             for ($j=0; $row=sql_fetch_array($result); $j++) {
                 $loop[$j] = $row;
-                $loop[$j]['href'] = $it_url . $row['it_id'];
+                $loop[$j]['href'] = shop_item_url($row['it_id']);
                 $loop[$j]['ca_name'] = $ca_name[$row['ca_id']];
                 
                 /**
@@ -170,7 +158,7 @@ function eb_goods ($eg_code) {
                  * 소셜링크 정보
                  */
                 if ($eg_item[$i]['gi_view_sns'] == 'y') {
-                    $loop[$j]['sns_url']  = urlencode(G5_SHOP_URL.'/item.php?it_id='.$row['it_id']);
+                    $loop[$j]['sns_url']  = urlencode(shop_item_url($row['it_id']));
                     $loop[$j]['sns_title'] = urlencode(get_text($row['it_name']).' | '.get_text($config['cf_title']));
                 }
             }

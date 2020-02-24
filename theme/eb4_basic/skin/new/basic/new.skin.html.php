@@ -130,15 +130,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                                 <a href="<?php echo $newlist[$i]['href']; ?>"><span class="color-grey"><?php echo $newlist[$i]['comment']; ?></span><strong><?php echo $newlist[$i]['wr_subject']; ?></strong></a>
                             </div>
                         </td>
-                        <td class="hidden-xs"><a href="./new.php?gr_id=<?php echo $newlist[$i]['gr_id']; ?>"><?php echo $newlist[$i]['gr_subject']; ?></a></td>
-                        <td class="hidden-xs"><a href="./board.php?bo_table=<?php echo $newlist[$i]['bo_table']; ?>"><?php echo $newlist[$i]['bo_subject']; ?></a></td>
+                        <td class="hidden-xs"><a href="<?php echo G5_BBS_URL; ?>/new.php?gr_id=<?php echo $newlist[$i]['gr_id']; ?>"><?php echo $newlist[$i]['gr_subject']; ?></a></td>
+                        <td class="hidden-xs"><a href="<?php echo get_eyoom_pretty_url($newlist[$i]['bo_table']); ?>"><?php echo $newlist[$i]['bo_subject']; ?></a></td>
                         <td class="hidden-xs"><div><?php echo $newlist[$i]['name']; ?></div></td>
                         <td class="hidden-xs"><?php echo $newlist[$i]['datetime2']; ?></td>
                     </tr>
                     <tr class="td-mobile visible-xs"><?php /* 767px 이하에서만 보임 */ ?>
                         <td colspan="<?php echo $colspan; ?>">
-                            <span><a href="./new.php?gr_id=<?php echo $newlist[$i]['gr_id']; ?>">[<?php echo $newlist[$i]['gr_subject']; ?>]</a></span>
-                            <span><a href="./board.php?bo_table=<?php echo $newlist[$i]['bo_table']; ?>">[<?php echo $newlist[$i]['bo_subject']; ?>]</a></span>
+                            <span><a href="<?php echo G5_BBS_URL; ?>/new.php?gr_id=<?php echo $newlist[$i]['gr_id']; ?>">[<?php echo $newlist[$i]['gr_subject']; ?>]</a></span>
+                            <span><a href="<?php echo get_eyoom_pretty_url($newlist[$i]['bo_table']); ?>">[<?php echo $newlist[$i]['bo_subject']; ?>]</a></span>
                             <span><i class="fas fa-user"></i> <?php echo $newlist[$i]['name']; ?></span>
                             <span><i class="far fa-clock"></i> <?php echo $newlist[$i]['datetime2']; ?></span>
                         </td>
@@ -204,7 +204,7 @@ function fnew_submit(f) {
         closeOnCancel: true
     },
     function(){
-        f.action = "./new_delete.php";
+        f.action = "<?php echo G5_BBS_URL; ?>/new_delete.php";
         f.submit();
         return true;
     });

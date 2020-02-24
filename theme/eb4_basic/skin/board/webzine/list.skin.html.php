@@ -162,7 +162,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php /* 게시판 카테고리 끝 */ ?>
 
     <?php if ($is_admin) { ?>
-    <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post" class="eyoom-form">
+    <form name="fboardlist" id="fboardlist" action="<?php echo G5_BBS_URL; ?>/board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post" class="eyoom-form">
     <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
     <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
     <input type="hidden" name="stx" value="<?php echo $stx; ?>">
@@ -428,7 +428,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php echo eb_paging($eyoom['paging_skin']);?>
     <?php } else { ?>
     <div id="infinite_pagination">
-        <a class="next" href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $bo_table; ?>&sca=<?php echo $sca; ?>&page=<?php echo $page+1; ?>"></a>
+        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;page='.($page+1)); ?>"></a>
     </div>
     <?php } ?>
 </div>
@@ -582,7 +582,7 @@ function fboardlist_submit(f) {
         if (!confirm("선택한 게시물을 정말 삭제하시겠습니까?\n\n한번 삭제한 자료는 복구할 수 없습니다\n\n답변글이 있는 게시글을 선택하신 경우\n답변글도 선택하셔야 게시글이 삭제됩니다."))
             return false;
         f.removeAttribute("target");
-        f.action = "./board_list_update.php";
+        f.action = g5_bbs_url+"/board_list_update.php";
     }
     return true;
 }
