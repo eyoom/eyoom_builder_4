@@ -40,22 +40,10 @@ function eb_paging($skin_dir='basic') {
 
     $add_query = '';
     if ($paging['ptype'] != 'admin' && $config['cf_bbs_rewrite']) {
-        $qstr = preg_replace('#&amp;page=[0-9]*#', '', $paging['qstr']);
-
-        if ($qstr) {
-            // If the first character of the query string is '&', replace it with '?'.
-            if(substr($qstr, 0, 1) == '&') {
-                $add_query = preg_replace("/(\&amp;|&)/", "?", $qstr, 1);
-            } else {
-                $add_query = '?'. $qstr;
-            }
+        if (preg_match('/\?pid=/i', $pg_url) || preg_match('/\?/i', $pg_url)) {
             $add_query .= '&amp;page=';
         } else {
-            if (preg_match('/\?pid=/i', $pg_url)) {
-                $add_query .= '&amp;page=';
-            } else {
-                $add_query .= '?page=';
-            }
+            $add_query .= '?page=';
         }
     } else {
         $add_query .= '&amp;page=';

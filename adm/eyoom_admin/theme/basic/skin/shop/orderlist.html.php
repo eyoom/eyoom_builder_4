@@ -197,10 +197,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             <div class="margin-bottom-5 clearfix">
                 <span class="font-size-12 color-grey">
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a><span class="margin-left-10 margin-right-10">|</span>전체 주문내역 <?php echo number_format($total_count); ?>건
-                <?php if ($od_status == '준비' && $total_count > 0) {?>
-                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=orderdelivery">엑셀배송처리</a>
-                <?php } ?>
                 </span>
+                <?php if ($od_status == '준비' && $total_count > 0) {?>
+                <span class="margin-left-10">
+                    <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=orderdelivery&amp;wmode=1" onclick="eb_modal_excel(this.href); return false;" class="btn-e btn-e-sm btn-e-green">엑셀배송처리</a>
+                </span>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -272,6 +274,23 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     </div>
 </div>
 
+<div class="modal fade admin-excel-iframe-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">엑셀 일괄배송처리</h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="modal-excel-iframe" width="100%" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/jsgrid.js"></script>
 <script>
@@ -284,6 +303,19 @@ function eb_modal(href) {
     $('.admin-iframe-modal').modal('show').on('shown.bs.modal', function () {
         $("#modal-iframe").attr("src", href);
         $('#modal-iframe').height(parseInt($(window).height() * 0.85));
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
+}
+
+function eb_modal_excel(href) {
+    $('.admin-excel-iframe-modal').modal('show').on('hidden.bs.modal', function () {
+        $("#modal-excel-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.admin-excel-iframe-modal').modal('show').on('shown.bs.modal', function () {
+        $("#modal-excel-iframe").attr("src", href);
+        $('#modal-excel-iframe').height(parseInt($(window).height() * 0.65));
         $('html').css({overflow: 'hidden'});
     });
     return false;

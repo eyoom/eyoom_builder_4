@@ -1042,17 +1042,17 @@ class eyoom extends qfile
                         $url = get_eyoom_pretty_url($no, '', $qstr);
                         break;
                     case 'respond':
-                        $url = G5_URL.'/mypage/'.$folder.'.php';
+                        $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr;
                         break;
                     case 'taglist':
                     case 'tagview':
-                        $url = G5_URL.'/page/?pid='.$folder;
+                        $url = G5_URL.'/page/?pid='.$folder.$qstr;
                         break;
                     case 'tag':
-                        $url = G5_URL.'/tag/';
+                        $url = G5_URL.'/tag/?'.$qstr;
                         break;
                     case 'tag_list':
-                        $url = G5_URL.'/tag/list.php';
+                        $url = G5_URL.'/tag/list.php?'.$qstr;
                         break;
                     case 'event':
                     case 'itemqalist':
@@ -1060,19 +1060,19 @@ class eyoom extends qfile
                     case 'orderaddress':
                     case 'orderinquiry':
                     case 'personalpay':
-                        $url = G5_SHOP_URL.'/'.$folder.'.php';
+                        $url = G5_SHOP_URL.'/'.$folder.'.php?'.$qstr;
                         break;
                     case 'itemlist':
-                        $url = shop_category_url($no);
+                        $url = shop_category_url($no).'?'.$qstr;
                         break;
                     case 'itemtype':
-                        $url = shop_type_url($no);
+                        $url = shop_type_url($no).'?'.$qstr;
                         break;
                     case 'itemsearch':
-                        $url = G5_SHOP_URL.'/search.php';
+                        $url = G5_SHOP_URL.'/search.php?'.$qstr;
                         break;
                     default:
-                        $url = G5_BBS_URL.'/'.$folder.'.php';
+                        $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr;
                         break;
                 }
             }
@@ -1086,6 +1086,9 @@ class eyoom extends qfile
                         $url = G5_BBS_URL.'/memo.php?kind='.$no.$qstr.'&amp;page=';
                         break;
                     case 'respond':
+                    case 'theme':
+                    case 'skins':
+                    case 'webpage':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr.'&amp;page=';
                         break;
                     case 'taglist':
