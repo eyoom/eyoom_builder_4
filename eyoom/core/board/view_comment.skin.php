@@ -64,8 +64,8 @@ for ($i=0; $i<$cmt_amt; $i++) {
     }
 
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';
-    if (is_array($level)) {
-        if (!$level['anonymous']) {
+    if ($eyoom_board['bo_use_anonymous'] != '1') {
+        if (is_array($level)) {
             $cmt[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
             $cmt[$i]['gnu_level'] = $level['gnu_level'];
             $cmt[$i]['eyoom_level'] = $level['eyoom_level'];
@@ -73,20 +73,21 @@ for ($i=0; $i<$cmt_amt; $i++) {
             $cmt[$i]['lv_name'] = $level['name'];
             $cmt[$i]['gnu_icon'] = $level['gnu_icon'];
             $cmt[$i]['eyoom_icon'] = $level['eyoom_icon'];
-        } else {
-            list($gnu_level,$eyoom_level,$anonymous) = explode('|',$list[$i]['eb_1']);
-            $cmt[$i]['anonymous_id'] = $anonymous ? $gnu_level."|".$eyoom_level:'';
-            $cmt[$i]['mb_id'] = 'anonymous';
-            $cmt[$i]['wr_name'] = '익명글';
-            $cmt[$i]['email'] = '';
-            $cmt[$i]['homepage'] = '';
-            $cmt[$i]['gnu_level'] = '';
-            $cmt[$i]['eyoom_level'] = '';
-            $cmt[$i]['lv_gnu_name'] = '';
-            $cmt[$i]['lv_name'] = '';
-            $cmt[$i]['gnu_icon'] = '';
-            $cmt[$i]['eyoom_icon'] = '';
         }
+    } else {
+        list($gnu_level,$eyoom_level,$anonymous) = explode('|',$list[$i]['eb_1']);
+        $cmt[$i]['mb_photo'] = '';
+        $cmt[$i]['anonymous_id'] = $anonymous ? $gnu_level."|".$eyoom_level:'';
+        $cmt[$i]['mb_id'] = 'anonymous';
+        $cmt[$i]['wr_name'] = '익명글';
+        $cmt[$i]['email'] = '';
+        $cmt[$i]['homepage'] = '';
+        $cmt[$i]['gnu_level'] = '';
+        $cmt[$i]['eyoom_level'] = '';
+        $cmt[$i]['lv_gnu_name'] = '';
+        $cmt[$i]['lv_name'] = '';
+        $cmt[$i]['gnu_icon'] = '';
+        $cmt[$i]['eyoom_icon'] = '';
     }
 
     if ($list[$i]['is_reply'] || $list[$i]['is_edit'] || $list[$i]['is_del']) {

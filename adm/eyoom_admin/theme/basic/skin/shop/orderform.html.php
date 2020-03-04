@@ -805,7 +805,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 										<label for="od_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
 										<label class="input">
 											<i class="icon-append fa fa-question-circle"></i>
-					                    	<input type="text" name="od_zip" value="<?php echo $od['od_zip1'].$od['od_zip2']; ?>" id="od_zip" maxlength="6" readonly="readonly">
+					                    	<input type="text" name="od_zip" value="<?php echo get_text($od['od_zip1']).get_text($od['od_zip2']); ?>" id="od_zip" maxlength="6" readonly="readonly">
 					                    	<b class="tooltip tooltip-top-right">우편번호</b>
 										</label>
 									</section>
@@ -900,7 +900,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 										<label for="od_b_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
 										<label class="input">
 											<i class="icon-append fa fa-question-circle"></i>
-					                    	<input type="text" name="od_b_zip" value="<?php echo $od['od_b_zip1'].$od['od_b_zip2']; ?>" id="od_b_zip" maxlength="6" readonly="readonly">
+					                    	<input type="text" name="od_b_zip" value="<?php echo get_text($od['od_b_zip1']).get_text($od['od_b_zip2']); ?>" id="od_b_zip" maxlength="6" readonly="readonly">
 					                    	<b class="tooltip tooltip-top-right">우편번호</b>
 										</label>
 									</section>

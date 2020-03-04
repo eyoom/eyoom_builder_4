@@ -162,7 +162,7 @@ if ($view['eb_1']) {
 /**
  * 익명글 기능
  */
-if (!$lv['anonymous']) {
+if ($eyoom_board['bo_use_anonymous'] != '1') {
     // 작성자 프로필 사진
     $view['mb_photo'] = $eb->mb_photo($view['mb_id']);
 } else {
@@ -171,6 +171,7 @@ if (!$lv['anonymous']) {
     $view['wr_name'] = '익명';
     $view['wr_email'] = '';
     $view['wr_homepage'] = '';
+    $is_ip_view = false;
 }
 
 /**

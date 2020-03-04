@@ -36,5 +36,5 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['num'] = $num;
     $list[$i]['cnt'] = $cnt;
     $row['fa_subject'] = str_replace("\r\n", '', strip_tags($row['fa_subject']));
-    $list[$i]['fa_subject'] = str_replace('"', "'", strip_tags($row['fa_subject']));
+    $list[$i]['fa_subject'] = conv_content(str_replace('"', "'", strip_tags($row['fa_subject'])), 1);
 }

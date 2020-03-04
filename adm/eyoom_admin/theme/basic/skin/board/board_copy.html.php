@@ -26,7 +26,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <tbody>
                     <tr>
                         <th class="table-form-th">
-                            <label for="bo_subject" class="label">원본 테이블명</label>
+                            <label class="label">원본 테이블명</label>
                         </th>
                         <td>
                             <label class="input form-width-250px">
@@ -50,18 +50,18 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="target_subject" class="label">게시판 제목<strong class="sound_only">필수</strong></label>
                         </th>
                         <td>
-                            <label class="input">
-                                <input type="text" name="target_subject" id="target_subject" value="[복사본] <?php echo $board['bo_subject'] ?>" required maxlength="120">
+                            <label for="target_subject"  class="input">
+                                <input type="text" name="target_subject" id="target_subject" value="[복사본] <?php echo get_sanitize_input($board['bo_subject']); ?>" required maxlength="120">
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <th class="table-form-th">
-                            <label for="target_subject" class="label">복사 유형<strong class="sound_only">필수</strong></label>
+                            <label class="label">복사 유형<strong class="sound_only">필수</strong></label>
                         </th>
                         <td>
                             <div class="inline-group">
-                                <label for="copy_case" class="radio"><input type="radio" name="copy_case" id="copy_case" value="schema_only" checked><i></i>구조만 복사</label>
+                                <label for="copy_case1" class="radio"><input type="radio" name="copy_case" id="copy_case1" value="schema_only" checked><i></i>구조만 복사</label>
                                 <label for="copy_case2" class="radio"><input type="radio" name="copy_case" id="copy_case2" value="schema_data_both"><i></i>구조와 데이터 모두 복사</label>
                             </div>
                         </td>

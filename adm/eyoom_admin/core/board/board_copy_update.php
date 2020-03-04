@@ -12,9 +12,11 @@ auth_check($auth[$sub_menu], 'w');
 
 check_admin_token();
 
+$copy_config    = clean_xss_tags(trim($_POST['copy_config']));
 $target_table   = trim($_POST['target_table']);
 $target_subject = trim($_POST['target_subject']);
-$copy_config = clean_xss_tags(trim($_POST['copy_config']));
+
+$target_subject = strip_tags(clean_xss_attributes($target_subject));
 
 if (!preg_match('/[A-Za-z0-9_]{1,20}/', $target_table)) {
     alert('게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)');

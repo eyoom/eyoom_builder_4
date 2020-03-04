@@ -30,8 +30,8 @@ if ($eyoom_board['bo_use_rating']) $colspan++;
  */
 foreach ($list as $i => $val) {
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';
-    if (is_array($level)) {
-        if (!$level['anonymous']) {
+    if ($eyoom_board['bo_use_anonymous'] != '1') {
+        if (is_array($level)) {
             $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
             $list[$i]['gnu_level'] = $level['gnu_level'];
             $list[$i]['eyoom_level'] = $level['eyoom_level'];
@@ -39,17 +39,18 @@ foreach ($list as $i => $val) {
             $list[$i]['lv_name'] = $level['name'];
             $list[$i]['gnu_icon'] = $level['gnu_icon'];
             $list[$i]['eyoom_icon'] = $level['eyoom_icon'];
-        } else {
-            $list[$i]['mb_id'] = 'anonymous';
-            $list[$i]['wr_name'] = '익명';
-            $list[$i]['email'] = '';
-            $list[$i]['homepage'] = '';
-            $list[$i]['gnu_level'] = '';
-            $list[$i]['gnu_icon'] = '';
-            $list[$i]['eyoom_icon'] = '';
-            $list[$i]['lv_gnu_name'] = '';
-            $list[$i]['lv_name'] = '';
         }
+    } else {
+        $list[$i]['mb_photo'] = '';
+        $list[$i]['mb_id'] = 'anonymous';
+        $list[$i]['wr_name'] = '익명';
+        $list[$i]['email'] = '';
+        $list[$i]['homepage'] = '';
+        $list[$i]['gnu_level'] = '';
+        $list[$i]['gnu_icon'] = '';
+        $list[$i]['eyoom_icon'] = '';
+        $list[$i]['lv_gnu_name'] = '';
+        $list[$i]['lv_name'] = '';
     }
 
     $list[$i]['key'] = $key;

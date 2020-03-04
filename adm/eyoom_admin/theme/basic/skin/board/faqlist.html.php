@@ -68,7 +68,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         {
             No: "<?php echo $list[$i]['num']; ?>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqform&amp;w=u&amp;fm_id=<?php echo $list[$i]['fm_id']; ?>&amp;fa_id=<?php echo $list[$i]['fa_id']; ?>'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqformupdate&amp;w=d&amp;fm_id=<?php echo $list[$i]['fm_id']; ?>&amp;fa_id=<?php echo $list[$i]['fa_id']; ?>&amp;smode=1' class='margin-left-10' onclick='return delete_confirm(this);'><u>삭제</u></a>",
-            제목: "<?php echo stripslashes($list[$i]['fa_subject']); ?>",
+            제목: "<?php echo $list[$i]['fa_subject']; ?>",
             순서: "<?php echo $list[$i]['fa_order']; ?>",
         },
         <?php } ?>
