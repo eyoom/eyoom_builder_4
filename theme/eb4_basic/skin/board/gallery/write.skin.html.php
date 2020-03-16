@@ -174,7 +174,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
             <?php } ?>
             <div class="col col-8">
-            <?php if ($is_notice || $is_html || $is_secret || $is_mail || $is_anonymous) { ?>
+            <?php if ($is_notice || $is_html || $is_secret || $is_mail || $bo_use_anonymous == '1') { ?>
                 <div class="inline-group">
                     <?php if ($is_notice) { ?>
                     <label for="notice" class="checkbox"><input type="checkbox" id="notice" name="notice" value="1" <?php echo $notice_checked; ?>><i></i>공지</label>
@@ -196,8 +196,8 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php } ?>
                     <?php } ?>
 
-                    <?php if ($is_anonymous) { ?>
-                    <label for="anonymous" class="checkbox"><input type="checkbox" id="anonymous" name="anonymous" value="y" <?php echo $anonymous_checked; ?>><i></i>익명글</label>
+                    <?php if ($bo_use_anonymous == '1') { ?>
+                    <label for="wr_anonymous" class="checkbox"><input type="checkbox" id="wr_anonymous" name="wr_anonymous" value="1" <?php echo $wr_anonymous_checked; ?>><i></i>익명글</label>
                     <?php } ?>
 
                     <?php if ($is_mail) { ?>
@@ -740,14 +740,6 @@ function html_auto_br(obj) {
 
 function fwrite_submit(f) {
     <?php echo $editor_js; ?> // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함
-
-    <?php if ($is_anonymous) { ?>
-    var eb_1 = '<?php echo $eb_1; ?>';
-    if ($("#anonymous").is(':checked')) {
-        eb_1 = eb_1+'|y';
-        $("#eb_1").val(eb_1);
-    }
-    <?php } ?>
 
     var subject = "";
     var content = "";

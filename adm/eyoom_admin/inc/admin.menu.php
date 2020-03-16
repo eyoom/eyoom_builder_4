@@ -29,7 +29,7 @@ $dir_icon = array(
 /**
  * 메뉴 예외처리
  */
-$except_menu = array('cf_theme', 'cf_menu', 'cf_service', 'scf_write_count', 'scf_item_type');
+$except_menu = array('cf_theme', 'cf_menu', 'cf_service', 'scf_write_count', 'scf_item_type', 'shop_index');
 if (!$is_youngcart) $except_menu[] = 'eyb_shopmenu';
 
 /**

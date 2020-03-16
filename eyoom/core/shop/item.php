@@ -26,6 +26,8 @@ if (!($it['ca_use'] && $it['it_use'])) {
         alert('현재 판매가능한 상품이 아닙니다.');
 }
 
+$it['it_basic'] = conv_content($it['it_basic'], 1);
+
 include_once(G5_LIB_PATH.'/iteminfo.lib.php');
 
 /**

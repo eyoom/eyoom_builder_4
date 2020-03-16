@@ -212,11 +212,18 @@ function eb_latest ($el_code) {
                      * 익명글 처리
                      */
                     $loop[$k]['is_anonymous'] = false;
-                    $mb_level = $eb_1 ? $eb->level_info($eb_1): '';
-                    if (is_array($mb_level) && $mb_level['anonymous']) {
+                    if ($row['wr_anonymous'] == '1' || $row['wr_bo_anonymous'] == '1') {
                         $loop[$k]['is_anonymous'] = true;
+                        $loop[$k]['mb_photo'] = '';
                         $loop[$k]['mb_id'] = 'anonymous';
-                        $loop[$k]['mb_nick'] = '익명';
+                        $loop[$k]['wr_name'] = '익명';
+                        $loop[$k]['email'] = '';
+                        $loop[$k]['homepage'] = '';
+                        $loop[$k]['gnu_level'] = '';
+                        $loop[$k]['gnu_icon'] = '';
+                        $loop[$k]['eyoom_icon'] = '';
+                        $loop[$k]['lv_gnu_name'] = '';
+                        $loop[$k]['lv_name'] = '';
                     }
 
                     /**
@@ -235,21 +242,18 @@ function eb_latest ($el_code) {
                     /**
                      * 비밀글, 익명글, 블라인드글, 권한처리
                      */
-                    if (($loop[$k]['is_secret'] || $loop[$k]['is_anonymous'] || $loop[$k]['is_blind'] || !$loop[$k]['is_auth']) && !$is_admin) {
-                        $loop[$k]['mb_photo'] = '';
-                        if (!$loop[$k]['is_anonymous']) {
-                            $loop[$k]['mb_id'] = '';
-                            $loop[$k]['mb_nick'] = '';
-                            $loop[$k]['wr_name'] = '';
-                            $loop[$k]['wr_content'] = '';
-                            $loop[$k]['wr_image'] = '';
-                            $loop[$k]['href'] = '#';
-                        }
+                    if (($loop[$k]['is_secret'] || $loop[$k]['is_blind'] || !$loop[$k]['is_auth']) && !$is_admin) {
+                        $loop[$k]['mb_id'] = '';
+                        $loop[$k]['mb_nick'] = '';
+                        $loop[$k]['wr_name'] = '';
+                        $loop[$k]['wr_content'] = '';
+                        $loop[$k]['wr_image'] = '';
+                        $loop[$k]['href'] = '#';
                     } else {
                         /**
                          * 프로필 포토
                          */
-                        if ($el_item[$i]['li_photo'] == 'y') {
+                        if ($el_item[$i]['li_photo'] == 'y' && !$loop[$k]['is_anonymous']) {
                             $loop[$k]['mb_photo'] = $eb->mb_photo($row['mb_id']);
                         }
 

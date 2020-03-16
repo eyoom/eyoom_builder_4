@@ -32,7 +32,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
                 <?php } ?>
             </div>
             <div class="eb-admr-info">
-                <h5 class="ellipsis"><?php echo $config['cf_title']; ?></h5>
+                <h5 class="ellipsis"><?php echo get_text($config['cf_title']); ?></h5>
                 <h6 class="ellipsis"><?php echo $member['mb_name']; ?> [<?php echo $member['mb_id']; ?>]</h6>
                 <p class="info-left">Lv. <span><?php echo $eyoomer['level']; ?></span></p>
                 <p class="info-right">P. <span><?php echo number_format($eyoomer['level_point']); ?></span></p>

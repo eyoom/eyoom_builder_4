@@ -20,6 +20,12 @@ if ($eyoom_board['bo_use_addon_map'] == '1') {
     add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 }
 
+/**
+ * 익명글 설정값
+ */
+$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$is_anonymous = false;
+
 unset($cmt);
 $cmt_amt = count($list);
 for ($i=0; $i<$cmt_amt; $i++) {
@@ -64,20 +70,21 @@ for ($i=0; $i<$cmt_amt; $i++) {
     }
 
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';
-    if ($eyoom_board['bo_use_anonymous'] != '1') {
-        if (is_array($level)) {
-            $cmt[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
-            $cmt[$i]['gnu_level'] = $level['gnu_level'];
-            $cmt[$i]['eyoom_level'] = $level['eyoom_level'];
-            $cmt[$i]['lv_gnu_name'] = $level['gnu_name'];
-            $cmt[$i]['lv_name'] = $level['name'];
-            $cmt[$i]['gnu_icon'] = $level['gnu_icon'];
-            $cmt[$i]['eyoom_icon'] = $level['eyoom_icon'];
+    if ($bo_use_anonymous == '1') {
+        if ($list[$i]['wr_anonymous'] == '1') {
+            $is_anonymous = true;
+        } else {
+            $is_anonymous = false;
         }
+    } else if ($bo_use_anonymous == '2') {
+        $is_anonymous = true;
     } else {
-        list($gnu_level,$eyoom_level,$anonymous) = explode('|',$list[$i]['eb_1']);
+        $is_anonymous = false;
+    }
+
+    if ($is_anonymous) {
         $cmt[$i]['mb_photo'] = '';
-        $cmt[$i]['anonymous_id'] = $anonymous ? $gnu_level."|".$eyoom_level:'';
+        $cmt[$i]['is_anonymous'] = 'y';
         $cmt[$i]['mb_id'] = 'anonymous';
         $cmt[$i]['wr_name'] = '익명글';
         $cmt[$i]['email'] = '';
@@ -88,6 +95,14 @@ for ($i=0; $i<$cmt_amt; $i++) {
         $cmt[$i]['lv_name'] = '';
         $cmt[$i]['gnu_icon'] = '';
         $cmt[$i]['eyoom_icon'] = '';
+    } else if (is_array($level)) {
+        $cmt[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
+        $cmt[$i]['gnu_level'] = $level['gnu_level'];
+        $cmt[$i]['eyoom_level'] = $level['eyoom_level'];
+        $cmt[$i]['lv_gnu_name'] = $level['gnu_name'];
+        $cmt[$i]['lv_name'] = $level['name'];
+        $cmt[$i]['gnu_icon'] = $level['gnu_icon'];
+        $cmt[$i]['eyoom_icon'] = $level['eyoom_icon'];
     }
 
     if ($list[$i]['is_reply'] || $list[$i]['is_edit'] || $list[$i]['is_del']) {

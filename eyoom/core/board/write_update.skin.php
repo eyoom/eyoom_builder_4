@@ -31,6 +31,21 @@ $up_set['eb_9'] = $eb_9 ? $eb->decrypt_md5($eb_9): '';
 $up_set['eb_10'] = $eb_10 ? $eb->decrypt_md5($eb_10): '';
 
 /**
+ * 게시물에 익명글 적용
+ */
+$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+if ($bo_use_anonymous == '1') {
+    $up_set['wr_anonymous'] = $_POST['wr_anonymous'];
+} else if ($bo_use_anonymous == '2') {
+    $up_set['wr_anonymous'] = '1';
+    $up_set['wr_bo_anonymous'] = '1';
+} else {
+    $up_set['wr_anonymous'] = '';
+    $up_set['wr_bo_anonymous'] = '';
+}
+sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$up_set['wr_bo_anonymous']}' where wr_id='{$wr_id}' ");
+
+/**
  * 답변글에 대한 내글반응 적용하기
  */
 if ($w == 'r') {
@@ -41,7 +56,7 @@ if ($w == 'r') {
     $respond['wr_id']       = $wr_id;
     $respond['wr_subject']  = $wr_subject;
     $respond['wr_mb_id']    = $wr['mb_id'];
-    if ($_POST['anonymous'] == 'y') $anonymous = true;
+    if ($_POST['wr_anonymous'] == '1' || $bo_use_anonymous == '2') $anonymous = true;
     $eb->respond($respond);
 }
 

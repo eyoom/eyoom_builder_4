@@ -8,15 +8,6 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
 
 /**
- * 글쓴이 정보를 가져옴
- */
-if ($view['mb_id']) {
-    if (!$mb) $mb = get_member($view['mb_id']);
-    $user = $eb->get_user_info($mb['mb_id'])+$mb;
-    $lvuser = $eb->user_level_info($user);
-}
-
-/**
  * 신고처리 정보
  */
 if ($eyoom_board['bo_use_yellow_card'] == '1') {
@@ -147,31 +138,63 @@ if ($v_img_count) {
 $view_content = $bbs->board_content($view['content'], $bo_table, $wr_id);
 
 /**
- * 작성자 레벨정보 가져오기
- */
-if ($view['eb_1']) {
-    $lv = $eb->level_info($view['eb_1']);
-} else {
-    $lv['gnu_level'] = '';
-    $lv['gnu_icon'] = '';
-    $lv['eyoom_icon'] = '';
-    $lv['gnu_name'] = '';
-    $lv['name'] = '';
-}
-
-/**
  * 익명글 기능
  */
-if ($eyoom_board['bo_use_anonymous'] != '1') {
-    // 작성자 프로필 사진
-    $view['mb_photo'] = $eb->mb_photo($view['mb_id']);
+$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$is_anonymous = false;
+if ($bo_use_anonymous == '1') {
+    if ($view['wr_anonymous'] == '1') {
+        $is_anonymous = true;
+    } else {
+        $is_anonymous = false;
+    }
+} else if ($bo_use_anonymous == '2') {
+    $is_anonymous = true;
 } else {
+    $is_anonymous = false;
+}
+
+if ($is_anonymous) {
     $view['mb_photo'] = '';
     $view['mb_id'] = 'anonymous';
     $view['wr_name'] = '익명';
     $view['wr_email'] = '';
     $view['wr_homepage'] = '';
+    $view['gnu_level'] = '';
+    $view['gnu_icon'] = '';
+    $view['eyoom_icon'] = '';
+    $view['lv_gnu_name'] = '';
+    $view['lv_name'] = '';
+    unset($lvuser, $lv);
+
     $is_ip_view = false;
+} else {
+    /**
+     * 글쓴이 정보를 가져옴
+     */
+    if ($view['mb_id']) {
+        if (!$mb) $mb = get_member($view['mb_id']);
+        $user = $eb->get_user_info($mb['mb_id'])+$mb;
+        $lvuser = $eb->user_level_info($user);
+    }
+
+    /**
+     * 작성자 프로필 사진
+     */ 
+    $view['mb_photo'] = $eb->mb_photo($view['mb_id']);
+
+    /**
+     * 작성자 레벨정보 가져오기
+     */
+    if ($view['eb_1']) {
+        $lv = $eb->level_info($view['eb_1']);
+    } else {
+        $lv['gnu_level'] = '';
+        $lv['gnu_icon'] = '';
+        $lv['eyoom_icon'] = '';
+        $lv['gnu_name'] = '';
+        $lv['name'] = '';
+    }
 }
 
 /**

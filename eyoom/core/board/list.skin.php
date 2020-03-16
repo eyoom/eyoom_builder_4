@@ -28,19 +28,23 @@ if ($eyoom_board['bo_use_rating']) $colspan++;
 /**
  * 제목에서 구분자로 회원정보 추출
  */
+$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$is_anonymous = false;
 foreach ($list as $i => $val) {
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';
-    if ($eyoom_board['bo_use_anonymous'] != '1') {
-        if (is_array($level)) {
-            $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
-            $list[$i]['gnu_level'] = $level['gnu_level'];
-            $list[$i]['eyoom_level'] = $level['eyoom_level'];
-            $list[$i]['lv_gnu_name'] = $level['gnu_name'];
-            $list[$i]['lv_name'] = $level['name'];
-            $list[$i]['gnu_icon'] = $level['gnu_icon'];
-            $list[$i]['eyoom_icon'] = $level['eyoom_icon'];
+    if ($bo_use_anonymous == '1') {
+        if ($list[$i]['wr_anonymous'] == '1') {
+            $is_anonymous = true;
+        } else {
+            $is_anonymous = false;
         }
+    } else if ($bo_use_anonymous == '2') {
+        $is_anonymous = true;
     } else {
+        $is_anonymous = false;
+    }
+
+    if ($is_anonymous) {
         $list[$i]['mb_photo'] = '';
         $list[$i]['mb_id'] = 'anonymous';
         $list[$i]['wr_name'] = '익명';
@@ -51,6 +55,14 @@ foreach ($list as $i => $val) {
         $list[$i]['eyoom_icon'] = '';
         $list[$i]['lv_gnu_name'] = '';
         $list[$i]['lv_name'] = '';
+    } else if (is_array($level)) {
+        $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
+        $list[$i]['gnu_level'] = $level['gnu_level'];
+        $list[$i]['eyoom_level'] = $level['eyoom_level'];
+        $list[$i]['lv_gnu_name'] = $level['gnu_name'];
+        $list[$i]['lv_name'] = $level['name'];
+        $list[$i]['gnu_icon'] = $level['gnu_icon'];
+        $list[$i]['eyoom_icon'] = $level['eyoom_icon'];
     }
 
     $list[$i]['key'] = $key;

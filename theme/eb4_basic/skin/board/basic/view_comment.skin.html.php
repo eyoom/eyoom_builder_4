@@ -252,7 +252,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <span id="reply_<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>"></span><?php /* 답변 */ ?>
 
                 <input type="hidden" value="<?php echo strstr($cmt[$i]['wr_option'],'secret'); ?>" id="secret_comment_<?php echo $cmt[$i]['comment_id']; ?>">
-                <input type="hidden" value="<?php echo $cmt[$i]['anonymous_id']; ?>" id="anonymous_id_<?php echo $cmt[$i]['comment_id']; ?>">
+                <input type="hidden" value="<?php echo $cmt[$i]['is_anonymous']; ?>" id="anonymous_id_<?php echo $cmt[$i]['comment_id']; ?>">
                 <input type="hidden" value="<?php echo $cmt[$i]['imgname']; ?>" id="imgname_<?php echo $cmt[$i]['comment_id']; ?>">
                 <textarea id="save_comment_<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>" style="display:none"><?php echo $cmt[$i]['content1']; ?></textarea>
                 <div class="clearfix"></div>
@@ -332,8 +332,8 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                     <section class="col col-4">
                         <div class="inline-group">
                             <label class="checkbox"><input type="checkbox" name="wr_secret" value="secret" id="wr_secret"><i></i>비밀글 사용</label>
-                            <?php if ($is_anonymous) { ?>
-                            <label class="checkbox"><input type="checkbox" name="anonymous" value="y" id="anonymous"><i></i>익명글 사용</label>
+                            <?php if ($bo_use_anonymous == '1') { ?>
+                            <label class="checkbox"><input type="checkbox" name="wr_anonymous" value="1" id="wr_anonymous"><i></i>익명글 사용</label>
                             <?php } ?>
                         </div>
                     </section>
@@ -795,14 +795,6 @@ function fviewcomment_submit(f) {
 
     f.is_good.value = 0;
 
-    <?php if ($is_anonymous) { ?>
-    var eb_1 = '<?php echo $eb_1; ?>';
-    if ($("#anonymous").is(':checked')) {
-        eb_1 = eb_1+'|y';
-        f.eb_1.value=eb_1;
-    }
-    <?php } ?>
-
     var subject = "";
     var content = "";
     $.ajax({
@@ -941,11 +933,11 @@ function comment_box(comment_id, work) {
                 document.getElementById('wr_secret').checked = true;
             else
                 document.getElementById('wr_secret').checked = false;
-            <?php if ($is_anonymous) { ?>
-            if (document.getElementById('anonymous_id_'+comment_id).value)
-                document.getElementById('anonymous').checked = true;
+            <?php if ($bo_use_anonymous == '1') { ?>
+            if (document.getElementById('anonymous_id_'+comment_id).value == 'y')
+                document.getElementById('wr_anonymous').checked = true;
             else
-                document.getElementById('anonymous').checked = false;
+                document.getElementById('wr_anonymous').checked = false;
             <?php } ?>
             var imgname = document.getElementById('imgname_' + comment_id).value;
             if (imgname) {

@@ -18,6 +18,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $row['sct_last'] = ' sct_clear';
     }
 
+    $row['it_basic'] = conv_content($row['it_basic'], 1);
+
     /**
      * 상세페이지 경로
      */

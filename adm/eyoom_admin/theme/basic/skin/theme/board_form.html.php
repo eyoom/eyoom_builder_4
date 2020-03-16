@@ -172,8 +172,12 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label class="label">익명글쓰기 사용</label>
                             </th>
                             <td>
-                                <label for="bo_use_anonymous" class="checkbox" style="width:80px;">
-                                    <input type="checkbox" name="bo_use_anonymous" id="bo_use_anonymous" value="1" <?php echo $eyoom_board['bo_use_anonymous']=='1' ? 'checked': ''; ?>><i></i> 사용
+                                <label for="bo_use_anonymous" class="select form-width-250px">
+                                    <select name="bo_use_anonymous" id="bo_use_anonymous">
+                                        <option value="" <?php echo $eyoom_board['bo_use_anonymous']=='' ? 'selected': ''; ?>>사용하지 않음</option>
+                                        <option value="1" <?php echo $eyoom_board['bo_use_anonymous']=='1' ? 'selected': ''; ?>>체크박스</option>
+                                        <option value="2" <?php echo $eyoom_board['bo_use_anonymous']=='2' ? 'selected': ''; ?>>무조건</option>
+                                    </select><i></i>
                                 </label>
                             </td>
                             <td class="table-chk-td">

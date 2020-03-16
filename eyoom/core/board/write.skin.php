@@ -16,6 +16,15 @@ if ($w == 'u' || $w == 'r') {
 }
 
 /**
+ * 익명글인지 체크
+ */
+$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+if ($w == 'u') {
+    // 익명글 체크사용
+    $wr_anonymous_checked = $bo_use_anonymous == '1' && $write['wr_anonymous'] == '1' ? 'checked':'';
+}
+
+/**
  * 글등록 회수 제한이 있는지 체크
  */
 if ($eyoom_board['bo_write_limit'] && !$is_admin) {
@@ -36,18 +45,10 @@ if ($is_member) {
     if ($w==''||$w=='r') {
         $eb_1 = $member['mb_level']."|".$eyoomer['level'];
     } else if ($w=='u') {
-        if ($eb_1 && $is_anonymous) {
-            list($gnu_level,$eyoom_level,$anonymous) = explode('|',$eb_1);
-            $eb_1 = $gnu_level."|".$eyoom_level;
-            if($anonymous == 'y') {
-                $anonymous_checked = 'checked="checked"';
-            }
-        } else {
-            $mb = $eb->get_user_info($write['mb_id']);
-            $gnu_level = $mb['mb_level'];
-            $eyoom_level = $mb['level'];
-            $eb_1 = $gnu_level."|".$eyoom_level;
-        }
+        $mb = $eb->get_user_info($write['mb_id']);
+        $gnu_level = $mb['mb_level'];
+        $eyoom_level = $mb['level'];
+        $eb_1 = $gnu_level."|".$eyoom_level;
     }
 }
 
