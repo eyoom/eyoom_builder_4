@@ -53,12 +53,16 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
 /**
  * 본 댓글의 저장값 다시 가져오기
  */
-$cdata = sql_fetch("select wr_content, wr_link2 from {$write_table} where wr_id='{$comment_id}'", false);
+$row = sql_fetch("select wr_link2 from {$write_table} where wr_id='{$comment_id}'", false);
+if ($row) {
+    $cfile = unserialize($row['wr_link2']);
+}
 
 /**
  * 첨부 이미지 삭제처리
  */
-if ($_POST['del_cmtimg']) {
+/*
+if ($_POST['del_cmtfile']) {
     $dfile = unserialize($cdata['wr_link2']);
     if (is_array($dfile)) {
         foreach ($dfile as $i => $file) {
@@ -69,6 +73,7 @@ if ($_POST['del_cmtimg']) {
         }
     }
 }
+*/
 
 /**
  * 가변 파일 업로드
@@ -83,12 +88,37 @@ for ($i=0; $i<count($_FILES['cmt_file']['name']); $i++) {
     $upload[$i]['image'][0] = '';
     $upload[$i]['image'][1] = '';
     $upload[$i]['image'][2] = '';
+    $upload[$i]['download'] = '';
+    $upload[$i]['datetime'] = '';
+    $upload[$i]['href'] = '';
+
+    // 삭제에 체크가 되어있다면 파일을 삭제합니다.
+    if (isset($_POST['del_cmtfile'][$i]) && $_POST['del_cmtfile'][$i]) {
+        $upload[$i]['del_check'] = true;
+
+        $del_filename = $cfile[$i]['file'];
+        $delete_file = G5_DATA_PATH.'/file/'.$bo_table.'/'.$del_filename;
+        if( file_exists($delete_file) ){
+            @unlink($delete_file);
+        }
+        // 썸네일삭제
+        if(preg_match("/\.({$config['cf_image_extension']})$/i", $del_filename)) {
+            delete_board_thumbnail($bo_table, $del_filename);
+        }
+    }
+    else
+        $upload[$i]['del_check'] = false;
 
     $tmp_file  = $_FILES['cmt_file']['tmp_name'][$i];
     $filesize  = $_FILES['cmt_file']['size'][$i];
     $filename  = $_FILES['cmt_file']['name'][$i];
     $filename  = get_safe_filename($filename);
-    if (!$filename) break;
+    if (!$filename) {
+        if ($upload[$i]['del_check'] == false) {
+            $upload[$i] = $cfile[$i];
+        }
+        continue;
+    }
 
     /**
      * 서버에 설정된 값보다 큰파일을 업로드 한다면
@@ -101,17 +131,6 @@ for ($i=0; $i<count($_FILES['cmt_file']['name']); $i++) {
         else if ($_FILES['cmt_file']['error'][$i] != 0) {
             $file_upload_msg .= '\"'.$filename.'\" 파일이 정상적으로 업로드 되지 않았습니다.\\n';
             continue;
-        }
-    }
-
-    /**
-     * 이미 등록된 이미지가 있다면 이전 이미지는 삭제처리
-     */
-    $dfile = unserialize($cdata['wr_link2']);
-    if (is_array($dfile) && !$_POST['del_cmtimg']) {
-        foreach ($dfile as $i => $file) {
-            $del_file = G5_DATA_PATH.'/file/'.$bo_table.'/'.$file['file'];
-            @unlink($del_file);
         }
     }
 
@@ -151,16 +170,17 @@ for ($i=0; $i<count($_FILES['cmt_file']['name']); $i++) {
         // 업로드가 안된다면 에러메세지 출력하고 죽어버립니다.
         $error_code = move_uploaded_file($tmp_file, $dest_file) or die($_FILES['cmt_file']['error'][$i]);
 
+        $upload[$i]['datetime'] = G5_TIME_YMDHIS;
+        $upload[$i]['href'] = EYOOM_CORE_URL.'/board/cmt_download.php?bo_table='.$bo_table.'&amp;wr_id='.$comment_id.'&amp;no='.$i;
+
         // 올라간 파일의 퍼미션을 변경합니다.
         chmod($dest_file, G5_FILE_PERMISSION);
-
-        $wr_image['bf'][$i] = str_replace(G5_PATH,'',$dest_file);
-
-        // 업로드 이미지가 있다면 wr_link2 필드에 업데이트
-        $sql = "update {$write_table} set wr_link2 = '".serialize($upload)."' where wr_id='{$comment_id}'";
-        sql_query($sql,false);
     }
 }
+
+// 업로드 이미지가 있다면 wr_link2 필드에 업데이트
+$sql = "update {$write_table} set wr_link2 = '".serialize($upload)."' where wr_id='{$comment_id}'";
+sql_query($sql,false);
 
 /**
  * 게시물에 익명글 적용

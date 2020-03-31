@@ -25,6 +25,7 @@ if ($w == '')
 else if ($w == 'u')
 {
     $mb = get_member($mb_id);
+    $eb_member = sql_fetch("select * from {$g5['eyoom_member']} where mb_id = '{$mb_id}' ");
     if (!$mb['mb_id'])
         alert('존재하지 않는 회원자료입니다.');
 

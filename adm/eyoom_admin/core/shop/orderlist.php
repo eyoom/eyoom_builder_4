@@ -14,7 +14,7 @@ $doc = strip_tags($doc);
 $sort1 = in_array($sort1, array('od_id', 'od_cart_price', 'od_receipt_price', 'od_cancel_price', 'od_misu', 'od_cash')) ? $sort1 : '';
 $sort2 = in_array($sort2, array('desc', 'asc')) ? $sort2 : 'desc';
 $sel_field = get_search_string($sel_field);
-if( !in_array($sel_field, array('od_id', 'mb_id', 'od_name', 'od_tel', 'od_hp', 'od_b_name', 'od_b_tel', 'od_b_hp', 'od_deposit_name', 'od_invoice')) ){   //검색할 필드 대상이 아니면 값을 제거
+if( !in_array($sel_field, array('od_id', 'mb_id', 'it_name', 'od_name', 'mb_nick', 'od_tel', 'od_hp', 'od_b_name', 'od_b_tel', 'od_b_hp', 'od_deposit_name', 'od_invoice')) ){   //검색할 필드 대상이 아니면 값을 제거
     $sel_field = '';
 }
 $od_status = get_search_string($od_status);
@@ -29,14 +29,36 @@ $od_receipt_point = preg_replace('/[^0-9a-z]/i', '', $od_receipt_point);
 $od_coupon = preg_replace('/[^0-9a-z]/i', '', $od_coupon); 
 
 $sql_search = "";
-if ($search != "") {
-    if ($sel_field != "") {
+
+if ($sel_field != "") {
+    // 상품명 검색
+    if ($sel_field == 'it_name') {
+        $sql = "select od_id from {$g5['g5_shop_cart_table']} where it_name like '%$search%' ";
+        $res = sql_query($sql);
+        for ($i=0; $row=sql_fetch_array($res); $i++) {
+            $s_od_id[$row['od_id']] = $row['od_id'];
+        }
+        
+        if (isset($s_od_id) && is_array($s_od_id)) {
+            $where[] = " find_in_set(od_id, '".implode(',', $s_od_id)."') > 0 ";
+        }
+    } else if ($sel_field == 'mb_nick') {
+        $sql = "select mb_id from {$g5['member_table']} where mb_nick like '%$search%' ";
+        $res = sql_query($sql);
+        for ($i=0; $row=sql_fetch_array($res); $i++) {
+            $s_mb_id[$row['mb_id']] = $row['mb_id'];
+        }
+        
+        if (isset($s_mb_id) && is_array($s_mb_id)) {
+            $where[] = " find_in_set(mb_id, '".implode(',', $s_mb_id)."') > 0 ";
+        }
+    } else {
         $where[] = " $sel_field like '%$search%' ";
     }
+}
 
-    if ($save_search != $search) {
-        $page = 1;
-    }
+if ($save_search != $search) {
+    $page = 1;
 }
 
 if ($od_status) {

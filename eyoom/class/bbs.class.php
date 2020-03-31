@@ -57,7 +57,7 @@ class bbs extends eyoom
                 'bo_use_addon_coding'       => 0,
                 'bo_use_addon_soundcloud'   => 0,
                 'bo_use_addon_map'          => 0,
-                'bo_use_addon_cmtimg'       => 1,
+                'bo_use_addon_cmtfile'      => 1,
                 'bo_use_extimg'             => 0,
                 'bo_use_adopt_point'        => 0,
                 'bo_adopt_minpoint'         => 0,

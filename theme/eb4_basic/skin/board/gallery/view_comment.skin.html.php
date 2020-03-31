@@ -1,6 +1,6 @@
 <?php
 /**
- * skin file : /theme/THEME_NAME/skin/board/gallery/view_comment.skin.html.php
+ * skin file : /theme/THEME_NAME/skin/board/basic/view_comment.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
 
@@ -38,7 +38,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .view-comment .comment-dropdown .dropdown-menu a {font-size:12px}
 .view-comment .comment-dropdown .dropdown-menu a small {font-size:11px;color:#a5a5a5}
 .view-comment .comment-item-content {position:relative;padding-left:20px}
-.view-comment .comment-item-content .comment-image {max-width:270px;float:left;margin-right:15px;margin-bottom:15px}
+.view-comment .comment-item-content .comment-file-item {position:relative;border:1px solid #e5e5e5;background:#fafafa;padding:7px 10px;font-size:11px;margin-bottom:15px}
+.view-comment .comment-item-content .comment-file-item:after {content:"";display:block;clear:both}
+.view-comment .comment-item-content .comment-file-item span {margin-left:5px}
+.view-comment .comment-item-content .comment-file-item i {color:#959595;margin-right:3px}
+.view-comment .comment-item-content .comment-cont-wrap {display:flex}
+.view-comment .comment-item-content .comment-cont-wrap:after {content:"";display:block;clear:both}
+.view-comment .comment-item-content .comment-cont-img {position:relative;flex-grow:1;padding-right:15px}
+.view-comment .comment-item-content .comment-cont-txt {position:relative;flex-grow:4}
+.view-comment .comment-item-content .comment-image {display:block;width:200px;margin-bottom:15px}
 .view-comment .comment-item-content .comment-yello-card {position:relative;padding:10px;margin-bottom:20px;background:#ffbeaa;border:1px solid #ff9b79;opacity:0.45}
 .view-comment .comment-btn-wrap {position:relative;text-align:right;height:20px}
 .view-comment .comment-btn-wrap .comment-btn-right {position:absolute;top:0;right:0}
@@ -88,7 +96,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 }
 @media (max-width:600px) {
     .comment-area {font-size:12px}
-    .view-comment .comment-item-content .comment-image {max-width:100%;float:none;margin-right:inherit}
+    .view-comment .comment-item-content .comment-cont-wrap {display:block}
+    .view-comment .comment-item-content .comment-cont-img {position:relative;flex-grow:none;padding-right:0}
+    .view-comment .comment-item-content .comment-cont-txt {position:relative;flex-grow:none}
+    .view-comment .comment-item-content .comment-image {width:100%;margin-right:inherit}
 }
 <?php } ?>
 </style>
@@ -182,31 +193,60 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                     <?php if ($cmt[$i]['yc_blind'] && $cmt[$i]['yc_cannotsee']) { ?>
                     <p class="margin-top-10 margin-bottom-10"><span class="color-orange">----- <i class="fas fa-exclamation-circle"></i> 블라인드 처리된 댓글입니다. -----</span></p>
                     <?php } else { ?>
-                    <p>
+                    <?php if ($cmt[$i]['count_cmtfile'] > 0) { ?>
+                    <div class="comment-file-wrap">
+                        <?php
+                            $cmtfile = $cmt[$i]['cmtfile'];
+                            foreach ($cmtfile as $k => $cmt_file) {
+                                if (!$cmt_file['source']) continue;
+                        ?>
+                            <div class="comment-file-item">
+                                <div class="pull-left">
+                                    - 첨부파일 : <strong><?php echo $cmt_file['source']; ?></strong> <?php echo $cmt_file['content']; ?> (<?php echo get_filesize($cmt_file['filesize']); ?>) - <a href="<?php echo $cmt_file['href']; ?>" class="view_file_download"><u>다운로드</u></a>
+                                </div>
+                                <div class="pull-right text-right hidden-xs">
+                                    <span><i class="fas fa-download"></i><?php echo $cmt_file['download'] ? number_format($cmt_file['download']): 0; ?></span>
+                                    <span><i class="far fa-clock"></i><?php echo $cmt_file['datetime']; ?></span>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <?php } ?>
+                    <div class="comment-cont-wrap">
                         <?php if ($cmt[$i]['yc_blind']) { ?>
                         <p class="margin-top-10 margin-bottom-10"><span class="color-orange">----- <i class="fas fa-exclamation-circle"></i> 블라인드 처리된 댓글입니다. -----</span></p>
                         <?php } ?>
                         <?php if (strstr($cmt[$i]['wr_option'], 'secret')) { ?><i class="fas fa-lock color-red"></i> <?php } ?>
-                        <?php if ($cmt[$i]['imgsrc']) { ?>
-                        <div class="thumbnail comment-image">
-                            <div class="thumb">
-                                <img src="<?php echo $cmt[$i]['imgsrc']; ?>" alt="">
-                                <div class="caption-overflow">
-                                    <span>
-                                        <a href="<?php echo $cmt[$i]['imgsrc']; ?>" class="btn-e btn-e-default btn-e-lg btn-e-brd"><i class="fas fa-plus color-white"></i></a>
-                                    </span>
+                        
+                        <?php if ($cmt[$i]['count_cmtimg'] > 0) { ?>
+                        <div class="comment-cont-img">
+                            <?php
+                                $cmtimg = $cmt[$i]['cmtimg'];
+                                foreach ($cmtimg as $k => $cmt_img) {
+                            ?>
+                            <div class="thumbnail comment-image">
+                                <div class="thumb">
+                                    <img src="<?php echo $cmt_img['imgsrc']; ?>" alt="">
+                                    <div class="caption-overflow">
+                                        <span>
+                                            <a href="<?php echo $cmt_img['imgsrc']; ?>" class="btn-e btn-e-default btn-e-lg btn-e-brd"><i class="fas fa-plus color-white"></i></a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                         <?php } ?>
-                        <?php if ($cmt[$i]['yc_blind']) { ?>
-                        <div class="comment-yello-card">
-                        <?php } ?>
-                        <?php echo $cmt[$i]['comment']; ?>
-                        <?php if ($cmt[$i]['yc_blind']) { ?>
+                        <div class="comment-cont-txt">
+                            <?php if ($cmt[$i]['yc_blind']) { ?>
+                            <div class="comment-yello-card">
+                            <?php } ?>
+                            <?php echo $cmt[$i]['comment']; ?>
+                            <?php if ($cmt[$i]['yc_blind']) { ?>
+                            </div>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
-                    </p>
+                    </div>
                     <?php } ?>
                     <div class="margin-bottom-10"></div>
                     <?php if ($cmt[$i]['firstcmt_point']) { ?>
@@ -253,7 +293,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
 
                 <input type="hidden" value="<?php echo strstr($cmt[$i]['wr_option'],'secret'); ?>" id="secret_comment_<?php echo $cmt[$i]['comment_id']; ?>">
                 <input type="hidden" value="<?php echo $cmt[$i]['is_anonymous']; ?>" id="anonymous_id_<?php echo $cmt[$i]['comment_id']; ?>">
-                <input type="hidden" value="<?php echo $cmt[$i]['imgname']; ?>" id="imgname_<?php echo $cmt[$i]['comment_id']; ?>">
+                <input type="hidden" value="<?php echo $cmt[$i]['cmt_attach']; ?>" id="cmt_attach_<?php echo $cmt[$i]['comment_id']; ?>">
                 <textarea id="save_comment_<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>" style="display:none"><?php echo $cmt[$i]['content1']; ?></textarea>
                 <div class="clearfix"></div>
             </div>
@@ -267,7 +307,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     </div>
     <?php if ($eyoom_board['bo_use_cmt_infinite'] == '1') { ?>
     <div id="infinite_pagination">
-        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_table,$wr_id,'&amp;sca='.$sca.'&amp;cpage='.($cpage+1)); ?>"></a>
+        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_tabl,$wr_id,'&amp;sca='.$sca.'&amp;cpage='.($cpage+1)); ?>"></a>
     </div>
     <?php if (count($cmt_list) > 20 ) { ?>
     <div class="view-comment-more">
@@ -348,8 +388,8 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                         <div class="panel panel-default">
                             <div class="panel-in">
                                 <div class="panel-in-left">
-                                    <?php if ($eyoom_board['bo_use_addon_cmtimg'] == '1') { ?>
-                                    <a class="comment-option-btn" data-toggle="collapse" data-parent="#comment-option" href="#collapse-image-cm" title="이미지"><i class="fas fa-image"></i><span class="margin-left-5 hidden-xs">이미지</span></a>
+                                    <?php if ($eyoom_board['bo_use_addon_cmtfile'] == '1') { ?>
+                                    <a class="comment-option-btn" data-toggle="collapse" data-parent="#comment-option" href="#collapse-file-cm" title="첨부파일"><i class="fas fa-file"></i><span class="margin-left-5 hidden-xs">첨부파일</span></a>
                                     <?php } ?>
                                     <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
                                     <a class="comment-option-btn" data-toggle="collapse" data-parent="#comment-option" href="#collapse-video-cm" title="동영상"><i class="fab fa-youtube"></i><span class="margin-left-5 hidden-xs">동영상</span></a>
@@ -373,14 +413,20 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div id="collapse-image-cm" class="panel-collapse collapse">
+                            <?php if ($eyoom_board['bo_use_addon_cmtfile'] == '1') { ?>
+                            <div id="collapse-file-cm" class="panel-collapse collapse">
                                 <div class="comment-collapse-box">
-                                    <label for="cmt_file" class="input input-file">
-                                        <div class="button bg-indigo"><input type="file" id="cmt_file" name="cmt_file[]" value="이미지선택" title="파일첨부 : 용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">이미지 선택</div><input type="text" readonly>
-                                    </label>
-                                    <div id="del_cmtimg"></div>
+                                    <?php for ($j=0; $j<$eyoom_board['bo_count_cmtfile']; $j++) { ?>
+                                    <div class="margin-bottom-5">
+                                        <label for="cmt_file_<?php echo $j; ?>" class="input input-file">
+                                            <div class="button bg-indigo"><input type="file" id="cmt_file_<?php echo $j; ?>" name="cmt_file[]" value="파일찾기" title="파일첨부 : 용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">파일<?php echo $j+1; ?></div><input type="text" readonly>
+                                        </label>
+                                        <div id="del_cmtfile_<?php echo $j; ?>"></div>
+                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
+                            <?php } ?>
                             <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
                             <div id="collapse-video-cm" class="panel-collapse collapse">
                                 <div class="comment-collapse-box">
@@ -939,11 +985,16 @@ function comment_box(comment_id, work) {
             else
                 document.getElementById('wr_anonymous').checked = false;
             <?php } ?>
-            var imgname = document.getElementById('imgname_' + comment_id).value;
-            if (imgname) {
-                var delchk_str = '<label class="checkbox"><input type="checkbox" name="del_cmtimg" value="1"><i></i><span class="font-size-12">파일삭제 ('+imgname+')</span></label>';
-                $("#del_cmtimg").html('');
-                $("#del_cmtimg").html(delchk_str);
+            var cmt_attach = document.getElementById('cmt_attach_' + comment_id).value;
+            if (cmt_attach) {
+                var cmtfile = cmt_attach.split('||');
+                var delchk_str = '';
+                for (var i=0; i<cmtfile.length; i++) {
+                    if (!cmtfile[i]) continue;
+                    delchk_str = '<label class="checkbox"><input type="checkbox" name="del_cmtfile['+i+']" value="1"><i></i><span class="font-size-12">파일삭제 ('+cmtfile[i]+')</span></label>';
+                    $("#del_cmtfile_"+i).html('');
+                    $("#del_cmtfile_"+i).html(delchk_str);
+                }
             }
         }
 

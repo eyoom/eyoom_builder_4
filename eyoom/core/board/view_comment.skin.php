@@ -60,13 +60,19 @@ for ($i=0; $i<$cmt_amt; $i++) {
      */
     $cmt_file = unserialize($list[$i]['wr_link2']);
     if (is_array($cmt_file)) {
+        $cfile_loop = &$cmt[$i]['cmtfile'];
+        $cimg_loop = &$cmt[$i]['cmtimg'];
         foreach ($cmt_file as $k => $_file) {
+            $cfile_loop[$k] = $_file;
+            $cmt_attach[$k] = $_file['source'];
             if (preg_match('/(gif|jpg|png)/',strtolower($_file['source']))) {
-                $cmt[$i]['imgsrc'] = G5_DATA_URL . '/file/'.$bo_table.'/'.$_file['file'];
-                $cmt[$i]['imgname'] = $_file['file'];
+                $cimg_loop[$k]['imgsrc'] = G5_DATA_URL . '/file/'.$bo_table.'/'.$_file['file'];
+                $cimg_loop[$k]['imgname'] = $_file['file'];
             }
-            break;
         }
+        $cmt[$i]['count_cmtfile'] = count($cmt_file);
+        $cmt[$i]['count_cmtimg'] = count($cimg_loop);
+        $cmt[$i]['cmt_attach'] = implode('||', $cmt_attach);
     }
 
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';

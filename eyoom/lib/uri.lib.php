@@ -151,25 +151,41 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
  * 짧은 주소를 이전 방식으로 되돌려 줌
  */
 function get_query_url_from_pretty_url($short_url) {
-    $url = parse_url($short_url);
-    if ($url['query']) {
-        return $short_url;
-    } else {
-        $info = explode('/', $short_url);
+    $purl = parse_url($short_url);
+    if ($purl['query']) {
+        $path_name = str_replace('/','',$purl['path']);
+        $info = explode('/', $purl['path']);
 
-        if ($info[1] == 'content' && $info[2]) {
-            $url = "/".G5_BBS_DIR."/content.php?co_id={$info[2]}";
-        }
-        else if ($info[1] == 'group' && $info[2]) {
-            $url = "/".G5_BBS_DIR."/group.php?gr_id={$info[2]}";
-        }
-        else if ($info[1] == 'page' && $info[2]) {
-            $url = "/page/?pid={$info[2]}";
+        if (preg_match('/\.php/i',$info[2]) || !$info[2]) {
+            return $short_url;
         } else {
-            $url = "/".G5_BBS_DIR."/board.php?bo_table={$info[1]}";
+            $url = get_query_url($info).'&amp;'.$purl['query'];
+            return $url;
         }
+    } else {
+        $info = explode('/', preg_replace('#http(s)?:\/\/#i','', $short_url));
+        $url = get_query_url($info);
         return $url;
     }
+}
+
+/**
+ * 짧은주소를 받아 이전 URL로 변경
+ */
+function get_query_url ($info) {
+    if ($info[1] == 'content' && $info[2]) {
+        $url = G5_BBS_URL."/content.php?co_id={$info[2]}";
+    }
+    else if ($info[1] == 'group' && $info[2]) {
+        $url = G5_BBS_URL."/group.php?gr_id={$info[2]}";
+    }
+    else if ($info[1] == 'page' && $info[2]) {
+        $url = G5_URL."/page/?pid={$info[2]}";
+    } else {
+        $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
+    }
+
+    return $url;
 }
 
 /**

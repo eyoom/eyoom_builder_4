@@ -664,7 +664,7 @@ new Clipboard('.clipboard-btn');
 <?php if ($board['bo_download_point'] < 0) { ?>
 $(function() {
     $("a.view_file_download").click(function(e) {
-        if (!g5$is_member) {
+        if (!g5_is_member) {
             swal({
                 title: "중요!",
                 text: "다운로드 권한이 없습니다. 로그인 후 이용 가능합니다.",

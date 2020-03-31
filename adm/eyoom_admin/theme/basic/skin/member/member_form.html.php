@@ -104,6 +104,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="select form-width-250px">
                                 <?php echo get_member_level_select('mb_level', 1, $member['mb_level'], $mb['mb_level']) ?><i></i>
                             </label>
+                            <input type='hidden' name='mb_prev_level' value='<?php echo $mb['mb_level']; ?>'>
                         </td>
                     <?php if (G5_IS_MOBILE) { ?>
                     </tr>
@@ -117,6 +118,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <i class="icon-append">점</i>
                                 <input type="text" value="<?php echo number_format($mb['mb_point']) ?>" class="text-right" disabled>
                             </label>
+                            <input type='hidden' name='level_point' value='<?php echo $eb_member['level_point']; ?>'>
                         </td>
                     </tr>
                     <tr>

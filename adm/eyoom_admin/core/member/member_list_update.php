@@ -74,19 +74,21 @@ if ($_POST['act_button'] == "선택수정") {
                 /**
                  * 이전 그누레벨과 대상 그누레벨의 차이
                  */
-                $level_min_point['set_level'] = $eb->get_level_point_from_gnulevel($mb_level);
-                $level_min_point['old_level'] = $eb->get_level_point_from_gnulevel($mb_prev_level);
-
-                $eyoom_point = $level_point + ($level_min_point['set_level'] - $level_min_point['old_level']);
-                $eyoom_level = $eb->get_eyoomlevel_from_point($eyoom_point);
-
-                // 이윰 멤버 테이블에 적용
-                $sql = "update {$g5['eyoom_member']} set level = '{$eyoom_level}', level_point = '{$eyoom_point}' where mb_id = '{$mb_id}' ";
-                sql_query($sql);
-
-                // 그누레벨 적용
-                $sql = "update {$g5['member_table']} set mb_level = '{$mb_level}' where mb_id = '{$mb_id}' ";
-                sql_query($sql);
+                if ($mb_level != $mb_prev_level) {
+                    $level_min_point['set_level'] = $eb->get_level_point_from_gnulevel($mb_level);
+                    $level_min_point['old_level'] = $eb->get_level_point_from_gnulevel($mb_prev_level);
+    
+                    $eyoom_point = $level_point + ($level_min_point['set_level'] - $level_min_point['old_level']);
+                    $eyoom_level = $eb->get_eyoomlevel_from_point($eyoom_point);
+    
+                    // 이윰 멤버 테이블에 적용
+                    $sql = "update {$g5['eyoom_member']} set level = '{$eyoom_level}', level_point = '{$eyoom_point}' where mb_id = '{$mb_id}' ";
+                    sql_query($sql);
+    
+                    // 그누레벨 적용
+                    $sql = "update {$g5['member_table']} set mb_level = '{$mb_level}' where mb_id = '{$mb_id}' ";
+                    sql_query($sql);
+                }
             }
 
             // 해당 회원 자동 탈퇴처리

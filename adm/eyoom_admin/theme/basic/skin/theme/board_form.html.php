@@ -815,17 +815,21 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label class="label">댓글에서 이미지 추가 기능 사용</label>
+                                <label class="label">댓글에 파일 추가 기능 사용</label>
                             </th>
                             <td>
-                                <label for="bo_use_addon_cmtimg" class="checkbox">
-                                    <input type="checkbox" name="bo_use_addon_cmtimg" id="bo_use_addon_cmtimg" value="1" <?php echo $eyoom_board['bo_use_addon_cmtimg']=='1' ? 'checked': ''; ?>><i></i> 사용
+                                <label for="bo_use_addon_cmtfile" class="checkbox">
+                                    <input type="checkbox" name="bo_use_addon_cmtfile" id="bo_use_addon_cmtfile" value="1" <?php echo $eyoom_board['bo_use_addon_cmtfile']=='1' ? 'checked': ''; ?>><i></i> 사용
+                                </label>
+                                <label for="bo_count_cmtfile" class="input form-width-150px">
+                                    <i class="icon-append">개</i>
+                                    <input type="input" name="bo_count_cmtfile" id="bo_count_cmtfile" value="<?php echo $eyoom_board['bo_count_cmtfile'] ? $eyoom_board['bo_count_cmtfile']: 1; ?>">
                                 </label>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group pull-right">
-                                    <label for="chk_grp_addon_cmtimg" class="checkbox"><input type="checkbox" name="chk_grp_addon_cmtimg" id="chk_grp_addon_cmtimg"><i></i>그룹적용</label>
-                                    <label for="chk_all_addon_cmtimg" class="checkbox"><input type="checkbox" name="chk_all_addon_cmtimg" id="chk_all_addon_cmtimg"><i></i>전체적용</label>
+                                    <label for="chk_grp_addon_cmtfile" class="checkbox"><input type="checkbox" name="chk_grp_addon_cmtfile" id="chk_grp_addon_cmtfile"><i></i>그룹적용</label>
+                                    <label for="chk_all_addon_cmtfile" class="checkbox"><input type="checkbox" name="chk_all_addon_cmtfile" id="chk_all_addon_cmtfile"><i></i>전체적용</label>
                                 </div>
                             </td>
                         </tr>

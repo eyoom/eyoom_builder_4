@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_use_addon_coding` char(1) NOT NULL default '0',
   `bo_use_addon_soundcloud` char(1) NOT NULL default '0',
   `bo_use_addon_map` char(1) NOT NULL default '0',
-  `bo_use_addon_cmtimg` char(1) NOT NULL default '1',
+  `bo_use_addon_cmtfile` char(1) NOT NULL default '1',
   `bo_use_extimg` char(1) NOT NULL default '0',
   `bo_use_adopt_point` char(1) NOT NULL default '0',
   `bo_adopt_minpoint` int(7) NOT NULL default '0',

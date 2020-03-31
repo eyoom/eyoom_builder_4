@@ -40,18 +40,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                             <div <?php if (!G5_IS_MOBILE) { ?>class="inline-group"<?php } ?>>
                                 <div class="margin-bottom-5">
                                     <label class="select form-width-150px">
-                                        <select name="sfl" id="sfl">
-                                            <option value="it_name" <?php echo get_selected($sfl, 'it_name'); ?>>상품명</option>
-                                            <option value="it_id" <?php echo get_selected($sfl, 'it_id'); ?>>상품코드</option>
-                                            <option value="it_maker" <?php echo get_selected($sfl, 'it_maker'); ?>>제조사</option>
-                                            <option value="it_origin" <?php echo get_selected($sfl, 'it_origin'); ?>>원산지</option>
-                                            <option value="it_sell_email" <?php echo get_selected($sfl, 'it_sell_email'); ?>>판매자 e-mail</option>
+                                        <select name="sel_field" id="sel_field">
+                                            <option value="it_name" <?php echo get_selected($sel_field, 'it_name'); ?>>상품명</option>
+                                            <option value="it_id" <?php echo get_selected($sel_field, 'it_id'); ?>>상품코드</option>
                                         </select><i></i>
                                     </label>
                                 </div>
                                 <span>
                                     <label class="input form-width-250px">
-                                        <input type="text" name="stx" value="<?php echo $stx; ?>" id="stx" autocomplete="off">
+                                        <input type="text" name="search" value="<?php echo $search; ?>" id="stx" autocomplete="off">
                                     </label>
                                 </span>
                             </div>
