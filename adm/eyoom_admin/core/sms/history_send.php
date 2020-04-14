@@ -228,7 +228,7 @@ if($config['cf_sms_type'] == 'LMS') {
 
 ?>
 <script>
-act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200');
-act.close();
+//act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200');
+//act.close();
 location.href = '<?php echo G5_ADMIN_URL; ?>/?dir=sms&pid=history_view&wr_no=<?php echo $wr_no?>&wr_renum=<?php echo $new_wr_renum?>';
 </script>

@@ -67,11 +67,11 @@ if($od['od_pg'] == 'lg') {
 .shop-order-inquiry-view .total-box-in-box {position:relative;overflow:hidden;clear:both;padding:5px 10px;text-align:right;font-size:12px;color:#757575}
 .shop-order-inquiry-view .total-box-in-box span {float:left}
 .shop-order-inquiry-view .total-box-in-box strong {color:#000;font-size:12px}
-#sod_cancel_pop {position:relative}
+#sod_cancel_pop {display:none;position:relative}
 #sod_fin_cancelfrm form {padding:0}
 .shop-order-inquiry-view .order-payment-cancel h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
 .shop-order-inquiry-view .order-payment-cancel button {height:40px;border:1px solid #959595;font-weight:bold;width:100%;background:#fff;color:#757575}
-.shop-order-inquiry-view .order-payment-cancel #sod_fin_cancelfrm {position:relative;top:inherit;left:inherit;width:100%;margin:20px 0 0;padding:0;background:none;box-shadow:0 0 0 #fff;border:0 none}
+.shop-order-inquiry-view .order-payment-cancel #sod_fin_cancelfrm {display:block;position:relative;top:inherit;left:inherit;width:100%;margin:20px 0 0;padding:0;background:none;box-shadow:0 0 0 #fff;border:0 none}
 .shop-order-inquiry-view .order-payment-cancel .btn-e-xxlg {border:0}
 .shop-order-inquiry-view #sod_fin_test {padding:0;margin-top:20px}
 .shop-order-inquiry-view #sod_fin_test .btn-e-xxlg {border:0}

@@ -10,9 +10,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 @media (max-width: 500px) {
     .admin-config-form .btn-e-lg {margin-bottom:5px}
 }
+
+.icode_old_version th{background-color:#FFFCED !important;}
+.icode_json_version th{background-color:#F6F1FF !important;}
+.cf_tr_hide {display:none;}
 </style>
 
-<?php if (!$config['cf_icode_pw']) { ?>
+<?php if (!($config['cf_icode_pw'] || $config['cf_icode_token_key'])) { ?>
 <div class="alert alert-primary">
     <p>SMS 기능을 사용하시려면 먼저 아이코드에 서비스 신청을 하셔야 합니다.</p>
     <a href="http://icodekorea.com/res/join_company_fix_a.php?sellid=sir2" target="_blank" class="btn-e btn-e-dark margin-top-10">아이코드 서비스 신청하기</a>
@@ -39,30 +43,43 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <tbody>
                     <tr>
                         <th class="table-form-th">
-                            <label for="cf_icode_id" class="label">아이코드 회원아이디<strong class="sound_only"> 필수</strong></label>
+                            <label for="cf_sms_type" class="label">SMS 전송유형</label>
+                        </th>
+                        <td>
+                            <label for="cf_sms_type" class="select form-width-250px">
+                                <select id="cf_sms_type" name="cf_sms_type">
+                                    <option value="" <?php echo get_selected($config['cf_sms_type'], ''); ?>>SMS</option>
+                                    <option value="LMS" <?php echo get_selected($config['cf_sms_type'], 'LMS'); ?>>LMS</option>
+                                </select><i></i>
+                            </label>
+                            <div class="note"><strong>Note:</strong> 전송유형을 SMS로 선택하시면 최대 80바이트까지 전송하실 수 있으며<br>LMS로 선택하시면 90바이트 이하는 SMS로, 그 이상은 <?php echo G5_ICODE_LMS_MAX_LENGTH; ?>바이트까지 LMS로 전송됩니다.<br>요금은 건당 SMS는 16원, LMS는 48원입니다.</div>
+                        </td>
+                    </tr>
+                    <tr class="icode_old_version">
+                        <th class="table-form-th">
+                            <label for="cf_icode_id" class="label">아이코드 회원아이디<br>(구버전)<strong class="sound_only"> 필수</strong></label>
                         </th>
                         <td>
                             <label class="input form-width-250px">
-                                <input type="text" name="cf_icode_id" id="cf_icode_id" value="<?php echo $config['cf_icode_id']; ?>" required>
+                                <input type="text" name="cf_icode_id" id="cf_icode_id" value="<?php echo $config['cf_icode_id']; ?>">
                             </label>
                             <div class="note"><strong>Note:</strong> 아이코드에서 사용하시는 회원아이디를 입력합니다.</div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="icode_old_version">
                         <th class="table-form-th">
-                            <label for="cf_icode_pw" class="label">아이코드 비밀번호<strong class="sound_only">필수</strong></label>
+                            <label for="cf_icode_pw" class="label">아이코드 비밀번호<br>(구버전)<strong class="sound_only">필수</strong></label>
                         </th>
                         <td>
                             <label class="input form-width-250px">
-                                <input type="password" name="cf_icode_pw" id="cf_icode_pw" value="<?php echo $config['cf_icode_pw']; ?>" required>
+                                <input type="password" name="cf_icode_pw" id="cf_icode_pw" value="<?php echo $config['cf_icode_pw']; ?>">
                             </label>
                             <div class="note"><strong>Note:</strong> 아이코드에서 사용하시는 비밀번호를 입력합니다.</div>
-                            <?php if (!$config['cf_icode_pw']) { ?><div class="note"><strong>Note:</strong> 현재 비밀번호가 입력되어 있지 않습니다.</div><?php } ?>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="icode_old_version <?php if(!(isset($userinfo['payment']) && $userinfo['payment'])){ echo 'cf_tr_hide'; } ?>">
                         <th class="table-form-th">
-                            <label class="label">요금제</label>
+                            <label class="label">요금제<br>(구버전)</label>
                         </th>
                         <td>
                             <?php
@@ -73,16 +90,15 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     echo '정액제';
                                     echo '<input type="hidden" name="cf_icode_server_port" value="7296">';
                                 } else {
-                                    echo '가입해주세요.';
                                     echo '<input type="hidden" name="cf_icode_server_port" value="7295">';
                                 }
                             ?>
                         </td>
                     </tr>
                     <?php if ($userinfo['payment'] == 'A') { ?>
-                    <tr>
+                    <tr class="icode_old_version">
                         <th class="table-form-th">
-                            <label class="label">충전 잔액</label>
+                            <label class="label">충전 잔액<br>(구버전)</label>
                         </th>
                         <td>
                             <?php echo number_format($userinfo['coin'])?> 원
@@ -90,6 +106,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </td>
                     </tr>
                     <?php } ?>
+                    <tr class="icode_json_version">
+                        <th class="table-form-th">
+                            <label class="label">아이코드 토큰키<br>(JSON버전)</label>
+                        </th>
+                        <td>
+                            <label class="input form-width-250px">
+                                <input type="text" name="cf_icode_token_key" value="<?php echo $config['cf_icode_token_key']; ?>" id="cf_icode_token_key">
+                            </label>
+                            <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 JSON 버전의 경우 아이코드 토큰키를 입력시 실행됩니다.<br>SMS 전송유형을 LMS로 설정시 90바이트 이내는 SMS, 90 ~ 2000 바이트는 LMS 그 이상은 절삭 되어 LMS로 발송됩니다.</div>
+                            <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 사이트 -> 토큰키관리 메뉴에서 생성한 토큰키를 입력합니다.</div>
+                            <br>
+                            서버아이피 : <?php echo $_SERVER['SERVER_ADDR']; ?>
+                        </td>
+                    </tr>
                     <tr>
                         <th class="table-form-th">
                             <label for="cf_phone" class="label">회신번호<strong class="sound_only"> 필수</strong></label>

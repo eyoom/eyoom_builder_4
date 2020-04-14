@@ -16,6 +16,14 @@ $action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=config_update&amp;smode=1';
 if (!$config['cf_icode_server_ip'])   $config['cf_icode_server_ip'] = '211.172.232.124';
 if (!$config['cf_icode_server_port']) $config['cf_icode_server_port'] = '7295';
 
+// 아이코드 토큰키 추가
+if( ! isset($config['cf_icode_token_key']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}` 
+            ADD COLUMN `cf_icode_token_key` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cf_icode_server_port`; ";
+    sql_query($sql, false);
+    $config['cf_icode_token_key'] = '';
+}
+
 if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw'])
 {
     $userinfo = get_icode_userinfo($config['cf_icode_id'], $config['cf_icode_pw']);

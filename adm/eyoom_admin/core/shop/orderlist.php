@@ -55,10 +55,10 @@ if ($sel_field != "") {
     } else {
         $where[] = " $sel_field like '%$search%' ";
     }
-}
 
-if ($save_search != $search) {
-    $page = 1;
+    if ($save_search != $search) {
+        $page = 1;
+    }
 }
 
 if ($od_status) {

@@ -290,8 +290,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     
             w = document.body.clientWidth/2 - 200;
             h = document.body.clientHeight/2 - 100;
-            act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200, left=' + w + ', top=' + h);
-            act.focus();
+            //act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200, left=' + w + ', top=' + h);
+            //act.focus();
     
             f.send_list.value = list;
             return true;
@@ -431,6 +431,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         var conts = document.getElementById(wr_message);
         var bytes = document.getElementById(sms_bytes);
         var max_bytes = document.getElementById("sms_max_bytes");
+        var lms_max_length = <?php echo G5_ICODE_LMS_MAX_LENGTH;?>
     
         var i = 0;
         var cnt = 0;
@@ -451,14 +452,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     
         <?php if($config['cf_sms_type'] == 'LMS') { ?>
         if(cnt > 90)
-            max_bytes.innerHTML = 1500;
+            max_bytes.innerHTML = lms_max_length;
         else
             max_bytes.innerHTML = 90;
     
-        if (cnt > 1500)
+        if (cnt > lms_max_length)
         {
-            exceed = cnt - 1500;
-            alert('메시지 내용은 1500바이트를 넘을수 없습니다.\n\n작성하신 메세지 내용은 '+ exceed +'byte가 초과되었습니다.\n\n초과된 부분은 자동으로 삭제됩니다.');
+            exceed = cnt - lms_max_length;
+            alert('메시지 내용은 '+ lms_max_length +'바이트를 넘을수 없습니다.\n\n작성하신 메세지 내용은 '+ exceed +'byte가 초과되었습니다.\n\n초과된 부분은 자동으로 삭제됩니다.');
             var tcnt = 0;
             var xcnt = 0;
             var tmp = conts.value;
@@ -471,7 +472,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     tcnt += 1;
                 }
     
-                if (tcnt > 1500) {
+                if (tcnt > lms_max_length) {
                     tmp = tmp.substring(0,i);
                     break;
                 } else {

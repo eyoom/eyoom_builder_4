@@ -315,7 +315,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         <div class="main-latest-wrap">
             <div class="main-latest">
                 <?php for ($i=0; $i<count($item_qa); $i++) { ?>
-                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_qa[$i]['is_answer'] == '') { ?>main-latest-no-answer<?php } ?>">
+                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_qa[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$item_qa[$i]['mb_photo']) { ?>
                         <i class="fas fa-user-circle"></i>
@@ -327,7 +327,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                         <p class="ellipsis"><?php echo conv_subject($item_qa[$i]['iq_subject'], 40); ?></p>
                         <p class="ellipsis"><span><?php echo $item_qa[$i]['name']; ?></span><span><i class="far fa-clock"></i> <?php echo $eb->date_format('Y-m-d', $item_qa[$i]['iq_time']); ?></span></p>
                     </div>
-                    <?php if (!$item_qa[$i]['is_answer'] == '') { ?>
+                    <?php if (!$item_qa[$i]['is_answer']) { ?>
                     <span class="latest-status-indicator"></span>
                     <?php } ?>
                 </a>
@@ -351,7 +351,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         <div class="main-latest-wrap">
             <div class="main-latest">
                 <?php for ($i=0; $i<count($item_use); $i++) { ?>
-                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemuseform&amp;is_id=<?php echo $item_use[$i]['is_id']; ?>&amp;w=u" class="main-latest-link main-latest-no-answer">
+                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemuseform&amp;is_id=<?php echo $item_use[$i]['is_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_use[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$item_use[$i]['mb_photo']) { ?>
                         <i class="fas fa-user-circle"></i>
@@ -363,7 +363,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                         <p class="ellipsis"><?php echo conv_subject($item_use[$i]['is_subject'], 40); ?></p>
                         <p class="ellipsis"><span><?php echo $item_use[$i]['name']; ?></span><span><i class="far fa-clock"></i> <?php echo $eb->date_format('Y-m-d', $item_use[$i]['is_time']); ?></span></p>
                     </div>
+                    <?php if (!$item_use[$i]['is_answer']) { ?>
                     <span class="latest-status-indicator"></span>
+                    <?php } ?>
                 </a>
                 <?php } ?>
                 <?php if (count($item_use) == 0) { ?>

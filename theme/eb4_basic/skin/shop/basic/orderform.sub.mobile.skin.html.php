@@ -41,7 +41,7 @@ set_session('ss_personalpay_hash', '');
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
 }
 <?php } ?>
-.shop-order-form .sod-li-wrap {margin:0 0 30px}
+.shop-order-form .sod-li-wrap {margin:0 0 30px;padding:0;list-style:none}
 .shop-order-form .sod-li-wrap .sod-li {background:#fff;border:1px solid #e5e5e5;margin:0 0 20px}
 .shop-order-form .sod-li-wrap .li-name {border-bottom:1px solid #e5e5e5;line-height:1.5;padding:10px;font-size:14px;font-weight:bold}
 .shop-order-form .sod-li-wrap .li-op-wrap {position:relative;margin:10px;padding-left:90px;min-height:80px}
@@ -125,6 +125,14 @@ set_session('ss_personalpay_hash', '');
 .shop-order-form #settle_bank .select {margin-bottom:10px}
 .shop-order-form #settle_bank .input {margin-bottom:0}
 .shop-order-form #settle_bank #od_deposit_name {text-align:left}
+/* Datepicker CSS 수정 */
+.ui-datepicker {width:260px}
+.ui-datepicker td span, .ui-datepicker td a {padding:inherit;text-align:inherit;line-height:25px}
+.ui-widget-header {border:0;border-bottom:1px solid #c5c5c5 !important;background:#e5e5e5}
+.ui-widget-content .ui-state-default {border:inherit;background:none}
+.ui-datepicker .ui-datepicker-buttonpane button {margin:10px 0 0;padding:5px 15px;border:0;background:#171C29;color:#fff}
+.ui-datepicker .ui-datepicker-buttonpane button:hover {background:#1F263B !important}
+.ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {border:0}
 <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-table th {width:70px !important;text-align:left;padding:5px 0;display:none}

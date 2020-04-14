@@ -16,6 +16,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 .sms5-sent-info .sent-info-li .ov_txt {font-weight:bold}
 .sms5-sent-info .sent-info-li .ov_num {color:#cc2300;font-weight:bold}
 .btn_add01 a {padding:5px 10px;font-size:12px}
+.sms5_box textarea.box_txt.is_overview{overflow:visible;min-height:130px}
 </style>
 
 <script>
@@ -26,8 +27,8 @@ function re_send() {
     if (!confirm('전송에 실패한 SMS 를 재전송 하시겠습니까?'))
         return;
 
-    act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200');
-    act.focus();
+    //act = window.open('<?php echo G5_ADMIN_URL; ?>/sms_admin/sms_ing.php', 'act', 'width=300, height=200');
+    //act.focus();
 
     location.href = '<?php echo G5_ADMIN_URL; ?>/?dir=sms&pid=history_send&w=f&page=<?php echo $page?>&st=<?php echo  $st?>&sv=<?php echo $sv?>&wr_no=<?php echo $wr_no?>&wr_renum=<?php echo $wr_renum?>&smode=1';
     <?php } ?>
@@ -112,7 +113,7 @@ function all_send() {
 
         <div id="con_sms" class="sms5_box">
             <span class="box_ico"></span>
-            <textarea class="box_txt" readonly><?php echo $write['wr_message'];?></textarea>
+            <textarea class="box_txt is_overview" readonly><?php echo $write['wr_message'];?></textarea>
         </div>
 
         <?php if ($write['wr_re_total'] && !$wr_renum) { ?>

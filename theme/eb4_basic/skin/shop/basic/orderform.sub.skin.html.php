@@ -130,6 +130,14 @@ if($is_kakaopay_use) {
 #settle_bank select {width:100%;border:1px solid #ccc}
 .shop-order-form #settle_bank .input {margin-bottom:0}
 .shop-order-form #settle_bank #od_deposit_name {width:100%;text-align:left;border:1px solid #ccc}
+/* Datepicker CSS 수정 */
+.ui-datepicker {width:260px}
+.ui-datepicker td span, .ui-datepicker td a {padding:inherit;text-align:inherit;line-height:25px}
+.ui-widget-header {border:0;border-bottom:1px solid #c5c5c5 !important;background:#e5e5e5}
+.ui-widget-content .ui-state-default {border:inherit;background:none}
+.ui-datepicker .ui-datepicker-buttonpane button {margin:10px 0 0;padding:5px 15px;border:0;background:#171C29;color:#fff}
+.ui-datepicker .ui-datepicker-buttonpane button:hover {background:#1F263B !important}
+.ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {border:0}
 <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-member-area {margin-right:0}

@@ -22,6 +22,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $item_qa[$i] = $row;
     $item_qa[$i]['mb_photo'] = $eb->mb_photo($row1['mb_id']);
     $item_qa[$i]['name'] = get_text($row1['mb_name']);
+    $item_qa[$i]['is_answer'] = $row['iq_answer'] ? true: false;
 }
 
 /**
@@ -36,6 +37,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $item_use[$i] = $row;
     $item_use[$i]['mb_photo'] = $eb->mb_photo($row1['mb_id']);
     $item_use[$i]['name'] = get_text($row1['mb_name']);
+    $item_use[$i]['is_answer'] = $row['is_confirm'] == '1' ? true: false;
 }
 
 /**

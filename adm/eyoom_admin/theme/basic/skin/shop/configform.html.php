@@ -31,6 +31,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 }
 ul.de_pg_tab li a {font-size:14px;background:#e5e5e5;line-height:2.3}
 ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
+
+.icode_old_version th{background-color:#FFFCED !important;}
+.icode_json_version th{background-color:#F6F1FF !important;}
+.cf_tr_hide {display:none;}
 </style>
 
 <div class="admin-shop-configform">
@@ -1998,6 +2002,10 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
         var ch = '';
         var limit_num = (jQuery("#cf_sms_type").val() == "LMS") ? 1500 : 80;
 
+        if( $("input[name='cf_icode_token_key']").length && $("input[name='cf_icode_token_key']").val() && jQuery("#cf_sms_type").val() == "LMS" ){
+            limit_num = 2000;
+        }
+
         for (i=0; i<cont.value.length; i++) {
             ch = cont.value.charAt(i);
             if (escape(ch).length > 4) {
@@ -2090,9 +2098,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 주문서작성시 쇼핑몰관리자가 문자메세지를 받아볼 번호를 숫자만으로 입력하세요. 예) 0101234567</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
-                                <label for="cf_icode_id" class="label">아이코드 회원아이디</label>
+                                <label for="cf_icode_id" class="label">아이코드 회원아이디<br>(구버전)</label>
                             </th>
                             <td>
                                 <label for="cf_icode_id" class="input form-width-250px">
@@ -2101,9 +2109,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 회원아이디를 입력합니다.</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
-                                <label for="cf_icode_pw" class="label">아이코드 비밀번호</label>
+                                <label for="cf_icode_pw" class="label">아이코드 비밀번호<br>(구버전)</label>
                             </th>
                             <td>
                                 <label for="cf_icode_pw" class="input form-width-250px">
@@ -2112,9 +2120,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 비밀번호를 입력합니다.</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version <?php if(!(isset($userinfo['payment']) && $userinfo['payment'])){ echo 'cf_tr_hide'; } ?>">
                             <th class="table-form-th">
-                                <label for="cf_icode_pw" class="label">요금제</label>
+                                <label for="cf_icode_pw" class="label">요금제<br>(구버전)</label>
                             </th>
                             <td>
                                 <input type="hidden" name="cf_icode_server_ip" value="<?php echo $config['cf_icode_server_ip']; ?>">
@@ -2132,17 +2140,8 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 ?>
                             </td>
                         </tr>
-                        <tr>
-                            <th class="table-form-th">
-                                <label class="label">아이코드 SMS 신청 [회원가입]</label>
-                            </th>
-                            <td>
-                                <a href="http://icodekorea.com/res/join_company_fix_a.php?sellid=sir2" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center margin-top-5">아이코드 회원가입</a>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 아래 링크에서 회원가입 하시면 문자 건당 16원에 제공 받을 수 있습니다.</div>
-                            </td>
-                        </tr>
                         <?php if ($userinfo['payment'] == 'A') { ?>
-                        <tr>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
                                 <label class="label">충전 잔액</label>
                             </th>
@@ -2159,6 +2158,30 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </td>
                         </tr>
                         <?php } ?>
+                        <tr class="icode_json_version">
+                            <th class="table-form-th">
+                                <label class="label">아이코드 토큰키<br>(JSON버전)</label>
+                            </th>
+                            <td>
+                                <label class="input form-width-250px">
+                                    <input type="text" name="cf_icode_token_key" value="<?php echo $config['cf_icode_token_key']; ?>" id="cf_icode_token_key">
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 JSON 버전의 경우 아이코드 토큰키를 입력시 실행됩니다.<br>SMS 전송유형을 LMS로 설정시 90바이트 이내는 SMS, 90 ~ 2000 바이트는 LMS 그 이상은 절삭 되어 LMS로 발송됩니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 사이트 -> 토큰키관리 메뉴에서 생성한 토큰키를 입력합니다.</div>
+                                <br>
+                                서버아이피 : <?php echo $_SERVER['SERVER_ADDR']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label class="label">아이코드 SMS 신청<br>회원가입</label>
+                            </th>
+                            <td>
+                                <a href="http://icodekorea.com/res/join_company_fix_a.php?sellid=sir2" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">아이코드 회원가입</a>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 아래 링크에서 회원가입 하시면 문자 건당 16원에 제공 받을 수 있습니다.</div>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
                 <?php if (!G5_IS_MOBILE) { ?>

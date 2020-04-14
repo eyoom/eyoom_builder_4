@@ -31,6 +31,10 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
     .pg-anchor-in.tab-e2 .tab-bottom-line {display:none}
 }
 .cf_cert_hide {display:none;position:absolute;top:-20000px;left:-10000px}
+
+.icode_old_version th{background-color:#FFFCED !important;}
+.icode_json_version th{background-color:#F6F1FF !important;}
+.cf_tr_hide {display:none;}
 </style>
 
 <div class="admin-config-form">
@@ -1977,12 +1981,12 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                         <option value="LMS" <?php echo get_selected($config['cf_sms_type'], 'LMS'); ?>>LMS</option>
                                     </select><i></i>
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 전송유형을 SMS로 선택하시면 최대 80바이트까지 전송하실 수 있으며 LMS로 선택하시면 90바이트 이하는 SMS로, <br>그 이상은 1500바이트까지 LMS로 전송됩니다.<br>요금은 건당 SMS는 16원, LMS는 48원입니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 전송유형을 SMS로 선택하시면 최대 80바이트까지 전송하실 수 있으며<br>LMS로 선택하시면 90바이트 이하는 SMS로, 그 이상은 ".G5_ICODE_LMS_MAX_LENGTH."바이트까지 LMS로 전송됩니다.<br>요금은 건당 SMS는 16원, LMS는 48원입니다.</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
-                                <label for="cf_icode_id" class="label">아이코드 회원아이디</label>
+                                <label for="cf_icode_id" class="label">아이코드 회원아이디<br>(구버전)</label>
                             </th>
                             <td>
                                 <label class="input form-width-250px">
@@ -1991,9 +1995,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 회원아이디를 입력합니다.</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
-                                <label for="cf_icode_pw" class="label">아이코드 비밀번호</label>
+                                <label for="cf_icode_pw" class="label">아이코드 비밀번호<br>(구버전)</label>
                             </th>
                             <td>
                                 <label class="input form-width-250px">
@@ -2002,9 +2006,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 비밀번호를 입력합니다.</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="icode_old_version <?php if(!(isset($userinfo['payment']) && $userinfo['payment'])){ echo 'cf_tr_hide'; } ?>">
                             <th class="table-form-th">
-                                <label class="label">요금제</label>
+                                <label class="label">요금제<br>(구버전)</label>
                             </th>
                             <td>
                                 <input type="hidden" name="cf_icode_server_ip" value="<?php echo $config['cf_icode_server_ip']; ?>">
@@ -2019,18 +2023,34 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 </label>
                             </td>
                         </tr>
-                        <tr>
+                        <?php if ($userinfo['payment'] == 'A') { ?>
+                        <tr class="icode_old_version">
                             <th class="table-form-th">
-                                <label class="label">아이코드 SMS 신청 [회원가입]</label>
+                                <label class="label">충전 잔액<br>(구버전)</label>
                             </th>
                             <td>
-                                <a href="http://icodekorea.com/res/join_company_fix_a.php?sellid=sir2" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">아이코드 회원가입</a>
+                                <?php echo number_format($userinfo['coin']); ?> 원.
+                                <a href="http://www.icodekorea.com/smsbiz/credit_card_amt.php?icode_id=<?php echo $config['cf_icode_id']; ?>&amp;icode_passwd=<?php echo $config['cf_icode_pw']; ?>" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">충전하기</a>
                             </td>
                         </tr>
-                        <?php if ($userinfo['payment'] == 'A') { ?>
+                        <?php } ?>
+                        <tr class="icode_json_version">
+                            <th class="table-form-th">
+                                <label class="label" for="cf_icode_token_key">아이코드 토큰키<br>(JSON버전)</label>
+                            </th>
+                            <td>
+                                <label class="input form-width-250px">
+                                    <input type="text" name="cf_icode_token_key" value="<?php echo $config['cf_icode_token_key']; ?>" id="cf_icode_token_key">
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 JSON 버전의 경우 아이코드 토큰키를 입력시 실행됩니다.<br>SMS 전송유형을 LMS로 설정시 90바이트 이내는 SMS, 90 ~ 2000 바이트는 LMS 그 이상은 절삭 되어 LMS로 발송됩니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 사이트 -> 토큰키관리 메뉴에서 생성한 토큰키를 입력합니다.</div>
+                                <br>
+                                서버아이피 : <?php echo $_SERVER['SERVER_ADDR']; ?>
+                            </td>
+                        </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label class="label">충전 잔액</label>
+                                <label class="label">아이코드 SMS 신청<br>회원가입</label>
                             </th>
                             <td>
                                 <?php echo number_format($userinfo['coin']); ?> 원
@@ -2041,10 +2061,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="label">아이코드 충전하기</label>
                             </th>
                             <td>
-                                <a href="http://www.icodekorea.com/smsbiz/credit_card_amt.php?icode_id=<?php echo $config['cf_icode_id']; ?>&amp;icode_passwd=<?php echo $config['cf_icode_pw']; ?>" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">충전하기</a>
+                                <a href="http://icodekorea.com/res/join_company_fix_a.php?sellid=sir2" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">아이코드 회원가입</a>
                             </td>
                         </tr>
-                        <?php } ?>
                     </tbody>
                 </table>
                 <?php if (!G5_IS_MOBILE) { ?>

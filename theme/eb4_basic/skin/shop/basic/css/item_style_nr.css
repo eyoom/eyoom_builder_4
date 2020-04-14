@@ -99,7 +99,7 @@
 #sit_opt_added .num_input {float:left;border:0;height:30px;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-align:center}
 #sit_opt_added .sit_opt_del {border:0;font-size:15px}
 #sit_opt_added .sit_opt_del:hover {color:#FF4848}
-#sit_opt_added .sit_opt_prc {display:block;float:left;width:100px;padding:0 3px;text-align:right;line-height:30px;font-size:14px;font-weight:bold}
+#sit_opt_added .sit_opt_prc {display:block;float:left;width:100px;padding-right:30px;text-align:right;line-height:30px;font-size:14px;font-weight:bold}
 
 #mod_option_frm #sit_sel_option {margin:20px}
 #mod_option_frm #sit_tot_price {margin:20px}

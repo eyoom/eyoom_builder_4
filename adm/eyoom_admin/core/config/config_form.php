@@ -299,6 +299,13 @@ if(!isset($member['mb_scrap_cnt'])) {
                 ADD `mb_scrap_cnt` int(11) NOT NULL DEFAULT '0' AFTER `mb_memo_cnt`", true);
 }
 
+// 아이코드 토큰키 추가
+if( ! isset($config['cf_icode_token_key']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}` 
+            ADD COLUMN `cf_icode_token_key` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cf_icode_server_port`; ";
+    sql_query($sql, false);
+}
+
 /**
  * FAQ 스킨설정
  */
