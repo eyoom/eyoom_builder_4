@@ -122,7 +122,9 @@ if (isset($eyoom_board['bo_use_addon_cmtimg'])) {
 	// 댓글 이미지 필드를 댓글 파일첨부 필드로 명칭 변경 
 	$sql = "alter table `{$g5['eyoom_board']}` change `bo_use_addon_cmtimg` `bo_use_addon_cmtfile` char(1) not null default '1';";
 	sql_query($sql);
+}
 
+if (!isset($eyoom_board['bo_count_cmtfile'])) {
 	// 댓글 첨부파일 개수 지정 필드 추가
 	$sql = "alter table `{$g5['eyoom_board']}` add `bo_count_cmtfile` smallint(2) not null default '1' after `bo_use_addon_cmtfile`;";
 	sql_query($sql);

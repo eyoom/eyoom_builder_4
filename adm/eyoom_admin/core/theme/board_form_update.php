@@ -72,7 +72,7 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
 /**
  * 게시판 테이블에 익명글 관련 필드 추가
  */
-if(!sql_query(" select wr_anonymous from {$write_table} limit 1 ", false)) {
+if(!sql_query(" select wr_bo_anonymous from {$write_table} limit 1 ", false)) {
     $sql = " alter table `{$write_table}`
         add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`,
         add `wr_bo_anonymous` char(1) NOT NULL default '' after `wr_anonymous`
@@ -83,7 +83,7 @@ if(!sql_query(" select wr_anonymous from {$write_table} limit 1 ", false)) {
 /**
  * 새글 테이블에 익명글 관련 필드 추가
  */
-if(!sql_query(" select wr_anonymous from {$g5['board_new_table']} limit 1 ", false)) {
+if(!sql_query(" select wr_bo_anonymous from {$g5['board_new_table']} limit 1 ", false)) {
     $sql = " alter table `{$g5['board_new_table']}`
         add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`,
         add `wr_bo_anonymous` char(1) NOT NULL default '' after `wr_anonymous`

@@ -22,9 +22,12 @@ if (!isset($g5['title'])) {
     $g5_head_title = $g5['title'];
 }
 else {
-    $g5_head_title = $g5['title'];
+    $g5_head_title = $g5['title']; // 상태바에 표시될 제목
     $g5_head_title .= " | ".$config['cf_title'];
 }
+
+$g5['title'] = strip_tags($g5['title']);
+$g5_head_title = strip_tags($g5_head_title);
 
 /**
  * 현재 접속자

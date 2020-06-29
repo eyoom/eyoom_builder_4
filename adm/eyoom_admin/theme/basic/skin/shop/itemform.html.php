@@ -1436,11 +1436,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </tr>
                         <tr id="sc_con_qty">
                             <th class="table-form-th">
-                                <label for="it_sc_qty" class="label">배송비 상세조건</label>
+                                <label for="it_sc_qty" class="label">배송비 상세조건<br><br>(주문수량별 배송비 적용)</label>
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <i class="icon-append">원</i>
+                                    <i class="icon-append">개</i>
                                     <input type="text" name="it_sc_qty" value="<?php echo $it['it_sc_qty']; ?>" id="it_sc_qty">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 주문수량이 설정한 수량의 배수가 될때마다 배송비를 부과합니다.<br>배송상품의 주문 수량에 따라 배송비가 부과됩니다. 예를 들어 기본배송비가 3,000원 수량을 3으로 설정했을 경우 상품의 주문수량이 5개이면 6,000원 배송비가 부과됩니다.</div>

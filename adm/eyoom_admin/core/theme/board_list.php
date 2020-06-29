@@ -18,6 +18,12 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=board_list_update&amp;smode=1';
 
 /**
+ * eyoom_board 테이블 - 익명필드 기본값 변경
+ */
+$sql = "alter table {$g5['eyoom_board']} change `bo_use_anonymous` `bo_use_anonymous` char(1) null default '0' ";
+sql_query($sql);
+
+/**
  * 게시판 정보 가져오기
  */
 $sql_common = " from {$g5['board_table']} as a left join {$g5['group_table']} as b on a.gr_id = b.gr_id ";

@@ -116,7 +116,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     <?php /* 페이지 */ ?>
     <?php echo eb_paging($eyoom['paging_skin']);?>
 
-    <form name="fauthlist2" id="fauthlist2" action="<?php echo $action_url2; ?>" method="post" autocomplete="off" class="eyoom-form">
+    <form name="fauthlist2" id="fauthlist2" action="<?php echo $action_url2; ?>" method="post" autocomplete="off" class="eyoom-form" onsubmit="return fauth_add_submit(this);">
     <input type="hidden" name="sst" value="<?php echo $sst; ?>">
     <input type="hidden" name="sod" value="<?php echo $sod; ?>">
     <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
@@ -185,6 +185,16 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 <label for="r" class="checkbox"><input type="checkbox" name="r" id="r" value="r" checked><i></i> r (읽기)</label>
                                 <label for="w" class="checkbox"><input type="checkbox" name="w" id="w" value="w"><i></i> w (쓰기)</label>
                                 <label for="d" class="checkbox"><input type="checkbox" name="d" id="d" value="d"><i></i> d (삭제)</label>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12">
+                        <section>
+                            <label for="mb_id" class="label">자동등록방지</label>
+                            <div>
+                                <?php echo $captcha_html; ?>
                             </div>
                         </section>
                     </div>
@@ -307,6 +317,11 @@ function sorting_list(f, str) {
         f.action = "<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&pid=<?php echo $pid; ?>";
         f.submit();
     }
+}
+
+function fauth_add_submit(f){
+    <?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
+    return true;
 }
 
 function fauthlist_submit(f) {

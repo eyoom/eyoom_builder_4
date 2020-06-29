@@ -90,7 +90,7 @@ if ($li_bo_table) {
 /**
  * 대상 테이블이 없다면, 모든 게시판에서 추춣을 의미 함
  */
-if (count($li_table) == 0 || $li_table[0] == '') {
+if (count($li_table) == 0) {
     $bo_info = $bbs->get_bo_subject();
     $li_table = array_keys($bo_info);
     $li_table = array_diff($li_table, $ex_tables);

@@ -8,6 +8,12 @@ $sub_menu = "200810";
 
 auth_check($auth[$sub_menu], 'r');
 
+$sql_search = '';
+
+if(isset($sfl) && $sfl && !in_array($sfl, array('vi_ip','vi_date','vi_time','vi_referer','vi_agent','vi_browser','vi_os','vi_device')) ) {
+    $sfl = '';
+}
+
 $sql_common = " from {$g5['visit_table']} ";
 if ($sfl) {
     if($sfl=='vi_ip' || $sfl=='vi_date'){

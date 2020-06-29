@@ -556,6 +556,10 @@ set_session('ss_personalpay_hash', '');
             <input type="radio" id="od_settle_card" name="od_settle_case" value="신용카드" <?php echo $checked; ?>><label for="od_settle_card" class="payment-select-box card_icon">신용카드</label>
             <?php $checked = ''; } ?>
 
+            <?php if($default['de_inicis_kakaopay_use']) { // 이니시스 카카오페이 ?>
+            <input type="radio" id="od_settle_inicis_kakaopay" name="od_settle_case" value="inicis_kakaopay" <?php echo $checked; ?>><label for="od_settle_inicis_kakaopay" class="payment-select-box inicis_kakaopay">KG 이니시스 카카오페이</label>
+            <?php $checked = ''; } ?>
+
             <?php
             // PG 간편결제
             if($default['de_easy_pay_use']) {
@@ -1202,7 +1206,7 @@ function pay_approval()
 
     var form_order_method = '';
 
-    if( settle_method == "삼성페이" || settle_method == "lpay" ){
+    if( settle_method == "삼성페이" || settle_method == "lpay" || settle_method == "inicis_kakaopay" ){
         form_order_method = 'samsungpay';
     }
 
@@ -1290,6 +1294,12 @@ function pay_approval()
             case "lpay":
                 paymethod = "wcard";
                 f.P_RESERVED.value = f.P_RESERVED.value.replace("&useescrow=Y", "")+"&d_lpay=Y";
+                //f.DEF_RESERVED.value = f.DEF_RESERVED.value.replace("&useescrow=Y", "");
+                f.P_SKIP_TERMS.value = "Y"; //약관을 skip 해야 제대로 실행됨
+                break;
+            case "inicis_kakaopay":
+                paymethod = "wcard";
+                f.P_RESERVED.value = f.P_RESERVED.value.replace("&useescrow=Y", "")+"&d_kakaopay=Y";
                 //f.DEF_RESERVED.value = f.DEF_RESERVED.value.replace("&useescrow=Y", "");
                 f.P_SKIP_TERMS.value = "Y"; //약관을 skip 해야 제대로 실행됨
                 break;

@@ -5,6 +5,7 @@
 include_once('./_common.php');
 
 $ca_id = clean_xss_tags(trim($_POST['id']));
+$ca_id = isset($ca_id) ? preg_replace('/[^0-9a-z]/i', '', $ca_id) : '';
 if ( $ca_id === 0 || (strlen($ca_id) == 1 && $ca_id == '0') ) $ca_id = '';
 
 $depth = strlen($ca_id)/2;

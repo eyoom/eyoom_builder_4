@@ -63,6 +63,8 @@ if ($csv == 'csv')
     $save_it_id = '';
     for ($i=0; $row=sql_fetch_array($result); $i++)
     {
+        $pull_address = iconv('UTF-8', 'UHC', print_address($row['od_b_addr1'], $row['od_b_addr2'], $row['od_b_addr3'], $row['od_b_addr_jibeon']));
+
         $row = array_map('iconv_euckr', $row);
 
         if($save_it_id != $row['it_id']) {
@@ -101,7 +103,7 @@ if ($csv == 'csv')
         }
 
         echo '"\''.$row['od_b_zip1'].$row['od_b_zip2'].'"\''.',';
-        echo '"'.print_address($row['od_b_addr1'], $row['od_b_addr2'], $row['od_b_addr3'], $row['od_b_addr_jibeon']).'"'.',';
+        echo '"'.$pull_address.'"'.',';
         echo '"'.$row['od_b_name'].'"'.',';
         //echo '"'.multibyte_digit((string)$row[od_b_tel]).'"'.',';
         //echo '"'.multibyte_digit((string)$row[od_b_hp]).'"'.',';
@@ -203,10 +205,12 @@ if ($csv == 'xls')
             $ct_send_cost = iconv_euckr($ct_send_cost);
         }
 
+        $pull_address = iconv('UTF-8', 'UHC', print_address($row['od_b_addr1'], $row['od_b_addr2'], $row['od_b_addr3'], $row['od_b_addr_jibeon']));
+
         $row = array_map('iconv_euckr', $row);
 
         $worksheet->write($i, 0, ' '.$row['od_b_zip1'].$row['od_b_zip2']);
-        $worksheet->write($i, 1, print_address($row['od_b_addr1'], $row['od_b_addr2'], $row['od_b_addr3'], $row['od_b_addr_jibeon']));
+        $worksheet->write($i, 1, $pull_address);
         $worksheet->write($i, 2, $row['od_b_name']);
         $worksheet->write($i, 3, ' '.$row['od_b_tel']);
         $worksheet->write($i, 4, ' '.$row['od_b_hp']);

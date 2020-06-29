@@ -99,6 +99,10 @@ if (strstr($sfl, 'mb_id')) {
     $mb_id = '';
 }
 
+include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
+$captcha_html = captcha_html();
+$captcha_js   = chk_captcha_js();
+
 /**
  * 페이징
  */

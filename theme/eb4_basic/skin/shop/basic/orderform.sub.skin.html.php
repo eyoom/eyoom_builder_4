@@ -7,7 +7,7 @@ if (!defined('_EYOOM_')) exit;
 require_once(G5_SHOP_PATH.'/settle_'.$default['de_pg_service'].'.inc.php');
 require_once(G5_SHOP_PATH.'/settle_kakaopay.inc.php');
 
-if( $default['de_inicis_lpay_use'] ){   //이니시스 Lpay 사용시
+if( $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use'] ){   //이니시스 Lpay 또는 이니시스 카카오페이 사용시
     require_once(G5_SHOP_PATH.'/inicis/lpay_common.php');
 }
 
@@ -16,7 +16,7 @@ if( $default['de_inicis_lpay_use'] ){   //이니시스 Lpay 사용시
  */
 require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 
-if( $default['de_inicis_lpay_use'] ){   //이니시스 L.pay 사용시
+if( $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use'] ){   //이니시스 L.pay 사용시
     require_once(G5_SHOP_PATH.'/inicis/lpay_form.1.php');
 }
 
@@ -543,7 +543,7 @@ if($is_kakaopay_use) {
                     <p class="color-grey font-size-11">* <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 포인트를 적립해드리지 않습니다.</p>
                     <?php } ?>
 
-                    <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use']) { ?>
+                    <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use']) { ?>
                     <fieldset id="sod_frm_paysel">
                     <legend>결제방법 선택</legend>
                     <?php } ?>
@@ -570,6 +570,10 @@ if($is_kakaopay_use) {
 
                     <?php if($default['de_card_use']) { $multi_settle++; // 신용카드 사용 ?>
                     <input type="radio" id="od_settle_card" name="od_settle_case" value="신용카드" <?php echo $checked; ?>><label for="od_settle_card" class="payment-select-box card_icon">신용카드</label>
+                    <?php $checked = ''; } ?>
+
+                    <?php if(isset($default['de_inicis_kakaopay_use']) && $default['de_inicis_kakaopay_use']) { $multi_settle++; // 이니시스 카카오페이  ?>
+                    <input type="radio" id="od_settle_inicis_kakaopay" name="od_settle_case" value="inicis_kakaopay" <?php echo $checked; ?>><label for="od_settle_inicis_kakaopay" class="payment-select-box inicis_kakaopay">KG 이니시스 카카오페이</label>
                     <?php $checked = ''; } ?>
 
                     <?php
@@ -641,7 +645,7 @@ if($is_kakaopay_use) {
                     </div>
                     <?php } ?>
 
-                    <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use'] ) { ?>
+                    <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use'] ) { ?>
                     </fieldset>
                     <?php } ?>
 
@@ -704,7 +708,7 @@ if($is_kakaopay_use) {
 </div>
 
 <?php
-if( $default['de_inicis_lpay_use'] ){   //이니시스 L.pay 사용시
+if( $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use'] ){   //이니시스 L.pay 또는 이니시스 카카오페이 사용시
     require_once(G5_SHOP_PATH.'/inicis/lpay_order.script.php');
 }
 ?>
@@ -1355,7 +1359,7 @@ function forderform_check(f)
 
     var form_order_method = '';
 
-    if( settle_method == "lpay" ){      //이니시스 L.pay 이면 ( 이니시스의 삼성페이는 모바일에서만 단독실행 가능함 )
+    if( settle_method == "lpay" || settle_method == "inicis_kakaopay" ){      //이니시스 L.pay 또는 이니시스 카카오페이 이면 ( 이니시스의 삼성페이는 모바일에서만 단독실행 가능함 )
         form_order_method = 'samsungpay';
     }
 
@@ -1449,6 +1453,10 @@ function forderform_check(f)
                 break;
             case "lpay":
                 f.gopaymethod.value = "onlylpay";
+                f.acceptmethod.value = f.acceptmethod.value+":cardonly";
+                break;
+            case "inicis_kakaopay":
+                f.gopaymethod.value = "onlykakaopay";
                 f.acceptmethod.value = f.acceptmethod.value+":cardonly";
                 break;
             default:

@@ -32,6 +32,8 @@ for ($i=0; $i<$count; $i++)
 
     $sql = " delete from {$g5['auth_table']} where mb_id = '".$mb_id."' and au_menu = '".$au_menu."' ";
     sql_query($sql);
+
+    run_event('adm_auth_delete_member', $mb_id, $au_menu);
 }
 
 alert('선택한 권한설정을 삭제하였습니다.', G5_ADMIN_URL . '/?dir=config&amp;pid=auth_list&amp;'.$qstr);

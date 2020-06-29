@@ -124,6 +124,12 @@ if(!isset($default['de_inicis_lpay_use'])) {
                     ADD `de_inicis_lpay_use` tinyint(4) NOT NULL DEFAULT '0' AFTER `de_samsung_pay_use` ", true);
 }
 
+// 이니시스 kakaopay 사용여부 필드 추가
+if(!isset($default['de_inicis_kakaopay_use'])) {
+    sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
+                    ADD `de_inicis_kakaopay_use` tinyint(4) NOT NULL DEFAULT '0' AFTER `de_inicis_lpay_use` ", true);
+}
+
 // 카카오페이 필드 추가
 if(!isset($default['de_kakaopay_mid'])) {
     sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
@@ -185,6 +191,13 @@ if(!sql_query(" DESC {$g5['g5_shop_post_log_table']} ", false)) {
 if(!isset($default['de_taxsave_types'])) {
     sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
                     ADD `de_taxsave_types` set('account','vbank','transfer') NOT NULL DEFAULT 'account' AFTER `de_taxsave_use` ", true);
+}
+
+// 아이코드 토큰키 추가
+if( ! isset($config['cf_icode_token_key']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}` 
+            ADD COLUMN `cf_icode_token_key` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cf_icode_server_port`; ";
+    sql_query($sql, false);
 }
 
 if( function_exists('pg_setting_check') ){

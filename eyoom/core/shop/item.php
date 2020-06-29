@@ -79,6 +79,8 @@ if (get_cookie('ck_it_id') != $it_id) {
  */
 $skin_dir = EYOOM_CORE_PATH.'/'. G5_SHOP_DIR;
 
+$g5['title'] = $it['it_name'].' &gt; '.$it['ca_name'];
+
 /**
  * 분류 상단 코드가 있으면 출력하고 없으면 기본 상단 코드 출력
  */

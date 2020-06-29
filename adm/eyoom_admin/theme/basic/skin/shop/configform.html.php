@@ -1156,6 +1156,17 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                         </tr>
                         <tr class="pg_info_fld inicis_info_fld">
                             <th class="table-form-th">
+                                <label for="de_inicis_kakaopay_use" class="label">KG이니시스 카카오페이 사용</label>
+                            </th>
+                            <td>
+                                <label for="de_inicis_kakaopay_use" class="checkbox form-width-100px">
+                                    <input type="checkbox" name="de_inicis_kakaopay_use" value="1" id="de_inicis_kakaopay_use"<?php echo $default['de_inicis_kakaopay_use']?' checked':''; ?>><i></i> 사용
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 KG이니시스 결제의 카카오페이를 사용합니다. <br>주문서 화면에 카카오페이(KG 이니시스 결제) 아이콘 이 출력됩니다. <br>실결제시 반드시 결제대행사 KG이니시스 항목의 상점 정보( 아이디, 키패스워드, 웹결제 사인키 )를 입력해 주세요.</div>
+                            </td>
+                        </tr>
+                        <tr class="pg_info_fld inicis_info_fld">
+                            <th class="table-form-th">
                                 <label for="de_inicis_cartpoint_use" class="label">KG이니시스 신용카드 포인트 결제</label>
                             </th>
                             <td>

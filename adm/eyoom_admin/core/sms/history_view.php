@@ -7,6 +7,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900400";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
+$re_text = '';
+
 $st = isset($st) ? strip_tags($st) : '';
 $ssv = isset($ssv) ? strip_tags($ssv) : '';
 

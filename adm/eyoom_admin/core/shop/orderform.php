@@ -229,7 +229,7 @@ $amount['cancel'] = $od['od_cancel_price'];
 /**
  * 결제방법
  */
-$s_receipt_way = $od['od_settle_case'];
+$s_receipt_way = check_pay_name_replace($od['od_settle_case'], $od);
 
 if($od['od_settle_case'] == '간편결제') {
     switch($od['od_pg']) {
@@ -243,7 +243,7 @@ if($od['od_settle_case'] == '간편결제') {
             $s_receipt_way = 'PAYCO';
             break;
         default:
-            $s_receipt_way = $row['od_settle_case'];
+            $s_receipt_way = check_pay_name_replace($row['od_settle_case'], $od);
             break;
     }
 }
