@@ -100,7 +100,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                     <option value="계좌이체" <?php echo get_selected($od_settle_case, '계좌이체'); ?>>계좌이체</option>
                                     <option value="휴대폰" <?php echo get_selected($od_settle_case, '휴대폰'); ?>>휴대폰</option>
                                     <option value="신용카드" <?php echo get_selected($od_settle_case, '신용카드'); ?>>신용카드</option>
-                                    <option value="간편결제" <?php echo get_selected($od_settle_case, '간편결제'); ?>>간편결제</option>
+                                    <option value="간편결제" <?php echo get_selected($od_settle_case, '간편결제'); ?>>PG간편결제</option>
                                     <option value="KAKAOPAY" <?php echo get_selected($od_settle_case, 'KAKAOPAY'); ?>>KAKAOPAY</option>
                                 </select><i></i>
                             </label>
@@ -190,7 +190,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     <div class="margin-bottom-30"></div>
 
     <form name="forderlist" id="forderlist" onsubmit="return forderlist_submit(this);" method="post" autocomplete="off" class="eyoom-form">
-    <input type="hidden" name="search$od_status" value="<?php echo $od_status; ?>">
+    <input type="hidden" name="search_od_status" value="<?php echo $od_status; ?>">
 
     <div class="row">
         <div class="col-sm-8">
@@ -380,7 +380,7 @@ $(document).ready(function(){
             체크: "<input type='hidden' name='od_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_id']; ?>' id='od_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' value='<?php echo $i; ?>' id='chk_<?php echo $i; ?>'><i></i></label>",
             관리: "<span class='text-center grid-buttons'><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderform&od_id=<?php echo $list[$i]['od_id'].'&'.$qstr; ?>'><u>보기</u></a></span>",
             이미지: "<div class='orderlist-img' style='width:80px;margin:0 auto'><a href='<?php echo $list[$i]['href']; ?>' target='_blank'><?php echo $list[$i]['image']; ?></a></div>",
-            주문번호_상품명_상태: "<a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderform&od_id=<?php echo $list[$i]['od_id'].'&'.$qstr; ?>&wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['disp_od_id']; ?></strong></a><br><a href='<?php echo $list[$i]['href']; ?>' target='_blank' style='font-weight:bold;'><?php echo get_text($list[$i]['it_name']); ?></a><div class='margin-top-5'><input type='hidden' name='current_status[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_status']; ?>'><a href='javascript:;' class='btn-e btn-e-sm btn-e-<?php echo $list[$i]['od_color']; ?>' style='font-size:10px;padding:0 10px;min-width:80px;text-align:center;'><?php echo $list[$i]['od_status']; ?></a></div>",
+            주문번호_상품명_상태: "<a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderform&od_id=<?php echo $list[$i]['od_id'].'&'.$qstr; ?>&wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['disp_od_id']; ?></strong></a><br><a href='<?php echo $list[$i]['href']; ?>' target='_blank' style='font-weight:bold;'><?php echo get_text($list[$i]['it_name']); ?></a><div class='margin-top-5'><input type='hidden' name='current_status[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_status']; ?>'><a href='javascript:;' class='btn-e btn-e-sm btn-e-<?php echo $list[$i]['od_color']; ?>' style='font-size:10px;padding:0 10px;min-width:80px;text-align:center;'><?php echo $list[$i]['od_status']; ?></a></div><?php if ($od_status == '준비') { ?><input type='text' name='od_invoice[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_invoice']; ?>' placeholder='운송장번호'><input type='hidden' name='od_invoice_time[<?php echo $i; ?>]' value='<?php echo $list[$i]['invoice_time']; ?>'><?php } ?>",
             주문자정보: "<div class='shop-member-info'><i class='fas fa-user-circle color-light-grey'></i> <a href='<?php echo G5_BBS_URL; ?>/profile.php?mb_id=<?php echo $list[$i]['mb_id']; ?>' onclick='win_profile(this.href); return false;'><b><?php echo $list[$i]['od_name']; ?> <?php if ($list[$i]['mb_id']) { ?>[<?php echo $list[$i]['mb_id']; ?>]<?php } ?></b><br><i class='far fa-user-circle color-light-grey'></i> <b><?php echo $list[$i]['mbinfo']['mb_nick']; ?></b></a><br><i class='fas fa-shopping-cart color-light-grey'></i> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderlist&sort1=<?php echo $sort1; ?>&sort2=<?php echo $sort2; ?>&sel_field=mb_id&search=<?php echo $list[$i]['mb_id']; ?>'>누적 <?php echo number_format($list[$i]['od_cnt']); ?> 건</a></div>",
             결재수단_주문금액: "<input type='hidden' name='current_settle_case[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_settle_case']; ?>'><span style='color:#999;'><?php echo $list[$i]['s_receipt_way']; ?></span><br><?php echo number_format($list[$i]['od_cart_price'] + $list[$i]['od_send_cost'] + $list[$i]['od_send_cost2']); ?>원",
             입금정보: "<b>미수금 : <span <?php if ($list[$i]['od_misu > 0']) { ?>class='color-red'<?php } ?>><?php echo number_format($list[$i]['od_misu']); ?></span>원<br>입금액 : <span class='color-blue'><?php echo number_format($list[$i]['od_receipt_price']); ?></span>원</b>",
@@ -450,12 +450,14 @@ $(function(){
     });
 
     // 상품리스트 닫기
-    $(".orderitemlist-x").on("click", function() {
+    $("#sodr_list").on("click", "#orderitemlist-x", function(e) {
         $("#orderitemlist").remove();
     });
 
-    $("body").on("click", function() {
-        $("#orderitemlist").remove();
+    $("body").on("click", function(e) {
+        if ($(e.target).closest("#orderitemlist").length === 0){
+            $("#orderitemlist").remove();
+        }
     });
 
     // 엑셀배송처리창

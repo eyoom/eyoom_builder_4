@@ -20,12 +20,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 .shop-search .search-tab .scroll_tabs_container div.scroll_tab_inner li a {font-weight:bold}
 .shop-search .search-tab .scroll_tabs_container div.scroll_tab_inner span {padding-left:2px;padding-right:0}
 .shop-search .search-cate {margin-bottom:30px}
-.shop-search .search-cate ul {padding-left:1px;zoom:1}
+.shop-search .search-cate ul {padding-left:1px;zoom:1;list-style:none}
 .shop-search .search-cate ul:after {display:block;visibility:hidden;clear:both;content:""}
 .shop-search .search-cate li {float:left;width:20%;border:1px solid #d5d5d5;margin-left:-1px;margin-top:-1px}
 .shop-search .search-cate a {display:block;padding:0 10px;line-height:40px;font-size:12px}
 .shop-search .search-cate a:hover {background:#f5f5f5;color:#FF4848}
-.shop-search #sct_lst {position:absolute;top:6px;right:0;margin-bottom:0;z-index:1}
+.shop-search #sct_lst {position:absolute;top:6px;right:0;margin-bottom:0;z-index:1;list-style:none}
 .shop-search #sct_lst li {position:relative;float:left}
 .shop-search #sct_lst button {position:relative;margin:0;padding:0;width:40px;height:40px;border:1px solid #d5d5d5;cursor:pointer;background:#fff;font-size:15px;color:#454545}
 .shop-search #sct_lst button.product-type-list-btn {border-right:0}

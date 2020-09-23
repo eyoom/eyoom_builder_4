@@ -25,6 +25,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
 .shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
 .shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
+.shop-cart .shop-cart-li-wrap, .shop-cart .table-list-eb .td-item-name ul, .shop-cart .shop-cart-li-wrap .li-opt ul {padding:0;list-style:none}
 <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
@@ -37,7 +38,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-cart .table-list-eb .td-image {position:absolute;top:0;left:0;width:80px;height:80px;overflow:hidden}
 .shop-cart .table-list-eb .td-image img {display:block;width:100% \9;max-width:100%;height:auto}
 .shop-cart .table-list-eb .td-item-name {margin-left:90px}
-.shop-cart .table-list-eb .td-item-name ul {list-style:none;padding:0;margin:5px 0}
+.shop-cart .table-list-eb .td-item-name ul {margin:5px 0}
 .shop-cart .table-list-eb .td-item-name ul li {color:#959595;font-size:12px}
 <?php } else { // 모바일의 경우 ?>
 .shop-cart .shop-cart-all-select {position:relative;padding:5px 10px;margin-bottom:20px;border:1px solid #e5e5e5}
@@ -67,6 +68,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-cart .shop-cart-total .cart-total-box strong {color:#000}
 .shop-cart .shop-cart-total .cart-total-box .cart-total-price {color:#FF4848;font-size:16px}
 .shop-cart .cart-act-btn {margin-top:30px;text-align:center}
+
+/* 영카트 모바일 css 관련 */
+#mod_option_frm {position:relative;top:inherit;left:inherit;width:100%;border:0 none}
+#mod_option_frm .shop-option {padding:0}
 <?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:600px) {
     .shop-cart .shop-cart-total .cart-total-box {font-size:13px}

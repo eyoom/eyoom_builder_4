@@ -452,6 +452,31 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </tr>
                         <tr>
                             <th class="table-form-th">
+                                <label for="bo_select_editor" class="label">게시판 에디터 선택</label>
+                            </th>
+                            <td>
+                                <label class="select form-width-250px">
+                                    <select id="bo_select_editor" name="bo_select_editor">
+                                    <?php
+                                    $arr = get_skin_dir('', G5_EDITOR_PATH);
+                                    for ($i=0; $i<count($arr); $i++) {
+                                        if ($i == 0) echo "<option value=\"\">기본환경설정의 에디터 사용</option>";
+                                        echo "<option value=\"".$arr[$i]."\"".get_selected($board['bo_select_editor'], $arr[$i]).">".$arr[$i]."</option>\n";
+                                    }
+                                    ?>
+                                    </select><i></i>
+                                </label>
+                                <div class="note"><strong>Note:</strong> 게시판에 사용할 에디터를 설정합니다. 스킨에 따라 적용되지 않을 수 있습니다.</div>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group">
+                                    <label for="chk_grp_select_editor" class="checkbox"><input type="checkbox" name="chk_grp_select_editor" value="1" id="chk_grp_select_editor"><i></i>그룹적용</label>
+                                    <label for="chk_all_select_editor" class="checkbox"><input type="checkbox" name="chk_all_select_editor" value="1" id="chk_all_select_editor"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
                                 <label for="bo_use_rss_view" class="label">RSS 보이기 사용</label>
                             </th>
                             <td>

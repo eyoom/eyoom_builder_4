@@ -200,8 +200,19 @@ if( ! isset($config['cf_icode_token_key']) ){
     sql_query($sql, false);
 }
 
+// PG 간편결제 추가 ( NHN_KCP 네이버페이, 카카오페이 )
+if( ! isset($default['de_easy_pay_services']) ){
+    $sql = "ALTER TABLE `{$g5['g5_shop_default_table']}` 
+            ADD COLUMN `de_easy_pay_services` VARCHAR(255) NOT NULL DEFAULT '' AFTER `de_easy_pay_use`; ";
+    sql_query($sql, false);
+}
+
 if( function_exists('pg_setting_check') ){
-	pg_setting_check(true);
+    pg_setting_check(true);
+}
+
+if(!$default['de_kakaopay_cancelpwd']){
+    $default['de_kakaopay_cancelpwd'] = '1111';
 }
 
 $account_checked = $vbank_checked = $transfer_checked = '';

@@ -32,6 +32,16 @@ if(isset($_POST['de_taxsave_types_transfer']) && $_POST['de_taxsave_types_transf
 	$de_taxsave_types .= ',transfer';
 }
 
+// NHN_KCP 간편결제 체크
+$de_easy_pay_services = '';
+if(isset($_POST['de_easy_pays'])){
+    $tmps = array();
+    foreach( (array) $_POST['de_easy_pays'] as $v ){
+        $tmps[] = preg_replace('/[^0-9a-z_\-]/i', '', $v);
+    }
+    $de_easy_pay_services = implode(",", $tmps);
+}
+
 //KVE-2019-0689, KVE-2019-0691, KVE-2019-0694
 $check_sanitize_keys = array(
     'de_admin_company_name',        //회사명
@@ -315,6 +325,14 @@ if ($_POST['amode'] == 'ittype') {
     $de_shop_skin = in_array($de_shop_skin, $skins) ? $de_shop_skin : 'basic';
     $de_shop_mobile_skin = in_array($de_shop_mobile_skin, $mobile_skins) ? $de_shop_mobile_skin : 'basic';
 
+    $warning_msg = '';
+
+    if( $de_kakaopay_enckey && ($de_pg_service === 'inicis' || $de_inicis_lpay_use || $de_inicis_kakaopay_use) ){
+        
+        $warning_msg = 'KG 이니시스 결제 또는 L.pay 또는 KG이니시스 카카오페이를 사용시 결제모듈 중복문제로 카카오페이를 활성화 할수 없습니다. \\n\\n카카오페이 사용을 비활성화 합니다.';
+        $de_kakaopay_enckey = '';
+    }
+    
     //
     // 영카트 default
     //
@@ -367,6 +385,7 @@ if ($_POST['amode'] == 'ittype') {
                     de_card_test                  = '{$de_card_test}',
                     de_card_use                   = '{$de_card_use}',
                     de_easy_pay_use               = '{$de_easy_pay_use}',
+                    de_easy_pay_services          = '{$de_easy_pay_services}',
                     de_samsung_pay_use            = '{$de_samsung_pay_use}',
                     de_inicis_lpay_use            = '{$de_inicis_lpay_use}',
                     de_inicis_kakaopay_use        = '{$de_inicis_kakaopay_use}',
@@ -454,6 +473,11 @@ if ($_POST['amode'] == 'ittype') {
                     cf_lg_mid               = '{$cf_lg_mid}',
                     cf_lg_mert_key          = '{$cf_lg_mert_key}' ";    
     sql_query($sql);
-    
-    alert('쇼핑몰 설정을 적용하였습니다.', G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
+
+    if( $warning_msg ){
+        alert($warning_msg, G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
+    } else {
+        goto_url("./configform.php");
+        alert('쇼핑몰 설정을 적용하였습니다.', G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
+    }
 }

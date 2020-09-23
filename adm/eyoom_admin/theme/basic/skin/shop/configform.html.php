@@ -1037,7 +1037,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <input type="hidden" name="de_pg_service" id="de_pg_service" value="<?php echo $default['de_pg_service']; ?>" >
                                 <ul class="de_pg_tab">
                                     <li class="<?php if($default['de_pg_service'] == 'kcp') echo 'tab-current'; ?>"><a href="#kcp_info_anchor" data-value="kcp" title="NHN KCP 선택하기" >NHN KCP</a></li>
-                                    <li class="<?php if($default['de_pg_service'] == 'lg') echo 'tab-current'; ?>"><a href="#lg_info_anchor" data-value="lg" title="LG유플러스 선택하기">LG유플러스</a></li>
+                                    <li class="<?php if($default['de_pg_service'] == 'lg') echo 'tab-current'; ?>"><a href="#lg_info_anchor" data-value="lg" title="토스페이먼츠 선택하기">토스페이먼츠</a></li>
                                     <li class="<?php if($default['de_pg_service'] == 'inicis') echo 'tab-current'; ?>"><a href="#inicis_info_anchor" data-value="inicis" title="KG이니시스 선택하기">KG이니시스</a></li>
                                 </ul>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 쇼핑몰에서 사용할 결제대행사를 선택합니다.</div>
@@ -1047,7 +1047,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             <th class="table-form-th">
                                 <label for="de_kcp_mid" class="label">KCP SITE CODE</label>
                                 <?php if (!G5_IS_MOBILE) { ?>
-                                <a href="http://sir.kr/main/service/p_pg.php" target="_blank" id="scf_kcpreg" class="btn-e btn-e-md btn-e-dark btn-e-block">NHN KCP서비스신청하기</a>
+                                <a href="http://sir.kr/main/service/p_pg.php" target="_blank" id="scf_kcpreg" class="btn-e btn-e-md btn-e-dark btn-e-block">NHN KCP 신청하기</a>
                                 <?php } ?>
                             </th>
                             <td>
@@ -1069,11 +1069,31 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 25자리 영대소문자와 숫자 - 그리고 _ 로 이루어 집니다. SITE KEY 발급 NHN KCP 전화: 1544-8660<br>예) 1Q9YRV83gz6TukH8PjH0xFf__</div>
                             </td>
                         </tr>
+                        <tr class="pg_info_fld kcp_info_fld">
+                            <th class="table-form-th">
+                                <label for="de_easy_pays" class="label">NHN KCP 간편결제</label>
+                            </th>
+                            <td>
+                                <label class="checkbox" for="de_easy_nhnkcp_payco" disabled><input type="checkbox" id="de_easy_nhnkcp_payco" name="de_easy_pays[]" value="nhnkcp_payco" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_payco') !== false){ echo 'checked="checked"'; } ?> ><i></i> PAYCO (페이코)</label>
+                                <label class="checkbox" for="de_easy_nhnkcp_naverpay"><input type="checkbox" id="de_easy_nhnkcp_naverpay" name="de_easy_pays[]" value="nhnkcp_naverpay" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_naverpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY (네이버페이)</label>
+                                <label class="checkbox" for="de_easy_nhnkcp_kakaopay"><input type="checkbox" id="de_easy_nhnkcp_kakaopay" name="de_easy_pays[]" value="nhnkcp_kakaopay" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_kakaopay') !== false){ echo 'checked="checked"'; } ?> ><i></i> KAKAOPAY (카카오페이)</label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 NHN KCP 간편결제들을 활성화 합니다.<br>NHN_KCP > 네이버페이, 카카오페이는 테스트결제가 되지 않습니다.</div>
+                            </td>
+                        </tr>
+                        <tr class="pg_info_fld kcp_info_fld">
+                            <th class="table-form-th">
+                                <label for="de_global_nhnkcp_naverpay" class="label">NHN KCP 네이버페이 사용</label>
+                            </th>
+                            <td>
+                                <label class="checkbox" for="de_global_nhnkcp_naverpay" disabled><input type="checkbox" id="de_global_nhnkcp_naverpay" name="de_easy_pays[]" value="global_nhnkcp_naverpay" <?php if(stripos($default['de_easy_pay_services'], 'global_nhnkcp_naverpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY (네이버페이)</label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 타 PG (토스페이먼츠, KG 이니시스) 사용중일때도 NHN_KCP 를 통한 네이버페이 간편결제를 사용할수 있습니다.<br>실결제시 반드시 결제대행사 NHN_KCP 항목에 KCP SITE CODE와 NHN KCP SITE KEY를 입력해야 합니다.</div>
+                            </td>
+                        </tr>
                         <tr class="pg_info_fld lg_info_fld" id="lg_info_anchor">
                             <th class="table-form-th">
-                                <label for="cf_lg_mid" class="label">LG유플러스 상점아이디</label>
+                                <label for="cf_lg_mid" class="label">토스페이먼츠 상점아이디</label>
                                 <?php if (!G5_IS_MOBILE) { ?>
-                                <a href="http://sir.kr/main/service/lg_pg.php" target="_blank" id="scf_lgreg" class="btn-e btn-e-md btn-e-dark btn-e-block">LG유플러스 서비스신청하기</a>
+                                <a href="http://sir.kr/main/service/lg_pg.php" target="_blank" id="scf_lgreg" class="btn-e btn-e-md btn-e-dark btn-e-block">토스페이먼츠 신청하기</a>
                                 <?php } ?>
                             </th>
                             <td>
@@ -1081,25 +1101,25 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                     <i class="icon-prepend text-width">si_</i>
                                     <input type="text" name="cf_lg_mid" value="<?php echo $config['cf_lg_mid']; ?>" id="cf_lg_mid">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> LG유플러스에서 받은 si_ 로 시작하는 상점 ID를 입력하세요. (영문자, 숫자 혼용)<br>만약, 상점 ID가 si_로 시작하지 않는다면 LG유플러스에 사이트코드 변경 요청을 하십시오. 예) si_lguplus<br><a href="<?php echo G5_ADMIN_URL; ?>/config_form.php#anc_cf_cert">기본환경설정 &gt; 본인확인</a> 설정의 LG유플러스 상점아이디와 동일합니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 토스페이먼츠에서 받은 si_ 로 시작하는 상점 ID를 입력하세요.<br>만약, 상점 ID가 si_로 시작하지 않는다면 토스페이먼츠에 사이트코드 변경 요청을 하십시오. 예) si_lguplus<br><a href="<?php echo G5_ADMIN_URL; ?>/config_form.php#anc_cf_cert">기본환경설정 &gt; 본인확인</a> 설정의 토스페이먼츠 상점아이디와 동일합니다.</div>
                             </td>
                         </tr>
                         <tr class="pg_info_fld lg_info_fld">
                             <th class="table-form-th">
-                                <label for="cf_lg_mert_key" class="label">LG유플러스 MERT KEY</label>
+                                <label for="cf_lg_mert_key" class="label">토스페이먼츠 MERT KEY</label>
                             </th>
                             <td>
                                 <label for="cf_lg_mert_key" class="input form-width-250px">
                                     <input type="text" name="cf_lg_mert_key" value="<?php echo $config['cf_lg_mert_key']; ?>" id="cf_lg_mert_key">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> LG유플러스 상점MertKey는 상점관리자 -> 계약정보 -> 상점정보관리에서 확인하실 수 있습니다.<br>예) 95160cce09854ef44d2edb2bfb05f9f3<br><a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&amp;pid=config_form#anc_cf_cert">기본환경설정 &gt; 본인확인</a> 설정의 LG유플러스 MERT KEY와 동일합니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 토스페이먼츠 상점MertKey는 상점관리자 -> 계약정보 -> 상점정보관리에서 확인하실 수 있습니다.<br>예) 95160cce09854ef44d2edb2bfb05f9f3<br><a href="<?php echo G5_ADMIN_URL; ?>/config_form.php#anc_cf_cert">기본환경설정 &gt; 본인확인</a> 설정의 토스페이먼츠 MERT KEY와 동일합니다.</div>
                             </td>
                         </tr>
                         <tr class="pg_info_fld inicis_info_fld" id="inicis_info_anchor">
                             <th class="table-form-th">
                                 <label for="de_inicis_mid" class="label">KG이니시스 상점아이디</label>
                                 <?php if (!G5_IS_MOBILE) { ?>
-                                <a href="http://sir.kr/main/service/inicis_pg.php" target="_blank" id="scf_kgreg" class="btn-e btn-e-md btn-e-dark btn-e-block">KG이니시스 서비스신청하기</a>
+                                <a href="http://sir.kr/main/service/inicis_pg.php" target="_blank" id="scf_kgreg" class="btn-e btn-e-md btn-e-dark btn-e-block">KG이니시스 신청하기</a>
                                 <?php } ?>
                             </th>
                             <td>
@@ -1178,42 +1198,54 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                         </tr>
                         <tr class="kakao_info_fld">
                             <th class="table-form-th">
-                                <label for="de_kakaopay_mid" class="label">카카오페이 상점MID</label>
+                                <label for="de_kakaopay_mid" class="label">카카오페이 상점아이디<br>( KG이니시스 )</label>
                                 <?php if (!G5_IS_MOBILE) { ?>
-                                <a href="http://sir.kr/main/service/kakaopay.php" target="_blank" class="btn-e btn-e-md btn-e-yellow btn-e-block">카카오페이 서비스신청하기</a>
+                                <a href="http://sir.kr/main/service/kakaopay.php?kk=yc5" target="_blank" class="btn-e btn-e-md btn-e-yellow btn-e-block">카카오페이 서비스신청하기</a>
+
                                 <?php } ?>
                             </th>
                             <td>
                                 <label for="de_kakaopay_mid" class="input form-width-250px">
-                                    <i class="icon-prepend text-width">KHSIR</i>
+                                    <i class="icon-prepend text-width">SIRK</i>
                                     <input type="text" name="de_kakaopay_mid" value="<?php echo $default['de_kakaopay_mid']; ?>" id="de_kakaopay_mid">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오페이로 부터 발급 받으신 상점아이디(MID) 10자리 중 첫 KHSIR과 끝 m 을 제외한 영문4자리를 입력 합니다. 예) KHSIRtestm</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> KG이니시스로 부터 카카오페이 간편결제만 사용용도로 발급 받으신 상점아이디(MID) 10자리 중 SIRK 을 제외한 나머지 6자리를 입력 합니다.</div>
                             </td>
                         </tr>
                         <tr class="kakao_info_fld">
                             <th class="table-form-th">
-                                <label for="de_kakaopay_key" class="label">카카오페이 상점키</label>
+                                <label for="de_kakaopay_key" class="label">카카오페이 상점키<br>( KG이니시스 )</label>
                             </th>
                             <td>
                                 <label for="de_kakaopay_key" class="input form-width-250px">
                                     <input type="text" name="de_kakaopay_key" value="<?php echo $default['de_kakaopay_key']; ?>" id="de_kakaopay_key">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오페이로 부터 발급 받으신 상점 서명키를 입력합니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.\nKG이니시스 상점관리자 > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
                             </td>
                         </tr>
                         <tr class="kakao_info_fld">
                             <th class="table-form-th">
-                                <label for="de_kakaopay_enckey" class="label">카카오페이 상점 EncKey</label>
+                                <label for="de_kakaopay_enckey" class="label">카카오페이 키패스워드<br>( KG이니시스 )</label>
                             </th>
                             <td>
                                 <label for="de_kakaopay_enckey" class="input form-width-250px">
-                                    <input type="text" name="de_kakaopay_enckey" value="<?php echo $default['de_kakaopay_enckey']; ?>" id="de_kakaopay_enckey">
+                                    <input type="text" name="de_kakaopay_cancelpwd" value="<?php echo $default['de_kakaopay_cancelpwd']; ?>" id="de_kakaopay_cancelpwd">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오페이로 부터 발급 받으신 상점 인증 전용 EncKey를 입력합니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 4자리 상점 키패스워드를 입력합니다.\nKG이니시스 상점관리자 패스워드와 관련이 없습니다.\n키패스워드 값을 확인하시려면 상점측에 발급된 키파일 안의 readme.txt 파일을 참조해 주십시오</div>
                             </td>
                         </tr>
                         <tr class="kakao_info_fld">
+                            <th class="table-form-th">
+                                <label for="de_kakaopay_enckey">카카오페이 사용</label>
+                            </th>
+                            <td>
+                                <label for="de_kakaopay_enckey" class="checkbox">
+                                    <input type="checkbox" name="de_kakaopay_enckey" value="1" id="de_kakaopay_enckey" <?php echo $default['de_kakaopay_enckey']?' checked':''; ?>><i></i> 사용
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 카카오페이 (KG 이니시스)를 사용합니다. <br >KG 이니시스의 SIRK****** 아이디를 받은 상점만 해당됩니다.</div>
+                            </td>
+                        </tr>
+                        <tr class="kakao_info_fld" style="display:none">
                             <th class="table-form-th">
                                 <label for="de_kakaopay_hashkey" class="label">카카오페이 상점 HashKey</label>
                             </th>
@@ -1222,17 +1254,6 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                     <input type="text" name="de_kakaopay_hashkey" value="<?php echo $default['de_kakaopay_hashkey']; ?>" id="de_kakaopay_hashkey">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 카카오페이로 부터 발급 받으신 상점 인증 전용 HashKey를 입력합니다.</div>
-                            </td>
-                        </tr>
-                        <tr class="kakao_info_fld">
-                            <th class="table-form-th">
-                                <label for="de_kakaopay_cancelpwd" class="label">카카오페이 결제취소 비밀번호</label>
-                            </th>
-                            <td>
-                                <label for="de_kakaopay_cancelpwd" class="input form-width-250px">
-                                    <input type="text" name="de_kakaopay_cancelpwd" value="<?php echo $default['de_kakaopay_cancelpwd']; ?>" id="de_kakaopay_cancelpwd">
-                                </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 카카오페이 상점관리자에서 설정하신 취소 비밀번호를 입력합니다.<br>입력하신 비밀번호와 상점관리자에서 설정하신 비밀번호가 일치하지 않으면 취소가 되지 않습니다.</div>
                             </td>
                         </tr>
                         <tr class="naver_info_fld">
@@ -1372,7 +1393,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                         <li><b>일반결제</b>의 테스트 사이트코드는 <b>T0000</b> 이며, <b>에스크로 결제</b>의 테스트 사이트코드는 <b>T0007</b> 입니다.</li>
                                     </ul>
                                     <ul id="lg_cardtest_tip" class="scf_cardtest_tip_adm scf_cardtest_tip_adm_hide">
-                                        <li>테스트결제의 <a href="http://pgweb.dacom.net:7085/" target="_blank">상점관리자</a> 로그인 정보는 LG유플러스 상점아이디 첫 글자에 t를 추가해서 로그인하시기 바랍니다. 예) tsi_lguplus</li>
+                                        <li>테스트결제의 <a href="http://pgweb.dacom.net:7085/" target="_blank">상점관리자</a> 로그인 정보는 토스페이먼츠 상점아이디 첫 글자에 t를 추가해서 로그인하시기 바랍니다. 예) tsi_lguplus</li>
                                     </ul>
                                     <ul id="inicis_cardtest_tip" class="scf_cardtest_tip_adm scf_cardtest_tip_adm_hide">
                                         <li><b>일반결제</b>의 테스트 사이트 mid는 <b>INIpayTest</b> 이며, <b>에스크로 결제</b>의 테스트 사이트 mid는 <b>iniescrow0</b> 입니다.</li>
@@ -2274,40 +2295,47 @@ function fconfig_check(f)
     <?php echo get_editor_js('de_change_content'); ?>
     <?php echo get_editor_js('de_guest_privacy'); ?>
 
-	var msg = "",
-		pg_msg = "";
+    var msg = "",
+        pg_msg = "";
 
-	if( f.de_pg_service.value == "kcp" ){
-		if( f.de_kcp_mid.value && f.de_kcp_site_key.value && parseInt(f.de_card_test.value) > 0 ){
-			pg_msg = "NHN KCP";
-		}
-	} else if ( f.de_pg_service.value == "lg" ) {
-		if( f.cf_lg_mid.value && f.cf_lg_mert_key.value && parseInt(f.de_card_test.value) > 0 ){
-			pg_msg = "LG유플러스";
-		}
-	} else if ( f.de_pg_service.value == "inicis" ) {
-		if( f.de_inicis_mid.value && f.de_inicis_sign_key.value && parseInt(f.de_card_test.value) > 0 ){
-			pg_msg = "KG이니시스";
-		}
-	}
+    if( f.de_pg_service.value == "kcp" ){
+        if( f.de_kcp_mid.value && f.de_kcp_site_key.value && parseInt(f.de_card_test.value) > 0 ){
+            pg_msg = "NHN KCP";
+        }
+    } else if ( f.de_pg_service.value == "lg" ) {
+        if( f.cf_lg_mid.value && f.cf_lg_mert_key.value && parseInt(f.de_card_test.value) > 0 ){
+            pg_msg = "토스페이먼츠";
+        }
+    } else if ( f.de_pg_service.value == "inicis" ) {
+        if( f.de_inicis_mid.value && f.de_inicis_sign_key.value && parseInt(f.de_card_test.value) > 0 ){
+            pg_msg = "KG이니시스";
+        }
+    }
 
-	if( pg_msg ){
-		msg += "(주의!) "+pg_msg+" 결제의 결제 설정이 현재 테스트결제 로 되어 있습니다.\n쇼핑몰 운영중이면 반드시 실결제로 설정하여 운영하셔야 합니다.\n실결제로 변경하려면 결제설정 탭 -> 결제 테스트에서 실결제를 선택해 주세요.\n정말로 테스트결제로 설정하시겠습니까?";
-	}
+    if( pg_msg ){
+        msg += "(주의!) "+pg_msg+" 결제의 결제 설정이 현재 테스트결제 로 되어 있습니다.\n쇼핑몰 운영중이면 반드시 실결제로 설정하여 운영하셔야 합니다.\n실결제로 변경하려면 결제설정 탭 -> 결제 테스트에서 실결제를 선택해 주세요.\n정말로 테스트결제로 설정하시겠습니까?";
+    }
 
-	if( msg ){
-		if (confirm(msg)){
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		return true;
-	}
+    if( msg ){
+        if (confirm(msg)){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return true;
+    }
 }
 
 $(function() {
-	$(document).ready(function () {
+    $(document).ready(function () {
+        
+        $("#de_global_nhnkcp_naverpay").on("click", function(e){
+            if ( $(this).prop('checked') ) {
+                $("#de_easy_nhnkcp_naverpay").prop('checked', true);
+            }
+        });
+
         function hash_goto_scroll(hash=""){
             var $elem = hash ? $("#"+hash) : $('#' + window.location.hash.replace('#', ''));
             if($elem.length) {
@@ -2321,7 +2349,7 @@ $(function() {
         }
 
         hash_goto_scroll();
-
+        
         $(document).on("click", ".pg_test_conf_link", function(e){
             e.preventDefault();
 
@@ -2452,19 +2480,19 @@ $(function() {
         });
     });
 
-	$(document).on("change", "#de_taxsave_use", function(e){
-		var $val = $(this).val();
-		
-		if( parseInt($val) > 0 ){
-			$("#de_taxsave_types").show();
-		} else {
-			$("#de_taxsave_types").hide();
-		}
-	});
-	
-	// 현금영수증 발급수단 중 무통장입금은 무조건 체크처리
-	document.getElementById("de_taxsave_types_account").checked = true;
-	document.getElementById("de_taxsave_types_account").disabled = true;
+    $(document).on("change", "#de_taxsave_use", function(e){
+        var $val = $(this).val();
+        
+        if( parseInt($val) > 0 ){
+            $("#de_taxsave_types").show();
+        } else {
+            $("#de_taxsave_types").hide();
+        }
+    });
+    
+    // 현금영수증 발급수단 중 무통장입금은 무조건 체크처리
+    document.getElementById("de_taxsave_types_account").checked = true;
+    document.getElementById("de_taxsave_types_account").disabled = true;
 });
 </script>
 

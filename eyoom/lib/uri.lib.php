@@ -141,6 +141,10 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
             case 'pid':
                 return get_eyoom_pretty_url('page', $me_pid);
             break;
+
+            case 'userpage':
+                return $me_link;
+            break;
         }
     } else {
         return $me_link;
@@ -181,6 +185,9 @@ function get_query_url ($info) {
     }
     else if ($info[1] == 'page' && $info[2]) {
         $url = G5_URL."/page/?pid={$info[2]}";
+    }
+    else if ($info[1] == 'bbs' && $info[2]) {
+        $url = G5_URL."/bbs/{$info[2]}";
     } else {
         $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
     }

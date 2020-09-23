@@ -65,7 +65,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
             $width = $size[0];
 
         $bn_img = "";
-        $bn_img .= "<img src='".G5_DATA_URL."/banner/".$row['bn_id']."' class='img-responsive' alt='".get_text($row['bn_alt'])."'></a>";
+        $bn_img .= "<img src='".G5_DATA_URL."/banner/".$row['bn_id']."?".preg_replace('/[^0-9]/i', '', $row['bn_time'])."' class='img-responsive' alt='".get_text($row['bn_alt'])."'>";
     }
 
     switch($row['bn_device']) {

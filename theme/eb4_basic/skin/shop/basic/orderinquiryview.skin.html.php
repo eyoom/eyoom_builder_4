@@ -218,7 +218,7 @@ if($od['od_pg'] == 'lg') {
                             </tr>
                             <tr>
                                 <th class="td-border-right">결제방식</th>
-                                <td><?php echo ($easy_pay_name ? $easy_pay_name.'('.$od['od_settle_case'].')' : check_pay_name_replace($od['od_settle_case'], $od) ); ?></td>
+                                <td><?php echo check_pay_name_replace($od['od_settle_case'], $od, 1); ?></td>
                             </tr>
                             <tr>
                                 <th class="td-border-right">결제금액</th>
@@ -230,7 +230,7 @@ if($od['od_pg'] == 'lg') {
                                 <td><?php echo $od['od_receipt_time']; ?></td>
                             </tr>
                             <?php } ?>
-                            <?php if($app_no_subj) { // 승인번호, 휴대폰번호, 거래번호 ?>
+                            <?php if($app_no_subj && $app_no) { // 승인번호, 휴대폰번호, 거래번호 ?>
                             <tr>
                                 <th class="td-border-right"><?php echo $app_no_subj; ?></th>
                                 <td><?php echo $app_no; ?></td>

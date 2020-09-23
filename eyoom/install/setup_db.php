@@ -21,11 +21,11 @@ if (!$exists_db_config || !$exists_eyoom_config) {
     exit;
 }
 
-$mysql_host         = safe_install_string_check($_POST['mysql_host']);
-$mysql_user         = safe_install_string_check($_POST['mysql_user']);
-$mysql_pass         = safe_install_string_check($_POST['mysql_pass']);
-$mysql_db           = safe_install_string_check($_POST['mysql_db']);
-$table_prefix       = safe_install_string_check($_POST['table_prefix']);
+$mysql_host         = defined('G5_MYSQL_HOST')      ? G5_MYSQL_HOST     : safe_install_string_check($_POST['mysql_host']);
+$mysql_user         = defined('G5_MYSQL_USER')      ? G5_MYSQL_USER     : safe_install_string_check($_POST['mysql_user']);
+$mysql_pass         = defined('G5_MYSQL_PASSWORD')  ? G5_MYSQL_PASSWORD : safe_install_string_check($_POST['mysql_pass']);
+$mysql_db           = defined('G5_MYSQL_DB')        ? G5_MYSQL_DB       : safe_install_string_check($_POST['mysql_db']);
+$table_prefix       = defined('G5_TABLE_PREFIX')    ? G5_TABLE_PREFIX   : safe_install_string_check($_POST['table_prefix']);
 $admin_id           = $_POST['admin_id'];
 $admin_pass         = $_POST['admin_pass'];
 $admin_name         = $_POST['admin_name'];

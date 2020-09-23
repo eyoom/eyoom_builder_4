@@ -168,19 +168,6 @@ if($od['od_settle_case'] == '신용카드' || $od['od_settle_case'] == 'KAKAOPAY
     $app_no_subj = '승인번호';
     $app_no = $od['od_app_no'];
     $disp_bank = false;
-    switch($od['od_pg']) {
-        case 'lg':
-            $easy_pay_name = 'PAYNOW';
-            break;
-        case 'inicis':
-            $easy_pay_name = 'KPAY';
-            break;
-        case 'kcp':
-            $easy_pay_name = 'PAYCO';
-            break;
-        default:
-            break;
-    }
 } else if($od['od_settle_case'] == '휴대폰') {
     $app_no_subj = '휴대폰번호';
     $app_no = $od['od_bank_account'];
@@ -230,7 +217,8 @@ if($disp_receipt) {
 	}
 	
 	if($od['od_settle_case'] == 'KAKAOPAY') {
-        $card_receipt_script = 'window.open(\'https://mms.cnspay.co.kr/trans/retrieveIssueLoader.do?TID='.$od['od_tno'].'&type=0\', \'popupIssue\', \'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=420,height=540\');';
+        //$card_receipt_script = 'window.open(\'https://mms.cnspay.co.kr/trans/retrieveIssueLoader.do?TID='.$od['od_tno'].'&type=0\', \'popupIssue\', \'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=420,height=540\');';
+        $card_receipt_script = 'window.open(\'https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid='.$od['od_tno'].'&noMethod=1\',\'receipt\',\'width=430,height=700\');';
 	}
 }
 

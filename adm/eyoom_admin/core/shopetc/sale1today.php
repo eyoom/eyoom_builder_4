@@ -37,7 +37,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $href = EYOOM_ADMOIN_URL."/?dir=shop&amp;pid=orderlist&amp;sel_field=mb_id&amp;search=".$row['mb_id'];
     }
 
-    $receipt_bank = $receipt_card = $receipt_vbank = $receipt_iche = $receipt_hp = 0;
+    $receipt_bank = $receipt_card = $receipt_vbank = $receipt_iche = $receipt_easy = $receipt_hp = 0;
     if($row['od_settle_case'] == '무통장')
         $receipt_bank = $row['od_receipt_price'];
     if($row['od_settle_case'] == '가상계좌')
@@ -48,6 +48,10 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $receipt_hp = $row['od_receipt_price'];
     if($row['od_settle_case'] == '신용카드')
         $receipt_card = $row['od_receipt_price'];
+
+    if(in_array($row['od_settle_case'], array('간편결제', 'KAKAOPAY', 'lpay', 'inicis_payco', 'inicis_kakaopay', '삼성페이'))) {
+        $receipt_easy = $row['od_receipt_price'];
+    }
 
     $list[$i] = $row;
     $list[$i]['href'] = $href;
@@ -64,6 +68,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $tot['receipt_vbank'] += $receipt_vbank;
     $tot['receipt_iche']  += $receipt_iche;
     $tot['receipt_card']  += $receipt_card;
+    $tot['receipt_easy']  += $receipt_easy;
     $tot['receipt_hp']    += $receipt_hp;
     $tot['receipt_point'] += $row['od_receipt_point'];
     $tot['misu']          += $row['od_misu'];

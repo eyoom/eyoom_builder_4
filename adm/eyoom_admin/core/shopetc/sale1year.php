@@ -80,6 +80,11 @@ function get_sale_info($row_array) {
             $tot['receiptcard']   += $row['od_receipt_price'];
         $tot['receiptpoint']  += $row['od_receipt_point'];
         $tot['misu']          += $row['od_misu'];
+
+        if(in_array($row['od_settle_case'], array('간편결제', 'KAKAOPAY', 'lpay', 'inicis_payco', 'inicis_kakaopay', '삼성페이'))) {
+            $save['receipteasy'] += $row['od_receipt_price'];
+            $tot['receipteasy'] += $row['od_receipt_price'];
+        }
     }
 
     $output['save'] = $save;
