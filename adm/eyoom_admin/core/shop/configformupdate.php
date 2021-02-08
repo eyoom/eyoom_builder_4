@@ -477,7 +477,6 @@ if ($_POST['amode'] == 'ittype') {
     if( $warning_msg ){
         alert($warning_msg, G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
     } else {
-        goto_url("./configform.php");
         alert('쇼핑몰 설정을 적용하였습니다.', G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
     }
 }

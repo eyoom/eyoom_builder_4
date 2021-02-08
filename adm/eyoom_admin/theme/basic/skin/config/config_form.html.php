@@ -1643,7 +1643,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="checkbox">
                                     <input type="checkbox" name="cf_social_servicelist[]" id="check_social_payco" value="payco" <?php echo option_array_checked('payco', $config['cf_social_servicelist']); ?>><i></i> 페이코 로그인을 사용합니다.
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 페이코 CallbackURL : <?php echo get_social_callbackurl('payco'); ?></div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 페이코 CallbackURL : <?php echo get_social_callbackurl('payco', false, true); ?></div>
                             </td>
                         </tr>
                     </tbody>
@@ -1718,7 +1718,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                     <span>
                                         <label class="input form-width-220px"><input type="text" name="cf_twitter_key" id="cf_twitter_key" value="<?php echo $config['cf_twitter_key']; ?>"> </label>
                                     </span>
-                                    <span><a href="https://dev.twitter.com/apps" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
+                                    <span><a href="https://developer.twitter.com/en/apps" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -1781,7 +1781,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                     <span>
                                         <label class="input form-width-220px"><input type="text" name="cf_kakao_rest_key" id="cf_kakao_rest_key" value="<?php echo $config['cf_kakao_rest_key']; ?>"> </label>
                                     </span>
-                                    <span><a href="https://developers.kakao.com/apps/new" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
+                                    <span><a href="https://developers.kakao.com/product/kakaoLogin" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -2166,6 +2166,26 @@ $(function() {
 });
 
 function fconfigform_submit(f) {
+    var current_user_ip = "<?php echo $_SERVER['REMOTE_ADDR']; ?>";
+    var cf_intercept_ip_val = f.cf_intercept_ip.value;
+
+    if( cf_intercept_ip_val && current_user_ip ){
+        var cf_intercept_ips = cf_intercept_ip_val.split("\n");
+
+        for(var i=0; i < cf_intercept_ips.length; i++){
+            if ( cf_intercept_ips[i].trim() ) {
+                cf_intercept_ips[i] = cf_intercept_ips[i].replace(".", "\.");
+                cf_intercept_ips[i] = cf_intercept_ips[i].replace("+", "[0-9\.]+");
+                
+                var re = new RegExp(cf_intercept_ips[i]);
+                if ( re.test(current_user_ip) ){
+                    alert("현재 접속 IP : "+ current_user_ip +" 가 차단될수 있기 때문에, 다른 IP를 입력해 주세요.");
+                    return false;
+                }
+            }
+        }
+    }
+
     f.action = "<?php echo $action_url1; ?>";
     return true;
 }

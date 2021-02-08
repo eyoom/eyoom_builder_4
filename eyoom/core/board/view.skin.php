@@ -101,12 +101,13 @@ if ($view['file']['count']) {
  * 링크 정보 가져오기
  */
 $i=1;
-foreach ($view['link'] as $k => $v) {
-    if (!$v) break;
-    $view_link[$i]['link']  = cut_str($view['link'][$i], 70);
-    $view_link[$i]['href']  = $view['link_href'][$i];
-    $view_link[$i]['hit']   = $view['link_hit'][$i];
-    $i++;
+if(isset($view['link']) && array_filter($view['link'])) {
+    foreach ($view['link'] as $k => $v) {
+        $view_link[$i]['link']  = cut_str($view['link'][$i], 70);
+        $view_link[$i]['href']  = $view['link_href'][$i];
+        $view_link[$i]['hit']   = $view['link_hit'][$i];
+        $i++;
+    }
 }
 
 /**

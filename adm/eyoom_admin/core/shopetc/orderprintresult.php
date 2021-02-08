@@ -132,7 +132,7 @@ if ($csv == 'xls')
     $fr_date = date_conv($fr_date);
     $to_date = date_conv($to_date);
 
-    $sql = " SELECT a.od_id, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type, a.od_time
+    $sql = " SELECT a.od_id, od_zip1, od_zip2, od_addr1, od_addr2, od_addr3, od_addr_jibeon, od_name, od_tel, od_hp, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type, a.od_time
                FROM {$g5['g5_shop_order_table']} a, {$g5['g5_shop_cart_table']} b
               where a.od_id = b.od_id ";
     if ($case == 1) // 출력기간
@@ -159,7 +159,7 @@ if ($csv == 'xls')
     $worksheet = $workbook->addworksheet();
 
     // Put Excel data
-    $data = array('우편번호', '주소', '이름', '전화1', '전화2', '상품명', '수량', '선택사항', '배송비', '상품코드', '주문번호', '운송장번호', '전하실말씀');
+    $data = array('보내는분_우편번호', '보내는분_주소', '보내는분_이름', '보내는분_전화1', '보내는분_전화2', '받는분_우편번호', '받는분_주소', '받는분_이름', '받는분_전화1', '받는분_전화2', '상품명', '수량', '선택사항', '배송비', '상품코드', '주문번호', '운송장번호', '전하실말씀');
     $data = array_map('iconv_euckr', $data);
 
     $col = 0;
@@ -209,19 +209,24 @@ if ($csv == 'xls')
 
         $row = array_map('iconv_euckr', $row);
 
-        $worksheet->write($i, 0, ' '.$row['od_b_zip1'].$row['od_b_zip2']);
-        $worksheet->write($i, 1, $pull_address);
-        $worksheet->write($i, 2, $row['od_b_name']);
-        $worksheet->write($i, 3, ' '.$row['od_b_tel']);
-        $worksheet->write($i, 4, ' '.$row['od_b_hp']);
-        $worksheet->write($i, 5, $row['it_name']);
-        $worksheet->write($i, 6, $row['ct_qty']);
-        $worksheet->write($i, 7, $row['ct_option']);
-        $worksheet->write($i, 8, $ct_send_cost);
-        $worksheet->write($i, 9, ' '.$row['it_id']);
-        $worksheet->write($i, 10, ' '.$row['od_id']);
-        $worksheet->write($i, 11, $row['od_invoice']);
-        $worksheet->write($i, 12, $row['od_memo']);
+        $worksheet->write($i, 0, ' '.$row['od_zip1'].$row['od_zip2']);
+        $worksheet->write($i, 1, $send_address);
+        $worksheet->write($i, 2, $row['od_name']);
+        $worksheet->write($i, 3, ' '.$row['od_tel']);
+        $worksheet->write($i, 4, ' '.$row['od_hp']);
+        $worksheet->write($i, 5, ' '.$row['od_b_zip1'].$row['od_b_zip2']);
+        $worksheet->write($i, 6, $pull_address);
+        $worksheet->write($i, 7, $row['od_b_name']);
+        $worksheet->write($i, 8, ' '.$row['od_b_tel']);
+        $worksheet->write($i, 9, ' '.$row['od_b_hp']);
+        $worksheet->write($i, 10, $row['it_name']);
+        $worksheet->write($i, 11, $row['ct_qty']);
+        $worksheet->write($i, 12, $row['ct_option']);
+        $worksheet->write($i, 13, $ct_send_cost);
+        $worksheet->write($i, 14, ' '.$row['it_id']);
+        $worksheet->write($i, 15, ' '.$row['od_id']);
+        $worksheet->write($i, 16, $row['od_invoice']);
+        $worksheet->write($i, 17, $row['od_memo']);
     }
 
     $workbook->close();

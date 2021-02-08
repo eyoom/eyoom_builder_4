@@ -16,6 +16,8 @@ $self_url = G5_BBS_URL."/login.php";
 if( G5_SOCIAL_USE_POPUP ) {
     $self_url = G5_SOCIAL_LOGIN_URL.'/popup.php';
 }
+
+add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css?ver='.G5_CSS_VER.'">', 10);
 ?>
 
 <style>

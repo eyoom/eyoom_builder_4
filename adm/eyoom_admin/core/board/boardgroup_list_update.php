@@ -14,19 +14,24 @@ auth_check($auth[$sub_menu], 'w');
 
 check_admin_token();
 
-$count = count($_POST['chk']);
+$post_chk = isset($_POST['chk']) ? (array) $_POST['chk'] : array();
+$post_group_id = isset($_POST['group_id']) ? (array) $_POST['group_id'] : array();
+$act_button = isset($_POST['act_button']) ? $_POST['act_button'] : '';
+
+$count = count($post_chk);
 
 if(!$count)
-    alert($_POST['act_button'].'할 게시판그룹을 1개이상 선택해 주세요.');
+    alert($act_button.'할 게시판그룹을 1개이상 선택해 주세요.');
 
 for ($i=0; $i<$count; $i++)
 {
-    $k     = $_POST['chk'][$i];
-    $gr_id = preg_replace('/[^a-z0-9_]/i', '', $_POST['group_id'][$k]);
+    $k     = $post_chk[$i];
+    $gr_id = preg_replace('/[^a-z0-9_]/i', '', $post_group_id[$k]);
+
     $gr_subject = is_array($_POST['gr_subject']) ? strip_tags(clean_xss_attributes($_POST['gr_subject'][$k])) : '';
     $gr_admin = is_array($_POST['gr_admin']) ? strip_tags(clean_xss_attributes($_POST['gr_admin'][$k])) : '';
 
-    if($_POST['act_button'] == '선택수정') {
+    if($act_button == '선택수정') {
         $sql = " update {$g5['group_table']}
                     set gr_subject    = '{$gr_subject}',
                         gr_device     = '".sql_real_escape_string($_POST['gr_device'][$k])."',
@@ -39,7 +44,7 @@ for ($i=0; $i<$count; $i++)
         sql_query($sql);
         $msg = "선택한 게시판그룹의 정보를 수정하였습니다.";
 
-    } else if($_POST['act_button'] == '선택삭제') {
+    } else if($act_button == '선택삭제') {
         $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where gr_id = '$gr_id' ");
         if ($row['cnt'])
             alert("이 그룹에 속한 게시판이 존재하여 게시판 그룹을 삭제할 수 없습니다.\\n\\n이 그룹에 속한 게시판을 먼저 삭제하여 주십시오.", G5_ADMIN_URL . '/?dir=board&amp;pid=board_list&amp;sfl=gr_id&amp;stx='.$gr_id);
@@ -52,5 +57,7 @@ for ($i=0; $i<$count; $i++)
         $msg = "선택한 게시판그룹을 삭제하였습니다.";
     }
 }
+
+run_event('admin_boardgroup_list_update', $act_button, $chk, $post_group_id, $qstr);
 
 alert($msg, G5_ADMIN_URL . '/?dir=board&amp;pid=boardgroup_list&amp;'.$qstr);

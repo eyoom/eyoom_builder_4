@@ -23,7 +23,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php /* 상단 HTML */ ?>
-    <div id="sev_hhtml" class="margin-bottom-20"><?php echo conv_content($ca['ev_head_html'], 1); ?></div>
+    <div id="sev_hhtml" class="margin-bottom-20"><?php echo conv_content($ev['ev_head_html'], 1); ?></div>
 
     <div class="shop-list-sort-wrap">
         <?php include $sort_skin; ?>
@@ -36,7 +36,7 @@ if (!defined('_EYOOM_')) exit;
     <?php echo eb_paging($eyoom['paging_skin']);?>
 
     <?php /* 하단 HTML */ ?>
-    <div id="sev_thtml"><?php echo conv_content($ca['ev_tail_html'], 1); ?></div>
+    <div id="sev_thtml"><?php echo conv_content($ev['ev_tail_html'], 1); ?></div>
 
     <?php /* 이벤트 테일 이미지 */ ?>
     <?php if (file_exists($timg)) { ?>

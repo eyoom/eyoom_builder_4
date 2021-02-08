@@ -148,14 +148,12 @@ $mb_dir = substr($mb['mb_id'],0,2);
 $icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb['mb_id']).'.gif';
 if (file_exists($icon_file)) {
     $icon_url = str_replace(G5_DATA_PATH, G5_DATA_URL, $icon_file);
+    $icon_filemtile = (defined('G5_USE_MEMBER_IMAGE_FILETIME') && G5_USE_MEMBER_IMAGE_FILETIME) ? '?'.filemtime($icon_file) : '';
 }
 
 // 회원이미지
 $mb_dir = substr($mb['mb_id'],0,2);
 $photo_file = G5_DATA_PATH.'/member_image/'.$mb_dir.'/'.get_mb_icon_name($mb['mb_id']).'.gif';
-if (file_exists($photo_file)) {
-    $photo_url = str_replace(G5_DATA_PATH, G5_DATA_URL, $photo_file);
-}
 
 // query string
 $lev = clean_xss_tags(trim($_GET['lev']));

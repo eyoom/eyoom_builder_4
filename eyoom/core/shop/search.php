@@ -151,8 +151,7 @@ $sca_count = count($sca_list);
  * 리스트 유형별로 출력
  */
 $list_file = $skin_dir.'/'.$default['de_search_list_skin'];
-
-if (file_exists($list_file)) {
+if (file_exists($list_file) && is_include_path_check($list_file)) {
     define('G5_SHOP_CSS_URL', G5_SHOP_SKIN_URL);
     $list = new item_list($list_file, $default['de_search_list_mod'], $default['de_search_list_row'], $default['de_search_img_width'], $default['de_search_img_height']);
     $list->set_query(" select * $sql_common $sql_where {$order_by} limit $from_record, $items ");

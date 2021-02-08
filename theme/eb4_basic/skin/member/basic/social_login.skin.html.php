@@ -17,7 +17,7 @@ if( G5_SOCIAL_USE_POPUP ) {
     $self_url = G5_SOCIAL_LOGIN_URL.'/popup.php';
 }
 
-add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css">', 10);
+add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css?ver='.G5_CSS_VER.'">', 10);
 ?>
 
 <style>
@@ -57,7 +57,7 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
         <li><a href="<?php echo $self_url;?>?provider=facebook&amp;url=<?php echo $urlencode;?>" class="social_link facebook-sl-btn" title="페이스북"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/facebook.png"><span>페이스북 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('google') ) {     //구글 로그인을 사용한다면 ?>
-        <li><a href="<?php echo $self_url;?>?provider=google&amp;url=<?php echo $urlencode;?>" class="social_link google-sl-btn" title="구글"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/google.png"><span>구글+ 로그인</span></a></li>
+        <li><a href="<?php echo $self_url;?>?provider=google&amp;url=<?php echo $urlencode;?>" class="social_link google-sl-btn" title="구글"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/google.png"><span>구글 로그인</span></a></li>
         <?php }     //end if ?>
         <?php if( social_service_check('twitter') ) {     //트위터 로그인을 사용한다면 ?>
         <li><a href="<?php echo $self_url;?>?provider=twitter&amp;url=<?php echo $urlencode;?>" class="social_link twitter-sl-btn" title="트위터"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/twitter.png"><span>트위터 로그인</span></a></li>

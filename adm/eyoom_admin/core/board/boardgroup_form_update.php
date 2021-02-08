@@ -75,4 +75,6 @@ if ($w == '') {
     alert('제대로 된 값이 넘어오지 않았습니다.');
 }
 
+run_event('admin_boardgroup_form_update', $gr_id, $w);
+
 alert($msg, G5_ADMIN_URL . '/?dir=board&amp;pid=boardgroup_form&amp;w=u&amp;gr_id='.$gr_id.'&amp;'.$qstr);
