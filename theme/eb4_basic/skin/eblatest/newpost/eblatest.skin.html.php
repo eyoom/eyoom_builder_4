@@ -59,7 +59,7 @@ if (!defined('_EYOOM_')) exit;
         <?php if (is_array($el_item)) { foreach ($el_item as $k => $eb_latest) { ?>
         <div class="tab-pane <?php echo ($k==0) ? 'active': ''; ?> in" id="newpost-tlb-<?php echo $el_master['el_code']; ?>-<?php echo ($k+1); ?>">
             <ul class="list-unstyled">
-                <?php if (count($eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
+                <?php if (count((array)$eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
                 <li>
                     <a href="<?php echo $data['href']; ?>">
                         <div class="newpost-subj <?php echo !G5_IS_MOBILE ? 'tooltips':''; ?>" <?php if (!G5_IS_MOBILE) { ?>data-toggle="tooltip" data-placement="top" data-original-title="<?php echo $eb_latest['li_date_type'] == '1' ? $eb->date_time("{$eb_latest['li_date_kind']}",$data['wr_datetime']):  $eb->date_format("{$eb_latest['li_date_kind']}",$data['wr_datetime']); ?>"<?php } ?>>

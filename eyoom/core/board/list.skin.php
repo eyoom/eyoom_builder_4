@@ -169,7 +169,7 @@ foreach ($list as $i => $val) {
      * 게시물 view페이지의 wmode(Window Mode) 설정
      */
     if ($infinite_wmode) {
-        $list[$i]['href'] = $list[$i]['href'].'&wmode=1';
+        $list[$i]['href'] .= strpos($list[$i]['href'], '?') ? '&wmode=1': '?wmode=1';
     }
 
     /**
@@ -239,7 +239,8 @@ if ($board['bo_use_category']) {
     /**
      * 카테고리 정보 재구성
      */
-    foreach ($categories as $key => $val) {
+    foreach ((array)$categories as $key => $val) {
+        if (!$val) break; 
         $bocate[$key]['ca_name'] = trim($val);
         $bocate[$key]['ca_sca'] = urlencode($bocate[$key]['ca_name']);
         $bocate[$key]['ca_count'] = number_format($ca_count[$val]);

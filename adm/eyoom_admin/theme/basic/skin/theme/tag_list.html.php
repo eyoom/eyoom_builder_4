@@ -189,7 +189,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='tg_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['tg_id']; ?>'>",
             태그노출: "<a href='javascript:;' id='dpmenu_y_<?php echo $list[$i]['tg_id']; ?>' class='chg_dpmenu' data-tgid='<?php echo $list[$i]['tg_id']; ?>' data-tgyn='y'><i class='fas fa-check color-red margin-right-3 <?php echo $list[$i]['tg_dpmenu'] == 'y' ? 'check-show':''; ?>'></i><span class='default-text <?php echo $list[$i]['tg_dpmenu'] == 'y' ? 'check-show-text':''; ?>'>노출</span></a> <a href='javascript:;' id='dpmenu_n_<?php echo $list[$i]['tg_id']; ?>' class='chg_dpmenu margin-left-10' data-tgid='<?php echo $list[$i]['tg_id']; ?>' data-tgyn='n'><i class='fas fa-check color-red margin-right-3 <?php echo $list[$i]['tg_dpmenu'] == 'n' ? 'check-show':''; ?>'></i><span class='default-text <?php echo $list[$i]['tg_dpmenu'] == 'n' ? 'check-show-text':''; ?>'>미노출</span></a><input type='hidden' name='tg_dpmenu[<?php echo $i; ?>]' value='<?php echo $list[$i]['tg_dpmenu']; ?>'>",

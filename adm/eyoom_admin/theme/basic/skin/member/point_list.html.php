@@ -300,7 +300,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='mb_id[<?php echo $i; ?>]' value='{.mb_id}' id='mb_id_<?php echo $i; ?>'><input type='hidden' name='po_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['po_id']; ?>' id='po_id_<?php echo $i; ?>'>",
             회원아이디: "<span class='ellipsis'><?php echo $list[$i]['mb_id']; ?></span>",

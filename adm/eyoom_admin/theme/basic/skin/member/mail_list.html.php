@@ -93,7 +93,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<div class='eyoom-form'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['ma_id']; ?>'><i></i></label></div>",
             번호: "<?php echo $list[$i]['num']; ?>",

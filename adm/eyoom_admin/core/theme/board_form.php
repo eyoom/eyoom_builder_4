@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999200";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
@@ -21,7 +21,7 @@ $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=board_form_update&amp;smode=1
  * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
  */
 $tmp = sql_fetch("select bo_table, bo_skin, use_gnu_skin, bo_write_limit from {$g5['eyoom_board']} where bo_table='{$bo_table}' and bo_theme='{$this_theme}'",false);
-if(!$tmp['bo_table']) {
+if(!(isset($tmp) && $tmp['bo_table'])) {
     sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bo_table}', gr_id='{$board['gr_id']}', bo_theme='{$this_theme}', bo_skin='basic', use_gnu_skin='n'");
 }
 
@@ -82,6 +82,6 @@ $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
 $frm_submit .= !$wmode ? ' <a href="' . G5_ADMIN_URL . '/?dir=theme&amp;pid=board_list&amp;page='.$page.'&amp;thema='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ': '';
 if ($w == 'u') {
-    $frm_submit .= !$wmode ? ' <a href="'.get_eyoom_pretty_url($board['bo_table']).'?theme='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> ': '';
+    $frm_submit .= !$wmode ? ' <a href="'.G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;theme='.$this_theme.'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> ': '';
 }
 $frm_submit .= '</div>';

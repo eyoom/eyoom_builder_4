@@ -6,14 +6,31 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400810";
 
-$cz_id = (int) $cz_id;
-
-auth_check($auth[$sub_menu], "w");
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=shop&amp;pid=couponzoneformupdate&amp;smode=1";
+
+$cz_id = isset($_REQUEST['cz_id']) ? (int) $_REQUEST['cz_id'] : 0;
+$cp = array(
+    'cp_method'=>'',
+    'cz_subject'=>'',
+    'cp_target'=>'',
+    'cp_price'=>'',
+    'cp_trunc'=>'',
+    'cp_type'=>'',
+    'mb_id'=>'',
+    'cz_type'=>'',
+    'cz_point'=>'',
+    'cp_price'=>'',
+    'cz_file'=>'',
+    'cp_minimum'=>'',
+    'cp_maximum'=>'',
+);
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$g5['title'] = '쿠폰존 쿠폰관리';
 
 if ($w == 'u') {
     $html_title = '쿠폰 수정';
@@ -38,7 +55,7 @@ if($cp['cp_method'] == 1) {
     $cp_target_btn = '상품검색';
 }
 
-$cpimg_str = false;
+$cpimg_str = '';
 $cpimg = G5_DATA_PATH."/coupon/{$cp['cz_file']}";
 if (is_file($cpimg) && $cp['cz_id']) {
     $size = @getimagesize($cpimg);

@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300100";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_copy_update&amp;smode=1';
 

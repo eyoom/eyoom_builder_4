@@ -8,7 +8,7 @@ $sub_menu = "999630";
 
 include_once(G5_EDITOR_LIB);
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebbanner_form_update&amp;smode=1';
 

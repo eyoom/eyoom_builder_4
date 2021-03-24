@@ -6,10 +6,22 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500110";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
-$date = preg_replace('/[^0-9]/i', '', $date);
-
+$date = isset($_GET['date']) ? preg_replace('/[^0-9]/i', '', $_GET['date']) : '';
+$tot = array(
+    'orderprice'=>0,
+    'coupon'=>0,
+    'receipt_bank'=>0,
+    'receipt_vbank'=>0,
+    'receipt_iche'=>0,
+    'receipt_card'=>0,
+    'receipt_easy'=>0,
+    'receipt_hp'=>0,
+    'receipt_point'=>0,
+    'ordercancel'=>0,
+    'misu'=>0,
+);
 $date = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3", $date);
 
 $sql = " select od_id,
@@ -28,13 +40,14 @@ $sql = " select od_id,
           order by od_id desc ";
 $result = sql_query($sql);
 
-unset($tot);
+$list = array();
+$href = '';
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     if ($row['mb_id'] == '') { // 비회원일 경우는 주문자로 링크
-        $href = EYOOM_ADMOIN_URL."/?dir=shop&amp;pid=orderlist&amp;sel_field=od_name&amp;search=".$row['od_name'];
+        $href = EYOOM_ADMIN_URL."/?dir=shop&amp;pid=orderlist&amp;sel_field=od_name&amp;search=".$row['od_name'];
     } else { // 회원일 경우는 회원아이디로 링크
-        $href = EYOOM_ADMOIN_URL."/?dir=shop&amp;pid=orderlist&amp;sel_field=mb_id&amp;search=".$row['mb_id'];
+        $href = EYOOM_ADMIN_URL."/?dir=shop&amp;pid=orderlist&amp;sel_field=mb_id&amp;search=".$row['mb_id'];
     }
 
     $receipt_bank = $receipt_card = $receipt_vbank = $receipt_iche = $receipt_easy = $receipt_hp = 0;
@@ -48,7 +61,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $receipt_hp = $row['od_receipt_price'];
     if($row['od_settle_case'] == '신용카드')
         $receipt_card = $row['od_receipt_price'];
-
     if(in_array($row['od_settle_case'], array('간편결제', 'KAKAOPAY', 'lpay', 'inicis_payco', 'inicis_kakaopay', '삼성페이'))) {
         $receipt_easy = $row['od_receipt_price'];
     }

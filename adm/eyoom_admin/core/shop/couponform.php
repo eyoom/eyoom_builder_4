@@ -6,12 +6,25 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400800";
 
-auth_check($auth[$sub_menu], "w");
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=shop&amp;pid=couponformupdate&amp;smode=1";
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$cp_id = isset($_REQUEST['cp_id']) ? clean_xss_tags($_REQUEST['cp_id'], 1, 1) : '';
+$cp = array(
+    'cp_method'=>'',
+    'cp_subject'=>'',
+    'cp_target'=>'',
+    'mb_id'=>'',
+    'cp_type'=>'',
+    'cp_price'=>'',
+    'cp_trunc'=>'',
+    'cp_minimum'=>'',
+    'cp_maximum'=>'',
+);
 
 $html_title = '';
 if ($w == 'u') {

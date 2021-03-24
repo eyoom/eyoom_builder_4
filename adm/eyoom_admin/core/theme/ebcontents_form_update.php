@@ -6,42 +6,42 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999610";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$ec_code        = clean_xss_tags(trim($_POST['ec_code']));
-$ec_theme       = clean_xss_tags(trim($_POST['theme']));
-$ec_state       = clean_xss_tags(trim($_POST['ec_state']));
-$ec_name        = clean_xss_tags(trim($_POST['ec_name']));
-$ec_skin        = clean_xss_tags(trim($_POST['ec_skin']));
-$ec_link_cnt    = clean_xss_tags(trim($_POST['ec_link_cnt']));
-$ec_image_cnt   = clean_xss_tags(trim($_POST['ec_image_cnt']));
-$ec_ext_cnt     = clean_xss_tags(trim($_POST['ec_ext_cnt']));
-$ec_link        = $eb->filter_url($_POST['ec_link']);
-$ec_target      = clean_xss_tags(trim($_POST['ec_target']));
-$ec_subject     = serialize($_POST['ec_subject']);
-$ec_text        = serialize($_POST['ec_text']);
+$ec_code             = isset($_POST['ec_code']) ? clean_xss_tags(trim($_POST['ec_code'])) : '';
+$post_me_id          = isset($_POST['me_id']) ? clean_xss_tags(trim($_POST['me_id'])) : '';
+$post_ec_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$post_ec_state       = isset($_POST['ec_state']) ? clean_xss_tags(trim($_POST['ec_state'])) : '';
+$post_ec_name        = isset($_POST['ec_name']) ? clean_xss_tags(trim($_POST['ec_name'])) : '';
+$post_ec_skin        = isset($_POST['ec_skin']) ? clean_xss_tags(trim($_POST['ec_skin'])) : '';
+$post_ec_link_cnt    = isset($_POST['ec_link_cnt']) ? clean_xss_tags(trim($_POST['ec_link_cnt'])) : '';
+$post_ec_image_cnt   = isset($_POST['ec_image_cnt']) ? clean_xss_tags(trim($_POST['ec_image_cnt'])) : '';
+$post_ec_ext_cnt     = isset($_POST['ec_ext_cnt']) ? clean_xss_tags(trim($_POST['ec_ext_cnt'])) : '';
+$post_ec_link        = isset($_POST['ec_link']) ? $eb->filter_url($_POST['ec_link']) : '';
+$post_ec_target      = isset($_POST['ec_target']) ? clean_xss_tags(trim($_POST['ec_target'])) : '';
+$post_ec_subject     = isset($_POST['ec_subject']) && is_array($_POST['ec_subject']) ? serialize($_POST['ec_subject']) : '';
+$post_ec_text        = isset($_POST['ec_text']) && is_array($_POST['ec_text']) ? serialize($_POST['ec_text']) : '';
 
-if ($_POST['me_id']) {
-    $me_id = clean_xss_tags(trim($_POST['me_id']));
-    $sql_me_id = " and me_id = '{$me_id}' ";
+if ($post_me_id) {
+    $sql_me_id = " and me_id = '{$post_me_id}' ";
     $meinfo = sql_fetch("select * from {$g5['eyoom_menu']} where (1) {$sql_me_id} ");
 }
 
 $sql_common = "
     ec_code = '{$ec_code}',
-    ec_theme = '{$ec_theme}',
-    me_id = '{$me_id}',
+    ec_theme = '{$post_ec_theme}',
+    me_id = '{$post_me_id}',
     me_code = '{$meinfo['me_code']}',
-    ec_state = '{$ec_state}',
-    ec_skin = '{$ec_skin}',
-    ec_name = '{$ec_name}',
-    ec_subject = '{$ec_subject}',
-    ec_text = '{$ec_text}',
-    ec_link_cnt = '{$ec_link_cnt}',
-    ec_image_cnt = '{$ec_image_cnt}',
-    ec_ext_cnt = '{$ec_ext_cnt}',
-    ec_link = '{$ec_link}',
-    ec_target = '{$ec_target}',
+    ec_state = '{$post_ec_state}',
+    ec_skin = '{$post_ec_skin}',
+    ec_name = '{$post_ec_name}',
+    ec_subject = '{$post_ec_subject}',
+    ec_text = '{$post_ec_text}',
+    ec_link_cnt = '{$post_ec_link_cnt}',
+    ec_image_cnt = '{$post_ec_image_cnt}',
+    ec_ext_cnt = '{$post_ec_ext_cnt}',
+    ec_link = '{$post_ec_link}',
+    ec_target = '{$post_ec_target}',
 ";
 
 /**
@@ -67,14 +67,14 @@ if ($w == 'u') {
 /**
  * 디렉토리가 없다면 생성
  */
-@mkdir(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/', G5_DIR_PERMISSION);
-@chmod(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/', G5_DIR_PERMISSION);
+@mkdir(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/', G5_DIR_PERMISSION);
+@chmod(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/', G5_DIR_PERMISSION);
 
-@mkdir(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/img/', G5_DIR_PERMISSION);
-@chmod(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/img/', G5_DIR_PERMISSION);
+@mkdir(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/', G5_DIR_PERMISSION);
+@chmod(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/', G5_DIR_PERMISSION);
 
-@mkdir(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/file/', G5_DIR_PERMISSION);
-@chmod(G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/file/', G5_DIR_PERMISSION);
+@mkdir(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/file/', G5_DIR_PERMISSION);
+@chmod(G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/file/', G5_DIR_PERMISSION);
 
 $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
 
@@ -82,7 +82,7 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  * 이미지 삭제
  */
 if ($w == 'u') {
-    $ebcontents_imgfile = G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/img/'.$del_image_name;
+    $ebcontents_imgfile = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/'.$del_image_name;
     if ($_POST['ec_image_del'] && file_exists($ebcontents_imgfile) && !is_dir($ebcontents_imgfile)) {
         @unlink($ebcontents_imgfile);
         $ec_image = '';
@@ -100,7 +100,7 @@ if (is_uploaded_file($_FILES['ec_image']['tmp_name'])) {
     if (!preg_match("/\.(jpg|gif|png)$/i", $_FILES['ec_image']['name'])) {
         $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
     } else {
-        $dest_path = G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/img/'.$file_name;
+        $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/'.$file_name;
 
         move_uploaded_file($_FILES['ec_image']['tmp_name'], $dest_path);
         chmod($dest_path, G5_FILE_PERMISSION);
@@ -121,7 +121,7 @@ $sql_common .= " ec_image = '" . $ec_image . "', ";
  * 첨부파일 삭제
  */
 if ($w == 'u') {
-    $ebcontents_file = G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/file/'.$del_file_name;
+    $ebcontents_file = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/file/'.$del_file_name;
     if ($_POST['ec_file_del'] && file_exists($ebcontents_file) && !is_dir($ebcontents_file)) {
         @unlink($ebcontents_file);
         $ec_file = '';
@@ -134,7 +134,7 @@ if ($w == 'u') {
  */
 if (is_uploaded_file($_FILES['ec_file']['tmp_name'])) {
     $upload = new upload;
-    $upfile = $upload->upload_file($_FILES['ec_file'], G5_DATA_PATH.'/ebcontents/'.$ec_theme.'/file/');
+    $upfile = $upload->upload_file($_FILES['ec_file'], G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/file/');
     $ec_file = $upfile['destfile'];
     $ec_filename = $upfile['filename'];
 }
@@ -146,7 +146,7 @@ $sql_common .= " ec_file = '" . $ec_file . "', ";
 $sql_common .= " ec_filename = '" . $ec_filename . "', ";
 
 if ($w == '') {
-    $max = sql_fetch("select max(ec_sort) as snum from {$g5['eyoom_contents']} where me_id = '{$me_id}' ");
+    $max = sql_fetch("select max(ec_sort) as snum from {$g5['eyoom_contents']} where me_id = '{$post_me_id}' ");
     $ec_sort = $max['snum'] + 1;
     $sql_common .= " ec_sort = '{$ec_sort}', ";
     sql_query(" insert into {$g5['eyoom_contents']} set {$sql_common} ec_regdt = '".G5_TIME_YMDHIS."'");
@@ -154,7 +154,7 @@ if ($w == '') {
     $msg = "EB컨텐츠 마스터를 추가하였습다.";
 
 } else if ($w == 'u') {
-    $ec_sort = clean_xss_tags(trim($_POST['ec_sort']));
+    $ec_sort = isset($_POST['ec_sort']) ? clean_xss_tags(trim($_POST['ec_sort'])): '';
     $sql_common .= " ec_sort = '{$ec_sort}', ";
     $sql = " update {$g5['eyoom_contents']} set {$sql_common} ec_regdt=ec_regdt where ec_code = '{$ec_code}' {$sql_me_id} ";
     sql_query($sql);
@@ -167,7 +167,7 @@ if ($w == '') {
 /**
  * EB콘텐츠 경로
  */
-$ebcontents_path = G5_DATA_PATH.'/ebcontents/'.$ec_theme;
+$ebcontents_path = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme;
 
 /**
  * 디렉토리가 없다면 생성

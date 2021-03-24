@@ -87,9 +87,10 @@ if (!get_session($spv_name)) {
 /**
  * 첨부파일 정보 가져오기
  */
+$view_file = array();
 if ($view['file']['count']) {
     $cnt = 0;
-    for ($i=0; $i<count($view['file']); $i++) {
+    for ($i=0; $i<count((array)$view['file']); $i++) {
         if (isset($view['file'][$i]['source']) && $view['file'][$i]['source']) {
             $view_file[$cnt] = $view['file'][$i];
             $cnt++;
@@ -101,6 +102,7 @@ if ($view['file']['count']) {
  * 링크 정보 가져오기
  */
 $i=1;
+$view_link = array();
 if(isset($view['link']) && array_filter($view['link'])) {
     foreach ($view['link'] as $k => $v) {
         $view_link[$i]['link']  = cut_str($view['link'][$i], 70);
@@ -113,11 +115,12 @@ if(isset($view['link']) && array_filter($view['link'])) {
 /**
  * 파일 출력
  */
-$v_img_count = count($view['file']);
+$v_img_count = count((array)$view['file']);
+$file_url = array();
 if ($v_img_count) {
     $file_conts = "<div id=\"bo_v_img\">\n";
 
-    for ($i=0; $i<=count($view['file']); $i++) {
+    for ($i=0; $i<=count((array)$view['file']); $i++) {
         if ($view['file'][$i]['view']) {
             unset($thumbnail, $matches);
 
@@ -268,6 +271,7 @@ if ($is_member) $eb_1 = $member['mb_level']."|".$eyoomer['level'];
 /**
  * 태그 정보
  */
+$view_tags = array();
 if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
     $tag_info = $eb->get_tag_info($bo_table, $wr_id);
     if ($tag_info['wr_tag']) {
@@ -284,6 +288,7 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
 /**
  * 확장필드
  */
+$ex_view = array();
 if ($bo_extend) {
     foreach ($exbo as $ex_fname => $exinfo) {
         unset($ex_value);

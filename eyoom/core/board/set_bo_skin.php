@@ -4,7 +4,8 @@ include_once($g5_path.'/common.php');
 
 if (!$is_admin) exit;
 
-$skin = $_POST['skin'];
+$bo_table = isset($_POST['bo_table']) ? clean_xss_tags($_POST['bo_table']): '';
+$skin = isset($_POST['skin']) ? clean_xss_tags($_POST['skin']): '';
 
 if (!$bo_table) exit;
 if (!$skin) exit;

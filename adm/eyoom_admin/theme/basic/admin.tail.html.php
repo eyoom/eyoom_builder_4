@@ -32,7 +32,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=itemqalist" class="sidebar-right-btn">전체보기 <i class="fas fa-plus"></i></a>
                 </h6>
                 <div class="eb-sidebar-latest">
-                    <?php for ($i=0; $i<count($item_qa); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$item_qa); $i++) { ?>
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>" class="eb-sidebar-latest-link <?php if (!$item_qa[$i]['is_answer'] == '') { ?>sidebar-latest-no-answer<?php } ?>">
                         <div class="sidebar-latest-member-img">
                             <?php if (!$item_qa[$i]['mb_photo']) { ?>
@@ -50,7 +50,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <?php } ?>
                     </a>
                     <?php } ?>
-                    <?php if (count($item_qa) == 0) { ?>
+                    <?php if (count((array)$item_qa) == 0) { ?>
                     <p class="sidebar-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 문의글이 없습니다.</p>                 <?php } ?>
                 </div>
                 <?php } // 상품문의 끝 ?>
@@ -77,7 +77,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <span class="latest-status-indicator"></span>
                     </a>
                     <?php } ?>
-                    <?php if (count($item_use) == 0) { ?>
+                    <?php if (count((array)$item_use) == 0) { ?>
                     <p class="sidebar-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 후기글이 없습니다.</p>
                     <?php } ?>
                 </div>
@@ -89,7 +89,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <a href="<?php echo G5_BBS_URL; ?>/qalist.php" target="_blank" class="sidebar-right-btn">전체보기 <i class="fas fa-plus"></i></a>
                 </h6>
                 <div class="eb-sidebar-latest">
-                    <?php for ($i=0; $i<count($qa_conts); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$qa_conts); $i++) { ?>
                     <a href="<?php echo G5_BBS_URL; ?>/qaview.php?qa_id=<?php echo $qa_conts[$i]['qa_id']; ?>" class="eb-sidebar-latest-link <?php if (!$qa_conts[$i]['qa_status']) { ?>sidebar-latest-no-answer<?php } ?>">
                         <div class="sidebar-latest-member-img">
                             <?php if (!$qa_conts[$i]['mb_photo']) { ?>
@@ -107,7 +107,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <?php } ?>
                     </a>
                     <?php } ?>
-                    <?php if (count($qa_conts) == 0) { ?>
+                    <?php if (count((array)$qa_conts) == 0) { ?>
                     <p class="sidebar-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 문의글이 없습니다.</p>
                     <?php } ?>
                 </div>
@@ -119,7 +119,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <a href="<?php echo G5_BBS_URL; ?>/new.php" target="_blank" class="sidebar-right-btn">전체보기 <i class="fas fa-plus"></i></a>
                 </h6>
                 <div class="eb-sidebar-latest">
-                    <?php for($i=0; $i<count($new_post); $i++) { ?>
+                    <?php for($i=0; $i<count((array)$new_post); $i++) { ?>
                     <a href="<?php echo $new_post[$i]['view_url']; ?>" target="_blank" class="eb-sidebar-latest-link">
                         <div class="sidebar-latest-member-img">
                             <?php if (!$new_post[$i]['mb_photo']) { ?>
@@ -134,7 +134,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </div>
                     </a>
                     <?php } ?>
-                    <?php if (count($new_post) == 0) { ?>
+                    <?php if (count((array)$new_post) == 0) { ?>
                     <p class="sidebar-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 게시글이 없습니다.</p>
                     <?php } ?>
                 </div>
@@ -148,7 +148,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=member_list" class="sidebar-right-btn">전체보기 <i class="fas fa-plus"></i></a>
                 </h6>
                 <div class="eb-sidebar-member">
-                    <?php for($i=0; $i<count($new_member); $i++) { ?>
+                    <?php for($i=0; $i<count((array)$new_member); $i++) { ?>
                     <div class="eb-sidebar-member-item">
                         <div class="sidebar-member-img" title="이름: <?php echo get_text($new_member[$i]['mb_name']); ?>">
                             <?php if (!$new_member[$i]['mb_photo']) { ?>
@@ -169,7 +169,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </div>
                     </div>
                     <?php } ?>
-                    <?php if (count($new_member) == 0) { ?>
+                    <?php if (count((array)$new_member) == 0) { ?>
                     <p class="sidebar-member-none"><i class="fas fa-exclamation-circle"></i> 출력할 자료가 없습니다.</p>
                     <?php } ?>
                 </div>
@@ -181,7 +181,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=point_list" class="sidebar-right-btn">전체보기 <i class="fas fa-plus"></i></a>
                 </h6>
                 <div class="eb-sidebar-member">
-                    <?php for($i=0; $i<count($new_point); $i++) { ?>
+                    <?php for($i=0; $i<count((array)$new_point); $i++) { ?>
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=point_list&amp;sfl=mb_id&amp;stx=<?php echo $new_point[$i]['mb_id']; ?>" title="ID: <?php echo $new_point[$i]['mb_id']; ?> 이름: <?php echo $new_point[$i]['mb_name']; ?>" class="eb-sidebar-member-item">
                         <div class="sidebar-member-img">
                             <?php if (!$new_point[$i]['mb_photo']) { ?>
@@ -205,7 +205,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </div>
                     </a>
                     <?php } ?>
-                    <?php if (count($new_point) == 0) { ?>
+                    <?php if (count((array)$new_point) == 0) { ?>
                     <p class="sidebar-member-none"><i class="fas fa-exclamation-circle"></i> 출력할 자료가 없습니다.</p>
                     <?php } ?>
                 </div>

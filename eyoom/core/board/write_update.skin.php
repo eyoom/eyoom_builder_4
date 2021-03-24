@@ -19,16 +19,16 @@ for ($i=1; $i<=10; $i++) {
  * $write_table 에 적용할 변수 선언
  */
 $up_set = array();
-$up_set['eb_1'] = $eb_1 ? $eb->decrypt_md5($eb_1): ''; // 이윰 레벨정보 : "그누레벨|이윰레벨"
-$up_set['eb_2'] = $eb_2 ? $eb->decrypt_md5($eb_2): ''; // 지뢰폭탄 정보
-$up_set['eb_3'] = $eb_3 ? $eb->decrypt_md5($eb_3): ''; // 원본 이미지 정보
-$up_set['eb_4'] = $eb_4 ? $eb->decrypt_md5($eb_4): ''; // 썸네일 이미지 정보, 동영상여부
-$up_set['eb_5'] = $eb_5 ? $eb->decrypt_md5($eb_5): ''; // 신고, 블라인드 기능
-$up_set['eb_6'] = $eb_6 ? $eb->decrypt_md5($eb_6): ''; // 채택포인트
-$up_set['eb_7'] = $eb_7 ? $eb->decrypt_md5($eb_7): ''; // 별점 평가
-$up_set['eb_8'] = $eb_8 ? $eb->decrypt_md5($eb_8): '';
-$up_set['eb_9'] = $eb_9 ? $eb->decrypt_md5($eb_9): '';
-$up_set['eb_10'] = $eb_10 ? $eb->decrypt_md5($eb_10): '';
+$up_set['eb_1'] = $eb_1 ? $eb->decrypt_aes($eb_1): ''; // 이윰 레벨정보 : "그누레벨|이윰레벨"
+$up_set['eb_2'] = $eb_2 ? $eb->decrypt_aes($eb_2): ''; // 지뢰폭탄 정보
+$up_set['eb_3'] = $eb_3 ? $eb->decrypt_aes($eb_3): ''; // 원본 이미지 정보
+$up_set['eb_4'] = $eb_4 ? $eb->decrypt_aes($eb_4): ''; // 썸네일 이미지 정보, 동영상여부
+$up_set['eb_5'] = $eb_5 ? $eb->decrypt_aes($eb_5): ''; // 신고, 블라인드 기능
+$up_set['eb_6'] = $eb_6 ? $eb->decrypt_aes($eb_6): ''; // 채택포인트
+$up_set['eb_7'] = $eb_7 ? $eb->decrypt_aes($eb_7): ''; // 별점 평가
+$up_set['eb_8'] = $eb_8 ? $eb->decrypt_aes($eb_8): '';
+$up_set['eb_9'] = $eb_9 ? $eb->decrypt_aes($eb_9): '';
+$up_set['eb_10'] = $eb_10 ? $eb->decrypt_aes($eb_10): '';
 
 /**
  * 게시물에 익명글 적용
@@ -64,6 +64,7 @@ if ($w == 'r') {
  * 업로드된 파일 정보 가져오기
  */
 $result = sql_query(" select * from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
+$wr_image = array();
 for ($i=0; $row=sql_fetch_array($result);$i++) {
     if (!preg_match("/.(gif|jpg|jpeg|png)$/i",$row['bf_file'])) continue;
     $wr_image['bf'][$i] = "/data/file/{$bo_table}/".$row['bf_file'];
@@ -88,7 +89,7 @@ if ($matches[1]) {
 /**
  * 이미지 정보 eb_3
  */
-if ($wr_image) {
+if (count($wr_image)>0) {
     $up_set['eb_3'] = serialize($wr_image);
 }
 
@@ -200,7 +201,7 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
             }
         }
 
-        if (isset($tag_array)) {
+        if (isset($tag_array) && is_array($tag_array)) {
             $wr_tag = implode(',', $tag_array);
 
             $tag_score = $w == 'u' ? 5: 20;
@@ -340,8 +341,9 @@ if ($w == '' || $w == 'r') {
 /**
  * $up_set 대상이 있다면 원본 테이블에 적용
  */
-if (count($up_set) > 0 && is_array($up_set) ) {
+if (count((array)$up_set) > 0 && is_array($up_set) ) {
     $j=0;
+    $set = array();
     foreach ($up_set as $key => $val) {
         $set[$j] = " {$key} = '{$val}' ";
         $j++;
@@ -355,6 +357,7 @@ if (count($up_set) > 0 && is_array($up_set) ) {
  */
 if ($bo_extend) {
     $j=0;
+    $ex_set = array();
     foreach ($exbo as $ex_fname => $exinfo) {
         unset($ex_value);
         switch ($exinfo['ex_form']) {
@@ -386,7 +389,7 @@ if ($bo_extend) {
         $ex_set[$j] = " {$ex_fname} = '{$ex_value}' ";
         $j++;
     }
-    sql_query("update {$write_table} set " . implode(',', $ex_set) ." where wr_id='{$wr_id}'");
+    if (count($ex_set)>0) sql_query("update {$write_table} set " . implode(',', $ex_set) ." where wr_id='{$wr_id}'");
 }
 
 /**

@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300100";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 

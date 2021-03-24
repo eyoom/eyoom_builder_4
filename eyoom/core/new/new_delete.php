@@ -13,7 +13,7 @@ if ($is_admin != 'super')
 $board = array();
 $save_bo_table = array();
 
-for($i=0;$i<count($_POST['chk_bn_id']);$i++)
+for($i=0;$i<count((array)$_POST['chk_bn_id']);$i++)
 {
     // 실제 번호를 넘김
     $k = $_POST['chk_bn_id'][$i];

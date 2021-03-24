@@ -73,6 +73,7 @@ function get_visit_info($fr_date, $to_date='') {
 
     $sql = " select *, SUBSTRING(vi_time,1,2) as hour from {$g5['visit_table']} where vi_date between '{$fr_date}' and '{$to_date}'order by vi_id desc ";
     $result = sql_query($sql);
+    $vi_cnt = $vi_br = $vi_os = $vi_dev = $vi_regist = $vi_domain = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $brow = $row['vi_browser'];
         if(!$brow) $brow = eb_get_brow($row['vi_agent']);

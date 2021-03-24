@@ -9,6 +9,7 @@ global $is_admin, $eyoom;
 /**
  * 상품진열
  */
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($this->list_mod >= 2) { // 1줄 이미지 : 2개 이상
         if ($i%$this->list_mod == 0) $row['sct_last'] = 'sct_last'; // 줄 마지막

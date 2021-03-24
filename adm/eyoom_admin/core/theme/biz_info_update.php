@@ -8,14 +8,14 @@ $sub_menu = "999110";
 
 check_demo();
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
 
 /**
  * 작업테마
  */
-$this_theme = clean_xss_tags($_POST['theme']);
+$this_theme = isset($_POST['theme']) ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
 
 /**
  * 이미지 파일 업로드
@@ -25,7 +25,9 @@ $is_img = true;
 /**
  * 커뮤니티 상단 로고
  */
-if ($_FILES['top_logo']['name']) {
+$top_logo = $bottom_logo = $top_mobile_logo = $bottom_mobile_logo = $top_shoplogo = $bottom_shoplogo = $top_mobile_shoplogo = $bottom_mobile_shoplogo = '';
+
+if (isset($_FILES['top_logo']['name']) && $_FILES['top_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_logo'], G5_DATA_PATH."/common", $is_img);
     $top_logo = $upfile['destfile'];
 }
@@ -33,7 +35,7 @@ if ($_FILES['top_logo']['name']) {
 /**
  * 커뮤니티 하단 로고
  */
-if ($_FILES['bottom_logo']['name']) {
+if (isset($_FILES['bottom_logo']['name']) && $_FILES['bottom_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_logo'], G5_DATA_PATH."/common", $is_img);
     $bottom_logo = $upfile['destfile'];
 }
@@ -41,7 +43,7 @@ if ($_FILES['bottom_logo']['name']) {
 /**
  * 커뮤니티 모바일 상단 로고
  */
-if ($_FILES['top_mobile_logo']['name']) {
+if (isset($_FILES['top_mobile_logo']['name']) && $_FILES['top_mobile_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_mobile_logo'], G5_DATA_PATH."/common", $is_img);
     $top_mobile_logo = $upfile['destfile'];
 }
@@ -49,7 +51,7 @@ if ($_FILES['top_mobile_logo']['name']) {
 /**
  * 커뮤니티 모바일 하단 로고
  */
-if ($_FILES['bottom_mobile_logo']['name']) {
+if (isset($_FILES['bottom_mobile_logo']['name']) && $_FILES['bottom_mobile_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_mobile_logo'], G5_DATA_PATH."/common", $is_img);
     $bottom_mobile_logo = $upfile['destfile'];
 }
@@ -57,7 +59,7 @@ if ($_FILES['bottom_mobile_logo']['name']) {
 /**
  * 쇼핑몰 상단 로고
  */
-if ($_FILES['top_shoplogo']['name']) {
+if (isset($_FILES['top_shoplogo']['name']) && $_FILES['top_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $top_shoplogo = $upfile['destfile'];
 }
@@ -65,7 +67,7 @@ if ($_FILES['top_shoplogo']['name']) {
 /**
  * 쇼핑몰 하단 로고
  */
-if ($_FILES['bottom_shoplogo']['name']) {
+if (isset($_FILES['bottom_shoplogo']['name']) && $_FILES['bottom_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $bottom_shoplogo = $upfile['destfile'];
 }
@@ -73,7 +75,7 @@ if ($_FILES['bottom_shoplogo']['name']) {
 /**
  * 쇼핑몰 모바일 상단 로고
  */
-if ($_FILES['top_mobile_shoplogo']['name']) {
+if (isset($_FILES['top_mobile_shoplogo']['name']) && $_FILES['top_mobile_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_mobile_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $top_mobile_shoplogo = $upfile['destfile'];
 }
@@ -81,7 +83,7 @@ if ($_FILES['top_mobile_shoplogo']['name']) {
 /**
  * 커뮤니티 모바일 하단 로고
  */
-if ($_FILES['bottom_mobile_shoplogo']['name']) {
+if (isset($_FILES['bottom_mobile_shoplogo']['name']) && $_FILES['bottom_mobile_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_mobile_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $bottom_mobile_shoplogo = $upfile['destfile'];
 }
@@ -89,14 +91,14 @@ if ($_FILES['bottom_mobile_shoplogo']['name']) {
 /**
  * 로고 파일 삭제
  */
-if ($_POST['top_logo_del'] || $top_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_logo_del']}");
-if ($_POST['bottom_logo_del'] || $bottom_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_logo_del']}");
-if ($_POST['top_mobile_logo_del'] || $top_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_logo_del']}");
-if ($_POST['bottom_mobile_logo_del'] || $bottom_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_logo_del']}");
-if ($_POST['top_shoplogo_del'] || $top_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_shoplogo_del']}");
-if ($_POST['bottom_shoplogo_del'] || $bottom_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_shoplogo_del']}");
-if ($_POST['top_mobile_shoplogo_del'] || $top_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_shoplogo_del']}");
-if ($_POST['bottom_mobile_shoplogo_del'] || $bottom_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_shoplogo_del']}");
+if ((isset($_POST['top_logo_del']) && $_POST['top_logo_del']) || $top_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_logo_del']}");
+if ((isset($_POST['bottom_logo_del']) && $_POST['bottom_logo_del']) || $bottom_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_logo_del']}");
+if ((isset($_POST['top_mobile_logo_del']) && $_POST['top_mobile_logo_del']) || $top_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_logo_del']}");
+if ((isset($_POST['bottom_mobile_logo_del']) && $_POST['bottom_mobile_logo_del']) || $bottom_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_logo_del']}");
+if ((isset($_POST['top_shoplogo_del']) && $_POST['top_shoplogo_del']) || $top_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_shoplogo_del']}");
+if ((isset($_POST['bottom_shoplogo_del']) && $_POST['bottom_shoplogo_del']) || $bottom_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_shoplogo_del']}");
+if ((isset($_POST['top_mobile_shoplogo_del']) && $_POST['top_mobile_shoplogo_del']) || $top_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_shoplogo_del']}");
+if ((isset($_POST['bottom_mobile_shoplogo_del']) && $_POST['bottom_mobile_shoplogo_del']) || $bottom_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_shoplogo_del']}");
 
 /**
  * 테마의 기업정보 설정 파일

@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300100";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 $ex_no = clean_xss_tags(trim($_GET['ex_no']));
 

@@ -24,6 +24,7 @@ $sql = " select *
           order by od_id desc
           $limit ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $uid = md5($row['od_id'].$row['od_time'].$row['od_ip']);
 
@@ -57,6 +58,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['href'] = G5_SHOP_URL.'/orderinquiryview.php?od_id='.$row['od_id'].'&amp;uid='.$uid;
     $list[$i]['od_status'] = $od_status;
 }
+$count = count($list);
 
 /**
  * 최근 위시리스트
@@ -69,6 +71,7 @@ $sql = " select *
           order by a.wi_id desc
           limit 0, 3 ";
 $result = sql_query($sql);
+$wishlist = array();
 for ($i=0; $row = sql_fetch_array($result); $i++) {
     $image = get_it_image($row['it_id'], 70, 70, true);
     $wishlist[$i]['image'] = $image;
@@ -76,6 +79,7 @@ for ($i=0; $row = sql_fetch_array($result); $i++) {
     $wishlist[$i]['it_name'] = $row['it_name'];
     $wishlist[$i]['wi_time'] = $row['wi_time'];
 }
+$wish_count = count($wishlist);
 
 /**
  * 사용자 프로그램

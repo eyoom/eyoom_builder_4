@@ -19,6 +19,7 @@ if ($is_admin) {
     $comment_max = (int)$board['bo_comment_max'];
 }
 
+$comment = array();
 if ($row['wr_id'] == $row['wr_parent']) {
     unset($sql,$write_table);
     $write_table = $g5['write_prefix'] . $row['bo_table'];
@@ -50,6 +51,7 @@ if ($row['wr_id'] == $row['wr_parent']) {
         $comment[$j]['datetime'] = $cmt['wr_datetime'];
     }
 }
+$count = count($comment);
 
 /**
  * 사용자 프로그램

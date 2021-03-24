@@ -18,15 +18,16 @@ include_once(G5_PATH . '/_head.php');
 
 //  최신글
 $sql = " select bo_table, bo_subject
-            from {$g5[board_table]}
+            from {$g5['board_table']}
             where gr_id = '{$gr_id}'
-              and bo_list_level <= '{$member[mb_level]}'
+              and bo_list_level <= '{$member['mb_level']}'
               and bo_device <> 'mobile'
 ";
 if (!$is_admin)
     $sql .= " and bo_use_cert = '' ";
 $sql .= " order by bo_order ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $loop = &$list[$i]['data'];
@@ -52,7 +53,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 }
 
-$group_cnt = count($list);
+$group_cnt = count((array)$list);
 
 /**
  * 테마 경로 지정

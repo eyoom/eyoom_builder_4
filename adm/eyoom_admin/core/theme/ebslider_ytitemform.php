@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999600";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -16,6 +16,8 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_ytitemform_update&amp;smode=1';
 
 $es_code = clean_xss_tags(trim($_GET['es_code']));
+$es_code = isset($_GET['es_code']) ? clean_xss_tags(trim($_GET['es_code'])): '';
+$ei_no = isset($_GET['ei_no']) ? clean_xss_tags(trim($_GET['ei_no'])): '';
 
 /**
  * 배너/광고 정보 가져오기

@@ -25,7 +25,7 @@ if ($wr_id)
     $wr_id_list = $wr_id;
 else {
     $comma = '';
-    for ($i=0; $i<count($_POST['chk_wr_id']); $i++) {
+    for ($i=0; $i<count((array)$_POST['chk_wr_id']); $i++) {
         $wr_id_list .= $comma . $_POST['chk_wr_id'][$i];
         $comma = ',';
     }
@@ -40,6 +40,7 @@ else if ($is_admin == 'board')
     $sql .= " and a.bo_admin = '{$member['mb_id']}' ";
 $sql .= " order by a.gr_id, a.bo_order, a.bo_table ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $atc_mark = '';
     $atc_bg = '';

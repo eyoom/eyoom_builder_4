@@ -7,11 +7,16 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900800";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "r");
+$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=num_book_update&amp;smode=1';
+
+$colspan = 4;
+$bk_no = isset($_REQUEST['bk_no']) ? (int) $_REQUEST['bk_no'] : 0;
+$bg_no = isset($_REQUEST['bg_no']) ? (int) $_REQUEST['bg_no'] : 0;
+$ap = isset($_REQUEST['ap']) ? clean_xss_tags($_REQUEST['ap'], 1, 1) : '';
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = "휴대폰번호 ";
-
-$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=num_book_update&amp;smode=1';
 
 $exist_hplist = array();
 

@@ -198,7 +198,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ex_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['ex_no']; ?>'>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_exform&amp;bo_table=<?php echo $bo_table; ?>&amp;ex_no=<?php echo $list[$i]['ex_no']; ?>&amp;w=u&amp;wmode=1' onclick='exboard_modal(this.href); return false;'><u>수정</u></a>",

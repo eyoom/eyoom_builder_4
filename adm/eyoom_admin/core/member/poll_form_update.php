@@ -10,34 +10,34 @@ $w = $_POST['w'];
 if ($w == 'u' || $w == 'd')
     check_demo();
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
 $check_keys = array(
-'po_subject',
-'po_poll1',
-'po_poll2',
-'po_poll3',
-'po_poll4',
-'po_poll5',
-'po_poll6',
-'po_poll7',
-'po_poll8',
-'po_poll9',
-'po_cnt1',
-'po_cnt2',
-'po_cnt3',
-'po_cnt4',
-'po_cnt5',
-'po_cnt6',
-'po_cnt7',
-'po_cnt8',
-'po_cnt9',
-'po_etc',
-'po_level',
-'po_point',
-'po_id'
+    'po_subject',
+    'po_poll1',
+    'po_poll2',
+    'po_poll3',
+    'po_poll4',
+    'po_poll5',
+    'po_poll6',
+    'po_poll7',
+    'po_poll8',
+    'po_poll9',
+    'po_cnt1',
+    'po_cnt2',
+    'po_cnt3',
+    'po_cnt4',
+    'po_cnt5',
+    'po_cnt6',
+    'po_cnt7',
+    'po_cnt8',
+    'po_cnt9',
+    'po_etc',
+    'po_level',
+    'po_point',
+    'po_id'
 );
 
 foreach( $_POST as $key=>$value ){

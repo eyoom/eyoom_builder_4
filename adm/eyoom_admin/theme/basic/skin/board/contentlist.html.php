@@ -105,7 +105,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=contentform&amp;w=u&amp;co_id=<?php echo $list[$i]['co_id']; ?>'><u>수정</u></a> <a href='<?php echo get_eyoom_pretty_url('content', $list[$i]['co_id']); ?>' target='_blank' class='margin-left-10'><u>보기</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=contentformupdate&amp;w=d&amp;co_id=<?php echo $list[$i]['co_id']; ?>&amp;smode=1' class='margin-left-10' onclick='return delete_confirm(this);'><u>삭제</u></a>",
             ID: "<?php echo $list[$i]['co_id']; ?>",

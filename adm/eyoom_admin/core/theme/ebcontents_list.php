@@ -6,6 +6,7 @@ $wmode = 1;
 include_once('./_common.php');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_list_update&amp;smode=1';
+$post_id = isset($_POST['id']) ? clean_xss_tags($_POST['id']) : '';
 
 /**
  * EB Contents 테이블 생성
@@ -46,7 +47,7 @@ $qfile->make_directory($ebcontents_folder);
 /**
  * 적용 테마
  */
-$_theme = $_POST['thema'] ? $_POST['thema']: $this_theme;
+$_theme = isset($_POST['thema']) ? clean_xss_tags($_POST['thema']): $this_theme;
 
 /**
  * 배너 테이블에서 작업테마의 배너/광고 레코드 정보 가져오기
@@ -61,11 +62,11 @@ $sql_search = " where ec.ec_theme='{$_theme}' ";
 /**
  * 메뉴를 선택하였을 경우
  */
-if ($_POST['id'] && strlen($_POST['id']) >= 3) {
+if ($post_id && strlen($post_id) >= 3) {
 	$sql_common .= " left join {$g5['eyoom_menu']} as me on ec.me_code = me.me_code ";
-	$sql_search .= " and me.me_shop='2' and ec.me_code='{$_POST['id']}' and me.me_theme = '{$_theme}' ";
+	$sql_search .= " and me.me_shop='2' and ec.me_code='{$post_id}' and me.me_theme = '{$_theme}' ";
 	
-	$meinfo = sql_fetch("select * from {$g5['eyoom_menu']} where me_code = '{$_POST['id']}' and me_theme='{$_theme}' and me_shop='2' ");
+	$meinfo = sql_fetch("select * from {$g5['eyoom_menu']} where me_code = '{$post_id}' and me_theme='{$_theme}' and me_shop='2' ");
 	$me_title = $meinfo['me_path'];
 } else {
     $sql_search .= " and ec.me_code = '' ";
@@ -78,7 +79,7 @@ $result = sql_query($sql);
 
 $ec_skin_img_path = G5_PATH.'/theme/'.$_theme.'/skin/ebcontents';
 $ec_skin_img_url = G5_URL.'/theme/'.$_theme.'/skin/ebcontents';
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['ec_chg_code'] = "&lt;?php echo eb_contents('{$row['ec_code']}'); ?&gt;";

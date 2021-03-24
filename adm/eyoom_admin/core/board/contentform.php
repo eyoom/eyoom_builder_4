@@ -6,11 +6,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300600";
 
+$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=contentformupdate&amp;smode=1';
+
 include_once(G5_EDITOR_LIB);
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
-$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=contentformupdate&amp;smode=1';
+$co_id = isset($_REQUEST['co_id']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['co_id']) : '';
 
 // 상단, 하단 파일경로 필드 추가
 if(!sql_query(" select co_include_head from {$g5['content_table']} limit 1 ", false)) {
@@ -40,8 +42,10 @@ if(!sql_query(" select co_skin from {$g5['content_table']} limit 1 ", false)) {
     sql_query(" update {$g5['content_table']} set co_skin = 'basic', co_mobile_skin = 'basic' ");
 }
 
-$html_title = "";
+$html_title = "내용";
+$g5['title'] = $html_title.' 관리';
 $readonly = '';
+
 if ($w == "u")
 {
     $html_title .= " 수정";
@@ -56,6 +60,13 @@ else
 {
     $html_title .= ' 입력';
     $co = array(
+        'co_id' => '',
+        'co_subject' => '',
+        'co_content' => '',
+        'co_mobile_content' => '',
+        'co_include_head' => '',
+        'co_include_tail' => '',
+        'co_tag_filter_use' => 1,
         'co_html' => 2,
         'co_skin' => 'basic',
         'co_mobile_skin' => 'basic'

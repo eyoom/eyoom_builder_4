@@ -8,29 +8,47 @@ $sub_menu = "999600";
 
 check_demo();
 
-if (!count($_POST['ytchk'])) {
-    alert($_POST['act_button']." 하실 항목을 하나 이상 체크하세요.");
+$es_code = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
+$post_count_ytchk = (isset($_POST['ytchk']) && is_array($_POST['ytchk'])) ? count($_POST['ytchk']) : 0;
+$ytchk = (isset($_POST['ytchk']) && is_array($_POST['ytchk'])) ? $_POST['ytchk'] : array();
+$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
+$act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (! $post_count_chk) {
+    alert($act_button." 하실 항목을 하나 이상 체크하세요.");
 }
 
-if ($_POST['act_button'] == "선택수정") {
+check_admin_token();
 
-    auth_check($auth[$sub_menu], 'w');
+if ($act_button === "선택수정") {
 
-    for ($i=0; $i<count($_POST['ytchk']); $i++) {
+    auth_check_menu($auth, $sub_menu, 'w');
+
+    for ($i=0; $i<$post_count_chk; $i++) {
 
         // 실제 번호를 넘김
-        $k = $_POST['ytchk'][$i];
+        $k = isset($_POST['ytchk'][$i]) ? (int) $_POST['ytchk'][$i] : 0;
+
+        $post_ei_autoplay = isset($_POST['ei_autoplay'][$k]) ? clean_xss_tags($_POST['ei_autoplay'][$k], 1, 1) : '';
+        $post_ei_control = isset($_POST['ei_control'][$k]) ? clean_xss_tags($_POST['ei_control'][$k], 1, 1) : '';
+        $post_ei_loop = isset($_POST['ei_loop'][$k]) ? clean_xss_tags($_POST['ei_loop'][$k], 1, 1) : '';
+        $post_ei_mute = isset($_POST['ei_mute'][$k]) ? clean_xss_tags($_POST['ei_mute'][$k], 1, 1) : '';
+        $post_ei_raster = isset($_POST['ei_raster'][$k]) ? clean_xss_tags($_POST['ei_raster'][$k], 1, 1) : '';
+        $post_ei_sort = isset($_POST['ei_sort'][$k]) ? clean_xss_tags($_POST['ei_sort'][$k], 1, 1) : '';
+        $post_ei_state = isset($_POST['ei_state'][$k]) ? clean_xss_tags($_POST['ei_state'][$k], 1, 1) : '';
+        $ei_view_level = isset($_POST['ei_view_level'][$k]) ? clean_xss_tags($_POST['ei_view_level'][$k], 1, 1) : 1;
+        $ei_no = isset($_POST['ei_no'][$k]) ? clean_xss_tags($_POST['ei_no'][$k], 1, 1) : '';
 
         $sql = " update {$g5['eyoom_slider_ytitem']}
-                    set ei_autoplay = '{$_POST['ei_autoplay'][$k]}',
-                        ei_control = '{$_POST['ei_control'][$k]}',
-                        ei_loop = '{$_POST['ei_loop'][$k]}',
-                        ei_mute = '{$_POST['ei_mute'][$k]}',
-                        ei_raster = '{$_POST['ei_raster'][$k]}',
-                        ei_sort = '{$_POST['ei_sort'][$k]}',
-                        ei_state = '{$_POST['ei_state'][$k]}',
-                        ei_view_level = '{$_POST['ei_view_level'][$k]}'
-                 where ei_no = '{$_POST['ei_no'][$k]}' and ei_theme = '{$_POST['theme']}' ";
+                    set ei_autoplay = '{$post_ei_autoplay}',
+                        ei_control = '{$post_ei_control}',
+                        ei_loop = '{$post_ei_loop}',
+                        ei_mute = '{$post_ei_mute}',
+                        ei_raster = '{$post_ei_raster}',
+                        ei_sort = '{$post_ei_sort}',
+                        ei_state = '{$post_ei_state}',
+                        ei_view_level = '{$ei_view_level}'
+                 where ei_no = '{$ei_no}' and ei_theme = '{$post_theme}' ";
         sql_query($sql);
     }
     $msg = "정상적으로 수정하였습니다.";
@@ -38,20 +56,21 @@ if ($_POST['act_button'] == "선택수정") {
     if (!$page) $page = 1;
     $qstr = "page={$page}";
 
-} else if ($_POST['act_button'] == "선택삭제") {
+} else if ($act_button == "선택삭제") {
 
-    auth_check($auth[$sub_menu], 'd');
-
-    for ($i=0; $i<count($_POST['ytchk']); $i++) {
+    auth_check_menu($auth, $sub_menu, 'd');
+    $del_ei_no = array();
+    for ($i=0; $i<$post_count_chk; $i++) {
         // 실제 번호를 넘김
-        $k = $_POST['ytchk'][$i];
-        $del_ei_no[$i] = $_POST['ei_no'][$k];
+        $k = isset($_POST['ytchk'][$i]) ? (int) $_POST['ytchk'][$i] : 0;
+        $ei_no = isset($_POST['ei_no'][$k]) ? clean_xss_tags($_POST['ei_no'][$k], 1, 1) : '';
+        $del_ei_no[$i] = $ei_no;
     }
 
     /**
      * 쿼리 조건문
      */
-    $where = " find_in_set(ei_no, '".implode(',', $del_ei_no)."') and ei_theme = '{$_POST['theme']}' ";
+    $where = " find_in_set(ei_no, '".implode(',', $del_ei_no)."') and ei_theme = '{$post_theme}' ";
 
     /**
      * EB슬라이더 아이템 레코드 삭제
@@ -66,4 +85,4 @@ if ($_POST['act_button'] == "선택수정") {
  */
 $qstr .= $wmode ? '&amp;wmode=1': '';
 
-alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=ebslider_form&amp;es_code={$_POST['es_code']}&amp;w=u&amp;".$qstr);
+alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=ebslider_form&amp;es_code={$es_code}&amp;w=u&amp;".$qstr);

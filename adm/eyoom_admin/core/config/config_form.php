@@ -6,15 +6,15 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "100100";
 
-auth_check($auth[$sub_menu], 'r');
-
-if ($is_admin != 'super')
-    alert('최고관리자만 접근 가능합니다.');
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=config&pid=config_form_update&smode=1";
+
+auth_check_menu($auth, $sub_menu, 'r');
+
+if ($is_admin != 'super')
+    alert('최고관리자만 접근 가능합니다.');
 
 if (!isset($config['cf_add_script'])) {
     sql_query(" ALTER TABLE `{$g5['config_table']}`
@@ -262,25 +262,6 @@ if(!sql_query(" DESC {$g5['social_profile_table']} ", false)) {
                 ) ", true);
 }
 
-/**
- * 슬랙 토큰정보 필드 추가
- */
-if (!isset($config['cf_slack_token'])) {
-    sql_query("ALTER TABLE `{$g5['config_table']}`
-                ADD `cf_slack_token` TEXT NOT NULL AFTER `cf_syndi_except`,
-                ADD `cf_slack_channel` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_slack_token` ", true);
-}
-
-/**
- * 구글지도, 네이버지도, 다음지도 앱 API ID
- */
-if (!isset($config['cf_map_google_id'])) {
-    sql_query("ALTER TABLE `{$g5['config_table']}`
-                ADD `cf_map_google_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_syndi_except`,
-                ADD `cf_map_naver_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_google_id`,
-                ADD `cf_map_daum_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_naver_id` ", true);
-}
-
 // 짧은 URL 주소를 사용 여부 필드 추가
 if (!isset($config['cf_bbs_rewrite'])) {
     sql_query(" ALTER TABLE `{$g5['config_table']}`
@@ -307,8 +288,22 @@ if( ! isset($config['cf_icode_token_key']) ){
 }
 
 /**
- * FAQ 스킨설정
+ * 슬랙 토큰정보 필드 제거
  */
+if (isset($config['cf_slack_token'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}` DROP `cf_slack_token`, DROP `cf_slack_channel`", true);
+}
+
+/**
+ * 구글지도, 네이버지도, 다음지도 앱 API ID
+ */
+if (!isset($config['cf_map_google_id'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_map_google_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_syndi_except`,
+                ADD `cf_map_naver_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_google_id`,
+                ADD `cf_map_daum_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_naver_id` ", true);
+}
+
 if(!$config['cf_faq_skin']) $config['cf_faq_skin'] = "basic";
 if(!$config['cf_mobile_faq_skin']) $config['cf_mobile_faq_skin'] = "basic";
 
@@ -334,6 +329,7 @@ $pg_anchor = array(
 if (!$config['cf_icode_server_ip'])   $config['cf_icode_server_ip'] = '211.172.232.124';
 if (!$config['cf_icode_server_port']) $config['cf_icode_server_port'] = '7295';
 
+$userinfo = array('payment'=>'');
 if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
     $userinfo = get_icode_userinfo($config['cf_icode_id'], $config['cf_icode_pw']);
 }

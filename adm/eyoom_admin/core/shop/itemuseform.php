@@ -6,13 +6,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400650";
 
+$action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemuseformupdate&amp;smode=1';
+
 include_once(G5_EDITOR_LIB);
 
-$is_id = preg_replace('/[^0-9]/', '', $is_id);
+$is_id = isset($_GET['is_id']) ? preg_replace('/[^0-9]/', '', $_GET['is_id']) : 0;
 
-auth_check($auth[$sub_menu], "w");
-
-$action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemuseformupdate&amp;smode=1';
+auth_check_menu($auth, $sub_menu, "w");
 
 $sql = " select *
            from {$g5['g5_shop_item_use_table']} a

@@ -6,12 +6,18 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400440";
 
-auth_check($auth[$sub_menu], "w");
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=shop&amp;pid=personalpayformupdate&amp;smode=1";
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$pp_id = isset($_REQUEST['pp_id']) ? safe_replace_regex($_REQUEST['pp_id'], 'pp_id') : '';
+$popup = isset($_REQUEST['popup']) ? clean_xss_tags($_REQUEST['popup'], 1, 1) : '';
+$od_id = isset($_REQUEST['od_id']) ? safe_replace_regex($_REQUEST['od_id'], 'od_id') : '';
+
+$pp = array('pp_name'=>'', 'pp_price'=>0, 'od_id'=>'', 'pp_content'=>'', 'pp_settle_case'=>'', 'pp_receipt_time'=>'', 'pp_receipt_price'=>0, 'pp_shop_memo'=>'');
 
 if ($w == 'u') {
     $html_title = '개인결제 수정';
@@ -35,7 +41,7 @@ if($wmode) { // 팝업창일 때
                 where od_id = '$od_id' ";
     $od = sql_fetch($sql);
 
-    if(!$od['od_id'])
+    if(! ($od['od_id'] && $od['od_id']))
         alert_close('주문정보가 존재하지 않습니다.');
 
     $pp['pp_name'] = $od['od_name'];

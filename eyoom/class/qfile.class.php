@@ -167,7 +167,7 @@ class qfile
             $files[] = $filename;
         }
 
-        for ($i=0; $i<count($files); $i++) {
+        for ($i=0; $i<count((array)$files); $i++) {
             $src_file = $src_dir.'/'.$files[$i];
             $dest_file = $dest_dir.'/'.$files[$i];
             if (is_file($src_file)) {
@@ -192,7 +192,7 @@ class qfile
         $matchs = get_editor_image($content,false);
         if (!$matchs) return false;
 
-        for ($i=0; $i<count($matchs[1]); $i++) {
+        for ($i=0; $i<count((array)$matchs[1]); $i++) {
             /**
              * 이미지 path 구함
              */

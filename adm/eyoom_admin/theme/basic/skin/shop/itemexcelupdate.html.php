@@ -57,7 +57,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             실패상품코드
                         </th>
                         <td>
-                            <?php echo implode(', ', $fail_it_id); ?>
+                            <?php echo implode(', ', (array)$fail_it_id); ?>
                         </td>
                     </tr>
                     <?php } ?>
@@ -75,7 +75,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             중복상품코드
                         </th>
                         <td>
-                            <?php echo implode(', ', $dup_it_id); ?>
+                            <?php echo implode(', ', (array)$dup_it_id); ?>
                         </td>
                     </tr>
                     <?php } ?>

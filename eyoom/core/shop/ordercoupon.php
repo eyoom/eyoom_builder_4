@@ -24,6 +24,7 @@ $result = sql_query($sql);
 $count = sql_num_rows($result);
 
 $k=0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     // 사용한 쿠폰인지 체크
     if (is_used_coupon($member['mb_id'], $row['cp_id']))
@@ -43,7 +44,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$k]['dc'] = $dc;
     $k++;
 }
-$cp_count = count($list);
+$cp_count = count((array)$list);
 
 /**
  * 이윰 테마파일 출력

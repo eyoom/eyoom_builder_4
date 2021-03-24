@@ -2,10 +2,9 @@
 $g5_path = '../../..';
 include_once($g5_path.'/common.php');
 
-$action     = $_POST['action'];
-$bo_table   = $_POST['bo_table'];
-$wr_id      = $_POST['wr_id'];
-$cmt_id     = $_POST['comment_id'];
+$bo_table   = isset($_POST['bo_table']) ? clean_xss_tags($_POST['bo_table']): '';
+$wr_id      = isset($_POST['wr_id']) ? clean_xss_tags($_POST['wr_id']): '';
+$cmt_id     = isset($_POST['comment_id']) ? clean_xss_tags($_POST['comment_id']): '';
 
 if (!preg_match('/adopt/i',$eyoom_board['bo_skin'])) exit;
 if (!$bo_table) exit;

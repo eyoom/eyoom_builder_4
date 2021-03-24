@@ -8,11 +8,11 @@ $sub_menu = "999100";
 
 if($is_admin != 'super') alert('최고관리자만 설정을 변경할 수 있습니다.');
 
-$tm_key         = clean_xss_tags(get_text(trim($_POST['tm_key'])));
-$cm_key         = clean_xss_tags(get_text(trim($_POST['cm_key'])));
-$cm_salt        = clean_xss_tags(get_text(trim($_POST['cm_salt'])));
-$tm_name        = clean_xss_tags(get_text(trim($_POST['tm_name'])));
-$eyoom_config   = $eb->decrypt_md5(trim($_POST['eyoom_config']));
+$tm_key         = isset($_POST['tm_key']) ? clean_xss_tags(get_text(trim($_POST['tm_key']))): '';
+$cm_key         = isset($_POST['cm_key']) ? clean_xss_tags(get_text(trim($_POST['cm_key']))): '';
+$cm_salt        = isset($_POST['cm_salt']) ? clean_xss_tags(get_text(trim($_POST['cm_salt']))): '';
+$tm_name        = isset($_POST['tm_name']) ? clean_xss_tags(get_text(trim($_POST['tm_name']))): '';
+$eyoom_config   = isset($_POST['eyoom_config']) ? $eb->decrypt_aes($_POST['eyoom_config'], $cm_salt): '';
 
 if (!$tm_name) alert('잘못된 접근입니다.');
 if (!$tm_key) alert('잘못된 접근입니다.');

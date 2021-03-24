@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = '100310';
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 if( !isset($g5['new_win_table']) ){
     die('<meta charset="utf-8">/data/dbconfig.php 파일에 <strong>$g5[\'new_win_table\'] = G5_TABLE_PREFIX.\'new_win\';</strong> 를 추가해 주세요.');
@@ -34,6 +34,8 @@ if(!sql_query(" DESCRIBE {$g5['new_win_table']} ", false)) {
                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ", true);
     }
 }
+
+$g5['title'] = '팝업레이어 관리';
 
 $sql_common = " from {$g5['new_win_table']} ";
 
@@ -78,7 +80,7 @@ $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = "select * {$sql_common} {$sql_search} order by nw_id desc limit {$from_record}, {$rows}";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     switch($row['nw_device']) {
         case 'pc':

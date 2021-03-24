@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  */
 $hsql = " select ev_id, ev_subject, ev_subject_strong from {$g5['g5_shop_event_table']} where ev_use = '1' order by ev_id desc limit 3";
 $hresult = sql_query($hsql);
-
+$ev_list = array();
 if(sql_num_rows($hresult)) {
     for ($i=0; $row=sql_fetch_array($hresult); $i++) {
         $ev_list[$i] = $row;
@@ -34,4 +34,4 @@ if(sql_num_rows($hresult)) {
         }
     }
 }
-$ev_count = count($ev_list);
+$ev_count = count((array)$ev_list);

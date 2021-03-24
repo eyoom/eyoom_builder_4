@@ -27,7 +27,7 @@ if (!defined('_EYOOM_')) exit;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                     <tr>
                         <td class="text-left"><?php echo $list[$i]['num']; ?></td>
                         <td><?php if ($list[$i]['mb_id']) { echo eb_nameview($eyoom['nameview_skin'], $list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); } else { echo $list[$i]['name']; } ?></td>
@@ -51,7 +51,7 @@ if (!defined('_EYOOM_')) exit;
                         </td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($list) == 0) { ?>
+                    <?php if (count((array)$list) == 0) { ?>
                     <tr><td colspan="3" class="text-center"><span class="color-grey"><i class="fa fa-exclamation-circle"></i> 현재 접속자가 없습니다.</span></td></tr>
                     <?php } ?>
                 </tbody>

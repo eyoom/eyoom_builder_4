@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999600";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -16,6 +16,9 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_form_update&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_ytitemlist_update&amp;smode=1';
 $action_url3 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_itemlist_update&amp;smode=1';
+
+$es_code = isset($_REQUEST['es_code']) && $_REQUEST['es_code'] ? clean_xss_tags($_REQUEST['es_code']) : '';
+if (!$es_code) alert("잘못된 접근입니다.");
 
 /**
  * EB Slider 유튜브동영상 아이템 테이블 생성
@@ -94,7 +97,7 @@ $ebslider_skins = get_skin_dir('ebslider', G5_PATH.'/theme/'.$this_theme.'/skin'
  * 슬라이더 정보 가져오기
  */
 if ($w == 'u') {
-    $es = sql_fetch("select * from {$g5[eyoom_slider]} where es_code = '{$es_code}' and es_theme='{$this_theme}'");
+    $es = sql_fetch("select * from {$g5['eyoom_slider']} where es_code = '{$es_code}' and es_theme='{$this_theme}'");
     $es['es_img_url'] = G5_DATA_URL.'/ebslider/'.$this_theme.'/img/'.$es['es_image'];
     if (!$es) {
         alert('존재하지 않는 슬라이더입니다.', G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_list&amp;page=1');
@@ -121,13 +124,13 @@ $sql_search = " where ei_theme='{$this_theme}' and es_code = '{$es_code}' ";
 
 $sql = " select * {$sql_common} {$sql_search} order by ei_sort asc";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 
-    $ei_link = unserialize($row['ei_link']);
-    $ei_target = unserialize($row['ei_target']);
-    $ei_img = unserialize($row['ei_img']);
+    $ei_link = isset($row['ei_link']) ? unserialize($row['ei_link']): array();
+    $ei_target = isset($row['ei_target']) ? unserialize($row['ei_target']): array();
+    $ei_img = isset($row['ei_img']) ? unserialize($row['ei_img']): array();
 
     $ei_file = G5_DATA_PATH.'/ebslider/'.$row['ei_theme'].'/img/'.$ei_img[0];
     if (file_exists($ei_file) && $ei_img[0]) {
@@ -149,7 +152,7 @@ $sql_search = " where ei_theme='{$this_theme}' and es_code = '{$es_code}' ";
 
 $sql = " select * {$sql_common} {$sql_search} order by ei_sort asc";
 $result = sql_query($sql);
-
+$yt_list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $yt_list[$i] = $row;
     $view_level = get_member_level_select("ei_view_level[$i]", 1, $member['mb_level'], $row['ei_view_level']);

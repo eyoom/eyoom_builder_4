@@ -8,13 +8,13 @@ $sub_menu = "300100";
 
 check_demo();
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
 $copy_config    = clean_xss_tags(trim($_POST['copy_config']));
-$target_table   = trim($_POST['target_table']);
-$target_subject = trim($_POST['target_subject']);
+$target_table   = isset($_POST['target_table']) ? trim($_POST['target_table']) : '';
+$target_subject = isset($_POST['target_subject']) ? trim($_POST['target_subject']) : '';
 
 $target_subject = strip_tags(clean_xss_attributes($target_subject));
 
@@ -79,6 +79,7 @@ $sql = " insert into {$g5['board_table']}
                 bo_use_ip_view = '{$board['bo_use_ip_view']}',
                 bo_use_list_view = '{$board['bo_use_list_view']}',
                 bo_use_list_content = '{$board['bo_use_list_content']}',
+                bo_use_list_file = '{$board['bo_use_list_file']}',
                 bo_table_width = '{$board['bo_table_width']}',
                 bo_subject_len = '{$board['bo_subject_len']}',
                 bo_mobile_subject_len = '{$board['bo_mobile_subject_len']}',
@@ -110,6 +111,7 @@ $sql = " insert into {$g5['board_table']}
                 bo_use_email = '{$board['bo_use_email']}',
                 bo_use_cert = '{$board['bo_use_cert']}',
                 bo_use_sns = '{$board['bo_use_sns']}',
+                bo_use_captcha = '{$board['bo_use_captcha']}',
                 bo_sort_field = '{$board['bo_sort_field']}',
                 bo_ex_cnt = '{$board['bo_ex_cnt']}',
                 bo_1_subj = '".addslashes($board['bo_1_subj'])."',
@@ -148,8 +150,8 @@ $f = @fopen($file, 'w');
 
 $copy_file = 0;
 if ($copy_case == 'schema_data_both') {
-    $d = @dir(G5_DATA_PATH.'/file/'.$bo_table);
-    while ($entry = @$d->read()) {
+    $d = dir(G5_DATA_PATH.'/file/'.$bo_table);
+    while ($entry = $d->read()) {
         if ($entry == '.' || $entry == '..') continue;
 
         // 김선용 201007 :
@@ -172,7 +174,7 @@ if ($copy_case == 'schema_data_both') {
         }
     }
     $d->close();
-
+    
     run_event('admin_board_copy_file', $bo_table, $target_table);
 
     // 글복사
@@ -225,6 +227,7 @@ if (count($file_copy)) {
 if ($copy_config == '1') {
     $res = sql_query("SHOW COLUMNS FROM {$g5['eyoom_board']}");
     $k=0;
+    $eb_fields = array();
     for ($i=0; $row=sql_fetch_array($res); $i++) {
         if ($row['Field'] == 'bo_id' || $row['Field'] == 'bo_table') continue;
         $eb_fields[$k] = $row['Field'];
@@ -234,7 +237,9 @@ if ($copy_config == '1') {
     $fields = implode(',', $eb_fields);
     $sql = "select {$fields} from {$g5['eyoom_board']} where bo_table = '{$bo_table}' ";
     $result = sql_query($sql);
+    $insert = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $eb_values = array();
         foreach($eb_fields as $k => $field) {
             $eb_values[$k] = "'{$row[$field]}'";
         }

@@ -26,7 +26,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                     <tr>
                         <td class="text-center"><a href="<?php echo $list[$i]['href']; ?>" target="_blank"><?php echo $list[$i]['image']; ?></a></td>
                         <td><?php echo cut_str(stripslashes($list[$i]['it_name']), 60, "&#133"); ?></td>
@@ -34,7 +34,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td class="text-center"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=itemeventwindel&amp;smode=1&amp;ev_id=<?php echo $ev_id; ?>&amp;it_id=<?php echo $list[$i]['it_id']; ?>" onclick="return delete_confirm();" class="btn-e btn-e-xs btn-e-yellow">삭제</a></td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($list) == 0) { ?>
+                    <?php if (count((array)$list) == 0) { ?>
                     <tr>
                         <td colspan="4" class="text-center">자료가 없습니다.</td>
                     </tr>

@@ -8,7 +8,7 @@ $sub_menu = '100900';
 
 if ($is_admin != "super") alert("최고관리자만 접근 가능합니다.", G5_URL);
 
-@include_once('./safe_check.php');
+@include_once(G5_ADMIN_PATH.'/safe_check.php');
 if(function_exists('social_log_file_delete')){
     social_log_file_delete();
 }
@@ -17,7 +17,7 @@ run_event('adm_cache_file_delete_before');
 
 flush();
 
-if (!$directory=@opendir(G5_DATA_PATH.'/session')) {
+if (!$directory=@opendir(G5_DATA_PATH.'/cache')) {
   $no_print = "캐시디렉토리를 열지못했습니다.";
 }
 

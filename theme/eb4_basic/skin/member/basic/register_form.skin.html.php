@@ -285,26 +285,62 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </fieldset>
         <header class="border-top"><h5 class="margin-0"><strong>기타 개인설정</strong></h5></header>
         <fieldset>
+            <?php if ($config['cf_use_signature']) { ?>
             <div class="row">
-                <?php if ($config['cf_use_signature']) { ?>
                 <section class="col col-12">
                     <label for="reg_mb_signature" class="label">서명<?php if ($config['cf_req_signature']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
                     <label class="textarea textarea-resizable <?php if ($config['cf_req_signature']) { ?>required-mark<?php } ?>">
                         <textarea name="mb_signature" id="reg_mb_signature" rows="5" <?php if ($config['cf_req_signature']) { ?>required<?php } ?>><?php echo $member['mb_signature']; ?></textarea>
                     </label>
                 </section>
-                <?php } ?>
             </div>
+            <?php } ?>
+            <?php if ($config['cf_use_profile']) { ?>
             <div class="row">
-                <?php if ($config['cf_use_profile']) { ?>
                 <section class="col col-12">
                     <label for="reg_mb_profile" class="label">자기소개</label>
                     <label class="textarea textarea-resizable <?php if ($config['cf_req_profile']) { ?>required-mark<?php } ?>">
                         <textarea name="mb_profile" id="reg_mb_profile" rows="5" <?php if ($config['cf_req_profile']) { ?>required<?php } ?>><?php echo $member['mb_profile']; ?></textarea>
                     </label>
                 </section>
-                <?php } ?>
             </div>
+            <?php } ?>
+            <?php if ($config['cf_use_member_icon'] && $member['mb_level'] >= $config['cf_icon_level']) {  ?>
+            <div class="row">
+                <section class="col col-12">
+                    <label for="reg_mb_icon" class="label">회원아이콘</label>
+                    <label for="file" class="input input-file">
+                        <div class="button bg-color-light-grey"><input type="file" id="reg_mb_icon" name="mb_icon" value="파일선택" title="파일첨부" onchange="this.parentNode.nextSibling.value = this.value">파일 선택</div><input type="text" readonly>
+                    </label>
+                    <div class="clearfix"></div>
+                    <?php if ($w == 'u' && file_exists($mb_icon_path)) {  ?>
+	                <img src="<?php echo $mb_icon_url ?>" alt="회원아이콘">
+	                <input type="checkbox" name="del_mb_icon" value="1" id="del_mb_icon">
+	                <label for="del_mb_icon" class="inline">삭제</label>
+	                <?php }  ?>
+                    <div class="note margin-bottom-10"><strong>Note:</strong> 이미지 크기는 가로 <?php echo $config['cf_member_icon_width'] ?>픽셀, 세로 <?php echo $config['cf_member_icon_height'] ?>픽셀 이하로 해주세요.<br>gif, jpg, png파일만 가능하며 용량 <?php echo number_format($config['cf_member_icon_size']) ?>바이트 이하만 등록됩니다.</div>
+                </section>
+            </div>
+            <div class="margin-hr-15"></div>
+            <?php } ?>
+            <?php if ($member['mb_level'] >= $config['cf_icon_level'] && $config['cf_member_img_size'] && $config['cf_member_img_width'] && $config['cf_member_img_height']) {  ?>
+            <div class="row">
+                <section class="col col-12">
+                    <label for="reg_mb_img" class="label">회원이미지</label>
+                    <label for="file" class="input input-file">
+                        <div class="button bg-color-light-grey"><input type="file" id="reg_mb_img" name="mb_img" value="파일선택" title="파일첨부" onchange="this.parentNode.nextSibling.value = this.value">파일 선택</div><input type="text" readonly>
+                    </label>
+                    <div class="clearfix"></div>
+	                <?php if ($w == 'u' && file_exists($mb_img_path)) {  ?>
+	                <img src="<?php echo $mb_img_url ?>" alt="회원이미지">
+	                <input type="checkbox" name="del_mb_img" value="1" id="del_mb_img">
+	                <label for="del_mb_img" class="inline">삭제</label>
+	                <?php }  ?>
+                    <div class="note margin-bottom-10"><strong>Note:</strong> 이미지 크기는 가로 <?php echo $config['cf_member_img_width'] ?>픽셀, 세로 <?php echo $config['cf_member_img_height'] ?>픽셀 이하로 해주세요.<br>gif, jpg, png파일만 가능하며 용량 <?php echo number_format($config['cf_member_img_size']) ?>바이트 이하만 등록됩니다.</div>
+                </section>
+            </div>
+            <div class="margin-hr-15"></div>
+            <?php } ?>
             <div class="row">
                 <section class="col col-6">
                     <label for="reg_mb_mailling" class="label">메일링서비스</label>
@@ -341,6 +377,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <div class="note margin-bottom-10"><strong>Note:</strong> 정보공개는 수정후 <?php $config['cf_open_modify']*1; ?>일 이내, <?php echo $open_day; ?> 까지는 변경이 안됩니다.<br>이렇게 하는 이유는 잦은 정보공개 수정으로 인하여 쪽지를 보낸 후 받지 않는 경우를 막기 위해서 입니다.</div>
                 </section>
                 <?php } ?>
+	            <?php
+	            //회원정보 수정인 경우 소셜 계정 출력
+	            if( $w == 'u' && function_exists('social_member_provider_manage') ){
+	                social_member_provider_manage();
+	            }
+	            ?>
                 <?php if ($w=='' && $config['cf_use_recommend']) { ?>
                 <section class="col col-6">
                     <label for="reg_mb_recommend" class="label">추천인아이디</label>
@@ -361,11 +403,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </section>
             </div>
         </fieldset>
-
-        <?php if ($social_oauth_url) { ?>
-        {# oauth_bs}
-        <div class="margin-bottom-20"></div>
-        <?php } ?>
 
         <footer class="text-center">
             <?php if ($w=='u') { ?>

@@ -101,6 +101,13 @@ $(function(){
 </script>
 
 <?php if ($is_admin == 'super') {  ?>
+<?php if (isset($co_id) && $co_id) { ?>
+<script>
+$(function() {
+    $(".ctt_admin a.btn_admin").attr('href', '<?php echo G5_ADMIN_URL; ?>/?dir=board&pid=contentform&co_id=<?php echo $co_id?>&w=u');
+});
+</script>
+<?php } ?>
 <!-- <div style='float:left; text-align:center;'>RUN TIME : <?php echo get_microtime()-$begin_time; ?><br></div> -->
 <?php }  ?>
 

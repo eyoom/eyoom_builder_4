@@ -14,6 +14,8 @@ if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=theme&amp;pid=layout_update&amp;smode=1";
 
+$theme = isset($_REQUEST['thema']) ? clean_xss_tags(trim($_REQUEST['thema'])) : 'eb4_basic';
+
 /**
  * 스킨 디렉토리 읽어오기
  */

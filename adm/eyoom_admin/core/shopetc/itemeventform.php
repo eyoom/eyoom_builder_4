@@ -8,12 +8,25 @@ include_once(G5_EDITOR_LIB);
 
 $sub_menu = "500300";
 
-auth_check($auth[$sub_menu], "w");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shopetc&amp;pid=itemeventformupdate&smode=1';
 
-$ev_id = preg_replace('/[^0-9]/', '', $ev_id);
+auth_check_menu($auth, $sub_menu, "w");
 
+$ev_id = isset($_REQUEST['ev_id']) ? preg_replace('/[^0-9]/', '', $_REQUEST['ev_id']) : '';
+$ev = array(
+    'ev_subject'=>'',
+    'ev_subject_strong'=>'',
+    'ev_id'=>'',
+    'ev_head_html'=>'',
+    'ev_tail_html'=>''
+);
+
+$res_item = null;
+
+$html_title = "이벤트";
+$g5['title'] = $html_title.' 관리';
+
+$it_info = array();
 if ($w == "u")
 {
     $html_title .= " 수정";
@@ -21,7 +34,7 @@ if ($w == "u")
 
     $sql = " select * from {$g5['g5_shop_event_table']} where ev_id = '$ev_id' ";
     $ev = sql_fetch($sql);
-    if (!$ev['ev_id'])
+    if (! (isset($ev['ev_id']) && $ev['ev_id']))
         alert("등록된 자료가 없습니다.");
 
     // 등록된 이벤트 상품
@@ -29,7 +42,6 @@ if ($w == "u")
                 from {$g5['g5_shop_event_item_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
                 where a.ev_id = '$ev_id' ";
     $res_item = sql_query($sql);
-
     for($i=0; $row=sql_fetch_array($res_item); $i++) {
         $it_info[$i] = $row;
         $it_info[$i]['image'] = get_it_image($row['it_id'], 50, 50);
@@ -57,7 +69,7 @@ $category_select = '';
 $sql = " select * from {$g5['g5_shop_category_table']} ";
 if ($is_admin != 'super')
     $sql .= " where ca_mb_id = '{$member['mb_id']}' ";
-$sql .= " order by ca_id, ca_order ";
+$sql .= " order by ca_order, ca_id ";
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {

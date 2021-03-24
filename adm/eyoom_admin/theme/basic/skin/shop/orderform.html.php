@@ -100,8 +100,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </tr>
                     </thead>
                     <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { $opt = $list[$i]['opt'];?>
-                        <?php for($k=0; $k<count($opt); $k++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { $opt = $list[$i]['opt'];?>
+                        <?php for($k=0; $k<count((array)$opt); $k++) { ?>
                         <tr>
                             <?php if ($k == 0) { ?>
                             <td rowspan="<?php echo $list[$i]['rowspan']; ?>">
@@ -1055,11 +1055,11 @@ $(function() {
     });
 
     // 부분취소창
-    $("#orderpartcancel").on("click", function() {
-        var href = this.href;
-        window.open(href, "partcancelwin", "left=100, top=100, width=600, height=350, scrollbars=yes");
-        return false;
-    });
+    // $("#orderpartcancel").on("click", function() {
+    //     var href = this.href;
+    //     window.open(href, "partcancelwin", "left=100, top=100, width=600, height=350, scrollbars=yes");
+    //     return false;
+    // });
 });
 
 function form_submit(f)

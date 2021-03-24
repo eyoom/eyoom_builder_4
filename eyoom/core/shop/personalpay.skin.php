@@ -4,6 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($list_mod >= 2) { // 1줄 이미지 : 2개 이상
         if ($i%$list_mod == 1) $sct_last = ' sct_last'; // 줄 마지막
@@ -18,7 +19,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 	$list[$i]['href'] = $href;
 	$list[$i]['sct_last'] = $sct_last;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 페이징

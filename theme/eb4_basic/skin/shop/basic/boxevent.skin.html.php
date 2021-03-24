@@ -118,7 +118,7 @@ if (!defined('_EYOOM_')) exit;
                 </div>
                 <?php } ?>
 
-                <?php if (count($ev_list[$i]['ev_prd']) == 0) { ?>
+                <?php if (count((array)$ev_list[$i]['ev_prd']) == 0) { ?>
                 <div class="boxevent-no-item">
                     <i class="fas fa-exclamation-circle"></i> 등록된 상품이 없습니다.
                 </div>

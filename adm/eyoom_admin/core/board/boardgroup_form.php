@@ -6,19 +6,26 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300200";
 
-auth_check($auth[$sub_menu], 'w');
+$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=boardgroup_form_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'w');
 
 if ($is_admin != 'super' && $w == '') alert('최고관리자만 접근 가능합니다.');
 
-$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=boardgroup_form_update&amp;smode=1';
-
-$html_title = '';
+$html_title = '게시판그룹';
 $gr_id_attr = '';
 $sound_only = '';
+
+if( ! isset($group['gr_id']) ){
+    $group['gr_id'] = '';
+    $group['gr_subject'] = '';
+    $group['gr_device'] = '';
+}
+
 if ($w == '') {
     $gr_id_attr = 'required';
     $sound_only = '<strong class="sound_only"> 필수</strong>';
-    $gr = array('gr_use_access' => 0);
+    $gr = array('gr_use_access' => 0, 'gr_admin'=>'');
     $html_title .= ' 생성';
 } else if ($w == 'u') {
     $gr_id_attr = 'readonly';

@@ -11,7 +11,7 @@ $action_url = G5_ADMIN_URL.'/?dir=sms&amp;pid=form_multi_update&amp;smode=1';
 
 $page_size = 12;
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 $token = get_token();
 
@@ -19,7 +19,7 @@ $g5['title'] = "이모티콘 관리";
 
 if ($page < 1) $page = 1;
 
-$fg_no = isset($fg_no) ? (int) $fg_no : '';
+$fg_no = isset($_REQUEST['fg_no']) ? (int) $_REQUEST['fg_no'] : 0;
 
 if (is_numeric($fg_no))
     $sql_group = " and fg_no='$fg_no' ";
@@ -40,7 +40,7 @@ if ($st == 'all') {
 }
 
 $total_res = sql_fetch("select count(*) as cnt from {$g5['sms5_form_table']} where 1 $sql_group $sql_search");
-$total_count = $total_res['cnt'];
+$total_count = isset($total_res['cnt']) ? $total_res['cnt'] : 0;
 
 $total_page = (int)($total_count/$page_size) + ($total_count%$page_size==0 ? 0 : 1);
 $page_start = $page_size * ( $page - 1 );
@@ -52,7 +52,7 @@ $qry = sql_query("select * from {$g5['sms5_form_group_table']} order by fg_name"
 while ($res = sql_fetch_array($qry)) array_push($group, $res);
 
 $res = sql_fetch("select count(*) as cnt from {$g5['sms5_form_table']} where fg_no=0");
-$no_count = $res['cnt'];
+$no_count = isset($res['cnt']) ? $res['cnt'] : 0;
 
 /**
  * 검색버튼

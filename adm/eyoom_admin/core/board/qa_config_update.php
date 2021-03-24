@@ -8,7 +8,7 @@ $sub_menu = "300500";
 
 check_demo();
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
@@ -19,7 +19,7 @@ $qaconfig = get_qa_config();
 $check_keys = array('qa_title', 'qa_category', 'qa_skin', 'qa_mobile_skin', 'qa_use_email', 'qa_req_email', 'qa_use_hp', 'qa_req_hp', 'qa_use_sms', 'qa_send_number', 'qa_admin_hp', 'qa_admin_email', 'qa_subject_len', 'qa_mobile_subject_len', 'qa_page_rows', 'qa_mobile_page_rows', 'qa_image_width', 'qa_upload_size');
 
 foreach($check_keys as $key){
-    $$key = $_POST[$key] = isset($_POST[$key]) ? strip_tags(clean_xss_attributes($_POST[$key])) : '';
+	$$key = $_POST[$key] = isset($_POST[$key]) ? strip_tags(clean_xss_attributes($_POST[$key])) : '';
 }
 
 $qa_include_head = preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($qa_include_head, 0, 255));
@@ -65,9 +65,17 @@ if( function_exists('filter_input_include_path') ){
     $qa_include_tail = filter_input_include_path($qa_include_tail);
 }
 
+// 분류에 & 나 = 는 사용이 불가하므로 2바이트로 바꾼다.
+$src_char = array('&', '=');
+$dst_char = array('＆', '〓');
+$qa_category = str_replace($src_char, $dst_char, $_POST['qa_category']);
+
+//https://github.com/gnuboard/gnuboard5/commit/f5f4925d4eb28ba1af728e1065fc2bdd9ce1da58 에 따른 조치
+$qa_category = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", $qa_category);
+
 $sql = " update {$g5['qa_config_table']}
             set qa_title                = '{$_POST['qa_title']}',
-                qa_category             = '{$_POST['qa_category']}',
+                qa_category             = '{$qa_category}',
                 qa_skin                 = '{$_POST['qa_skin']}',
                 qa_mobile_skin          = '{$_POST['qa_mobile_skin']}',
                 qa_use_email            = '{$_POST['qa_use_email']}',

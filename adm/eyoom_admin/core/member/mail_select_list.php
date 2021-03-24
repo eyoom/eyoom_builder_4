@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200300";
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=mail_select_update';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 $ma_last_option = "";
 

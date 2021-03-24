@@ -645,7 +645,7 @@ set_session('ss_personalpay_hash', '');
             <?php if ($default['de_bank_use']) { // 무통장입금 ?>
             <div id="settle_bank">
                 <label for="od_bank_account" class="sound_only">입금할 계좌</label>
-                <?php if (count($bank_str) <= 1) { ?>
+                <?php if (count((array)$bank_str) <= 1) { ?>
                 <input type="hidden" name="od_bank_account" value="<?php echo $bank_account; ?>"> <?php echo $bank_account; ?>
                 <?php } else { ?>
                 <label class="select">
@@ -852,6 +852,9 @@ $(function() {
     });
 
     $("#od_coupon_btn").click(function() {
+        if( $("#od_coupon_frm").parent(".od_coupon_wrap").length ){
+            $("#od_coupon_frm").parent(".od_coupon_wrap").remove();
+        }
         $("#od_coupon_frm").remove();
         var $this = $(this);
         var price = parseInt($("input[name=org_od_price]").val()) - parseInt($("input[name=item_coupon]").val());
@@ -899,6 +902,9 @@ $(function() {
         $("#od_cp_price").text(number_format(String(price)));
         $("#sc_cp_price").text(0);
         calculate_order_price();
+        if( $("#od_coupon_frm").parent(".od_coupon_wrap").length ){
+            $("#od_coupon_frm").parent(".od_coupon_wrap").remove();
+        }
         $("#od_coupon_frm").remove();
         $("#od_coupon_btn").text("쿠폰변경").focus();
         if(!$("#od_coupon_cancel").size())
@@ -906,6 +912,9 @@ $(function() {
     });
 
     $(document).on("click", ".od-coupon-close", function() {
+        if( $("#od_coupon_frm").parent(".od_coupon_wrap").length ){
+            $("#od_coupon_frm").parent(".od_coupon_wrap").remove();
+        }
         $("#od_coupon_frm").remove();
         $("#od_coupon_btn").focus();
     });
@@ -920,6 +929,9 @@ $(function() {
         $("#od_cp_price").text(0);
         $("#sc_cp_price").text(0);
         calculate_order_price();
+        if( $("#od_coupon_frm").parent(".od_coupon_wrap").length ){
+            $("#od_coupon_frm").parent(".od_coupon_wrap").remove();
+        }
         $("#od_coupon_frm").remove();
         $("#od_coupon_btn").text("쿠폰적용").focus();
         $(this).remove();

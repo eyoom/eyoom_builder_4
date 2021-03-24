@@ -47,13 +47,13 @@ if (!defined('_EYOOM_')) exit;
 <?php } ?>
 </style>
 
-<?php if (count($rel_tags) > 0) { ?>
+<?php if (count((array)$rel_tags) > 0) { ?>
 <div class="content-box margin-bottom-30">
     <div class="content-box-header">
         <h4 class="font-bold"><strong>연관태그 검색</strong> <small>[태그 in 태그]</small></h4>
     </div>
     <div class="content-box-body">
-        <?php for ($i=0; $i<count($rel_tags); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$rel_tags); $i++) { ?>
         <span><a href="<?php echo $rel_tags[$i]['href']; ?>" class="btn-e btn-e-xs btn-e-default"><?php echo $rel_tags[$i]['tag']; ?></a></span>
         <?php } ?>
     </div>
@@ -64,7 +64,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="margin-bottom-20 font-size-12 color-grey">
         <u>전체 <?php echo number_format($total_count); ?> 건 - <?php echo $page; ?> 페이지</u>
     </div>
-    <?php for ($i=0; $i<count($list); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
     <div class="webzine-item">
         <div class="webzine-item-heading">
             <span class="webzine-photo">
@@ -107,7 +107,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
     <?php } ?>
-    <?php if (count($list) == 0) { ?>
+    <?php if (count((array)$list) == 0) { ?>
     <div class="text-center color-grey font-size-14"><i class="fas fa-exclamation-circle"></i> 출력할 내용이 없습니다.</div>
     <?php } ?>
 </div>

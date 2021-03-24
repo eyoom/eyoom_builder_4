@@ -36,13 +36,14 @@ $sql = " select *
           order by a.wi_id desc
           limit 0, 8 ";
 $result = sql_query($sql);
+$wish_list = array();
 for ($i=0; $row = sql_fetch_array($result); $i++) {
     $image = get_it_image($row['it_id'], 500, 0, true);
     
     $wish_list[$i] = $row;
     $wish_list[$i]['image'] = $image;
 }
-$wish_count = count($wish_list);
+$wish_count = count((array)$wish_list);
 
 /**
  * 이윰 테마파일 출력

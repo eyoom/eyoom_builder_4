@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999200";
 
-auth_check($auth[$sub_menu], 'r');
+auth_check_menu($auth, $sub_menu, 'r');
 
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
@@ -69,14 +69,14 @@ $bo_table = array();
  * 해당 게시판의 스킨정보
  */
 $arr = get_skin_dir('board',G5_PATH.'/theme/'.$this_theme.'/skin');
-
+$list = array();
 for($i=0; $bbs=sql_fetch_array($result); $i++) {
 
     /**
      * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
      */
     $tmp = sql_fetch("select bo_table, bo_skin, use_gnu_skin, bo_write_limit from {$g5['eyoom_board']} where bo_table='{$bbs['bo_table']}' and bo_theme='{$this_theme}'",false);
-    if(!$tmp['bo_table']) {
+    if(! (isset($tmp) && $tmp['bo_table'])) {
         sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bbs['bo_table']}', gr_id='{$bbs['gr_id']}', bo_theme='{$this_theme}', bo_skin='basic', use_gnu_skin='n'");
     }
 
@@ -87,7 +87,7 @@ for($i=0; $bbs=sql_fetch_array($result); $i++) {
     $list[$i]['use_gnu_skin'] = $tmp['use_gnu_skin'] ? $tmp['use_gnu_skin']:'n';
     $list[$i]['bo_write_limit'] = $tmp['bo_write_limit'];
 
-    if($arr) {
+    if(is_array($arr) && $arr) {
         $bo_skin_select = "<select name='bo_skin[$i]' id='bo_skin_{$i}' required>";
         for ($j=0; $j<count($arr); $j++) {
             if ($j == 0) $bo_skin_select .= "<option value=''>선택</option>";

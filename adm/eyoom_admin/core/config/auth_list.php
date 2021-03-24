@@ -70,6 +70,7 @@ $sql = " select *
 $result = sql_query($sql);
 
 $count = 0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $is_continue = false;

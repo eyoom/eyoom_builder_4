@@ -60,7 +60,7 @@ if (!defined('_EYOOM_')) exit;
                         <div class="clearfix"></div>
                     </li>
                     <?php } ?>
-                    <?php if (count($ranking['today']) == 0) { ?>
+                    <?php if (count((array)$ranking['today']) == 0) { ?>
                     <p class="text-center color-light-grey font-size-11 margin-top-10"><i class="fas fa-exclamation-circle"></i> 출력할 랭킹이 없습니다.</p>
                     <?php } ?>
                 </ul>
@@ -91,7 +91,7 @@ if (!defined('_EYOOM_')) exit;
                         <div class="clearfix"></div>
                     </li>
                     <?php } ?>
-                    <?php if (count($ranking['total']) == 0) { ?>
+                    <?php if (count((array)$ranking['total']) == 0) { ?>
                     <p class="text-center color-light-grey font-size-11 margin-top-10"><i class="fas fa-exclamation-circle"></i> 출력할 랭킹이 없습니다.</p>
                     <?php } ?>
                 </ul>
@@ -122,7 +122,7 @@ if (!defined('_EYOOM_')) exit;
                         <div class="clearfix"></div>
                     </li>
                     <?php } ?>
-                    <?php if (count($ranking['level']) == 0) { ?>
+                    <?php if (count((array)$ranking['level']) == 0) { ?>
                     <p class="text-center color-light-grey font-size-11 margin-top-10"><i class="fas fa-exclamation-circle"></i> 출력할 랭킹이 없습니다.</p>
                     <?php } ?>
                 </ul>

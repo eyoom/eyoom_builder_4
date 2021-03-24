@@ -58,7 +58,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                     <tr>
                         <td class="text-center"><?php echo $list[$i]['num']; ?></td>
                         <td class="td-width">
@@ -78,7 +78,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                         </td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($list) == 0) { ?>
+                    <?php if (count((array)$list) == 0) { ?>
                     <tr><td colspan="5" class="text-center">자료가 없습니다.</td></tr>
                     <?php } ?>
                 </tbody>

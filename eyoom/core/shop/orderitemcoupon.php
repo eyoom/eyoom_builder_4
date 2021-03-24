@@ -40,7 +40,7 @@ $sql = " select *
                   ) ";
 $result = sql_query($sql);
 $count = sql_num_rows($result);
-
+$list = array();
 if ($count > 0) {
     $k=0;
     for($i=0; $row=sql_fetch_array($result); $i++) {
@@ -62,7 +62,7 @@ if ($count > 0) {
         $list[$k]['dc'] = $dc;
         $k++;
     }
-    $cp_count = count($list);
+    $cp_count = count((array)$list);
 }
 
 /**

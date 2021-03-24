@@ -7,14 +7,17 @@ if (!$is_member) exit;
 /**
  * 회원만 접근
  */
-if (!$_POST['mb_id']) exit;
-$mb_id = $_POST['mb_id'];
+$mb_id = isset($_POST['mb_id']) ? trim($_POST['mb_id']) : '';
+if (!$mb_id) exit;
 
 /**
  * 푸쉬파일 가져오기
  */
 $push_tocken = false;
-$push_path = G5_DATA_PATH . '/member/push';
+$member_path = G5_DATA_PATH . '/member';
+$qfile->make_directory($member_path);
+$push_path = $member_path . '/push';
+$qfile->make_directory($push_path);
 
 $push_file = $push_path.'/push.'.$mb_id.'.php';
 if (file_exists($push_file)) {

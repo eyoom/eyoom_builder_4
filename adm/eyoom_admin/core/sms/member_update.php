@@ -7,7 +7,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900200";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = "회원정보 업데이트";
 

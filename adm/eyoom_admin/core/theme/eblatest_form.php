@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999620";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -15,6 +15,9 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_form_update&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_itemlist_update&amp;smode=1';
+
+$el_code = isset($_REQUEST['el_code']) && $_REQUEST['el_code'] ? clean_xss_tags($_REQUEST['el_code']) : '';
+if (!$el_code) alert("잘못된 접근입니다.");
 
 /**
  * EB최신글 아이템 테이블 생성
@@ -96,7 +99,7 @@ $sql_search = " where li_theme='{$this_theme}' and el_code = '{$el_code}' ";
 
 $sql = " select * {$sql_common} {$sql_search} order by li_sort asc";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $view_level = get_member_level_select("li_view_level[$i]", 1, $member['mb_level'], $row['li_view_level']);

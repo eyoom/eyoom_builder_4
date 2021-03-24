@@ -65,7 +65,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="input form-width-250px">
                                 <input type="text" name="bk_hp" id="bk_hp" value="<?php echo $write['bk_hp']?>" required>
                             </label>
-                            <?php if (count($exist_hplist)) { ?>
+                            <?php if (count((array)$exist_hplist)) { ?>
                             <div class="hp_check_el">
                                 <ul>
                                 <?php foreach( $exist_hplist as $v ) { if( empty($v) ) continue; ?>

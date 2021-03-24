@@ -37,14 +37,14 @@ function eb_tagmenu($skin_dir='basic') {
     }
 
     $sql = " select * from {$g5['eyoom_tag']} where (1) and tg_theme = '{$theme}' and tg_dpmenu = 'y' order by {$sql_order} limit {$limit} ";
-
     $result = sql_query($sql);
+    $list = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $list[$i] = $row;
         $list[$i]['tag'] = get_text($list[$i]['tg_word']);
         $list[$i]['href'] = G5_URL . '/tag/?tag=' . str_replace('&', '^', $list[$i]['tg_word']);
     }
-    $cnt = count($list);
+    $cnt = count((array)$list);
 
     $tagmenu_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/tagmenu/'.$skin_dir;
     $tagmenu_skin_url = str_replace(G5_PATH, G5_URL, $tagmenu_skin_path);

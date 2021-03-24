@@ -14,6 +14,11 @@ define('_EYOOM_', true);
 define('GNU_SITE', 'http://sir.kr');
 
 /**
+ * 암호화, 복호화용 key값 - 값을 자신의 원하는 것으로 변경하여 사용하세요.
+ */
+define('SALT_KEY', 'svjRGP7M2$F6!VzF=yzvJc5@77+uCy5G!5#F*dGM');
+
+/**
  * 게시판 이윰 확장필드 prefix
  */
 define('EYOOM_EXBOARD_PREFIX', 'ex_');
@@ -122,6 +127,11 @@ define('EYOOM_ADMIN_INC_PATH', EYOOM_ADMIN_PATH . '/inc');
  * 이윰관리자 라이브러리 경로
  */
 define('EYOOM_ADMIN_LIB_PATH', EYOOM_ADMIN_PATH . '/lib');
+
+/**
+ * 이윰관리자 개발자 코드
+ */
+define('EYOOM_ADMIN_USER_PATH', EYOOM_ADMIN_PATH . '/user');
 
 /**
  * 이윰관리자 테마 경로
@@ -271,3 +281,8 @@ $g5['eyoom_latest_item'] = G5_TABLE_PREFIX . 'eyoom_latest_item';
  * 이윰 게시판 확장필드 관리
  */
 $g5['eyoom_exboard'] = G5_TABLE_PREFIX . 'eyoom_exboard';
+
+/**
+ * 윈도우모드 (window mode)
+ */
+$wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;

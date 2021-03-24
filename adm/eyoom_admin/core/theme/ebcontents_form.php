@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999610";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -14,6 +14,9 @@ auth_check($auth[$sub_menu], 'w');
 include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_form_update&amp;smode=1';
+
+$ec_code = isset($_REQUEST['ec_code']) && $_REQUEST['ec_code'] ? clean_xss_tags($_REQUEST['ec_code']) : '';
+if (!$ec_code) alert("잘못된 접근입니다.");
 
 /**
  * EB Contents 이미지 아이템 테이블 생성
@@ -50,7 +53,7 @@ $qfile->make_directory(G5_DATA_PATH.'/ebcontents/'.$this_theme.'/');
  * EB Contents 정보 가져오기
  */
 if ($w == 'u') {
-    $ec = sql_fetch("select * from {$g5[eyoom_contents]} where ec_code = '{$ec_code}' and ec_theme='{$this_theme}'");
+    $ec = sql_fetch("select * from {$g5['eyoom_contents']} where ec_code = '{$ec_code}' and ec_theme='{$this_theme}'");
 
     if (!$ec) {
         alert('존재하지 않는 컨텐츠입니다.', G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_list&amp;page=1');

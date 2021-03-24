@@ -4,7 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-for ($i=count($tmp_array)-1; $i>=0; $i--) {
+for ($i=count((array)$tmp_array)-1; $i>=0; $i--) {
     $write = sql_fetch(" select * from {$write_table} where wr_id = '{$tmp_array[$i]}' ");
     if ($is_admin == 'super') // 최고관리자 통과
         ;

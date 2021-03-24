@@ -19,16 +19,16 @@ for ($i=1; $i<=10; $i++) {
  * $write_table 에 적용할 변수 선언
  */
 $up_set = array();
-$up_set['eb_1'] = $eb_1 ? $eb->decrypt_md5($eb_1): ''; // 이윰 레벨정보 : "그누레벨|이윰레벨"
-$up_set['eb_2'] = $eb_2 ? $eb->decrypt_md5($eb_2): ''; // 지뢰폭탄 정보
-$up_set['eb_3'] = $eb_3 ? $eb->decrypt_md5($eb_3): ''; // 원본 이미지 정보
-$up_set['eb_4'] = $eb_4 ? $eb->decrypt_md5($eb_4): ''; // 썸네일 이미지 정보, 동영상여부
-$up_set['eb_5'] = $eb_5 ? $eb->decrypt_md5($eb_5): ''; // 신고, 블라인드 기능
-$up_set['eb_6'] = $eb_6 ? $eb->decrypt_md5($eb_6): ''; // 채택포인트
-$up_set['eb_7'] = $eb_7 ? $eb->decrypt_md5($eb_7): ''; // 별점 평가
-$up_set['eb_8'] = $eb_8 ? $eb->decrypt_md5($eb_8): '';
-$up_set['eb_9'] = $eb_9 ? $eb->decrypt_md5($eb_9): '';
-$up_set['eb_10'] = $eb_10 ? $eb->decrypt_md5($eb_10): '';
+$up_set['eb_1'] = $eb_1 ? $eb->decrypt_aes($eb_1): ''; // 이윰 레벨정보 : "그누레벨|이윰레벨"
+$up_set['eb_2'] = $eb_2 ? $eb->decrypt_aes($eb_2): ''; // 지뢰폭탄 정보
+$up_set['eb_3'] = $eb_3 ? $eb->decrypt_aes($eb_3): ''; // 원본 이미지 정보
+$up_set['eb_4'] = $eb_4 ? $eb->decrypt_aes($eb_4): ''; // 썸네일 이미지 정보, 동영상여부
+$up_set['eb_5'] = $eb_5 ? $eb->decrypt_aes($eb_5): ''; // 신고, 블라인드 기능
+$up_set['eb_6'] = $eb_6 ? $eb->decrypt_aes($eb_6): ''; // 채택포인트
+$up_set['eb_7'] = $eb_7 ? $eb->decrypt_aes($eb_7): ''; // 별점 평가
+$up_set['eb_8'] = $eb_8 ? $eb->decrypt_aes($eb_8): '';
+$up_set['eb_9'] = $eb_9 ? $eb->decrypt_aes($eb_9): '';
+$up_set['eb_10'] = $eb_10 ? $eb->decrypt_aes($eb_10): '';
 
 /**
  * 첨부파일이 있다면 파일처리
@@ -80,7 +80,7 @@ if ($_POST['del_cmtfile']) {
  */
 $file_upload_msg = '';
 $upload = array();
-for ($i=0; $i<count($_FILES['cmt_file']['name']); $i++) {
+for ($i=0; $i<count((array)$_FILES['cmt_file']['name']); $i++) {
     $upload[$i]['file']     = '';
     $upload[$i]['source']   = '';
     $upload[$i]['filesize'] = 0;
@@ -269,8 +269,9 @@ if ($w == 'cu') {
 /**
  * $up_set 대상이 있다면 원본 테이블에 적용
  */
-if (count($up_set) > 0 && is_array($up_set) ) {
+if (count((array)$up_set) > 0 && is_array($up_set) ) {
     $j=0;
+    $set = array();
     foreach ($up_set as $key => $val) {
         $set[$j] = " {$key} = '{$val}' ";
         $j++;

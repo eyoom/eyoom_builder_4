@@ -6,7 +6,7 @@ if (!defined('_EYOOM_')) exit;
 
 $thumbnail_width = 500;
 $num = $total_count - ($page - 1) * $rows;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $iq_subject = conv_subject($row['iq_subject'],50,"…");
 
@@ -51,7 +51,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 	$list[$i]['iq_answer'] = $iq_answer;
 	$num--;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 페이징

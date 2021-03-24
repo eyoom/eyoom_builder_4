@@ -44,7 +44,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             순위: "<?php echo $list[$i]['no']; ?>",
             접속기기: "<?php echo $list[$i]['link']; ?><?php echo $list[$i]['key']; ?><?php echo $list[$i]['link2']; ?>",

@@ -75,7 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                             <div class="inline-group">
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_a" id="cate_a" onchange="this.form.submit();">
+                                        <select name="cate_a" id="cate_1" onchange="fsearchform_submit(1);">
                                             <option value="">::대분류::</option>
                                             <?php foreach ($cate1 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_a == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -85,7 +85,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_b" id="cate_b" onchange="this.form.submit();">
+                                        <select name="cate_b" id="cate_2" onchange="fsearchform_submit(2);">
                                             <option value="">::중분류::</option>
                                             <?php foreach ($cate2 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_b == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -95,7 +95,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_c" id="cate_c" onchange="this.form.submit();">
+                                        <select name="cate_c" id="cate_3" onchange="fsearchform_submit(3);">
                                             <option value="">::소분류::</option>
                                             <?php foreach ($cate3 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_c == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -105,7 +105,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_d" id="cate_d" onchange="this.form.submit();">
+                                        <select name="cate_d" id="cate_4" onchange="fsearchform_submit(4);">
                                             <option value="">::세분류::</option>
                                             <?php foreach ($cate4 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_d == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -227,6 +227,16 @@ function fitemeventlistupdatecheck(f) {
     return true;
 }
 
+function fsearchform_submit(num) {
+    var f = document.flist;
+    var number = parseInt(num)+1;
+    
+    for (var i=number; i<=4; i++) {
+        $("#cate_"+number).val('');
+    }
+    f.submit();
+}
+
 function eb_modal(href) {
     <?php if (!(G5_IS_MOBILE || $wmode)) { ?>
     $('.admin-iframe-modal').modal('show').on('hidden.bs.modal', function () {
@@ -265,7 +275,7 @@ window.closeModal = function(url){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<input type='hidden' name='it_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['it_id']; ?>' id='it_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='1' <?php echo ($list[$i]['is_ev_item'] ? "checked" : ""); ?>><i></i></label>",
             제품코드: "<a <?php if (!(G5_IS_MOBILE || $wmode)) { ?>href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemform&amp;it_id=<?php echo $list[$i]['it_id']; ?>&amp;w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'<?php } else { ?>href='javascript:void(0);'<?php } ?>><i class='fas fa-external-link-alt color-light-grey margin-right-5 hidden-xs'></i><strong><?php echo $list[$i]['it_id']; ?></strong></a>",

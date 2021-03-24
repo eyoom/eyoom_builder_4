@@ -48,7 +48,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
                     <span class="menu-item-text"><strong class="menu-item-main">관리자 메인</strong></span>
                 </a>
             </li>
-            <?php for($i=0; $i<count($admmenu); $i++) { ?>
+            <?php for($i=0; $i<count((array)$admmenu); $i++) { ?>
             <li class="eb-menu-item <?php echo $admmenu[$i]['active']; ?>">
                 <a href="javascript:void(0)" class="eb-menu-link eb-is-submenu waves-effect waves-light">
                     <i class="menu-item-icon fas <?php echo $admmenu[$i]['fa_icon']; ?>"></i>

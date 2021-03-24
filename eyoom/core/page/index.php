@@ -56,6 +56,7 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
     /**
      * EB컨텐츠 마스터 정보
      */
+    $ec_master = array();
     if ($meinfo) {
         $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}' order by ec_sort asc";
         $result = sql_query($sql);
@@ -67,7 +68,7 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
     /**
      * EB마스터 갯수
      */
-    $ec_cnt = count($ec_master);
+    $ec_cnt = count((array)$ec_master);
 
     /**
      * 기본 페이지 스킨 출력

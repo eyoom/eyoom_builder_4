@@ -8,31 +8,39 @@ $sub_menu = "999620";
 
 check_demo();
 
-if (!count($_POST['chk'])) {
-    alert($_POST['act_button']." 하실 항목을 하나 이상 체크하세요.");
+$post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
+$chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
+$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
+$act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (! $post_count_chk) {
+    alert($act_button." 하실 항목을 하나 이상 체크하세요.");
 }
 
-if ($_POST['act_button'] == "선택수정") {
+if ($act_button == "선택수정") {
 
-    auth_check($auth[$sub_menu], 'w');
+    auth_check_menu($auth, $sub_menu, 'w');
 
-    for ($i=0; $i<count($_POST['chk']); $i++) {
+    for ($i=0; $i<$post_count_chk; $i++) {
 
         // 실제 번호를 넘김
-        $k = $_POST['chk'][$i];
+        $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
+        $el_state = isset($_POST['el_state'][$k]) ? clean_xss_tags($_POST['el_state'][$k]): '';
+        $el_no = isset($_POST['el_no'][$k]) ? clean_xss_tags($_POST['el_no'][$k]): '';
+        $el_code = isset($_POST['el_code'][$k]) ? clean_xss_tags($_POST['el_code'][$k]): '';
 
         $sql = " update {$g5['eyoom_latest']}
-                    set el_state = '{$_POST['el_state'][$k]}'
-                 where el_no = '{$_POST['el_no'][$k]}' and el_theme = '{$_POST['theme']}' ";
+                    set el_state = '{$el_state}'
+                 where el_no = '{$el_no}' and el_theme = '{$post_theme}' ";
         sql_query($sql);
 
         /**
          * EB최신글 마스터 설정파일
          */
         unset($el_master);
-        $el_master_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_master_' . $_POST['el_code'][$k] . '.php';
+        $el_master_file = G5_DATA_PATH . '/eblatest/'.$post_theme.'/el_master_' . $el_code . '.php';
         include ($el_master_file);
-        $el_master['el_state'] = $_POST['el_state'][$k];
+        $el_master['el_state'] = $el_state;
 
         /**
          * 설정파일 저장
@@ -44,21 +52,24 @@ if ($_POST['act_button'] == "선택수정") {
     if (!$page) $page = 1;
     $qstr = "page={$page}";
 
-} else if ($_POST['act_button'] == "선택삭제") {
+} else if ($act_button == "선택삭제") {
 
-    auth_check($auth[$sub_menu], 'd');
-
-    for ($i=0; $i<count($_POST['chk']); $i++) {
+    auth_check_menu($auth, $sub_menu, 'd');
+    $del_el_no = $del_el_code = array();
+    for ($i=0; $i<$post_count_chk; $i++) {
         // 실제 번호를 넘김
-        $k = $_POST['chk'][$i];
-        $del_el_no[$i] = $_POST['el_no'][$k];
-        $del_el_code[$i] = $_POST['el_code'][$k];
+        $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
+        $el_no = isset($_POST['el_no'][$k]) ? clean_xss_tags($_POST['el_no'][$k]): '';
+        $el_code = isset($_POST['el_code'][$k]) ? clean_xss_tags($_POST['el_code'][$k]): '';
+
+        $del_el_no[$i] = $el_no;
+        $del_el_code[$i] = $el_code;
         
         /**
          * EB최신글 마스터 설정파일 삭제
          */
-        $el_master_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_master_' . $_POST['el_code'][$k] . '.php';
-        $el_item_file = G5_DATA_PATH . '/eblatest/'.$_POST['theme'].'/el_item_' . $_POST['el_code'][$k] . '.php';
+        $el_master_file = G5_DATA_PATH . '/eblatest/'.$post_theme.'/el_master_' . $el_code . '.php';
+        $el_item_file = G5_DATA_PATH . '/eblatest/'.$post_theme.'/el_item_' . $el_code . '.php';
         @unlink ($el_master_file);
         @unlink ($el_item_file);
     }
@@ -66,7 +77,7 @@ if ($_POST['act_button'] == "선택수정") {
     /**
      * 쿼리 조건문
      */
-    $where = " find_in_set(el_no, '".implode(',', $del_el_no)."') and el_theme = '{$_POST['theme']}' ";
+    $where = " find_in_set(el_no, '".implode(',', $del_el_no)."') and el_theme = '{$post_theme}' ";
 
     /**
      * EB최신글 마스터 테이블 레코드 삭제
@@ -77,7 +88,7 @@ if ($_POST['act_button'] == "선택수정") {
     /**
      * 쿼리 조건문
      */
-    $where = " find_in_set(el_code, '".implode(',', $del_el_code)."') and li_theme = '{$_POST['theme']}' ";
+    $where = " find_in_set(el_code, '".implode(',', $del_el_code)."') and li_theme = '{$post_theme}' ";
 
     /**
      * EB최신글 아이템 레코드 삭제

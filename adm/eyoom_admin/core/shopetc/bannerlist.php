@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500500";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 $bn_position = (isset($_GET['bn_position']) && in_array($_GET['bn_position'], array('메인', '왼쪽'))) ? $_GET['bn_position'] : '';
 $bn_device = (isset($_GET['bn_device']) && in_array($_GET['bn_device'], array('pc', 'mobile'))) ? $_GET['bn_device'] : 'both';
@@ -47,9 +47,10 @@ if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이�
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select * from {$g5['g5_shop_banner_table']} $sql_search
-      order by bn_order, bn_id desc
-      limit $from_record, $rows  ";
+        order by bn_order, bn_id desc
+        limit $from_record, $rows  ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     // 테두리 있는지
     $bn_border  = $row['bn_border'];

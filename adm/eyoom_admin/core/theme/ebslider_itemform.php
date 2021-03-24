@@ -8,7 +8,7 @@ $sub_menu = "999600";
 
 include_once(G5_EDITOR_LIB);
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -17,12 +17,13 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_itemform_update&amp;smode=1';
 
-$es_code = clean_xss_tags(trim($_GET['es_code']));
+$es_code = isset($_GET['es_code']) ? clean_xss_tags(trim($_GET['es_code'])): '';
+$ei_no = isset($_GET['ei_no']) ? clean_xss_tags(trim($_GET['ei_no'])): '';
 
 /**
  * EB슬라이더 마스터 정보
  */
-$es = sql_fetch("select * from {$g5[eyoom_slider]} where es_code = '{$es_code}' and es_theme='{$this_theme}'");
+$es = sql_fetch("select * from {$g5['eyoom_slider']} where es_code = '{$es_code}' and es_theme='{$this_theme}'");
 
 /**
  * EB슬라이더 아이템 정보 가져오기
@@ -31,13 +32,14 @@ if ($iw == 'u') {
     $ei = sql_fetch("select * from {$g5['eyoom_slider_item']} where ei_no = '{$ei_no}' and ei_theme='{$this_theme}'");
     $ei['ei_start'] = $ei['ei_start'] ? date('Y-m-d', strtotime($ei['ei_start'])) : '';
     $ei['ei_end']   = $ei['ei_end'] ? date('Y-m-d', strtotime($ei['ei_end'])) : '';
+    $ei_url = array();
     if ($ei['ei_no']) {
         foreach($ei as $key => $value) {
             $es_item[$key] = stripslashes($value);
         }
-        $ei_link = unserialize($es_item['ei_link']);
-        $ei_target = unserialize($es_item['ei_target']);
-        $ei_img = unserialize($es_item['ei_img']);
+        $ei_link = isset($es_item['ei_link']) && is_array($es_item['ei_link']) ? unserialize($es_item['ei_link']): array();
+        $ei_target = isset($es_item['ei_target']) && is_array($es_item['ei_target']) ? unserialize($es_item['ei_target']): array();
+        $ei_img = isset($es_item['ei_img']) && is_array($es_item['ei_img']) ? unserialize($es_item['ei_img']): array();
         for($i=0; $i<$es['es_image_cnt']; $i++) {
             unset($ei_file);
             $ei_file = G5_DATA_PATH.'/ebslider/'.$ei['ei_theme'].'/img/'.$ei_img[$i];

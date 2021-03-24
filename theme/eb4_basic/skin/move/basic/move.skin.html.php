@@ -51,7 +51,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                     <tr class="<?php echo $list[$i]['atc_bg']; ?>">
                         <td>
                             <label for="chk<?php echo $i; ?>" class="sound_only"><?php echo $list[$i]['bo_table']; ?></label>

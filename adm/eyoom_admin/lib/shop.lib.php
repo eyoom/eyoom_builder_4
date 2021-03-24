@@ -108,7 +108,7 @@ function get_year_order_info($year) {
     ";
 
     $result = sql_query($sql);
-
+    $info = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $month = substr($row['od_date'], -2) * 1;
         $info[$month][$i] = $row;
@@ -116,7 +116,7 @@ function get_year_order_info($year) {
     @ksort($info);
 
     for($m=1; $m<=12; $m++) {
-        $sale_month[$m]['count'] = count($info[$m]);
+        $sale_month[$m]['count'] = count((array)$info[$m]);
 
         if (isset($info[$m])) {
             foreach($info[$m] as $i => $row) {

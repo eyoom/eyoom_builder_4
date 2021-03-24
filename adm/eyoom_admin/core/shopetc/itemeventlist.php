@@ -6,12 +6,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500310";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shopetc&amp;pid=itemeventlistupdate&amp;smode=1';
 
-$ev_id = preg_replace('/[^0-9]/', '', $ev_id);
+auth_check_menu($auth, $sub_menu, "r");
 
+$ev_id = isset($_GET['ev_id']) ? preg_replace('/[^0-9]/', '', $_GET['ev_id']) : '';
+$sst = (isset($_GET['sst']) && in_array($_GET['sst'], array('a.it_id', 'it_name'))) ? $_GET['sst'] : 'a.it_id';
+$sod = (isset($_GET['sod']) && in_array($_GET['sod'], array('desc', 'asc'))) ? $_GET['sod'] : 'desc';
+$sfl = (isset($_GET['sfl']) && in_array($_GET['sfl'], array('a.it_id', 'it_name')) ) ? $_GET['sfl'] : 'it_name';
+$stx = isset($_GET['stx']) ? get_search_string($_GET['stx']) : '';
+$ev_title = isset($ev_title) ? clean_xss_tags($ev_title, 1, 1) : '';
+
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
 /**
  * 1차 상품 분류 가져오기
  */
@@ -59,7 +67,7 @@ if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이�
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 if (!$sst) {
-    $sst  = "it_id";
+    $sst  = "b.ev_id";
     $sod = "desc";
 }
 $sql_order = "order by $sst $sod";
@@ -69,6 +77,10 @@ $sql  = " select a.*, b.ev_id
           $sql_order
           limit $from_record, $rows ";
 $result = sql_query($sql);
+
+//$qstr1 = 'sel_ca_id='.$sel_ca_id.'&amp;sel_field='.$sel_field.'&amp;search='.$search;
+$qstr1 = 'ev_id='.$ev_id.'&amp;cate_a='.$cate_a.'&amp;cate_b='.$cate_b.'&amp;cate_c='.$cate_c.'&amp;sfl='.$sfl.'&amp;stx='.$stx;
+$qstr  = $qstr1.'&amp;sst='.$sst.'&amp;sod='.$sod.'&amp;page='.$page;
 
 // 이벤트제목
 if($ev_id) {
@@ -83,7 +95,7 @@ $result1 = sql_query($sql1);
 while ($row1=sql_fetch_array($result1)) {
     $event_option .= '<option value="'.$row1['ev_id'].'" '.get_selected($ev_id, $row1['ev_id']).' >'.conv_subject($row1['ev_subject'], 20,"…").'</option>';
 }
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $href = shop_item_url($row['it_id']);
 
@@ -98,8 +110,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['href'] = $href;
     $list[$i]['is_ev_item'] = $ev['ev_id'] ? true: false;
 }
-
-$qstr .= "&amp;ev_id={$ev_id}";
 
 /**
  * 페이징

@@ -389,7 +389,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-	    <?php for ($i=0; $i<count($list); $i++) { ?>
+	    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
 	        체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ei_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['ei_no']; ?>'>",
 	        관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_itemform&amp;thema=<?php echo $this_theme; ?>&amp;es_code=<?php echo $list[$i]['es_code']; ?>&amp;ei_no=<?php echo $list[$i]['ei_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"EB슬라이더 아이템관리\"); return false;'><u>수정</u></a>",
@@ -423,7 +423,7 @@ window.closeModal = function(){
     };
     window.ytdb    = ytdb,
     ytdb.clients   = [
-	    <?php for ($i=0; $i<count($yt_list); $i++) { ?>
+	    <?php for ($i=0; $i<count((array)$yt_list); $i++) { ?>
         {
 	        체크: "<label for='ytchk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='ytchk[]' id='ytchk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ei_no[<?php echo $i; ?>]' value='<?php echo $yt_list[$i]['ei_no']; ?>'>",
 	        관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebslider_ytitemform&amp;thema=<?php echo $this_theme; ?>&amp;es_code=<?php echo $yt_list[$i]['es_code']; ?>&amp;ei_no=<?php echo $yt_list[$i]['ei_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"유튜브동영상 설정관리\"); return false;'><u>수정</u></a>",

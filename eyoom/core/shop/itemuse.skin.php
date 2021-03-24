@@ -5,6 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 
 $thumbnail_width = 500;
+$item_use = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $hash = md5($row['is_id'].$row['is_time'].$row['is_ip']);
 
@@ -23,7 +24,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $item_use[$i]['link_del']   = $itemuse_formupdate."&amp;is_id={$row['is_id']}&amp;w=d&amp;hash={$hash}";
     $item_use[$i]['is_thumb'] = get_itemuselist_thumbnail($it_id, $item_use[$i]['is_content'], 160, 160);
 }
-$use_cnt = count($item_use);
+$use_cnt = count((array)$item_use);
 
 $paging_itemuse = itemuse_page($config['cf_write_pages'], $page, $total_page, "./itemuse.php?it_id=$it_id&amp;page=", "");
 

@@ -62,7 +62,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             회원이름: "<?php echo get_text($list[$i]['mb_name']); ?>",
             회원아이디: "<?php echo $list[$i]['mb_id']; ?>",

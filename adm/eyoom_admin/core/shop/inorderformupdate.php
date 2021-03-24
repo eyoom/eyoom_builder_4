@@ -9,18 +9,20 @@ $sub_menu = "400410";
 check_demo();
 
 if($w == 'd')
-    auth_check($auth[$sub_menu], "d");
+    auth_check_menu($auth, $sub_menu, "d");
 else
-    auth_check($auth[$sub_menu], "w");
+    auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
+
+$od_id = isset($_REQUEST['od_id']) ? safe_replace_regex($_REQUEST['od_id'], 'od_id') : '';
 
 //------------------------------------------------------------------------------
 // 주문서 정보
 //------------------------------------------------------------------------------
 $sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$od_id' ";
 $od = sql_fetch($sql);
-if (!$od['od_id']) {
+if (! (isset($od['od_id']) && $od['od_id'])) {
     alert("해당 주문번호로 미완료 주문서가 존재하지 않습니다.");
 }
 
@@ -41,18 +43,18 @@ $row = sql_fetch($sql);
 $tot_ct_price  = $row['od_price'];
 $cart_count    = $row['cart_count'];
 $tot_od_price  = $tot_ct_price;
-$i_price       = (int)$data['od_price'];
-$i_send_cost   = (int)$data['od_send_cost'];
-$i_send_cost2  = (int)$data['od_send_cost2'];
-$i_send_coupon = (int)$data['od_send_coupon'];
-$i_temp_point  = (int)$data['od_temp_point'];
+$i_price       = isset($data['od_price']) ? (int) $data['od_price'] : 0;
+$i_send_cost   = isset($data['od_send_cost']) ? (int) $data['od_send_cost'] : 0;
+$i_send_cost2  = isset($data['od_send_cost2']) ? (int) $data['od_send_cost2'] : 0;
+$i_send_coupon = isset($data['od_send_coupon']) ? (int) $data['od_send_coupon'] : 0;
+$i_temp_point  = isset($data['od_temp_point']) ? (int) $data['od_temp_point'] : 0;
 
 // 쿠폰금액
 $tot_cp_price = 0;
 if($od['mb_id']) {
     // 상품쿠폰
     $tot_it_cp_price = $tot_od_cp_price = 0;
-    $it_cp_cnt = count($data['cp_id']);
+    $it_cp_cnt = (isset($data['cp_id']) && is_array($data['cp_id'])) ? count($data['cp_id']) : 0;
     $arr_it_cp_prc = array();
     for($i=0; $i<$it_cp_cnt; $i++) {
         $cid = $data['cp_id'][$i];
@@ -63,7 +65,7 @@ if($od['mb_id']) {
                       and mb_id IN ( '{$od['mb_id']}', '전체회원' )
                       and cp_method IN ( 0, 1 ) ";
         $cp = sql_fetch($sql);
-        if(!$cp['cp_id'])
+        if(! (isset($cp['cp_id']) && $cp['cp_id']))
             continue;
 
         // 사용한 쿠폰인지
@@ -115,7 +117,7 @@ if($od['mb_id']) {
     $tot_od_price -= $tot_it_cp_price;
 
     // 주문쿠폰
-    if($data['od_cp_id']) {
+    if(isset($data['od_cp_id']) && $data['od_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
                     from {$g5['g5_shop_coupon_table']}
                     where cp_id = '{$data['od_cp_id']}'
@@ -182,10 +184,10 @@ if($od['mb_id'] && $od_send_cost > 0) {
 }
 
 // 추가배송비
-$od_send_cost2 = (int)$data['od_send_cost2'];
+$od_send_cost2 = isset($data['od_send_cost2']) ? (int) $data['od_send_cost2'] : 0;
 
 // 포인트
-$od_temp_point = (int)$data['od_temp_point'];
+$od_temp_point = isset($data['od_temp_point']) ? (int) $data['od_temp_point'] : 0;
 
 $i_price     = $i_price + $i_send_cost + $i_send_cost2 - $i_temp_point - $i_send_coupon;
 $order_price = $tot_od_price + $od_send_cost + $od_send_cost2 - $tot_sc_cp_price - $od_temp_point;
@@ -227,7 +229,7 @@ $od_addr_jibeon   = preg_match("/^(N|R)$/", $data['od_addr_jibeon']) ? $data['od
 $od_b_name        = clean_xss_tags($data['od_b_name']);
 $od_b_tel         = clean_xss_tags($data['od_b_tel']);
 $od_b_hp          = clean_xss_tags($data['od_b_hp']);
-$od_b_zip         = preg_replace('/[^0-9]/', '', $data['od_b_zip']);
+$od_b_zip		  = preg_replace('/[^0-9]/', '', $data['od_b_zip']);
 $od_b_zip1        = substr($od_b_zip, 0, 3);
 $od_b_zip2        = substr($od_b_zip, 3);
 $od_b_addr1       = clean_xss_tags($data['od_b_addr1']);
@@ -242,6 +244,10 @@ $od_receipt_point = $od_temp_point;
 $od_receipt_time  = $od['dt_time'];
 $od_misu          = 0;
 $od_status        = '입금';
+$od_bank_account  = isset($data['od_bank_account']) ? clean_xss_tags($data['od_bank_account'], 1, 1) : '';
+$od_tno = '';
+$od_app_no = '';
+$od_hope_date = isset($data['od_hope_date']) ? clean_xss_tags($data['od_hope_date'], 1, 1) : '';
 
 // 주문서에 입력
 $sql = " insert {$g5['g5_shop_order_table']}
@@ -291,7 +297,7 @@ $sql = " insert {$g5['g5_shop_order_table']}
                 od_free_mny       = '$od_free_mny',
                 od_status         = '$od_status',
                 od_shop_memo      = '',
-                od_hope_date      = '{$data['od_hope_date']}',
+                od_hope_date      = '{$od_hope_date}',
                 od_time           = '{$od['dt_time']}',
                 od_ip             = '{$data['od_ip']}',
                 od_settle_case    = '{$data['od_settle_case']}',
@@ -317,11 +323,11 @@ if ($od['mb_id'] && $od_receipt_point)
 
 // 쿠폰사용내역기록
 if($od['mb_id']) {
-    $it_cp_cnt = count($data['cp_id']);
+    $it_cp_cnt = (isset($data['cp_id']) && is_array($data['cp_id'])) ? count($data['cp_id']) : 0;
     for($i=0; $i<$it_cp_cnt; $i++) {
         $cid = $data['cp_id'][$i];
         $cp_it_id = $data['it_id'][$i];
-        $cp_prc = (int)$arr_it_cp_prc[$cp_it_id];
+        $cp_prc = isset($arr_it_cp_prc[$cp_it_id]) ? (int) $arr_it_cp_prc[$cp_it_id] : 0;
 
         if(trim($cid)) {
             $sql = " insert into {$g5['g5_shop_coupon_log_table']}
@@ -334,7 +340,6 @@ if($od['mb_id']) {
         }
 
         // 쿠폰사용금액 cart에 기록
-        $cp_prc = (int)$arr_it_cp_prc[$cp_it_id];
         $sql = " update {$g5['g5_shop_cart_table']}
                     set cp_price = '$cp_prc'
                     where od_id = '$od_id'
@@ -345,7 +350,7 @@ if($od['mb_id']) {
         sql_query($sql);
     }
 
-    if($data['od_cp_id']) {
+    if(isset($data['od_cp_id']) && $data['od_cp_id']) {
         $sql = " insert into {$g5['g5_shop_coupon_log_table']}
                     set cp_id       = '{$data['od_cp_id']}',
                         mb_id       = '{$od['mb_id']}',
@@ -355,7 +360,7 @@ if($od['mb_id']) {
         sql_query($sql);
     }
 
-    if($data['sc_cp_id']) {
+    if(isset($data['sc_cp_id']) && $data['sc_cp_id']) {
         $sql = " insert into {$g5['g5_shop_coupon_log_table']}
                     set cp_id       = '{$data['sc_cp_id']}',
                         mb_id       = '{$od['mb_id']}',

@@ -21,6 +21,14 @@ function eb_slider ($es_code) {
      */
     $ebslider_path = G5_DATA_PATH.'/ebslider/'.$theme;
     $ebslider_url = G5_DATA_URL.'/ebslider/'.$theme;
+
+    /**
+     * 디렉토리가 없다면 생성하기
+     */
+    if (!is_dir($ebslider_path)) {
+        $qfile->make_directory($ebslider_path);
+    }
+
     $master_file = $ebslider_path.'/es_master_'.$es_code.'.php';
     if (file_exists($master_file) && !is_dir($master_file)) {
         include($master_file);

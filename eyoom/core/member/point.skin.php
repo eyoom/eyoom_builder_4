@@ -9,6 +9,7 @@ $sum_point1 = $sum_point2 = $sum_point3 = 0;
 
 $sql = " select * {$sql_common} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $point1 = $point2 = 0;
     if ($row['po_point'] > 0) {
@@ -29,7 +30,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 }
 
-if (count($list)>0) {
+if (count((array)$list)>0) {
     if ($sum_point1 > 0) $sum_point1 = "+" . number_format($sum_point1);
     $sum_point2 = number_format($sum_point2);
 }

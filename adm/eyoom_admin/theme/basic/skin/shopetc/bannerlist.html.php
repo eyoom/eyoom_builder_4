@@ -60,7 +60,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             ID: "<?php echo $list[$i]['bn_id'];  ?>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=bannerform&amp;w=u&amp;bn_id=<?php echo $list[$i]['bn_id'];  ?>'><u>수정</u></a><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=bannerformupdate&amp;w=d&amp;bn_id=<?php echo $list[$i]['bn_id'];  ?>' onclick='return delete_confirm(this);' class='margin-left-10'><u>삭제</u></a>",

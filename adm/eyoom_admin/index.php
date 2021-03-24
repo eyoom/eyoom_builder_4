@@ -20,6 +20,13 @@ define('_EYOOM_IS_ADMIN_', true);
 @include_once(EYOOM_ADMIN_PATH.'/admin.common.php');
 
 /**
+ * 영카트5 인가?
+ */
+if ($is_youngcart) {
+    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
+}
+
+/**
  * 관리자모드 헤더 디자인 출력
  */
 @include_once(EYOOM_ADMIN_PATH.'/admin.head.php');

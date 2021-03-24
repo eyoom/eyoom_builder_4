@@ -6,11 +6,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300500";
 
+$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=qa_config_update&amp;smode=1';
+
 include_once(G5_EDITOR_LIB);
 
-auth_check($auth[$sub_menu], 'r');
-
-$action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=qa_config_update&amp;smode=1';
+auth_check_menu($auth, $sub_menu, 'r');
 
 // DB 테이블 생성
 if(!sql_query(" DESCRIBE `{$g5['qa_config_table']}` ", false)) {

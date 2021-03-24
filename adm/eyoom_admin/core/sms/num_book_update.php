@@ -7,7 +7,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900800";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
 $g5['title'] = "휴대폰번호 업데이트";
 
@@ -15,10 +15,11 @@ $g5['sms5_demo'] = 0;
 
 $is_hp_exist = false;
 
-$bk_hp = get_hp($bk_hp);
+$bk_hp = isset($_REQUEST['bk_hp']) ? get_hp($_REQUEST['bk_hp']) : '';
 
-$bk_memo = strip_tags($bk_memo);
-$bk_name = strip_tags($bk_name);
+$bk_memo = isset($_REQUEST['bk_memo']) ? strip_tags($_REQUEST['bk_memo']) : '';
+$bk_name = isset($_REQUEST['bk_name']) ? strip_tags($_REQUEST['bk_name']) : '';
+$bg_no = isset($_REQUEST['bg_no']) ? (int) $_REQUEST['bg_no'] : 0;
 
 if ($w=='u') // 업데이트
 {
@@ -59,7 +60,7 @@ if ($w=='u') // 업데이트
         // 휴대폰번호 중복체크
         $sql = " select mb_id from {$g5['member_table']} where mb_id <> '{$res['mb_id']}' and mb_hp = '{$bk_hp}' ";
         $mb_hp_exist = sql_fetch($sql);
-        if ($mb_hp_exist['mb_id']) { //중복된 회원 휴대폰번호가 있다면
+        if (isset($mb_hp_exist['mb_id']) && $mb_hp_exist['mb_id']) { //중복된 회원 휴대폰번호가 있다면
             $is_hp_exist = true;
         } else {
              sql_query("update {$g5['member_table']} set mb_name='".addslashes($bk_name)."', mb_hp='$bk_hp', mb_sms='$bk_receipt' where mb_id='{$res['mb_id']}'", false);
@@ -67,7 +68,7 @@ if ($w=='u') // 업데이트
     }
     $get_bg_no = $bg_no;
 
-    $go_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=num_book_write&amp;bk_no='.$bk_no.'&amp;w='.$w.'&amp;page='.$page;
+    $go_url = './num_book_write.php?bk_no='.$bk_no.'&amp;w='.$w.'&amp;page='.$page;
     if( $is_hp_exist ){ //중복된 회원 휴대폰번호가 있다면
         //alert( "중복된 회원 휴대폰번호가 있어서 회원정보에는 반영되지 않았습니다.", $go_url );
         goto_url($go_url);

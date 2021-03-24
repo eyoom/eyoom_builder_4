@@ -459,7 +459,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <select id="bo_select_editor" name="bo_select_editor">
                                     <?php
                                     $arr = get_skin_dir('', G5_EDITOR_PATH);
-                                    for ($i=0; $i<count($arr); $i++) {
+                                    for ($i=0; $i<count((array)$arr); $i++) {
                                         if ($i == 0) echo "<option value=\"\">기본환경설정의 에디터 사용</option>";
                                         echo "<option value=\"".$arr[$i]."\"".get_selected($board['bo_select_editor'], $arr[$i]).">".$arr[$i]."</option>\n";
                                     }

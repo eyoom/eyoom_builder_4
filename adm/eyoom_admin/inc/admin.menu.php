@@ -43,7 +43,7 @@ $i = 0;
 foreach ($amenu as $key => $value) {
     if (!$is_youngcart && ($key == 400 || $key == 500)) continue;
 
-    if (!$_dirname[$key] || !$menu['menu'.$key][0][2]) continue;
+    if (!isset($_dirname[$key]) || !isset($menu['menu'.$key][0][2])) continue;
     else {
         $_dir = $_dirname[$key];
         $tmp  = explode('/',$menu['menu'.$key][0][2]);
@@ -57,7 +57,7 @@ foreach ($amenu as $key => $value) {
         $loop1 = &$admmenu[$i]['submenu'];
 
         $subkey = 'menu'.$key;
-        for($j=1; $j<count($menu[$subkey]); $j++) {
+        for($j=1; $j<count((array)$menu[$subkey]); $j++) {
             if ($is_admin != 'super' &&
                 (!array_key_exists($menu[$subkey][$j][0],$auth) ||
                 !strstr($auth[$menu[$subkey][$j][0]], 'r'))

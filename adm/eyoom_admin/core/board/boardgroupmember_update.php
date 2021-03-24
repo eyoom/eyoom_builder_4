@@ -10,7 +10,7 @@ sql_query(" ALTER TABLE {$g5['group_member_table']} CHANGE `gm_id` `gm_id` INT( 
 
 if ($w == '')
 {
-    auth_check($auth[$sub_menu], 'w');
+    auth_check_menu($auth, $sub_menu, 'w');
 
     $mb = get_member($mb_id);
     if (!$mb['mb_id']) {
@@ -43,7 +43,7 @@ if ($w == '')
 }
 else if ($w == 'd' || $w == 'ld')
 {
-    auth_check($auth[$sub_menu], 'd');
+    auth_check_menu($auth, $sub_menu, 'd');
 
     $count = count($_POST['chk']);
     if(!$count)

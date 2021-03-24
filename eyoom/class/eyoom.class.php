@@ -331,11 +331,12 @@ class eyoom extends qfile
     public function get_group() {
         $sql = " select gr_id, gr_subject from {$this->g5['group_table']} order by gr_id ";
         $result = sql_query($sql);
+        $group = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $group[$i]['gr_id']      = $row['gr_id'];
             $group[$i]['gr_subject'] = $row['gr_subject'];
         }
-        if ($group) return $group; else return false;
+        if (count($group) > 0) return $group; else return false;
     }
 
     /**
@@ -345,6 +346,7 @@ class eyoom extends qfile
         $fields = 'a.bo_table, a.bo_subject, a.bo_list_level, a.bo_use_secret, b.gr_subject, b.gr_id';
         $sql = "select {$fields} from {$this->g5['board_table']} as a left join {$this->g5['group_table']} as b on a.gr_id = b.gr_id where 1 order by b.gr_subject asc, a.bo_subject asc";
         $res = sql_query($sql, false);
+        $bo_name = array();
         for ($i=0; $row=sql_fetch_array($res);$i++) {
             $bo_name[$row['bo_table']]['gr_id'] = $row['gr_id'];
             $bo_name[$row['bo_table']]['gr_name'] = $row['gr_subject'];
@@ -362,6 +364,7 @@ class eyoom extends qfile
         $sql = "select * from {$this->g5['board_table']} where (1) order by bo_subject asc";
 
         $res = sql_query($sql, false);
+        $board_info = array();
         for ($i=0; $row=sql_fetch_array($res);$i++) {
             $board_info[$i] = $row;
         }
@@ -375,6 +378,7 @@ class eyoom extends qfile
         $sql = "select * from {$this->g5['group_table']} where (1) order by gr_subject asc";
 
         $res = sql_query($sql, false);
+        $group_info = array();
         for ($i=0; $row=sql_fetch_array($res);$i++) {
             $group_info[$i] = $row;
         }
@@ -413,6 +417,7 @@ class eyoom extends qfile
             }
         } else {
             $res = sql_query($sql, false);
+            $userinfo = array();
             for ($i=0;$row=sql_fetch_array($res);$i++) {
                 $userinfo[$i] = $row;
             }
@@ -834,44 +839,19 @@ class eyoom extends qfile
     }
 
     /**
-     * md5 암호화
+     * AES 암호화
      */
-    public function encrypt_md5($buf, $key="password") {
-        $key1 = pack('H*',md5($key));
-        while($buf !== false) {
-            $m = substr($buf, 0, 16);
-            $buf = substr($buf, 16);
-
-            $c = "";
-            for ($i=0;$i<16;$i++) $c .= $m{$i}^$key1{$i};
-            $ret_buf .= $c;
-            $key1 = pack('H*',md5($key.$key1.$m));
-        }
-
-        $len = strlen($ret_buf);
-        for ($i=0; $i<$len; $i++) $hex_data .= sprintf('%02x', ord(substr($ret_buf, $i, 1)));
-        return($hex_data);
+    public function encrypt_aes($str, $key = '') {
+        if (!$key) $key = SALT_KEY;
+        return base64_encode(openssl_encrypt($str, "AES-256-CBC", $key, true, str_repeat(chr(0), 16)));
     }
 
     /**
-     * md5 복호화
+     * AES 복호화
      */
-    public function decrypt_md5($hex_buf, $key="password") {
-        $len = strlen($hex_buf);
-        for ($i=0; $i<$len; $i+=2) $buf .= chr(hexdec(substr($hex_buf, $i, 2)));
-
-        $key1 = pack('H*', md5($key));
-        while($buf !== false) {
-           $m = substr($buf, 0, 16);
-           $buf = substr($buf, 16);
-
-           $c = "";
-           for ($i=0;$i<16;$i++) $c .= $m{$i}^$key1{$i};
-
-           $ret_buf .= $m = $c;
-           $key1 = pack('H*',md5($key.$key1.$m));
-        }
-        return($ret_buf);
+    public function decrypt_aes($str, $key = '') {
+        if (!$key) $key = SALT_KEY;
+        return openssl_decrypt(base64_decode($str), "AES-256-CBC", $key, true, str_repeat(chr(0), 16));
     }
 
     /**
@@ -891,8 +871,10 @@ class eyoom extends qfile
     /**
      * URL로 부터 파일정보 가져오기
      */
-    public function get_filename_from_url() {
-        $file_tmp = explode('/',str_replace('\\','/',$_SERVER['SCRIPT_NAME']));
+    public function get_filename_from_url($url = '') {
+        if (!$url) $url = $_SERVER['SCRIPT_NAME'];
+
+        $file_tmp = explode('/',str_replace('\\','/',$url));
         $cnt = count($file_tmp);
         $path['dirname']    = $file_tmp[($cnt-2)];
         $path['filename']   = $file_tmp[($cnt-1)];
@@ -1150,7 +1132,7 @@ class eyoom extends qfile
                 @sql_query("update {$this->g5['eyoom_tag']} set tg_scnt = tg_scnt+1, tg_score = tg_score+1 where tg_theme='{$theme}' and tg_word = '{$_tag}'");
                 $i++;
             }
-            $tag_query .= ' and ' . implode(' and ', $sch_tag);
+            $tag_query .= ' and ' . implode(' and ', (array)$sch_tag);
         }
         $sql = "select wr_tag from {$this->g5['eyoom_tag_write']} as a where (1) {$tag_query}";
         $res = sql_query($sql);
@@ -1176,7 +1158,7 @@ class eyoom extends qfile
         }
         $output['tag_query']    = $tag_query;
         $output['rel_tags']     = $rel_tags;
-        $output['count']        = count($rel_tags);
+        $output['count']        = count((array)$rel_tags);
 
         return $output;
     }
@@ -1208,7 +1190,7 @@ class eyoom extends qfile
             $i++;
         }
         if(is_array($set)) {
-            return implode(',', $set);
+            return implode(',', (array)$set);
         }
     }
 

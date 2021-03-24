@@ -6,13 +6,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = '800300';
 
-auth_check($auth[$sub_menu], 'r');
+auth_check_menu($auth, $sub_menu, 'r');
 
-$theme  = clean_xss_tags(trim($_POST['theme']));
-$type   = clean_xss_tags(trim($_POST['type']));
+$theme  = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])): '';
+$type   = isset($_POST['type']) ? clean_xss_tags(trim($_POST['type'])): '';
 if(!$theme) exit;
 if(!$type) exit;
 
+$page_id = $page_name = array();
 switch($type) {
     case 'group':
         $sql = "select gr_id, gr_subject from {$g5['group_table']} where (1) order by gr_subject asc";
@@ -55,7 +56,7 @@ $_value_array = array();
 $_value_array['pid'] = implode('|',$page_id);
 $_value_array['name'] = implode('|',$page_name);
 
-include_once EYOOM_CLASS_PATH."/json.class.php";
+include_once EYOOM_CLASS_PATH.'/json.class.php';
 
 $json = new Services_JSON();
 $output = $json->encode($_value_array);

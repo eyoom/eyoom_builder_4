@@ -10,8 +10,8 @@ if (!defined('_EYOOM_')) exit;
 $colspan = 6;
 
 if ($is_checkbox) $colspan++;
-
-for ($i=0; $i<count($categories); $i++) {
+$category_tab = array();
+for ($i=0; $i<count((array)$categories); $i++) {
     $category = trim($categories[$i]);
     if ($category=='') continue;
     $category_tab[$i]['category'] = $category;

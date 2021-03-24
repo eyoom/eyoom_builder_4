@@ -72,14 +72,14 @@ include_once($eyoom_skin_path['mypage'] . '/myhomebox.skin.html.php');
 
 <div class="my-post">
     <div class="my-post-container">
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         <div class="post-item">
             <div class="post-item-pd">
                 <div class="post-item-in">
                     <div class="item-category">
                         <?php echo $list[$i]['bo_info']['gr_name']; ?> / <?php echo $list[$i]['bo_info']['bo_name']; ?>
                     </div>
-                    <a href="<?php echo $list[$i]['href']; ?>&amp;wmode=1" <?php if (!G5_IS_MOBILE) { ?>onclick="post_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                    <a href="<?php echo $list[$i]['href']; ?>" <?php if (!G5_IS_MOBILE) { ?>onclick="post_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
                         <?php if ($list[$i]['wr_image']) { ?>
                         <div class="post-item-photo">
                             <div class="post-item-photo-in">
@@ -108,7 +108,7 @@ include_once($eyoom_skin_path['mypage'] . '/myhomebox.skin.html.php');
             </div>
         </div>
         <?php } ?>
-        <?php if (count($list) == 0) { ?>
+        <?php if (count((array)$list) == 0) { ?>
         <div class="text-center color-grey font-size-14 margin-top-50"><i class="fas fa-exclamation-circle"></i> 최근 게시물이 없습니다.</div>
         <?php } ?>
     </div>

@@ -40,7 +40,7 @@ switch($act) {
         if(!$rid) alert('잘못된 접근입니다.',G5_URL.'/mypage/respond.php');
         $where  = "rid = '$rid'";
         $where2 = " and wr_mb_id = '".$member['mb_id']."'";
-        $row = sql_fetch("select * from {$g5[eyoom_respond]} where $where $where2", false);
+        $row = sql_fetch("select * from {$g5['eyoom_respond']} where $where $where2", false);
 
         if(!$row['re_chk']) {
             $respond->respond_read($where);

@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300200";
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=boardgroupmember_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 $gr = get_group($gr_id);
 if (!$gr['gr_id']) {
@@ -54,7 +54,7 @@ $sql = " select *
             {$sql_order}
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     // 접근가능한 그룹수
     $sql2 = " select count(*) as cnt from {$g5['group_member_table']} where mb_id = '{$row['mb_id']}' ";

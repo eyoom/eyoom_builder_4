@@ -6,7 +6,7 @@ if (!defined('_EYOOM_')) exit;
 
 $thumbnail_width = 500;
 $iq_num     = $total_count - ($page - 1) * $rows;
-
+$item_qa = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $iq_name    = get_text($row['iq_name']);
@@ -61,7 +61,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $item_qa[$i]['iq_num'] = $iq_num;
     $iq_num--;
 }
-$qa_cnt = count($item_qa);
+$qa_cnt = count((array)$item_qa);
 
 $paging_itemqa = itemqa_page($config['cf_write_pages'], $page, $total_page, "./itemqa.php?it_id=$it_id&amp;page=", "");
 

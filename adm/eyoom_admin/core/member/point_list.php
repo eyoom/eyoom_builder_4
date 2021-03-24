@@ -9,7 +9,7 @@ $sub_menu = "200200";
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=point_list_delete&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=member&amp;pid=point_update&amp;smode=1';
 
-auth_check($auth[$sub_menu], 'r');
+auth_check_menu($auth, $sub_menu, 'r');
 
 $sql_common = " from {$g5['point_table']} ";
 
@@ -81,6 +81,7 @@ if (!(isset($mb['mb_id']) && $mb['mb_id'])) {
     $sum_point = $row2['sum_point'];
 }
 
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($i==0 || ($row2['mb_id'] != $row['mb_id'])) {
         $sql2 = " select mb_id, mb_name, mb_nick, mb_email, mb_homepage, mb_point from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";

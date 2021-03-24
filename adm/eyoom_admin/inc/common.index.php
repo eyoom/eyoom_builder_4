@@ -32,10 +32,10 @@ $this_vi_info = get_visit_info($today);
  */
 for($i=0; $i<24; $i++) {
     // 방문자
-    $this_vi_count[$i] = $this_vi_info['vi_cnt'][$i] ? count($this_vi_info['vi_cnt'][$i]) : 0;
+    $this_vi_count[$i] = $this_vi_info['vi_cnt'][$i] ? count((array)$this_vi_info['vi_cnt'][$i]) : 0;
 
     // 회원가입
-    $this_vi_regist[$i] = $this_vi_info['vi_regist'][$i] ? count($this_vi_info['vi_regist'][$i]) : 0;
+    $this_vi_regist[$i] = $this_vi_info['vi_regist'][$i] ? count((array)$this_vi_info['vi_regist'][$i]) : 0;
 }
 
 /**

@@ -141,11 +141,12 @@ $q = get_text($q);
 $sql = " select b.ca_id, b.ca_name, count(*) as cnt $sql_common $sql_where group by b.ca_id order by b.ca_id ";
 $result = sql_query($sql);
 $sca_total_cnt = 0;
+$sca_list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sca_list[$i] = $row;
     $sca_total_cnt += $row['cnt'];
 }
-$sca_count = count($sca_list);
+$sca_count = count((array)$sca_list);
 
 /**
  * 리스트 유형별로 출력

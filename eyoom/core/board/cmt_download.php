@@ -5,7 +5,7 @@ include_once($g5_path.'/common.php');
 // clean the output buffer
 ob_end_clean();
 
-$no = (int)$no;
+$no = isset($_REQUEST['no']) ? (int) $_REQUEST['no'] : 0;
 
 // 다운로드 차감일 때 비회원은 다운로드 불가
 if($board['bo_download_point'] < 0 && $is_guest)

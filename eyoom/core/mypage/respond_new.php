@@ -14,6 +14,7 @@ if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);
  */
 $sql = "select * from {$g5['eyoom_respond']} where wr_mb_id = '{$eyoomer['mb_id']}' and re_chk = 0 order by regdt desc ";
 $result = sql_query($sql, false);
+$respond_new = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $reinfo = $eb->respond_mention($row['re_type'],$row['mb_name'],$row['re_cnt']);
 
@@ -29,6 +30,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $respond_new[$i]['datetime'] = $row['regdt'];
     $respond_new[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
 }
+$count = count($respond_new);
 unset($i);
 
 /**

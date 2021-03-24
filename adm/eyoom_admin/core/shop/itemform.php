@@ -6,17 +6,80 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400300";
 
-include_once(G5_EDITOR_LIB);
-include_once(G5_LIB_PATH.'/iteminfo.lib.php');
-
-auth_check($auth[$sub_menu], "w");
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=shop&amp;pid=itemformupdate&amp;smode=1";
 
-$html_title = '';
+include_once(G5_EDITOR_LIB);
+include_once(G5_LIB_PATH.'/iteminfo.lib.php');
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$html_title = "상품 ";
+
+$it = array(
+    'it_id'=>'',
+    'it_skin'=>'',
+    'it_mobile_skin'=>'',
+    'it_name'=>'',
+    'it_basic'=>'',
+    'it_order'=>0,
+    'it_type1'=>0,
+    'it_type2'=>0,
+    'it_type3'=>0,
+    'it_type4'=>0,
+    'it_type5'=>0,
+    'it_brand'=>'',
+    'it_model'=>'',
+    'it_tel_inq'=>0,
+    'it_use'=>0,
+    'it_nocoupon'=>0,
+    'ec_mall_pid'=>'',
+    'it_mobile_explan'=>'',
+    'it_sell_email'=>'',
+    'it_shop_memo'=>'',
+    'it_info_gubun'=>'',
+    'it_explan'=>'',
+    'it_point_type'=>0,
+    'it_cust_price'=>0,
+    'it_option_subject'=>'',
+    'it_price'=>0,
+    'it_point'=>0,
+    'it_supply_point'=>0,
+    'it_soldout'=>0,
+    'it_stock_sms'=>0,
+    'it_stock_qty'=>0,
+    'it_noti_qty'=>0,
+    'it_buy_min_qty'=>0,
+    'it_buy_max_qty'=>0,
+    'it_notax'=>0,
+    'it_supply_subject'=>'',
+    'it_sc_type'=>0,
+    'it_sc_method'=>0,
+    'it_sc_price'=>0,
+    'it_sc_minimum'=>0,
+    'it_sc_qty'=>0,
+    'it_img1'=>'',
+    'it_img2'=>'',
+    'it_img3'=>'',
+    'it_img4'=>'',
+    'it_img5'=>'',
+    'it_img6'=>'',
+    'it_img7'=>'',
+    'it_img8'=>'',
+    'it_img9'=>'',
+    'it_img10'=>'',
+    'it_head_html'=>'',
+    'it_tail_html'=>'',
+    'it_mobile_head_html'=>'',
+    'it_mobile_tail_html'=>'',
+);
+
+for($i=0;$i<=10;$i++){
+    $it['it_'.$i.'_subj'] = '';
+    $it['it_'.$i] = '';
+}
 
 if ($w == "")
 {
@@ -31,8 +94,8 @@ if ($w == "")
     {
         $sql = " select ca_id from {$g5['g5_shop_category_table']} order by ca_order, ca_id limit 1 ";
         $row = sql_fetch($sql);
-        if (!$row['ca_id'])
-            alert("등록된 분류가 없습니다. 우선 분류를 등록하여 주십시오.", './?dir=shop&amp;pid=categorylist');
+        if (! (isset($row['ca_id']) && $row['ca_id']))
+            alert("등록된 분류가 없습니다. 우선 분류를 등록하여 주십시오.", G5_ADMIN_URL.'/?dir=shop&amp;pid=categorylist');
         $it['ca_id'] = $row['ca_id'];
     }
     //$it[it_maker]  = stripslashes($_COOKIE[ck_maker]);
@@ -60,7 +123,7 @@ else if ($w == "u")
     if(!$it)
         alert('상품정보가 존재하지 않습니다.');
 
-    if (!$ca_id)
+    if (! (isset($ca_id) && $ca_id))
         $ca_id = $it['ca_id'];
 
     $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
@@ -71,17 +134,17 @@ else
     alert();
 }
 
-$cate_a = clean_xss_tags(trim($_GET['cate_a']));
-$cate_b = clean_xss_tags(trim($_GET['cate_b']));
-$cate_c = clean_xss_tags(trim($_GET['cate_c']));
-$sdt = clean_xss_tags(trim($_GET['sdt']));
-$fr_date = trim($_GET['fr_date']);
-$to_date = trim($_GET['to_date']);
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
+$sdt = isset($_GET['sdt']) ? clean_xss_tags(trim($_GET['sdt'])) : '';
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
 if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
 if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
-$ituse = clean_xss_tags(trim($_GET['ituse']));
-$itsoldout = clean_xss_tags(trim($_GET['itsoldout']));
-$itype = clean_xss_tags(trim($_GET['itype']));
+$ituse = isset($_GET['ituse']) ? clean_xss_tags(trim($_GET['ituse'])) : '';
+$itsoldout = isset($_GET['itsoldout']) ? clean_xss_tags(trim($_GET['itsoldout'])) : '';
+$itype = isset($_GET['itype']) ? clean_xss_tags(trim($_GET['itype'])) : '';
 
 $qstr  = $qstr.'&amp;sca='.$sca.'&amp;page='.$page;
 if ($cate_a) $qstr .= "&amp;cate_a={$cate_a}";
@@ -216,7 +279,7 @@ for($i=1; $i<=10; $i++) {
 /**
  * 선택된 관련상품 가져오기 - 관련상품 검색에서 사용
  */
-$str = array();
+$str = $rellist = array();
 $sql = " select b.ca_id, b.it_id, b.it_name, b.it_price
            from {$g5['g5_shop_item_relation_table']} a
            left join {$g5['g5_shop_item_table']} b on (a.it_id2=b.it_id)
@@ -250,11 +313,12 @@ $sql = " select b.ev_id, b.ev_subject
           where a.it_id = '$it_id'
           order by b.ev_id desc ";
 $result = sql_query($sql);
+$reg_evinfo = $reg_ev_id = array();
 for ($g=0; $row=sql_fetch_array($result); $g++) {
     $reg_evinfo[$g] = $row;
     $reg_ev_id[$g] = $row['ev_id'];
 }
-if (is_array($reg_ev_id)) {
+if (isset($reg_ev_id) && is_array($reg_ev_id)) {
     $reg_ev_ids = implode(',', $reg_ev_id);
 }
 

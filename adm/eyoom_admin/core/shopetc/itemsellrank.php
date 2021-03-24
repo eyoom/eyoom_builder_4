@@ -6,7 +6,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500100";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = (isset($_GET['fr_date']) && preg_match("/[0-9]/", $_GET['fr_date'])) ? $_GET['fr_date'] : '';
+$to_date = (isset($_GET['to_date']) && preg_match("/[0-9]/", $_GET['to_date'])) ? $_GET['to_date'] : date("Ymd", time());
 
 /**
  * 1차 상품 분류 가져오기
@@ -88,7 +91,7 @@ $result = sql_query($sql);
 
 //$qstr = 'page='.$page.'&amp;sort1='.$sort1.'&amp;sort2='.$sort2;
 $qstr .= '&amp;fr_date='.$fr_date.'&amp;to_date='.$to_date;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $href = shop_item_url($row['it_id']);

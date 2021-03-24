@@ -6,9 +6,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400660";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemqalistupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+$sfl = (isset($_GET['sfl']) && in_array($_GET['sfl'], array('a.it_id', 'it_name')) ) ? $_GET['sfl'] : 'it_name';
+$stx = isset($_GET['stx']) ? get_search_string($_GET['stx']) : '';
+$sst = (isset($_GET['sst']) && in_array($_GET['sst'], array('a.it_id', 'it_name'))) ? $_GET['sst'] : 'a.it_id';
+$sod = (isset($_GET['sod']) && in_array($_GET['sod'], array('desc', 'asc'))) ? $_GET['sod'] : 'desc';
+
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -98,7 +109,7 @@ $result = sql_query($sql);
 
 //$qstr = 'page='.$page.'&amp;sst='.$sst.'&amp;sod='.$sod.'&amp;stx='.$stx;
 $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca.'&amp;save_stx='.$stx;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);

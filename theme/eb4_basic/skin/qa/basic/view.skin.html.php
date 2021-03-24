@@ -81,7 +81,7 @@ button.mfp-close {position:fixed;color:#fff !important}
     <?php /* 첨부파일 시작 */ ?>
     <div class="board-view-file">
         <ul class="list-unstyled">
-        <?php for ($i=0; $i<count($files); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$files); $i++) { ?>
             <li>
                 - 첨부파일: <a href="<?php echo $files[$i]['download_href']; ?>"><strong><?php echo $files[$i]['download_source']; ?></strong></a>
             </li>
@@ -179,7 +179,7 @@ button.mfp-close {position:fixed;color:#fff !important}
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for ($i=0; $i<count($rel_list); $i++) { ?>
+                        <?php for ($i=0; $i<count((array)$rel_list); $i++) { ?>
                         <tr>
                             <td class="td-subj-wrap">
                                 <div class="td-subject ellipsis">

@@ -116,7 +116,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<input type='hidden' name='od_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['od_id']; ?>' id='od_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' value='<?php echo $i; ?>' id='chk_<?php echo $i; ?>'><i></i></label>",
             관리: "<span class='text-center grid-buttons'><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=inorderform&w=u&od_id=<?php echo $list[$i]['od_id']; ?><?php echo $qstr ? '&'.$qstr:''; ?>'><u>수정</u></a><a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=inorderformupdate&w=d&od_id=<?php echo $list[$i]['od_id']; ?><?php echo $qstr ? '&'.$qstr:''; ?>'  onclick='return delete_confirm(this);' class='margin-left-10'><u>삭제</u></a></span>",

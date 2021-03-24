@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200900";
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=poll_delete&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 $sql_common = " from {$g5['poll_table']} ";
 
@@ -47,7 +47,7 @@ $sql = " select *
             {$sql_order}
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql2 = " select sum(po_cnt1+po_cnt2+po_cnt3+po_cnt4+po_cnt5+po_cnt6+po_cnt7+po_cnt8+po_cnt9) as sum_po_cnt from {$g5['poll_table']} where po_id = '{$row['po_id']}' ";
     $row2 = sql_fetch($sql2);

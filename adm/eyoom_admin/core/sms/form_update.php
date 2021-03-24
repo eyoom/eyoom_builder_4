@@ -7,10 +7,12 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900600";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
-$fo_name = isset($fo_name) ? strip_tags(clean_xss_attributes($fo_name)) : '';
-$fo_content = isset($fo_content) ? strip_tags(clean_xss_attributes($fo_content)) : '';
+$fo_name = isset($_REQUEST['fo_name']) ? strip_tags(clean_xss_attributes($_REQUEST['fo_name'])) : '';
+$fo_content = isset($_REQUEST['fo_content']) ? strip_tags(clean_xss_attributes($_REQUEST['fo_content'])) : '';
+$fo_receipt = isset($_REQUEST['fo_receipt']) ? clean_xss_tags($_REQUEST['fo_receipt'], 1, 1) : '';
+$get_fg_no = '';
 
 $g5['title'] = "이모티콘 업데이트";
 

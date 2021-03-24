@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = '200300';
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=mail_delete&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 $sql_common = " from {$g5['mail_table']} ";
 
@@ -21,7 +21,7 @@ $page = 1;
 
 $sql = " select * {$sql_common} order by ma_id desc ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $num = number_format($total_count - ($page - 1) * $config['cf_page_rows'] - $i);
 

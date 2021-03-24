@@ -43,7 +43,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <label class="select">
                 <select name="gr_id" id="gr_id">
                     <option value="">전체그룹</option>
-                    <?php for($i=0; $i<count($sel_group); $i++) { ?>
+                    <?php for($i=0; $i<count((array)$sel_group); $i++) { ?>
                     <option value='<?php echo $sel_group[$i]['gr_id']; ?>'><?php echo $sel_group[$i]['gr_subject']; ?></option>
                     <?php } ?>
                 </select>
@@ -113,7 +113,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($newlist); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$newlist); $i++) { ?>
                     <tr>
                         <?php if ($is_admin) { ?>
                         <td>
@@ -144,7 +144,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         </td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($newlist) == 0) { ?>
+                    <?php if (count((array)$newlist) == 0) { ?>
                     <tr><td colspan="<?php echo $colspan; ?>" class="text-center"><span class="color-grey"><i class="fas fa-exclamation-circle"></i> 새글 목록이 없습니다.</span></td></tr>
                     <?php } ?>
                 </tbody>

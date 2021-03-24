@@ -309,7 +309,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     <div id="infinite_pagination">
         <a class="next" href="<?php echo get_eyoom_pretty_url($bo_tabl,$wr_id,'&amp;sca='.$sca.'&amp;cpage='.($cpage+1)); ?>"></a>
     </div>
-    <?php if (count($cmt_list) > 20 ) { ?>
+    <?php if (count((array)$cmt_list) > 20 ) { ?>
     <div class="view-comment-more">
         <a id="view-comment-more" href="#" class="btn-e btn-e-indigo btn-e-xlg">댓글 더보기</a>
     </div>

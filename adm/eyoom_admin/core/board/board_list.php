@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300100";
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_list_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 /**
  * 게시판 여유필드 확장수 저장 필드 추가
@@ -43,28 +43,28 @@ if ($stx) {
 }
 
 // 그룹검색
-$grid = $_GET['grid'] ? clean_xss_tags($_GET['grid']): '';
+$grid = isset($_GET['grid']) ? clean_xss_tags($_GET['grid']): '';
 if ($grid) {
     $sql_search .= " and a.gr_id = '{$grid}' ";
     $qstr .= "&amp;grid={$grid}";
 }
 
 // PC 스킨
-$boskin = $_GET['boskin'] ? clean_xss_tags($_GET['boskin']): '';
+$boskin = isset($_GET['boskin']) ? clean_xss_tags($_GET['boskin']): '';
 if ($boskin) {
     $sql_search .= " and a.bo_skin = '{$boskin}' ";
     $qstr .= "&amp;boskin={$boskin}";
 }
 
 // 모바일 스킨
-$bomobileskin = $_GET['bomobileskin'] ? clean_xss_tags($_GET['bomobileskin']): '';
+$bomobileskin = isset($_GET['bomobileskin']) ? clean_xss_tags($_GET['bomobileskin']): '';
 if ($bomobileskin) {
     $sql_search .= " and a.bo_mobile_skin = '{$bomobileskin}' ";
     $qstr .= "&amp;bomobileskin={$bomobileskin}";
 }
 
 // 확장필드
-$bo_ex = $_GET['bo_ex'] ? (int) $_GET['bo_ex']: '';
+$bo_ex = isset($_GET['bo_ex']) ? (int) $_GET['bo_ex']: '';
 if ($bo_ex) {
     $bo_ex_val = $bo_ex-1 == 1 ? 1:'';
     $sql_search .= $bo_ex_val ? ' and a.bo_ex_cnt > 0 ': ' and a.bo_ex_cnt = 0 ';
@@ -79,7 +79,7 @@ if ($bo_ex) {
 }
 
 // 분류사용
-$bo_cate = $_GET['bo_cate'] ? (int) $_GET['bo_cate']: '';
+$bo_cate = isset($_GET['bo_cate']) ? (int) $_GET['bo_cate']: '';
 if ($bo_cate) {
     $bo_cate_val = $bo_cate-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_category = '{$bo_cate_val}' ";
@@ -94,7 +94,7 @@ if ($bo_cate) {
 }
 
 // 사이드 네임뷰
-$bo_sideview = $_GET['bo_sideview'] ? (int) $_GET['bo_sideview']: '';
+$bo_sideview = isset($_GET['bo_sideview']) ? (int) $_GET['bo_sideview']: '';
 if ($bo_sideview) {
     $bo_sideview_val = $bo_sideview-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_sideview = '{$bo_sideview_val}' ";
@@ -109,7 +109,7 @@ if ($bo_sideview) {
 }
 
 // DHTML 사용
-$bo_dhtml = $_GET['bo_dhtml'] ? (int) $_GET['bo_dhtml']: '';
+$bo_dhtml = isset($_GET['bo_dhtml']) ? (int) $_GET['bo_dhtml']: '';
 if ($bo_dhtml) {
     $bo_dhtml_val = $bo_dhtml-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_dhtml_editor = '{$bo_dhtml_val}' ";
@@ -124,7 +124,7 @@ if ($bo_dhtml) {
 }
 
 // 비밀글 사용
-$bo_secret = $_GET['bo_secret'] ? (int) $_GET['bo_secret']: '';
+$bo_secret = isset($_GET['bo_secret']) ? (int) $_GET['bo_secret']: '';
 if ($bo_secret) {
     $bo_secret_val = $bo_secret-1;
     $sql_search .= " and a.bo_use_secret = '{$bo_secret_val}' ";
@@ -141,7 +141,7 @@ if ($bo_secret) {
 }
 
 // 추천사용
-$bo_good = $_GET['bo_good'] ? (int) $_GET['bo_good']: '';
+$bo_good = isset($_GET['bo_good']) ? (int) $_GET['bo_good']: '';
 if ($bo_good) {
     $bo_good_val = $bo_good-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_good = '{$bo_good_val}' ";
@@ -156,7 +156,7 @@ if ($bo_good) {
 }
 
 // 비추천사용
-$bo_nogood = $_GET['bo_nogood'] ? (int) $_GET['bo_nogood']: '';
+$bo_nogood = isset($_GET['bo_nogood']) ? (int) $_GET['bo_nogood']: '';
 if ($bo_nogood) {
     $bo_nogood_val = $bo_nogood-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_nogood = '{$bo_nogood_val}' ";
@@ -171,7 +171,7 @@ if ($bo_nogood) {
 }
 
 // 목록에서 파일 사용
-$bo_file = $_GET['bo_file'] ? (int) $_GET['bo_file']: '';
+$bo_file = isset($_GET['bo_file']) ? (int) $_GET['bo_file']: '';
 if ($bo_file) {
     $bo_file_val = $bo_file-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_list_file = '{$bo_file_val}' ";
@@ -186,7 +186,7 @@ if ($bo_file) {
 }
 
 // 목록에서 내용 사용
-$bo_cont = $_GET['bo_cont'] ? (int) $_GET['bo_cont']: '';
+$bo_cont = isset($_GET['bo_cont']) ? (int) $_GET['bo_cont']: '';
 if ($bo_cont) {
     $bo_cont_val = $bo_cont-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_list_content = '{$bo_cont_val}' ";
@@ -201,7 +201,7 @@ if ($bo_cont) {
 }
 
 // 전체목록보이기 사용
-$bo_list = $_GET['bo_list'] ? (int) $_GET['bo_list']: '';
+$bo_list = isset($_GET['bo_list']) ? (int) $_GET['bo_list']: '';
 if ($bo_list) {
     $bo_list_val = $bo_list-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_list_view = '{$bo_list_val}' ";
@@ -216,7 +216,7 @@ if ($bo_list) {
 }
 
 // SNS 사용
-$bo_sns = $_GET['bo_sns'] ? (int) $_GET['bo_sns']: '';
+$bo_sns = isset($_GET['bo_sns']) ? (int) $_GET['bo_sns']: '';
 if ($bo_sns) {
     $bo_sns_val = $bo_sns-1 == 1 ? 1:'';
     $sql_search .= " and a.bo_use_sns = '{$bo_sns_val}' ";
@@ -247,7 +247,7 @@ $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $gr_select = str_replace('"', "'", get_group_select("gr_id[$i]", $row['gr_id']));

@@ -6,20 +6,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999600";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$es_master['es_code']       = clean_xss_tags(trim($_POST['es_code']));
-$es_master['es_theme']      = clean_xss_tags(trim($_POST['theme']));
-$es_master['es_state']      = clean_xss_tags(trim($_POST['es_state']));
-$es_master['es_subject']    = clean_xss_tags(trim($_POST['es_subject']));
-$es_master['es_skin']       = clean_xss_tags(trim($_POST['es_skin']));
-$es_master['es_text']       = clean_xss_tags(trim($_POST['es_text']));
-$es_master['es_ytplay']     = clean_xss_tags(trim($_POST['es_ytplay']));
-$es_master['es_ytmauto']    = clean_xss_tags(trim($_POST['es_ytmauto']));
-$es_master['es_link_cnt']   = clean_xss_tags(trim($_POST['es_link_cnt']));
-$es_master['es_image_cnt']  = clean_xss_tags(trim($_POST['es_image_cnt']));
-$es_master['es_link']       = $eb->filter_url($_POST['es_link']);
-$es_master['es_target']     = clean_xss_tags(trim($_POST['es_target']));
+$es_master['es_code'] = $es_code = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
+$es_master['es_theme']      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$es_master['es_state']      = isset($_POST['es_state']) ? clean_xss_tags(trim($_POST['es_state'])) : '';
+$es_master['es_subject']    = isset($_POST['es_subject']) ? clean_xss_tags(trim($_POST['es_subject'])) : '';
+$es_master['es_skin']       = isset($_POST['es_skin']) ? clean_xss_tags(trim($_POST['es_skin'])) : '';
+$es_master['es_text']       = isset($_POST['es_text']) ? clean_xss_tags(trim($_POST['es_text'])) : '';
+$es_master['es_ytplay']     = isset($_POST['es_ytplay']) ? clean_xss_tags(trim($_POST['es_ytplay'])) : '';
+$es_master['es_ytmauto']    = isset($_POST['es_ytmauto']) ? clean_xss_tags(trim($_POST['es_ytmauto'])) : '';
+$es_master['es_link_cnt']   = isset($_POST['es_link_cnt']) ? clean_xss_tags(trim($_POST['es_link_cnt'])) : '';
+$es_master['es_image_cnt']  = isset($_POST['es_image_cnt']) ? clean_xss_tags(trim($_POST['es_image_cnt'])) : '';
+$es_master['es_link']       = isset($_POST['es_link']) ? $eb->filter_url($_POST['es_link']) : '';
+$es_master['es_target']     = isset($_POST['es_target']) ? clean_xss_tags(trim($_POST['es_target'])) : '';
 
 $sql_common = "
     es_code = '{$es_master['es_code']}',

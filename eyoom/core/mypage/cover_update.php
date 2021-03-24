@@ -8,6 +8,7 @@ if (!$is_member) exit;
  * 업로드 경로
  */
 $dest_path = G5_DATA_PATH.'/member/cover/';
+$qfile->make_directory($dest_path);
 $upload->path = $dest_path;
 
 /**
@@ -43,4 +44,4 @@ if ($res) {
  */
 @include_once(EYOOM_USER_PATH.'/mypage/cover_update.php');
 
-goto_url(G5_URL.$back_url);
+goto_url(G5_URL.'/?'.$member['mb_id']);

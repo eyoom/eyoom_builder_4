@@ -149,7 +149,7 @@ setTimeout(function() {
     chartTime.load({
         columns: [
             // 오늘의 시간별 접속자
-            ['접속자', <?php for($i=0; $i<count($period_vi_count); $i++) { echo $period_vi_count[$i]; if(count($period_vi_count)!=($i+1)) echo ','; } ?>]
+            ['접속자', <?php for($i=0; $i<count((array)$period_vi_count); $i++) { echo $period_vi_count[$i]; if(count((array)$period_vi_count)!=($i+1)) echo ','; } ?>]
         ]
     });
 }, 1500);
@@ -180,7 +180,7 @@ setTimeout(function() {
         // 오늘의 브라우저별 접속자
         columns: [
             <?php $i=0; if (is_array($period_vi_browser)) { foreach ($period_vi_browser as $key => $val) { ?>
-            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count($period_vi_browser) != ($i+1)) echo ','; $i++; ?>
+            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$period_vi_browser) != ($i+1)) echo ','; $i++; ?>
             <?php }} ?>
         ]
     });
@@ -213,7 +213,7 @@ setTimeout(function() {
         columns: [
             <?php $i=0; if (is_array($period_vi_domain)) { foreach ($period_vi_domain as $key => $val) { ?>
             <?php if ($i<10) { ?>
-            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count($period_vi_domain) != ($i+1)) echo ','; ?>
+            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$period_vi_domain) != ($i+1)) echo ','; ?>
             <?php } ?>
             <?php }} ?>
         ]
@@ -246,7 +246,7 @@ setTimeout(function() {
         // 도메인별 접속자
         columns: [
             <?php $i=0; if (is_array($period_vi_os)) { foreach ($period_vi_os as $key => $val) { ?>
-            ['<?php if (!$key) echo '기타'; else echo $key; ?>', <?php echo $val; ?>]<?php if (count($period_vi_os) != ($i+1)) echo ','; ?>
+            ['<?php if (!$key) echo '기타'; else echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$period_vi_os) != ($i+1)) echo ','; ?>
             <?php }} ?>
         ]
     });

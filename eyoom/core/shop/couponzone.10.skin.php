@@ -11,7 +11,7 @@ $sql = " select * $sql_common and cz_type = '0' $sql_order ";
 $result = sql_query($sql);
 
 $coupon = '';
-
+$dn_list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     if(!$row['cz_file'])
         continue;
@@ -54,7 +54,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
     $dn_list[$i]['coupon_tit'] = $subj;
     $dn_list[$i]['btn_disabled'] = $disabled;
 }
-$dn_count = count($dn_list);
+$dn_count = count((array)$dn_list);
 
 /**
  * 포인트 쿠폰
@@ -63,7 +63,7 @@ $sql = " select * $sql_common and cz_type = '1' $sql_order ";
 $result = sql_query($sql);
 
 $coupon = '';
-
+$po_list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     if(!$row['cz_file'])
         continue;
@@ -106,7 +106,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
     $po_list[$i]['coupon_tit'] = $subj;
     $po_list[$i]['btn_disabled'] = $disabled;
 }
-$po_count = count($po_list);
+$po_count = count((array)$po_list);
 
 /**
  * 이윰 테마파일 출력

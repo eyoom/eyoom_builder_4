@@ -68,6 +68,7 @@ function get_eyoom_ranking($type, $cnt=10) {
     }
     //echo $sql; exit;
     $result = sql_query($sql, false);
+    $list = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $list[$i] = $row;
         $list[$i]['point'] = $row['level_point'];

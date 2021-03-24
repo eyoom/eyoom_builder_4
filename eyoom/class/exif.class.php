@@ -62,8 +62,8 @@ class exif
         if ( function_exists('exif_read_data') ) {
             $this->exif = @exif_read_data($source);
             if ($this->exif) {
-
-                foreach ($this->exif_item as $key => $val) {
+                $exif_data = array();
+                foreach ((array)$this->exif_item as $key => $val) {
                     if ($exif_value = $this->get_exif_value($key)) {
                         $exif_data[$key] = $exif_value;
                     }

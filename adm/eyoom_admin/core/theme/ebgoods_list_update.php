@@ -8,29 +8,37 @@ $sub_menu = "999500";
 
 check_demo();
 
-if (!count($_POST['chk'])) {
-    alert($_POST['act_button']." 하실 항목을 하나 이상 체크하세요.");
+$post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
+$chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
+$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
+$act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (! $post_count_chk) {
+    alert($act_button." 하실 항목을 하나 이상 체크하세요.");
 }
 
-if ($_POST['act_button'] == "선택수정") {
+if ($act_button == "선택수정") {
 
-    auth_check($auth[$sub_menu], 'w');
+    auth_check_menu($auth, $sub_menu, 'w');
 
-    for ($i=0; $i<count($_POST['chk']); $i++) {
+    for ($i=0; $i<$post_count_chk; $i++) {
 
         // 실제 번호를 넘김
-        $k = $_POST['chk'][$i];
+        $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
+        $eg_state = isset($_POST['eg_state'][$k]) ? clean_xss_tags($_POST['eg_state'][$k]): '';
+        $eg_no = isset($_POST['eg_no'][$k]) ? clean_xss_tags($_POST['eg_no'][$k]): '';
+        $eg_code = isset($_POST['eg_code'][$k]) ? clean_xss_tags($_POST['eg_code'][$k]): '';
 
         $sql = " update {$g5['eyoom_goods']}
-                    set eg_state = '{$_POST['eg_state'][$k]}'
-                 where eg_no = '{$_POST['eg_no'][$k]}' and eg_theme = '{$_POST['theme']}' ";
+                    set eg_state = '{$eg_state}'
+                 where eg_no = '{$eg_no}' and eg_theme = '{$post_theme}' ";
         sql_query($sql);
 
         /**
          * EB상품추출 마스터 설정파일
          */
         unset($eg_master);
-        $eg_master_file = G5_DATA_PATH . '/ebgoods/'.$_POST['theme'].'/eg_master_' . $_POST['eg_code'][$k] . '.php';
+        $eg_master_file = G5_DATA_PATH . '/ebgoods/'.$post_theme.'/eg_master_' . $eg_code . '.php';
         include ($eg_master_file);
         $eg_master['eg_state'] = $_POST['eg_state'][$k];
 
@@ -44,21 +52,24 @@ if ($_POST['act_button'] == "선택수정") {
     if (!$page) $page = 1;
     $qstr = "page={$page}";
 
-} else if ($_POST['act_button'] == "선택삭제") {
+} else if ($act_button == "선택삭제") {
 
-    auth_check($auth[$sub_menu], 'd');
-
-    for ($i=0; $i<count($_POST['chk']); $i++) {
+    auth_check_menu($auth, $sub_menu, 'd');
+    $del_eg_no = $del_eg_code = array();
+    for ($i=0; $i<$post_count_chk; $i++) {
         // 실제 번호를 넘김
-        $k = $_POST['chk'][$i];
-        $del_eg_no[$i] = $_POST['eg_no'][$k];
-        $del_eg_code[$i] = $_POST['eg_code'][$k];
+        $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
+        $eg_no = isset($_POST['eg_no'][$k]) ? clean_xss_tags($_POST['eg_no'][$k]): '';
+        $eg_code = isset($_POST['eg_code'][$k]) ? clean_xss_tags($_POST['eg_code'][$k]): '';
+
+        $del_eg_no[$i] = $eg_no;
+        $del_eg_code[$i] = $eg_code;
     }
 
     /**
      * 쿼리 조건문
      */
-    $where = " find_in_set(eg_no, '".implode(',', $del_eg_no)."') and eg_theme = '{$_POST['theme']}' ";
+    $where = " find_in_set(eg_no, '".implode(',', $del_eg_no)."') and eg_theme = '{$post_theme}' ";
 
     /**
      * EB상품추출 마스터 테이블 레코드 삭제
@@ -69,7 +80,7 @@ if ($_POST['act_button'] == "선택수정") {
     /**
      * 쿼리 조건문
      */
-    $where = " find_in_set(eg_code, '".implode(',', $del_eg_code)."') and gi_theme = '{$_POST['theme']}' ";
+    $where = " find_in_set(eg_code, '".implode(',', $del_eg_code)."') and gi_theme = '{$post_theme}' ";
 
     /**
      * EB상품추출 아이템 레코드 삭제

@@ -75,14 +75,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                         </tr>
                     </thead>
                     <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                         <?php foreach ($list[$i]['opt'] as $j => $opt) { ?>
                         <tr>
                             <?php if ($j == 0) { ?>
-                            <td rowspan="<?php echo count($list[$i]['opt']); ?>">
+                            <td rowspan="<?php echo count((array)$list[$i]['opt']); ?>">
                                 <a href="<?php echo $list[$i]['href']; ?>" target="_blank"><?php echo $list[$i]['image']; ?></a>
                             </td>
-                            <td rowspan="<?php echo count($list[$i]['opt']); ?>">
+                            <td rowspan="<?php echo count((array)$list[$i]['opt']); ?>">
                                 <a href="<?php echo $list[$i]['href']; ?>" target="_blank"><strong><?php echo stripslashes($row['it_name']); ?></strong></a><br>
                                 <?php if($od['od_tax_flag'] && $row['ct_notax']) echo '[비과세상품]'; ?>
                             </td>

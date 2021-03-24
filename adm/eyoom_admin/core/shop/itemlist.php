@@ -6,9 +6,12 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400300";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemlistupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -47,9 +50,13 @@ if ($sdt_target && $fr_date && $to_date) {
  * 서브 카테고리
  */
 $cate2 = $cate3 = $cate4 = array();
-$cate_a = clean_xss_tags(trim($_GET['cate_a']));
-$cate_b = clean_xss_tags(trim($_GET['cate_b']));
-$cate_c = clean_xss_tags(trim($_GET['cate_c']));
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
+$ituse = isset($_GET['ituse']) ? clean_xss_tags(trim($_GET['ituse'])) : '';
+$itsoldout = isset($_GET['itsoldout']) ? clean_xss_tags(trim($_GET['itsoldout'])) : '';
+$itype = isset($_GET['itype']) ? clean_xss_tags(trim($_GET['itype'])) : '';
+
 if ($cate_a) {
     $sql_cate = " and (a.ca_id like '{$cate_a}%' or a.ca_id2 like '{$cate_a}%' or a.ca_id3 like '{$cate_a}%') ";
     $w = " (1) and ca_id like '{$cate_a}%' and length(ca_id)=4";
@@ -132,6 +139,7 @@ $result = sql_query($sql);
 $qstr  = $qstr.'&amp;sca='.$sca.'&amp;page='.$page.'&amp;save_stx='.$stx;
 
 $k=0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['href'] = shop_item_url($row['it_id']);

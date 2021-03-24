@@ -175,7 +175,7 @@ $(document).ready(function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             No: "<?php echo $list[$i]['nw_id']; ?>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=config&amp;pid=newwinform&amp;w=u<?php if ($qstr) { ?>&amp;<?php echo $qstr; ?><?php } ?>&amp;nw_id=<?php echo $list[$i]['nw_id']; ?>'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=config&amp;pid=newwinformupdate&amp;w=d<?php if ($qstr) { ?>&amp;<?php echo $qstr; ?><?php } ?>&amp;nw_id=<?php echo $list[$i]['nw_id']; ?>&amp;smode=1' class='margin-left-10' onclick='return delete_confirm(this);'><u>삭제</u></a>",

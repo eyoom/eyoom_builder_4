@@ -30,7 +30,7 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
             if( $config['cf_bbs_rewrite'] > 1 ){
 
                 $get_content = get_content_db( $no , true);
-                $segments[2] = $get_content['co_seo_title'] ? urlencode($get_content['co_seo_title']).'/' : urlencode($no);
+                $segments[2] = (isset($get_content['co_seo_title']) && $get_content['co_seo_title']) ? urlencode($get_content['co_seo_title']).'/' : urlencode($no);
 
             } else {
                 $segments[2] = urlencode($no);
@@ -55,7 +55,7 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
 
                     $get_write = get_write( $g5['write_prefix'].$folder, $no , true);
                     
-                    $segments[2] = $get_write['wr_seo_title'] ? urlencode($get_write['wr_seo_title']).'/' : urlencode($no);
+                    $segments[2] = (isset($get_write['wr_seo_title']) && $get_write['wr_seo_title']) ? urlencode($get_write['wr_seo_title']).'/' : urlencode($no);
 
                 } else {
                     $segments[2] = urlencode($no);
@@ -108,14 +108,14 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
 				$url .= ($folder === 'content') ? '?co_id='. $no : '?'. $no;
 			}
             if($query_string) {
-                $url .= ($no ? '?' : '&amp;'). $query_string;
+                $url .= (!$no ? '?' : '&amp;'). $query_string;
 			}
 		}
 
         $segments[0] = $url;
     }
 
-	return implode('/', $segments).$add_query;
+	return implode('/', (array)$segments).$add_query;
 }
 
 /**
@@ -156,10 +156,14 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
  */
 function get_query_url_from_pretty_url($short_url) {
     $purl = parse_url($short_url);
-    if ($purl['query']) {
-        $path_name = str_replace('/','',$purl['path']);
-        $info = explode('/', $purl['path']);
 
+    $get_path_url = parse_url(G5_URL);
+    $base_path = isset($get_path_url['path']) ? $get_path_url['path'] : '';
+
+    if ($purl['query']) {
+        $_purl = $base_path ? str_replace($base_path, '', $purl['path']): $purl['path'];
+        $path_name = str_replace('/','',$_purl);
+        $info = explode('/', $_purl);
         if (preg_match('/\.php/i',$info[2]) || !$info[2]) {
             return $short_url;
         } else {
@@ -167,7 +171,8 @@ function get_query_url_from_pretty_url($short_url) {
             return $url;
         }
     } else {
-        $info = explode('/', preg_replace('#http(s)?:\/\/#i','', $short_url));
+        $_purl = $base_path ? str_replace($base_path, '', $short_url): $short_url;
+        $info = explode('/', preg_replace('#http(s)?:\/\/#i','', $_purl));
         $url = get_query_url($info);
         return $url;
     }
@@ -188,6 +193,9 @@ function get_query_url ($info) {
     }
     else if ($info[1] == 'bbs' && $info[2]) {
         $url = G5_URL."/bbs/{$info[2]}";
+    }
+    else if ($info[1] == 'mypage') {
+        $url = G5_URL."/mypage/";
     } else {
         $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
     }
@@ -293,7 +301,7 @@ function update_eyoom_rewrite_rules(){
             $fp = fopen($save_path, "ab");
             flock( $fp, LOCK_EX );
             
-            $rewrite_str = implode("\n", $rules);
+            $rewrite_str = implode("\n", (array)$rules);
             
             fwrite( $fp, "\n" );
             fwrite( $fp, $rewrite_str );

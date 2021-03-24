@@ -65,7 +65,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             <?php echo $t_name; ?>: "<strong><?php echo $list[$i]['t_name']; ?></strong>",
             <?php echo $t_id; ?>: "<?php echo $list[$i]['t_id']; ?>",

@@ -249,16 +249,16 @@ if ($eyoom_board['bo_use_addon_map'] == '1' || (isset($ex_address) && $ex_addres
 /**
  * 이윰 여분필드 변수값 암호화
  */
-$eb_1 = $eb_1 ? $eb->encrypt_md5($eb_1): '';
-$eb_2 = $eb_2 ? $eb->encrypt_md5($eb_2): '';
-$eb_3 = $eb_3 ? $eb->encrypt_md5($eb_3): '';
-$eb_4 = $eb_4 ? $eb->encrypt_md5($eb_4): '';
-$eb_5 = $eb_5 ? $eb->encrypt_md5($eb_5): '';
-$eb_6 = $eb_6 ? $eb->encrypt_md5($eb_6): '';
-$eb_7 = $eb_7 ? $eb->encrypt_md5($eb_7): '';
-$eb_8 = $eb_8 ? $eb->encrypt_md5($eb_8): '';
-$eb_9 = $eb_9 ? $eb->encrypt_md5($eb_9): '';
-$eb_10 = $eb_10 ? $eb->encrypt_md5($eb_10): '';
+$eb_1 = $eb_1 ? $eb->encrypt_aes($eb_1): '';
+$eb_2 = $eb_2 ? $eb->encrypt_aes($eb_2): '';
+$eb_3 = $eb_3 ? $eb->encrypt_aes($eb_3): '';
+$eb_4 = $eb_4 ? $eb->encrypt_aes($eb_4): '';
+$eb_5 = $eb_5 ? $eb->encrypt_aes($eb_5): '';
+$eb_6 = $eb_6 ? $eb->encrypt_aes($eb_6): '';
+$eb_7 = $eb_7 ? $eb->encrypt_aes($eb_7): '';
+$eb_8 = $eb_8 ? $eb->encrypt_aes($eb_8): '';
+$eb_9 = $eb_9 ? $eb->encrypt_aes($eb_9): '';
+$eb_10 = $eb_10 ? $eb->encrypt_aes($eb_10): '';
 
 /**
  * 사용자 프로그램

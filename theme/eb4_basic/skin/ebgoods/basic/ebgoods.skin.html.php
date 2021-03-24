@@ -115,7 +115,7 @@ if (!defined('_EYOOM_')) exit;
         <?php if (is_array($eg_item)) { foreach ($eg_item as $k => $eb_goods) { ?>
         <div class="tab-pane <?php echo ($k==0) ? 'active': ''; ?> in" id="basic-tlb-<?php echo $eg_master['eg_code']; ?>-<?php echo ($k+1); ?>">
             <div class="ebgoods-basic row">
-                <?php if (count($eb_goods['list']) > 0) { foreach ($eb_goods['list'] as $i => $data) { ?>
+                <?php if (count((array)$eb_goods['list']) > 0) { foreach ($eb_goods['list'] as $i => $data) { ?>
                 <div class="col-sm-4">
                     <div class="goods-box">
                         <a href="<?php echo $data['href']; ?>">
@@ -197,7 +197,7 @@ if (!defined('_EYOOM_')) exit;
                 </div>
                 <?php } ?>
 
-                <?php if (count($eb_goods['list']) == 0) { ?>
+                <?php if (count((array)$eb_goods['list']) == 0) { ?>
                 <p class="text-center font-size-13 color-grey margin-top-10"><i class="fas fa-exclamation-circle"></i> 등록된 상품이 없습니다.</p>
                 <?php } ?>
             </div>

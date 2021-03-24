@@ -6,15 +6,15 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999500";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$eg_code        = clean_xss_tags(trim($_POST['eg_code']));
-$eg_theme       = clean_xss_tags(trim($_POST['theme']));
-$eg_state       = clean_xss_tags(trim($_POST['eg_state']));
-$eg_subject     = clean_xss_tags(trim($_POST['eg_subject']));
-$eg_skin        = clean_xss_tags(trim($_POST['eg_skin']));
-$eg_link        = $eb->filter_url($_POST['eg_link']);
-$eg_target      = clean_xss_tags(trim($_POST['eg_target']));
+$eg_code        = isset($_POST['eg_code']) ? clean_xss_tags(trim($_POST['eg_code'])) : '';
+$eg_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$eg_state       = isset($_POST['eg_state']) ? clean_xss_tags(trim($_POST['eg_state'])) : '';
+$eg_subject     = isset($_POST['eg_subject']) ? clean_xss_tags(trim($_POST['eg_subject'])) : '';
+$eg_skin        = isset($_POST['eg_skin']) ? clean_xss_tags(trim($_POST['eg_skin'])) : '';
+$eg_link        = isset($_POST['eg_link']) ? $eb->filter_url($_POST['eg_link']) : '';
+$eg_target      = isset($_POST['eg_target']) ? clean_xss_tags(trim($_POST['eg_target'])) : '';
 
 $sql_common = "
     eg_code = '{$eg_code}',
@@ -25,7 +25,6 @@ $sql_common = "
     eg_link = '{$eg_link}',
     eg_target = '{$eg_target}',
 ";
-
 
 if ($w == '') {
     sql_query(" insert into {$g5['eyoom_goods']} set {$sql_common} eg_regdt = '".G5_TIME_YMDHIS."'");

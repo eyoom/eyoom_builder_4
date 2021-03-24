@@ -6,42 +6,42 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999620";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$iw             = clean_xss_tags(trim($_POST['iw']));
-$li_theme       = clean_xss_tags(trim($_POST['theme']));
-$li_no          = clean_xss_tags(trim($_POST['li_no']));
-$el_code        = clean_xss_tags(trim($_POST['el_code']));
-$li_state       = clean_xss_tags(trim($_POST['li_state']));
-$li_sort        = clean_xss_tags(trim($_POST['li_sort']));
-$li_title       = clean_xss_tags(trim($_POST['li_title']));
-$li_link        = $eb->filter_url($_POST['li_link']);
-$li_target      = clean_xss_tags(trim($_POST['li_target']));
-$li_bo_table    = clean_xss_tags(trim($_POST['li_bo_table']));
-$li_gr_id       = clean_xss_tags(trim($_POST['li_gr_id']));
-$li_include     = clean_xss_tags(trim($_POST['li_include']));
-$li_exclude     = clean_xss_tags(trim($_POST['li_exclude']));
-$li_count       = clean_xss_tags(trim($_POST['li_count']));
-$li_depart      = clean_xss_tags(trim($_POST['li_depart']));
-$li_period      = clean_xss_tags(trim($_POST['li_period']));
-$li_cut_subject = clean_xss_tags(trim($_POST['li_cut_subject']));
-$li_type        = clean_xss_tags(trim($_POST['li_type']));
-$li_img_view    = clean_xss_tags(trim($_POST['li_img_view']));
-$li_img_width   = clean_xss_tags(trim($_POST['li_img_width']));
-$li_img_height  = clean_xss_tags(trim($_POST['li_img_height']));
-$li_content     = clean_xss_tags(trim($_POST['li_content']));
-$li_cut_content = clean_xss_tags(trim($_POST['li_cut_content']));
-$li_bo_subject  = clean_xss_tags(trim($_POST['li_bo_subject']));
-$li_ca_view     = clean_xss_tags(trim($_POST['li_ca_view']));
-$li_best        = clean_xss_tags(trim($_POST['li_best']));
-$li_random      = clean_xss_tags(trim($_POST['li_random']));
-$li_mbname_view = clean_xss_tags(trim($_POST['li_mbname_view']));
-$li_photo       = clean_xss_tags(trim($_POST['li_photo']));
-$li_use_date    = clean_xss_tags(trim($_POST['li_use_date']));
-$li_date_type   = clean_xss_tags(trim($_POST['li_date_type']));
-$li_date_kind   = clean_xss_tags(trim($_POST['li_date_kind']));
-$li_view_level  = clean_xss_tags(trim($_POST['li_view_level']));
-$li_renew       = clean_xss_tags(trim($_POST['li_renew']));
+$iw             = isset($_POST['iw']) ? clean_xss_tags(trim($_POST['iw'])) : '';
+$li_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$li_no          = isset($_POST['li_no']) ? clean_xss_tags(trim($_POST['li_no'])) : '';
+$el_code        = isset($_POST['el_code']) ? clean_xss_tags(trim($_POST['el_code'])) : '';
+$li_state       = isset($_POST['li_state']) ? clean_xss_tags(trim($_POST['li_state'])) : '';
+$li_sort        = isset($_POST['li_sort']) ? clean_xss_tags(trim($_POST['li_sort'])) : '';
+$li_title       = isset($_POST['li_title']) ? clean_xss_tags(trim($_POST['li_title'])) : '';
+$li_link        = isset($_POST['li_link']) ? $eb->filter_url($_POST['li_link']) : '';
+$li_target      = isset($_POST['li_target']) ? clean_xss_tags(trim($_POST['li_target'])) : '';
+$li_bo_table    = isset($_POST['li_bo_table']) ? clean_xss_tags(trim($_POST['li_bo_table'])) : '';
+$li_gr_id       = isset($_POST['li_gr_id']) ? clean_xss_tags(trim($_POST['li_gr_id'])) : '';
+$li_include     = isset($_POST['li_include']) ? clean_xss_tags(trim($_POST['li_include'])) : '';
+$li_exclude     = isset($_POST['li_exclude']) ? clean_xss_tags(trim($_POST['li_exclude'])) : '';
+$li_count       = isset($_POST['li_count']) ? clean_xss_tags(trim($_POST['li_count'])) : '';
+$li_depart      = isset($_POST['li_depart']) ? clean_xss_tags(trim($_POST['li_depart'])) : '';
+$li_period      = isset($_POST['li_period']) ? clean_xss_tags(trim($_POST['li_period'])) : '';
+$li_cut_subject = isset($_POST['li_cut_subject']) ? clean_xss_tags(trim($_POST['li_cut_subject'])) : '';
+$li_type        = isset($_POST['li_type']) ? clean_xss_tags(trim($_POST['li_type'])) : '';
+$li_img_view    = isset($_POST['li_img_view']) ? clean_xss_tags(trim($_POST['li_img_view'])) : '';
+$li_img_width   = isset($_POST['li_img_width']) ? clean_xss_tags(trim($_POST['li_img_width'])) : '';
+$li_img_height  = isset($_POST['li_img_height']) ? clean_xss_tags(trim($_POST['li_img_height'])) : '';
+$li_content     = isset($_POST['li_content']) ? clean_xss_tags(trim($_POST['li_content'])) : '';
+$li_cut_content = isset($_POST['li_cut_content']) ? clean_xss_tags(trim($_POST['li_cut_content'])) : '';
+$li_bo_subject  = isset($_POST['li_bo_subject']) ? clean_xss_tags(trim($_POST['li_bo_subject'])) : '';
+$li_ca_view     = isset($_POST['li_ca_view']) ? clean_xss_tags(trim($_POST['li_ca_view'])) : '';
+$li_best        = isset($_POST['li_best']) ? clean_xss_tags(trim($_POST['li_best'])) : '';
+$li_random      = isset($_POST['li_random']) ? clean_xss_tags(trim($_POST['li_random'])) : '';
+$li_mbname_view = isset($_POST['li_mbname_view']) ? clean_xss_tags(trim($_POST['li_mbname_view'])) : '';
+$li_photo       = isset($_POST['li_photo']) ? clean_xss_tags(trim($_POST['li_photo'])) : '';
+$li_use_date    = isset($_POST['li_use_date']) ? clean_xss_tags(trim($_POST['li_use_date'])) : '';
+$li_date_type   = isset($_POST['li_date_type']) ? clean_xss_tags(trim($_POST['li_date_type'])) : '';
+$li_date_kind   = isset($_POST['li_date_kind']) ? clean_xss_tags(trim($_POST['li_date_kind'])) : '';
+$li_view_level  = isset($_POST['li_view_leveliw']) ? clean_xss_tags(trim($_POST['li_view_level'])) : '';
+$li_renew       = isset($_POST['li_renew']) ? clean_xss_tags(trim($_POST['li_renew'])) : '';
 
 /**
  * 제외 테이블
@@ -90,7 +90,7 @@ if ($li_bo_table) {
 /**
  * 대상 테이블이 없다면, 모든 게시판에서 추춣을 의미 함
  */
-if (count($li_table) == 0) {
+if (count((array)$li_table) == 0) {
     $bo_info = $bbs->get_bo_subject();
     $li_table = array_keys($bo_info);
     $li_table = array_diff($li_table, $ex_tables);

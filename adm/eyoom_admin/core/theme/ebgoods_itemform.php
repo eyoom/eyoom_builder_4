@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999500";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 /**
  * 테마 환경설정 파일
@@ -15,14 +15,16 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebgoods_itemform_update&amp;smode=1';
 
-$eg_code = clean_xss_tags(trim($_GET['eg_code']));
+$eg_code = isset($_GET['eg_code']) ? clean_xss_tags(trim($_GET['eg_code'])): '';
+$gi_no = isset($_GET['gi_no']) ? clean_xss_tags(trim($_GET['gi_no'])): '';
 
 /**
  * EB상품추출 아이템 정보 가져오기
  */
 if ($iw == 'u') {
     $gi = sql_fetch("select * from {$g5['eyoom_goods_item']} where gi_no = '{$gi_no}' and gi_theme='{$this_theme}'");
-    if ($gi) {
+    $eg_item = array();
+    if (isset($gi) && is_array($gi)) {
         foreach($gi as $key => $value) {
             $eg_item[$key] = get_text(stripslashes($value));
         }

@@ -15,6 +15,7 @@ $sql = " select *
           order by od_id desc
           $limit ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $uid = md5($row['od_id'].$row['od_time'].$row['od_ip']);
 
@@ -55,7 +56,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 	$list[$i]['od_status_number'] = $od_status_number;
 	$list[$i]['od_status'] = $od_status;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 페이징

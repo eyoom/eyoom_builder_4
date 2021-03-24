@@ -6,7 +6,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300700";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
+
+$g5['title'] = 'FAQ 상세관리';
+if (isset($_REQUEST['fm_subject'])){
+    $fm_subject = clean_xss_tags($_REQUEST['fm_subject'], 1, 1, 255);
+    $g5['title'] .= ' : '.$fm_subject;
+}
 
 $fm_id = (int) $fm_id;
 
@@ -22,7 +28,7 @@ $total_count = $row['cnt'];
 
 $sql = "select * $sql_common order by fa_order , fa_id ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $row1 = sql_fetch(" select COUNT(*) as cnt from {$g5['faq_table']} where fm_id = '{$row['fm_id']}' ");
     $cnt = $row1['cnt'];

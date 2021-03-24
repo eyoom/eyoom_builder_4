@@ -10,21 +10,23 @@ check_demo();
 
 check_admin_token();
 
-if (!count($_POST['chk'])) {
+$count_post_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
+
+if (! $count_post_chk) {
     alert($_POST['act_button']." 하실 항목을 하나 이상 체크하세요.");
 }
 
-if ($_POST['act_button'] == "선택수정") {
-    auth_check($auth[$sub_menu], 'w');
-} else if ($_POST['act_button'] == "선택삭제") {
-    auth_check($auth[$sub_menu], 'd');
+if ($_POST['act_button'] === "선택수정") {
+    auth_check_menu($auth, $sub_menu, 'w');
+} else if ($_POST['act_button'] === "선택삭제") {
+    auth_check_menu($auth, $sub_menu, 'd');
 } else {
     alert("선택수정이나 선택삭제 작업이 아닙니다.");
 }
 
-for ($i=0; $i<count($_POST['chk']); $i++)
+for ($i=0; $i<$count_post_chk; $i++)
 {
-    $k = $_POST['chk'][$i]; // 실제 번호를 넘김
+    $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0; // 실제 번호를 넘김
     $iit_id = isset($_POST['it_id'][$k]) ? preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$k]) : '';
     $iis_id = isset($_POST['is_id'][$k]) ? (int) $_POST['is_id'][$k] : 0;
     $iis_score = isset($_POST['is_score'][$k]) ? (int) $_POST['is_score'][$k] : 0;
@@ -33,10 +35,9 @@ for ($i=0; $i<count($_POST['chk']); $i++)
     if ($_POST['act_button'] == "선택수정")
     {
         $sql = "update {$g5['g5_shop_item_use_table']}
-                set is_score   = '{$iis_score}',
-                    is_confirm = '{$iis_confirm}'
-                where is_id      = '{$iis_id}' ";
-
+                   set is_score   = '{$iis_score}',
+                       is_confirm = '{$iis_confirm}'
+                 where is_id      = '{$iis_id}' ";
         sql_query($sql);
 
         $msg = "선택한 상품후기를 수정처리하였습니다.";

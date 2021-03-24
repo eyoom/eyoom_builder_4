@@ -32,6 +32,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 <?php } ?>
 </style>
 
+<form name="fqalist" id="fqalist" action="<?php echo G5_BBS_URL; ?>/qadelete.php" onsubmit="return fqalist_submit(this);" method="post" class="eyoom-form">
+<input type="hidden" name="stx" value="<?php echo $stx; ?>">
+<input type="hidden" name="sca" value="<?php echo $sca; ?>">
+<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="token" value="<?php echo get_text($token); ?>">
+
 <div class="qa-list">
     <?php /* 게시판 페이지 정보 및 버튼 시작 */ ?>
     <div class="board-info margin-bottom-20">
@@ -63,7 +69,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         <div id="tab-category">
             <div class="category-list">
                 <span <?php if ($sca == '') { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류</a></span>
-                <?php for ($i=0; $i<count($category_tab); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$category_tab); $i++) { ?>
                 <span <?php if ($category_tab[$i]['category'] == $sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_tab[$i]['href']; ?>"><?php echo $category_tab[$i]['category']; ?></a></span>
                 <?php } ?>
                 <span class="fake-span"></span>
@@ -78,10 +84,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
     <?php /* 게시판 카테고리 끝 */ ?>
 
-    <form name="fqalist" id="fqalist" action="<?php echo G5_BBS_URL; ?>/qadelete.php" onsubmit="return fqalist_submit(this);" method="post" class="eyoom-form">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="sca" value="<?php echo $sca; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
     <div class="table-list-eb margin-bottom-20">
         <div class="qa-list-body">
             <table class="table table-hover">
@@ -103,7 +105,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                     <tr>
                         <td class="text-center hidden-xs"><?php echo $list[$i]['num']; ?></td>
                         <?php if ($is_checkbox) { ?>
@@ -137,7 +139,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         </td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($list) == 0) { ?>
+                    <?php if (count((array)$list) == 0) { ?>
                     <tr><td colspan="<?php echo $colspan; ?>" class="text-center"><span class="color-grey"><i class="fas fa-exclamation-circle"></i> 게시물이 없습니다.</span></td></tr>
                     <?php } ?>
                 </tbody>
@@ -155,8 +157,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         <?php } ?>
     </div>
     <div class="clearfix"></div>
-    </form>
 </div>
+</form>
 
 <?php if ($is_checkbox) { ?>
 <noscript>
@@ -167,7 +169,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 <?php /* 페이지 */ ?>
 <?php echo eb_paging($eyoom['paging_skin']);?>
 
-<?php /* 게시판 검색 시작 */ ?>
+<?php /* 검색 시작 */ ?>
 <div class="row margin-top-30">
     <div class="col-sm-4 col-sm-offset-4">
         <form name="fsearch" method="get" class="eyoom-form">
@@ -180,7 +182,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </form>
     </div>
 </div>
-<?php /* 게시판 검색 끝 */ ?>
+<?php /* 검색 끝 */ ?>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>

@@ -99,10 +99,11 @@ function ftheme_check(f) {
 		var wurl = '<?php echo $hostname['host']; ?>';
 		var rurl = '';
 		var itid = '<?php echo $it_id; ?>';
+		var eb4 = '<?php echo EYOOM_VERSION; ?>';
 		
 		$.ajax({
 			url: "<?php echo EYOOM_AJAX_URL; ?>",
-			data: {tmkey: tmkey, scheme: scheme, host: host, wurl: wurl, rurl: rurl, itid: itid},
+			data: {tmkey: tmkey, scheme: scheme, host: host, wurl: wurl, rurl: rurl, itid: itid, eb4: eb4},
 			dataType: 'jsonp',
 			jsonp: 'callback',
 			jsonpCallback: 'set_theme',

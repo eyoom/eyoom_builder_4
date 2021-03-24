@@ -4,17 +4,17 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
 /**
  * POST 변수 체크
  */
-$theme      = get_text($_POST['theme']);
-$me_shop    = get_text($_POST['me_shop']);
-$tg_theme   = get_text($_POST['tg_theme']);
-$tg_me_shop = get_text($_POST['tg_me_shop']);
+$theme      = isset($_POST['theme']) ? clean_xss_tags($_POST['theme']): '';
+$me_shop    = isset($_POST['me_shop']) ? clean_xss_tags($_POST['me_shop']): '';
+$tg_theme   = isset($_POST['tg_theme']) ? clean_xss_tags($_POST['tg_theme']): '';
+$tg_me_shop = isset($_POST['tg_me_shop']) ? clean_xss_tags($_POST['tg_me_shop']): '';
 
 if(!($theme && $me_shop && $tg_theme && $tg_me_shop)) {
     alert('잘못된 접근입니다.');

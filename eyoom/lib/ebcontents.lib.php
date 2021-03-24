@@ -21,6 +21,14 @@ function eb_contents ($ec_code) {
      */
     $ebcontents_path = G5_DATA_PATH.'/ebcontents/'.$theme;
     $ebcontents_url = G5_DATA_URL.'/ebcontents/'.$theme;
+
+    /**
+     * 디렉토리가 없다면 생성하기
+     */
+    if (!is_dir($ebcontents_path)) {
+        $qfile->make_directory($ebcontents_path);
+    }
+
     $master_file = $ebcontents_path.'/ec_master_'.$ec_code.'.php';
     if (file_exists($master_file) && !is_dir($master_file)) {
         include($master_file);

@@ -4,21 +4,6 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-if ($w == '') {
-    if (defined('G5_SLACK_USE') && G5_SLACK_USE === true && is_file(G5_SLACK_PATH.'/slack.class.php')) {
-        include_once(G5_SLACK_PATH.'/slack.class.php');
-
-        $slack = new SLACK();
-
-        $slack->setChannel("#{$config['cf_slack_channel']}"); // 메세지를 전송할 Slack 채널명
-        $slack->setUsername('[게시글] '.$wr_name);
-        $slack->setMessage($wr_content, get_eyoom_pretty_url($bo_table,$wr_id));
-
-
-        $result = $slack->send();
-    }
-}
-
 /**
  * 한줄 게시판이라면 목록으로 이동
  */

@@ -121,7 +121,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
     </div>
 
     <div class="config-box">
-        <?php for($i=0; $i<count($bolist); $i++) { ?>
+        <?php for($i=0; $i<count((array)$bolist); $i++) { ?>
         <label class="toggle small-toggle green-toggle"><input type="checkbox" class="bo_favorite_<?php echo $i; ?>" value="on" checked><i class="rounded-4x"></i><?php echo $bolist[$i]['gr_subject'];?> &gt; <?php echo $bolist[$i]['bo_subject'];?></label>
         <input type="hidden" name="bo_favorite[<?php echo $bolist[$i]['bo_table']; ?>]" id="bo_favorite_<?php echo $i; ?>" value="on">
         <?php } ?>

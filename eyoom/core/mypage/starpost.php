@@ -24,6 +24,7 @@ $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 $sql = "select * from {$g5['eyoom_rating']} where (1) and mb_id='{$member['mb_id']}' and find_in_set(bo_table,'".implode(',',$bo_possible)."') order by rt_datetime desc limit $from_record, $page_rows";
 $result = sql_query($sql, false);
 $k=0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     /**
      * 게시글 정보
@@ -34,6 +35,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $k++;
     }
 }
+$count = count($list);
 
 /**
  * 사용자 프로그램

@@ -6,9 +6,16 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400620";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemstocklistupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -44,17 +51,17 @@ if ($sdt_target && $fr_date && $to_date) {
  */
 $cate2 = $cate3 = $cate4 = array();
 if ($cate_a) {
-    $sql_cate = " and (a.ca_id like '{$cate_a}%' or a.ca_id2 like '{$cate_a}%' or a.ca_id3 like '{$cate_a}%') ";
+    $sql_cate = " and (ca_id like '{$cate_a}%' or ca_id2 like '{$cate_a}%' or ca_id3 like '{$cate_a}%') ";
     $w = " (1) and ca_id like '{$cate_a}%' and length(ca_id)=4";
     $cate2 = $shop->get_goods_category($fields, $w);
 }
 if ($cate_a && $cate_b) {
-    $sql_cate = " and (a.ca_id like '{$cate_b}%' or a.ca_id2 like '{$cate_b}%' or a.ca_id3 like '{$cate_b}%') ";
+    $sql_cate = " and (ca_id like '{$cate_b}%' or ca_id2 like '{$cate_b}%' or ca_id3 like '{$cate_b}%') ";
     $w = " (1) and ca_id like '{$cate_b}%' and length(ca_id)=6";
     $cate3 = $shop->get_goods_category($fields, $w);
 }
 if ($cate_a && $cate_b && $cate_c) {
-    $sql_cate = " and (a.ca_id like '{$cate_c}%' or a.ca_id2 like '{$cate_c}%' or a.ca_id3 like '{$cate_c}%') ";
+    $sql_cate = " and (ca_id like '{$cate_c}%' or ca_id2 like '{$cate_c}%' or ca_id3 like '{$cate_c}%') ";
     $w = " (1) and ca_id like '{$cate_c}%' and length(ca_id)=8";
     $cate4 = $shop->get_goods_category($fields, $w);
 }
@@ -102,6 +109,7 @@ $qstr = $qstr1.'&amp;page='.$page;
 
 // 리스트
 $k = 0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $href = shop_item_url($row['it_id']);
@@ -109,8 +117,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     // 선택옵션이 있을 경우 주문대기 수량 계산하지 않음
     $sql2 = " select count(*) as cnt from {$g5['g5_shop_item_option_table']} where it_id = '{$row['it_id']}' and io_type = '0' and io_use = '1' ";
     $row2 = sql_fetch($sql2);
+    $wait_qty = 0;
 
-    if(!$row2['cnt']) {
+    if(! (isset($row2['cnt']) && $row2['cnt'])) {
         $sql1 = " select SUM(ct_qty) as sum_qty
                     from {$g5['g5_shop_cart_table']}
                    where it_id = '{$row['it_id']}'
@@ -132,7 +141,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     }
 
     $list[$i] = $row;
-    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', cut_str(stripslashes($row['it_name']), 60, "&#133"));
     $list[$i]['href'] = $href;
     $list[$i]['wait_qty'] = $wait_qty;
     $list[$i]['temporary_qty'] = $temporary_qty;

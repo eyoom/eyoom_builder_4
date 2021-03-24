@@ -13,7 +13,7 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_itemlist_update&amp;smode=1';
 
-$ec_code = clean_xss_tags(trim($_GET['ec_code']));
+$ec_code = isset($_REQUEST['ec_code']) ? clean_xss_tags(trim($_REQUEST['ec_code'])) : '';
 if (!$ec_code) {
     alert('잘못된 접근입니다.');
 }
@@ -30,20 +30,20 @@ $sql_search = " where ci_theme='{$this_theme}' and ec_code = '{$ec_code}' ";
 
 $sql = " select * {$sql_common} {$sql_search} order by ci_sort asc";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 
-    $ci_link = unserialize($row['ci_link']);
-    $ci_target = unserialize($row['ci_target']);
-    $ci_img = unserialize($row['ci_img']);
+    $ci_link = is_array($row['ci_link']) ? unserialize($row['ci_link']) : array();
+    $ci_target = is_array($row['ci_target']) ? unserialize($row['ci_target']) : array();
+    $ci_img = is_array($row['ci_img']) ? unserialize($row['ci_img']) : array();
 
     $ci_file = G5_DATA_PATH.'/ebcontents/'.$row['ci_theme'].'/img/'.$ci_img[0];
     if (file_exists($ci_file) && $ci_img[0]) {
         $ci_url     = G5_DATA_URL.'/ebcontents/'.$row['ci_theme'].'/img/'.$ci_img[0];
         $list[$i]['ci_image'] = "<img src='".$ci_url."' class='img-responsive'> ";
     }
-    $ci_subject = unserialize($row['ci_subject']);
+    $ci_subject = is_array($row['ci_subject']) ? unserialize($row['ci_subject']) : array();
     $list[$i]['ci_subject_1'] = $ci_subject[0];
 
     $view_level = get_member_level_select("ci_view_level[$i]", 1, $member['mb_level'], $row['ci_view_level']);

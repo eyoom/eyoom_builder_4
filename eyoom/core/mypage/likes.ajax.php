@@ -8,7 +8,7 @@ include_once($g5_path.'/common.php');
 
 if (!$is_member) exit;
 
-$mb_id = $_POST['user'];
+$mb_id = isset($_POST['user']) ? trim($_POST['user']) : '';
 if (!$mb_id) exit;
 
 $user = $eb->get_user_info($mb_id);

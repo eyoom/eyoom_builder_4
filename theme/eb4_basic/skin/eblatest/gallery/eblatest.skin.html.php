@@ -88,7 +88,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="tab-content">
         <?php if (is_array($el_item)) { foreach ($el_item as $k => $eb_latest) { ?>
         <div class="tab-pane <?php echo ($k==0) ? 'active': ''; ?> in" id="gallery-tlb-<?php echo $el_master['el_code']; ?>-<?php echo ($k+1); ?>">
-            <?php if (count($eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
+            <?php if (count((array)$eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
             <div class="gallery-item">
                 <div class="gallery-img">
                     <a href="<?php echo $data['href']; ?>">

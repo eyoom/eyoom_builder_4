@@ -40,6 +40,7 @@ $g5['title'] = '배송지 목록';
 include_once(G5_PATH.'/head.sub.php');
 
 $sep = chr(30);
+$list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     $addr = $row['ad_name'].$sep.$row['ad_tel'].$sep.$row['ad_hp'].$sep.$row['ad_zip1'].$sep.$row['ad_zip2'].$sep.$row['ad_addr1'].$sep.$row['ad_addr2'].$sep.$row['ad_addr3'].$sep.$row['ad_jibeon'].$sep.$row['ad_subject'];
     $addr = get_text($addr);
@@ -57,7 +58,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 	$list[$i]['ad_jibeon'] = $row['ad_jibeon'];
 	$list[$i]['del_href'] = $_SERVER['SCRIPT_NAME'] .'?w=d&amp;ad_id='.$row['ad_id'];
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 페이징

@@ -30,7 +30,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             </tr>
             </thead>
             <tbody>
-            <?php for ($i=0; $i<count($list); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$list); $i++) { ?>
             <tr>
                 <td class="td_chk">
                     <label for="chk<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['bg_name'] ?></label>

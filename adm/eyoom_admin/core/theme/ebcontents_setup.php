@@ -8,8 +8,8 @@ $sub_menu = "999610";
 
 if($is_admin != 'super') alert('최고관리자만 설정을 변경할 수 있습니다.');
 
-$ec_theme = clean_xss_tags(get_text(trim($_GET['ec_theme'])));
-$ec_pid = clean_xss_tags(get_text(trim($_GET['ec_pid'])));
+$ec_theme = isset($_GET['ec_theme']) ? clean_xss_tags(get_text(trim($_GET['ec_theme']))) : '';
+$ec_pid = isset($_GET['ec_pid']) ? clean_xss_tags(get_text(trim($_GET['ec_pid']))): '';
 
 /**
  * 테마 설정 폴더 업로드 체크
@@ -45,7 +45,7 @@ if (file_exists($ebcontents_sql_file)) {
 	$file = preg_replace('/`ci_theme` = \'(eb4_[a-z0-9_]{5,10})\'/', "`ci_theme` = '{$ec_theme}'", $file);
 
 	preg_match_all('/`ec_code` = \'([0-9]{10,15})\'/', $file, $matchs);
-	if (is_array($matchs[1])) {
+	if (isset($matchs[1]) && is_array($matchs[1])) {
     	$add_code = date('H')*3600 + date('i')*60 + date('s') + (ceil(time()-$code)/86400)*86400;
     	foreach ($matchs[1] as $k => $code) {
         	$new_code = $code + $add_code;

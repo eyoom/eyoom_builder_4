@@ -49,9 +49,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <div class="adm-form-wrap">
         <header><strong><i class="fas fa-caret-right"></i> 결과메세지</strong></header>
         <fieldset>
-            <p class="color-blue">다음 <?php echo count($real_email); ?> 개의 메일 주소로 테스트 메일 발송이 완료되었습니다.</p>
+            <p class="color-blue">다음 <?php echo count((array)$real_email); ?> 개의 메일 주소로 테스트 메일 발송이 완료되었습니다.</p>
             <div class="alert alert-warning padding-all-10 margin-top-30 margin-bottom-30">
-                <?php for ($i=0;$i<count($real_email);$i++) { ?>
+                <?php for ($i=0;$i<count((array)$real_email);$i++) { ?>
                 <div><?php echo $real_email[$i]; ?></div>
                 <?php } ?>
             </div>

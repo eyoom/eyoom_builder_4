@@ -24,10 +24,12 @@ $sql = "select a.bo_table, a.bo_subject, b.gr_subject from {$g5['board_table']} 
 $favorite = (array)unserialize($eyoomer['favorite']);
 if (!$favorite) $favorite = array();
 $res = sql_query($sql,false);
+$bolist = array();
 for($i=0; $row=sql_fetch_array($res);$i++) {
     $bolist[$i] = $row;
     //if (in_array($row['bo_table'],$favorite)) $bolist[$i]['check'] = true;
 }
+$count = count($bolist);
 
 /**
  * 사용자 프로그램

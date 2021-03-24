@@ -216,7 +216,7 @@ button.mfp-close {position:fixed;color:#fff !important}
     <?php /* 첨부파일 시작 */?>
     <div class="board-view-file">
         <ul class="list-unstyled">
-        <?php for ($i=0; $i<count($view_file); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$view_file); $i++) { ?>
             <li>
                 <div class="pull-left">
                     - 첨부파일 : <strong><?php echo $view_file[$i]['source']; ?></strong> <?php echo $view_file[$i]['content']; ?> (<?php echo $view_file[$i]['size']; ?>) - <a href="<?php echo $view_file[$i]['href']; ?>" class="view_file_download"><u>다운로드</u></a>
@@ -233,7 +233,7 @@ button.mfp-close {position:fixed;color:#fff !important}
     <?php /* 첨부파일 끝 */?>
     <?php } ?>
 
-    <?php if (count($view_link) >0) { ?>
+    <?php if (count((array)$view_link) >0) { ?>
     <?php /* 관련링크 시작 */?>
     <div class="board-view-link">
         <ul class="list-unstyled">
@@ -382,10 +382,10 @@ button.mfp-close {position:fixed;color:#fff !important}
     <?php } ?>
 
     <?php /* 태그 시작 */?>
-    <?php if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && count($view_tags) > 0) { ?>
+    <?php if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && count((array)$view_tags) > 0) { ?>
     <div class="board-view-tag">
         <i class="fas fa-tags"></i>
-        <?php for ($i=0; $i<count($view_tags); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$view_tags); $i++) { ?>
         <a href="<?php echo $view_tags[$i]['href']; ?>"><span><?php echo $view_tags[$i]['tag']; ?></span></a>
         <?php } ?>
         <div class="clearfix"></div>
@@ -463,10 +463,10 @@ button.mfp-close {position:fixed;color:#fff !important}
                 <?php if ($goodinfo && $is_member) { ?>
                 <div class="text-center color-grey font-size-11 margin-bottom-10"><i class="fas fa-exclamation-circle"></i> 이미 <?php echo $goodinfo['bg_flag'] == 'good' ? '추천': '비추천';?>하였습니다. [참여일 : <?php echo $goodinfo['bg_datetime']; ?>]</div>
                 <?php } ?>
-                <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count($goods) > 0) { ?>
+                <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count((array)$goods) > 0) { ?>
                 <a href="#collapse-good" data-toggle="collapse" class="btn-e btn-e-xs btn-e-default">추천한 회원 보기</a>
                 <?php } ?>
-                <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count($nogoods) > 0) { ?>
+                <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count((array)$nogoods) > 0) { ?>
                 <a href="#collapse-nogood" data-toggle="collapse" class="btn-e btn-e-xs btn-e-default">비추천 회원 보기</a>
                 <?php } ?>
             </div>
@@ -486,17 +486,17 @@ button.mfp-close {position:fixed;color:#fff !important}
                     <?php } ?>
                 </div>
                 <div class="text-center color-grey font-size-11 margin-bottom-10"><i class="fas fa-exclamation-circle"></i> 로그인 후 추천 또는 비추천하실 수 있습니다.</div>
-                <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count($goods) > 0) { ?>
+                <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count((array)$goods) > 0) { ?>
                 <a href="#collapse-good" data-toggle="collapse" class="btn-e btn-e-xs btn-e-default">추천한 회원 보기</a>
                 <?php } ?>
-                <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count($nogoods) > 0) { ?>
+                <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count((array)$nogoods) > 0) { ?>
                 <a href="#collapse-nogood" data-toggle="collapse" class="btn-e btn-e-xs btn-e-default">비추천 회원 보기</a>
                 <?php } ?>
             </div>
             <?php } ?>
         <?php } ?>
 
-        <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count($goods) > 0) { ?>
+        <?php if ($eyoom_board['bo_use_good_member'] == '1' && $board['bo_use_good'] && count((array)$goods) > 0) { ?>
         <div id="collapse-good" class="board-view-good-member collapse">
             <h6>추천한 회원</h6>
             <?php foreach ($goods as $k => $gmember) { ?>
@@ -519,7 +519,8 @@ button.mfp-close {position:fixed;color:#fff !important}
             <?php } ?>
         </div>
         <?php } ?>
-        <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count($nogoods) > 0) { ?>
+        
+        <?php if ($eyoom_board['bo_use_nogood_member'] == '1' && $board['bo_use_nogood'] && count((array)$nogoods) > 0) { ?>
         <div id="collapse-nogood" class="board-view-good-member collapse">
             <h6>비추천 회원</h6>
             <?php foreach ($nogoods as $k => $nogmember) { ?>
@@ -810,16 +811,18 @@ $(function() {
             });
             return;
         } else {
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php', { bo_table: "<?php echo $bo_table; ?>", wr_id: "<?php echo $wr_id; ?>", cmt_id: cmt_id, action: "add", reason: yc_reason });
-            swal({
-                title: "알림!",
-                text: "정상적으로 신고처리 하였습니다.",
-                confirmButtonColor: "#FDAB29",
-                type: "warning",
-                confirmButtonText: "확인"
-            },
-            function() {
-               document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var wr_id = '<?php echo $wr_id; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php';
+            $.post('<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php', { bo_table: bo_table, wr_id: wr_id, cmt_id: cmt_id, action: "add", reason: yc_reason }, function() {
+                swal({
+                    title: "알림!",
+                    text: "정상적으로 신고처리 하였습니다.",
+                    confirmButtonColor: "#FDAB29",
+                    type: "warning",
+                    confirmButtonText: "확인"
+                });
+                document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
             });
         }
     });
@@ -850,8 +853,12 @@ $(function() {
             closeOnCancel: true
         },
         function(){
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php', { bo_table: "<?php echo $bo_table; ?>", wr_id: "<?php echo $wr_id; ?>", cmt_id: cmt_id, action: "cancel" });
-            document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var wr_id = '<?php echo $wr_id; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php';
+            $.post(url, { bo_table: bo_table, wr_id: wr_id, cmt_id: cmt_id, action: "cancel" }, function() {
+                document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
+            });
         });
     });
 
@@ -991,8 +998,12 @@ $(function() {
             closeOnCancel: true
         },
         function(){
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/star_rating.php', { bo_table: "<?php echo $bo_table; ?>", wr_id: "<?php echo $wr_id; ?>", score: score });
-            document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var wr_id = '<?php echo $wr_id; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/star_rating.php';
+            $.post(url, { bo_table: bo_table, wr_id: wr_id, score: score }, function() {
+                document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
+            });
         });
     });
     <?php } ?>
@@ -1108,8 +1119,12 @@ $(function() {
                 confirmButtonText: "확인"
             });
         } else {
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php', { bo_table: "<?php echo $bo_table; ?>", skin: skin });
-            document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var wr_id = '<?php echo $wr_id; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php';
+            $.post(url, { bo_table: bo_table, skin: skin }, function() {
+                document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
+            });
         }
     });
 });

@@ -24,7 +24,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <div class="alert alert-warning padding-all-10 margin-top-30 margin-bottom-30">
         <ul>
             <li>완료됨</li>
-            <?php for ($i=0; $i<count($print_html); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$print_html); $i++) { ?>
             <li><?php echo $print_html[$i]; ?></li>
             <?php } ?>
         </ul>

@@ -38,6 +38,7 @@ $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
 $sql = "select * {$sql_common} {$sql_order} limit {$from_record}, {$page_rows}";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 
@@ -100,7 +101,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['star'] = $rating['star'];
 }
 
-$tag_count = count($list);
+$tag_count = count((array)$list);
 
 /**
  * 페이징

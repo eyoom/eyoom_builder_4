@@ -253,18 +253,18 @@ $item_view = 'zoom';
                                     <a href="<?php echo G5_URL; ?>"><i class="fas fa-navicon nav-icon-pre hidden-xs hidden-sm"></i>HOME</a>
                                 </li>
                                 <li class="nav-li-divider"></li>
-                                <?php if (is_array($menu)) { ?>
+                                <?php if (isset($menu) && is_array($menu)) { ?>
                                 <?php foreach ($menu as $key => $menu_1) { ?>
                                 <li class="<?php if ($menu_1['active']) echo 'active';?> <?php if ($menu_1['submenu']) echo 'dropdown'; ?>">
                                     <a href="<?php echo $menu_1['me_link']; ?>" target="_<?php echo $menu_1['me_target']; ?>" class="dropdown-toggle disabled" <?php echo G5_IS_MOBILE && $menu_1['submenu'] ? 'data-toggle="dropdown"' : 'data-hover="dropdown"';?>>
                                         <?php if ($menu_1['me_icon']) { ?><i class="<?php echo $menu_1['me_icon']; ?> nav-cate-icon margin-right-5"></i><?php } ?>
                                         <?php echo $menu_1['me_name']?>
                                     </a>
-                                    <?php if (is_array($menu_1['submenu'])) { ?>
+                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                     <a href="#" class="cate-dropdown-open dorpdown-toggle hidden-lg hidden-md" data-toggle="dropdown"></a>
                                     <?php } ?>
-                                    <?php $index2 = 0; $size2 = count($menu_1['submenu']); ?>
-                                    <?php if (is_array($menu_1['submenu'])) { ?>
+                                    <?php $index2 = 0; $size2 = count((array)$menu_1['submenu']); ?>
+                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                     <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
                                     <?php if ($index2 == 0) { ?>
                                     <ul class="dropdown-menu">
@@ -283,8 +283,8 @@ $item_view = 'zoom';
                                                 <i class="fas fa-angle-right sub-caret hidden-sm hidden-xs"></i><i class="fas fa-angle-down sub-caret hidden-md hidden-lg"></i>
                                                 <?php } ?>
                                             </a>
-                                            <?php $index3 = 0; $size3 = count($menu_2['subsub']); ?>
-                                            <?php if (is_array($menu_2['subsub'])) { ?>
+                                            <?php $index3 = 0; $size3 = count((array)$menu_2['subsub']); ?>
+                                            <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { ?>
                                             <?php foreach ($menu_2['subsub'] as $ssubkey => $menu_3) { ?>
                                             <?php if ($index3 == 0) { ?>
                                             <ul class="dropdown-menu">
@@ -369,7 +369,7 @@ $item_view = 'zoom';
                 <?php /* 페이지 카테고리 시작, 서브페이지 사이드 레이아웃 사용 + 991px 이하에서만 출력 */ ?>
                 <?php if ($side_layout['use'] == 'yes') { ?>
                 <div class="category-mobile-area">
-                    <?php if ($sidemenu) { ?>
+                    <?php if (isset($sidemenu) && $sidemenu) { ?>
                     <div class="tab-scroll-page-category">
                         <div class="scrollbar">
                             <div class="handle">
@@ -378,7 +378,7 @@ $item_view = 'zoom';
                         </div>
                         <div id="tab-page-category">
                             <div class="page-category-list">
-                                <?php foreach ($sidemenu as $smenu) { ?>
+                                <?php foreach ((array)$sidemenu as $smenu) { ?>
                                 <span <?php if ($smenu['active']) echo 'active'; ?>><a href="<?php echo $smenu['me_link']; ?>" target="_<?php echo $smenu['me_target']; ?>"><?php echo $smenu['me_name']; ?></a></span>
                                 <?php } ?>
                                 <span class="fake-span"></span>

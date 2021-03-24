@@ -39,7 +39,7 @@ $comm_tax_mny = 0; // 과세금액
 $comm_vat_mny = 0; // 부가세
 $comm_free_mny = 0; // 면세금액
 $tot_tax_mny = 0;
-
+$sod_list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     // 합계금액 계산
     $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
@@ -159,7 +159,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $tot_point      += $point;
     $tot_sell_price += $sell_price;
 } // for 끝
-$sod_count = count($sod_list);
+$sod_count = count((array)$sod_list);
 
 if ($sod_count == 0) {
 	alert('장바구니가 비어 있습니다.', G5_SHOP_URL.'/cart.php');
@@ -180,6 +180,7 @@ $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 
 /**
  * 받으시는 분
  */
+$latest_addr = array();
 if($is_member) {
     // 배송지 이력
     $sep = chr(30);
@@ -297,6 +298,7 @@ if ($default['de_bank_use']) {
 	if (count($bank_str) <= 1) {
 		$bank_account = $bank_str[0];
 	} else {
+        $bank_str = $bank_account = array();
 		for ($i=0; $i<count($bank_str); $i++) {
 			$bank_str[$i] = trim($bank_str[$i]);
 			$bank_account[$i]['bank'] .= $bank_str[$i];

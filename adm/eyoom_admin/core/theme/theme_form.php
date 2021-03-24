@@ -14,7 +14,7 @@ $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=theme_form_update&amp;smode=1
 /**
  * 설치하고자 하는 테마명
  */
-$theme_name = clean_xss_tags(trim($_GET['thema']));
+$theme_name = isset($_GET['thema']) ? clean_xss_tags(trim($_GET['thema'])): '';
 
 /**
  * 홈페이지 주소

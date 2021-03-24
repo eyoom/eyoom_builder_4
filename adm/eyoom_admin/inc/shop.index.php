@@ -15,6 +15,7 @@ foreach($od_status as $status) {
  */
 $sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 5 ";
 $result = sql_query($sql);
+$item_qa = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
     $row1 = sql_fetch($sql1);
@@ -30,6 +31,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
  */
 $sql = " select * from {$g5['g5_shop_item_use_table']} where (1) order by is_id desc limit 5 ";
 $result = sql_query($sql);
+$item_use = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
     $row1 = sql_fetch($sql1);
@@ -79,6 +81,7 @@ foreach($this_ord_info as $key => $od_info) {
 $term = 3;
 $info = array();
 $info_key = array();
+$od_pg_thead = array();
 $j = 0;
 for($i=($term - 1); $i>=0; $i--) {
     $date = date("Y-m-d", strtotime('-'.$i.' days', G5_SERVER_TIME));
@@ -92,6 +95,7 @@ for($i=($term - 1); $i>=0; $i--) {
 $pg_case = array('신용카드', '계좌이체', '가상계좌', '무통장', '휴대폰', '포인트', '쿠폰', '간편결제', 'KAKAOPAY');
 
 $k =0;
+$pg_info = array();
 foreach($pg_case as $val) {
     $val_cnt ++;
     $pg_info[$k]['cnt']     = $val_cnt;

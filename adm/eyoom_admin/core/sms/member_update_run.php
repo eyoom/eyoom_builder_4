@@ -9,6 +9,8 @@ include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
 @include_once(G5_PLUGIN_PATH."/sms5/JSON.php");
 
+$mtype = isset($_REQUEST['mtype']) ? clean_xss_tags($_REQUEST['mtype'], 1, 1) : '';
+
 if(empty($config['cf_sms_use'])){
     if( $mtype == "json" ){
         die("{\"error\":\"환경 설정의 SMS 사용에서 아이코드를 사용설정해 주셔야 실행할수 있습니다.\"}");
@@ -25,9 +27,9 @@ if( !function_exists('json_encode') ) {
 }
 
 if( $mtype == "json" ){
-    ajax_auth_check($auth[$sub_menu], "w");
+    ajax_auth_check_menu($auth, $sub_menu, "w");
 } else {
-    auth_check($auth[$sub_menu], "w");
+    auth_check_menu($auth, $sub_menu, "w");
 }
 
 $count      = 0;
@@ -129,9 +131,9 @@ if( $mtype == "json" ){
     $json_msg = array();
     $json_msg['datetime'] = G5_TIME_YMDHIS;
     $json_msg['res_msg'] = $msg;
-    echo( json_encode($json_msg) );
+    die( json_encode($json_msg) );
 } else {
-    echo( $msg );
+    die( $msg );
 }
 
 sleep(2);

@@ -24,7 +24,19 @@ function eb_goods ($eg_code) {
     /**
      * EB상품추출 경로
      */
-    $ebgoods_path = G5_DATA_PATH.'/ebgoods/'.$theme;
+    $_ebgoods_path = G5_DATA_PATH.'/ebgoods/';
+    $ebgoods_path = $_ebgoods_path.$theme;
+
+    /**
+     * 디렉토리가 없다면 생성하기
+     */
+    if (!is_dir($_ebgoods_path)) {
+        $qfile->make_directory($_ebgoods_path);
+    }
+
+    if (!is_dir($ebgoods_path)) {
+        $qfile->make_directory($ebgoods_path);
+    }
 
     /**
      * EB상품추출 master 파일 경로
@@ -37,7 +49,7 @@ function eb_goods ($eg_code) {
         /**
          * g5_eyoom_goods 테이블에서 정보 추출
          */
-         $eg_master = sql_fetch("select * from {$g5['eyoom_goods']} where (1) and eg_code = '{$eg_code}' limit 1 ");
+        $eg_master = sql_fetch("select * from {$g5['eyoom_goods']} where (1) and eg_code = '{$eg_code}' limit 1 ");
 
         /**
          * 파일 캐시
@@ -87,7 +99,7 @@ function eb_goods ($eg_code) {
         /**
          * 지정된 아이템의 게시물 가져오기
          */
-        $eg_count = count($eg_item);
+        $eg_count = count((array)$eg_item);
         for ($i=0; $i<$eg_count; $i++) {
             if ($eg_item[$i]['gi_state'] == '2' || $eg_item[$i]['gi_view_level'] > $member['mb_level']) {
                 unset($eg_item[$i]);
@@ -104,6 +116,7 @@ function eb_goods ($eg_code) {
              */
             if ($eg_item[$i]['gi_ca_ids']) {
                 $ca_ids = explode(',', $eg_item[$i]['gi_ca_ids']);
+                $where_ca_id = array();
                 foreach ($ca_ids as $k => $id) {
                     $ca_id = trim($id);
                     $where_ca_id[$k] = " (ca_id like '".$ca_id."%' || ca_id2 like '".$ca_id."%' || ca_id3 like '".$ca_id."%') ";

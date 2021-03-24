@@ -33,7 +33,7 @@ if (!defined('_EYOOM_')) exit;
 
     <div class="tag-list-tab margin-bottom-20">
         <ul class="list-inline">
-            <?php for ($i=0; $i<count($fccate); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$fccate); $i++) { ?>
             <li class="<?php echo $sca == $fccate[$i]['fccate_no'] ? 'active': '';?>"><a href="javascript:;" onclick="set_fccate('<?php echo $fccate[$i]['fccate_no']; ?>');" class="btn-e btn-e-xs btn-e-<?php echo $sca == $fccate[$i]['fccate_no'] ? 'red': 'dark';?>"><?php echo $fccate[$i]['fccate_name']; ?></a></li>
             <?php } ?>
         </ul>
@@ -45,7 +45,7 @@ if (!defined('_EYOOM_')) exit;
 </div>
 
 <div class="tag-list">
-    <?php for ($i=0; $i<count($list); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
     <a href="<?php echo $list[$i]['href']; ?>"><span class="tag-word"><span class="font-kind-<?php echo $list[$i]['weight']; ?>"><?php echo $list[$i]['tag']; ?></span></span></a>
     <?php } ?>
 </div>

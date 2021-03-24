@@ -6,23 +6,24 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200300";
 
-include_once(G5_EDITOR_LIB);
-
-auth_check($auth[$sub_menu], 'r');
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=member&amp;pid=mail_update&amp;smode=1";
 
+include_once(G5_EDITOR_LIB);
+
+auth_check_menu($auth, $sub_menu, 'r');
+
 $html_title = '회원메일';
+
+$ma_id = isset($_GET['ma_id']) ? (int) $_GET['ma_id'] : 0;
+$ma = array('ma_id'=>0, 'ma_subject'=>'', 'ma_content'=>'');
 
 if ($w == 'u') {
     $html_title .= '수정';
     $readonly = ' readonly';
 
-    $ma_id = (int) $ma_id;
-    
     $sql = " select * from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
     $ma = sql_fetch($sql);
     if (!$ma['ma_id'])
@@ -30,6 +31,8 @@ if ($w == 'u') {
 } else {
     $html_title .= '입력';
 }
+
+$g5['title'] = $html_title;
 
 /**
  * 버튼

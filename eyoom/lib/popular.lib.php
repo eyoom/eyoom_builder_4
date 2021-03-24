@@ -26,6 +26,7 @@ function eb_popular($skin_dir='basic', $pop_cnt=7, $date_cnt=3) {
     $date_gap = date('Y-m-d', G5_SERVER_TIME - ($date_cnt * 86400));
     $sql = " select pp_word, count(*) as cnt from {$g5['popular_table']} where pp_date between '$date_gap' and '".G5_TIME_YMD."' group by pp_word order by cnt desc, pp_word limit 0, $pop_cnt ";
     $result = sql_query($sql);
+    $popular = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $popular[$i] = $row;
     }

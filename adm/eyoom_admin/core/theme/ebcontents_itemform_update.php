@@ -6,64 +6,67 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999610";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$iw             = clean_xss_tags(trim($_POST['iw']));
-$ci_no          = clean_xss_tags(trim($_POST['ci_no']));
-$ec_code        = clean_xss_tags(trim($_POST['ec_code']));
-$ci_state       = clean_xss_tags(trim($_POST['ci_state']));
-$ci_sort        = clean_xss_tags(trim($_POST['ci_sort']));
-$ci_theme       = clean_xss_tags(trim($_POST['theme']));
-$ci_period      = clean_xss_tags(trim($_POST['ci_period']));
-$ci_start       = clean_xss_tags(trim($_POST['ci_start']));
-$ci_end         = clean_xss_tags(trim($_POST['ci_end']));
-$ci_view_level  = clean_xss_tags(trim($_POST['ci_view_level']));
-$ci_subject     = serialize($_POST['ci_subject']);
-$ci_text        = serialize($_POST['ci_text']);
+$iw                 = isset($_POST['iw']) ? clean_xss_tags(trim($_POST['iw'])) : '';
+$ci_no              = isset($_POST['ci_no']) ? clean_xss_tags(trim($_POST['ci_no'])) : '';
 
+$post_ec_code       = isset($_POST['ec_code']) ? clean_xss_tags(trim($_POST['ec_code'])) : '';
+$post_ci_state      = isset($_POST['ci_state']) ? clean_xss_tags(trim($_POST['ci_state'])) : '';
+$post_ci_sort       = isset($_POST['ci_sort']) ? clean_xss_tags(trim($_POST['ci_sort'])) : '';
+$post_ci_theme      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$post_ci_period     = isset($_POST['ci_period']) ? clean_xss_tags(trim($_POST['ci_period'])) : '1';
+$post_ci_start      = isset($_POST['ci_start']) ? clean_xss_tags(trim($_POST['ci_start'])) : '';
+$post_ci_end        = isset($_POST['ci_end']) ? clean_xss_tags(trim($_POST['ci_end'])) : '';
+$post_ci_view_level = isset($_POST['ci_view_level']) ? clean_xss_tags(trim($_POST['ci_view_level'])) : 1;
+$post_ci_subject    = isset($_POST['ci_subject']) && is_array($_POST['ci_subject']) ? serialize($_POST['ci_subject']) : '';
+$post_ci_text       = isset($_POST['ci_text']) && is_array($_POST['ci_text']) ? serialize($_POST['ci_text']) : '';
+$post_ci_link       = isset($_POST['ci_link']) && is_array($_POST['ci_link']) ? $_POST['ci_link'] : array();
+$post_ci_target     = isset($_POST['ci_target']) ? clean_xss_tags($_POST['ci_target']) : '';
+$post_ci_content    = isset($_POST['ci_content']) ? trim($_POST['ci_content']) : '';
 
 /**
  * 노출 기간
  */
-if ($ci_period == '1')  {
-    $ci_start   = '';
-    $ci_end     = '';
+if ($post_ci_period  == '1')  {
+    $post_ci_start   = '';
+    $post_ci_end     = '';
 } else {
-    $ci_start   = $ci_start ? date('Ymd', strtotime($_POST['ci_start'])) : '';
-    $ci_end     = $ci_end ? date('Ymd', strtotime($_POST['ci_end'])) : '';
+    $post_ci_start   = $post_ci_start ? date('Ymd', strtotime($post_ci_start)) : '';
+    $post_ci_end     = $post_ci_end ? date('Ymd', strtotime($post_ci_end)) : '';
 }
 
 /**
  * 링크정보 및 타겟 정보
  */
-if (is_array($_POST['ci_link'])) {
-    foreach ($_POST['ci_link'] as $k => $link) {
+if (is_array($post_ci_link)) {
+    foreach ($post_ci_link as $k => $link) {
         $ci_link[$k]= $eb->filter_url($link);
     }
-    $ci_target = $_POST['ci_target'];
+    $ci_target[$k] = $post_ci_target;
 }
 
 // 컨텐츠 내용
 $ci_content = '';
-if (isset($_POST['ci_content'])) {
-    $ci_content = substr(trim($_POST['ci_content']),0,65536);
+if ($post_ci_content) {
+    $ci_content = substr(trim($post_ci_content),0,65536);
     $ci_content = preg_replace("#[\\\]+$#", "", $ci_content);
 }
 
 $sql_common = "
-    ec_code = '{$ec_code}',
-    ci_state = '{$ci_state}',
-    ci_sort = '{$ci_sort}',
-    ci_subject = '{$ci_subject}',
-    ci_text = '{$ci_text}',
+    ec_code = '{$post_ec_code}',
+    ci_state = '{$post_ci_state}',
+    ci_sort = '{$post_ci_sort}',
+    ci_subject = '{$post_ci_subject}',
+    ci_text = '{$post_ci_text}',
     ci_content = '{$ci_content}',
     ci_link = '" . serialize($ci_link) . "',
     ci_target = '" . serialize($ci_target) . "',
-    ci_theme = '{$ci_theme}',
-    ci_period = '{$ci_period}',
-    ci_start = '{$ci_start}',
-    ci_end = '{$ci_end}',
-    ci_view_level = '{$ci_view_level}',
+    ci_theme = '{$post_ci_theme}',
+    ci_period = '{$post_ci_period }',
+    ci_start = '{$post_ci_start}',
+    ci_end = '{$post_ci_end}',
+    ci_view_level = '{$post_ci_view_level}',
 ";
 
 /**
@@ -79,7 +82,7 @@ if (empty($_POST)) {
  * 파일개수 체크
  */
 $file_count   = 0;
-$upload_count = count($_FILES['ci_img']['name']);
+$upload_count = count((array)$_FILES['ci_img']['name']);
 
 for ($i=0; $i<$upload_count; $i++) {
     if($_FILES['ci_img']['name'][$i] && is_uploaded_file($_FILES['ci_img']['tmp_name'][$i]))
@@ -97,7 +100,7 @@ if ($iw == 'u') {
 /**
  * 디렉토리가 없다면 생성
  */
-$qfile->make_directory(G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/');
+$qfile->make_directory(G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/');
 
 $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
 
@@ -105,9 +108,10 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  * 이미지 삭제
  */
 if ($iw == 'u') {
-    if(is_array($ci_img_del)) {
+    $ci_img_del = isset($_POST['ci_img_del']) ? $_POST['ci_img_del']: '';
+    if($ci_img_del && is_array($ci_img_del)) {
         foreach ($ci_img_del as $i => $chk) {
-            $ebcontents_file = G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/'.$del_img_name[$i];
+            $ebcontents_file = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$del_img_name[$i];
             if ($chk && file_exists($ebcontents_file) && !is_dir($ebcontents_file)) {
                 @unlink($ebcontents_file);
                 $ci_img[$i] = '';
@@ -121,14 +125,14 @@ if ($iw == 'u') {
  */
 $file_upload_msg = '';
 $upload = array();
-for ($i=0; $i<count($_FILES['ci_img']['name']); $i++) {
+for ($i=0; $i<count((array)$_FILES['ci_img']['name']); $i++) {
     if (is_uploaded_file($_FILES['ci_img']['tmp_name'][$i])) {
         $ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
         $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$ext;
         if (!preg_match("/(jpg|gif|png)$/i", $_FILES['ci_img']['name'][$i])) {
             $file_upload_msg .= $_FILES['ci_img']['name'][$i] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
         } else {
-            $dest_path = G5_DATA_PATH.'/ebcontents/'.$ci_theme.'/img/'.$file_name;
+            $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$file_name;
 
             move_uploaded_file($_FILES['ci_img']['tmp_name'][$i], $dest_path);
             chmod($dest_path, G5_FILE_PERMISSION);
@@ -141,7 +145,7 @@ for ($i=0; $i<count($_FILES['ci_img']['name']); $i++) {
     }
 }
 
-if (is_array($ci_img)) {
+if (isset($ci_img) && is_array($ci_img)) {
     $sql_common .= " ci_img = '" . serialize($ci_img) . "', ";
 }
 
@@ -163,6 +167,6 @@ if ($iw == '') {
 /**
  * 설정된 정보를 파일로 저장 - 캐쉬 기능
  */
-$thema->save_ebcontents_item($ec_code, $ci_theme);
+$thema->save_ebcontents_item($post_ec_code, $post_ci_theme);
 
-alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=ebcontents_itemlist&amp;ec_code={$_POST['ec_code']}&amp;thema='{$_POST['theme']}'&amp;w=u&amp;wmode=1");
+alert($msg, G5_ADMIN_URL . "/?dir=theme&amp;pid=ebcontents_itemlist&amp;ec_code={$post_ec_code}&amp;thema='{$post_ci_theme}'&amp;w=u&amp;wmode=1");

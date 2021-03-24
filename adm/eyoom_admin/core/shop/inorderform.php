@@ -6,12 +6,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400410";
 
-auth_check($auth[$sub_menu], "w");
-
 /**
  * 폼 action URL
  */
 $action_url1 = G5_ADMIN_URL . "/?dir=shop&amp;pid=inorderformupdate&amp;smode=1";
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$od_id = isset($_REQUEST['od_id']) ? safe_replace_regex($_REQUEST['od_id'], 'od_id') : '';
 
 //------------------------------------------------------------------------------
 // 주문서 정보
@@ -39,7 +41,7 @@ $tot_cp_price = 0;
 if($od['mb_id']) {
     // 상품쿠폰
     $tot_it_cp_price = $tot_od_cp_price = 0;
-    $it_cp_cnt = count($data['cp_id']);
+    $it_cp_cnt = (isset($data['cp_id']) && is_array($data['cp_id'])) ? count($data['cp_id']) : 0;
     $arr_it_cp_prc = array();
     for($i=0; $i<$it_cp_cnt; $i++) {
         $cid = $data['cp_id'][$i];
@@ -50,7 +52,7 @@ if($od['mb_id']) {
                       and mb_id IN ( '{$od['mb_id']}', '전체회원' )
                       and cp_method IN ( 0, 1 ) ";
         $cp = sql_fetch($sql);
-        if(!$cp['cp_id'])
+        if(! (isset($cp['cp_id']) && $cp['cp_id']))
             continue;
 
         // 사용한 쿠폰인지
@@ -102,7 +104,7 @@ if($od['mb_id']) {
     $tot_od_price -= $tot_it_cp_price;
 
     // 주문쿠폰
-    if($data['od_cp_id']) {
+    if(isset($data['od_cp_id']) && $data['od_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
                     from {$g5['g5_shop_coupon_table']}
                     where cp_id = '{$data['od_cp_id']}'
@@ -169,17 +171,17 @@ if($od['mb_id'] && $od_send_cost > 0) {
 }
 
 // 추가배송비
-$od_send_cost2 = (int)$data['od_send_cost2'];
+$od_send_cost2 = isset($data['od_send_cost2']) ? (int) $data['od_send_cost2'] : 0;
 
 // 포인트
-$od_temp_point = (int)$data['od_temp_point'];
+$od_temp_point = isset($data['od_temp_point']) ? (int) $data['od_temp_point'] : 0;
 
 $order_price   = $tot_od_price + $od_send_cost + $od_send_cost2 - $tot_sc_cp_price - $od_temp_point;
 
 // 상품목록
 $sql = " select it_id, it_name, ct_notax, ct_send_cost, it_sc_type $sql_common group by it_id order by ct_id ";
 $result = sql_query($sql);
-
+$list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     // 상품이미지
     $row['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));
@@ -308,6 +310,7 @@ if( $default['de_pg_service'] === 'inicis' && empty($default['de_card_test']) ){
 
     if( $tmps ) {
         $j=0;
+        $inilog = array();
         foreach ($tmps as $tmp) {
             if( empty($tmp) ) continue;
             $inilog[$j]['oid']      = $tmp['oid'];

@@ -432,7 +432,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
     </section>
     <div class="margin-hr-10"></div>
     <section>
-        <?php $wl_cnt = count($wr_link); ?>
+        <?php $wl_cnt = count((array)$wr_link); ?>
         <?php for ($i=1; $i<=$wl_cnt; $i++) { ?>
         <div class="row">
             <div class="col col-12">
@@ -448,7 +448,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
         <?php } ?>
     </section>
     <section>
-        <?php $wf_cnt = count($wr_file); ?>
+        <?php $wf_cnt = count((array)$wr_file); ?>
         <?php for ($i=0; $i<$wf_cnt; $i++) { ?>
         <div class="row">
             <div class="col col-12">
@@ -824,7 +824,7 @@ function fwrite_submit(f) {
 }
 
 <?php if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && $member['mb_level'] >= $eyoom_board['bo_tag_level']) { ?>
-var tag_size = '<?php echo (count($wr_tags) > 0)? count($wr_tags):0; ?>';
+var tag_size = '<?php echo (count((array)$wr_tags) > 0)? count((array)$wr_tags):0; ?>';
 $(function(){
     $(".add_tags").click(function(){
         add_tags();
@@ -918,8 +918,11 @@ $(function() {
                 confirmButtonText: "확인"
             });
         } else {
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php', { bo_table: "<?php echo $bo_table; ?>", skin: skin });
-            document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php';
+            $.post(url, { bo_table: bo_table, skin: skin }, function() {
+                document.location.href = '<?php echo str_replace('&amp;','&', get_pretty_url($bo_table));?>';
+            });
         }
     });
 });

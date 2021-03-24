@@ -49,13 +49,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <div class="inline-group">
                                 <span>
                                     <label for="mb_id1_from" class="input">
-                                        <input type="text" name="mb_id1_from" value="<?php echo $mb_id1_from; ?>" id="mb_id1_from" title="시작구간">
+                                        <input type="text" name="mb_id1_from" value="<?php echo get_sanitize_input($mb_id1_from); ?>" id="mb_id1_from" title="시작구간">
                                     </label>
                                 </span>
                                 <span> - </span>
                                 <span>
                                     <label for="mb_id1_to" class="input">
-                                        <input type="text" name="mb_id1_to" value="<?php echo $mb_id1_to; ?>" id="mb_id1_to" title="종료구간">
+                                        <input type="text" name="mb_id1_to" value="<?php echo get_sanitize_input($mb_id1_to); ?>" id="mb_id1_to" title="종료구간">
                                     </label>
                                 </span>
                             </div>
@@ -68,7 +68,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="input form-width-250px">
-                                <input type="text" name="mb_email" id="mb_email" value="<?php echo $mb_email; ?>">
+                                <input type="text" name="mb_email" id="mb_email" value="<?php echo get_sanitize_input($mb_email); ?>">
                             </label>
                             <div class="note"><strong>Note:</strong> 메일 주소에 단어 포함 (예 : @<?php echo preg_replace("#^(www[^\.]*\.)#", "", $_SERVER['HTTP_HOST']); ?>)</div>
                         </td>
@@ -126,7 +126,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="select form-width-250px">
                                 <select name="gr_id" id="gr_id">
                                     <option value="">전체</option>
-                                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                                    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                                     <option value="<?php echo $list[$i]['gr_id']; ?>"><?php echo $list[$i]['gr_subject']; ?></option>
                                     <?php } ?>
                                 </select><i></i>

@@ -47,7 +47,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     <div class="margin-bottom-30"></div>
 
     <div class="margin-bottom-30">
-        <?php for ($i=0; $i<count($ordinfo); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$ordinfo); $i++) { ?>
         <h5><strong>주문번호 : </strong><strong class="color-red"><?php echo $ordinfo[$i]['od_id']; ?></strong></h5>
         <div class="orderprintresult-box">
             <h5><strong>보내는 사람</strong> : <?php echo get_text($ordinfo[$i]['od_name']); ?></h5>

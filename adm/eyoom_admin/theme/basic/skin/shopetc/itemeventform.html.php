@@ -296,7 +296,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         <div class="srel_pad"></div>
                         <div id="reg_item_list" class="srel_sel srel_list">
                             <ul>
-                                <?php for ($i=0; $i<count($it_info); $i++) { ?>
+                                <?php for ($i=0; $i<count((array)$it_info); $i++) { ?>
                                 <li>
                                     <input type="hidden" name="it_id[]" value="<?php echo $it_info[$i]['it_id']; ?>">
                                     <div><?php echo $it_info[$i]['image']; ?> <?php echo $it_info[$i]['it_name']; ?></div>
@@ -304,7 +304,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 </li>
                                 <?php } ?>
                             </ul>
-                            <?php if (count($it_info) == 0) { ?>
+                            <?php if (count((array)$it_info) == 0) { ?>
                             <p>등록된 상품이 없습니다.</p>
                             <?php } ?>
                         </div>

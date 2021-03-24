@@ -47,13 +47,13 @@ $error_msg = implode(",", $error_list);
 if ($error_msg && !$is_admin)
     alert("회원아이디 '{$error_msg}' 은(는) 존재(또는 정보공개)하지 않는 회원아이디 이거나 탈퇴, 접근차단된 회원아이디 입니다.\\n쪽지를 발송하지 않았습니다.");
 
-if (! count($member_list['id'])){
+if (! count((array)$member_list['id'])){
     alert('해당 회원이 존재하지 않습니다.');
 }
 
 if (!$is_admin) {
-    if (count($member_list['id'])) {
-        $point = (int)$config['cf_memo_send_point'] * count($member_list['id']);
+    if (count((array)$member_list['id'])) {
+        $point = (int)$config['cf_memo_send_point'] * count((array)$member_list['id']);
         if ($point) {
             if ($member['mb_point'] - $point < 0) {
                 alert('보유하신 포인트('.number_format($member['mb_point']).'점)가 모자라서 쪽지를 보낼 수 없습니다.');
@@ -62,7 +62,7 @@ if (!$is_admin) {
     }
 }
 
-for ($i=0; $i<count($member_list['id']); $i++) {
+for ($i=0; $i<count((array)$member_list['id']); $i++) {
     $tmp_row = sql_fetch(" select max(me_id) as max_me_id from {$g5['memo_table']} ");
     $me_id = $tmp_row['max_me_id'] + 1;
 

@@ -46,6 +46,7 @@ $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
 $sql = "select * from {$g5['board_new_table']} where $where and mb_id = '{$eyoomer['mb_id']}' order by bn_datetime desc limit $from_record, $page_rows";
 $result = sql_query($sql, false);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     /**
      * 게시판 테이블
@@ -101,7 +102,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['datetime'] = $row['bn_datetime'];
     $list[$i]['bo_info'] = $bo_info[$row['bo_table']];
 }
-$timeline = count($list);
+$timeline = count((array)$list);
 
 /**
  * 사용자 프로그램

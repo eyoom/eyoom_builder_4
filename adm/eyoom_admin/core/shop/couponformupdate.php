@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400800";
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
 
@@ -25,6 +25,7 @@ $check_sanitize_keys = array(
     'cp_trunc',         // 절사금액
     'cp_minimum',       // 최소주문금액
     'cp_maximum',       // 최대할인금액
+    'chk_all_mb'        // 전체회원 체크
 );
 
 foreach( $check_sanitize_keys as $key ){
@@ -87,7 +88,7 @@ if($w == '') {
         if(!$row['mb_id'])
             alert('입력하신 회원아이디는 존재하지 않거나 탈퇴 또는 차단된 회원아이디입니다.');
 
-        $mb_id = $_POST['mb_id'];
+        $mb_id = isset($_POST['mb_id']) ? trim($_POST['mb_id']) : '';
     }
 
     $j = 0;

@@ -6,7 +6,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500140";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = (isset($_GET['fr_date']) && preg_match("/[0-9]/", $_GET['fr_date'])) ? $_GET['fr_date'] : '';
+$to_date = (isset($_GET['to_date']) && preg_match("/[0-9]/", $_GET['to_date'])) ? $_GET['to_date'] : '';
+
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -42,9 +49,6 @@ $sql_search .= $sql_cate;
 
 if (!$to_date) $to_date = date("Y-m-d", time());
 
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
-
 if ($fr_date && $to_date)
 {
     $sql_search .= " and a.wi_time between '$fr_date 00:00:00' and '$to_date 23:59:59' ";
@@ -78,7 +82,7 @@ $sql = $sql . " limit $from_record, $rows ";
 $result = sql_query($sql);
 
 $qstr .= '&amp;fr_date='.$fr_date.'&amp;to_date='.$to_date;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     // $s_mod = icon("수정", "./itemqaform.php?w=u&amp;iq_id={$row['iq_id']}&amp;$qstr");
     // $s_del = icon("삭제", "javascript:del('./itemqaupdate.php?w=d&amp;iq_id={$row['iq_id']}&amp;$qstr');");

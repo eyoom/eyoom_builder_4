@@ -8,11 +8,13 @@ $sub_menu = "500310";
 
 check_demo();
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
-for ($i=0; $i<count($_POST['it_id']); $i++)
+$post_it_id_count = (isset($_POST['it_id']) && is_array($_POST['it_id'])) ? count($_POST['it_id']) : 0;
+
+for ($i=0; $i<$post_it_id_count; $i++)
 {
-    $iit_id = preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$i]);
+    $iit_id = isset($_POST['it_id'][$i]) ? preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$i]) : '';
 
     $sql = " delete from {$g5['g5_shop_event_item_table']}
               where ev_id = '$ev_id'
@@ -28,11 +30,7 @@ for ($i=0; $i<count($_POST['it_id']); $i++)
     }
 
 }
+$qstr1 = 'ev_id='.$ev_id.'&amp;cate_a='.$cate_a.'&amp;cate_b='.$cate_b.'&amp;cate_c='.$cate_c.'&amp;sfl='.$sfl.'&amp;stx='.$stx;
+$qstr  = $qstr1.'&amp;sst='.$sst.'&amp;sod='.$sod.'&amp;page='.$page;
 
-// query string
-$qstr .= $cate_a ? '&amp;cate_a='.$cate_a: '';
-$qstr .= $cate_b ? '&amp;cate_b='.$cate_b: '';
-$qstr .= $cate_c ? '&amp;cate_c='.$$cate_c: '';
-$qstr .= $cate_d ? '&amp;cate_d='.$cate_d: '';
-
-alert("해당 상품을 선택한 이벤트에 추가하였습니다.", G5_ADMIN_URL . '/?dir=shopetc&amp;pid=itemeventlist&amp;ev_id='.$ev_id.'&amp;'.$qstr.'&amp;page='.$page);
+alert("해당 상품을 선택한 이벤트에 추가하였습니다.", G5_ADMIN_URL . '/?dir=shopetc&amp;pid=itemeventlist&amp;'.$qstr.'&amp;page='.$page);

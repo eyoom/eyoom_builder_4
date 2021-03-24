@@ -23,8 +23,8 @@ $shop_theme = $eyoom_default['shop_theme'];
 /**
  * 현재 작업중인 테마
  */
-$this_theme = $_GET['thema'];
-if (!$this_theme) $this_theme = $_POST['thema'];
+$this_theme = isset($_GET['thema']) ? clean_xss_tags($_GET['thema']): '';
+if (!$this_theme) $this_theme = isset($_POST['thema']) ? clean_xss_tags($_POST['thema']): '';
 if ($this_theme) set_session('work_theme', $this_theme);
 if (!$this_theme) $this_theme = get_session('work_theme');
 if (!$this_theme) $this_theme = $theme;
@@ -64,6 +64,7 @@ if ($pid == 'board_form') {
  */
 $sql = "select * from {$g5['eyoom_theme']} where 1 ";
 $res = sql_query($sql, false);
+$tminfo = array();
 for ($i=0; $row=sql_fetch_array($res); $i++) {
     $tminfo[$row['tm_name']] = $row;
 }
@@ -77,7 +78,8 @@ $this_tminfo = $tminfo[$this_theme];
  * 이윰 테마 디렉토리에 등록된 테마 폴더명 = 테마명
  */
 $arr = get_skin_dir ('theme', G5_PATH);
-for ($i=0; $i<count($arr); $i++) {
+$tlist = array();
+for ($i=0; $i<count((array)$arr); $i++) {
     if (!preg_match("/^eb4_*/i", $arr[$i])) continue;
     $config_file = G5_DATA_PATH.'/eyoom.'.$arr[$i].'.config.php';
     if(file_exists($config_file)) {

@@ -62,6 +62,7 @@ class latest extends qfile
     public function get_item($code) {
         $sql = "select * from {$this->g5['eyoom_latest_item']} where (1) and el_code = '{$code}' order by li_sort asc ";
         $result = sql_query($sql);
+        $el_item = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $el_item[$i] = $row;
         }
@@ -98,7 +99,7 @@ class latest extends qfile
          */
         if (!$el_item) return false;
 
-        for ($i=0; $i<count($el_item); $i++) {
+        for ($i=0; $i<count((array)$el_item); $i++) {
             if ($el_item[$i]['li_no'] == $li_no) {
                 $latest_item = $el_item[$i];
                 break;
@@ -168,7 +169,7 @@ class latest extends qfile
         /**
          * 스위치온 파일이 없다면 생성
          */
-        if (!file_exists(cache_switch_on)) {
+        if (!file_exists($switch_on_file)) {
             $this->save_file("switchon", $switch_on_file, array());
         }
     }
@@ -370,7 +371,8 @@ class latest extends qfile
          * 모든 게시판 정보를 가져옴
          */
         $bo_info = $this->eb->get_all_board_info();
-        for ($i=0; $i<count($bo_info); $i++) {
+        $bo_tables = array();
+        for ($i=0; $i<count((array)$bo_info); $i++) {
             $bo_tables[$i] = $bo_info[$i]['bo_table'];
         }
         unset($bo_info);
@@ -378,7 +380,7 @@ class latest extends qfile
         /**
          * wr_hit 연동 업데이트
          */
-        if (is_array($bo_tables)) {
+        if (is_array($bo_tables) && count($bo_tables) > 0) {
             foreach ($bo_tables as $bo_table) {
                 $write_table = $this->g5['write_prefix'] . $bo_table;
                 $sql = "update {$this->g5['board_new_table']} a, (select wr_id, wr_hit, wr_comment from {$write_table}) b set a.wr_hit = b.wr_hit, a.wr_comment = b.wr_comment where a.wr_id = b.wr_id and a.bo_table = '{$bo_table}' ";

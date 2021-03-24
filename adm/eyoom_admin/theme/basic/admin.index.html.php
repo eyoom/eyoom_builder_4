@@ -271,7 +271,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             </div>
             <div class="main-latest-wrap">
                 <div class="main-latest">
-                    <?php for ($i=0; $i<count($qa_conts); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$qa_conts); $i++) { ?>
                     <a href="<?php echo G5_BBS_URL; ?>/qaview.php?qa_id=<?php echo $qa_conts[$i]['qa_id']; ?>" class="main-latest-link <?php if (!$qa_conts[$i]['qa_status']) { ?>main-latest-no-answer<?php } ?>">
                         <div class="main-latest-member-img">
                             <?php if (!$qa_conts[$i]['mb_photo']) { ?>
@@ -289,7 +289,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                         <?php } ?>
                     </a>
                     <?php } ?>
-                    <?php if (count($qa_conts) == 0) { ?>
+                    <?php if (count((array)$qa_conts) == 0) { ?>
                     <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 문의글이 없습니다.</p>
                     <?php } ?>
                 </div>
@@ -314,7 +314,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
         <div class="main-latest-wrap">
             <div class="main-latest">
-                <?php for ($i=0; $i<count($item_qa); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$item_qa); $i++) { ?>
                 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_qa[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$item_qa[$i]['mb_photo']) { ?>
@@ -332,7 +332,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                     <?php } ?>
                 </a>
                 <?php } ?>
-                <?php if (count($item_qa) == 0) { ?>
+                <?php if (count((array)$item_qa) == 0) { ?>
                 <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 문의글이 없습니다.</p>
                 <?php } ?>
             </div>
@@ -350,7 +350,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
         <div class="main-latest-wrap">
             <div class="main-latest">
-                <?php for ($i=0; $i<count($item_use); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$item_use); $i++) { ?>
                 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemuseform&amp;is_id=<?php echo $item_use[$i]['is_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_use[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$item_use[$i]['mb_photo']) { ?>
@@ -368,7 +368,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                     <?php } ?>
                 </a>
                 <?php } ?>
-                <?php if (count($item_use) == 0) { ?>
+                <?php if (count((array)$item_use) == 0) { ?>
                 <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 후기글이 없습니다.</p>
                 <?php } ?>
             </div>
@@ -451,12 +451,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             <thead>
                 <tr>
                     <th rowspan="2" class="td-width-150 bg-yellow lighter"><span class="color-black">구분</span></th>
-                    <?php for ($i=0; $i<count($od_pg_thead); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$od_pg_thead); $i++) { ?>
                     <th colspan="2" class="text-center"><?php echo $od_pg_thead[$i]['day']; ?></th>
                     <?php } ?>
                 </tr>
                 <tr>
-                    <?php for ($i=0; $i<count($od_pg_thead); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$od_pg_thead); $i++) { ?>
                     <th class="min-width-50 text-center">건수</th>
                     <th class="min-width-50 text-center">금액</th>
                     <?php } ?>
@@ -494,7 +494,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
         <div class="main-latest-wrap">
             <div class="main-latest">
-                <?php for($i=0; $i<count($new_member); $i++) { ?>
+                <?php for($i=0; $i<count((array)$new_member); $i++) { ?>
                 <div class="main-latest-link" title="이름: <?php echo get_text($new_member[$i]['mb_name']); ?>">
                     <div class="main-latest-member-img">
                         <?php if (!$new_member[$i]['mb_photo']) { ?>
@@ -515,7 +515,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                     </div>
                 </div>
                 <?php } ?>
-                <?php if (count($new_member) == 0) { ?>
+                <?php if (count((array)$new_member) == 0) { ?>
                 <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 자료가 없습니다.</p>
                 <?php } ?>
             </div>
@@ -533,7 +533,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
         <div class="main-latest-wrap">
             <div class="main-latest">
-                <?php for($i=0; $i<count($new_point); $i++) { ?>
+                <?php for($i=0; $i<count((array)$new_point); $i++) { ?>
                 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=point_list&amp;sfl=mb_id&amp;stx=<?php echo $new_point[$i]['mb_id']; ?>" title="ID: <?php echo $new_point[$i]['mb_id']; ?> 이름: <?php echo $new_point[$i]['mb_name']; ?> 포인트합: <?php echo number_format($new_point[$i]['po_mb_point']); ?>p" class="main-latest-link">
                     <div class="main-latest-member-img">
                         <?php if (!$new_point[$i]['mb_photo']) { ?>
@@ -556,7 +556,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                     </div>
                 </a>
                 <?php } ?>
-                <?php if (count($new_point) == 0) { ?>
+                <?php if (count((array)$new_point) == 0) { ?>
                 <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 자료가 없습니다.</p>
                 <?php } ?>
             </div>
@@ -574,7 +574,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
         </div>
         <div class="main-latest-wrap">
             <div class="main-latest">
-                <?php for($i=0; $i<count($new_post); $i++) { ?>
+                <?php for($i=0; $i<count((array)$new_post); $i++) { ?>
                 <a href="<?php echo $new_post[$i]['view_url']; ?>" target="_blank" class="main-latest-link">
                     <div class="main-latest-member-img">
                         <?php if (!$new_post[$i]['mb_photo']) { ?>
@@ -589,7 +589,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                     </div>
                 </a>
                 <?php } ?>
-                <?php if (count($new_post) == 0) { ?>
+                <?php if (count((array)$new_post) == 0) { ?>
                 <p class="main-latest-none"><i class="fas fa-exclamation-circle"></i> 출력할 게시글이 없습니다.</p>
                 <?php } ?>
             </div>
@@ -772,7 +772,7 @@ setTimeout(function () {
     chartTime.load({
         columns: [
             // 오늘의 시간별 접속자
-            ['접속자', <?php for($i=0; $i<count($this_vi_count); $i++) { echo $this_vi_count[$i]; if(count($this_vi_count)!=($i+1)) echo ','; } ?>]
+            ['접속자', <?php for($i=0; $i<count((array)$this_vi_count); $i++) { echo $this_vi_count[$i]; if(count((array)$this_vi_count)!=($i+1)) echo ','; } ?>]
         ]
     });
 }, 1500);
@@ -781,7 +781,7 @@ setTimeout(function () {
     chartTime.load({
         columns: [
             // 오늘의 시간별 회원가입
-            ['회원가입', <?php for($i=0; $i<count($this_vi_regist); $i++) { echo $this_vi_regist[$i]; if(count($this_vi_regist)!=($i+1)) echo ','; } ?>]
+            ['회원가입', <?php for($i=0; $i<count((array)$this_vi_regist); $i++) { echo $this_vi_regist[$i]; if(count((array)$this_vi_regist)!=($i+1)) echo ','; } ?>]
         ]
     });
 }, 2000);
@@ -812,7 +812,7 @@ setTimeout(function () {
         // 오늘의 브라우저별 접속자
         columns: [
             <?php $i=0; if (is_array($this_vi_browser)) { foreach ($this_vi_browser as $key => $val) { ?>
-            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count($this_vi_browser) != ($i+1)) echo ','; $i++; ?>
+            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$this_vi_browser) != ($i+1)) echo ','; $i++; ?>
             <?php }} ?>
         ]
     });
@@ -844,7 +844,7 @@ setTimeout(function () {
         columns: [
             <?php $i=0; if (is_array($this_vi_domain)) { foreach ($this_vi_domain as $key => $val) { ?>
             <?php if ($i<10) { ?>
-            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count($this_vi_domain) != ($i+1)) echo ','; ?>
+            ['<?php echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$this_vi_domain) != ($i+1)) echo ','; ?>
             <?php } ?>
             <?php }} ?>
         ]
@@ -876,7 +876,7 @@ setTimeout(function () {
         // 오늘의 OS 접속자
         columns: [
             <?php $i=0; if (is_array($this_vi_os)) { foreach ($this_vi_os as $key => $val) { ?>
-            ['<?php if (!$key) echo '기타'; else echo $key; ?>', <?php echo $val; ?>]<?php if (count($this_vi_os) != ($i+1)) echo ','; ?>
+            ['<?php if (!$key) echo '기타'; else echo $key; ?>', <?php echo $val; ?>]<?php if (count((array)$this_vi_os) != ($i+1)) echo ','; ?>
             <?php }} ?>
         ]
     });
@@ -890,7 +890,7 @@ var chartSalesWeek = c3.generate({
         x: '날짜',
         // 지난 7일 쇼핑몰 매출 현황
         columns: [
-            ['날짜', <?php for($i=0; $i<count($last_x_val); $i++) { echo "'".$last_x_val[$i]."'"; if(count($last_x_val)!=($i+1)) echo ','; } ?>],
+            ['날짜', <?php for($i=0; $i<count((array)$last_x_val); $i++) { echo "'".$last_x_val[$i]."'"; if(count((array)$last_x_val)!=($i+1)) echo ','; } ?>],
             ['주문', 0, 0, 0, 0, 0, 0, 0],
             ['취소', 0, 0, 0, 0, 0, 0, 0]
         ],
@@ -931,8 +931,8 @@ setTimeout(function () {
     chartSalesWeek.load({
         // 최근 7일 쇼핑몰 매출 현황((주문)
         columns: [
-            ['날짜', <?php for($i=0; $i<count($x_val); $i++) { echo "'".$x_val[$i]."'"; if(count($x_val)!=($i+1)) echo ','; } ?>],
-            ['주문', <?php for($i=0; $i<count($arr_order); $i++) { echo $arr_order[$i]['order']; if(count($arr_order)!=($i+1)) echo ','; } ?>]
+            ['날짜', <?php for($i=0; $i<count((array)$x_val); $i++) { echo "'".$x_val[$i]."'"; if(count((array)$x_val)!=($i+1)) echo ','; } ?>],
+            ['주문', <?php for($i=0; $i<count((array)$arr_order); $i++) { echo $arr_order[$i]['order']; if(count((array)$arr_order)!=($i+1)) echo ','; } ?>]
         ]
     });
 }, 1600);
@@ -941,8 +941,8 @@ setTimeout(function () {
     chartSalesWeek.load({
         // 최근 7일 쇼핑몰 매출 현황(취소)
         columns: [
-            ['날짜', <?php for($i=0; $i<count($x_val); $i++) { echo "'".$x_val[$i]."'"; if(count($x_val)!=($i+1)) echo ','; } ?>],
-            ['취소', <?php for($i=0; $i<count($arr_order); $i++) { echo $arr_order[$i]['cancel']*-1; if(count($arr_order)!=($i+1)) echo ','; } ?>]
+            ['날짜', <?php for($i=0; $i<count((array)$x_val); $i++) { echo "'".$x_val[$i]."'"; if(count((array)$x_val)!=($i+1)) echo ','; } ?>],
+            ['취소', <?php for($i=0; $i<count((array)$arr_order); $i++) { echo $arr_order[$i]['cancel']*-1; if(count((array)$arr_order)!=($i+1)) echo ','; } ?>]
         ]
     });
 }, 2200);

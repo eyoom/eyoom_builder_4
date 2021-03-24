@@ -32,7 +32,7 @@ for($i=1; $i<=10; $i++) {
  */
 $thumb1 = true;
 $thumb_count = 0;
-$thumb_total_count = count($thumbnails);
+$thumb_total_count = count((array)$thumbnails);
 if($thumb_total_count > 0) {
     $i=0;
     foreach($thumbnails as $val) {

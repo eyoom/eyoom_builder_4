@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999110";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
@@ -37,14 +37,14 @@ $pg_anchor = array(
 /**
  * 로고 파일
  */
-$top_logo = G5_DATA_PATH."/common/{$bizinfo['bi_top_logo']}";
-$bottom_logo = G5_DATA_PATH."/common/{$bizinfo['bi_bottom_logo']}";
-$top_mobile_logo = G5_DATA_PATH."/common/{$bizinfo['bi_top_mobile_logo']}";
-$bottom_mobile_logo = G5_DATA_PATH."/common/{$bizinfo['bi_bottom_mobile_logo']}";
-$top_shoplogo = G5_DATA_PATH."/common/{$bizinfo['bi_top_shoplogo']}";
-$bottom_shoplogo = G5_DATA_PATH."/common/{$bizinfo['bi_bottom_shoplogo']}";
-$top_mobile_shoplogo = G5_DATA_PATH."/common/{$bizinfo['bi_top_mobile_shoplogo']}";
-$bottom_mobile_shoplogo = G5_DATA_PATH."/common/{$bizinfo['bi_bottom_mobile_shoplogo']}";
+$top_logo = isset($bizinfo['bi_top_logo']) && $bizinfo['bi_top_logo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_top_logo']}" : '';
+$bottom_logo = isset($bizinfo['bi_bottom_logo']) && $bizinfo['bi_bottom_logo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_bottom_logo']}" : '';
+$top_mobile_logo = isset($bizinfo['bi_top_mobile_logo']) && $bizinfo['bi_top_mobile_logo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_top_mobile_logo']}" : '';
+$bottom_mobile_logo = isset($bizinfo['bi_bottom_mobile_logo']) && $bizinfo['bi_bottom_mobile_logo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_bottom_mobile_logo']}" : '';
+$top_shoplogo = isset($bizinfo['bi_top_shoplogo']) && $bizinfo['bi_top_shoplogo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_top_shoplogo']}" : '';
+$bottom_shoplogo = isset($bizinfo['bi_bottom_shoplogo']) && $bizinfo['bi_bottom_shoplogo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_bottom_shoplogo']}" : '';
+$top_mobile_shoplogo = isset($bizinfo['bi_top_mobile_shoplogo']) && $bizinfo['bi_top_mobile_shoplogo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_top_mobile_shoplogo']}" : '';
+$bottom_mobile_shoplogo = isset($bizinfo['bi_bottom_mobile_shoplogo']) && $bizinfo['bi_bottom_mobile_shoplogo'] ? G5_DATA_PATH."/common/{$bizinfo['bi_bottom_mobile_shoplogo']}" : '';
 
 /**
  * 버튼

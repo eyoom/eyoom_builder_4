@@ -6,9 +6,14 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200810";
 
-auth_check($auth[$sub_menu], 'r');
+include_once(G5_PATH.'/lib/visit.lib.php');
 
-$sql_search = '';
+auth_check_menu($auth, $sub_menu, 'r');
+
+$fr_date = isset($_REQUEST['fr_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['fr_date']) : G5_TIME_YMD;
+$to_date = isset($_REQUEST['to_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['to_date']) : G5_TIME_YMD;
+
+$sql_search = ' where (1) ';
 
 if(isset($sfl) && $sfl && !in_array($sfl, array('vi_ip','vi_date','vi_time','vi_referer','vi_agent','vi_browser','vi_os','vi_device')) ) {
     $sfl = '';
@@ -17,19 +22,14 @@ if(isset($sfl) && $sfl && !in_array($sfl, array('vi_ip','vi_date','vi_time','vi_
 $sql_common = " from {$g5['visit_table']} ";
 if ($sfl) {
     if($sfl=='vi_ip' || $sfl=='vi_date'){
-        $sql_search = " where $sfl like '$stx%' ";
+        $sql_search .= " and $sfl like '$stx%' ";
     }else{
-        $sql_search = " where $sfl like '%$stx%' ";
+        $sql_search .= " and $sfl like '%$stx%' ";
     }
 }
 
-if (empty($fr_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
-if (empty($to_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
-
-$qstr .= "&amp;fr_date=".$fr_date."&amp;to_date=".$to_date;
-
 if ($fr_date && $to_date) {
-    $sql_search .= " and vi_date between '$fr_date 00:00:00' and '$to_date 23:59:59' ";
+    $sql_search .= " and (vi_date between '$fr_date 00:00:00' and '$to_date 23:59:59') ";
     $qstr .= "&amp;fr_date={$fr_date}&amp;to_date={$to_date}";
 }
 
@@ -51,6 +51,7 @@ $sql = " select *
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
 
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $brow = $row['vi_browser'];
     if(!$brow)
@@ -75,7 +76,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         }
 
         $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), $referer);
-        $link = '<a href="'.get_text($row['vi_referer']).'" target="_blank" title="'.$title.'">';
+        $link = "<a href='".get_text($row['vi_referer'])."' target='_blank' title='".$title."'>";
     }
 
     if ($is_admin == 'super')

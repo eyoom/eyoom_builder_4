@@ -43,21 +43,6 @@ if (!isset($box_follower['mb_id'])) {
 }
 
 /**
- * 방명록 : 50개만 뿌리자
- */
-$limits = 50;
-$fields = "a.mb_nick, a.mb_name, a.mb_email, a.mb_homepage, a.mb_tel, a.mb_hp, a.mb_point, a.mb_datetime, a.mb_signature, a.mb_profile, b.* ";
-$sql = "select $fields from {$g5['member_table']} as a  left join {$g5['eyoom_guest']} as b on a.mb_id = b.mb_id where b.mb_id = '{$user['mb_id']}' order by b.gu_regdt desc limit 0, {$limits}";
-
-$res = sql_query($sql, false);
-for($i=0; $row=sql_fetch_array($res); $i++) {
-    $guest[$i] = $row;
-    $guest[$i]['datetime'] = $row['gu_regdt'];
-    $guest[$i]['content'] = nl2br($row['content']);
-    $guest[$i]['mb_photo'] = $eb->mb_photo($row['gu_id']);
-}
-
-/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/mypage/myhomebox.php');

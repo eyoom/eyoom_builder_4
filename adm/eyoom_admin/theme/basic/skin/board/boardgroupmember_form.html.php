@@ -45,7 +45,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                     <label class="select form-width-250px">
                                         <select name="gr_id" id="gr_id">
                                             <option value="">접근가능 그룹을 선택하세요.</option>
-                                            <?php for ($i=0; $i<count($grlist); $i++) { ?>
+                                            <?php for ($i=0; $i<count((array)$grlist); $i++) { ?>
                                             <option value="<?php echo $grlist[$i]['gr_id']; ?>"><?php echo $grlist[$i]['gr_subject']; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -118,7 +118,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['gm_id'] ?>'><i></i></label>",
             그룹아이디: "<a href='<?php echo get_eyoom_pretty_url(G5_GROUP_DIR, $list[$i]['gr_id']); ?>'><?php echo $list[$i]['gr_id']; ?></a>",

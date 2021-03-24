@@ -8,6 +8,11 @@ $sub_menu = "100200";
 
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 
+$au_menu = isset($_POST['au_menu']) ? preg_replace('/[^0-9a-z_]/i', '', $_POST['au_menu']) : '';
+$post_r = isset($_POST['r']) ? preg_replace('/[^0-9a-z_]/i', '', $_POST['r']) : '';
+$post_w = isset($_POST['w']) ? preg_replace('/[^0-9a-z_]/i', '', $_POST['w']) : '';
+$post_d = isset($_POST['d']) ? preg_replace('/[^0-9a-z_]/i', '', $_POST['d']) : '';
+
 if ($is_admin != 'super')
     alert('최고관리자만 접근 가능합니다.');
 
@@ -24,15 +29,15 @@ if (!chk_captcha()) {
 }
 
 $sql = " insert into {$g5['auth_table']}
-            set mb_id   = '{$_POST['mb_id']}',
-                au_menu = '{$_POST['au_menu']}',
-                au_auth = '{$_POST['r']},{$_POST['w']},{$_POST['d']}' ";
+            set mb_id   = '$mb_id',
+                au_menu = '$au_menu',
+                au_auth = '{$post_r},{$post_w},{$post_d}' ";
 $result = sql_query($sql, FALSE);
 if (!$result) {
     $sql = " update {$g5['auth_table']}
-                set au_auth = '{$_POST['r']},{$_POST['w']},{$_POST['d']}'
-              where mb_id   = '{$_POST['mb_id']}'
-                and au_menu = '{$_POST['au_menu']}' ";
+                set au_auth = '{$post_r},{$post_w},{$post_d}'
+              where mb_id   = '$mb_id'
+                and au_menu = '$au_menu' ";
     sql_query($sql);
 }
 

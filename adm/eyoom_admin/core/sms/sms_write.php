@@ -7,7 +7,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900300";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "r");
+$wr_no = isset($_REQUEST['wr_no']) ? (int) $_REQUEST['wr_no'] : 0;
+$bk_no = isset($_REQUEST['bk_no']) ? (int) $_REQUEST['bk_no'] : 0;
+$fo_no = isset($_REQUEST['fo_no']) ? (int) $_REQUEST['fo_no'] : 0;
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = "문자 보내기";
 

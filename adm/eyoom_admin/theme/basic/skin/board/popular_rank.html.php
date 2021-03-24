@@ -119,7 +119,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             순위: "<?php echo number_format($list[$i]['rank']); ?>",
             검색어: "<?php echo $list[$i]['word']; ?>",

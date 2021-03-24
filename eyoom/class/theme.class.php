@@ -336,7 +336,7 @@ class theme extends qfile
 
         $sql = " select * from {$this->g5['menu_table']} where me_use = '1' and length(me_code) = '2' order by me_order, me_id ";
         $result = sql_query($sql, false);
-
+        $menu = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             if ($str || $gr_str) {
                 if ((preg_match('/'.$gr_str.'/i',$row['me_link']) && $gr_str) || (preg_match('/'.$str.'/i',$row['me_link'])) && $str) {
@@ -363,7 +363,7 @@ class theme extends qfile
 
                 $loop[$k] = $row2;
             }
-            $menu[$i]['cnt'] = count($loop);
+            $menu[$i]['cnt'] = count((array)$loop);
         }
         return $menu;
     }
@@ -566,10 +566,13 @@ class theme extends qfile
         if (!$bo_new) $bo_new = $this->bo_new;
         $sql = "select bo_table, count(*) as cnt from {$this->g5['board_new_table']} where bn_datetime between date_format(".date("YmdHis",G5_SERVER_TIME - ($bo_new * 3600)).", '%Y-%m-%d %H:%i:%s') AND date_format(".date("YmdHis",G5_SERVER_TIME).", '%Y-%m-%d %H:%i:%s') and wr_id = wr_parent group by bo_table";
         $res = sql_query($sql, false);
-        for ($i=0;$row=sql_fetch_array($res);$i++) {
-            $new[$row['bo_table']] = $row['cnt'];
-        }
-        return $new;
+        $new = array();
+        if ($res) {
+            for ($i=0;$row=sql_fetch_array($res);$i++) {
+                $new[$row['bo_table']] = $row['cnt'];
+            }
+            return $new;
+        } else return false;
     }
 
     /**
@@ -580,10 +583,13 @@ class theme extends qfile
         if (!$bo_new) $bo_new = $this->bo_new;
         $sql = "select ca_name, count(*) as cnt from {$this->g5['board_new_table']} where bn_datetime between date_format(".date("YmdHis",G5_SERVER_TIME - ($bo_new * 3600)).", '%Y-%m-%d %H:%i:%s') AND date_format(".date("YmdHis",G5_SERVER_TIME).", '%Y-%m-%d %H:%i:%s') and wr_id = wr_parent group by ca_name";
         $res = sql_query($sql, false);
-        for ($i=0;$row=sql_fetch_array($res);$i++) {
-            $ca_new[$row['ca_name']] = $row['cnt'];
-        }
-        return $ca_new;
+        $ca_new = array();
+        if ($res) {
+            for ($i=0;$row=sql_fetch_array($res);$i++) {
+                $ca_new[$row['ca_name']] = $row['cnt'];
+            }
+            return $ca_new;
+        } else return false;
     }
 
     /**
@@ -609,9 +615,10 @@ class theme extends qfile
         $addwhere .= " and me_shop = '".$me_shop."' ";
         $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='{$theme_name}' {$addwhere} order by me_code asc, me_order asc";
         $res = sql_query($sql, false);
+        $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
             $split = str_split($row['me_code'],3);
-            $depth = count($split);
+            $depth = count((array)$split);
 
             if ($depth==1) $menu[$split[0]] = $row;
             if ($depth==2) $menu[$split[0]][$split[1]] = $row;
@@ -640,7 +647,7 @@ class theme extends qfile
     private function g5_submenu_create($me_code) {
         $sql = " select * from {$this->g5['menu_table']} where me_use = '1' and length(me_code) = '4' and substring(me_code, 1, 2) = '{$me_code}' order by me_order, me_id ";
         $result = sql_query($sql, false);
-
+        $submenu = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $submenu[$i] = $row;
         }
@@ -678,9 +685,10 @@ class theme extends qfile
         $me_code = str_split($data['me_code'],3);
         $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='{$this->theme}' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere} order by me_code asc, me_order asc";
         $res = sql_query($sql, false);
+        $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
             $split = str_split($row['me_code'],3);
-            $depth = count($split);
+            $depth = count((array)$split);
 
             if ($depth==2) $menu[$split[1]] = $row;
             if ($depth==3) $menu[$split[1]][$split[2]] = $row;
@@ -697,6 +705,7 @@ class theme extends qfile
         $output = '';
         if (is_array($arr)) {
             $output .= ',"children":[';
+            $_output = array();
             $i=0;
             foreach ($arr as $key => $val) {
                 if (is_array($val)) {
@@ -708,7 +717,7 @@ class theme extends qfile
                     $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
                     $_output[$me_order] .= '"order":"'.$me_order.'",';
                     $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
-                    if (is_array($val) && count($val)>3) $_output[$me_order] .= $this->eyoom_menu_json($val);
+                    if (is_array($val) && count((array)$val)>3) $_output[$me_order] .= $this->eyoom_menu_json($val);
                     $_output[$me_order] .= '}';
                 }
                 $i++;
@@ -724,10 +733,10 @@ class theme extends qfile
      * 메뉴코드를 단계별로 잘라 배열에 담기
      */
     private function get_splited_code($split=array()) {
-        $cnt = count($split);
+        $cnt = count((array)$split);
         if ($cnt<1) return false;
         else {
-            for ($i=0;$i<count($split);$i++) {
+            for ($i=0;$i<$cnt;$i++) {
                 if ($i==0) $code[$i] = $split[$i];
                 else $code[$i] = $code[$i-1].$split[$i];
             }
@@ -742,15 +751,15 @@ class theme extends qfile
     public function get_path($me_code) {
         $split = str_split($me_code,3);
         $code = $this->get_splited_code($split);
-
+        $path_name = array();
         if (is_array($code)) {
-            for ($i=0;$i<count($code);$i++) {
+            for ($i=0;$i<count((array)$code);$i++) {
                 $path = sql_fetch("select me_name from {$this->g5['eyoom_menu']} where me_code='{$code[$i]}'");
                 $path_name[$i] = $path['me_name'];
             }
         }
-        $path = implode(" &gt; ", $path_name);
-        return $path;
+        $path_string = implode(" &gt; ", $path_name);
+        return $path_string;
     }
 
     /**
@@ -1174,6 +1183,7 @@ class theme extends qfile
         $sql = "select * from {$this->g5['eyoom_slider_item']} where es_code = '{$code}' and ei_theme = '{$theme}' and ei_state = '1' order by ei_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
+        $es_item = array();
         for($i=0; $row=sql_fetch_array($result); $i++) {
             if($row['ei_period'] == '2') {
                 if($this_date >= $row['ei_start'] && $this_date <= $row['ei_end']) {
@@ -1212,6 +1222,7 @@ class theme extends qfile
         $sql = "select * from {$this->g5['eyoom_contents_item']} where ec_code = '{$code}' and ci_theme = '{$theme}' and ci_state = '1' order by ci_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
+        $ec_item = array();
         for($i=0; $row=sql_fetch_array($result); $i++) {
             if($row['ci_period'] == '2') {
                 if($this_date >= $row['ci_start'] && $this_date <= $row['ci_end']) {
@@ -1252,6 +1263,7 @@ class theme extends qfile
         $sql = "select * from {$this->g5['eyoom_goods_item']} where eg_code = '{$code}' and gi_theme = '{$theme}' and gi_state = '1' order by gi_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
+        $eg_item = array();
         for($i=0; $row=sql_fetch_array($result); $i++) {
             $eg_item[$i] = $row;
         }

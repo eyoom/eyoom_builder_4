@@ -6,7 +6,7 @@ if (!$is_member) alert('회원만 접근하실 수 있습니다.');
 $g5['title'] = '나의 환경설정 저장';
 if(!$eyoomer['mb_id']) alert('잘못된 접근입니다.');
 
-$set = '';
+$set = array();
 $set_array = array(
     'mypage_main',
     'open_page',
@@ -70,6 +70,7 @@ if (is_array($_POST['bo_favorite'])) {
  * 적용하기
  */
 $sql = "UPDATE {$g5['eyoom_member']} SET ".implode(',',$set)." WHERE mb_id = '{$eyoomer['mb_id']}'";
+
 if(sql_query($sql,false)) {
     alert('정상적으로 설정정보를 저장하였습니다.',G5_URL.'/mypage/config.php');
 } else {

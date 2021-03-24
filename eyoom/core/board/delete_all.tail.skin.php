@@ -4,7 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-for ($i=count($tmp_array)-1; $i>=0; $i--) {
+for ($i=count((array)$tmp_array)-1; $i>=0; $i--) {
     if ($is_admin == 'super') // 최고관리자 통과
         ;
     else if ($is_admin == 'group') { // 그룹관리자

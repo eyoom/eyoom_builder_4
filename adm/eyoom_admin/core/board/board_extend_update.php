@@ -9,7 +9,7 @@ $sub_menu = "300100";
 if ($w == 'u')
     check_demo();
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
@@ -25,6 +25,7 @@ if ($bo_ex_cnt != $board['bo_ex_cnt']) {
 // 확장필드를 게시판 테이블에 추가하기
 $add_set = array();
 $k = $bo_ex_cnt + 1;
+$add_set = array();
 for($i=0; $i<$bo_exadd; $i++) {
     unset($ex_fname, $set_info, $insert);
 
@@ -58,6 +59,7 @@ sql_query($sql, true);
 // 최종 추가된 확장필드 갯수
 $sql = "SHOW COLUMNS FROM {$write_table} LIKE 'ex_%'";
 $res = sql_query($sql);
+$ex = array();
 for($i=0; $row=sql_fetch_array($res); $i++) {
     $ex[$i] = $row['Field'];
 }

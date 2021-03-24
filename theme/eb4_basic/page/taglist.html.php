@@ -25,7 +25,7 @@ if (!defined('_EYOOM_')) exit;
     <u>전체 <?php echo number_format($total_count); ?> 건 - <?php echo number_format($page); ?> 페이지</u>
 </div>
 <div class="tag-list">
-    <?php for ($i=0; count($list); $i++) { ?>
+    <?php for ($i=0; count((array)$list); $i++) { ?>
     <a href="<?php echo $list[$i]['href']; ?>"><span class="tag-word"><span class="font-kind-<?php echo $list[$i]['weight']; ?>"><?php echo $list[$i]['tag']; ?></span></span></a>
     <?php } ?>
 </div>

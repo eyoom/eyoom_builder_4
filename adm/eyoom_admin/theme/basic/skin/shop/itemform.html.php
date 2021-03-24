@@ -1696,7 +1696,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                     <div class="col col-6">
                         <label class="label">선택된 관련상품 목록</label>
                         <div id="reg_relation" class="relation-sbox-margin-top">
-                            <?php if (count($rellist) > 0) { ?>
+                            <?php if (count((array)$rellist) > 0) { ?>
                             <ul>
                                 <?php foreach($rellist as $relitem) { ?>
                                 <li>
@@ -1732,7 +1732,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label class="label">등록된 전체이벤트 목록</label>
                             <div id="event_list">
                                 <div class="event-box">
-                                    <?php if (count($evinfo) > 0) { ?>
+                                    <?php if (count((array)$evinfo) > 0) { ?>
                                     <ul>
                                         <?php foreach ($evinfo as $evitem) { ?>
                                         <li>
@@ -1798,7 +1798,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label class="label">선택된 관련이벤트 목록</label>
                             <div>
                                 <div class="event-box" id="reg_event_list">
-                                    <?php if (count($reg_evinfo) > 0) { ?>
+                                    <?php if (count((array)$reg_evinfo) > 0) { ?>
                                     <ul>
                                         <?php foreach ($reg_evinfo as $reg_evitem) { ?>
                                         <li>

@@ -26,4 +26,4 @@ if ($wishlist_datas) {
     }
 }
 
-$wish_count = count($wish_list);
+$wish_count = count((array)$wish_list);

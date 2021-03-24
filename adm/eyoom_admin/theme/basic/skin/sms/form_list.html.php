@@ -83,7 +83,7 @@ function multi_update(sel) {
                         <select name="fg_no" id="fg_no" onchange="location.href='<?php echo G5_ADMIN_URL; ?>/?dir=sms&amp;pid=form_list&amp;fg_no='+this.value;">
                             <option value="" <?php echo $fg_no?'':'selected'?>> 전체 </option>
                             <option value="0" <?php echo $fg_no=='0'?'selected':''?>> 미분류 (<?php echo number_format($no_count)?>) </option>
-                            <?php for($i=0; $i<count($group); $i++) {?>
+                            <?php for($i=0; $i<count((array)$group); $i++) {?>
                             <option value="<?php echo $group[$i]['fg_no']?>" <?php echo ($fg_no==$group[$i]['fg_no'])?'selected':''?>> <?php echo $group[$i]['fg_name']?> (<?php echo number_format($group[$i]['fg_count'])?>) </option>
                             <?php } ?>
                         </select>
@@ -127,6 +127,7 @@ function multi_update(sel) {
     <form name="emoticonlist" id="emoticonlist" method="post" action="<?php echo $action_url; ?>" onsubmit="return emoticonlist_submit(this);">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="token" value="<?php echo $token; ?>">
+    <input type="hidden" name="fg_no" value="<?php echo $fg_no; ?>">
     <input type="hidden" name="sw" value="">
     <input type="hidden" name="atype" value="del">
     <ul id="sms5_preset" class="sms5_box">

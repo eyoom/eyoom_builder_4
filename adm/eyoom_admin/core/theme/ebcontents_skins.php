@@ -20,8 +20,9 @@ $skin_url = G5_URL.'/theme/'.$this_theme.'/skin';
  * 스킨 디렉토리 읽어오기
  */
 $ebcontents_skins = get_skin_dir('ebcontents', $skin_dir);
-if (is_array($ebcontents_skins)) {
+if (isset($ebcontents_skins) && is_array($ebcontents_skins)) {
     $i=0;
+    $list = array();
     foreach ($ebcontents_skins as $k => $skin) {
         $list[$i]['ec_skin_name'] = $skin;
         $skin_img = $skin_dir.'/ebcontents/'.$skin.'/image/ec_skin_img.png';

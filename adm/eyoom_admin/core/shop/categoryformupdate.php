@@ -68,7 +68,7 @@ if( function_exists('filter_input_include_path') ){
 if ($w == "u" || $w == "d")
     check_demo();
 
-auth_check($auth[$sub_menu], "d");
+auth_check_menu($auth, $sub_menu, "d");
 
 check_admin_token();
 

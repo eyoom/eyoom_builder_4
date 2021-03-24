@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400800";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=couponlist_delete&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $sql_common = " from {$g5['g5_shop_coupon_table']} ";
 
@@ -17,6 +17,8 @@ if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
         case 'mb_id' :
+            $sql_search .= " ({$sfl} = '{$stx}') ";
+            break;
         default :
             $sql_search .= " ({$sfl} like '%{$stx}%') ";
             break;
@@ -50,6 +52,7 @@ $sql = " select *
 $result = sql_query($sql);
 
 $k = 0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     switch($row['cp_method']) {
         case '0':

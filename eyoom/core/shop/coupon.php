@@ -20,6 +20,7 @@ $result = sql_query($sql);
 
 $cp_count = 0;
 $k=0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if (is_used_coupon($member['mb_id'], $row['cp_id']))
         continue;

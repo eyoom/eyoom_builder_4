@@ -9,12 +9,12 @@ $sub_menu = "999100";
 if($is_admin != 'super') alert('최고관리자만 설정을 변경할 수 있습니다.');
 
 unset($theme);
-$theme      = clean_xss_tags(trim($_POST['theme']));
-$shop_theme = clean_xss_tags(trim($_POST['shop_theme']));
-$back_theme = clean_xss_tags(trim($_POST['back_theme']));
-$back_pid   = clean_xss_tags(trim($_POST['back_pid']));
-$w          = clean_xss_tags(trim($_POST['w']));
-$bo_table   = clean_xss_tags(trim($_POST['bo_table']));
+$theme      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])): '';
+$shop_theme = isset($_POST['shop_theme']) ? clean_xss_tags(trim($_POST['shop_theme'])): '';
+$back_theme = isset($_POST['back_theme']) ? clean_xss_tags(trim($_POST['back_theme'])): '';
+$back_pid   = isset($_POST['back_pid']) ? clean_xss_tags(trim($_POST['back_pid'])): '';
+$w          = isset($_POST['w']) ? clean_xss_tags(trim($_POST['w'])): '';
+$bo_table   = isset($_POST['bo_table']) ? clean_xss_tags(trim($_POST['bo_table'])): '';
 
 $qstr = '';
 if($w) $qstr .= "&amp;w={$w}";

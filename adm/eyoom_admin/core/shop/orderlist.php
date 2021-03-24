@@ -6,28 +6,29 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400400";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 $where = array();
 
-$doc = strip_tags($doc);
-$sort1 = in_array($sort1, array('od_id', 'od_cart_price', 'od_receipt_price', 'od_cancel_price', 'od_misu', 'od_cash')) ? $sort1 : '';
-$sort2 = in_array($sort2, array('desc', 'asc')) ? $sort2 : 'desc';
-$sel_field = get_search_string($sel_field);
-if( !in_array($sel_field, array('od_id', 'mb_id', 'it_name', 'od_name', 'mb_nick', 'od_tel', 'od_hp', 'od_b_name', 'od_b_tel', 'od_b_hp', 'od_deposit_name', 'od_invoice')) ){   //검색할 필드 대상이 아니면 값을 제거
-    $sel_field = '';
-}
-$od_status = get_search_string($od_status);
-$search = get_search_string($search);
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
+$doc = isset($_GET['doc']) ? clean_xss_tags($_GET['doc'], 1, 1) : '';
+$sort1 = (isset($_GET['sort1']) && in_array($_GET['sort1'], array('od_id', 'od_cart_price', 'od_receipt_price', 'od_cancel_price', 'od_misu', 'od_cash'))) ? $_GET['sort1'] : '';
+$sort2 = (isset($_GET['sort2']) && in_array($_GET['sort2'], array('desc', 'asc'))) ? $_GET['sort2'] : 'desc';
+$sel_field = (isset($_GET['sel_field']) && in_array($_GET['sel_field'], array('od_id', 'mb_id', 'od_name', 'od_tel', 'od_hp', 'od_b_name', 'od_b_tel', 'od_b_hp', 'od_deposit_name', 'od_invoice')) ) ? $_GET['sel_field'] : ''; 
+$od_status = isset($_GET['od_status']) ? get_search_string($_GET['od_status']) : '';
+$search = isset($_GET['search']) ? get_search_string($_GET['search']) : '';
 
-$od_misu = preg_replace('/[^0-9a-z]/i', '', $od_misu);
-$od_cancel_price = preg_replace('/[^0-9a-z]/i', '', $od_cancel_price);
-$od_refund_price = preg_replace('/[^0-9a-z]/i', '', $od_refund_price);
-$od_receipt_point = preg_replace('/[^0-9a-z]/i', '', $od_receipt_point);
-$od_coupon = preg_replace('/[^0-9a-z]/i', '', $od_coupon); 
+$fr_date = (isset($_GET['fr_date']) && preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_GET['fr_date'])) ? $_GET['fr_date'] : '';
+$to_date = (isset($_GET['to_date']) && preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_GET['to_date'])) ? $_GET['to_date'] : '';
 
+$od_misu = isset($_GET['od_misu']) ? preg_replace('/[^0-9a-z]/i', '', $_GET['od_misu']) : '';
+$od_cancel_price = isset($_GET['od_cancel_price']) ? preg_replace('/[^0-9a-z]/', '', $_GET['od_cancel_price']) : '';
+$od_refund_price = isset($_GET['od_refund_price']) ? preg_replace('/[^0-9a-z]/i', '', $_GET['od_refund_price']) : '';
+$od_receipt_point = isset($_GET['od_receipt_point']) ? preg_replace('/[^0-9a-z]/i', '', $_GET['od_receipt_point']) : '';
+$od_coupon = isset($_GET['od_coupon']) ? preg_replace('/[^0-9a-z]/i', '', $_GET['od_coupon']) : ''; 
+$od_settle_case = isset($_GET['od_settle_case']) ? clean_xss_tags($_GET['od_settle_case'], 1, 1) : ''; 
+$od_escrow = isset($_GET['od_escrow']) ? clean_xss_tags($_GET['od_escrow'], 1, 1) : ''; 
+
+$tot_itemcount = $tot_orderprice = $tot_receiptprice = $tot_ordercancel = $tot_misu = $tot_couponprice = 0;
 $sql_search = "";
 
 if ($sel_field != "") {
@@ -170,6 +171,7 @@ if( function_exists('pg_setting_check') ){
 }
 
 $k=0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $cnt = sql_fetch(" select count(*) as cnt from {$g5['g5_shop_cart_table']} where od_id = '{$row['od_id']}' ");
@@ -262,6 +264,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i]['uid'] = $uid;
     $list[$i]['od_cnt'] = $od_cnt;
     $list[$i]['invoice_time'] = $invoice_time;
+    $list[$i]['dlcomp'] = $delivery_company;
 
     $tot_itemcount     += $row['od_cart_count'];
     $tot_orderprice    += ($row['od_cart_price'] + $row['od_send_cost'] + $row['od_send_cost2']);
@@ -278,6 +281,14 @@ if (($od_status == '' || $od_status == '완료' || $od_status == '전체취소' 
     if ($od_status == '입금') $change_status = "준비";
     if ($od_status == '준비') $change_status = "배송";
     if ($od_status == '배송') $change_status = "완료";
+}
+
+$dlcomp = explode(")", str_replace("(", "", G5_DELIVERY_COMPANY));
+$delivery_comp = array();
+for ($i=0; $i<count($dlcomp); $i++) {
+    if (trim($dlcomp[$i])=="") continue;
+    list($value, $url, $tel) = explode("^", $dlcomp[$i]);
+    $delivery_comp[$i] = $value;
 }
 
 /**

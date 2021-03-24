@@ -22,7 +22,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
     </div>
 
     <ul class="list-unstyled">
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         <li>
             <?php if ($list[$i]['ec_skin_img']) { ?>
             <div class="skin-img">

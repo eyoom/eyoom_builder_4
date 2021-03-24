@@ -6,12 +6,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = '100910';
 
-if ($is_admin != "super") alert("최고관리자만 접근 가능합니다.", G5_URL);
+if ($is_admin != 'super')
+    alert('최고관리자만 접근 가능합니다.', G5_URL);
 
 flush();
 
 if (!$directory=@opendir(G5_DATA_PATH.'/cache')) {
-  $no_print = "캐시 디렉토리를 열지못했습니다.";
+    $no_print = "캐시 디렉토리를 열지못했습니다.";
 }
 
 $cnt=0;

@@ -9,7 +9,7 @@ $sub_menu = "300100";
 if ($w == 'u')
     check_demo();
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
@@ -75,6 +75,7 @@ if ($w == '') {
     // 최종 확장필드 갯수
     $sql = "SHOW COLUMNS FROM {$write_table} LIKE 'ex_%'";
     $res = sql_query($sql);
+    $ex = array();
     for($i=0; $row=sql_fetch_array($res); $i++) {
         $ex[$i] = $row['Field'];
     }

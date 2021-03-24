@@ -7,23 +7,23 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900800";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "r");
+$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=num_book_multi_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $token = get_token();
-
-$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=num_book_multi_update&amp;smode=1';
 
 $g5['title'] = "휴대폰번호 관리";
 
 if ($page < 1) $page = 1;
 
-$bg_no = isset($bg_no) ? preg_replace('/[^0-9]/i', '', $bg_no) : '';
-$st = isset($st) ? preg_replace('/[^a-z0-9]/i', '', $st) : '';
+$bg_no = isset($_REQUEST['bg_no']) ? preg_replace('/[^0-9]/i', '', $_REQUEST['bg_no']) : '';
+$st = isset($_REQUEST['st']) ? preg_replace('/[^a-z0-9]/i', '', $_REQUEST['st']) : '';
 
 $sql_korean = $sql_group = $sql_search = $sql_no_hp = '';
 
 if (is_numeric($bg_no) && $bg_no)
-    $sql_group = " and bg_no='$bg_no' ";   
+    $sql_group = " and bg_no='$bg_no' ";
 else
     $sql_group = "";
 
@@ -36,6 +36,9 @@ if ($st == 'all') {
 } else {
     $sql_search = '';
 }
+
+$ap = isset($_GET['ap']) ? (int) $_GET['ap'] : 0;
+$no_hp = isset($_GET['no_hp']) ? preg_replace('/[^0-9a-z_]/i', '', $_GET['no_hp']) : 0;
 
 if ($ap > 0)
     $sql_korean = korean_index('bk_name', $ap-1);
@@ -85,6 +88,7 @@ while ($res = sql_fetch_array($qry)) array_push($group, $res);
 $line = 0;
 $qry = sql_query("select * from {$g5['sms5_book_table']} where 1 $sql_group $sql_search $sql_korean $sql_no_hp order by bk_no desc limit $page_start, $page_size");
 $i=0;
+$list = array();
 while($res = sql_fetch_array($qry))
 {
     $bg = 'bg'.($line++%2);

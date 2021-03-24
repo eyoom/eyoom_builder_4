@@ -46,6 +46,7 @@ $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 /**
  * 설정된 관심게시판이 있다면 가져오기
  */
+$list = array();
 if (is_array($bo_tables)) {
     /**
      * 게시판 검색
@@ -65,6 +66,7 @@ if (is_array($bo_tables)) {
         $list[$i] = $bbs->board_latest_record($row, $board_info);
     }
 }
+$count = count($list);
 
 /**
  * 사용자 프로그램

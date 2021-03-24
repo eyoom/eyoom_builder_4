@@ -5,7 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 
 $thumbnail_width = 500;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $num = $total_count - ($page - 1) * $rows - $i;
     $star = get_star($row['is_score']);
@@ -29,7 +29,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['it_name'] = $row2['it_name'];
     $list[$i]['star'] = $star;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 페이징

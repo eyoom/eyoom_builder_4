@@ -4,9 +4,9 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-$theme      = clean_xss_tags(trim($_GET['thema']));
-$me_shop    = clean_xss_tags(trim($_GET['me_shop']));
-if(!$me_shop) $me_shop = 2;
+$theme      = isset($_GET['thema']) ? clean_xss_tags(trim($_GET['thema'])): '';
+$me_shop    = isset($_GET['me_shop']) ? clean_xss_tags(trim($_GET['me_shop'])): 2;
+
 $root_text = $me_shop == 1 ? '쇼핑몰 메뉴':'커뮤니티 메뉴';
 if ($_GET['me_ec']) { $root_text = '홈페이지'; }
 
@@ -22,6 +22,7 @@ $output .= '
 ';
 if(is_array($eyoom_menu)) {
     $i=0;
+    $_output = array();
     foreach($eyoom_menu as $key => $val) {
         unset($blind);
         $me_order = $val['me_order'].$i;
@@ -30,7 +31,7 @@ if(is_array($eyoom_menu)) {
         $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
         $_output[$me_order] .= '"order":"'.$me_order.'",';
         $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
-        if(is_array($val) && count($val)>3) $_output[$me_order] .= $thema->eyoom_menu_json($val);
+        if(is_array($val) && count((array)$val)>3) $_output[$me_order] .= $thema->eyoom_menu_json($val);
         $_output[$me_order] .= '}';
         $i++;
     }

@@ -8,7 +8,7 @@ $sub_menu = "999610";
 
 include_once(G5_EDITOR_LIB);
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_itemform_update&amp;smode=1';
 
@@ -22,12 +22,13 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
  */
 include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
-$ec_code = clean_xss_tags(trim($_GET['ec_code']));
+$ec_code = isset($_GET['ec_code']) ? clean_xss_tags(trim($_GET['ec_code'])): '';
+$ci_no = isset($_GET['ci_no']) ? clean_xss_tags(trim($_GET['ci_no'])): '';
 
 /**
  * EB컨텐츠 마스터 정보
  */
-$ec = sql_fetch("select * from {$g5[eyoom_contents]} where ec_code = '{$ec_code}' and ec_theme='{$this_theme}'");
+$ec = sql_fetch("select * from {$g5['eyoom_contents']} where ec_code = '{$ec_code}' and ec_theme='{$this_theme}'");
 
 /**
  * EB컨텐츠 아이템 정보 가져오기
@@ -36,7 +37,7 @@ if ($iw == 'u') {
     $ci = sql_fetch("select * from {$g5['eyoom_contents_item']} where ci_no = '{$ci_no}' and ci_theme='{$this_theme}'");
     $ci['ci_start'] = $ci['ci_start'] ? date('Y-m-d', strtotime($ci['ci_start'])) : '';
     $ci['ci_end']   = $ci['ci_end'] ? date('Y-m-d', strtotime($ci['ci_end'])) : '';
-
+    $ci_url = $ec_item = array();
     if ($ci['ci_no']) {
         foreach($ci as $key => $value) {
             $ec_item[$key] = stripslashes($value);

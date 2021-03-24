@@ -35,6 +35,7 @@ if (!$page) $page = 1;
 if (!$page_rows) $page_rows = 20;
 $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
+$list = array();
 if (is_array($sb_member)) {
     /**
      * 게시판 검색
@@ -67,6 +68,7 @@ if (is_array($sb_member)) {
         $list[$i] = $bbs->board_latest_record($row, $board_info);
     }
 }
+$count = count($list);
 
 /**
  * 사용자 프로그램

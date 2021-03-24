@@ -4,12 +4,12 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
 
 unset($theme);
-$theme = clean_xss_tags(trim($_POST['theme']));
+$theme = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])): 'eb4_basic';
 
 /**
  * $eyoom 변수파일 재정의

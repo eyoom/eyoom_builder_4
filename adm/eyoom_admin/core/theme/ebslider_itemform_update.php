@@ -6,21 +6,23 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999600";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$iw             = clean_xss_tags(trim($_POST['iw']));
-$ei_no          = clean_xss_tags(trim($_POST['ei_no']));
-$es_code        = clean_xss_tags(trim($_POST['es_code']));
-$ei_state       = clean_xss_tags(trim($_POST['ei_state']));
-$ei_sort        = clean_xss_tags(trim($_POST['ei_sort']));
-$ei_title       = clean_xss_tags(trim($_POST['ei_title']));
-$ei_subtitle    = clean_xss_tags(trim($_POST['ei_subtitle']));
-$ei_text        = clean_xss_tags(trim($_POST['ei_text']));
-$ei_theme       = clean_xss_tags(trim($_POST['theme']));
-$ei_period      = clean_xss_tags(trim($_POST['ei_period']));
-$ei_start       = clean_xss_tags(trim($_POST['ei_start']));
-$ei_end         = clean_xss_tags(trim($_POST['ei_end']));
-$ei_view_level  = clean_xss_tags(trim($_POST['ei_view_level']));
+$iw             = isset($_POST['iw']) ? clean_xss_tags(trim($_POST['iw'])) : '';
+$ei_no          = isset($_POST['ei_no']) ? clean_xss_tags(trim($_POST['ei_no'])) : '';
+$es_code        = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
+$ei_state       = isset($_POST['ei_state']) ? clean_xss_tags(trim($_POST['ei_state'])) : '';
+$ei_sort        = isset($_POST['ei_sort']) ? clean_xss_tags(trim($_POST['ei_sort'])) : '';
+$ei_title       = isset($_POST['ei_title']) ? clean_xss_tags(trim($_POST['ei_title'])) : '';
+$ei_subtitle    = isset($_POST['ei_subtitle']) ? clean_xss_tags(trim($_POST['ei_subtitle'])) : '';
+$ei_links       = isset($_POST['ei_link']) ? clean_xss_tags($_POST['ei_link']) : '';
+$ei_target      = isset($_POST['ei_target']) ? clean_xss_tags($_POST['ei_target']) : '';
+$ei_text        = isset($_POST['ei_text']) ? clean_xss_tags(trim($_POST['ei_text'])) : '';
+$ei_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$ei_period      = isset($_POST['ei_period']) ? clean_xss_tags(trim($_POST['ei_period'])) : '';
+$ei_start       = isset($_POST['ei_start']) ? clean_xss_tags(trim($_POST['ei_start'])) : '';
+$ei_end         = isset($_POST['ei_end']) ? clean_xss_tags(trim($_POST['ei_end'])) : '';
+$ei_view_level  = isset($_POST['ei_view_level']) ? clean_xss_tags(trim($_POST['ei_view_level'])) : '';
 
 /**
  * 노출 기간
@@ -29,18 +31,17 @@ if ($ei_period == '1')  {
     $ei_start   = '';
     $ei_end     = '';
 } else {
-    $ei_start   = $ei_start ? date('Ymd', strtotime($_POST['ei_start'])) : '';
-    $ei_end     = $ei_end ? date('Ymd', strtotime($_POST['ei_end'])) : '';
+    $ei_start   = $ei_start ? date('Ymd', strtotime($ei_start)) : '';
+    $ei_end     = $ei_end ? date('Ymd', strtotime($ei_end)) : '';
 }
 
 /**
  * 링크정보 및 타겟 정보
  */
-if (is_array($_POST['ei_link'])) {
-    foreach ($_POST['ei_link'] as $k => $link) {
+if (is_array($ei_links)) {
+    foreach ($ei_links as $k => $link) {
         $ei_link[$k]= $eb->filter_url($link);
     }
-    $ei_target = $_POST['ei_target'];
 }
 
 $sql_common = "
@@ -84,7 +85,7 @@ for ($i=0; $i<$upload_count; $i++) {
  */
 if ($iw == 'u') {
     $ei = sql_fetch("select ei_img from {$g5['eyoom_slider_item']} where ei_no = '{$ei_no}' ");
-    $ei_img = unserialize($ei['ei_img']);
+    $ei_img = isset($ei['ei_img']) && is_array($ei['ei_img']) ? unserialize($ei['ei_img']): array();
 }
 
 /**
@@ -100,7 +101,7 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  */
 $file_upload_msg = '';
 $upload = array();
-for ($i=0; $i<count($_FILES['ei_img']['name']); $i++) {
+for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
     if (is_uploaded_file($_FILES['ei_img']['tmp_name'][$i])) {
         $ext = $qfile->get_file_ext($_FILES['ei_img']['name'][$i]);
         $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$ext;

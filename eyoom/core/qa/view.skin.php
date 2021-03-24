@@ -9,6 +9,7 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 /**
  * 첨부파일 다운로드
  */
+$files = array();
 for ($i=0; $i<$view['download_count']; $i++) {
     $files[$i]['download_href'] = $view['download_href'][$i];
     $files[$i]['download_source'] = $view['download_source'][$i];
@@ -17,6 +18,7 @@ for ($i=0; $i<$view['download_count']; $i++) {
 /**
  * 파일 출력
  */
+$thumbs = array();
 if ($view['img_count']) {
     for ($i=0; $i<$view['img_count']; $i++) {
         $thumbs[$i] = get_view_thumbnail($view['img_file'][$i], $qaconfig['qa_image_width']);

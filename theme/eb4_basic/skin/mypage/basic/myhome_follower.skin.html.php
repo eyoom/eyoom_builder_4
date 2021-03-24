@@ -41,7 +41,7 @@ if (!defined('_EYOOM_')) exit;
         </strong>
     </div>
     <div class="infinite-container">
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         <div class="follow-item">
             <section class="follow-item-box">
                 <div class="follow-photo">
@@ -97,7 +97,7 @@ if (!defined('_EYOOM_')) exit;
             </section>
         </div>
         <?php } ?>
-        <?php if (count($list) == 0) { ?>
+        <?php if (count((array)$list) == 0) { ?>
         <div class="text-center color-grey font-size-14 margin-top-30">
             <i class="fa fa-exclamation-circle"></i> 팔로한 회원이 없습니다.
         </div>

@@ -62,7 +62,7 @@ $sql .= " order by a.ct_id ";
 $result = sql_query($sql);
 
 $it_send_cost = 0;
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     /**
      * 합계금액 계산
@@ -130,7 +130,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $tot_point      += $point;
     $tot_sell_price += $sell_price;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 배송비 계산

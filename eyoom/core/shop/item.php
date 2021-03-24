@@ -8,7 +8,7 @@ $it_id = get_search_string(trim($_GET['it_id']));
 $it_seo_title = isset($it_seo_title) ? $it_seo_title : '';
 
 $it = get_shop_item_with_category($it_id, $it_seo_title);
-$it_id = $it['it_id'];
+$it_id = $_REQUEST['it_id'] = $it['it_id'];
 
 if( isset($row['it_seo_title']) && ! $row['it_seo_title'] ){
     shop_seo_title_update($row['it_id']);
@@ -188,6 +188,8 @@ if(G5_SOLDOUT_CHECK)
 $is_orderable = true;
 if(!$it['it_use'] || $it['it_tel_inq'] || $is_soldout)
     $is_orderable = false;
+
+$optitem = $supitem = '';
 
 if($is_orderable) {
     /**

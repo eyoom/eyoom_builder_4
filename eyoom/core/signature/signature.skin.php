@@ -8,13 +8,13 @@ if (!defined('_EYOOM_')) exit;
  * 회원이 작성한 최신글
  */
 $mb_write = $bbs->get_member_latest($view['mb_id'], 8, false);
-$mb_write_cnt = count($mb_write);
+$mb_write_cnt = count((array)$mb_write);
 
 /**
  * 회원이 작성한 최신 댓글
  */
 $mb_cmt = $bbs->get_member_latest($view['mb_id'], 8, true);
-$mb_cmt_cnt = count($mb_cmt);
+$mb_cmt_cnt = count((array)$mb_cmt);
 
 /**
  * 사용자 프로그램

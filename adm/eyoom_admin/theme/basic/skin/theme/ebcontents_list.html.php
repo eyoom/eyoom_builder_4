@@ -78,7 +78,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='ec_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['ec_no']; ?>'><input type='hidden' name='ec_code[<?php echo $i; ?>]' value='<?php echo $list[$i]['ec_code']; ?>'>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_form&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;w=u&amp;wmode=1' onclick='eb_modal(this.href); return false;'><u>수정</u></a> <a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_itemlist&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;wmode=1' onclick='eb_modal(this.href); return false;' class='margin-left-10'><u>아이템관리</u></a>",

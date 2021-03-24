@@ -272,14 +272,14 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v nav-icon-pre hidden-xs hidden-sm"></i>CATEGORY</a>
                                     <ul class="dropdown-menu">
                                     <?php if ($eyoom['use_eyoom_shopmenu'] == 'n') { // 영카트 분류가 쇼핑몰 메뉴 출력 ?>
-                                        <?php if (is_array($menu)) { ?>
+                                        <?php if (isset($menu) && is_array($menu)) { ?>
                                         <?php foreach ($menu as $key => $menu_1) { ?>
                                         <li class="item-vertical <?php if ($menu_1['active']) echo 'active'; ?> dropdown">
                                             <a href="<?php echo $menu_1['href']; ?>" class="dropdown-toggle" <?php echo G5_IS_MOBILE ? 'data-toggle="dropdown"': 'data-hover="dropdown"'; ?>>
                                                 <?php echo $menu_1['ca_name']; ?>
                                             </a>
-                                            <?php $index2 = 0; $size2 = count($menu_1['submenu']); ?>
-                                            <?php if (is_array($menu_1['submenu'])) { ?>
+                                            <?php $index2 = 0; $size2 = count((array)$menu_1['submenu']); ?>
+                                            <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                             <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
                                             <?php if ($index2 == 0) { ?>
                                             <ul class="dropdown-menu">
@@ -296,18 +296,18 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
                                         <?php } ?>
                                         <?php } ?>
                                     <?php } else if ($eyoom['use_eyoom_shopmenu'] == 'y') { // 이윰 쇼핑몰 메뉴 출력 ?>
-                                        <?php if (is_array($menu)) { ?>
+                                        <?php if (isset($menu) && is_array($menu)) { ?>
                                         <?php foreach ($menu as $key => $menu_1) { ?>
                                         <li class="item-vertical <?php if ($menu_1['active']) echo 'active';?> <?php if ($menu_1['submenu']) echo 'dropdown'; ?>">
                                             <a href="<?php echo $menu_1['me_link']; ?>" target="_<?php echo $menu_1['me_target']; ?>" class="dropdown-toggle disabled" <?php echo G5_IS_MOBILE && $menu_1['submenu'] ? 'data-toggle="dropdown"' : 'data-hover="dropdown"';?>>
                                                 <?php if ($menu_1['me_icon']) { ?><i class="<?php echo $menu_1['me_icon']; ?> nav-cate-icon margin-right-5"></i><?php } ?>
                                                 <?php echo $menu_1['me_name']?>
                                             </a>
-                                            <?php if (is_array($menu_1['submenu'])) { ?>
+                                            <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                             <a href="#" class="cate-dropdown-open dorpdown-toggle hidden-lg hidden-md" data-toggle="dropdown"></a>
                                             <?php } ?>
-                                            <?php $index2 = 0; $size2 = count($menu_1['submenu']); ?>
-                                            <?php if (is_array($menu_1['submenu'])) { ?>
+                                            <?php $index2 = 0; $size2 = count((array)$menu_1['submenu']); ?>
+                                            <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                             <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
                                             <?php if ($index2 == 0) { ?>
                                             <ul class="dropdown-menu">
@@ -326,8 +326,8 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
                                                         <i class="fas fa-angle-right sub-caret hidden-sm hidden-xs"></i><i class="fas fa-angle-down sub-caret hidden-md hidden-lg"></i>
                                                         <?php } ?>
                                                     </a>
-                                                    <?php $index3 = 0; $size3 = count($menu_2['subsub']); ?>
-                                                    <?php if (is_array($menu_2['subsub'])) { ?>
+                                                    <?php $index3 = 0; $size3 = count((array)$menu_2['subsub']); ?>
+                                                    <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { ?>
                                                     <?php foreach ($menu_2['subsub'] as $ssubkey => $menu_3) { ?>
                                                     <?php if ($index3 == 0) { ?>
                                                     <ul class="dropdown-menu">

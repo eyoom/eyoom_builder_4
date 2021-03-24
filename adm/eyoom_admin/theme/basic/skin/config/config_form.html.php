@@ -83,7 +83,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_admin_email" id="cf_admin_email" class="email" value="<?php echo $config['cf_admin_email'] ?>" required>
+                                    <input type="text" name="cf_admin_email" id="cf_admin_email" class="email" value="<?php echo get_sanitize_input($config['cf_admin_email']); ?>" required>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 관리자가 보내고 받는 용도로 사용하는 메일 주소를 입력합니다. (회원가입, 인증메일, 테스트, 회원메일발송 등에서 사용)</div>
                             </td>
@@ -94,7 +94,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_admin_email_name" id="cf_admin_email_name" value="<?php echo $config['cf_admin_email_name'] ?>" required>
+                                    <input type="text" name="cf_admin_email_name" id="cf_admin_email_name" value="<?php echo get_sanitize_input($config['cf_admin_email_name']); ?>" required>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 관리자가 보내고 받는 용도로 사용하는 메일의 발송이름을 입력합니다. (회원가입, 인증메일, 테스트, 회원메일발송 등에서 사용)</div>
                             </td>
@@ -107,7 +107,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="select form-width-250px">
                                     <select name="cf_eyoom_admin_theme" id="cf_eyoom_admin_theme" required>
                                         <option value="">선택</option>
-                                        <?php for ($i=0; $i<count($cf_eyoom_admin_theme); $i++) { ?>
+                                        <?php for ($i=0; $i<count((array)$cf_eyoom_admin_theme); $i++) { ?>
                                         <option value="<?php echo $cf_eyoom_admin_theme[$i]; ?>" <?php echo get_selected($config['cf_eyoom_admin_theme'], $cf_eyoom_admin_theme[$i])?>><?php echo $cf_eyoom_admin_theme[$i]; ?></option>
                                         <?php } ?>
                                     </select><i></i>
@@ -145,7 +145,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_point_term" value="<?php echo $config['cf_point_term']; ?>" id="cf_point_term" class="text-right">
+                                    <input type="text" name="cf_point_term" value="<?php echo (int) $config['cf_point_term']; ?>" id="cf_point_term" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 기간을 0으로 설정시 포인트 유효기간이 적용되지 않습니다.</div>
                             </td>
@@ -157,7 +157,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_login_point" value="<?php echo $config['cf_login_point']; ?>" id="cf_login_point" class="text-right" required>
+                                    <input type="text" name="cf_login_point" value="<?php echo (int) $config['cf_login_point']; ?>" id="cf_login_point" class="text-right" required>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 회원이 로그인시 하루에 한번만 적립</div>
                             </td>
@@ -171,7 +171,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_memo_send_point" value="<?php echo $config['cf_memo_send_point']; ?>" id="cf_memo_send_point" class="text-right" required>
+                                    <input type="text" name="cf_memo_send_point" value="<?php echo (int) $config['cf_memo_send_point']; ?>" id="cf_memo_send_point" class="text-right" required>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 양수로 입력하십시오. 0점은 쪽지 보낼시 포인트를 차감하지 않습니다.</div>
                             </td>
@@ -183,7 +183,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td colspan="3">
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">자리</i>
-                                    <input type="text" name="cf_cut_name" id="cf_cut_name" value="<?php echo $config['cf_cut_name']; ?>" class="text-right">
+                                    <input type="text" name="cf_cut_name" id="cf_cut_name" value="<?php echo (int) $config['cf_cut_name']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 입력한 자리수만큼만 표시하게 됩니다.</div>
                             </td>
@@ -196,7 +196,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="inline-group">
                                     <span>수정하면</span>
                                     <span>
-                                        <label class="input"><input type="text" name="cf_nick_modify" id="cf_nick_modify" value="<?php echo $config['cf_nick_modify']; ?>" class="text-right" style="width:80px;"></label>
+                                        <label class="input"><input type="text" name="cf_nick_modify" id="cf_nick_modify" value="<?php echo (int) $config['cf_nick_modify']; ?>" class="text-right" style="width:80px;"></label>
                                     </span>
                                     <span>일 동안 바꿀 수 없음</span>
                                 </div>
@@ -212,7 +212,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="inline-group">
                                     <span>수정하면</span>
                                     <span>
-                                        <label class="input"><input type="text" name="cf_open_modify" id="cf_open_modify" value="<?php echo $config['cf_open_modify']; ?>" class="text-right" style="width:80px;"></label>
+                                        <label class="input"><input type="text" name="cf_open_modify" id="cf_open_modify" value="<?php echo (int) $config['cf_open_modify']; ?>" class="text-right" style="width:80px;"></label>
                                     </span>
                                     <span>일 동안 바꿀 수 없음</span>
                                 </div>
@@ -225,7 +225,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_new_del" id="cf_new_del" value="<?php echo $config['cf_new_del']; ?>" class="text-right">
+                                    <input type="text" name="cf_new_del" id="cf_new_del" value="<?php echo (int) $config['cf_new_del']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정일이 지난 최근게시물 자동 삭제</div>
                             </td>
@@ -239,7 +239,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_memo_del" id="cf_memo_del" value="<?php echo $config['cf_memo_del']; ?>" class="text-right">
+                                    <input type="text" name="cf_memo_del" id="cf_memo_del" value="<?php echo (int) $config['cf_memo_del']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정일이 지난 쪽지 자동 삭제</div>
                             </td>
@@ -251,7 +251,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_visit_del" id="cf_visit_del" value="<?php echo $config['cf_visit_del']; ?>" class="text-right">
+                                    <input type="text" name="cf_visit_del" id="cf_visit_del" value="<?php echo (int) $config['cf_visit_del']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정일이 지난 접속자 로그 자동 삭제</div>
                             </td>
@@ -265,7 +265,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_popular_del" id="cf_popular_del" value="<?php echo $config['cf_popular_del']; ?>" class="text-right">
+                                    <input type="text" name="cf_popular_del" id="cf_popular_del" value="<?php echo (int) $config['cf_popular_del']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정일이 지난 인기검색어 자동 삭제</div>
                             </td>
@@ -277,7 +277,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">분</i>
-                                    <input type="text" name="cf_login_minutes" id="cf_login_minutes" value="<?php echo $config['cf_login_minutes']; ?>" class="text-right">
+                                    <input type="text" name="cf_login_minutes" id="cf_login_minutes" value="<?php echo (int) $config['cf_login_minutes']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정값 이내의 접속자를 현재 접속자로 인정</div>
                             </td>
@@ -291,7 +291,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">라인</i>
-                                    <input type="text" name="cf_new_rows" id="cf_new_rows" value="<?php echo $config['cf_new_rows']; ?>" class="text-right">
+                                    <input type="text" name="cf_new_rows" id="cf_new_rows" value="<?php echo (int) $config['cf_new_rows']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 목록 한페이지당 라인수</div>
                             </td>
@@ -303,7 +303,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">라인</i>
-                                    <input type="text" name="cf_page_rows" id="cf_page_rows" value="<?php echo $config['cf_page_rows']; ?>" class="text-right">
+                                    <input type="text" name="cf_page_rows" id="cf_page_rows" value="<?php echo (int) $config['cf_page_rows']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 목록(리스트) 한페이지당 라인수</div>
                             </td>
@@ -317,7 +317,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">라인</i>
-                                    <input type="text" name="cf_mobile_page_rows" id="cf_mobile_page_rows" value="<?php echo $config['cf_mobile_page_rows']; ?>" class="text-right">
+                                    <input type="text" name="cf_mobile_page_rows" id="cf_mobile_page_rows" value="<?php echo (int) $config['cf_mobile_page_rows']; ?>" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 모바일 목록 한페이지당 라인수</div>
                             </td>
@@ -329,7 +329,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">p.</i>
-                                    <input type="text" name="cf_write_pages" id="cf_write_pages" value="<?php echo $config['cf_write_pages']; ?>" required class="text-right">
+                                    <input type="text" name="cf_write_pages" id="cf_write_pages" value="<?php echo (int) $config['cf_write_pages']; ?>" required class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 목록 페이지 블럭당 페이지수</div>
                             </td>
@@ -343,7 +343,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">p.</i>
-                                    <input type="text" name="cf_mobile_pages" id="cf_mobile_pages" value="<?php echo $config['cf_mobile_pages']; ?>" required class="text-right">
+                                    <input type="text" name="cf_mobile_pages" id="cf_mobile_pages" value="<?php echo (int) $config['cf_mobile_pages']; ?>" required class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 모바일 목록 페이지 블럭당 페이지수</div>
                             </td>
@@ -444,7 +444,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="select form-width-250px">
                                     <select name="cf_editor" id="cf_editor">
                                         <option value="">사용안함</option>
-                                        <?php for ($i=0; $i<count($cf_editor); $i++) { ?>
+                                        <?php for ($i=0; $i<count((array)$cf_editor); $i++) { ?>
                                         <option value="<?php echo $cf_editor[$i]; ?>" <?php echo get_selected($config['cf_editor'], $cf_editor[$i])?>><?php echo $cf_editor[$i]; ?></option>
                                         <?php } ?>
                                     </select><i></i>
@@ -475,7 +475,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="select form-width-250px">
                                     <select name="cf_captcha_mp3" id="cf_captcha_mp3" required>
                                         <option value="">선택</option>
-                                        <?php for ($i=0; $i<count($cf_captcha_mp3); $i++) { ?>
+                                        <?php for ($i=0; $i<count((array)$cf_captcha_mp3); $i++) { ?>
                                         <option value="<?php echo $cf_captcha_mp3[$i]; ?>" <?php echo get_selected($config['cf_captcha_mp3'], $cf_captcha_mp3[$i])?>><?php echo $cf_captcha_mp3[$i]; ?></option>
                                         <?php } ?>
                                     </select><i></i>
@@ -490,7 +490,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input"><input type="text" name="cf_recaptcha_site_key" id="cf_recaptcha_site_key" value="<?php echo $config['cf_recaptcha_site_key']; ?>"> </label>
+                                        <label class="input"><input type="text" name="cf_recaptcha_site_key" id="cf_recaptcha_site_key" value="<?php echo get_sanitize_input($config['cf_recaptcha_site_key']); ?>"> </label>
                                     </span>
                                     <span><a href="https://www.google.com/recaptcha/admin" target="_blank" class="btn-e btn-e-md btn-e-dark">reCAPTCHA 등록하기</a></span>
                                 </div>
@@ -505,7 +505,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input">
-                                    <input type="text" name="cf_recaptcha_secret_key" id="cf_recaptcha_secret_key" value="<?php echo $config['cf_recaptcha_secret_key']; ?>">
+                                    <input type="text" name="cf_recaptcha_secret_key" id="cf_recaptcha_secret_key" value="<?php echo get_sanitize_input($config['cf_recaptcha_secret_key']); ?>">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 구글 reCAPTCHA Secret key 를 입력해 주세요.</div>
                             </td>
@@ -516,7 +516,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="cf_possible_ip" id="cf_possible_ip" rows="8"><?php echo $config['cf_possible_ip']; ?></textarea>
+                                    <textarea name="cf_possible_ip" id="cf_possible_ip" rows="8"><?php echo get_sanitize_input($config['cf_possible_ip']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 입력된 IP의 컴퓨터만 접근할 수 있습니다.<br>123.123.+ 도 입력 가능. (엔터로 구분)</div>
                             </td>
@@ -529,7 +529,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="cf_intercept_ip" id="cf_intercept_ip" rows="8"><?php echo $config['cf_intercept_ip']; ?></textarea>
+                                    <textarea name="cf_intercept_ip" id="cf_intercept_ip" rows="8"><?php echo get_sanitize_input($config['cf_intercept_ip']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 입력된 IP의 컴퓨터는 접근할 수 없음.<br>123.123.+ 도 입력 가능. (엔터로 구분)</div>
                             </td>
@@ -540,7 +540,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <textarea name="cf_analytics" id="cf_analytics" rows="8"><?php echo $config['cf_analytics']; ?></textarea>
+                                    <textarea name="cf_analytics" id="cf_analytics" rows="8"><?php echo get_text($config['cf_analytics']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 방문자분석 스크립트 코드를 입력합니다. 예) 구글 애널리틱스</div>
                             </td>
@@ -551,7 +551,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <textarea name="cf_add_meta" id="cf_add_meta" rows="8"><?php echo $config['cf_add_meta']; ?></textarea>
+                                    <textarea name="cf_add_meta" id="cf_add_meta" rows="8"><?php echo get_text($config['cf_add_meta']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 추가로 사용하실 meta 태그를 입력합니다.</div>
                             </td>
@@ -562,7 +562,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="cf_syndi_token" id="cf_syndi_token" value="<?php echo $config['cf_syndi_token']; ?>">
+                                    <input type="text" name="cf_syndi_token" id="cf_syndi_token" value="<?php echo isset($config['cf_syndi_token']) ? get_sanitize_input($config['cf_syndi_token']) : ''; ?>">
                                 </label>
                                 <div class="note"><strong>Note:</strong> <?php if (!function_exists('curl_init')) { ?><b>경고) curl이 지원되지 않아 네이버 신디케이션을 사용할수 없습니다.</b><br><?php } ?>네이버 신디케이션 연동키(token)을 입력하면 네이버 신디케이션을 사용할 수 있습니다.<br>연동키는 <a href="http://webmastertool.naver.com/" target="_blank"><u>네이버 웹마스터도구</u></a> -> 네이버 신디케이션에서 발급할 수 있습니다.</div>
                             </td>
@@ -573,34 +573,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="cf_syndi_except" id="cf_syndi_except" value="<?php echo $config['cf_syndi_except']; ?>">
+                                    <input type="text" name="cf_syndi_except" id="cf_syndi_except" value="<?php echo isset($config['cf_syndi_except']) ? get_sanitize_input($config['cf_syndi_except']) : ''; ?>">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 네이버 신디케이션 수집에서 제외할 게시판 아이디를 | 로 구분하여 입력하십시오. 예) notice|adult<br>참고로 그룹접근사용 게시판, 글읽기 권한 2 이상 게시판, 비밀글은 신디케이션 수집에서 제외됩니다.</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th">
-                                <label for="cf_slack_token" class="label">슬랙 Legacy token</label>
-                            </th>
-                            <td>
-                                <label class="input">
-                                    <input type="text" name="cf_slack_token" id="cf_slack_token" value="<?php echo $config['cf_slack_token']; ?>">
-                                </label>
-                                <div class="note"><strong>Note:</strong> 슬랙 (<a href="http://slack.com" target="_blank">slack.com</a>)을 이용하여 글쓰기/댓글쓰기 내용을 실시간 푸쉬 알람으로 받아 보실 수 있습니다.<br>연동키는 <a href="https://api.slack.com/custom-integrations/legacy-tokens" target="_blank"><u>슬랙 Legacy tokens</u></a> 에서 발급받으실 수 있습니다. (Workspace에 Sign In 하여 토큰 생성)<br><span class="color-red">ERR_BLOCKED_BY_XSS_AUDITOR 에러로 차단이 되는 경우, 새로고침하고 저장해 주세요.</span></div>
-                            </td>
-                        <?php if (G5_IS_MOBILE) { ?>
-                        </tr>
-                        <tr>
-                        <?php } ?>
-                            <th class="table-form-th border-left-th">
-                                <label for="cf_slack_channel" class="label">슬랙 채널명</label>
-                            </th>
-                            <td>
-                                <label class="input">
-                                    <i class="icon-prepend">#</i>
-                                    <input type="text" name="cf_slack_channel" id="cf_slack_channel" value="<?php echo $config['cf_slack_channel']; ?>">
-                                </label>
-                                <div class="note"><strong>Note:</strong> 워크스페이스에 생성한 채널명을 입력해 주세요. 최신글 및 댓글등을 해당 채널로 받아보실 수 있습니다.</div>
                             </td>
                         </tr>
                     </tbody>
@@ -641,7 +616,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_delay_sec" value="<?php echo $config['cf_delay_sec'] ?>" id="cf_delay_sec" required>
+                                    <input type="text" name="cf_delay_sec" value="<?php echo (int) $config['cf_delay_sec'] ?>" id="cf_delay_sec" required>
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 초단위로 지정한 초가 지난 후 글쓰기가 가능합니다.</div>
                             </td>
@@ -696,7 +671,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_read_point" id="cf_read_point" value="<?php echo $config['cf_read_point'] ?>" class="text-right" required>
+                                    <input type="text" name="cf_read_point" id="cf_read_point" value="<?php echo (int) $config['cf_read_point'] ?>" class="text-right" required>
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -709,7 +684,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_write_point" id="cf_write_point" value="<?php echo $config['cf_write_point'] ?>" class="text-right" required>
+                                    <input type="text" name="cf_write_point" id="cf_write_point" value="<?php echo (int) $config['cf_write_point'] ?>" class="text-right" required>
                                 </label>
                             </td>
                         </tr>
@@ -720,7 +695,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_comment_point" id="cf_comment_point" value="<?php echo $config['cf_comment_point'] ?>" class="text-right" required>
+                                    <input type="text" name="cf_comment_point" id="cf_comment_point" value="<?php echo (int) $config['cf_comment_point'] ?>" class="text-right" required>
                                 </label>
                             </td>
                         <?php if (G5_IS_MOBILE) { ?>
@@ -733,7 +708,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_download_point" id="cf_download_point" value="<?php echo $config['cf_download_point'] ?>" class="text-right" required>
+                                    <input type="text" name="cf_download_point" id="cf_download_point" value="<?php echo (int) $config['cf_download_point'] ?>" class="text-right" required>
                                 </label>
                             </td>
                         </tr>
@@ -743,7 +718,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="cf_image_extension" value="<?php echo $config['cf_image_extension'] ?>" id="cf_image_extension">
+                                    <input type="text" name="cf_image_extension" value="<?php echo get_sanitize_input($config['cf_image_extension']); ?>" id="cf_image_extension">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 게시판 글작성시 이미지 파일 업로드 가능 확장자. | 로 구분</div>
                             </td>
@@ -754,7 +729,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="cf_flash_extension" value="<?php echo $config['cf_flash_extension'] ?>" id="cf_flash_extension">
+                                    <input type="text" name="cf_flash_extension" value="<?php echo get_sanitize_input($config['cf_flash_extension']); ?>" id="cf_flash_extension">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 게시판 글작성시 플래쉬 파일 업로드 가능 확장자. | 로 구분</div>
                             </td>
@@ -765,7 +740,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input">
-                                    <input type="text" name="cf_movie_extension" value="<?php echo $config['cf_movie_extension'] ?>" id="cf_movie_extension">
+                                    <input type="text" name="cf_movie_extension" value="<?php echo get_sanitize_input($config['cf_movie_extension']); ?>" id="cf_movie_extension">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 게시판 글작성시 동영상 파일 업로드 가능 확장자. | 로 구분</div>
                             </td>
@@ -776,7 +751,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <textarea name="cf_filter" id="cf_filter" rows="8"><?php echo $config['cf_filter']; ?></textarea>
+                                    <textarea name="cf_filter" id="cf_filter" rows="8"><?php echo get_sanitize_input($config['cf_filter']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 입력된 단어가 포함된 내용은 게시할 수 없습니다. 단어와 단어 사이는 ,로 구분합니다.</div>
                             </td>
@@ -925,7 +900,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append">점</i>
-                                    <input type="text" name="cf_register_point" id="cf_register_point" value="<?php echo $config['cf_register_point']; ?>" class="text-right">
+                                    <input type="text" name="cf_register_point" id="cf_register_point" value="<?php echo (int) $config['cf_register_point']; ?>" class="text-right">
                                 </label>
                             </td>
                         </tr>
@@ -936,7 +911,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td colspan="3">
                                 <label class="input form-width-250px">
                                     <i class="icon-append">일</i>
-                                    <input type="text" name="cf_leave_day" value="<?php echo $config['cf_leave_day'] ?>" id="cf_leave_day"  class="text-right">
+                                    <input type="text" name="cf_leave_day" value="<?php echo (int) $config['cf_leave_day'] ?>" id="cf_leave_day"  class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정일 이후 자동 삭제</div>
                             </td>
@@ -976,7 +951,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">Byte</i>
-                                    <input type="text" name="cf_member_icon_size" value="<?php echo $config['cf_member_icon_size'] ?>" id="cf_member_icon_size" class="text-right">
+                                    <input type="text" name="cf_member_icon_size" value="<?php echo (int) $config['cf_member_icon_size'] ?>" id="cf_member_icon_size" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정 용량 이하만 허용</div>
                             </td>
@@ -990,12 +965,12 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label for="cf_member_icon_width" class="input"><i class="icon-prepend text-width">가로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_icon_width" id="cf_member_icon_width" value="<?php echo $config['cf_member_icon_width']; ?>" class="text-right" style="width:170px;"></label>
+                                        <label for="cf_member_icon_width" class="input"><i class="icon-prepend text-width">가로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_icon_width" id="cf_member_icon_width" value="<?php echo (int) $config['cf_member_icon_width']; ?>" class="text-right" style="width:170px;"></label>
                                     </span>
                                     <span>이하</span>
                                     <br>
                                     <span>
-                                        <label for="cf_member_icon_height" class="input"><i class="icon-prepend text-width">세로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_icon_height" id="cf_member_icon_height" value="<?php echo $config['cf_member_icon_height']; ?>" class="text-right" style="width:170px;"></label>
+                                        <label for="cf_member_icon_height" class="input"><i class="icon-prepend text-width">세로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_icon_height" id="cf_member_icon_height" value="<?php echo (int) $config['cf_member_icon_height']; ?>" class="text-right" style="width:170px;"></label>
                                     </span>
                                     <span>이하</span>
                                 </div>
@@ -1008,7 +983,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <label class="input form-width-250px">
                                     <i class="icon-append text-width">Byte</i>
-                                    <input type="text" name="cf_member_img_size" value="<?php echo $config['cf_member_img_size'] ?>" id="cf_member_img_size" class="text-right">
+                                    <input type="text" name="cf_member_img_size" value="<?php echo (int) $config['cf_member_img_size'] ?>" id="cf_member_img_size" class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 설정 용량 이하만 허용</div>
                             </td>
@@ -1022,12 +997,12 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label for="cf_member_img_width" class="input"><i class="icon-prepend text-width">가로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_img_width" id="cf_member_img_width" value="<?php echo $config['cf_member_img_width']; ?>" class="text-right" style="width:170px;"></label>
+                                        <label for="cf_member_img_width" class="input"><i class="icon-prepend text-width">가로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_img_width" id="cf_member_img_width" value="<?php echo (int) $config['cf_member_img_width']; ?>" class="text-right" style="width:170px;"></label>
                                     </span>
                                     <span>이하</span>
                                     <br>
                                     <span>
-                                        <label for="cf_member_img_height" class="input"><i class="icon-prepend text-width">세로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_img_height" id="cf_member_img_height" value="<?php echo $config['cf_member_img_height']; ?>" class="text-right" style="width:170px;"></label>
+                                        <label for="cf_member_img_height" class="input"><i class="icon-prepend text-width">세로</i><i class="icon-append text-width">px</i><input type="text" name="cf_member_img_height" id="cf_member_img_height" value="<?php echo (int) $config['cf_member_img_height']; ?>" class="text-right" style="width:170px;"></label>
                                     </span>
                                     <span>이하</span>
                                 </div>
@@ -1062,7 +1037,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="cf_prohibit_id" id="cf_prohibit_id" rows="8"><?php echo $config['cf_prohibit_id']; ?></textarea>
+                                    <textarea name="cf_prohibit_id" id="cf_prohibit_id" rows="8"><?php echo get_sanitize_input($config['cf_prohibit_id']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 회원아이디, 닉네임으로 사용할 수 없는 단어를 정하여 쉼표 (,)로 구분</div>
                             </td>
@@ -1075,7 +1050,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="cf_prohibit_email" id="cf_prohibit_email" rows="8"><?php echo $config['cf_prohibit_email']; ?></textarea>
+                                    <textarea name="cf_prohibit_email" id="cf_prohibit_email" rows="8"><?php echo get_sanitize_input($config['cf_prohibit_email']); ?></textarea>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 입력 받지 않을 도메인을 지정합니다. 엔터로 구분 ex) hotmail.com</div>
                             </td>
@@ -1086,7 +1061,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <textarea name="cf_stipulation" id="cf_stipulation" rows="8"><?php echo $config['cf_stipulation']; ?></textarea>
+                                    <textarea name="cf_stipulation" id="cf_stipulation" rows="8"><?php echo html_purifier($config['cf_stipulation']); ?></textarea>
                                 </label>
                             </td>
                         </tr>
@@ -1096,7 +1071,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="textarea">
-                                    <textarea name="cf_privacy" id="cf_privacy" rows="8"><?php echo $config['cf_privacy']; ?></textarea>
+                                    <textarea name="cf_privacy" id="cf_privacy" rows="8"><?php echo html_purifier($config['cf_privacy']); ?></textarea>
                                 </label>
                             </td>
                         </tr>
@@ -1183,7 +1158,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="inline-group">
                                     <span>
                                         <label class="input form-width-250px">
-                                            <input type="text" name="cf_cert_kcb_cd" value="<?php echo $config['cf_cert_kcb_cd']; ?>" id="cf_cert_kcb_cd">
+                                            <input type="text" name="cf_cert_kcb_cd" value="<?php echo get_sanitize_input($config['cf_cert_kcb_cd']); ?>" id="cf_cert_kcb_cd">
                                         </label>
                                     </span>
                                     <span>
@@ -1203,7 +1178,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                     <span>
                                         <label class="input form-width-250px">
                                             <i class="icon-prepend">SM</i>
-                                            <input type="text" name="cf_cert_kcp_cd" value="<?php echo $config['cf_cert_kcp_cd']; ?>" id="cf_cert_kcp_cd">
+                                            <input type="text" name="cf_cert_kcp_cd" value="<?php echo get_sanitize_input($config['cf_cert_kcp_cd']); ?>" id="cf_cert_kcp_cd">
                                         </label>
                                     </span>
                                     <span>
@@ -1222,7 +1197,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                     <span>
                                         <label class="input form-width-250px">
                                             <i class="icon-prepend">si_</i>
-                                            <input type="text" name="cf_lg_mid" value="<?php echo $config['cf_lg_mid']; ?>" id="cf_lg_mid">
+                                            <input type="text" name="cf_lg_mid" value="<?php echo get_sanitize_input($config['cf_lg_mid']); ?>" id="cf_lg_mid">
                                         </label>
                                     </span>
                                     <span>
@@ -1238,7 +1213,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td class="cf_cert_service">
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_lg_mert_key" value="<?php echo $config['cf_lg_mert_key']; ?>" id="cf_lg_mert_key">
+                                    <input type="text" name="cf_lg_mert_key" value="<?php echo get_sanitize_input($config['cf_lg_mert_key']); ?>" id="cf_lg_mert_key">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> LG유플러스 상점MertKey는 상점관리자 -> 계약정보 -> 상점정보관리에서 확인하실 수 있습니다.</strong></div>
                             </td>
@@ -1250,7 +1225,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td class="cf_cert_service">
                                 <label class="input form-width-250px">
                                     <i class="icon-append">회</i>
-                                    <input type="text" name="cf_cert_limit" value="<?php echo $config['cf_cert_limit']; ?>" id="cf_cert_limit" class="text-right">
+                                    <input type="text" name="cf_cert_limit" value="<?php echo (int) $config['cf_cert_limit']; ?>" id="cf_cert_limit" class="text-right">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 하루동안 아이핀과 휴대폰 본인확인 인증 이용회수를 제한할 수 있습니다.<br>회수제한은 실서비스에서 아이핀과 휴대폰 본인확인 인증에 개별 적용됩니다.<br>0 으로 설정하시면 회수제한이 적용되지 않습니다.</div>
                             </td>
@@ -1666,7 +1641,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_naver_clientid" id="cf_naver_clientid" value="<?php echo $config['cf_naver_clientid']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_naver_clientid" id="cf_naver_clientid" value="<?php echo get_sanitize_input($config['cf_naver_clientid']); ?>"> </label>
                                     </span>
                                     <span><a href="https://developers.naver.com/apps/#/register" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1680,7 +1655,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_naver_secret" id="cf_naver_secret" value="<?php echo $config['cf_naver_secret']; ?>">
+                                    <input type="text" name="cf_naver_secret" id="cf_naver_secret" value="<?php echo get_sanitize_input($config['cf_naver_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1691,7 +1666,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_facebook_appid" id="cf_facebook_appid" value="<?php echo $config['cf_facebook_appid']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_facebook_appid" id="cf_facebook_appid" value="<?php echo get_sanitize_input($config['cf_facebook_appid']); ?>"> </label>
                                     </span>
                                     <span><a href="https://developers.facebook.com/apps" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1705,7 +1680,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_facebook_secret" id="cf_facebook_secret" value="<?php echo $config['cf_facebook_secret']; ?>">
+                                    <input type="text" name="cf_facebook_secret" id="cf_facebook_secret" value="<?php echo get_sanitize_input($config['cf_facebook_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1716,7 +1691,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_twitter_key" id="cf_twitter_key" value="<?php echo $config['cf_twitter_key']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_twitter_key" id="cf_twitter_key" value="<?php echo get_sanitize_input($config['cf_twitter_key']); ?>"> </label>
                                     </span>
                                     <span><a href="https://developer.twitter.com/en/apps" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1730,7 +1705,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_twitter_secret" id="cf_twitter_secret" value="<?php echo $config['cf_twitter_secret']; ?>">
+                                    <input type="text" name="cf_twitter_secret" id="cf_twitter_secret" value="<?php echo get_sanitize_input($config['cf_twitter_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1741,7 +1716,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_google_clientid" id="cf_google_clientid" value="<?php echo $config['cf_google_clientid']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_google_clientid" id="cf_google_clientid" value="<?php echo get_sanitize_input($config['cf_google_clientid']); ?>"> </label>
                                     </span>
                                     <span><a href="https://console.developers.google.com" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1755,7 +1730,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_google_secret" id="cf_google_secret" value="<?php echo $config['cf_google_secret']; ?>">
+                                    <input type="text" name="cf_google_secret" id="cf_google_secret" value="<?php echo get_sanitize_input($config['cf_google_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1766,7 +1741,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td colspan="3">
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_googl_shorturl_apikey" id="cf_googl_shorturl_apikey" value="<?php echo $config['cf_googl_shorturl_apikey']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_googl_shorturl_apikey" id="cf_googl_shorturl_apikey" value="<?php echo get_sanitize_input($config['cf_googl_shorturl_apikey']); ?>"> </label>
                                     </span>
                                     <span><a href="http://code.google.com/apis/console/" target="_blank" class="btn-e btn-e-md btn-e-dark">API Key 등록하기</a></span>
                                 </div>
@@ -1779,7 +1754,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_kakao_rest_key" id="cf_kakao_rest_key" value="<?php echo $config['cf_kakao_rest_key']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_kakao_rest_key" id="cf_kakao_rest_key" value="<?php echo get_sanitize_input($config['cf_kakao_rest_key']); ?>"> </label>
                                     </span>
                                     <span><a href="https://developers.kakao.com/product/kakaoLogin" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1793,7 +1768,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_kakao_client_secret" id="cf_kakao_client_secret" value="<?php echo $config['cf_kakao_client_secret']; ?>">
+                                    <input type="text" name="cf_kakao_client_secret" id="cf_kakao_client_secret" value="<?php echo get_sanitize_input($config['cf_kakao_client_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1803,7 +1778,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td colspan="3">
                                 <label class="input form-width-300px">
-                                    <input type="text" name="cf_kakao_js_apikey" id="cf_kakao_js_apikey" value="<?php echo $config['cf_kakao_js_apikey']; ?>">
+                                    <input type="text" name="cf_kakao_js_apikey" id="cf_kakao_js_apikey" value="<?php echo get_sanitize_input($config['cf_kakao_js_apikey']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1814,7 +1789,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label class="input form-width-220px"><input type="text" name="cf_payco_clientid" id="cf_payco_clientid" value="<?php echo $config['cf_payco_clientid']; ?>"> </label>
+                                        <label class="input form-width-220px"><input type="text" name="cf_payco_clientid" id="cf_payco_clientid" value="<?php echo get_sanitize_input($config['cf_payco_clientid']); ?>"> </label>
                                     </span>
                                     <span><a href="https://developers.payco.com/guide" target="_blank" class="btn-e btn-e-md btn-e-dark">앱 등록하기</a></span>
                                 </div>
@@ -1828,7 +1803,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_payco_secret" id="cf_payco_secret" value="<?php echo $config['cf_payco_secret']; ?>">
+                                    <input type="text" name="cf_payco_secret" id="cf_payco_secret" value="<?php echo get_sanitize_input($config['cf_payco_secret']); ?>">
                                 </label>
                             </td>
                         </tr>
@@ -1854,9 +1829,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <td>
                                     <div class="inline-group inline-mobile-block">
                                         <span>
-                                            <label class="input form-width-350px"><input type="text" name="cf_map_google_id" id="cf_map_google_id" value="<?php echo $config['cf_map_google_id']; ?>"> </label>
+                                            <label class="input form-width-350px"><input type="text" name="cf_map_google_id" id="cf_map_google_id" value="<?php echo get_sanitize_input($config['cf_map_google_id']); ?>"> </label>
                                         </span>
-                                        <span><a href="https://developers.google.com/maps/documentation/javascript/" target="_blank" class="btn-e btn-e-md btn-e-dark">구글지도 API KEY 신청하기</a></span>
+                                        <span><a href="https://cloud.google.com/maps-platform/" target="_blank" class="btn-e btn-e-md btn-e-dark">구글지도 API KEY 신청하기</a></span>
                                     </div>
                                     <div class="note margin-bottom-10"><strong>Note:</strong> 구글 계정으로 로그인 &gt; 키가져오기 버튼 클릭 후, API KEY를 발급받을 수 있습니다.</div>
                                 </td>
@@ -1868,10 +1843,9 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <td>
                                     <div class="inline-group inline-mobile-block">
                                         <span>
-                                            <label class="input form-width-350px"><input type="text" name="cf_map_naver_id" id="cf_map_naver_id" value="<?php echo $config['cf_map_naver_id']; ?>"> </label>
+                                            <label class="input form-width-350px"><input type="text" name="cf_map_naver_id" id="cf_map_naver_id" value="<?php echo get_sanitize_input($config['cf_map_naver_id']); ?>"> </label>
                                         </span>
-                                        <span><a href="https://developers.naver.com/apps/#/wizard/register" target="_blank" class="btn-e btn-e-md btn-e-dark">네이버지도 clientId 신청하기</a></span>
-                                        <span><a href="https://navermaps.github.io/maps.js/docs/tutorial-Getting-Started-Register-Application.html" target="_blank" class="btn-e btn-e-md btn-e-green">네이버지도 신청 가이드</a></span>
+                                        <span><a href="https://www.ncloud.com/product/applicationService/maps" target="_blank" class="btn-e btn-e-md btn-e-green">네이버지도 신청 가이드</a></span>
                                     </div>
                                     <div class="note margin-bottom-10"><strong>Note:</strong> 신청 후, 내 애플리케이션 메뉴에서 Client ID를 확인하실 수 있습니다.</div>
                                 </td>
@@ -1883,7 +1857,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <td>
                                     <div class="inline-group inline-mobile-block">
                                         <span>
-                                            <label class="input form-width-350px"><input type="text" name="cf_map_daum_id" id="cf_map_daum_id" value="<?php echo $config['cf_map_daum_id']; ?>"> </label>
+                                            <label class="input form-width-350px"><input type="text" name="cf_map_daum_id" id="cf_map_daum_id" value="<?php echo get_sanitize_input($config['cf_map_daum_id']); ?>"> </label>
                                         </span>
                                         <span><a href="https://developers.kakao.com" target="_blank" class="btn-e btn-e-md btn-e-dark">다음지도 APP KEY 신청하기</a></span>
                                         <span><a href="http://apis.map.daum.net/web/guide/" target="_blank" class="btn-e btn-e-md btn-e-yellow">다음지도 API 개발 가이드</a></span>
@@ -1990,7 +1964,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_icode_id" value="<?php echo $config['cf_icode_id']; ?>" id="cf_icode_id">
+                                    <input type="text" name="cf_icode_id" value="<?php echo get_sanitize_input($config['cf_icode_id']); ?>" id="cf_icode_id">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 회원아이디를 입력합니다.</div>
                             </td>
@@ -2001,7 +1975,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="password" name="cf_icode_pw" value="<?php echo $config['cf_icode_pw']; ?>" id="cf_icode_pw">
+                                    <input type="password" name="cf_icode_pw" value="<?php echo get_sanitize_input($config['cf_icode_pw']); ?>" id="cf_icode_pw">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드에서 사용하시는 비밀번호를 입력합니다.</div>
                             </td>
@@ -2011,7 +1985,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <label class="label">요금제<br>(구버전)</label>
                             </th>
                             <td>
-                                <input type="hidden" name="cf_icode_server_ip" value="<?php echo $config['cf_icode_server_ip']; ?>">
+                                <input type="hidden" name="cf_icode_server_ip" value="<?php echo get_sanitize_input($config['cf_icode_server_ip']); ?>">
                                 <label class="input margin-top-5">
                                     <?php if ($userinfo['payment'] == 'A') { ?>
                                     충전제<input type="hidden" name="cf_icode_server_port" value="7295" id="cf_icode_server_port">
@@ -2030,7 +2004,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <?php echo number_format($userinfo['coin']); ?> 원.
-                                <a href="http://www.icodekorea.com/smsbiz/credit_card_amt.php?icode_id=<?php echo $config['cf_icode_id']; ?>&amp;icode_passwd=<?php echo $config['cf_icode_pw']; ?>" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">충전하기</a>
+                                <a href="http://www.icodekorea.com/smsbiz/credit_card_amt.php?icode_id=<?php echo get_text($config['cf_icode_id']); ?>&amp;icode_passwd=<?php echo get_text($config['cf_icode_pw']); ?>" target="_blank" class="btn-e btn-e-sm btn-e-dark text-center">충전하기</a>
                             </td>
                         </tr>
                         <?php } ?>
@@ -2040,7 +2014,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="cf_icode_token_key" value="<?php echo $config['cf_icode_token_key']; ?>" id="cf_icode_token_key">
+                                    <input type="text" name="cf_icode_token_key" value="<?php echo isset($config['cf_icode_token_key']) ? get_sanitize_input($config['cf_icode_token_key']) : ''; ?>" id="cf_icode_token_key">
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 JSON 버전의 경우 아이코드 토큰키를 입력시 실행됩니다.<br>SMS 전송유형을 LMS로 설정시 90바이트 이내는 SMS, 90 ~ 2000 바이트는 LMS 그 이상은 절삭 되어 LMS로 발송됩니다.</div>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 아이코드 사이트 -> 토큰키관리 메뉴에서 생성한 토큰키를 입력합니다.</div>

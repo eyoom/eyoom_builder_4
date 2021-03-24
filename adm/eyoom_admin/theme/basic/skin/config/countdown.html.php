@@ -57,7 +57,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="cd_skin" class="select form-width-250px">
                                 <select name="cd_skin" id="cd_skin">
                                     <option value="">::스킨선택::</option>
-                                    <?php for ($i=0; $i<count($skins); $i++) { ?>
+                                    <?php for ($i=0; $i<count((array)$skins); $i++) { ?>
                                     <option value="<?php echo $skins[$i]; ?>" <?php echo $skins[$i] == $countdown['cd_skin'] ? 'selected': ''; ?>><?php echo $skins[$i]; ?></option>
                                     <?php } ?>
                                 </select><i></i>

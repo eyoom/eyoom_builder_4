@@ -15,8 +15,8 @@ if ($is_admin) $colspan++;
  * 그룹정보 가져오기
  */
 $sel_group = $eb->get_group();
-
-for ($i=0; $i<count($list); $i++) {
+$newlist = array();
+for ($i=0; $i<count((array)$list); $i++) {
     $tmp_write_table = $g5['write_prefix'].$list[$i]['bo_table'];
 
     // 익명글 제외

@@ -44,7 +44,7 @@ if (!defined('_EYOOM_')) exit;
     	<p>내글 반응</p>
     </blockquote>
     <ul class="timeline">
-        <?php for ($i=0; $i<count($respond_new); $i++) {?>
+        <?php for ($i=0; $i<count((array)$respond_new); $i++) {?>
         <li>
             <div class="timeline-date helvetica-neue"><span><?php echo $eb->date_format('Y.m',$respond_new[$i]['datetime']); ?></span> <span><?php echo $eb->date_format('d',$respond_new[$i]['datetime']); ?></span></div>
             <i class="timeline-icon rounded-x hidden-xs"></i>
@@ -67,7 +67,7 @@ if (!defined('_EYOOM_')) exit;
             </div>
         </li>
         <?php } ?>
-        <?php if ( count($respond_new)==0 ) { ?>
+        <?php if ( count((array)$respond_new)==0 ) { ?>
         <div class="text-center margin-top-20 margin-bottom-20 color-grey font-size-13">
             <i class="fa fa-exclamation-circle"></i> 읽지 않은 내글 반응이 없습니다.
         </div>

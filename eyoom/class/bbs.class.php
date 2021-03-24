@@ -106,6 +106,7 @@ class bbs extends eyoom
      */
     public function group_bo_table($gr_id) {
         $result = sql_query("select bo_table from {$this->g5['board_table']} where (1) and gr_id = '{$gr_id}' ");
+        $bo_table = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $bo_table[$i] = $row['bo_table'];
         }
@@ -125,8 +126,9 @@ class bbs extends eyoom
         if ($is_admin != 'super') return;
 
         $write_table = $this->g5['write_prefix'] . $bo_table;
-        if ($this->board && !sql_query(" select eb_1 from {$write_table} limit 1 ", false)) {
+        if ($this->board && $this->board['bo_table'] && !sql_query(" select eb_1 from {$write_table} limit 1 ", false)) {
             $k = 1;
+            $add_set = array();
             for ($i=0; $i<10; $i++) {
                 $field_name = 'eb_' . $k;
                 $after_field = $i==0 ? 'wr_10': 'eb_' . $i;
@@ -322,6 +324,8 @@ class bbs extends eyoom
      */
     public function video_content($video_url) {
         $v_url = trim(strip_tags($video_url[1]));
+        $v_url = preg_replace('/<a href="([^"]+)">.+/i', '$1', htmlspecialchars_decode($v_url));
+        $v_url = trim(strip_tags($v_url));
         $video_url = preg_replace('/&#?[a-z0-9]+;/i','',htmlentities($v_url));
         $video_url = preg_replace('/nbsp;/i','',$video_url );
         $src = explode('|', $video_url);
@@ -433,15 +437,13 @@ class bbs extends eyoom
              */
             case 'tvcast.naver.com':
             case 'tv.naver.com':
-                if ($src[1] && $src[2] && $src[3]) {
+                if ($src[1] && $src[2]) {
                     $video['key1'] = $src[1];
                     $video['key2'] = $src[2];
-                    $video['key3'] = $src[3];
                 } else {
                     $data = $this->get_video_use_curl($video_url, $host);
                     $video['key1'] = $data['vid'];
-                    $video['key2'] = $data['outKey'];
-                    $video['key3'] = $data['imgsrc'];
+                    $video['key2'] = $data['imgsrc'];
                 }
                 break;
 
@@ -487,7 +489,7 @@ class bbs extends eyoom
                     $data = $this->get_video_use_curl($video_url, $host);
                     $video['key1'] = $data['prgid'];
                     $video['key2'] = $data['userid'];
-                    $video['key3'] = $data['imgkey'];
+                    $video['key3'] = $data['imgsrc'];
                 }
                 break;
 
@@ -632,12 +634,12 @@ class bbs extends eyoom
             /**
              * Naver
              */
+            //<meta property="og:video:url" content='
             case 'tvcast.naver.com':
             case 'tv.naver.com':
-                preg_match('/&outKey=(?P<outKey>[a-zA-Z0-9]+)&/i', $output, $scrapping);
-                $out['outKey']= $scrapping['outKey'];
-                preg_match('/\?vid=(?P<vid>[a-zA-Z0-9]+)&/i', $output, $scrapping);
-                $out['vid']= $scrapping['vid'];
+                // <meta property="og:url" content='https://tv.naver.com/v/18588378'>
+                preg_match('/\<meta property=\"og:url\"\scontent=\'(?P<vid>[a-zA-Z0-9:\/\._]+)\'/i', $output, $scrapping);
+                $out['vid'] = $this->get_video_key($this->eyoom_host($scrapping['vid']));
                 preg_match('/\<meta property=\"og:image\"\scontent=\'(?P<imgsrc>[a-zA-Z0-9:\/\._]+)/i', $output, $scrapping);
                 $out['imgsrc'] = $scrapping['imgsrc'];
                 return $out;
@@ -647,7 +649,7 @@ class bbs extends eyoom
              * Ted
              */
             case 'ted.com':
-                preg_match('/\<meta property=\"og:image\"\scontent=\"(?P<imgsrc>[a-zA-Z0-9:\/\._]+)/i', $output, $scrapping);
+                preg_match('/\<meta property=\"og:image\"\scontent=\"(?P<imgsrc>[a-zA-Z0-9-:\/\._]+)/i', $output, $scrapping);
                 $out['imgsrc'] = $scrapping['imgsrc'];
                 return $out;
                 break;
@@ -674,8 +676,7 @@ class bbs extends eyoom
                 $out['prgid'] = trim($tmp[count($tmp)-1]);
                 $out['userid'] = trim($tmp[count($tmp)-2]);
                 preg_match('/\<meta property=\"og:image\"\scontent=\"(?P<imgsrc>[a-zA-Z0-9:\/\._\?\=%]+)/i', $output, $scrapping);
-                $img_src = (parse_url(urldecode($scrapping['imgsrc'])));
-                $out['imgkey'] = $img_src['query'];
+                $out['imgsrc'] = $scrapping['imgsrc'];
                 return $out;
                 break;
 
@@ -736,7 +737,7 @@ class bbs extends eyoom
                 break;
             case 'tvcast.naver.com':
             case 'tv.naver.com':
-                $source = '<iframe width="'.$video['width'].'" height="'.$video['height'].'" src="http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid='.$video['key1'].'&outKey='.$video['key2'].'&controlBarMovable=true&jsCallable=true&skinName=tvcast_black" frameborder="no" scrolling="no" marginwidth="0" marginheight="0"></iframe>';
+                $source = '<iframe width="'.$video['width'].'" height="'.$video['height'].'" src="https://tv.naver.com/embed/'.$video['key1'].'" frameborder="no" scrolling="no" marginwidth="0" marginheight="0" allowfullscreen></iframe>';
                 break;
             case 'vimeo.com':
                 $source = '<iframe src="//player.vimeo.com/video/'.$video['key1'].'" width="'.$video['width'].'" height="'.$video['height'].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
@@ -806,7 +807,7 @@ class bbs extends eyoom
 
             case 'tvcast.naver.com':
             case 'tv.naver.com':
-                $video['img_url'] = $video['key3'];
+                $video['img_url'] = $video['key2'];
                 break;
             case 'ted.com':
                 $video['img_url'] = $video['key2'];
@@ -817,7 +818,7 @@ class bbs extends eyoom
                 break;
             case 'channel.pandora.tv':
             case 'pan.best':
-                $video['img_url'] = "http://www.pandora.tv/external/getExternalApi/getOgThumb?{$video['key3']}";
+                $video['img_url'] = $video['key3'];
                 break;
             case 'dailymotion.com':
             case 'dai.ly':
@@ -853,7 +854,7 @@ class bbs extends eyoom
         $prefix = 'vlist';
 
         $video = $this->get_imgurl_from_video($src);
-        $path = trim($this->get_filename_from_url($video['img_url']));
+        $path = $this->get_filename_from_url($video['img_url']);
         $filename = $path['filename'];
         $thumb_info = '/file/' . $bo_table . '/' . $prefix . '_thumb_' . $wr_id . '_' . $filename;
         $vlist_thumb_path = G5_DATA_PATH . $thumb_info;
@@ -894,7 +895,7 @@ class bbs extends eyoom
         $host = $extra_parse_url['host'];
         if ($host == $_SERVER['HTTP_HOST']) return false;
 
-        $path = @trim($this->get_filename_from_url($extra_img_url));
+        $path = $this->get_filename_from_url($extra_img_url);
         $filename = $path['filename'];
         $thumb_info = '/file/' . $bo_table . '/' . $prefix . '_thumb_' . $wr_id . '_' . $filename;
         $list_thumb_path = G5_DATA_PATH . $thumb_info;
@@ -1154,7 +1155,7 @@ class bbs extends eyoom
         $files = glob($path.'/*.gif');
         foreach ($files as $k => $file) {
             $temp = explode('/',$file);
-            $filename = $temp[(count($temp)-1)];
+            $filename = $temp[(count((array)$temp)-1)];
             $emoticon[$k]['emoticon'] = substr($filename,0,-4);
             $emoticon[$k]['url'] = $url.'/'.$filename;
         }
@@ -1223,6 +1224,7 @@ class bbs extends eyoom
     public function good_members($bg_flag, $bo_table, $wr_id) {
         $sql = "select *, b.mb_name, b.mb_nick, b.mb_email, b.mb_homepage from {$this->g5['board_good_table']} as a left join {$this->g5['member_table']} as b on a.mb_id = b.mb_id where bg_flag = '{$bg_flag}' and bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ";
         $result = sql_query($sql, false);
+        $good_member = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $good_member[$i] = $row;
             $good_member[$i]['mb_photo'] = parent::mb_photo($row['mb_id']);
@@ -1271,6 +1273,7 @@ class bbs extends eyoom
         else {
             $sql = "select a.*, b.mb_name, b.mb_nick, b.mb_email, b.mb_homepage from {$this->g5['eyoom_rating']} as a left join {$this->g5['member_table']} as b on a.mb_id = b.mb_id where a.bo_table='{$bo_table}' and a.wr_id='{$wr_id}' order by a.rt_datetime desc";
             $result = sql_query($sql, false);
+            $info = array();
             for ($i=0; $row=sql_fetch_array($result); $i++) {
                 $info[$row['mb_id']] = $row;
                 $info[$row['mb_id']]['mb_photo'] = parent::mb_photo($row['mb_id']);
@@ -1355,7 +1358,7 @@ class bbs extends eyoom
         $matchs = get_editor_image($content,false);
         if (!$matchs) return false;
 
-        for ($i=0; $i<count($matchs[1]); $i++) {
+        for ($i=0; $i<count((array)$matchs[1]); $i++) {
             // 이미지 path 구함
             $imgurl = parse_url($matchs[1][$i]);
             $srcfile = $_SERVER['DOCUMENT_ROOT'].$imgurl['path'];
@@ -1437,6 +1440,7 @@ class bbs extends eyoom
         $sql = "select * from {$this->g5['board_new_table']} where {$where} and mb_id = '{$mb_id}' order by bn_datetime desc limit $count ";
         $result = sql_query($sql, false);
         $k=0;
+        $list = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             /**
              * 게시글 정보
@@ -1585,6 +1589,7 @@ class bbs extends eyoom
         /**
          * 목록보기 권한이 있는 게시물만 리스트에 보이도록 처리
          */
+        $data = array();
         if (is_array($bo_info)) {
             $i=0;
             foreach ($bo_info as $bo_table => $info) {

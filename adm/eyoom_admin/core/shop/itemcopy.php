@@ -6,9 +6,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400300";
 
-$ca_id = preg_replace('/[^0-9a-z]/i', '', $ca_id);
+$ca_id = isset($_REQUEST['ca_id']) ? preg_replace('/[^0-9a-z]/i', '', $_REQUEST['ca_id']) : '';
+$it_id = isset($_REQUEST['it_id']) ? safe_replace_regex($_REQUEST['it_id'], 'it_id') : '';
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 /**
  * 버튼

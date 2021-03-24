@@ -66,7 +66,7 @@ if (!defined('_EYOOM_')) exit;
 </style>
 
 <div class="product-main-30 row">
-    <?php for ($i=0; $i<count($list); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
     <div class="col-sm-3">
         <div class="item-main-30">
             <div class="product-img-wrap">
@@ -146,7 +146,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
     <?php } ?>
-    <?php if (count($list) == 0) { ?>
+    <?php if (count((array)$list) == 0) { ?>
     <p class="text-center font-size-13 color-grey margin-top-10"><i class="fa fa-exclamation-circle"></i> 등록된 상품이 없습니다.</p>
     <?php } ?>
 </div>

@@ -31,7 +31,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <div id="faq_hhtml" class="faq-html"><?php echo stripslashes($fm['fm_head_html']); ?></div>
     <?php } ?>
 
-    <?php if (count($faq_master) > 0) { ?>
+    <?php if (count((array)$faq_master) > 0) { ?>
     <div class="tab-scroll-category">
         <div class="scrollbar">
             <div class="handle">
@@ -40,7 +40,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
         </div>
         <div id="tab-category">
             <div class="category-list">
-                <?php for ($i=0; $i<count($faq_master); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$faq_master); $i++) { ?>
                 <span <?php echo $faq_master[$i]['fm_id'] == $fm_id ? 'class="active"': ''; ?>><a href="<?php echo $faq_master[$i]['category_href']; ?>?fm_id=<?php echo $faq_master[$i]['fm_id']; ?>" <?php echo $faq_master[$i]['category_option']; ?>><?php echo $faq_master[$i]['fm_subject']; ?></a></span>
                 <?php } ?>
                 <span class="fake-span"></span>
@@ -55,9 +55,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <?php } ?>
 
     <div id="faq_wrap" class="faq_<?php echo $fm_id; ?>">
-        <?php if (count($faq_list) > 0) { ?>
+        <?php if (count((array)$faq_list) > 0) { ?>
         <div class="panel-group accordion-default panel-group-control panel-group-control-right" id="accordion-faq">
-            <?php for ($i=0; $i<count($faq_list); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$faq_list); $i++) { ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -115,7 +115,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 </div>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/magnific-popup/magnific-popup.min.js"></script>
-<?php if (count($faq_master_list)) { ?>
+<?php if (count((array)$faq_master_list)) { ?>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>
 <script>

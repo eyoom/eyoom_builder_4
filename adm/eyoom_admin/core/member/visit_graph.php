@@ -6,7 +6,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200800";
 
-auth_check($auth[$sub_menu], 'r');
+auth_check_menu($auth, $sub_menu, 'r');
+
+$fr_date = isset($_REQUEST['fr_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['fr_date']) : G5_TIME_YMD;
+$to_date = isset($_REQUEST['to_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['to_date']) : G5_TIME_YMD;
 
 /**
  * 탭메뉴 활성화 구분자
@@ -27,7 +30,7 @@ $period_vi_info = get_visit_info($fr_date, $to_date);
  */
 for($i=0; $i<24; $i++) {
     // 방문자
-    $period_vi_count[$i] = $period_vi_info['vi_cnt'][$i] ? count($period_vi_info['vi_cnt'][$i]) : 0;
+    $period_vi_count[$i] = $period_vi_info['vi_cnt'][$i] ? count((array)$period_vi_info['vi_cnt'][$i]) : 0;
 }
 
 /**

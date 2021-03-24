@@ -39,14 +39,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/p
 <?php } else if ($exinfo['ex_form'] == 'radio') { ?>
 <code class="language-markup">&lt;label class="label"><?php echo $exinfo['ex_subject']; ?>&lt;/label>
 &lt;div class="inline-group">
-    <?php for ($i=0; $i<count($exitem); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$exitem); $i++) { ?>
     &lt;label for="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" class="radio">&lt;input type="radio" name="<?php echo $exinfo['ex_fname']; ?>" id="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" value="<?php echo $exitem[$i]; ?>" &lt;?php echo $ex_value['<?php echo $exinfo['ex_fname']; ?>'] == '<?php echo $exinfo[$i]; ?>'<?php if ($i == 0) { ?> || !$ex_value['<?php echo $exinfo['ex_fname']; ?>']<?php } ?> ? 'checked':''; ?&gt;>&lt;i>&lt;/i><?php echo $exitem[$i]; ?>&lt;/label>
     <?php } ?>
 &lt;/div></code>
 <?php } else if ($exinfo['ex_form'] == 'checkbox') { ?>
 <code class="language-markup">&lt;label class="label"><?php echo $exinfo['ex_subject']; ?>&lt;/label>
 &lt;div class="inline-group">
-    <?php for ($i=0; $i<count($exitem); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$exitem); $i++) { ?>
     &lt;label for="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" class="checkbox">&lt;input type="checkbox" name="<?php echo $exinfo['ex_fname']; ?>[<?php echo $i+1; ?>]" id="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" value="<?php echo $exitem[$i]; ?>" &lt;?php echo $ex_value['<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>'] == '<?php echo $exitem[$i]; ?>' ? 'checked':''; ?&gt;>&lt;i>&lt;/i><?php echo $exitem[$i]; ?>&lt;/label>
     <?php } ?>
 &lt;/div></code>
@@ -54,7 +54,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/p
 <code class="language-markup">&lt;label class="label"><?php echo $exinfo['ex_subject']; ?>&lt;/label>
 &lt;label class="select">
     &lt;select name="<?php echo $exinfo['ex_fname']; ?>" id="<?php echo $exinfo['ex_fname']; ?>">
-        <?php for ($i=0; $i<count($exitem); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$exitem); $i++) { ?>
         &lt;option value="<?php echo $exitem[$i] != '선택' ? $exitem[$i]:'';?>" &lt;?php echo $ex_value['<?php echo $exinfo['ex_fname']; ?>'] == '<?php echo $exitem[$i]; ?>' ? 'selected': ''; ?&gt;><?php echo $exitem[$i]; ?>&lt;/option>
         <?php } ?>
     &lt;/select>&lt;i>&lt;/i>

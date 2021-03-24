@@ -6,9 +6,15 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400500";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=optionstocklistupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
+
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -44,17 +50,17 @@ if ($sdt_target && $fr_date && $to_date) {
  */
 $cate2 = $cate3 = $cate4 = array();
 if ($cate_a) {
-    $sql_cate = " and (a.ca_id like '{$cate_a}%' or a.ca_id2 like '{$cate_a}%' or a.ca_id3 like '{$cate_a}%') ";
+    $sql_cate = " and (b.ca_id like '{$cate_a}%' or b.ca_id2 like '{$cate_a}%' or b.ca_id3 like '{$cate_a}%') ";
     $w = " (1) and ca_id like '{$cate_a}%' and length(ca_id)=4";
     $cate2 = $shop->get_goods_category($fields, $w);
 }
 if ($cate_a && $cate_b) {
-    $sql_cate = " and (a.ca_id like '{$cate_b}%' or a.ca_id2 like '{$cate_b}%' or a.ca_id3 like '{$cate_b}%') ";
+    $sql_cate = " and (b.ca_id like '{$cate_b}%' or b.ca_id2 like '{$cate_b}%' or b.ca_id3 like '{$cate_b}%') ";
     $w = " (1) and ca_id like '{$cate_b}%' and length(ca_id)=6";
     $cate3 = $shop->get_goods_category($fields, $w);
 }
 if ($cate_a && $cate_b && $cate_c) {
-    $sql_cate = " and (a.ca_id like '{$cate_c}%' or a.ca_id2 like '{$cate_c}%' or a.ca_id3 like '{$cate_c}%') ";
+    $sql_cate = " and (b.ca_id like '{$cate_c}%' or b.ca_id2 like '{$cate_c}%' or b.ca_id3 like '{$cate_c}%') ";
     $w = " (1) and ca_id like '{$cate_c}%' and length(ca_id)=8";
     $cate4 = $shop->get_goods_category($fields, $w);
 }
@@ -89,7 +95,8 @@ $sql  = " select a.it_id,
                  a.io_noti_qty,
                  a.io_use,
                  b.it_name,
-                 b.it_option_subject
+                 b.it_option_subject,
+                 b.ca_id
            $sql_common
            $sql_order
            limit $from_record, $rows ";
@@ -100,6 +107,7 @@ $qstr = $qstr1.'&amp;page='.$page;
 
 // 리스트
 $k = 0;
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $href = shop_item_url($row['it_id']);
@@ -146,7 +154,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     }
 
     $list[$i] = $row;
-    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', $row['it_name']);
+    $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', cut_str(stripslashes($row['it_name']), 60, "&#133"));
     $list[$i]['option'] = $option;
     $list[$i]['href'] = $href;
     $list[$i]['wait_qty'] = $wait_qty;

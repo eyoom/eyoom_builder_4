@@ -95,10 +95,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                             <label class="label">분류선택</label>
                         </th>
                         <td>
-                            <div <?php if (!G5_IS_MOBILE) { ?>class="inline-group"<?php } ?>>
+                            <div class="inline-group">
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_a" id="cate_a" onchange="this.form.submit();">
+                                        <select name="cate_a" id="cate_1" onchange="fsearchform_submit(1);">
                                             <option value="">::대분류::</option>
                                             <?php foreach ($cate1 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_a == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -108,7 +108,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_b" id="cate_b" onchange="this.form.submit();">
+                                        <select name="cate_b" id="cate_2" onchange="fsearchform_submit(2);">
                                             <option value="">::중분류::</option>
                                             <?php foreach ($cate2 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_b == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -118,7 +118,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_c" id="cate_c" onchange="this.form.submit();">
+                                        <select name="cate_c" id="cate_3" onchange="fsearchform_submit(3);">
                                             <option value="">::소분류::</option>
                                             <?php foreach ($cate3 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_c == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -128,7 +128,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                 </span>
                                 <span>
                                     <label class="select form-width-150px">
-                                        <select name="cate_d" id="cate_d" onchange="this.form.submit();">
+                                        <select name="cate_d" id="cate_4" onchange="fsearchform_submit(4);">
                                             <option value="">::세분류::</option>
                                             <?php foreach ($cate4 as $ca) { ?>
                                             <option value="<?php echo $ca['ca_id']; ?>" <?php echo $cate_d == $ca['ca_id'] ? 'selected':''; ?>><?php echo $ca['ca_name']; ?></option>
@@ -216,6 +216,16 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/jsgrid.js"></script>
 <script>
+function fsearchform_submit(num) {
+    var f = document.flist;
+    var number = parseInt(num)+1;
+    
+    for (var i=number; i<=4; i++) {
+        $("#cate_"+number).val('');
+    }
+    f.submit();
+}
+
 $(document).ready(function(){
     $('#fr_date').datepicker({
         changeMonth: true,
@@ -265,7 +275,7 @@ $(document).ready(function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<input type='hidden' name='iq_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['iq_id']; ?>' id='iq_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $list[$i]['iq_id']; ?>&amp;w=u<?php echo $qstr ? '&amp;'.$qstr:''; ?>'><u>수정</u></a>",

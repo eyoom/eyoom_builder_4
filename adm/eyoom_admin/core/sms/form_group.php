@@ -7,11 +7,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 $sub_menu = "900500";
 include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
-auth_check($auth[$sub_menu], "r");
+$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=form_group_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = "이모티콘 그룹";
-
-$action_url = G5_ADMIN_URL . '/?dir=sms&amp;pid=form_group_update&amp;smode=1';
 
 $res = sql_fetch("select count(*) as cnt from {$g5['sms5_form_group_table']}");
 $total_count = $res['cnt'];

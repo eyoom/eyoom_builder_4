@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500300";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 $sql_common = " from {$g5['g5_shop_event_table']} ";
 
@@ -17,7 +17,7 @@ $total_count = $row['cnt'];
 
 $sql = "select * $sql_common order by ev_id desc ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $href = "";

@@ -19,7 +19,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <select name="fg_no" id="emo_sel">
                     <option value=""<?php echo get_selected('', $fg_no); ?>> 전체 </option>
                     <option value="0"<?php echo get_selected('0', $fg_no); ?>> 미분류 (<?php echo number_format($no_count)?>) </option>
-                    <?php for($i=0; $i<count($group); $i++) {?>
+                    <?php for($i=0; $i<count((array)$group); $i++) {?>
                     <option value="<?php echo $group[$i]['fg_no']?>"<?php echo get_selected($fg_no, $group[$i]['fg_no']);?>> <?php echo $group[$i]['fg_name']?> (<?php echo number_format($group[$i]['fg_count'])?>) </option>
                     <?php } ?>
                 </select>

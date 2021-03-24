@@ -136,7 +136,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<input type='hidden' name='cp_id[<?php echo $i; ?>]' value='<?php echo $list[$i]['cp_id']; ?>' id='cp_id_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=couponform&amp;cp_id=<?php echo $list[$i]['cp_id']; ?>&amp;w=u<?php echo $qstr ? '&amp;'.$qstr:''; ?>'><u>수정</u></a>",

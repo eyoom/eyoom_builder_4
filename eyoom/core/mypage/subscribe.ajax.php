@@ -8,8 +8,8 @@ include_once($g5_path.'/common.php');
 
 if (!$is_member) exit;
 
-$action = $_POST['action'];
-$mb_id = $_POST['user'];
+$action = isset($_POST['action']) ? trim($_POST['action']) : '';
+$mb_id = isset($_POST['user']) ? trim($_POST['user']) : '';
 
 if (!$action) exit;
 if (!$mb_id) exit;

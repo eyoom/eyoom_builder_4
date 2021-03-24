@@ -6,10 +6,10 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500110";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
-$fr_month = preg_replace('/[^0-9]/i', '', $fr_month);
-$to_month = preg_replace('/[^0-9]/i', '', $to_month);
+$fr_month = isset($_REQUEST['fr_month']) ? preg_replace('/[^0-9 :_\-]/i', '', $_REQUEST['fr_month']) : '';
+$to_month = isset($_REQUEST['to_month']) ? preg_replace('/[^0-9 :_\-]/i', '', $_REQUEST['to_month']) : '';
 
 $fr_month = preg_replace("/([0-9]{4})([0-9]{2})/", "\\1-\\2", $fr_month);
 $to_month = preg_replace("/([0-9]{4})([0-9]{2})/", "\\1-\\2", $to_month);
@@ -30,6 +30,9 @@ $sql = " select od_id,
       order by od_time desc ";
 $result = sql_query($sql);
 
+$save = array('ordercount'=>0, 'orderprice'=>0, 'ordercancel'=>0, 'ordercoupon'=>0, 'receiptbank'=>0, 'receiptvbank'=>0, 'receiptiche'=>0, 'receipthp'=>0, 'receiptcard'=>0, 'receiptpoint'=>0, 'misu'=>0, 'receipteasy'=>0);
+$tot = array('ordercount'=>0, 'orderprice'=>0, 'ordercancel'=>0, 'ordercoupon'=>0, 'receiptbank'=>0, 'receiptvbank'=>0, 'receiptiche'=>0, 'receipthp'=>0, 'receiptcard'=>0, 'receiptpoint'=>0, 'misu'=>0, 'receipteasy'=>0);
+
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $date = $row['od_date'];
     $sale_data[$date][$i] = $row;
@@ -38,6 +41,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 if (!$sale_data) $sale_data = array();
 
 $i=0;
+$list = array();
 foreach($sale_data as $od_date => $data) {
     $sale_info = get_sale_info($data);
 
@@ -46,7 +50,7 @@ foreach($sale_data as $od_date => $data) {
     $list[$i]['count'] = $sale_info['count'];
     $i++;
 }
-$cnt = count($list);
+$cnt = count((array)$list);
 
 function get_sale_info($row_array) {
     global $tot;
@@ -91,7 +95,7 @@ function get_sale_info($row_array) {
     }
 
     $output['save'] = $save;
-    $output['count'] = count($row_array);
+    $output['count'] = count((array)$row_array);
 
     return $output;
 }

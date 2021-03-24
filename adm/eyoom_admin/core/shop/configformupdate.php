@@ -8,18 +8,18 @@ $sub_menu = "400100";
 
 check_demo();
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
 
 $check_skin_keys = array('de_type1_list_skin', 'de_type2_list_skin', 'de_type3_list_skin', 'de_type4_list_skin', 'de_type5_list_skin', 'de_mobile_type1_list_skin', 'de_mobile_type2_list_skin', 'de_mobile_type3_list_skin', 'de_mobile_type4_list_skin', 'de_mobile_type5_list_skin', 'de_rel_list_skin', 'de_mobile_rel_list_skin', 'de_search_list_skin', 'de_mobile_search_list_skin', 'de_listtype_list_skin', 'de_mobile_listtype_list_skin');
-    
+
 foreach($check_skin_keys as $key){
     $$key = $_POST[$key] = isset($_POST[$key]) ? preg_replace('#\.+(\/|\\\)#', '', strip_tags($_POST[$key])) : '';
 
     if( isset($_POST[$key]) && preg_match('#\.+(\/|\\\)#', $_POST[$key]) ){
         alert('스킨설정에 유효하지 문자가 포함되어 있습니다.');
-    }    
+    }
 }
 
 // 현금영수증 발급수단
@@ -194,7 +194,7 @@ $check_sanitize_keys = array(
 );
 
 foreach( $check_sanitize_keys as $key ){
-    $$key = isset($_POST[$key]) ? strip_tags(clean_xss_attributes($_POST[$key])) : '';
+    $$key = isset($_POST[$key]) ? clean_xss_tags($_POST[$key], 1, 1) : '';
 }
 
 $cfg_upset = "
@@ -272,36 +272,30 @@ if ($_POST['amode'] == 'ittype') {
 } else {
     
     // 대표전화번호 유효성 체크
-    if(!check_vaild_callback($_POST['de_admin_company_tel']))
+    if(! (isset($_POST['de_admin_company_tel']) && check_vaild_callback($_POST['de_admin_company_tel'])) )
         alert('대표전화번호를 올바르게 입력해 주세요.');
-    
+
     // 로그인을 바로 이 주소로 하는 경우 쇼핑몰설정값이 사라지는 현상을 방지
     if (!$_POST['de_admin_company_owner']) goto_url(G5_ADMIN_URL . "/?dir=shop&pid=configform");
-    
-    if ($_POST['logo_img_del'])  @unlink(G5_DATA_PATH."/common/logo_img");
-    if ($_POST['logo_img_del2'])  @unlink(G5_DATA_PATH."/common/logo_img2");
-    if ($_POST['mobile_logo_img_del'])  @unlink(G5_DATA_PATH."/common/mobile_logo_img");
-    if ($_POST['mobile_logo_img_del2'])  @unlink(G5_DATA_PATH."/common/mobile_logo_img2");
-    
+
+    if (! empty($_POST['logo_img_del']))  @unlink(G5_DATA_PATH."/common/logo_img");
+    if (! empty($_POST['logo_img_del2']))  @unlink(G5_DATA_PATH."/common/logo_img2");
+    if (! empty($_POST['mobile_logo_img_del']))  @unlink(G5_DATA_PATH."/common/mobile_logo_img");
+    if (! empty($_POST['mobile_logo_img_del2']))  @unlink(G5_DATA_PATH."/common/mobile_logo_img2");
+
     if ($_FILES['logo_img']['name']) upload_file($_FILES['logo_img']['tmp_name'], "logo_img", G5_DATA_PATH."/common");
     if ($_FILES['logo_img2']['name']) upload_file($_FILES['logo_img2']['tmp_name'], "logo_img2", G5_DATA_PATH."/common");
     if ($_FILES['mobile_logo_img']['name']) upload_file($_FILES['mobile_logo_img']['tmp_name'], "mobile_logo_img", G5_DATA_PATH."/common");
     if ($_FILES['mobile_logo_img2']['name']) upload_file($_FILES['mobile_logo_img2']['tmp_name'], "mobile_logo_img2", G5_DATA_PATH."/common");
-    
-    $de_kcp_mid = substr($_POST['de_kcp_mid'],0,3);
+
+    $de_kcp_mid = isset($_POST['de_kcp_mid']) ? substr($_POST['de_kcp_mid'], 0, 3) : '';
     $cf_icode_server_port = isset($cf_icode_server_port) ? preg_replace('/[^0-9]/', '', $cf_icode_server_port) : '7295';
-    
-    // kcp 전자결제를 사용할 때 site key 입력체크
-    if($_POST['de_pg_service'] == 'kcp' && !$_POST['de_card_test'] && ($_POST['de_iche_use'] || $_POST['de_vbank_use'] || $_POST['de_hp_use'] || $_POST['de_card_use'])) {
-        if(trim($_POST['de_kcp_site_key']) == '')
-            alert('NHN KCP SITE KEY를 입력해 주십시오.');
-    }
 
     $de_shop_skin = isset($_POST['de_shop_skin']) ? preg_replace('#\.+(\/|\\\)#', '', $_POST['de_shop_skin']) : 'basic';
-    $de_shop_mobile_skin = isset($_POST['de_shop_mobile_skin']) ? preg_replace('#\.+(\/|\\\)#', '', $_POST['de_shop_mobile_skin']) : 'basic';    
-    
+    $de_shop_mobile_skin = isset($_POST['de_shop_mobile_skin']) ? preg_replace('#\.+(\/|\\\)#', '', $_POST['de_shop_mobile_skin']) : 'basic';
+
     $skins = get_skin_dir('shop');
-    
+
     if(defined('G5_THEME_PATH') && $config['cf_theme']) {
         $dirs = get_skin_dir('shop', G5_THEME_PATH.'/'.G5_SKIN_DIR);
         if(!empty($dirs)) {
@@ -310,9 +304,9 @@ if ($_POST['amode'] == 'ittype') {
             }
         }
     }
-    
+
     $mobile_skins = get_skin_dir('shop', G5_MOBILE_PATH.'/'.G5_SKIN_DIR);
-    
+
     if(defined('G5_THEME_PATH') && $config['cf_theme']) {
         $dirs = get_skin_dir('shop', G5_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR);
         if(!empty($dirs)) {
@@ -321,12 +315,18 @@ if ($_POST['amode'] == 'ittype') {
             }
         }
     }
-    
+
     $de_shop_skin = in_array($de_shop_skin, $skins) ? $de_shop_skin : 'basic';
     $de_shop_mobile_skin = in_array($de_shop_mobile_skin, $mobile_skins) ? $de_shop_mobile_skin : 'basic';
 
     $warning_msg = '';
 
+    // kcp 전자결제를 사용할 때 site key 입력체크
+    if($de_pg_service == 'kcp' && ! $de_card_test && ($de_iche_use || $de_vbank_use || $de_hp_use || $de_card_use)) {
+        if(! trim($de_kcp_site_key))
+            alert('NHN KCP SITE KEY를 입력해 주십시오.');
+    }
+    
     if( $de_kakaopay_enckey && ($de_pg_service === 'inicis' || $de_inicis_lpay_use || $de_inicis_kakaopay_use) ){
         
         $warning_msg = 'KG 이니시스 결제 또는 L.pay 또는 KG이니시스 카카오페이를 사용시 결제모듈 중복문제로 카카오페이를 활성화 할수 없습니다. \\n\\n카카오페이 사용을 비활성화 합니다.';
@@ -350,30 +350,30 @@ if ($_POST['amode'] == 'ittype') {
                     de_shop_skin                  = '{$de_shop_skin}',
                     de_shop_mobile_skin           = '{$de_shop_mobile_skin}',
                     {$cfg_upset},
-                    de_rel_list_use               = '{$de_rel_list_use}',    
+                    de_rel_list_use               = '{$de_rel_list_use}',
                     de_rel_list_skin              = '{$_POST['de_rel_list_skin']}',
                     de_rel_list_mod               = '{$de_rel_list_mod}',
                     de_rel_img_width              = '{$de_rel_img_width}',
                     de_rel_img_height             = '{$de_rel_img_height}',
-                    de_mobile_rel_list_use        = '{$de_mobile_rel_list_use}',    
+                    de_mobile_rel_list_use        = '{$de_mobile_rel_list_use}',
                     de_mobile_rel_list_skin       = '{$_POST['de_mobile_rel_list_skin']}',
                     de_mobile_rel_list_mod        = '{$de_mobile_rel_list_mod}',
                     de_mobile_rel_img_width       = '{$de_mobile_rel_img_width}',
-                    de_mobile_rel_img_height      = '{$de_mobile_rel_img_height}',    
+                    de_mobile_rel_img_height      = '{$de_mobile_rel_img_height}',
                     de_search_list_skin           = '{$_POST['de_search_list_skin']}',
                     de_search_list_mod            = '{$de_search_list_mod}',
                     de_search_list_row            = '{$de_search_list_row}',
                     de_search_img_width           = '{$de_search_img_width}',
-                    de_search_img_height          = '{$de_search_img_height}',    
+                    de_search_img_height          = '{$de_search_img_height}',
                     de_mobile_search_list_skin    = '{$_POST['de_mobile_search_list_skin']}',
                     de_mobile_search_list_mod     = '{$de_mobile_search_list_mod}',
                     de_mobile_search_list_row     = '{$de_mobile_search_list_row}',
                     de_mobile_search_img_width    = '{$de_mobile_search_img_width}',
-                    de_mobile_search_img_height   = '{$de_mobile_search_img_height}',    
+                    de_mobile_search_img_height   = '{$de_mobile_search_img_height}',
                     de_listtype_list_skin         = '{$_POST['de_listtype_list_skin']}',
                     de_listtype_list_mod          = '{$de_listtype_list_mod}',
                     de_listtype_list_row          = '{$de_listtype_list_row}',
-                    de_listtype_img_width         = '{$de_listtype_img_width}',    
+                    de_listtype_img_width         = '{$de_listtype_img_width}',
                     de_listtype_img_height        = '{$_POST['de_listtype_img_height']}',
                     de_mobile_listtype_list_skin  = '{$_POST['de_mobile_listtype_list_skin']}',
                     de_mobile_listtype_list_mod   = '{$de_mobile_listtype_list_mod}',
@@ -401,7 +401,7 @@ if ($_POST['amode'] == 'ittype') {
                     de_send_cost_limit            = '{$de_send_cost_limit}',
                     de_send_cost_list             = '{$de_send_cost_list}',
                     de_hope_date_use              = '{$de_hope_date_use}',
-                    de_hope_date_after            = '{$de_hope_date_after}',    
+                    de_hope_date_after            = '{$de_hope_date_after}',
                     de_baesong_content            = '{$_POST['de_baesong_content']}',
                     de_change_content             = '{$_POST['de_change_content']}',
                     de_point_days                 = '{$de_point_days}',
@@ -415,7 +415,7 @@ if ($_POST['amode'] == 'ittype') {
                     de_inicis_mid                 = '{$de_inicis_mid}',
                     de_inicis_admin_key           = '{$de_inicis_admin_key}',
                     de_inicis_sign_key            = '{$de_inicis_sign_key}',
-                    de_iche_use                   = '{$de_iche_use}',    
+                    de_iche_use                   = '{$de_iche_use}',
                     de_sms_cont1                  = '{$_POST['de_sms_cont1']}',
                     de_sms_cont2                  = '{$_POST['de_sms_cont2']}',
                     de_sms_cont3                  = '{$_POST['de_sms_cont3']}',
@@ -454,7 +454,7 @@ if ($_POST['amode'] == 'ittype') {
                     de_member_reg_coupon_use      = '{$de_member_reg_coupon_use}',
                     de_member_reg_coupon_term     = '{$de_member_reg_coupon_term}',
                     de_member_reg_coupon_price    = '{$de_member_reg_coupon_price}',
-                    de_member_reg_coupon_minimum  = '{$de_member_reg_coupon_minimum}'    
+                    de_member_reg_coupon_minimum  = '{$de_member_reg_coupon_minimum}'
                     ";
     sql_query($sql);
     
@@ -471,7 +471,7 @@ if ($_POST['amode'] == 'ittype') {
                     cf_icode_server_port    = '{$_POST['cf_icode_server_port']}',
                     cf_icode_token_key      = '{$cf_icode_token_key}',
                     cf_lg_mid               = '{$cf_lg_mid}',
-                    cf_lg_mert_key          = '{$cf_lg_mert_key}' ";    
+                    cf_lg_mert_key          = '{$cf_lg_mert_key}' ";
     sql_query($sql);
 
     if( $warning_msg ){

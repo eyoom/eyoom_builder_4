@@ -45,7 +45,7 @@ $sql = " select it_id, it_name, ct_send_cost, it_sc_type
             group by it_id
             order by ct_id ";
 $result = sql_query($sql);
-
+$order = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
 	$image = get_it_image($row['it_id'], 200, 0);
 	
@@ -113,9 +113,9 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 		if($opt['ct_status'] == '주문')
 			$st_count2++;
 	}
-	$order[$i]['cnt'] = count($loop);
+	$order[$i]['cnt'] = count((array)$loop);
 }
-$order_count = count($order);
+$order_count = count((array)$order);
 
 /**
  * 주문 상품의 상태가 모두 주문이면 고객 취소 가능

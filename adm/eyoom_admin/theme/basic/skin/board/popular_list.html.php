@@ -115,7 +115,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['pp_id']; ?>'><i></i></label>",
             검색어: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=popular_list&amp;sfl=pp_word&amp;stx=<?php echo $list[$i]['word']; ?>'><?php echo $list[$i]['word']; ?></a>",

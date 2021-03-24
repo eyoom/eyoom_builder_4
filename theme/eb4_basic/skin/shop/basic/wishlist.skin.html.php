@@ -45,7 +45,7 @@ if (!defined('_EYOOM_')) exit;
     <input type="hidden" name="prog" value="wish">
 
     <div class="wishlist-container">
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         <div class="wishlist-box">
             <div class="wishlist-box-pd">
                 <div class="wishlist-box-in">
@@ -83,7 +83,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
         <?php } ?>
 
-        <?php if (count($list)==0) {?>
+        <?php if (count((array)$list)==0) {?>
         <p class="text-center font-size-14 color-grey margin-top-20"><i class="fa fa-exclamation-circle"></i> 보관함이 비었습니다.</p>
         <?php } ?>
     </div>

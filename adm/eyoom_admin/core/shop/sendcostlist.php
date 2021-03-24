@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400750";
 
-auth_check($auth[$sub_menu], "r");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=sendcostupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $sql_common = " from {$g5['g5_shop_sendcost_table']} ";
 
@@ -33,7 +33,7 @@ $sql = " select *
             {$sql_order}
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
-
+$list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 }

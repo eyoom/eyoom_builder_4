@@ -8,7 +8,7 @@ $sub_menu = "200820";
 
 check_demo();
 
-auth_check($auth[$sub_menu], 'd');
+auth_check_menu($auth, $sub_menu, 'd');
 
 if ($is_admin != 'super')
     alert('최고관리자만 접근 가능합니다.');

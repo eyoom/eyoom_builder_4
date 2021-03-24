@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999620";
 
-auth_check($auth[$sub_menu], 'r');
+auth_check_menu($auth, $sub_menu, 'r');
 
 /**
  * 테마 환경설정 파일
@@ -82,7 +82,7 @@ $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select * {$sql_common} {$sql_search} order by el_regdt desc limit {$from_record}, {$rows}";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['el_chg_code']    = "&lt;?php echo eb_latest('{$row['el_code']}'); ?&gt;";

@@ -26,4 +26,4 @@ if ($cart_datas) {
     }
 }
 
-$ct_count = count($ct_list);
+$ct_count = count((array)$ct_list);

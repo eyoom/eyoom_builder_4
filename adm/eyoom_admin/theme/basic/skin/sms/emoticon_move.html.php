@@ -24,7 +24,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             </tr>
             </thead>
             <tbody>
-            <?php for ($i=0; $i<count($list); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$list); $i++) { ?>
             <tr>
                 <td class="td_chk">
                     <input type="radio" value="<?php echo $list[$i]['fg_no'] ?>" id="chk<?php echo $i ?>" name="chk_fg_no[]">

@@ -130,7 +130,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0; $i<count($respond); $i++) { ?>
+                    <?php for ($i=0; $i<count((array)$respond); $i++) { ?>
                     <tr <?php if ( $respond[$i]['chk'] == 1) { ?>class="resopnd-chked"<?php } ?>>
                         <?php if ($is_member) { ?>
                         <td class="td-chk">
@@ -176,7 +176,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
                         </td>
                     </tr>
                     <?php } ?>
-                    <?php if (count($respond) == 0) { ?>
+                    <?php if (count((array)$respond) == 0) { ?>
                     <tr><td colspan="6" class="text-center font-size-13 color-grey"><i class="fa fa-exclamation-circle"></i> 내글 반응이 없습니다.</td></tr>
                     <?php } ?>
                 </tbody>

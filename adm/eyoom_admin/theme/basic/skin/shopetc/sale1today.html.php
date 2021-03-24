@@ -46,7 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             주문번호: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=orderform&amp;od_id=<?php echo $list[$i]['od_id']; ?>'><?php echo $list[$i]['od_id']; ?></a>",
             주문자: "<a href='<?php echo $list[$i]['href']; ?>'><?php echo $list[$i]['od_name']; ?></a>",

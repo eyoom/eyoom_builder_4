@@ -6,19 +6,21 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300700";
 
-include_once(G5_EDITOR_LIB);
-
-auth_check($auth[$sub_menu], "w");
-
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=faqformupdate&amp;smode=1';
 
-$fm_id = (int) $fm_id;
-$fa_id = isset($fa_id) ? (int) $fa_id : 0;
+include_once(G5_EDITOR_LIB);
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$fm_id = isset($_GET['fm_id']) ? (int) $_GET['fm_id'] : 0;
+$fa_id = isset($_GET['fa_id']) ? (int) $_GET['fa_id'] : 0;
 
 $sql = " select * from {$g5['faq_master_table']} where fm_id = '$fm_id' ";
 $fm = sql_fetch($sql);
 
-$html_title = $fm['fm_subject'];
+$html_title = 'FAQ '.$fm['fm_subject'];
+
+$fa = array('fa_id'=>0, 'fm_id'=>0, 'fa_subject'=>'', 'fa_content'=>'', 'fa_order'=>0);
 
 if ($w == "u")
 {

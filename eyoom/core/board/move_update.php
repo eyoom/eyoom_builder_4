@@ -15,7 +15,7 @@ if ($is_admin != 'board' && $is_admin != 'group' && $is_admin != 'super' && !def
 if ($sw != 'move' && $sw != 'copy')
     alert('sw 값이 제대로 넘어오지 않았습니다.');
 
-if (!count($_POST['chk_bo_table']))
+if (!count((array)$_POST['chk_bo_table']))
     alert('게시물을 '.$act.'할 게시판을 한개 이상 선택해 주십시오.', $url);
 
 // 원본 파일 디렉토리
@@ -32,7 +32,7 @@ $sql = " select distinct wr_num from $write_table where wr_id in ({$wr_id_list})
 $result = sql_query($sql);
 while ($row = sql_fetch_array($result)) {
     $wr_num = $row['wr_num'];
-    for ($i=0; $i<count($_POST['chk_bo_table']); $i++) {
+    for ($i=0; $i<count((array)$_POST['chk_bo_table']); $i++) {
         $move_bo_table = preg_replace('/[^a-z0-9_]/i', '', $_POST['chk_bo_table'][$i]);
 
         // 취약점 18-0075 참고
@@ -127,7 +127,20 @@ while ($row = sql_fetch_array($result)) {
                     if ($row3['bf_file']) {
                         // 원본파일을 복사하고 퍼미션을 변경
                         // 제이프로님 코드제안 적용
-                        $copy_file_name = ($bo_table !== $move_bo_table) ? $row3['bf_file'] : $row2['wr_id'].'_copy_'.$insert_id.'_'.$row3['bf_file'];
+
+                        $copy_file_name = $row3['bf_file'];
+
+                        if($bo_table === $move_bo_table){
+                            if(preg_match('/_copy(\d+)?_(\d+)_/', $copy_file_name, $match)){
+
+                                $number = isset($match[1]) ? (int) $match[1] : 0;
+                                $replace_str = '_copy'.($number + 1).'_'.$insert_id.'_';
+                                $copy_file_name = preg_replace('/_copy(\d+)?_(\d+)_/', $replace_str, $copy_file_name);
+                            } else {
+                                $copy_file_name = $row2['wr_id'].'_copy_'.$insert_id.'_'.$row3['bf_file'];
+                            }
+                        }
+
                         $is_exist_file = is_file($src_dir.'/'.$row3['bf_file']) && file_exists($src_dir.'/'.$row3['bf_file']);
                         if( $is_exist_file ){
                             @copy($src_dir.'/'.$row3['bf_file'], $dst_dir.'/'.$copy_file_name);
@@ -220,6 +233,8 @@ while ($row = sql_fetch_array($result)) {
                 $save[$cnt]['wr_id'] = $row2['wr_parent'];
 
             $cnt++;
+
+            run_event('bbs_move_copy', $row2, $move_bo_table, $insert_id, $next_wr_num, $sw);
         }
 
         sql_query(" update {$g5['board_table']} set bo_count_write = bo_count_write + '$count_write' where bo_table = '$move_bo_table' ");
@@ -235,9 +250,9 @@ while ($row = sql_fetch_array($result)) {
 delete_cache_latest($bo_table);
 
 if ($sw == 'move') {
-    for ($i=0; $i<count($save); $i++) {
+    for ($i=0; $i<count((array)$save); $i++) {
         if( isset($save[$i]['bf_file']) && $save[$i]['bf_file'] ){
-            for ($k=0; $k<count($save[$i]['bf_file']); $k++) {
+            for ($k=0; $k<count((array)$save[$i]['bf_file']); $k++) {
                 $del_file = $save[$i]['bf_file'][$k];
 
                 if ( is_file($del_file) && file_exists($del_file) ){
@@ -263,7 +278,7 @@ if (!defined('G5_AUTOMOVE')) {
 
     // 무한스크롤 모달창 닫기
     if ($wmode) {
-        if (isset($w_id) && $w_id) $wr_id = implode('|',$w_id);
+        if (isset($w_id) && $w_id) $wr_id = implode('|',(array)$w_id);
         $opener_script = "opener.close_modal('".$wr_id."');";
     } else {
         $opener_script = "opener.document.location.href = \"".$opener_href."\";";

@@ -11,7 +11,7 @@ if ($is_admin != "super") alert("최고관리자만 접근 가능합니다.", G5
 flush();
 
 if (!$directory=@opendir(G5_DATA_PATH.'/session')) {
-  $no_print = "세션 디렉토리를 열지못했습니다.";
+    $no_print = "세션 디렉토리를 열지못했습니다.";
 }
 
 $cnt=0;

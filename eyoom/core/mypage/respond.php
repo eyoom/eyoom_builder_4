@@ -62,10 +62,9 @@ $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
 if (!$page) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
-$respond = array();
 $sql = " select * {$sql_common} {$sql_order} limit {$from_record}, {$rows} ";
-
 $result = sql_query($sql, false);
+$respond = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $reinfo = $eb->respond_mention($row['re_type'],$row['mb_name'],$row['re_cnt']);
 
@@ -91,6 +90,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $respond[$i]['datetime2'] = $datetime2;
     $respond[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
 }
+$count = count($respond);
 
 /**
  * 페이징

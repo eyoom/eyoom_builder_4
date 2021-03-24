@@ -6,33 +6,33 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999500";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$iw                     = clean_xss_tags(trim($_POST['iw']));
-$gi_theme               = clean_xss_tags(trim($_POST['theme']));
-$gi_no                  = clean_xss_tags(trim($_POST['gi_no']));
-$eg_code                = clean_xss_tags(trim($_POST['eg_code']));
-$gi_state               = clean_xss_tags(trim($_POST['gi_state']));
-$gi_sort                = clean_xss_tags(trim($_POST['gi_sort']));
-$gi_title               = clean_xss_tags(trim($_POST['gi_title']));
-$gi_link                = $eb->filter_url($_POST['gi_link']);
-$gi_target              = clean_xss_tags(trim($_POST['gi_target']));
-$gi_ca_id               = clean_xss_tags(trim($_POST['gi_ca_id']));
-$gi_include             = clean_xss_tags(trim($_POST['gi_include']));
-$gi_exclude             = clean_xss_tags(trim($_POST['gi_exclude']));
-$gi_count               = clean_xss_tags(trim($_POST['gi_count']));
-$gi_view_level          = clean_xss_tags(trim($_POST['gi_view_level']));
-$gi_sortby              = clean_xss_tags(trim($_POST['gi_sortby']));
-$gi_view_img            = clean_xss_tags(trim($_POST['gi_view_img']));
-$gi_img_width           = clean_xss_tags(trim($_POST['gi_img_width']));
-$gi_img_height          = clean_xss_tags(trim($_POST['gi_img_height']));
-$gi_view_it_id          = clean_xss_tags(trim($_POST['gi_view_it_id']));
-$gi_view_it_name        = clean_xss_tags(trim($_POST['gi_view_it_name']));
-$gi_view_it_basic       = clean_xss_tags(trim($_POST['gi_view_it_basic']));
-$gi_view_it_cust_price  = clean_xss_tags(trim($_POST['gi_view_it_cust_price']));
-$gi_view_it_price       = clean_xss_tags(trim($_POST['gi_view_it_price']));
-$gi_view_it_icon        = clean_xss_tags(trim($_POST['gi_view_it_icon']));
-$gi_view_sns            = clean_xss_tags(trim($_POST['gi_view_sns']));
+$iw                     = isset($_POST['iw']) ? clean_xss_tags(trim($_POST['iw'])) : '';
+$gi_theme               = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$gi_no                  = isset($_POST['gi_no']) ? clean_xss_tags(trim($_POST['gi_no'])) : '';
+$eg_code                = isset($_POST['eg_code']) ? clean_xss_tags(trim($_POST['eg_code'])) : '';
+$gi_state               = isset($_POST['gi_state']) ? clean_xss_tags(trim($_POST['gi_state'])) : '';
+$gi_sort                = isset($_POST['gi_sort']) ? clean_xss_tags(trim($_POST['gi_sort'])) : '';
+$gi_title               = isset($_POST['gi_title']) ? clean_xss_tags(trim($_POST['gi_title'])) : '';
+$gi_link                = isset($_POST['gi_link']) ? $eb->filter_url($_POST['gi_link']) : '';
+$gi_target              = isset($_POST['gi_target']) ? clean_xss_tags(trim($_POST['gi_target'])) : '';
+$gi_ca_id               = isset($_POST['gi_ca_id']) ? clean_xss_tags(trim($_POST['gi_ca_id'])) : '';
+$gi_include             = isset($_POST['gi_include']) ? clean_xss_tags(trim($_POST['gi_include'])) : '';
+$gi_exclude             = isset($_POST['gi_exclude']) ? clean_xss_tags(trim($_POST['gi_exclude'])) : '';
+$gi_count               = isset($_POST['gi_count']) ? clean_xss_tags(trim($_POST['gi_count'])) : '';
+$gi_view_level          = isset($_POST['gi_view_level']) ? clean_xss_tags(trim($_POST['gi_view_level'])) : '';
+$gi_sortby              = isset($_POST['gi_sortby']) ? clean_xss_tags(trim($_POST['gi_sortby'])) : '';
+$gi_view_img            = isset($_POST['gi_view_img']) ? clean_xss_tags(trim($_POST['gi_view_img'])) : '';
+$gi_img_width           = isset($_POST['gi_img_width']) ? clean_xss_tags(trim($_POST['gi_img_width'])) : '';
+$gi_img_height          = isset($_POST['gi_img_height']) ? clean_xss_tags(trim($_POST['gi_img_height'])) : '';
+$gi_view_it_id          = isset($_POST['gi_view_it_id']) ? clean_xss_tags(trim($_POST['gi_view_it_id'])) : '';
+$gi_view_it_name        = isset($_POST['gi_view_it_name']) ? clean_xss_tags(trim($_POST['gi_view_it_name'])) : '';
+$gi_view_it_basic       = isset($_POST['gi_view_it_basic']) ? clean_xss_tags(trim($_POST['gi_view_it_basic'])) : '';
+$gi_view_it_cust_price  = isset($_POST['gi_view_it_cust_price']) ? clean_xss_tags(trim($_POST['gi_view_it_cust_price'])) : '';
+$gi_view_it_price       = isset($_POST['gi_view_it_price']) ? clean_xss_tags(trim($_POST['gi_view_it_price'])) : '';
+$gi_view_it_icon        = isset($_POST['gi_view_it_icon']) ? clean_xss_tags(trim($_POST['gi_view_it_icon'])) : '';
+$gi_view_sns            = isset($_POST['gi_view_sns']) ? clean_xss_tags(trim($_POST['gi_view_sns'])) : '';
 
 /**
  * 제외 카테고리

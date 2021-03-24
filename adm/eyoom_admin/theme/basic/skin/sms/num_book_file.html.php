@@ -46,7 +46,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <select name="upload_bg_no" id="upload_bg_no">
                                     <option value=""></option>
                                     <option value="1"> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?>) </option>
-                                    <?php for ($i=0; $i<count($group); $i++) { ?>
+                                    <?php for ($i=0; $i<count((array)$group); $i++) { ?>
                                     <option value="<?php echo $group[$i]['bg_no']?>"> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?>) </option>
                                     <?php } ?>
                                 </select>
@@ -125,7 +125,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                         <option value=""> </option>
                                         <option value="all"> 전체 </option>
                                         <option value="1"> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?>) </option>
-                                        <?php for ($i=0; $i<count($group); $i++) { ?>
+                                        <?php for ($i=0; $i<count((array)$group); $i++) { ?>
                                         <option value="<?php echo $group[$i]['bg_no']?>"> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?>) </option>
                                         <?php } ?>
                                     </select>

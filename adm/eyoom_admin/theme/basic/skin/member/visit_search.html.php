@@ -152,7 +152,7 @@ $(document).ready(function() {
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             IP: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=visit_search&sfl=vi_ip&amp;stx=<?php echo $list[$i]['ip']; ?>'><?php echo $list[$i]['ip']; ?></a>",
             접속경로: "<?php echo $list[$i]['link'].$list[$i]['title']; ?><?php echo $list[$i]['link'] ? '</a>' : ''; ?>",

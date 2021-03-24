@@ -151,7 +151,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $list[$i]['gm_id'] ?>'><i></i></label>",
             그룹: "<?php if ($list[$i]['cnt']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=boardgroupmember_form&amp;mb_id=<?php echo $list[$i]['mb_id']; ?>'><?php echo $list[$i]['cnt']; ?></a><?php } ?>",

@@ -36,7 +36,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="notice-roll-shop">
         <span class="label label-red">공지</span>
         <ul>
-            <?php if (count($eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
+            <?php if (count((array)$eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
             <li>
                 <a href="<?php echo $data['href']; ?>" class="ellipsis">
                     <?php if ($data['new']) { ?><i class="far fa-check-circle color-red"></i><?php } ?>

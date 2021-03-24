@@ -74,7 +74,7 @@ if (!defined('_EYOOM_')) exit;
         <?php if (is_array($el_item)) { foreach ($el_item as $k => $eb_latest) { ?>
         <div class="tab-pane <?php echo ($k==0) ? 'active': ''; ?> in" id="basic-tlb-<?php echo $el_master['el_code']; ?>-<?php echo ($k+1); ?>">
             <div class="row">
-                <?php if (count($eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $i => $data) { ?>
+                <?php if (count((array)$eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $i => $data) { ?>
                 <?php if ($i % $depart_number[$k] == 0) { ?>
                 <div class="col-sm-<?php echo 12/$el_item[$k]['li_depart']; ?>">
                     <ul class="list-unstyled">
@@ -123,8 +123,8 @@ if (!defined('_EYOOM_')) exit;
                             </a>
                         </li>
                 <?php if ( ( $i%$depart_number[$k] == $depart_number[$k]-1 ) ||
-                            ( count($eb_latest['list']) != $eb_latest['li_count'] && ($i%$depart_number[$k] != 0 && $i==count($eb_latest['list'])-1 && $i%$depart_number[$k] == (count($eb_latest['list'])%$depart_number[$k])-1) ) ||
-                            ( $i == count($eb_latest['list'])-1 )
+                            ( count((array)$eb_latest['list']) != $eb_latest['li_count'] && ($i%$depart_number[$k] != 0 && $i==count((array)$eb_latest['list'])-1 && $i%$depart_number[$k] == (count((array)$eb_latest['list'])%$depart_number[$k])-1) ) ||
+                            ( $i == count((array)$eb_latest['list'])-1 )
                          ) {
                 ?>
                     </ul>

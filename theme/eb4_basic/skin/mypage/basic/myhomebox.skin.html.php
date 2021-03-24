@@ -55,7 +55,7 @@ if (!defined('_EYOOM_')) exit;
             </a>
             <div class="clearfix"></div>
             <ul class="follow-list clearfix">
-                <?php for ($i=0; $i<count($my_friends); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$my_friends); $i++) { ?>
                 <li class="tooltips" type="button" data-placement="top" data-toggle="tooltip" data-original-title="<?php echo $my_friends[$i]['mb_nick']; ?>">
                     <a href="<?php echo G5_URL; ?>/?<?php echo $my_friends[$i]['mb_id']; ?>">
                         <?php if ($my_friends[$i]['mb_photo']) { echo $my_friends[$i]['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
@@ -63,7 +63,7 @@ if (!defined('_EYOOM_')) exit;
                     <span class="ellipsis"><?php echo $my_friends[$i]['mb_nick']; ?></span>
                 </li>
                 <?php } ?>
-                <?php if (count($my_friends) == 0) { ?>
+                <?php if (count((array)$my_friends) == 0) { ?>
                 <div class="text-center color-grey"><i class="fa fa-exclamation-circle"></i> 맞팔친구가 없습니다.</div>
                 <?php } ?>
             </ul>
@@ -74,7 +74,7 @@ if (!defined('_EYOOM_')) exit;
             </a>
             <div class="clearfix"></div>
             <ul class="follow-list clearfix">
-                <?php for ($i=0; $i<count($my_follower); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$my_follower); $i++) { ?>
                 <li class="tooltips" type="button" data-placement="top" data-toggle="tooltip" data-original-title="<?php echo $my_follower[$i]['mb_nick']; ?>">
                     <a href="<?php echo G5_URL; ?>/?<?php echo $my_follower[$i]['mb_id']; ?>">
                         <?php if ($my_follower[$i]['mb_photo']) { echo $my_follower[$i]['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
@@ -82,7 +82,7 @@ if (!defined('_EYOOM_')) exit;
                     <span class="ellipsis"><?php echo $my_follower[$i]['mb_nick']; ?></span>
                 </li>
                 <?php } ?>
-                <?php if (count($my_follower) == 0) { ?>
+                <?php if (count((array)$my_follower) == 0) { ?>
                 <div class="text-center color-grey"><i class="fa fa-exclamation-circle"></i> 팔로워가 없습니다.</div>
                 <?php } ?>
             </ul>
@@ -92,7 +92,7 @@ if (!defined('_EYOOM_')) exit;
                 팔로윙 전체보기
             </a>
             <ul class="follow-list clearfix">
-                <?php for ($i=0; $i<count($my_following); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$my_following); $i++) { ?>
                 <li class="tooltips" type="button" data-placement="top" data-toggle="tooltip" data-original-title="<?php echo $my_following[$i]['mb_nick']; ?>">
                     <a href="<?php echo G5_URL; ?>/?<?php echo $my_following[$i]['mb_id']; ?>">
                         <?php if ($my_following[$i]['mb_photo']) { echo $my_following[$i]['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
@@ -100,7 +100,7 @@ if (!defined('_EYOOM_')) exit;
                     <span class="ellipsis"><?php echo $my_following[$i]['mb_nick']; ?></span>
                 </li>
                 <?php } ?>
-                <?php if (count($my_following) == 0) { ?>
+                <?php if (count((array)$my_following) == 0) { ?>
                 <div class="text-center color-grey"><i class="fa fa-exclamation-circle"></i> 팔로윙이 없습니다.</div>
                 <?php } ?>
             </ul>

@@ -6,7 +6,7 @@ if (!defined('_EYOOM_')) exit;
 
 $max_width = $max_height = 0;
 $bn_first_class = ' class="sbn_first"';
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $main_banners[] = $row;
 
@@ -52,7 +52,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 	
 	$list[$i] = $row;
 }
-$count = count($list);
+$count = count((array)$list);
 
 /**
  * 스킨 출력

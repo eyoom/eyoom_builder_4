@@ -9,7 +9,11 @@ include_once(EYOOM_ADMIN_CORE_PATH . '/sms/_common.php');
 
 $action_url = G5_ADMIN_URL.'/?dir=sms&amp;pid=emoticon_move_update&amp;smode=1';
 
-auth_check($auth[$sub_menu], "r");
+if ($sw != 'move'){
+    alert('sw 값이 제대로 넘어오지 않았습니다.');
+}
+
+auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = '이모티콘그룹 이동';
 

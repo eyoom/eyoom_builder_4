@@ -22,10 +22,17 @@ function eb_latest ($el_code) {
     $eblatest_path = G5_DATA_PATH.'/eblatest/'.$theme;
 
     /**
+     * 디렉토리가 없다면 생성하기
+     */
+    if (!is_dir($eblatest_path)) {
+        $qfile->make_directory($eblatest_path);
+    }
+
+    /**
      * EB최신글 master 파일 경로
      */
     $master_file = $eblatest_path.'/el_master_'.$el_code.'.php';
-
+    
     if (file_exists($master_file) && !is_dir($master_file)) {
         include($master_file);
     } else {
@@ -82,7 +89,7 @@ function eb_latest ($el_code) {
         /**
          * 지정된 아이템의 게시물 가져오기
          */
-        $el_count = count($el_item);
+        $el_count = count((array)$el_item);
         for ($i=0; $i<$el_count; $i++) {
             if ($el_item[$i]['li_state'] == '2' || $el_item[$i]['li_view_level'] > $member['mb_level']) {
                 unset($el_item[$i]);

@@ -6,6 +6,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200800";
 
+auth_check_menu($auth, $sub_menu, 'r');
+
+$fr_date = isset($_REQUEST['fr_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['fr_date']) : G5_TIME_YMD;
+$to_date = isset($_REQUEST['to_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['to_date']) : G5_TIME_YMD;
+
 /**
  * 탭메뉴 활성화 구분자
  */
@@ -15,6 +20,7 @@ include_once(EYOOM_ADMIN_CORE_PATH . '/member/visit.sub.php');
 
 $max = 0;
 $sum_count = 0;
+$arr = array();
 $limit = '';
 
 $sql_common = " from {$g5['visit_table']} ";
@@ -42,6 +48,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 }
 
 $k = 0;
+$list = array();
 if ($i) {
     for ($i=0; $i<24; $i++) {
         $hour = sprintf("%02d", $i);

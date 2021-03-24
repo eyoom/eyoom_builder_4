@@ -5,11 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
- * 후킹 이벤트 실행
- */
-run_event('head_sub');
-
-/**
  * 페이지 로딩 시작 시간
  */
 $g5_debug['php']['begin_time'] = $begin_time = get_microtime();
@@ -22,8 +17,8 @@ if (!isset($g5['title'])) {
     $g5_head_title = $g5['title'];
 }
 else {
-    $g5_head_title = $g5['title']; // 상태바에 표시될 제목
-    $g5_head_title .= " | ".$config['cf_title'];
+    // 상태바에 표시될 제목
+    $g5_head_title = implode(' | ', array_filter(array($g5['title'], $config['cf_title'])));
 }
 
 $g5['title'] = strip_tags($g5['title']);

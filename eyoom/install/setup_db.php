@@ -92,6 +92,7 @@ if (!$dblink) {
 /*************************************
  * Database 선택 및 예외처리
  ************************************/
+$g5['connect_db'] = $dblink;
 $select_db = sql_select_db($mysql_db, $dblink);
 if (!$select_db) {
 ?>
@@ -266,6 +267,7 @@ if($g5_install || !$result) {
                      mb_level = '10',
                      mb_mailling = '1',
                      mb_open = '1',
+                     mb_nick_date = '".G5_TIME_YMDHIS."',
                      mb_email_certify = '".G5_TIME_YMDHIS."',
                      mb_datetime = '".G5_TIME_YMDHIS."',
                      mb_ip = '{$_SERVER['REMOTE_ADDR']}'
@@ -289,7 +291,7 @@ if($g5_install || !$result) {
     // 게시판 생성
     $tmp_bo_table   = array ("notice", "qa", "free", "gallery");
     $tmp_bo_subject = array ("공지사항", "질문답변", "자유게시판", "갤러리");
-    for ($i=0; $i<count($tmp_bo_table); $i++)
+    for ($i=0; $i<count((array)$tmp_bo_table); $i++)
     {
 
         $bo_skin = ($tmp_bo_table[$i] === 'gallery') ? 'gallery' : 'basic';
@@ -553,10 +555,11 @@ $dir_arr = array (
     $data_path.'/tmp',
     $data_path.'/ebslider',
     $data_path.'/ebcontents',
-    $data_path.'/eblatest'
+    $data_path.'/eblatest',
+    $data_path.'/ebgoods'
 );
 
-for ($i=0; $i<count($dir_arr); $i++) {
+for ($i=0; $i<count((array)$dir_arr); $i++) {
     @mkdir($dir_arr[$i], G5_DIR_PERMISSION);
     @chmod($dir_arr[$i], G5_DIR_PERMISSION);
 }
@@ -569,7 +572,7 @@ if($g5_shop_install) {
         $data_path.'/item'
     );
 
-    for ($i=0; $i<count($dir_arr); $i++) {
+    for ($i=0; $i<count((array)$dir_arr); $i++) {
         @mkdir($dir_arr[$i], G5_DIR_PERMISSION);
         @chmod($dir_arr[$i], G5_DIR_PERMISSION);
     }

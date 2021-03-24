@@ -41,7 +41,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="outlogin_skin" id="outlogin_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['outlogin']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['outlogin']); $i++) { ?>
                                             <option value="<?php echo $skins['outlogin'][$i]; ?>" <?php echo get_selected($eyoom_config['outlogin_skin'], $skins['outlogin'][$i]); ?>><?php echo $skins['outlogin'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -61,7 +61,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="popular_skin" id="popular_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['popular']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['popular']); $i++) { ?>
                                             <option value="<?php echo $skins['popular'][$i]; ?>" <?php echo get_selected($eyoom_config['popular_skin'], $skins['popular'][$i]); ?>><?php echo $skins['popular'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -81,7 +81,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="poll_skin" id="poll_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['poll']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['poll']); $i++) { ?>
                                             <option value="<?php echo $skins['poll'][$i]; ?>" <?php echo get_selected($eyoom_config['poll_skin'], $skins['poll'][$i]); ?>><?php echo $skins['poll'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -101,7 +101,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="visit_skin" id="visit_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['visit']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['visit']); $i++) { ?>
                                             <option value="<?php echo $skins['visit'][$i]; ?>" <?php echo get_selected($eyoom_config['visit_skin'], $skins['visit'][$i]); ?>><?php echo $skins['visit'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -121,7 +121,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="search_skin" id="search_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['search']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['search']); $i++) { ?>
                                             <option value="<?php echo $skins['search'][$i]; ?>" <?php echo get_selected($eyoom_config['search_skin'], $skins['search'][$i]); ?>><?php echo $skins['search'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -141,7 +141,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="newwin_skin" id="newwin_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['newwin']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['newwin']); $i++) { ?>
                                             <option value="<?php echo $skins['newwin'][$i]; ?>" <?php echo get_selected($eyoom_config['newwin_skin'], $skins['newwin'][$i]); ?>><?php echo $skins['newwin'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>
@@ -161,7 +161,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <label class="select form-width-250px">
                                         <select name="tag_skin" id="tag_skin" required="required">
                                             <option value="">선택</option>
-                                            <?php for($i=0; $i<count($skins['tag']); $i++) { ?>
+                                            <?php for($i=0; $i<count((array)$skins['tag']); $i++) { ?>
                                             <option value="<?php echo $skins['tag'][$i]; ?>" <?php echo get_selected($eyoom_config['tag_skin'], $skins['tag'][$i]); ?>><?php echo $skins['tag'][$i]; ?></option>
                                             <?php } ?>
                                         </select><i></i>

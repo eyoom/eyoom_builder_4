@@ -127,7 +127,7 @@ function all_send() {
         <?php
         if ($write['wr_memo'] ) {
             $tmp_wr_memo = @unserialize($write['wr_memo']);
-            if( count($tmp_wr_memo) && is_array($tmp_wr_memo) ){
+            if( count((array)$tmp_wr_memo) && is_array($tmp_wr_memo) ){
                 if(function_exists('array_fill_keys')){
                     $tmp_wr_hp = array_replace($tmp_wr_memo['hp'],array_fill_keys(array_keys($tmp_wr_memo['hp'], null),''));
                 } else {

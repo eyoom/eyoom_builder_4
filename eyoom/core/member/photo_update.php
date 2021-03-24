@@ -10,7 +10,9 @@ if (!$is_member) exit;
 /**
  * 업로드 경로
  */
-$dest_path = G5_DATA_PATH.'/member/profile/';
+$member_path = G5_DATA_PATH.'/member';
+$qfile->make_directory($member_path);
+$dest_path = $member_path.'/profile/';
 $upload->path = $dest_path;
 
 /**
@@ -19,7 +21,7 @@ $upload->path = $dest_path;
 if ($del_photo) {
     $_old_photo = $dest_path.$old_photo;
     @unlink($_old_photo);
-    sql_query("update {$g5[eyoom_member]} set photo = '' where mb_id='".$member['mb_id']."'");
+    sql_query("update {$g5['eyoom_member']} set photo = '' where mb_id='".$member['mb_id']."'");
 }
 
 /**
@@ -46,7 +48,7 @@ if ($res) {
     $thumb_file = $res['t_file'];
     $rename = $member['mb_id'].'.'.$res['ext'];
     @rename($thumb_file, $dest_path.$rename);
-    sql_query("update {$g5[eyoom_member]} set photo = '".$rename."' where mb_id='".$member['mb_id']."'");
+    sql_query("update {$g5['eyoom_member']} set photo = '".$rename."' where mb_id='".$member['mb_id']."'");
 }
 
 /**

@@ -261,7 +261,7 @@ window.closeModal = function(){
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<(array)$list); $i++) { ?>
         {
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='gi_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['gi_no']; ?>'>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_itemform&amp;eg_code=<?php echo $list[$i]['eg_code']; ?>&amp;gi_no=<?php echo $list[$i]['gi_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1' onclick='eb_modal(this.href,\"EB상품 아이템관리\"); return false;'><u>수정</u></a>",

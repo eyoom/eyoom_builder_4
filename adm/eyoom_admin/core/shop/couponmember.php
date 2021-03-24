@@ -6,7 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400800";
 
-auth_check($auth[$sub_menu], "w");
+auth_check_menu($auth, $sub_menu, "w");
+
+$mb_name = isset($_REQUEST['mb_name']) ? clean_xss_tags($_REQUEST['mb_name'], 1, 1) : '';
 
 $sql_common = " from {$g5['member_table']} ";
 $sql_where = " where mb_id <> '{$config['cf_admin']}' and mb_leave_date = '' and mb_intercept_date ='' ";
@@ -15,7 +17,7 @@ if($mb_name){
     $mb_name = preg_replace('/\!\?\*$#<>()\[\]\{\}/i', '', strip_tags($mb_name));
     $sql_where .= " and mb_name like '%".sql_real_escape_string($mb_name)."%' ";
 }
-    
+
 // 테이블의 전체 레코드수만 얻음
 $sql = " select count(*) as cnt " . $sql_common . $sql_where;
 $row = sql_fetch($sql);
@@ -36,6 +38,7 @@ $result = sql_query($sql);
 $qstr1 = 'mb_name='.urlencode($mb_name);
 
 $k = 0;
+$list = array();
 for($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 

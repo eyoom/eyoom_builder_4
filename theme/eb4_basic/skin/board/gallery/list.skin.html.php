@@ -149,7 +149,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         <div id="tab-category">
             <div class="category-list">
                 <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($board['bo_count_write']); ?>)</a></span>
-                <?php for ($i=0; $i<count($bocate); $i++) { ?>
+                <?php for ($i=0; $i<count((array)$bocate); $i++) { ?>
                 <span <?php if ($decode_sca == $bocate[$i]['ca_name']) { ?>class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url($bo_table, '', 'sca='.$bocate[$i]['ca_sca']); ?>"><?php echo $bocate[$i]['ca_name']; ?> (<?php echo $bocate[$i]['ca_count']; ?>)</a></span>
                 <?php } ?>
                 <span class="fake-span"></span>
@@ -197,7 +197,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
     <div class="board-gallery">
         <div class="gallery-sizer"></div>
-    <?php for ($i=0; $i<count($list); $i++) { ?>
+    <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         <div class="gallery-item">
             <?php if ($list[$i]['is_notice']) { ?>
             <div class="gallery-item-in gallery-box-notice">
@@ -303,7 +303,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php } ?>
         </div>
     <?php } ?>
-    <?php if (count($list) == 0) { ?>
+    <?php if (count((array)$list) == 0) { ?>
         <div class="text-center color-grey font-size-14"><i class="fas fa-exclamation-circle"></i> 게시물이 없습니다.</div>
     <?php } ?>
     </div>
@@ -648,8 +648,11 @@ $(function() {
                 confirmButtonText: "확인"
             });
         } else {
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php', { bo_table: "<?php echo $bo_table; ?>", skin: skin });
-            document.location.reload();
+            var bo_table = '<?php echo $bo_table; ?>';
+            var url = '<?php echo EYOOM_CORE_URL; ?>/board/set_bo_skin.php';
+            $.post(url, { bo_table: bo_table, skin: skin }, function() {
+                document.location.href = '<?php echo str_replace('&amp;','&', get_pretty_url($bo_table));?>';
+            });
         }
     });
 });

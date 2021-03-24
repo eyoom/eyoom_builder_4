@@ -4,15 +4,15 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 if ($is_admin != 'super') alert("권한이 없습니다.");
 
 /**
- * POST 변수 체크
+ * 변수 체크
  */
-$theme      = get_text($_GET['thema']);
-$me_shop    = get_text($_GET['me_shop']);
+$theme      = isset($_GET['thema']) ? clean_xss_tags(trim($_GET['thema'])): '';
+$me_shop    = isset($_GET['me_shop']) ? clean_xss_tags(trim($_GET['me_shop'])): '';
 
 if(!($theme && $me_shop)) {
     alert('잘못된 접근입니다.');

@@ -6,17 +6,17 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999620";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
-$el_code        = clean_xss_tags(trim($_POST['el_code']));
-$el_theme       = clean_xss_tags(trim($_POST['theme']));
-$el_state       = clean_xss_tags(trim($_POST['el_state']));
-$el_subject     = clean_xss_tags(trim($_POST['el_subject']));
-$el_skin        = clean_xss_tags(trim($_POST['el_skin']));
-$el_cache       = clean_xss_tags(trim($_POST['el_cache']));
-$el_new         = clean_xss_tags(trim($_POST['el_new']));
-$el_link        = $eb->filter_url($_POST['el_link']);
-$el_target      = clean_xss_tags(trim($_POST['el_target']));
+$el_code        = isset($_POST['el_code']) ? clean_xss_tags(trim($_POST['el_code'])) : '';
+$el_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
+$el_state       = isset($_POST['el_state']) ? clean_xss_tags(trim($_POST['el_state'])) : '';
+$el_subject     = isset($_POST['el_subject']) ? clean_xss_tags(trim($_POST['el_subject'])) : '';
+$el_skin        = isset($_POST['el_skin']) ? clean_xss_tags(trim($_POST['el_skin'])) : '';
+$el_cache       = isset($_POST['el_cache']) ? clean_xss_tags(trim($_POST['el_cache'])) : '';
+$el_new         = isset($_POST['el_new']) ? clean_xss_tags(trim($_POST['el_new'])) : '';
+$el_link        = isset($_POST['el_link']) ? $eb->filter_url($_POST['el_link']) : '';
+$el_target      = isset($_POST['el_target']) ? clean_xss_tags(trim($_POST['el_target'])) : '';
 
 $sql_common = "
     el_code = '{$el_code}',

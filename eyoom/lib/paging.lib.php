@@ -36,7 +36,7 @@ function eb_paging($skin_dir='basic') {
             $i++;
         }
     }
-    $pg_cnt = count($pg_str);
+    $pg_cnt = count((array)$pg_str);
 
     $add_query = '';
     if ($paging['ptype'] != 'admin' && $config['cf_bbs_rewrite']) {

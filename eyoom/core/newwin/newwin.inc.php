@@ -26,7 +26,7 @@ for ($i=0; $nw=sql_fetch_array($result); $i++) {
     $newwin[$i] = $nw;
 }
 
-if (is_array($newwin) && count($newwin) > 0) {
+if (is_array($newwin) && count((array)$newwin) > 0) {
     /**
      * 스킨파일 출력
      */

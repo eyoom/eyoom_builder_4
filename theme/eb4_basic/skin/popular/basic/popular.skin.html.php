@@ -19,14 +19,14 @@ if (!defined('_EYOOM_')) exit;
     </div>
     <div class="popular">
         <ul class="list-unstyled">
-            <?php for ($i=0; $i<count($popular); $i++) { ?>
+            <?php for ($i=0; $i<count((array)$popular); $i++) { ?>
             <li>
                 <a href="<?php echo G5_BBS_URL; ?>/search.php?sfl=wr_subject&amp;sop=and&amp;stx=<?php echo urlencode($popular[$i]['pp_word']); ?>" class="popular-word">
                     <span><?php echo $i+1; ?>. <?php echo $popular[$i]['pp_word']; ?></span>
                 </a>
             </li>
             <?php } ?>
-            <?php if (count($popular) == 0) { ?>
+            <?php if (count((array)$popular) == 0) { ?>
             <p class="text-center color-light-grey font-size-11"><i class="fas fa-exclamation-circle"></i> 출력할 인기검색어가 없습니다.</p>
             <?php } ?>
             <div class="clearfix"></div>

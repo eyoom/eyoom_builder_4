@@ -6,6 +6,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200800";
 
+auth_check_menu($auth, $sub_menu, 'r');
+
+$fr_date = isset($_REQUEST['fr_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['fr_date']) : G5_TIME_YMD;
+$to_date = isset($_REQUEST['to_date']) ? preg_replace('/[^0-9 :\-]/i', '', $_REQUEST['to_date']) : G5_TIME_YMD;
+
 /**
  * 탭메뉴 활성화 구분자
  */
@@ -46,7 +51,8 @@ $j = 0;
 $k = 0;
 $save_count = -1;
 $tot_count = 0;
-if (count($arr)) {
+$list = array();
+if (count((array)$arr)) {
     arsort($arr);
     foreach ($arr as $key=>$value) {
         $count = $arr[$key];

@@ -6,11 +6,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "500500";
 
-auth_check($auth[$sub_menu], "w");
-
-$bn_id = preg_replace('/[^0-9]/', '', $bn_id);
-
 $action_url1 = G5_ADMIN_URL . '/?dir=shopetc&amp;pid=bannerformupdate&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, "w");
+
+$bn_id = isset($_REQUEST['bn_id']) ? preg_replace('/[^0-9]/', '', $_REQUEST['bn_id']) : 0;
+$bn = array(
+    'bn_id'=>0,
+    'bn_alt'=>'',
+    'bn_device'=>'',
+    'bn_position'=>'',
+    'bn_border'=>'',
+    'bn_new_win'=>'',
+    'bn_order'=>''
+);
 
 if ($w=="u")
 {

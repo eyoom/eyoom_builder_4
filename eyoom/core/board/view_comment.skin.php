@@ -27,7 +27,8 @@ $bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
 $is_anonymous = false;
 
 unset($cmt);
-$cmt_amt = count($list);
+$cmt_amt = count((array)$list);
+$cmt = array();
 for ($i=0; $i<$cmt_amt; $i++) {
     $cmt[$i]['comment_id'] = $list[$i]['wr_id'];
     $cmt[$i]['cmt_depth'] = strlen($list[$i]['wr_comment_reply']) * 15;
@@ -62,6 +63,7 @@ for ($i=0; $i<$cmt_amt; $i++) {
     if (is_array($cmt_file)) {
         $cfile_loop = &$cmt[$i]['cmtfile'];
         $cimg_loop = &$cmt[$i]['cmtimg'];
+        $cmt_attach = array();
         foreach ($cmt_file as $k => $_file) {
             $cfile_loop[$k] = $_file;
             $cmt_attach[$k] = $_file['source'];
@@ -70,8 +72,8 @@ for ($i=0; $i<$cmt_amt; $i++) {
                 $cimg_loop[$k]['imgname'] = $_file['file'];
             }
         }
-        $cmt[$i]['count_cmtfile'] = count($cmt_file);
-        $cmt[$i]['count_cmtimg'] = count($cimg_loop);
+        $cmt[$i]['count_cmtfile'] = count((array)$cmt_file);
+        $cmt[$i]['count_cmtimg'] = count((array)$cimg_loop);
         $cmt[$i]['cmt_attach'] = implode('||', $cmt_attach);
     }
 
@@ -214,7 +216,7 @@ if (isset($good_comment) && is_array($good_comment)) {
 /**
  * 댓글수 재조정
  */
-$cmt_amt = count($cmt);
+$cmt_amt = count((array)$cmt);
 
 /**
  * 댓글에 이미지 첨부파일 용량 제한
@@ -240,16 +242,16 @@ if ($is_member) {
 /**
  * 이윰 여분필드 변수값 암호화
  */
-$cmt_eb_1 = $cmt_eb_1 ? $eb->encrypt_md5($cmt_eb_1): '';
-$cmt_eb_2 = $cmt_eb_2 ? $eb->encrypt_md5($cmt_eb_2): '';
-$cmt_eb_3 = $cmt_eb_3 ? $eb->encrypt_md5($cmt_eb_3): '';
-$cmt_eb_4 = $cmt_eb_4 ? $eb->encrypt_md5($cmt_eb_4): '';
-$cmt_eb_5 = $cmt_eb_5 ? $eb->encrypt_md5($cmt_eb_5): '';
-$cmt_eb_6 = $cmt_eb_6 ? $eb->encrypt_md5($cmt_eb_6): '';
-$cmt_eb_7 = $cmt_eb_7 ? $eb->encrypt_md5($cmt_eb_7): '';
-$cmt_eb_8 = $cmt_eb_8 ? $eb->encrypt_md5($cmt_eb_8): '';
-$cmt_eb_9 = $cmt_eb_9 ? $eb->encrypt_md5($cmt_eb_9): '';
-$cmt_eb_10 = $cmt_eb_10 ? $eb->encrypt_md5($cmt_eb_10): '';
+$cmt_eb_1 = $cmt_eb_1 ? $eb->encrypt_aes($cmt_eb_1): '';
+$cmt_eb_2 = $cmt_eb_2 ? $eb->encrypt_aes($cmt_eb_2): '';
+$cmt_eb_3 = $cmt_eb_3 ? $eb->encrypt_aes($cmt_eb_3): '';
+$cmt_eb_4 = $cmt_eb_4 ? $eb->encrypt_aes($cmt_eb_4): '';
+$cmt_eb_5 = $cmt_eb_5 ? $eb->encrypt_aes($cmt_eb_5): '';
+$cmt_eb_6 = $cmt_eb_6 ? $eb->encrypt_aes($cmt_eb_6): '';
+$cmt_eb_7 = $cmt_eb_7 ? $eb->encrypt_aes($cmt_eb_7): '';
+$cmt_eb_8 = $cmt_eb_8 ? $eb->encrypt_aes($cmt_eb_8): '';
+$cmt_eb_9 = $cmt_eb_9 ? $eb->encrypt_aes($cmt_eb_9): '';
+$cmt_eb_10 = $cmt_eb_10 ? $eb->encrypt_aes($cmt_eb_10): '';
 
 /**
  * 사용자 프로그램

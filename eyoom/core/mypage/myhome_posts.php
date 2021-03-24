@@ -23,14 +23,16 @@ $where = " find_in_set(bo_table,'".implode(',',$bo_possible)."') and wr_id = wr_
 
 
 $sql = "select * from {$g5['board_new_table']} where {$where} order by bn_datetime desc limit {$from_record}, $page_rows ";
-
 $result = sql_query($sql, false);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     /**
      * 게시글 정보
      */
     $list[$i] = $bbs->board_latest_record($row, $board_info);
+    $list[$i]['href'] .= strpos($list[$i]['href'], '?') ? '&wmode=1': '?wmode=1';
 }
+$count = count($list);
 
 /**
  * 사용자 프로그램

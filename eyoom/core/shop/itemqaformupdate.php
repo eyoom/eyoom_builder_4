@@ -8,6 +8,7 @@ if (!$is_member) {
     alert_close("상품문의는 회원만 작성이 가능합니다.");
 }
 
+$it_id = isset($_REQUEST['it_id']) ? safe_replace_regex($_REQUEST['it_id'], 'it_id') : '';
 $iq_id = (int) trim($_REQUEST['iq_id']);
 $iq_subject = trim($_POST['iq_subject']);
 $iq_question = trim($_POST['iq_question']);
@@ -87,7 +88,7 @@ else if ($w == "d")
 
     $imgs = get_editor_image($row['iq_question'], $get_editor_img_mode);
 
-    for($i=0;$i<count($imgs[1]);$i++) {
+    for($i=0;$i<count((array)$imgs[1]);$i++) {
         $p = parse_url($imgs[1][$i]);
         if(strpos($p['path'], "/data/") != 0)
             $data_path = preg_replace("/^\/.*\/data/", "/data", $p['path']);
@@ -105,7 +106,7 @@ else if ($w == "d")
 
     $imgs = get_editor_image($row['iq_answer'], $get_editor_img_mode);
 
-    for($i=0;$i<count($imgs[1]);$i++) {
+    for($i=0;$i<count((array)$imgs[1]);$i++) {
         $p = parse_url($imgs[1][$i]);
         if(strpos($p['path'], "/data/") != 0)
             $data_path = preg_replace("/^\/.*\/data/", "/data", $p['path']);

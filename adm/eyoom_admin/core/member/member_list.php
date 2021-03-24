@@ -6,9 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200100";
 
-auth_check($auth[$sub_menu], 'r');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=member_list_update&amp;smode=1';
+
+auth_check_menu($auth, $sub_menu, 'r');
 
 if ($wmode) $qstr .= "&amp;wmode=1";
 
@@ -36,14 +36,14 @@ if ($stx) {
 }
 
 // 회원레벨 검색
-$lev = $_GET['lev'] ? (int) $_GET['lev']: '';
+$lev = isset($_GET['lev']) ? (int) $_GET['lev']: '';
 if ($lev) {
     $sql_search .= " and mb_level = '{$lev}' ";
     $qstr .= "&amp;lev={$lev}";
 }
 
 // 본인확인
-$cert = $_GET['cert'] ? (int) $_GET['cert']: '';
+$cert = isset($_GET['cert']) ? (int) $_GET['cert']: '';
 if ($cert) {
     $cert_val = $cert-1 == 1 ? 1:'';
     $sql_search .= " and mb_certify = '{$cert_val}' ";
@@ -58,7 +58,7 @@ if ($cert) {
 }
 
 // 정보공개
-$open = $_GET['open'] ? (int) $_GET['open']: '';
+$open = isset($_GET['open']) ? (int) $_GET['open']: '';
 if ($open) {
     $open_val = $open-1 == 1 ? 1:'';
     $sql_search .= " and mb_open = '{$open_val}' ";
@@ -73,7 +73,7 @@ if ($open) {
 }
 
 // 성인인증
-$adt = $_GET['adt'] ? (int) $_GET['adt']: '';
+$adt = isset($_GET['adt']) ? (int) $_GET['adt']: '';
 if ($adt) {
     $adt_val = $adt-1 == 1 ? 1:'';
     $sql_search .= " and mb_adult = '{$adt_val}' ";
@@ -88,7 +88,7 @@ if ($adt) {
 }
 
 // 메일 수신 여부
-$mail = $_GET['mail'] ? (int) $_GET['mail']: '';
+$mail = isset($_GET['mail']) ? (int) $_GET['mail']: '';
 if ($mail) {
     $mail_val = $mail-1 == 1 ? 1:'';
     $sql_search .= " and mb_mailling = '{$mail_val}' ";
@@ -102,8 +102,8 @@ if ($mail) {
     $mb_mailling_all = 'checked';
 }
 
-// 메일 수신 여부
-$sms = $_GET['sms'] ? (int) $_GET['sms']: '';
+// 문자 수신 여부
+$sms = isset($_GET['sms']) ? (int) $_GET['sms']: '';
 if ($sms) {
     $sms_val = $sms-1 == 1 ? 1:'';
     $sql_search .= " and mb_sms = '{$sms_val}' ";
@@ -164,6 +164,7 @@ $intercept_count = $row['cnt'];
 
 $sql = " select *, a.mb_id as mb_id {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $leave_date = $row['mb_leave_date'] ? $row['mb_leave_date'] : date('Ymd', G5_SERVER_TIME);

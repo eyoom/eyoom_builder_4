@@ -4,7 +4,7 @@ include_once($g5_path.'/common.php');
 
 @include_once(EYOOM_INC_PATH.'/html_process.php');
 
-$emo = $_GET['emo'];
+$emo = isset($_GET['emo']) ? clean_xss_tags($_GET['emo']): '';
 if (!$emo) $emo = 'rabbit';
 
 $emoticon = $bbs->get_emoticon($emo);

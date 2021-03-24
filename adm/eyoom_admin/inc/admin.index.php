@@ -27,15 +27,9 @@ if(function_exists('social_log_file_delete')){
  */
 $sql = "select * from {$g5['eyoom_theme']} where 1 ";
 $res = sql_query($sql,false);
+$tminfo = array();
 for ($i=0; $row=sql_fetch_array($res); $i++) {
     $tminfo[$row['tm_name']] = $row;
-}
-
-/**
- * 영카트5 인가?
- */
-if ($is_youngcart) {
-    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
 }
 
 /**

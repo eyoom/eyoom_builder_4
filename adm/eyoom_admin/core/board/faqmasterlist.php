@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300700";
 
-auth_check($auth[$sub_menu], "r");
+auth_check_menu($auth, $sub_menu, "r");
 
 //dbconfig파일에 $g5['faq_table'] , $g5['faq_master_table'] 배열변수가 있는지 체크
 if( !isset($g5['faq_table']) || !isset($g5['faq_master_table']) ){
@@ -48,6 +48,8 @@ if(!sql_query(" DESCRIBE {$g5['faq_table']} ", false)) {
     }
 }
 
+$g5['title'] = 'FAQ관리';
+
 $sql_common = " from {$g5['faq_master_table']} ";
 
 // 테이블의 전체 레코드수만 얻음
@@ -62,7 +64,7 @@ $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = "select * $sql_common order by fm_order, fm_id limit $from_record, {$config['cf_page_rows']} ";
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql1 = " select COUNT(*) as cnt from {$g5['faq_table']} where fm_id = '{$row['fm_id']}' ";
     $row1 = sql_fetch($sql1);

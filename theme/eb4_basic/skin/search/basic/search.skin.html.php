@@ -50,7 +50,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
                 <label class="select">
                     <select name="gr_id" id="gr_id" class="form-control">
                         <option value="">전체그룹</option>
-                        <?php for ($i=0; $i<count($sel_group); $i++) { ?>
+                        <?php for ($i=0; $i<count((array)$sel_group); $i++) { ?>
                         <option value='<?php echo $sel_group[$i]['gr_id']; ?>'><?php echo $sel_group[$i]['gr_subject']; ?></option>
                         <?php } ?>
                     </select>
@@ -117,7 +117,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <div class="margin-bottom-30"></div>
 
     <?php if ($stx && $board_count) { ?><section class="search-result-list"><?php } ?>
-    <?php for ($idx=$table_index, $k=0; $idx<count($search_table) && $k<$rows; $idx++) { ?>
+    <?php for ($idx=$table_index, $k=0; $idx<count((array)$search_table) && $k<$rows; $idx++) { ?>
         <h5>
             <a href="<?php echo get_eyoom_pretty_url($search_table[$idx], '', $search_query); ?>">
                 <strong><i class="fas fa-search"></i> '<u><?php echo $bo_subject[$idx] ?></u>' 게시판 내 결과</strong>
@@ -125,7 +125,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
         </h5>
         <ul class="list-unstyled result-list">
         <?php
-        for ($i=0; $i<count($list[$idx]) && $k<$rows; $i++, $k++) {
+        for ($i=0; $i<count((array)$list[$idx]) && $k<$rows; $i++, $k++) {
             if ($list[$idx][$i]['wr_is_comment']) {
                 $comment_def = '<span class="cmt_def">댓글 | </span>';
                 $comment_href = '#c_'.$list[$idx][$i]['wr_id'];

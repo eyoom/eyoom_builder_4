@@ -6,13 +6,19 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200900";
 
-auth_check($auth[$sub_menu], 'w');
-
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=poll_form_update&amp;smode=1';
 
-$po_id = isset($po_id) ? (int) $po_id : 0;
+auth_check_menu($auth, $sub_menu, 'w');
 
-$html_title = '';
+$po_id = isset($po_id) ? (int) $po_id : 0;
+$po = array(
+    'po_subject'=>'',
+    'po_etc'=>'',
+    'po_level'=>'',
+    'po_point'=>'',
+);
+
+$html_title = '투표';
 if ($w == '')
     $html_title .= ' 생성';
 else if ($w == 'u')  {

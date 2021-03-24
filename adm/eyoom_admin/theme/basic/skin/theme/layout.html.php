@@ -107,7 +107,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="outlogin_skin" id="outlogin_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['outlogin']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['outlogin']); $i++) { ?>
                 <option value="<?php echo $skins['outlogin'][$i]; ?>" <?php echo get_selected($eyoom['outlogin_skin'], $skins['outlogin'][$i]); ?>><?php echo $skins['outlogin'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -132,7 +132,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="poll_skin" id="poll_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['poll']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['poll']); $i++) { ?>
                 <option value="<?php echo $skins['poll'][$i]; ?>" <?php echo get_selected($eyoom['poll_skin'], $skins['poll'][$i]); ?>><?php echo $skins['poll'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -157,7 +157,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="ranking_skin" id="ranking_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['ranking']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['ranking']); $i++) { ?>
                 <option value="<?php echo $skins['ranking'][$i]; ?>" <?php echo get_selected($eyoom['ranking_skin'], $skins['ranking'][$i]); ?>><?php echo $skins['ranking'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -182,7 +182,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="popular_skin" id="popular_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['popular']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['popular']); $i++) { ?>
                 <option value="<?php echo $skins['popular'][$i]; ?>" <?php echo get_selected($eyoom['popular_skin'], $skins['popular'][$i]); ?>><?php echo $skins['popular'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -207,7 +207,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="tag_skin" id="tag_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['tag']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['tag']); $i++) { ?>
                 <option value="<?php echo $skins['tag'][$i]; ?>" <?php echo get_selected($eyoom['tag_skin'], $skins['tag'][$i]); ?>><?php echo $skins['tag'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -232,7 +232,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         <label class="select">
             <select name="visit_skin" id="visit_skin" required="required">
                 <option value="">선택</option>
-                <?php for($i=0; $i<count($skins['visit']); $i++) { ?>
+                <?php for($i=0; $i<count((array)$skins['visit']); $i++) { ?>
                 <option value="<?php echo $skins['visit'][$i]; ?>" <?php echo get_selected($eyoom['visit_skin'], $skins['visit'][$i]); ?>><?php echo $skins['visit'][$i]; ?></option>
                 <?php } ?>
             </select><i></i>
@@ -377,7 +377,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="outlogin_skin" id="outlogin_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['outlogin']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['outlogin']); $i++) { ?>
                         <option value="<?php echo $skins['outlogin'][$i]; ?>" <?php echo get_selected($eyoom['outlogin_skin'], $skins['outlogin'][$i]); ?>><?php echo $skins['outlogin'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>
@@ -404,7 +404,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="poll_skin" id="poll_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['poll']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['poll']); $i++) { ?>
                         <option value="<?php echo $skins['poll'][$i]; ?>" <?php echo get_selected($eyoom['poll_skin'], $skins['poll'][$i]); ?>><?php echo $skins['poll'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>
@@ -431,7 +431,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="ranking_skin" id="ranking_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['ranking']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['ranking']); $i++) { ?>
                         <option value="<?php echo $skins['ranking'][$i]; ?>" <?php echo get_selected($eyoom['ranking_skin'], $skins['ranking'][$i]); ?>><?php echo $skins['ranking'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>
@@ -458,7 +458,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="popular_skin" id="popular_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['popular']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['popular']); $i++) { ?>
                         <option value="<?php echo $skins['popular'][$i]; ?>" <?php echo get_selected($eyoom['popular_skin'], $skins['popular'][$i]); ?>><?php echo $skins['popular'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>
@@ -485,7 +485,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="tag_skin" id="tag_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['tag']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['tag']); $i++) { ?>
                         <option value="<?php echo $skins['tag'][$i]; ?>" <?php echo get_selected($eyoom['tag_skin'], $skins['tag'][$i]); ?>><?php echo $skins['tag'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>
@@ -512,7 +512,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="select">
                     <select name="visit_skin" id="visit_skin" required="required">
                         <option value="">선택</option>
-                        <?php for($i=0; $i<count($skins['visit']); $i++) { ?>
+                        <?php for($i=0; $i<count((array)$skins['visit']); $i++) { ?>
                         <option value="<?php echo $skins['visit'][$i]; ?>" <?php echo get_selected($eyoom['visit_skin'], $skins['visit'][$i]); ?>><?php echo $skins['visit'][$i]; ?></option>
                         <?php } ?>
                     </select><i></i>

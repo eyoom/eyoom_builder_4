@@ -17,7 +17,7 @@ class shop extends eyoom
         $hsql = " select ca_id, ca_name from {$this->g5['g5_shop_category_table']} where length(ca_id) = '2' and ca_use = '1' order by ca_order, ca_id ";
         $hresult = sql_query($hsql);
         $gnb_zindex = 999; // gnb_1dli z-index 값 설정용
-
+        $menu = array();
         for ($i=0; $row=sql_fetch_array($hresult); $i++) {
             $gnb_zindex -= 1; // html 구조에서 앞선 gnb_1dli 에 더 높은 z-index 값 부여
             /**
@@ -36,7 +36,7 @@ class shop extends eyoom
                 $row2['href'] = shop_category_url($row2['ca_id']);
                 $loop[$j] = $row2;
             }
-            $menu[$i]['cnt'] = count($loop);
+            $menu[$i]['cnt'] = count((array)$loop);
         }
         return $menu;
     }
@@ -203,6 +203,7 @@ class shop extends eyoom
         $fields = $fields ? $fields : '*';
         $sql = "select {$fields} from {$this->g5['g5_shop_category_table']} where {$where} order by ca_order, ca_id";
         $res = sql_query($sql);
+        $list = array();
         for ($i=0; $row=sql_fetch_array($res); $i++) {
             $list[$i] = $row;
         }
@@ -238,9 +239,10 @@ class shop extends eyoom
         }
         $sql = "select ca_id, ca_use, ca_order, ca_name, ca_stock_qty, ca_sell_email from {$this->g5['g5_shop_category_table']} where (1) {$addwhere} order by ca_id asc, ca_order asc";
         $res = sql_query($sql, false);
+        $category = array();
         for($i=0;$row=sql_fetch_array($res);$i++) {
             $split = str_split($row['ca_id'],2);
-            $depth = count($split);
+            $depth = count((array)$split);
 
             if($depth==1) $category[$split[0]] = $row;
             if($depth==2) $category[$split[0]][$split[1]] = $row;
@@ -256,6 +258,7 @@ class shop extends eyoom
         $output = '';
         if(is_array($arr)) {
             $output .= ',"children":[';
+            $_output=array();
             $i=0;
             foreach($arr as $key => $val) {
                 if(is_array($val)) {
@@ -267,7 +270,7 @@ class shop extends eyoom
                     $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
                     $_output[$ca_order] .= '"order":"'.$ca_order.'",';
                     $_output[$ca_order] .= '"text":"'.trim($val['ca_name']).$blind.'"';
-                    if(is_array($val) && count($val)>3) $_output[$ca_order] .= $this->category_json($val);
+                    if(is_array($val) && count((array)$val)>3) $_output[$ca_order] .= $this->category_json($val);
                     $_output[$ca_order] .= '}';
                 }
                 $i++;
@@ -380,7 +383,7 @@ class shop extends eyoom
              */
             for($i=0; $i<$subj_count; $i++) {
                 $opt = $options[$i];
-                $opt_count = count($opt);
+                $opt_count = count((array)$opt);
                 $disabled = '';
                 if($opt_count) {
                     $seq = $i + 1;
@@ -468,7 +471,7 @@ class shop extends eyoom
          */
         for($i=0; $i<$subj_count; $i++) {
             $opt = $options[$subj[$i]];
-            $opt_count = count($opt);
+            $opt_count = count((array)$opt);
             if($opt_count) {
                 $seq = $i + 1;
 
@@ -501,6 +504,7 @@ class shop extends eyoom
             $data[$ca_id] = $info['ca_name'];
         } else {
             $result = sql_query($sql);
+            $data = array();
             for ($i=0; $row=sql_fetch_array($result); $i++) {
                 $data[$row['ca_id']] = $row['ca_name'];
             }

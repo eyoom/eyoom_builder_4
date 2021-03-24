@@ -103,7 +103,6 @@ function num_group_submit(f) {
 
     </form>
 
-    <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, G5_ADMIN_URL."/?dir=sms&amp;pid=num_book&amp;bg_no=$bg_no&amp;st=$st&amp;sv=$sv&amp;ap=$ap&amp;page="); ?>
 </div>
 
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jsgrid/jsgrid.min.js"></script>
@@ -137,7 +136,7 @@ function num_group_submit(f) {
             비회원: "<?php echo number_format($no_group['bg_nomember'])?>",
             수신: "<?php echo number_format($no_group['bg_receipt'])?>",
             거부: "<?php echo number_format($no_group['bg_reject'])?>",
-            이동: "<label class='select'><select name='select_bg_no_999' onchange=\"move(<?php echo $no_group['bg_no']?>, '<?php echo $no_group['bg_name']?>', this);\"><option value=''></option><?php for ($i=0; $i<count($group); $i++) { ?><option value='<?php echo $group[$i]['bg_no']?>'> <?php echo get_sanitize_input($group[$i]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_bg_no_999' onchange=\"move(<?php echo $no_group['bg_no']?>, '<?php echo $no_group['bg_name']?>', this);\"><option value=''></option><?php for ($i=0; $i<count((array)$group); $i++) { ?><option value='<?php echo $group[$i]['bg_no']?>'> <?php echo get_sanitize_input($group[$i]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
         },
         <?php for ($i=0; $i<$count; $i++) { ?>
         {
@@ -149,7 +148,7 @@ function num_group_submit(f) {
             비회원: "<?php echo number_format($group[$i]['bg_nomember'])?>",
             수신: "<?php echo number_format($group[$i]['bg_receipt'])?>",
             거부: "<?php echo number_format($group[$i]['bg_reject'])?>",
-            이동: "<label class='select'><select name='select_bg_no[<?php echo $i; ?>]' id='select_bg_no_<?php echo $i; ?>' onchange=\"move(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', this);\"><option value=''></option><option value='<?php echo $no_group['bg_no']?>'><?php echo $no_group['bg_name']?></option><?php for ($j=0; $j<count($group); $j++) { ?><?php if ($group[$i]['bg_no']==$group[$j]['bg_no']) continue; ?><option value='<?php echo $group[$j]['bg_no']?>'> <?php echo get_sanitize_input($group[$j]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_bg_no[<?php echo $i; ?>]' id='select_bg_no_<?php echo $i; ?>' onchange=\"move(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', this);\"><option value=''></option><option value='<?php echo $no_group['bg_no']?>'><?php echo $no_group['bg_name']?></option><?php for ($j=0; $j<count((array)$group); $j++) { ?><?php if ($group[$i]['bg_no']==$group[$j]['bg_no']) continue; ?><option value='<?php echo $group[$j]['bg_no']?>'> <?php echo get_sanitize_input($group[$j]['bg_name']); ?> </option><?php } ?></select><i></i></label>",
         },
         <?php } ?>
     ]

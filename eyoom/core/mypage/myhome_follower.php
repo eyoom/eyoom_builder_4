@@ -17,13 +17,14 @@ $fields = 'b.mb_id, b.mb_name, b.mb_nick, b.mb_email, b.mb_homepage, b.mb_dateti
 $sql = "select {$fields} from {$g5['eyoom_follow']} as a left join {$g5['member_table']} as b on a.fo_my_id = b.mb_id left join {$g5['eyoom_member']} as c on b.mb_id = c.mb_id where a.fo_mb_id = '{$user['mb_id']}' limit {$from_record}, $page_rows ";
 
 $result = sql_query($sql);
-
+$list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
     $list[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
     $list[$i]['cnt_following'] = $eb->count_following($row['mb_id']);
     $list[$i]['cnt_follower'] = $eb->count_follower($row['mb_id']);
 }
+$count = count($list);
 
 /**
  * 사용자 프로그램

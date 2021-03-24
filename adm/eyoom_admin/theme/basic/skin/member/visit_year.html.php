@@ -44,7 +44,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     };
     window.db    = db,
     db.clients   = [
-        <?php for ($i=0; $i<count($list); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$list); $i++) { ?>
         {
             년: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=visit_month&fr_date=<?php echo $list[$i]['key']; ?>-01-01&to_date=<?php echo $list[$i]['key']; ?>-12-31'><?php echo $list[$i]['key']; ?></a>",
             그래프: "<div class='visit_bar'><span style='width:<?php echo $list[$i]['s_rate']; ?>%'></span></div>",

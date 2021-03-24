@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200300";
 
-auth_check($auth[$sub_menu], 'w');
+auth_check_menu($auth, $sub_menu, 'w');
 
 check_demo();
 
@@ -18,8 +18,11 @@ $countgap = 10; // 몇건씩 보낼지 설정
 $maxscreen = 500; // 몇건씩 화면에 보여줄건지?
 $sleepsec = 200;  // 천분의 몇초간 쉴지 설정
 
-$ma_id = trim($_POST['ma_id']);
-$select_member_list = trim($_POST['ma_list']);
+flush();
+ob_flush();
+
+$ma_id = isset($_POST['ma_id']) ? (int) $_POST['ma_id'] : 0;
+$select_member_list = isset($_POST['ma_list']) ? trim($_POST['ma_list']) : '';
 
 //print_r2($_POST); EXIT;
 $member_list = explode("\n", conv_unescape_nl($select_member_list));
@@ -52,8 +55,13 @@ for ($i=0; $i<count($member_list); $i++) {
         mailer($config['cf_admin_email_name'], $config['cf_admin_email'], $to_email, $subject, $content, 1);
 
         echo "<script> document.all.cont.innerHTML += '$cnt. $to_email ($mb_id : $name)<br>'; </script>\n";
+        //echo "+";
+        flush();
+        ob_flush();
+        ob_end_flush();
         usleep($sleepsec);
-        if ($cnt % $countgap == 0) {
+        if ($cnt % $countgap == 0)
+        {
             echo "<script> document.all.cont.innerHTML += '<br>'; document.body.scrollTop += 1000; </script>\n";
         }
 

@@ -49,7 +49,7 @@ if (defined('G5_YOUNGCART_VER')) {
 if ($is_admin != 'super') $add_where = " and mb_level <= '{$member['mb_level']}' ";
 $sql = " select * from {$g5['member_table']} where (1) and mb_id != '{$config['cf_admin']}' {$add_where} and mb_leave_date = '' order by mb_datetime desc limit 5 ";
 $result = sql_query($sql);
-
+$new_member = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $new_member[$i] = $row;
     $new_member[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
@@ -74,6 +74,7 @@ $sql_order = " order by a.bn_id desc ";
 
 $sql = " select a.*, b.bo_subject, c.gr_subject, c.gr_id {$sql_common} {$sql_order} limit {$new_write_rows} ";
 $result = sql_query($sql);
+$new_post = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $tmp_write_table = $g5['write_prefix'] . $row['bo_table'];
 
@@ -130,6 +131,7 @@ $sql_order = " order by po_id desc ";
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$new_point_rows} ";
 $result = sql_query($sql);
 $row2['mb_id'] = '';
+$new_point = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($row2['mb_id'] != $row['mb_id']) {
         $sql2 = " select mb_no, mb_id, mb_name, mb_nick, mb_email, mb_homepage, mb_point from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
@@ -147,6 +149,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
  */
 $sql = " select * from {$g5['qa_content_table']} where (1) and qa_type = '0' order by qa_num limit 5 ";
 $result = sql_query($sql);
+$qa_conts = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
     $row1 = sql_fetch($sql1);

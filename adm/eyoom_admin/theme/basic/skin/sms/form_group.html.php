@@ -129,15 +129,15 @@ function grouplist_submit(f) {
             보기: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=sms&pid=form_list&fg_no=0'><u>보기</u></a>",
             그룹명: "미분류",
             이모티콘수: "<?php echo number_format($res['cnt'])?>",
-            이동: "<label class='select'><select name='select_fg_no_999' id='select_fg_no_999' onchange='move(0, \"미분류\", this);'><option value=''></option><?php for ($i=0; $i<count($group); $i++) { ?><option value='<?php echo $group[$i]['fg_no']?>'> <?php echo $group[$i]['fg_name']?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_fg_no_999' id='select_fg_no_999' onchange='move(0, \"미분류\", this);'><option value=''></option><?php for ($i=0; $i<count((array)$group); $i++) { ?><option value='<?php echo $group[$i]['fg_no']?>'> <?php echo $group[$i]['fg_name']?> </option><?php } ?></select><i></i></label>",
         },
-        <?php for ($i=0; $i<count($group); $i++) { ?>
+        <?php for ($i=0; $i<count((array)$group); $i++) { ?>
         {
             체크: "<input type='hidden' name='fg_no[<?php echo $i; ?>]' value='<?php echo $group[$i]['fg_no']; ?>' id='fg_no_<?php echo $i; ?>'><label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label>",
             보기: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=sms&pid=form_list&fg_no=<?php echo $group[$i]['fg_no']?>'><u>보기</u></a>",
-            그룹명: "<label class='input'><input type='text' name='fg_name[<?php echo $i; ?>]' value='<?php echo $group[$i]['fg_name']?>' id='fg_name_<?php echo $i; ?>'></label>",
+            그룹명: "<label class='input'><input type='text' name='fg_name[<?php echo $i; ?>]' value='<?php echo get_sanitize_input($group[$i]['fg_name']); ?>' id='fg_name_<?php echo $i; ?>'></label>",
             이모티콘수: "<?php echo number_format($group[$i]['fg_count'])?>",
-            이동: "<label class='select'><select name='select_fg_no[<?php echo $i; ?>]' id='select_fg_no_<?php echo $i; ?>' onchange='move(<?php echo $group[$i]['fg_no']?>, \"<?php echo $group[$i]['fg_name']?>\", this);'><option value=''></option><option value='0'>미분류</option><?php for ($j=0; $j<count($group); $j++) { ?><?php if ($group[$i]['fg_no']==$group[$j]['fg_no']) continue; ?><option value='<?php echo $group[$j]['fg_no']?>'> <?php echo $group[$j]['fg_name']?> </option><?php } ?></select><i></i></label>",
+            이동: "<label class='select'><select name='select_fg_no[<?php echo $i; ?>]' id='select_fg_no_<?php echo $i; ?>' onchange='move(<?php echo $group[$i]['fg_no']?>, \"<?php echo $group[$i]['fg_name']?>\", this);'><option value=''></option><option value='0'>미분류</option><?php for ($j=0; $j<count((array)$group); $j++) { ?><?php if ($group[$i]['fg_no']==$group[$j]['fg_no']) continue; ?><option value='<?php echo $group[$j]['fg_no']?>'> <?php echo $group[$j]['fg_name']?> </option><?php } ?></select><i></i></label>",
         },
         <?php } ?>
     ]
