@@ -66,17 +66,17 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custo
         <div class="eb-side-info">
             <div class="eb-side-info-box">
                 <div class="side-info-item margin-bottom-15">
-                    <p class="side-info-title">설치된 <?php echo $is_youngcart ? '영카트5': '그누보드5'; ?> 버전</p>
+                    <p class="side-info-title">설치된 <?php echo G5_VERSION; ?> 버전</p>
                     <h5 class="side-info-cont">
-                        <strong class="color-red"><?php echo $is_youngcart ? G5_YOUNGCART_VER: G5_GNUBOARD_VER; ?></strong>
-                        <small>최신버전 : <a href="<?php echo $is_youngcart ? GNU_SITE . '/yc5_pds': GNU_SITE . '/g5_pds'; ?>" target="_blank">다운로드</a></small>
+                        <strong class="color-red"><?php echo G5_GNUBOARD_VER; ?></strong>
+                        <small>최신버전 : <a href="<?php echo GNU_SITE . '/g5_pds'; ?>" target="_blank">다운로드</a></small>
                     </h5>
                 </div>
                 <div class="side-info-item margin-bottom-15">
                     <p class="side-info-title">설치된 이윰빌더 버전</p>
                     <h5 class="side-info-cont">
                         <strong class="color-yellow"><?php echo EYOOM_VERSION; ?></strong>
-                        <small>최신버전 : <a href="<?php echo EYOOM_SITE . '/bbs/board.php?bo_table=eb4_download'; ?>" target="_blank">다운로드</a></small>
+                        <small>최신버전 : <a href="<?php echo EYOOM_SITE . '/eb4_download'; ?>" target="_blank">다운로드</a></small>
                     </h5>
                 </div>
                 <div class="side-info-item margin-bottom-15">

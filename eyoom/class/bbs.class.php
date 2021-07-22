@@ -143,6 +143,38 @@ class bbs extends eyoom
         }
     }
 
+    public function make_anonymous_fields($bo_table) {
+        global $is_admin;
+
+        /**
+         * 최고관리자일 경우만 허용
+         */
+        if ($is_admin != 'super') return;
+
+        $write_table = $this->g5['write_prefix'] . $bo_table;
+
+        /**
+         * 게시판 테이블에 익명글 관련 필드 추가
+         */
+        if(!sql_query(" select wr_anonymous from {$write_table} limit 1 ", false)) {
+            $sql = " alter table `{$write_table}`
+                add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`
+            ";
+            sql_query($sql, true);
+        }
+
+        /**
+         * 새글 테이블에 익명글 관련 필드 추가
+         */
+        if(!sql_query(" select wr_bo_anonymous from {$this->g5['board_new_table']} limit 1 ", false)) {
+            $sql = " alter table `{$this->g5['board_new_table']}`
+                add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`,
+                add `wr_bo_anonymous` char(1) NOT NULL default '' after `wr_anonymous`
+            ";
+            sql_query($sql, true);
+        }
+    }
+
     /**
      * 이윰빌더 시즌4에서는 그누보드 여분필드를 사용하지 않고 eb_1 ~ eb_10을 활용
      */

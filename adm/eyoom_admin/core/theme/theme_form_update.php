@@ -103,7 +103,7 @@ $qfile->copy_dir($tmp_dir.'/eblatest/'.$tm_name, G5_DATA_PATH.'/eblatest/'.$tm_n
 /**
  * 설정파일 정의 
  */
-$_eyoom = unserialize($eyoom_config);
+$_eyoom = $eb->mb_unserialize($eyoom_config);
 
 /**
  * 홈페이지 주소

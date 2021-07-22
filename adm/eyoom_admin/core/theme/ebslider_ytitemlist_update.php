@@ -14,7 +14,7 @@ $ytchk = (isset($_POST['ytchk']) && is_array($_POST['ytchk'])) ? $_POST['ytchk']
 $post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
 
-if (! $post_count_chk) {
+if (! $post_count_ytchk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
 }
 
@@ -24,7 +24,7 @@ if ($act_button === "선택수정") {
 
     auth_check_menu($auth, $sub_menu, 'w');
 
-    for ($i=0; $i<$post_count_chk; $i++) {
+    for ($i=0; $i<$post_count_ytchk; $i++) {
 
         // 실제 번호를 넘김
         $k = isset($_POST['ytchk'][$i]) ? (int) $_POST['ytchk'][$i] : 0;
@@ -60,7 +60,7 @@ if ($act_button === "선택수정") {
 
     auth_check_menu($auth, $sub_menu, 'd');
     $del_ei_no = array();
-    for ($i=0; $i<$post_count_chk; $i++) {
+    for ($i=0; $i<$post_count_ytchk; $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['ytchk'][$i]) ? (int) $_POST['ytchk'][$i] : 0;
         $ei_no = isset($_POST['ei_no'][$k]) ? clean_xss_tags($_POST['ei_no'][$k], 1, 1) : '';

@@ -97,8 +97,8 @@ $upload = array();
 if (is_uploaded_file($_FILES['ec_image']['tmp_name'])) {
     $ext = $qfile->get_file_ext($_FILES['ec_image']['name']);
     $file_name = md5(time().$_FILES['ec_image']['name']).".".$ext;
-    if (!preg_match("/\.(jpg|gif|png)$/i", $_FILES['ec_image']['name'])) {
-        $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+    if (!preg_match("/\.(jpg|jpeg|gif|png|webp)$/i", $_FILES['ec_image']['name'])) {
+        $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
     } else {
         $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/'.$file_name;
 

@@ -14,7 +14,6 @@ check_admin_token();
 $is_shop = $_POST['me_shop'] === '1' ? 'shop': '';
 $mode = isset($_POST['mode']) ? clean_xss_tags($_POST['mode']): '';
 $theme = isset($_POST['theme']) ? clean_xss_tags($_POST['theme']): 'eb4_basic';
-$act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
 
 switch($mode) {
     case "update":
@@ -47,7 +46,7 @@ switch($mode) {
         /**
          * 메뉴 생성하기
          */
-        if($act_button == '메뉴생성' && $subme_name) {
+        if($subme_name) {
             $subme_info = $thema->get_menu_link($subme_link);
             $subme_info['me_link'] = preg_match('/^javascript/i', $subme_info['me_link']) ? G5_URL : strip_tags($subme_info['me_link']);
             $subme_path = $me_path ? $me_path.' > '.$subme_name: $subme_name;
@@ -60,24 +59,22 @@ switch($mode) {
             $row = sql_fetch("select max(me_code) as max from {$g5['eyoom_menu']} where $where");
             $max = $row['max'];
             if (!$max) $max = $subme_code."000";
-            $me_code = sprintf("%0{$length}s",$max+1);
+            $subme_code = sprintf("%0{$length}s",$max+1);
 
             $row2 = sql_fetch("select max(me_order) as max from {$g5['eyoom_menu']} where $where");
-            $me_order = $row2['max'] + 1;
+            $subme_order = $row2['max'] + 1;
 
             if(!$subme_use_nav) {
                 $_me_code = str_split($subme_code,3);
                 $row3 = sql_fetch("select * from {$g5['eyoom_menu']} where me_theme='{$theme}' and me_code='{$_me_code[0]}' and me_shop='{$me_shop}'");
-                $me_use_nav = $row3['me_use_nav'];
-                if(!$me_use_nav) $me_use_nav = 'y';
-            } else {
-                $me_use_nav = $subme_use_nav;
+                $subme_use_nav = $row3['me_use_nav'];
+                if(!$subme_use_nav) $subme_use_nav = 'y';
             }
 
             $set = "
                 me_theme        = '{$theme}',
-                me_code         = '{$me_code}',
-                me_order        = '{$me_order}',
+                me_code         = '{$subme_code}',
+                me_order        = '{$subme_order}',
                 me_icon         = '{$subme_icon}',
                 me_shop         = '{$me_shop}',
                 me_name         = '{$subme_name}',
@@ -90,7 +87,7 @@ switch($mode) {
                 me_permit_level = '{$subme_permit_level}',
                 me_side         = '{$subme_side}',
                 me_use          = '{$subme_use}',
-                me_use_nav      = '{$me_use_nav}'
+                me_use_nav      = '{$subme_use_nav}'
             ";
             $insert = "insert into {$g5['eyoom_menu']} set $set";
             sql_query($insert,false);
@@ -100,7 +97,7 @@ switch($mode) {
         /**
          * 메뉴 수정하기
          */
-        if ($act_button == '메뉴수정' && $me_name) {
+        if ($me_name) {
             $me_info = $thema->get_menu_link($me_link);
             $me_info['me_link'] = preg_match('/^javascript/i', $me_info['me_link']) ? G5_URL : strip_tags($me_info['me_link']);
 

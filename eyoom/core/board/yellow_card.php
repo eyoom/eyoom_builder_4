@@ -37,7 +37,7 @@ if ($eyoom_board['bo_use_yellow_card'] != '1') {
      * 신고 접수 정보
      */
     $data = sql_fetch("select eb_5 from {$write_table} where {$wrid} ");
-    $ycard = unserialize($data['eb_5']);
+    $ycard = $eb->mb_unserialize($data['eb_5']);
     if (!$ycard) $ycard = array();
 
     /**

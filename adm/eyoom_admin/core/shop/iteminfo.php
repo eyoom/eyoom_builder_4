@@ -40,7 +40,10 @@ if ($article) {
         if($gubun == $it['it_info_gubun'] && $info_value[$key])
             $el_value = $info_value[$key];
 
-        $itinfo[$k]['el_value'] = $el_value;
+        $itinfo[$k]['el_name']      = $el_name;
+        $itinfo[$k]['el_title']     = $el_title;
+        $itinfo[$k]['el_example']   = $el_example;
+        $itinfo[$k]['el_value']     = $el_value;
         $k++;
     }
 }

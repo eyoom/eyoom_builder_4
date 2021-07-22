@@ -17,8 +17,10 @@ $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_form_update&amp;smod
 $action_url2 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_ytitemlist_update&amp;smode=1';
 $action_url3 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebslider_itemlist_update&amp;smode=1';
 
-$es_code = isset($_REQUEST['es_code']) && $_REQUEST['es_code'] ? clean_xss_tags($_REQUEST['es_code']) : '';
-if (!$es_code) alert("잘못된 접근입니다.");
+if ($w == 'u') {
+    $es_code = isset($_REQUEST['es_code']) && $_REQUEST['es_code'] ? clean_xss_tags($_REQUEST['es_code']) : '';
+    if (!$es_code) alert("잘못된 접근입니다.");
+}
 
 /**
  * EB Slider 유튜브동영상 아이템 테이블 생성
@@ -128,9 +130,9 @@ $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 
-    $ei_link = isset($row['ei_link']) ? unserialize($row['ei_link']): array();
-    $ei_target = isset($row['ei_target']) ? unserialize($row['ei_target']): array();
-    $ei_img = isset($row['ei_img']) ? unserialize($row['ei_img']): array();
+    $ei_link = isset($row['ei_link']) ? $eb->mb_unserialize($row['ei_link']): array();
+    $ei_target = isset($row['ei_target']) ? $eb->mb_unserialize($row['ei_target']): array();
+    $ei_img = isset($row['ei_img']) ? $eb->mb_unserialize($row['ei_img']): array();
 
     $ei_file = G5_DATA_PATH.'/ebslider/'.$row['ei_theme'].'/img/'.$ei_img[0];
     if (file_exists($ei_file) && $ei_img[0]) {

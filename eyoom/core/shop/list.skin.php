@@ -4,7 +4,7 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-global $is_admin, $eyoom;
+global $is_admin, $eyoom, $shop;
 
 /**
  * 상품진열
@@ -33,6 +33,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
      */
     if ($this->view_it_img) {
         $row['it_image'] = get_it_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name']))."\n";
+
+        $row['it_image2'] = $shop->get_it_second_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name']))."\n";
     }
 
     /**

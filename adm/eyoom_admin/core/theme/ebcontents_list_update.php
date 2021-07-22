@@ -94,7 +94,7 @@ if ($act_button == "선택수정") {
     $sql = "select ci_img from {$g5['eyoom_contents_item']} where {$where}";
     $res = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($res); $i++) {
-        $ci_img = unserialize($row['ci_img']);
+        $ci_img = $eb->mb_unserialize($row['ci_img']);
         foreach ($ci_img as $k => $img_name) {
             $ci_file = $ebcontents_folder . '/' . $img_name;
             if (!is_dir($ci_file) && file_exists($ci_file) && $img_name) {

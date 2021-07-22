@@ -51,8 +51,8 @@ h1,h2,h3,h4,h5,h6 {color:#252525;line-height:1.2;text-shadow:none;font-weight:no
 .ellipsis {display:block;overflow:hidden;white-space:nowrap;word-wrap:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis}
 
 /*Display Block*/
-.display-block {display:block}
-.display-inline-block {display:inline-block}
+.display-block {display:block !important}
+.display-inline-block {display:inline-block !important}
 .inline-mix .display-inline-block {display:inline-block !important}
 
 /*Position & Overflow*/

@@ -294,25 +294,25 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                     <div class="col col-2">
                                         <label for="de_type1_list_mod" class="label">1줄당 이미지 수</label>
                                         <label class="input">
-                                            <input type="text" name="de_type1_list_mod" value="<?php echo $default['de_type1_list_mod']; ?>" id="de_type1_list_mod">
+                                            <input type="text" name="de_type1_list_mod" value="<?php echo get_sanitize_input($default['de_type1_list_mod']); ?>" id="de_type1_list_mod">
                                         </label>
                                     </div>
                                     <div class="col col-2">
                                         <label for="de_type1_list_row" class="label">출력할 줄 수</label>
                                         <label class="input">
-                                            <input type="text" name="de_type1_list_row" value="<?php echo $default['de_type1_list_row']; ?>" id="de_type1_list_row">
+                                            <input type="text" name="de_type1_list_row" value="<?php echo get_sanitize_input($default['de_type1_list_row']); ?>" id="de_type1_list_row">
                                         </label>
                                     </div>
                                     <div class="col col-2">
                                         <label for="de_type1_img_width" class="label">이미지 폭</label>
                                         <label class="input">
-                                            <input type="text" name="de_type1_img_width" value="<?php echo $default['de_type1_img_width']; ?>" id="de_type1_img_width">
+                                            <input type="text" name="de_type1_img_width" value="<?php echo get_sanitize_input($default['de_type1_img_width']); ?>" id="de_type1_img_width">
                                         </label>
                                     </div>
                                     <div class="col col-2">
                                         <label for="de_type1_img_height" class="label">이미지 높이</label>
                                         <label class="input">
-                                            <input type="text" name="de_type1_img_height" value="<?php echo $default['de_type1_img_height']; ?>" id="de_type1_img_height">
+                                            <input type="text" name="de_type1_img_height" value="<?php echo get_sanitize_input($default['de_type1_img_height']); ?>" id="de_type1_img_height">
                                         </label>
                                     </div>
                                 </div>
@@ -1087,6 +1087,15 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             <td>
                                 <label class="checkbox" for="de_global_nhnkcp_naverpay" disabled><input type="checkbox" id="de_global_nhnkcp_naverpay" name="de_easy_pays[]" value="global_nhnkcp_naverpay" <?php if(stripos($default['de_easy_pay_services'], 'global_nhnkcp_naverpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY (네이버페이)</label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 타 PG (토스페이먼츠, KG 이니시스) 사용중일때도 NHN_KCP 를 통한 네이버페이 간편결제를 사용할수 있습니다.<br>실결제시 반드시 결제대행사 NHN_KCP 항목에 KCP SITE CODE와 NHN KCP SITE KEY를 입력해야 합니다.</div>
+                            </td>
+                        </tr>
+                        <tr class="pg_info_fld kcp_info_fld">
+                            <th class="table-form-th">
+                                <label for="used_nhnkcp_naverpay_point" class="label">NHN KCP 네이버페이<br>포인트결제 사용</label>
+                            </th>
+                            <td>
+                                <label class="checkbox" for="used_nhnkcp_naverpay_point" disabled><input type="checkbox" id="used_nhnkcp_naverpay_point" name="de_easy_pays[]" value="used_nhnkcp_naverpay_point" <?php if(stripos($default['de_easy_pay_services'], 'used_nhnkcp_naverpay_point') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY POINT (네이버페이 포인트 사용)</label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 NHN_KCP 를 통한 네이버페이 결제시 네이버페이 포인트결제가 활성화 됩니다.<br>체크를 했는데도 [DR02] 실결제시 가맹점 설정정보가 올바르지 않습니다 라고 메시지가 뜬다면, 체크를 해제하고 NHN_KCP 에 위에서 설정한 KCP SITE CODE 로 네이버페이 포인트 결제가 가능한지 문의해 주세요.</div>
                             </td>
                         </tr>
                         <tr class="pg_info_fld lg_info_fld" id="lg_info_anchor">

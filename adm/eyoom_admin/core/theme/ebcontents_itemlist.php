@@ -34,16 +34,16 @@ $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
 
-    $ci_link = is_array($row['ci_link']) ? unserialize($row['ci_link']) : array();
-    $ci_target = is_array($row['ci_target']) ? unserialize($row['ci_target']) : array();
-    $ci_img = is_array($row['ci_img']) ? unserialize($row['ci_img']) : array();
+    $ci_link = $row['ci_link'] ? $eb->mb_unserialize($row['ci_link']) : array();
+    $ci_target = $row['ci_target'] ? $eb->mb_unserialize($row['ci_target']) : array();
+    $ci_img = $row['ci_img'] ? $eb->mb_unserialize($row['ci_img']) : array();
 
     $ci_file = G5_DATA_PATH.'/ebcontents/'.$row['ci_theme'].'/img/'.$ci_img[0];
     if (file_exists($ci_file) && $ci_img[0]) {
         $ci_url     = G5_DATA_URL.'/ebcontents/'.$row['ci_theme'].'/img/'.$ci_img[0];
         $list[$i]['ci_image'] = "<img src='".$ci_url."' class='img-responsive'> ";
     }
-    $ci_subject = is_array($row['ci_subject']) ? unserialize($row['ci_subject']) : array();
+    $ci_subject = $row['ci_subject'] ? $eb->mb_unserialize($row['ci_subject']) : array();
     $list[$i]['ci_subject_1'] = $ci_subject[0];
 
     $view_level = get_member_level_select("ci_view_level[$i]", 1, $member['mb_level'], $row['ci_view_level']);

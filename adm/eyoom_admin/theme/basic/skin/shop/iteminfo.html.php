@@ -20,7 +20,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             <td>
                 <label class="input form-width-250px">
                     <input type="hidden" name="ii_article[]" value="<?php echo $el['el_name']; ?>">
-                    <input type="text" name="ii_value[]" value="<?php echo $el['el_value']; ?>" id="ii_article_<?php echo $el['el_name']; ?>" required>
+                    <input type="text" name="ii_value[]" value="<?php echo get_text($el['el_value']); ?>" id="ii_article_<?php echo $el['el_name']; ?>" required>
                 </label>
                 <?php if ($el['el_example']) { ?>
                 <div class="note"><strong>Note:</strong> <?php echo $el['el_example']; ?></div>

@@ -38,12 +38,12 @@ if ($bo_use_anonymous == '1') {
     $up_set['wr_anonymous'] = $_POST['wr_anonymous'];
 } else if ($bo_use_anonymous == '2') {
     $up_set['wr_anonymous'] = '1';
-    $up_set['wr_bo_anonymous'] = '1';
+    $wr_bo_anonymous = '1';
 } else {
     $up_set['wr_anonymous'] = '';
-    $up_set['wr_bo_anonymous'] = '';
+    $wr_bo_anonymous = '';
 }
-sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$up_set['wr_bo_anonymous']}' where wr_id='{$wr_id}' ");
+sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' where wr_id='{$wr_id}' ");
 
 /**
  * 답변글에 대한 내글반응 적용하기
@@ -66,7 +66,7 @@ if ($w == 'r') {
 $result = sql_query(" select * from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
 $wr_image = array();
 for ($i=0; $row=sql_fetch_array($result);$i++) {
-    if (!preg_match("/.(gif|jpg|jpeg|png)$/i",$row['bf_file'])) continue;
+    if (!preg_match("/.(gif|jpg|jpeg|png|webp)$/i",$row['bf_file'])) continue;
     $wr_image['bf'][$i] = "/data/file/{$bo_table}/".$row['bf_file'];
 }
 
@@ -121,7 +121,7 @@ if ($eyoom_board['bo_use_addon_soundcloud'] == '1') {
  * 여유필드 eb_4 활용
  */
 if ($eyoom_board['bo_use_addon_video'] == '1') {
-    $eb_4 = unserialize($eb_4);
+    $eb_4 = $eb->mb_unserialize($eb_4);
 
     /**
      * 내용에서 동영상 정보 가져오기
@@ -152,7 +152,7 @@ if ($eyoom_board['bo_use_addon_video'] == '1') {
  * 채택게시판 포인트
  */
 if (preg_match('/adopt/i',$eyoom_board['bo_skin']) && $eyoom_board['bo_use_adopt_point'] && $_POST['adopt_point']) {
-    $eb_6 = unserialize($eb_6);
+    $eb_6 = $eb->mb_unserialize($eb_6);
     $adopt_point = (int)clean_xss_tags($_POST['adopt_point']);
     if ($adopt_point > $member['mb_point']) {
         alert("채택 포인트는 보유하고 있는 포인트보다 높게 사용하실 수 없습니다.");

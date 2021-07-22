@@ -37,7 +37,7 @@ foreach ($set_array as $k => $field) {
  * 관심게시판
  */
 if (is_array($_POST['bo_favorite'])) {
-    $favorite = unserialize($eyoomer['favorite']);
+    $favorite = $eb->mb_unserialize($eyoomer['favorite']);
 
     /**
      * 관심게시판에서 off한 게시판

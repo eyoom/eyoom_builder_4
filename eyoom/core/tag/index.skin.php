@@ -90,7 +90,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
     /**
      * 블라인드 처리
      */
-    $eb_4 = unserialize($list[$i]['eb_4']);
+    $eb_4 = $eb->mb_unserialize($list[$i]['eb_4']);
     if(!$eb_4) $eb_4 = array();
     if($eb_4['yc_blind'] == 'y') {
         $list[$i]['wr_subject'] = '이 게시물은 블라인드 처리된 글입니다.';

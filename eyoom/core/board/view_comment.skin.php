@@ -49,7 +49,7 @@ for ($i=0; $i<$cmt_amt; $i++) {
     /**
      * 댓글포인트
      */
-    $point = $list[$i]['wr_link1'] ? @unserialize($list[$i]['wr_link1']):'';
+    $point = $list[$i]['wr_link1'] ? @$eb->mb_unserialize($list[$i]['wr_link1']):'';
     if (is_array($point)) {
         $cmt[$i]['firstcmt_point'] = $point['firstcmt'] ? $point['firstcmt']:0;
         $cmt[$i]['bomb_point'] = is_array($point['bomb']) ? array_sum($point['bomb']):0;
@@ -59,7 +59,7 @@ for ($i=0; $i<$cmt_amt; $i++) {
     /**
      * wr_link2를 활용하여 댓글에 이미지표현
      */
-    $cmt_file = unserialize($list[$i]['wr_link2']);
+    $cmt_file = $eb->mb_unserialize($list[$i]['wr_link2']);
     if (is_array($cmt_file)) {
         $cfile_loop = &$cmt[$i]['cmtfile'];
         $cimg_loop = &$cmt[$i]['cmtimg'];
@@ -67,7 +67,7 @@ for ($i=0; $i<$cmt_amt; $i++) {
         foreach ($cmt_file as $k => $_file) {
             $cfile_loop[$k] = $_file;
             $cmt_attach[$k] = $_file['source'];
-            if (preg_match('/(gif|jpg|png)/',strtolower($_file['source']))) {
+            if (preg_match('/(gif|jpg|jpeg|png|webp)/',strtolower($_file['source']))) {
                 $cimg_loop[$k]['imgsrc'] = G5_DATA_URL . '/file/'.$bo_table.'/'.$_file['file'];
                 $cimg_loop[$k]['imgname'] = $_file['file'];
             }
@@ -143,7 +143,7 @@ for ($i=0; $i<$cmt_amt; $i++) {
      * 블라인드 처리
      */
     if ($eyoom_board['bo_use_yellow_card'] == '1') {
-        $cmt_ycard = unserialize($list[$i]['eb_5']);
+        $cmt_ycard = $eb->mb_unserialize($list[$i]['eb_5']);
         if (!$cmt_ycard) $cmt_ycard = array();
         $cmt[$i]['yc_count'] = $cmt_ycard['yc_count'];
         if ($cmt_ycard['yc_blind'] == 'y') {

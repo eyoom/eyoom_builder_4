@@ -57,9 +57,11 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <td>
                                 <label class="select form-width-250px">
                                     <select name="nw_division" id="nw_division">
-                                        <option value="both"  <?php echo get_selected($nw['nw_division'], 'both', true); ?>>커뮤니티와 쇼핑몰</option>
                                         <option value="comm"  <?php echo get_selected($nw['nw_division'], 'comm', true); ?>>커뮤니티</option>
+                                        <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
+                                        <option value="both"  <?php echo get_selected($nw['nw_division'], 'both', true); ?>>커뮤니티와 쇼핑몰</option>
                                         <option value="shop"  <?php echo get_selected($nw['nw_division'], 'shop', true); ?>>쇼핑몰</option>
+                                        <?php } ?>
                                     </select><i></i>
                                 </label>
                                 <div class="note"><strong>Note:</strong> 커뮤니티에 표시될 것인지 쇼핑몰에 표시될 것인지를 설정합니다.</div>

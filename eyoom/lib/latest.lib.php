@@ -237,7 +237,7 @@ function eb_latest ($el_code) {
                      * 블라인드 처리
                      */
                     $loop[$k]['is_blind'] = false;
-                    $eb_4 = unserialize($row['eb_4']);
+                    $eb_4 = $eb->mb_unserialize($row['eb_4']);
                     if(!$eb_4) $eb_4 = array();
                     if($eb_4['yc_blind'] == 'y') {
                         if (!$is_admin) {
@@ -267,7 +267,7 @@ function eb_latest ($el_code) {
                         /**
                          * 게시물에 동영상이 있는지 결정
                          */
-                        $video = unserialize($row['eb_4']);
+                        $video = $eb->mb_unserialize($row['eb_4']);
                         $loop[$k]['is_video'] = $video['is_video'];
 
                         /**

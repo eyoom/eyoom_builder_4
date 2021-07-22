@@ -2,7 +2,7 @@
 /**
  * @file    /adm/eyoom_admin/core/theme/ebcontents_list.php
  */
-$wmode = 1;
+//$wmode = 1;
 include_once('./_common.php');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_list_update&amp;smode=1';

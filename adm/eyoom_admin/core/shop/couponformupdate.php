@@ -61,7 +61,7 @@ if(!$_POST['cp_price']) {
 }
 
 if( (int) $_POST['cp_price'] < 0 ){
-    alert('할인금액 또는 할인비율은 음수를 입력할수 없습니다.');
+    alert('할인비율을 1과 99사이 값으로 입력해 주십시오.');
 }
 
 if($_POST['cp_type'] && ($_POST['cp_price'] < 1 || $_POST['cp_price'] > 99))
@@ -88,7 +88,7 @@ if($w == '') {
         if(!$row['mb_id'])
             alert('입력하신 회원아이디는 존재하지 않거나 탈퇴 또는 차단된 회원아이디입니다.');
 
-        $mb_id = isset($_POST['mb_id']) ? trim($_POST['mb_id']) : '';
+        $mb_id = $_POST['mb_id'];
     }
 
     $j = 0;

@@ -59,7 +59,7 @@ if( isset($_FILES['cp_img']) && !empty($_FILES['cp_img']['name']) ){
     }
 
     $timg = @getimagesize($_FILES['cp_img']['tmp_name']);
-    if ($timg['2'] < 1 || $timg['2'] > 16){
+    if ($timg['2'] < 1 || $timg['2'] > 18){
         alert("이미지 파일만 업로드 할수 있습니다.");
     }
 }

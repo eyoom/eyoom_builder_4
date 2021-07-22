@@ -14,9 +14,10 @@ auth_check_menu($auth, $sub_menu, 'w');
 include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebcontents_form_update&amp;smode=1';
-
-$ec_code = isset($_REQUEST['ec_code']) && $_REQUEST['ec_code'] ? clean_xss_tags($_REQUEST['ec_code']) : '';
-if (!$ec_code) alert("잘못된 접근입니다.");
+if ($w == 'u') {
+    $ec_code = isset($_REQUEST['ec_code']) && $_REQUEST['ec_code'] ? clean_xss_tags($_REQUEST['ec_code']) : '';
+    if (!$ec_code) alert("잘못된 접근입니다.");
+}
 
 /**
  * EB Contents 이미지 아이템 테이블 생성
@@ -66,7 +67,7 @@ if ($w == 'u') {
             $ec['ec_skin_img'] = G5_URL.'/theme/'.$this_theme.'/skin/ebcontents/'.$ec['ec_skin'].'/image/ec_skin_img.png';
         }
         
-        $ec_subject = unserialize($ec['ec_subject']);
+        $ec_subject = $eb->mb_unserialize($ec['ec_subject']);
         if (is_array($ec_subject)) {
             foreach ($ec_subject as $k => $subject) {
                 $key = 'ec_subject_'.($k+1);
@@ -74,7 +75,7 @@ if ($w == 'u') {
             }
         }
         
-        $ec_text = unserialize($ec['ec_text']);
+        $ec_text = $eb->mb_unserialize($ec['ec_text']);
         if (is_array($ec_text)) {
             foreach ($ec_text as $k => $text) {
                 $key = 'ec_text_'.($k+1);

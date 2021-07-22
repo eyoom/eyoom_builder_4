@@ -37,9 +37,9 @@ if ($iw == 'u') {
         foreach($ei as $key => $value) {
             $es_item[$key] = stripslashes($value);
         }
-        $ei_link = isset($es_item['ei_link']) && is_array($es_item['ei_link']) ? unserialize($es_item['ei_link']): array();
-        $ei_target = isset($es_item['ei_target']) && is_array($es_item['ei_target']) ? unserialize($es_item['ei_target']): array();
-        $ei_img = isset($es_item['ei_img']) && is_array($es_item['ei_img']) ? unserialize($es_item['ei_img']): array();
+        $ei_link = isset($es_item['ei_link']) ? $eb->mb_unserialize($es_item['ei_link']): array();
+        $ei_target = isset($es_item['ei_target']) ? $eb->mb_unserialize($es_item['ei_target']): array();
+        $ei_img = isset($es_item['ei_img']) ? $eb->mb_unserialize($es_item['ei_img']): array();
         for($i=0; $i<$es['es_image_cnt']; $i++) {
             unset($ei_file);
             $ei_file = G5_DATA_PATH.'/ebslider/'.$ei['ei_theme'].'/img/'.$ei_img[$i];

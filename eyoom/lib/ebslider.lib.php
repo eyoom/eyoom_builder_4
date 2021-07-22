@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  * 최신글 추출
  */
 function eb_slider ($es_code) {
-    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $qfile, $config;
+    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $qfile, $config, $eb;
 
     /**
      * 쇼핑몰 테마인지 체크
@@ -112,8 +112,8 @@ function eb_slider ($es_code) {
                     // 링크 정보
                     $link   = &$slider[$i]['link'];
                     $target = &$slider[$i]['target'];
-                    $link   = unserialize($row['ei_link']);
-                    $target = unserialize($row['ei_target']);
+                    $link   = $eb->mb_unserialize($row['ei_link']);
+                    $target = $eb->mb_unserialize($row['ei_target']);
 
                     if (is_array($link)) {
                         foreach ($link as $k => $href) {
@@ -126,7 +126,7 @@ function eb_slider ($es_code) {
 
                     // 이미지 정보
                     $image  = &$slider[$i]['image'];
-                    $image  = unserialize($row['ei_img']);
+                    $image  = $eb->mb_unserialize($row['ei_img']);
                     if (is_array($image)) {
                         foreach ($image as $k => $filename) {
                             $img_var = 'img_' . ($k+1);

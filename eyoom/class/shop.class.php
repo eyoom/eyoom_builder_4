@@ -282,6 +282,54 @@ class shop extends eyoom
         return $output;
     }
 
+    // 상품분류 소팅하기
+    public function category_array_sort($arr) {
+        if(is_array($arr)) {
+            $_output=array();
+            $i=0;
+            foreach($arr as $key => $val) {
+                if(is_array($val)) {
+                    if(strlen($val['ca_id'])<2) continue;
+                    $ca_order = $val['ca_order'].$i;
+                    $_output[$ca_order]['ca_id'] = $val['ca_id'];
+                    $_output[$ca_order]['ca_name'] = trim($val['ca_name']);
+                    $_output[$ca_order]['ca_stock_qty'] = $val['ca_stock_qty'];
+                    $_output[$ca_order]['ca_sell_email'] = $val['ca_sell_email'];
+                    if(is_array($val) && count((array)$val)>3) $_output[$ca_order]['ca_sub'] = $this->category_array_sort($val);
+                }
+                $i++;
+            }
+            @ksort($_output);
+        }
+        return $_output;
+    }
+
+    // 카테고리 순서데로 뽑아오기
+    public function get_category_select($arr) {
+        if(is_array($arr)) {
+            foreach ($arr as $k => $info) {
+                $len = strlen($info['ca_id']) / 2 - 1;
+    
+                $nbsp = "";
+                for ($i=0; $i<$len; $i++)
+                    $nbsp .= "&nbsp;&nbsp;&nbsp;";
+        
+                $output['select'] .= "<option value=\"{$info['ca_id']}\">$nbsp{$info['ca_name']}</option>\n";
+        
+                $output['script'] .= "ca_use['{$info['ca_id']}'] = {$info['ca_use']};\n";
+                $output['script'] .= "ca_stock_qty['{$info['ca_id']}'] = {$info['ca_stock_qty']};\n";
+                $output['script'] .= "ca_sell_email['{$info['ca_id']}'] = '{$info['ca_sell_email']}';\n";
+    
+                if (is_array($info['ca_sub'])) {
+                    $_output = $this->get_category_select($info['ca_sub']);
+                    $output['select'] .= $_output['select'];
+                    $output['script'] .= $_output['script'];
+                }
+            }
+            return $output;
+        }
+    }
+
     // 할인율 계산
     public function dc_ratio($it_cust_price, $it_price) {
         if (!$it_cust_price) return;
@@ -511,5 +559,68 @@ class shop extends eyoom
         }
         
         return $data;
+    }
+
+    /**
+     * 상품의 두번째 이미지를 추출합니다.
+     */
+    public function get_it_second_image($it_id, $width, $height=0, $anchor=false, $img_id='', $img_alt='', $is_crop=false) {
+        global $g5;
+    
+        if(!$it_id || !$width)
+            return '';
+    
+        $row = get_shop_item($it_id, true);
+    
+        if(!$row['it_id'])
+            return '';
+    
+        $filename = $thumb = $img = '';
+    
+        $k=0;
+        for($i=1;$i<=10; $i++) {
+            $file = G5_DATA_PATH.'/item/'.$row['it_img'.$i];
+            if(is_file($file) && $row['it_img'.$i]) {
+                $size = @getimagesize($file);
+                if($size[2] < 1 || $size[2] > 3)
+                    continue;
+    
+                $filename = basename($file);
+                $filepath = dirname($file);
+                $img_width = $size[0];
+                $img_height = $size[1];
+    
+                if ($k==1) break;
+                $k++;
+            }
+        }
+    
+        if($img_width && !$height) {
+            $height = round(($width * $img_height) / $img_width);
+        }
+    
+        if($filename) {
+            //thumbnail($filename, $source_path, $target_path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=true, $um_value='80/0.5/3')
+            $thumb = thumbnail($filename, $filepath, $filepath, $width, $height, false, $is_crop, 'center', false, $um_value='80/0.5/3');
+        }
+    
+        if($thumb) {
+            $file_url = str_replace(G5_PATH, G5_URL, $filepath.'/'.$thumb);
+            $img = '<img src="'.$file_url.'" width="'.$width.'" height="'.$height.'" alt="'.$img_alt.'"';
+        } else {
+            $img = '<img src="'.G5_SHOP_URL.'/img/no_image.gif" width="'.$width.'"';
+            if($height)
+                $img .= ' height="'.$height.'"';
+            $img .= ' alt="'.$img_alt.'"';
+        }
+    
+        if($img_id)
+            $img .= ' id="'.$img_id.'"';
+        $img .= '>';
+    
+        if($anchor)
+            $img = $img = '<a href="'.shop_item_url($it_id).'">'.$img.'</a>';
+    
+        return run_replace('get_it_image_tag', $img, $thumb, $it_id, $width, $height, $anchor, $img_id, $img_alt, $is_crop);
     }
 }

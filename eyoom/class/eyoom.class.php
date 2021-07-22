@@ -805,7 +805,7 @@ class eyoom extends qfile
          * 지뢰폭탄 포인트 - 게시판 여유필드 eb_2를 사용
          */
         if($eyoom_board['bo_bomb_point'] > 0 && $eyoom_board['bo_bomb_point_limit'] > 0 && $eyoom_board['bo_bomb_point_cnt'] > 0 && $wr['eb_2']) {
-            $bomb = @unserialize($wr['eb_2']);
+            $bomb = @$this->mb_unserialize($wr['eb_2']);
             if(is_array($bomb)) {
                 foreach($bomb as $key => $val) {
                     if($val == $cmt_amt) {
@@ -839,19 +839,86 @@ class eyoom extends qfile
     }
 
     /**
+     * md5 암호화
+     * 출처 : https://yadolee.com/tip/874
+     * shadow님의 운영하는 사이트에서 php8.0 오류가 패치된 함수를 그대로 발췌하였습니다.
+     */
+    public function encrypt_md5($buf, $key="password") {
+        $key1 = pack("H*",md5($key));
+        $ret_buf = $hex_data = '';
+        while(isset($buf) && $buf) {
+            $m = substr($buf, 0, 16);
+            $buf = substr($buf, 16);
+
+            $c = "";
+            $limit = strlen($m);
+            for($i=0;$i<$limit;$i++) $c .= $m[$i]^$key1[$i];
+            $ret_buf .= $c;
+            $key1 = pack("H*",md5($key.$key1.$m));
+        }
+
+        $len = strlen($ret_buf);
+        for($i=0; $i<$len; $i++) $hex_data .= sprintf("%02x", ord(substr($ret_buf, $i, 1)));
+        return($hex_data);
+    }
+
+    /**
+     * md5 복호화
+     * 출처 : https://yadolee.com/tip/874
+     * shadow님의 운영하는 사이트에서 php8.0 오류가 패치된 함수를 그대로 발췌하였습니다.
+     */
+    public function decrypt_md5($hex_buf, $key="password") {
+        $len = strlen($hex_buf);
+        for ($i=0; $i<$len; $i+=2) $buf .= chr(hexdec(substr($hex_buf, $i, 2)));
+
+        $key1 = pack("H*", md5($key));
+        $ret_buf = '';
+        while(isset($buf) && $buf) {
+            $m = substr($buf, 0, 16);
+            $buf = substr($buf, 16);
+
+            $c = "";
+            $limit = strlen($m);
+            for($i=0;$i<$limit;$i++) $c .= $m[$i]^$key1[$i];
+
+            $ret_buf .= $m = $c;
+            $key1 = pack("H*",md5($key.$key1.$m));
+        }
+        return($ret_buf);
+    }
+
+    /**
      * AES 암호화
      */
     public function encrypt_aes($str, $key = '') {
-        if (!$key) $key = SALT_KEY;
-        return base64_encode(openssl_encrypt($str, "AES-256-CBC", $key, true, str_repeat(chr(0), 16)));
+        if( version_compare( PHP_VERSION, '5.3' , '<' ) ){
+            return $this->encrypt_md5($str, $key);
+        } else {
+            if (!$key) $key = SALT_KEY;
+            return base64_encode(openssl_encrypt($str, "AES-256-CBC", $key, true, str_repeat(chr(0), 16)));
+        }
     }
 
     /**
      * AES 복호화
      */
     public function decrypt_aes($str, $key = '') {
-        if (!$key) $key = SALT_KEY;
-        return openssl_decrypt(base64_decode($str), "AES-256-CBC", $key, true, str_repeat(chr(0), 16));
+        if( version_compare( PHP_VERSION, '5.3' , '<' ) ){
+            return $this->decrypt_md5($str, $key);
+        } else {
+            if (!$key) $key = SALT_KEY;
+            return openssl_decrypt(base64_decode($str), "AES-256-CBC", $key, true, str_repeat(chr(0), 16));
+        }
+    }
+
+    /**
+     * unserialize : return false 오류 처리
+     */
+    public function mb_unserialize($serial_str) {  
+        $serial_str = preg_replace_callback('/s:(\d+):"([\s\S]*?)";/', function($matches) {
+            return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
+        }, $serial_str);
+        return unserialize($serial_str);  
     }
 
     /**

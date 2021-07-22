@@ -12,7 +12,7 @@ if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);
 /**
  * 관심게시판
  */
-$favorite = unserialize($eyoomer['favorite']);
+$favorite = $eb->mb_unserialize($eyoomer['favorite']);
 $board_info = $eb->get_bo_subject();
 
 /**

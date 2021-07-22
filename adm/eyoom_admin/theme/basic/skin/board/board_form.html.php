@@ -1130,8 +1130,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="bo_gallery_cols" class="label">갤러리 이미지 수<strong class="sound_only">필수</strong></label>
                             </th>
                             <td>
-                                <label class="select form-width-250px">
-                                    <?php echo get_member_level_select('bo_gallery_cols', 1, 10, $board['bo_gallery_cols'], 'required'); ?><i></i>
+                                <label class="input form-width-250px">
+                                    <i class="icon-append">개</i>
+                                    <input type="text" name="bo_gallery_cols" value="<?php echo $board['bo_gallery_cols'] ?>" id="bo_gallery_cols" required class="text-right">
                                 </label>
                                 <div class="note"><strong>Note:</strong> 갤러리 형식의 게시판 목록에서 이미지를 한줄에 몇장씩 보여 줄 것인지를 설정하는 값</div>
                             </td>
@@ -1655,7 +1656,7 @@ jQuery(function($){
 function fboardform_submit(f)
 {
     <?php
-    if(!$w){
+    if($w!=''){
     $js_array = get_bo_table_banned_word();
     echo "var banned_array = ". json_encode($js_array) . ";\n";
     }

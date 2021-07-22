@@ -42,11 +42,11 @@ if ($iw == 'u') {
         foreach($ci as $key => $value) {
             $ec_item[$key] = stripslashes($value);
         }
-        $ci_subject = unserialize($ec_item['ci_subject']); // 텍스트필드
-        $ci_text = unserialize($ec_item['ci_text']); // 텍스트필드
-        $ci_link = unserialize($ec_item['ci_link']);
-        $ci_target = unserialize($ec_item['ci_target']);
-        $ci_img = unserialize($ec_item['ci_img']);
+        $ci_subject = $eb->mb_unserialize($ec_item['ci_subject']); // 텍스트필드
+        $ci_text = $eb->mb_unserialize($ec_item['ci_text']); // 텍스트필드
+        $ci_link = $eb->mb_unserialize($ec_item['ci_link']);
+        $ci_target = $eb->mb_unserialize($ec_item['ci_target']);
+        $ci_img = $eb->mb_unserialize($ec_item['ci_img']);
         for($i=0; $i<$ec['ec_image_cnt']; $i++) {
             unset($ci_file);
             $ci_file = G5_DATA_PATH.'/ebcontents/'.$ci['ci_theme'].'/img/'.$ci_img[$i];

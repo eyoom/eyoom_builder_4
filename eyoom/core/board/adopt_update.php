@@ -19,7 +19,7 @@ $wr_data = sql_fetch("select mb_id, eb_6, wr_name from {$write_table} where wr_i
 
 // 자신의 글인지 체크
 if (($is_member && $member['mb_id'] == $wr_data['mb_id']) || $is_admin) {
-    $eb_6 = unserialize($wr_data['eb_6']);
+    $eb_6 = $eb->mb_unserialize($wr_data['eb_6']);
 
     // 이미 채택된 댓글이 존재한지 체크
     if (isset($eb_6['adopt_cmt_id']) && $eb_6['adopt_cmt_id']) {

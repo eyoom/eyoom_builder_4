@@ -16,8 +16,10 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebgoods_form_update&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebgoods_itemlist_update&amp;smode=1';
 
-$eg_code = isset($_REQUEST['eg_code']) && $_REQUEST['eg_code'] ? clean_xss_tags($_REQUEST['eg_code']) : '';
-if (!$eg_code) alert("잘못된 접근입니다.");
+if ($w == 'u') {
+    $eg_code = isset($_REQUEST['eg_code']) && $_REQUEST['eg_code'] ? clean_xss_tags($_REQUEST['eg_code']) : '';
+    if (!$eg_code) alert("잘못된 접근입니다.");
+}
 
 /**
  * EB상품추출 아이템 테이블 생성
@@ -96,3 +98,5 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $view_level = get_member_level_select("gi_view_level[$i]", 1, $member['mb_level'], $row['gi_view_level']);
     $list[$i]['view_level'] = preg_replace("/(\\n|\\r)/","",str_replace('"', "'", $view_level));
 }
+
+$count = count($list);

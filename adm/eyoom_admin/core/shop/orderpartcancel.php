@@ -17,7 +17,7 @@ $od = sql_fetch($sql);
 
 $msg = '';
 if(! (isset($od['od_id']) && $od['od_id']))
-    $msg = '주문정보가 존해하지 않습니다.';
+    $msg = '주문정보가 존재하지 않습니다.';
 
 if($od['od_pg'] == 'inicis' && $od['od_settle_case'] == '계좌이체')
     $msg = 'KG이니시스는 신용카드만 부분취소가 가능합니다.';

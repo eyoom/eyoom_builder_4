@@ -15,8 +15,8 @@ $ei_state       = isset($_POST['ei_state']) ? clean_xss_tags(trim($_POST['ei_sta
 $ei_sort        = isset($_POST['ei_sort']) ? clean_xss_tags(trim($_POST['ei_sort'])) : '';
 $ei_title       = isset($_POST['ei_title']) ? clean_xss_tags(trim($_POST['ei_title'])) : '';
 $ei_subtitle    = isset($_POST['ei_subtitle']) ? clean_xss_tags(trim($_POST['ei_subtitle'])) : '';
-$ei_links       = isset($_POST['ei_link']) ? clean_xss_tags($_POST['ei_link']) : '';
-$ei_target      = isset($_POST['ei_target']) ? clean_xss_tags($_POST['ei_target']) : '';
+$ei_links       = isset($_POST['ei_link']) ? (array) $_POST['ei_link'] : '';
+$ei_target      = isset($_POST['ei_target']) ? (array) $_POST['ei_target'] : '';
 $ei_text        = isset($_POST['ei_text']) ? clean_xss_tags(trim($_POST['ei_text'])) : '';
 $ei_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
 $ei_period      = isset($_POST['ei_period']) ? clean_xss_tags(trim($_POST['ei_period'])) : '';
@@ -85,7 +85,7 @@ for ($i=0; $i<$upload_count; $i++) {
  */
 if ($iw == 'u') {
     $ei = sql_fetch("select ei_img from {$g5['eyoom_slider_item']} where ei_no = '{$ei_no}' ");
-    $ei_img = isset($ei['ei_img']) && is_array($ei['ei_img']) ? unserialize($ei['ei_img']): array();
+    $ei_img = isset($ei['ei_img']) ? $eb->mb_unserialize($ei['ei_img']): array();
 }
 
 /**
@@ -105,8 +105,8 @@ for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
     if (is_uploaded_file($_FILES['ei_img']['tmp_name'][$i])) {
         $ext = $qfile->get_file_ext($_FILES['ei_img']['name'][$i]);
         $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$ext;
-        if (!preg_match("/(jpg|gif|png)$/i", $_FILES['ei_img']['name'][$i])) {
-            $file_upload_msg .= $_FILES['ei_img']['name'][$i] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+        if (!preg_match("/(jpg|jpeg|gif|png|webp)$/i", $_FILES['ei_img']['name'][$i])) {
+            $file_upload_msg .= $_FILES['ei_img']['name'][$i] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
         } else {
             $dest_path = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$file_name;
 

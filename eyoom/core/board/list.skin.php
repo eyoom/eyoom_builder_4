@@ -70,7 +70,7 @@ foreach ($list as $i => $val) {
     /**
      * eb_4 여유필드 unserialize
      */
-    $eb_4 = unserialize($list[$i]['eb_4']);
+    $eb_4 = $eb->mb_unserialize($list[$i]['eb_4']);
     if (!$eb_4) $eb_4 = array();
 
     /**
@@ -129,7 +129,7 @@ foreach ($list as $i => $val) {
      * 채택 게시판용
      */
     if (preg_match('/adopt/i',$eyoom_board['bo_skin'])) {
-        $eb_6 = unserialize($list[$i]['eb_6']);
+        $eb_6 = $eb->mb_unserialize($list[$i]['eb_6']);
         $list[$i]['adopt_cmt_id'] = $eb_6['adopt_cmt_id'];
         $list[$i]['adopt_point'] = $eb_6['adopt_point'];
     }
@@ -138,7 +138,7 @@ foreach ($list as $i => $val) {
      * 별점기능 사용
      */
     if ($eyoom_board['bo_use_rating'] == '1' && $eyoom_board['bo_use_rating_list'] == '1') {
-        $eb_7 = unserialize($list[$i]['eb_7']);
+        $eb_7 = $eb->mb_unserialize($list[$i]['eb_7']);
         if (!$eb_7) $eb_7 = array();
         $rating = $bbs->get_star_rating($eb_7);
         $list[$i]['star'] = $rating['point'];
@@ -175,7 +175,7 @@ foreach ($list as $i => $val) {
     /**
      * 게시물 블라인드 처리
      */
-    $eb_5 = unserialize($list[$i]['eb_5']);
+    $eb_5 = $eb->mb_unserialize($list[$i]['eb_5']);
     if (isset($eb_5['yc_blind']) && $eb_5['yc_blind'] == 'y') {
         $yc_data = sql_fetch("select mb_id from {$g5['emp_yellowcard']} where bo_table = '{$bo_table}' and wr_id = '{$list[$i]['wr_id']}' and mb_id = '{$member['mb_id']}' ");
         if (!$is_admin && $member['mb_level'] < $eyoom_board['bo_blind_view'] && !$yc_data['mb_id']) $list[$i]['href'] = 'javascript:;';

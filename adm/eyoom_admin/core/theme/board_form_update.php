@@ -69,32 +69,10 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
     sql_query($sql, true);
 }
 
-/**
- * 게시판 테이블에 익명글 관련 필드 추가
- */
-if(!sql_query(" select wr_bo_anonymous from {$write_table} limit 1 ", false)) {
-    $sql = " alter table `{$write_table}`
-        add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`,
-        add `wr_bo_anonymous` char(1) NOT NULL default '' after `wr_anonymous`
-    ";
-    sql_query($sql, true);
-}
-
-/**
- * 새글 테이블에 익명글 관련 필드 추가
- */
-if(!sql_query(" select wr_bo_anonymous from {$g5['board_new_table']} limit 1 ", false)) {
-    $sql = " alter table `{$g5['board_new_table']}`
-        add `wr_anonymous` char(1) NOT NULL default '' after `wr_hit`,
-        add `wr_bo_anonymous` char(1) NOT NULL default '' after `wr_anonymous`
-    ";
-    sql_query($sql, true);
-}
-
 $use_shop_skin = isset($_POST['use_shop_skin']) ? clean_xss_tags($_POST['use_shop_skin'], 1, 1) : '';
 $use_gnu_skin = isset($_POST['use_gnu_skin']) ? clean_xss_tags($_POST['use_gnu_skin'], 1, 1) : '';
 $bo_skin = isset($_POST['bo_skin']) ? clean_xss_tags($_POST['bo_skin'], 1, 1) : '';
-$bo_use_point_explain = isset($_POST['bo_use_point_explain']) ? (int) $_POST['bo_use_point_explain'] : 1;
+$bo_use_point_explain = isset($_POST['bo_use_point_explain']) ? (int) $_POST['bo_use_point_explain'] : 0;
 $bo_cmtpoint_target = isset($_POST['bo_cmtpoint_target']) ? (int) $_POST['bo_cmtpoint_target'] : 1;
 $bo_firstcmt_point = isset($_POST['bo_firstcmt_point']) ? (int) $_POST['bo_firstcmt_point'] : 0;
 $bo_firstcmt_point_type = isset($_POST['bo_firstcmt_point_type']) ? (int) $_POST['bo_firstcmt_point_type'] : 1;
@@ -112,33 +90,33 @@ $bo_adopt_minpoint = isset($_POST['bo_adopt_minpoint']) ? (int) $_POST['bo_adopt
 $bo_adopt_maxpoint = isset($_POST['bo_adopt_maxpoint']) ? (int) $_POST['bo_adopt_maxpoint'] : 0;
 $bo_adopt_ratio = isset($_POST['bo_adopt_ratio']) ? (int) $_POST['bo_adopt_ratio'] : 0;
 $bo_write_limit = isset($_POST['bo_write_limit']) ? (int) $_POST['bo_write_limit'] : 0;
-$bo_use_profile_photo = isset($_POST['bo_use_profile_photo']) ? (int) $_POST['bo_use_profile_photo'] : 1;
+$bo_use_profile_photo = isset($_POST['bo_use_profile_photo']) ? (int) $_POST['bo_adopt_ratio']: 0;
 $bo_sel_date_type = isset($_POST['bo_sel_date_type']) ? (int) $_POST['bo_sel_date_type'] : 1;
 $bo_use_hotgul = isset($_POST['bo_use_hotgul']) ? (int) $_POST['bo_use_hotgul'] : 1;
 $bo_use_anonymous = isset($_POST['bo_use_anonymous']) ? (int) $_POST['bo_use_anonymous'] : 0;
 $bo_use_infinite_scroll = isset($_POST['bo_use_infinite_scroll']) ? (int) $_POST['bo_use_infinite_scroll'] : 2;
 $bo_use_cmt_best = isset($_POST['bo_use_cmt_best']) ? (int) $_POST['bo_use_cmt_best'] : 0;
-$bo_use_list_image = isset($_POST['bo_use_list_image']) ? (int) $_POST['bo_use_list_image'] : 1;
+$bo_use_list_image = isset($_POST['bo_use_list_image']) ? (int) $_POST['bo_use_list_image'] : 0;
 $bo_use_video_photo = isset($_POST['bo_use_video_photo']) ? (int) $_POST['bo_use_video_photo'] : 2;
-$bo_use_good_member = isset($_POST['bo_use_good_member']) ? (int) $_POST['bo_use_good_member'] : 1;
+$bo_use_good_member = isset($_POST['bo_use_good_member']) ? (int) $_POST['bo_use_good_member'] : 0;
 $bo_use_nogood_member = isset($_POST['bo_use_nogood_member']) ? (int) $_POST['bo_use_nogood_member'] : 0;
 $bo_use_extimg = isset($_POST['bo_use_extimg']) ? (int) $_POST['bo_use_extimg'] : 0;
 $download_fee_ratio = isset($_POST['download_fee_ratio']) ? (int) $_POST['download_fee_ratio'] : 0;
 $bo_use_yellow_card = isset($_POST['bo_use_yellow_card']) ? (int) $_POST['bo_use_yellow_card'] : 0;
 $bo_use_rating = isset($_POST['bo_use_rating']) ? (int) $_POST['bo_use_rating'] : 2;
-$bo_use_rating_list = isset($_POST['bo_use_rating_list']) ? (int) $_POST['bo_use_rating_list'] : 1;
+$bo_use_rating_list = isset($_POST['bo_use_rating_list']) ? (int) $_POST['bo_use_rating_list'] : 0;
 $bo_use_rating_member = isset($_POST['bo_use_rating_member']) ? (int) $_POST['bo_use_rating_member'] : 0;
 $bo_use_rating_score = isset($_POST['bo_use_rating_score']) ? (int) $_POST['bo_use_rating_score'] : 0;
 $bo_use_rating_comment = isset($_POST['bo_use_rating_comment']) ? (int) $_POST['bo_use_rating_comment'] : 0;
 $bo_rating_point = isset($_POST['bo_rating_point']) ? (int) $_POST['bo_rating_point'] : 0;
 $bo_use_tag = isset($_POST['bo_use_tag']) ? (int) $_POST['bo_use_tag'] : 0;
 $bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
-$bo_use_addon_emoticon = isset($_POST['bo_use_addon_emoticon']) ? (int) $_POST['bo_use_addon_emoticon'] : 1;
-$bo_use_addon_video = isset($_POST['bo_use_addon_video']) ? (int) $_POST['bo_use_addon_video'] : 1;
+$bo_use_addon_emoticon = isset($_POST['bo_use_addon_emoticon']) ? (int) $_POST['bo_use_addon_emoticon'] : 0;
+$bo_use_addon_video = isset($_POST['bo_use_addon_video']) ? (int) $_POST['bo_use_addon_video'] : 0;
 $bo_use_addon_coding = isset($_POST['bo_use_addon_coding']) ? (int) $_POST['bo_use_addon_coding'] : 0;
 $bo_use_addon_soundcloud = isset($_POST['bo_use_addon_soundcloud']) ? (int) $_POST['bo_use_addon_soundcloud'] : 0;
 $bo_use_addon_map = isset($_POST['bo_use_addon_map']) ? (int) $_POST['bo_use_addon_map'] : 0;
-$bo_use_addon_cmtfile = isset($_POST['bo_use_addon_cmtfile']) ? (int) $_POST['bo_use_addon_cmtfile'] : 1;
+$bo_use_addon_cmtfile = isset($_POST['bo_use_addon_cmtfile']) ? (int) $_POST['bo_use_addon_cmtfile'] : 0;
 $bo_count_cmtfile = isset($_POST['bo_count_cmtfile']) ? (int) $_POST['bo_count_cmtfile'] : 1;
 $bo_cmt_best_min = isset($_POST['bo_cmt_best_min']) ? (int) $_POST['bo_cmt_best_min'] : 10;
 $bo_cmt_best_limit = isset($_POST['bo_cmt_best_limit']) ? (int) $_POST['bo_cmt_best_limit'] : 5;

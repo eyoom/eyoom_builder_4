@@ -150,7 +150,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                         <select name="ei_target[<?php echo $i; ?>]" id="ei_target_<?php echo $i; ?>">
                                             <option value="">타겟을 선택하세요.</option>
                                             <option value="_blank" <?php echo $ei_target[$i] == '_blank' ? 'selected':''; ?>>새창</option>
-                                            <option value="_self" <?php echo $ei_target[$i] == '_self' || !$ei_target[$i] ? 'selected':''; ?>>현재창</option>
+                                            <option value="_self" <?php echo $ei_target[$i] == '_self' ? 'selected':''; ?>>현재창</option>
                                         </select><i></i>
                                     </label>
                                 </span>

@@ -96,5 +96,5 @@ if (file_exists($timg)) {
  */
 $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
-$frm_submit .= ' <a href="' . G5_ADMIN_URL . '/?dir=board&amp;pid=contentform&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ';
+$frm_submit .= ' <a href="' . G5_ADMIN_URL . '/?dir=board&amp;pid=contentlist&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ';
 $frm_submit .= '</div>';

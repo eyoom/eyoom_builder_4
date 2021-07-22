@@ -63,7 +63,7 @@ if(!isset($eyoom_board['bo_tag_level']) || $eyoom_board['bo_tag_level'] < $board
 if(!$eyoom_board['bo_exif_detail']) {
     $exif_detail = $exif->get_exif_default();
 } else {
-    $exif_detail = unserialize(stripslashes($eyoom_board['bo_exif_detail']));
+    $exif_detail = $eb->mb_unserialize(stripslashes($eyoom_board['bo_exif_detail']));
 }
 
 $i=0;

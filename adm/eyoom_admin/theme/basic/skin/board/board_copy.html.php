@@ -93,7 +93,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 <script>
 function fboardcopy_check(f) {
     <?php
-    if(!$w){
+    if($w!=''){
     $js_array = get_bo_table_banned_word();
     echo "var banned_array = ". json_encode($js_array) . ";\n";
     }

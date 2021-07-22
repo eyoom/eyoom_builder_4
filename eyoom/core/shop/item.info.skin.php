@@ -22,7 +22,7 @@ if ($default['de_rel_list_use']) {
  * 상품 정보 고시
  */
 if ($it['it_info_value']) {
-    $info_data = unserialize(stripslashes($it['it_info_value']));
+    $info_data = $eb->mb_unserialize(stripslashes($it['it_info_value']));
 
     if (is_array($info_data)) {
         $gubun = $it['it_info_gubun'];

@@ -185,7 +185,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 								        <select name="es_target" id="es_target">
 									        <option value="">타겟을 선택하세요.</option>
 									        <option value="_blank" <?php echo $es['es_target'] == '_blank' ? 'selected':''; ?>>새창</option>
-											<option value="_self" <?php echo $es['es_target'] == '_self' || !$es['es_target'] ? 'selected':''; ?>>현재창</option>
+											<option value="_self" <?php echo $es['es_target'] == '_self' ? 'selected':''; ?>>현재창</option>
 								        </select><i></i>
 									</label>
 								</span>
@@ -257,6 +257,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 	new Clipboard('.eb-clipboard-box-btn');
 	</script>
 
+	<?php if ($w == 'u' && $es_code) { ?>
 	<div class="admin-ebslider-itemlist">
 		<form name="febslideritemlist" id="febslideritemlist" action="<?php echo $action_url3; ?>" method="post" onsubmit="return febslideritemlist_submit(this);" class="eyoom-form">
 		<input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">
@@ -290,7 +291,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 
 	<div class="margin-bottom-40"></div>
 
-	<?php if ($w == 'u' && $es_code) { ?>
 	<div class="admin-ebslider-YTitemlist margin-top-40">
 		<form name="febsliderytitemlist" id="febsliderytitemlist" action="<?php echo $action_url2; ?>" method="post" onsubmit="return febsliderytitemlist_submit(this);" class="eyoom-form">
 		<input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">

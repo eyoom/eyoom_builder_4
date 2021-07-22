@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
  * 최신글 추출
  */
 function eb_contents ($ec_code) {
-    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $qfile, $config, $bbs, $bizinfo;
+    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $qfile, $config, $bbs, $bizinfo, $eb;
 
     /**
      * 쇼핑몰 테마인지 체크
@@ -64,7 +64,7 @@ function eb_contents ($ec_code) {
         /**
          * EB컨텐츠 마스터 타이틀
          */
-        $ec_subject = unserialize($ec_master['ec_subject']);
+        $ec_subject = $eb->mb_unserialize($ec_master['ec_subject']);
         if (is_array($ec_subject)) {
             foreach ($ec_subject as $k => $subject) {
                 $key = 'ec_subject_'.($k+1);
@@ -75,7 +75,7 @@ function eb_contents ($ec_code) {
         /**
          * EB컨텐츠 마스터 설명글
          */
-        $ec_text = unserialize($ec_master['ec_text']);
+        $ec_text = $eb->mb_unserialize($ec_master['ec_text']);
         if (is_array($ec_text)) {
             foreach ($ec_text as $k => $text) {
                 $key = 'ec_text_'.($k+1);
@@ -122,7 +122,7 @@ function eb_contents ($ec_code) {
                      * 타이틀
                      */
                     $ci_subject = &$contents[$i]['ci_subject'];
-                    $ci_subject = unserialize($row['ci_subject']);
+                    $ci_subject = $eb->mb_unserialize($row['ci_subject']);
                     if (is_array($ci_subject)) {
                         foreach ($ci_subject as $k => $subject) {
                             $subj_var = 'ci_subject_' . ($k+1);
@@ -134,7 +134,7 @@ function eb_contents ($ec_code) {
                      * 설명글
                      */
                     $ci_text = &$contents[$i]['ci_text'];
-                    $ci_text = unserialize($row['ci_text']);
+                    $ci_text = $eb->mb_unserialize($row['ci_text']);
                     if (is_array($ci_text)) {
                         foreach ($ci_text as $k => $text) {
                             $text_var = 'ci_text_' . ($k+1);
@@ -147,8 +147,8 @@ function eb_contents ($ec_code) {
                      */
                     $link   = &$contents[$i]['link'];
                     $target = &$contents[$i]['target'];
-                    $link   = unserialize($row['ci_link']);
-                    $target = unserialize($row['ci_target']);
+                    $link   = $eb->mb_unserialize($row['ci_link']);
+                    $target = $eb->mb_unserialize($row['ci_target']);
 
                     if (is_array($link)) {
                         foreach ($link as $k => $href) {
@@ -163,7 +163,7 @@ function eb_contents ($ec_code) {
                      * 이미지 정보
                      */
                     $image  = &$contents[$i]['image'];
-                    $image  = unserialize($row['ci_img']);
+                    $image  = $eb->mb_unserialize($row['ci_img']);
                     if (is_array($image)) {
                         foreach ($image as $k => $filename) {
                             $img_var = 'img_' . ($k+1);

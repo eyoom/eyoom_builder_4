@@ -67,61 +67,61 @@ for($i=0;$i<=10;$i++){
 
 // 파일삭제
 if ($it_img1_del) {
-    $file_img1 = $it_img_dir.'/'.$it_img1;
+    $file_img1 = $it_img_dir.'/'.clean_relative_paths($it_img1);
     @unlink($file_img1);
     delete_item_thumbnail(dirname($file_img1), basename($file_img1));
     $it_img1 = '';
 }
 if ($it_img2_del) {
-    $file_img2 = $it_img_dir.'/'.$it_img2;
+    $file_img2 = $it_img_dir.'/'.clean_relative_paths($it_img2);
     @unlink($file_img2);
     delete_item_thumbnail(dirname($file_img2), basename($file_img2));
     $it_img2 = '';
 }
 if ($it_img3_del) {
-    $file_img3 = $it_img_dir.'/'.$it_img3;
+    $file_img3 = $it_img_dir.'/'.clean_relative_paths($it_img3);
     @unlink($file_img3);
     delete_item_thumbnail(dirname($file_img3), basename($file_img3));
     $it_img3 = '';
 }
 if ($it_img4_del) {
-    $file_img4 = $it_img_dir.'/'.$it_img4;
+    $file_img4 = $it_img_dir.'/'.clean_relative_paths($it_img4);
     @unlink($file_img4);
     delete_item_thumbnail(dirname($file_img4), basename($file_img4));
     $it_img4 = '';
 }
 if ($it_img5_del) {
-    $file_img5 = $it_img_dir.'/'.$it_img5;
+    $file_img5 = $it_img_dir.'/'.clean_relative_paths($it_img5);
     @unlink($file_img5);
     delete_item_thumbnail(dirname($file_img5), basename($file_img5));
     $it_img5 = '';
 }
 if ($it_img6_del) {
-    $file_img6 = $it_img_dir.'/'.$it_img6;
+    $file_img6 = $it_img_dir.'/'.clean_relative_paths($it_img6);
     @unlink($file_img6);
     delete_item_thumbnail(dirname($file_img6), basename($file_img6));
     $it_img6 = '';
 }
 if ($it_img7_del) {
-    $file_img7 = $it_img_dir.'/'.$it_img7;
+    $file_img7 = $it_img_dir.'/'.clean_relative_paths($it_img7);
     @unlink($file_img7);
     delete_item_thumbnail(dirname($file_img7), basename($file_img7));
     $it_img7 = '';
 }
 if ($it_img8_del) {
-    $file_img8 = $it_img_dir.'/'.$it_img8;
+    $file_img8 = $it_img_dir.'/'.clean_relative_paths($it_img8);
     @unlink($file_img8);
     delete_item_thumbnail(dirname($file_img8), basename($file_img8));
     $it_img8 = '';
 }
 if ($it_img9_del) {
-    $file_img9 = $it_img_dir.'/'.$it_img9;
+    $file_img9 = $it_img_dir.'/'.clean_relative_paths($it_img9);
     @unlink($file_img9);
     delete_item_thumbnail(dirname($file_img9), basename($file_img9));
     $it_img9 = '';
 }
 if ($it_img10_del) {
-    $file_img10 = $it_img_dir.'/'.$it_img10;
+    $file_img10 = $it_img_dir.'/'.clean_relative_paths($it_img10);
     @unlink($file_img10);
     delete_item_thumbnail(dirname($file_img10), basename($file_img10));
     $it_img10 = '';
@@ -130,7 +130,7 @@ if ($it_img10_del) {
 // 이미지업로드
 if ($_FILES['it_img1']['name']) {
     if($w == 'u' && $it_img1) {
-        $file_img1 = $it_img_dir.'/'.$it_img1;
+        $file_img1 = $it_img_dir.'/'.clean_relative_paths($it_img1);
         @unlink($file_img1);
         delete_item_thumbnail(dirname($file_img1), basename($file_img1));
     }
@@ -138,7 +138,7 @@ if ($_FILES['it_img1']['name']) {
 }
 if ($_FILES['it_img2']['name']) {
     if($w == 'u' && $it_img2) {
-        $file_img2 = $it_img_dir.'/'.$it_img2;
+        $file_img2 = $it_img_dir.'/'.clean_relative_paths($it_img2);
         @unlink($file_img2);
         delete_item_thumbnail(dirname($file_img2), basename($file_img2));
     }
@@ -146,7 +146,7 @@ if ($_FILES['it_img2']['name']) {
 }
 if ($_FILES['it_img3']['name']) {
     if($w == 'u' && $it_img3) {
-        $file_img3 = $it_img_dir.'/'.$it_img3;
+        $file_img3 = $it_img_dir.'/'.clean_relative_paths($it_img3);
         @unlink($file_img3);
         delete_item_thumbnail(dirname($file_img3), basename($file_img3));
     }
@@ -154,7 +154,7 @@ if ($_FILES['it_img3']['name']) {
 }
 if ($_FILES['it_img4']['name']) {
     if($w == 'u' && $it_img4) {
-        $file_img4 = $it_img_dir.'/'.$it_img4;
+        $file_img4 = $it_img_dir.'/'.clean_relative_paths($it_img4);
         @unlink($file_img4);
         delete_item_thumbnail(dirname($file_img4), basename($file_img4));
     }
@@ -162,7 +162,7 @@ if ($_FILES['it_img4']['name']) {
 }
 if ($_FILES['it_img5']['name']) {
     if($w == 'u' && $it_img5) {
-        $file_img5 = $it_img_dir.'/'.$it_img5;
+        $file_img5 = $it_img_dir.'/'.clean_relative_paths($it_img5);
         @unlink($file_img5);
         delete_item_thumbnail(dirname($file_img5), basename($file_img5));
     }
@@ -170,7 +170,7 @@ if ($_FILES['it_img5']['name']) {
 }
 if ($_FILES['it_img6']['name']) {
     if($w == 'u' && $it_img6) {
-        $file_img6 = $it_img_dir.'/'.$it_img6;
+        $file_img6 = $it_img_dir.'/'.clean_relative_paths($it_img6);
         @unlink($file_img6);
         delete_item_thumbnail(dirname($file_img6), basename($file_img6));
     }
@@ -178,7 +178,7 @@ if ($_FILES['it_img6']['name']) {
 }
 if ($_FILES['it_img7']['name']) {
     if($w == 'u' && $it_img7) {
-        $file_img7 = $it_img_dir.'/'.$it_img7;
+        $file_img7 = $it_img_dir.'/'.clean_relative_paths($it_img7);
         @unlink($file_img7);
         delete_item_thumbnail(dirname($file_img7), basename($file_img7));
     }
@@ -186,7 +186,7 @@ if ($_FILES['it_img7']['name']) {
 }
 if ($_FILES['it_img8']['name']) {
     if($w == 'u' && $it_img8) {
-        $file_img8 = $it_img_dir.'/'.$it_img8;
+        $file_img8 = $it_img_dir.'/'.clean_relative_paths($it_img8);
         @unlink($file_img8);
         delete_item_thumbnail(dirname($file_img8), basename($file_img8));
     }
@@ -194,7 +194,7 @@ if ($_FILES['it_img8']['name']) {
 }
 if ($_FILES['it_img9']['name']) {
     if($w == 'u' && $it_img9) {
-        $file_img9 = $it_img_dir.'/'.$it_img9;
+        $file_img9 = $it_img_dir.'/'.clean_relative_paths($it_img9);
         @unlink($file_img9);
         delete_item_thumbnail(dirname($file_img9), basename($file_img9));
     }
@@ -202,7 +202,7 @@ if ($_FILES['it_img9']['name']) {
 }
 if ($_FILES['it_img10']['name']) {
     if($w == 'u' && $it_img10) {
-        $file_img10 = $it_img_dir.'/'.$it_img10;
+        $file_img10 = $it_img_dir.'/'.clean_relative_paths($it_img10);
         @unlink($file_img10);
         delete_item_thumbnail(dirname($file_img10), basename($file_img10));
     }
@@ -222,6 +222,10 @@ if ($w == "" || $w == "u")
     @set_cookie("ck_origin", stripslashes($it_origin), time() + 86400*31);
 }
 
+// 관련상품을 삭제한 뒤에 경고가 노출되어 등록, 수정 없이 관련상품만 삭제될 수 있는 오류 수정 (squared2님,210617)
+// 포인트 비율 값 체크
+if(($it_point_type == 1 || $it_point_type == 2) && ($it_point < 0  || $it_point > 99))
+    alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
 
 // 관련상품을 우선 삭제함
 sql_query(" delete from {$g5['g5_shop_item_relation_table']} where it_id = '$it_id' ");
@@ -285,15 +289,12 @@ if($supply_count) {
 $value_array = array();
 $count_ii_article = (isset($_POST['ii_article']) && is_array($_POST['ii_article'])) ? count($_POST['ii_article']) : 0;
 for($i=0; $i<$count_ii_article; $i++) {
-    $key = isset($_POST['ii_article'][$i]) ? $_POST['ii_article'][$i] : '';
-    $val = isset($_POST['ii_value'][$i]) ? $_POST['ii_value'][$i] : '';
+    $key = isset($_POST['ii_article'][$i]) ? strip_tags($_POST['ii_article'][$i], '<br><span><strong><b>') : '';
+    $val = isset($_POST['ii_value'][$i]) ? strip_tags($_POST['ii_value'][$i], '<br><span><strong><b>') : '';
+
     $value_array[$key] = $val;
 }
 $it_info_value = addslashes(serialize($value_array));
-
-// 포인트 비율 값 체크
-if(($it_point_type == 1 || $it_point_type == 2) && $it_point > 99)
-    alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
 
 $it_name = isset($_POST['it_name']) ? strip_tags(clean_xss_attributes(trim($_POST['it_name']))) : '';
 

@@ -11,7 +11,7 @@ include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
  * 신고처리 정보
  */
 if ($eyoom_board['bo_use_yellow_card'] == '1') {
-    $eb_5 = unserialize($view['eb_5']);
+    $eb_5 = $eb->mb_unserialize($view['eb_5']);
 
     $mb_ycard = $bbs->mb_yellow_card($member['mb_id'],$bo_table, $wr_id);
     if ($eb_5['yc_blind'] == 'y') {
@@ -41,7 +41,7 @@ if ($eyoom_board['bo_use_yellow_card'] == '1') {
  * 별점기능 사용여부
  */
 if ($eyoom_board['bo_use_rating'] == '1') {
-    $eb_7 = unserialize($view['eb_7']);
+    $eb_7 = $eb->mb_unserialize($view['eb_7']);
     if (!$eb_7) $eb_7 = array();
 
     $mb_rating = $bbs->mb_rating($bo_table, $wr_id);
@@ -53,7 +53,7 @@ if ($eyoom_board['bo_use_rating'] == '1') {
  * 채택게시판
  */
 if (preg_match('/adopt/i',$eyoom_board['bo_skin'])) {
-    $eb_6 = unserialize($view['eb_6']);
+    $eb_6 = $eb->mb_unserialize($view['eb_6']);
 
     $adopt_cmt_id = $eb_6['adopt_cmt_id'];
     $adopt_point = $eb_6['adopt_point'];

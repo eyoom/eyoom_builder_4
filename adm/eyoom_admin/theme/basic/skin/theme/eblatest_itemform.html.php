@@ -78,7 +78,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                         <select name="li_target" id="ec_target">
                                             <option value="">타겟을 선택하세요.</option>
                                             <option value="_blank" <?php echo $li['li_target'] == '_blank' ? 'selected':''; ?>>새창</option>
-                                            <option value="_self" <?php echo $li['li_target'] == '_self' || !$li['li_target'] ? 'selected':''; ?>>현재창</option>
+                                            <option value="_self" <?php echo $li['li_target'] == '_self' ? 'selected':''; ?>>현재창</option>
                                         </select><i></i>
                                     </label>
                                 </span>

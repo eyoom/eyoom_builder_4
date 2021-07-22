@@ -7,7 +7,7 @@ if (!$is_member) exit;
 $bo_table = isset($_POST['bo_table']) ? clean_xss_tags($_POST['bo_table']): '';
 $favorite = isset($_POST['favorite']) ? clean_xss_tags($_POST['favorite']): 'n';
 
-$bo_favorite = $eyoomer['favorite'] ? unserialize($eyoomer['favorite']): array();
+$bo_favorite = $eyoomer['favorite'] ? $eb->mb_unserialize($eyoomer['favorite']): array();
 if (!$bo_favorite) $bo_favorite = array();
 
 switch ($favorite) {

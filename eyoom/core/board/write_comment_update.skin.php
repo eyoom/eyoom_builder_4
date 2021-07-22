@@ -55,7 +55,7 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  */
 $row = sql_fetch("select wr_link2 from {$write_table} where wr_id='{$comment_id}'", false);
 if ($row) {
-    $cfile = unserialize($row['wr_link2']);
+    $cfile = $eb->mb_unserialize($row['wr_link2']);
 }
 
 /**
@@ -63,7 +63,7 @@ if ($row) {
  */
 /*
 if ($_POST['del_cmtfile']) {
-    $dfile = unserialize($cdata['wr_link2']);
+    $dfile = $eb->mb_unserialize($cdata['wr_link2']);
     if (is_array($dfile)) {
         foreach ($dfile as $i => $file) {
             $del_file = G5_DATA_PATH.'/file/'.$bo_table.'/'.$file['file'];
@@ -147,7 +147,7 @@ for ($i=0; $i<count((array)$_FILES['cmt_file']['name']); $i++) {
         // image type
         if ( preg_match("/\.({$config['cf_image_extension']})$/i", $filename) ||
              preg_match("/\.({$config['cf_flash_extension']})$/i", $filename) ) {
-            if ($timg['2'] < 1 || $timg['2'] > 16)
+            if ($timg['2'] < 1 || $timg['2'] > 18)
                 continue;
         }
         $upload[$i]['image'] = $timg;

@@ -13,7 +13,7 @@ if($board['bo_download_point'] < 0 && $is_guest)
 
 $row = sql_fetch("select wr_link2 from {$write_table} where wr_id='{$wr_id}'", false);
 if ($row) {
-    $cfile = unserialize($row['wr_link2']);
+    $cfile = $eb->mb_unserialize($row['wr_link2']);
 }
 $file = $cfile[$no];
 if (!$file['file'])

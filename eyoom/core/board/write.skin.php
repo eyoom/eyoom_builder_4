@@ -56,7 +56,7 @@ if ($is_member) {
  * 채택게시판의 설정값 가져오기
  */
 if (preg_match('/adopt/i',$eyoom_board['bo_skin']) && $eyoom_board['bo_use_adopt_point'] == '1') {
-    $eb_6 = unserialize($eb_6);
+    $eb_6 = $eb->mb_unserialize($eb_6);
     $adopt_point = $eb_6['adopt_point'];
     $eb_6 = serialize($eb_6);
 }

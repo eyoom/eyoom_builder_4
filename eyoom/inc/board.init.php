@@ -29,6 +29,11 @@ if (!$eyoom_board) $eyoom_board = $bbs->board_default($bo_table);
 if ($is_admin && !$board['bo_wr_eb']) $bbs->make_eb_fields($bo_table);
 
 /**
+ * 게시판 익명필드 추가
+ */
+if ($is_admin) $bbs->make_anonymous_fields($bo_table);
+
+/**
  * 게시판 스킨
  */
 $bo_skin = $eb->get_skin_dir('board', G5_PATH.'/theme/'.$theme.'/skin/');
@@ -36,7 +41,7 @@ $bo_skin = $eb->get_skin_dir('board', G5_PATH.'/theme/'.$theme.'/skin/');
 /**
  * 게시물 자동 이동/복사를 위한 변수
  */
-(array)$bo_automove = unserialize($eyoom_board['bo_automove']);
+(array)$bo_automove = $eb->mb_unserialize($eyoom_board['bo_automove']);
 
 /**
  * EXIF정보보기 사용시
@@ -72,7 +77,7 @@ if ($eyoom_board['bo_use_infinite_scroll'] == 1) {
 /**
  * 관심게시판
  */
-$bo_favorite = $eyoomer['favorite'] ? unserialize($eyoomer['favorite']): array();
+$bo_favorite = $eyoomer['favorite'] ? $eb->mb_unserialize($eyoomer['favorite']): array();
 
 /**
  * 확장필드 체크

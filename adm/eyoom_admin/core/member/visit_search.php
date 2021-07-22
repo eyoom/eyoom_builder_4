@@ -6,7 +6,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "200810";
 
-include_once(G5_PATH.'/lib/visit.lib.php');
+include_once(G5_LIB_PATH.'/visit.lib.php');
 
 auth_check_menu($auth, $sub_menu, 'r');
 

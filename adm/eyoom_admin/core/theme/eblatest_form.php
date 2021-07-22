@@ -16,8 +16,10 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_form_update&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=theme&amp;pid=eblatest_itemlist_update&amp;smode=1';
 
-$el_code = isset($_REQUEST['el_code']) && $_REQUEST['el_code'] ? clean_xss_tags($_REQUEST['el_code']) : '';
-if (!$el_code) alert("잘못된 접근입니다.");
+if ($w == 'u') {
+    $el_code = isset($_REQUEST['el_code']) && $_REQUEST['el_code'] ? clean_xss_tags($_REQUEST['el_code']) : '';
+    if (!$el_code) alert("잘못된 접근입니다.");
+}
 
 /**
  * EB최신글 아이템 테이블 생성

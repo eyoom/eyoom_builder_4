@@ -28,7 +28,7 @@ if ($eyoom_board['bo_use_rating'] == '1') {
      * eb_7 여분필드 활용
      */
     $data = sql_fetch("select eb_7 from {$write_table} where {$wrid} ");
-    $eb_7 = unserialize($data['eb_7']);
+    $eb_7 = $eb->mb_unserialize($data['eb_7']);
     if (!$eb_7) $eb_7 = array();
 
     /**

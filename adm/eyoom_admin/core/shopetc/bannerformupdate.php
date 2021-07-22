@@ -44,7 +44,7 @@ if( $bn_bimg || $bn_bimg_name ){
     }
 
     $timg = @getimagesize($bn_bimg);
-    if ($timg['2'] < 1 || $timg['2'] > 16){
+    if ($timg['2'] < 1 || $timg['2'] > 18){
         alert("이미지 파일만 업로드 할수 있습니다.");
     }
 }

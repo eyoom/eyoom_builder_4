@@ -21,7 +21,7 @@ $sql = "select * from {$g5['eyoom_activity']} where mb_id = '{$eyoomer['mb_id']}
 $res = sql_query($sql, false);
 $list = array();
 for ($i=0;$row=sql_fetch_array($res);$i++) {
-    $act_contents = unserialize($row['act_contents']);
+    $act_contents = $eb->mb_unserialize($row['act_contents']);
     $list[$i] = $act_contents;
     $list[$i]['type'] = $row['act_type'];
     $list[$i]['datetime'] = $row['act_regdt'];

@@ -22,7 +22,7 @@ $post_ci_view_level = isset($_POST['ci_view_level']) ? clean_xss_tags(trim($_POS
 $post_ci_subject    = isset($_POST['ci_subject']) && is_array($_POST['ci_subject']) ? serialize($_POST['ci_subject']) : '';
 $post_ci_text       = isset($_POST['ci_text']) && is_array($_POST['ci_text']) ? serialize($_POST['ci_text']) : '';
 $post_ci_link       = isset($_POST['ci_link']) && is_array($_POST['ci_link']) ? $_POST['ci_link'] : array();
-$post_ci_target     = isset($_POST['ci_target']) ? clean_xss_tags($_POST['ci_target']) : '';
+$post_ci_target     = isset($_POST['ci_target']) && is_array($_POST['ci_target']) ? $_POST['ci_target'] : array();
 $post_ci_content    = isset($_POST['ci_content']) ? trim($_POST['ci_content']) : '';
 
 /**
@@ -42,8 +42,8 @@ if ($post_ci_period  == '1')  {
 if (is_array($post_ci_link)) {
     foreach ($post_ci_link as $k => $link) {
         $ci_link[$k]= $eb->filter_url($link);
+        $ci_target[$k] = $post_ci_target[$k];
     }
-    $ci_target[$k] = $post_ci_target;
 }
 
 // 컨텐츠 내용
@@ -94,7 +94,7 @@ for ($i=0; $i<$upload_count; $i++) {
  */
 if ($iw == 'u') {
     $ci = sql_fetch("select ci_img from {$g5['eyoom_contents_item']} where ci_no = '{$ci_no}' ");
-    $ci_img = unserialize($ci['ci_img']);
+    $ci_img = $eb->mb_unserialize($ci['ci_img']);
 }
 
 /**
@@ -129,8 +129,8 @@ for ($i=0; $i<count((array)$_FILES['ci_img']['name']); $i++) {
     if (is_uploaded_file($_FILES['ci_img']['tmp_name'][$i])) {
         $ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
         $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$ext;
-        if (!preg_match("/(jpg|gif|png)$/i", $_FILES['ci_img']['name'][$i])) {
-            $file_upload_msg .= $_FILES['ci_img']['name'][$i] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+        if (!preg_match("/(jpg|jpeg|gif|png|webp)$/i", $_FILES['ci_img']['name'][$i])) {
+            $file_upload_msg .= $_FILES['ci_img']['name'][$i] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
         } else {
             $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$file_name;
 

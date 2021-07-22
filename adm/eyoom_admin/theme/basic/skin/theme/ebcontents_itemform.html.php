@@ -306,10 +306,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/v
                                 </span>
                                 <span>
                                     <label for="ci_target_<?php echo $i; ?>" class="select form-width-150px">
-                                        <select name="ci_target[<?php echo $i; ?>]" id="ci_target_<?php echo $i; ?>" required>
+                                        <select name="ci_target[<?php echo $i; ?>]" id="ci_target_<?php echo $i; ?>">
                                             <option value="">타겟을 선택하세요.</option>
                                             <option value="_blank" <?php echo $ci_target[$i] == '_blank' ? 'selected':''; ?>>새창</option>
-                                            <option value="_self" <?php echo $ci_target[$i] == '_self' || !$ci_target[$i] ? 'selected':''; ?>>현재창</option>
+                                            <option value="_self" <?php echo $ci_target[$i] == '_self' ? 'selected':''; ?>>현재창</option>
                                         </select><i></i>
                                     </label>
                                 </span>

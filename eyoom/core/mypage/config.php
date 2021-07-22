@@ -17,11 +17,11 @@ $action_url = G5_URL.'/mypage/config_update.php';
 /**
  * 관심게시판 설정 - 게시판 정보
  */
-$bo_favorite = $eyoomer['favorite'] ? unserialize($eyoomer['favorite']): array();
+$bo_favorite = $eyoomer['favorite'] ? $eb->mb_unserialize($eyoomer['favorite']): array();
 if (!$bo_favorite) $bo_favorite = array();
 
 $sql = "select a.bo_table, a.bo_subject, b.gr_subject from {$g5['board_table']} as a left join {$g5['group_table']} as b on a.gr_id = b.gr_id where (1) and find_in_set(a.bo_table, '".implode(',', $bo_favorite)."') order by b.gr_subject asc, a.bo_subject asc";
-$favorite = (array)unserialize($eyoomer['favorite']);
+$favorite = (array)$eb->mb_unserialize($eyoomer['favorite']);
 if (!$favorite) $favorite = array();
 $res = sql_query($sql,false);
 $bolist = array();
