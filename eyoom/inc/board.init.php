@@ -31,7 +31,7 @@ if ($is_admin && !$board['bo_wr_eb']) $bbs->make_eb_fields($bo_table);
 /**
  * 게시판 익명필드 추가
  */
-if ($is_admin) $bbs->make_anonymous_fields($bo_table);
+if ($is_admin && $board['bo_table'] == $bo_table) $bbs->make_anonymous_fields($bo_table);
 
 /**
  * 게시판 스킨
