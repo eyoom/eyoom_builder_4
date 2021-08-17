@@ -17,7 +17,6 @@ if (!defined('_EYOOM_')) exit;
 <ul class="board-view-sns social-icons social-icons-color">
     <li><a href="<?php echo $facebook_url; ?>" target="_blank" title="Facebook" class="social_facebook"></a></li>
     <li><a href="<?php echo $twitter_url; ?>" target="_blank" title="Twitter" class="social_twitter"></a></li>
-    <li><a href="<?php echo $gplus_url; ?>" target="_blank" title="Google Plus" class="social_google"></a></li>
     <?php if($config['cf_kakao_js_apikey']) { ?>
     <li><a href="javascript:kakaolink_send('<?php echo str_replace(array('%27', '\''), '', $sns_msg); ?>', '<?php echo $longurl; ?>');" title="Kakao" class="social_kakao"></a></li>
     <?php } ?>

@@ -136,7 +136,8 @@ class upload extends qfile
         /**
          * 파일명
          */
-        $destfile = $this->eb->encrypt_aes(time()) . '.' . $ext;
+        $num = $this->eb->random_num(10000);
+        $destfile = $this->eb->encrypt_aes(time().$num) . '.' . $ext;
 
         /**
          * 업로드 한후 , 퍼미션을 변경함

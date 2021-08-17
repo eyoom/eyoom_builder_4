@@ -579,6 +579,7 @@ class shop extends eyoom
     
         $k=0;
         for($i=1;$i<=10; $i++) {
+            if ($i==1) continue;
             $file = G5_DATA_PATH.'/item/'.$row['it_img'.$i];
             if(is_file($file) && $row['it_img'.$i]) {
                 $size = @getimagesize($file);
@@ -608,10 +609,7 @@ class shop extends eyoom
             $file_url = str_replace(G5_PATH, G5_URL, $filepath.'/'.$thumb);
             $img = '<img src="'.$file_url.'" width="'.$width.'" height="'.$height.'" alt="'.$img_alt.'"';
         } else {
-            $img = '<img src="'.G5_SHOP_URL.'/img/no_image.gif" width="'.$width.'"';
-            if($height)
-                $img .= ' height="'.$height.'"';
-            $img .= ' alt="'.$img_alt.'"';
+            return false;
         }
     
         if($img_id)

@@ -27,6 +27,11 @@ $dir_icon = array(
 );
 
 /**
+ * 관리자 메뉴 확장
+ */
+@include_once(EYOOM_ADMIN_INC_PATH.'/admin.menu.extend.php');
+
+/**
  * 메뉴 예외처리
  */
 $except_menu = array('cf_theme', 'cf_menu', 'cf_service', 'scf_write_count', 'scf_item_type', 'shop_index');

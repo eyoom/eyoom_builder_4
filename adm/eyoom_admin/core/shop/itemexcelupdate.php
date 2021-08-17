@@ -61,6 +61,10 @@ if($is_upload_file) {
         $it_origin          = addslashes($rowData[0][$j++]);
         $it_brand           = addslashes($rowData[0][$j++]);
         $it_model           = addslashes($rowData[0][$j++]);
+        $it_option1         = addslashes($rowData[0][$j++]);
+        $it_option2         = addslashes($rowData[0][$j++]);
+        $it_option3         = addslashes($rowData[0][$j++]);
+        $it_opt_set         = addslashes($rowData[0][$j++]);
         $it_type1           = addslashes($rowData[0][$j++]);
         $it_type2           = addslashes($rowData[0][$j++]);
         $it_type3           = addslashes($rowData[0][$j++]);

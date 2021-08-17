@@ -65,22 +65,26 @@ else
 }
 
 // 분류리스트
-$category_select = '';
-$sql = " select * from {$g5['g5_shop_category_table']} ";
-if ($is_admin != 'super')
-    $sql .= " where ca_mb_id = '{$member['mb_id']}' ";
-$sql .= " order by ca_order, ca_id ";
-$result = sql_query($sql);
-for ($i=0; $row=sql_fetch_array($result); $i++)
-{
-    $len = strlen($row['ca_id']) / 2 - 1;
-
-    $nbsp = "";
-    for ($i=0; $i<$len; $i++)
-        $nbsp .= "&nbsp;&nbsp;&nbsp;";
-
-    $category_select .= "<option value=\"{$row['ca_id']}\">$nbsp{$row['ca_name']}</option>\n";
+$category = $shop->get_category();
+if(is_array($category)) {
+    $i=0;
+    $cate_sel_option = array();
+    foreach($category as $key => $val) {
+        $ca_order = $val['ca_order'].$i;
+        if ($val['ca_id'] != '0' && !$val['ca_id']) continue;
+        $cate_sel_option[$ca_order]['ca_id'] = $val['ca_id'];
+        $cate_sel_option[$ca_order]['ca_name'] = trim($val['ca_name']);
+        $cate_sel_option[$ca_order]['ca_stock_qty'] = $val['ca_stock_qty'];
+        $cate_sel_option[$ca_order]['ca_sell_email'] = $val['ca_sell_email'];
+        if(is_array($val) && count((array)$val)>3) $cate_sel_option[$ca_order]['ca_sub'] = $shop->category_array_sort($val);
+        $i++;
+    }
+    ksort($cate_sel_option);
 }
+
+$category_select = '';
+$category_output = $shop->get_category_select($cate_sel_option);
+$category_select = $category_output['select'];
 
 // 모바일 1줄당 이미지수 필드 추가
 if(!sql_query(" select ev_mobile_list_row from {$g5['g5_shop_event_table']} limit 1 ", false)) {
