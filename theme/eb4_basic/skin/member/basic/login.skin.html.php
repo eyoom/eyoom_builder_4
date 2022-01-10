@@ -146,7 +146,7 @@ $login_sidebar = 'image';
             </div>
 
             <?php /* 쇼핑몰 비회원 구매 시작 */ ?>
-            <?php if ($default['de_level_sell'] == 1) { ///#1) ?>
+            <?php if (isset($default['de_level_sell']) && $default['de_level_sell'] == 1) { // 상품구입 권한 ?>
 
             <?php if (preg_match('/orderform.php/',$url)) { ///#2) ?>
             <div class="margin-bottom-30"></div>

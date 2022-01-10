@@ -93,6 +93,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 
 <div class="admin-shop-itemform">
     <form name="fitemform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return fitemformcheck(this);" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
+    <input type="hidden" name="codedup" value="<?php echo $default['de_code_dup_use']; ?>">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="sca" value="<?php echo $sca; ?>">
     <input type="hidden" name="sst" value="<?php echo $sst; ?>">

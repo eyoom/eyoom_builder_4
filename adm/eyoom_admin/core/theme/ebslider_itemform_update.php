@@ -97,6 +97,21 @@ if ($iw == 'u') {
 $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
 
 /**
+ * 이미지 삭제
+ */
+if ($iw == 'u') {
+    if(is_array($ei_img_del)) {
+        foreach ($ei_img_del as $i => $chk) {
+            $ebslider_file = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$del_img_name[$i];
+            if ($chk && file_exists($ebslider_file)) {
+                @unlink($ebslider_file);
+                $ei_img[$i] = '';
+            }
+        }
+    }
+}
+
+/**
  * 이미지 업로드
  */
 $file_upload_msg = '';
@@ -116,21 +131,6 @@ for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
             if (file_exists($dest_path)) {
                 $size = getimagesize($dest_path);
                 $ei_img[$i] = $file_name;
-            }
-        }
-    }
-}
-
-/**
- * 이미지 삭제
- */
-if ($iw == 'u') {
-    if(is_array($ei_img_del)) {
-        foreach ($ei_img_del as $i => $chk) {
-            $ebslider_file = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$del_img_name[$i];
-            if ($chk && file_exists($ebslider_file)) {
-                @unlink($ebslider_file);
-                $ei_img[$i] = '';
             }
         }
     }

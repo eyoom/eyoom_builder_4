@@ -1103,6 +1103,9 @@ class eyoom extends qfile
                     case 'tag_list':
                         $url = G5_URL.'/tag/list.php?'.$qstr;
                         break;
+                    case 'survey':
+                        $url = G5_URL.'/survey/?'.$qstr;
+                        break;
                     case 'event':
                     case 'itemqalist':
                     case 'itemuselist':
@@ -1146,6 +1149,9 @@ class eyoom extends qfile
                         break;
                     case 'tag':
                         $url = G5_URL.'/tag/?'.$qstr.'&amp;page=';
+                        break;
+                    case 'survey':
+                        $url = G5_URL.'/survey/?'.$qstr.'&amp;page=';
                         break;
                     case 'tag_list':
                         $url = G5_URL.'/tag/list.php?'.$qstr.'&amp;page=';

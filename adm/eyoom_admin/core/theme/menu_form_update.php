@@ -49,6 +49,7 @@ switch($mode) {
         if($subme_name) {
             $subme_info = $thema->get_menu_link($subme_link);
             $subme_info['me_link'] = preg_match('/^javascript/i', $subme_info['me_link']) ? G5_URL : strip_tags($subme_info['me_link']);
+            $subme_info['me_link'] = html_purifier($subme_info['me_link']);
             $subme_path = $me_path ? $me_path.' > '.$subme_name: $subme_name;
 
             $subme_code = strip_tags($me_code);
@@ -100,6 +101,7 @@ switch($mode) {
         if ($me_name) {
             $me_info = $thema->get_menu_link($me_link);
             $me_info['me_link'] = preg_match('/^javascript/i', $me_info['me_link']) ? G5_URL : strip_tags($me_info['me_link']);
+            $me_info['me_link'] = html_purifier($me_info['me_link']);
 
             $me_code = strip_tags($me_code);
             $me_name = strip_tags($me_name);

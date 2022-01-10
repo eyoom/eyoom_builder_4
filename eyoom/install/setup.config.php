@@ -2,6 +2,7 @@
 @header('Content-Type: text/html; charset=utf-8');
 @header('X-Robots-Tag: noindex');
 
+$g5_path['path'] = '../..';
 include_once ('../../config.php');
 include_once ('./setup.head.php');
 include_once ('../class/qfile.class.php');

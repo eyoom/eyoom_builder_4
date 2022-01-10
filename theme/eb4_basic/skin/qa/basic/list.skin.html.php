@@ -174,10 +174,17 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <div class="col-sm-4 col-sm-offset-4">
         <form name="fsearch" method="get" class="eyoom-form">
         <input type="hidden" name="sca" value="<?php echo $sca; ?>">
+        <input type="hidden" name="sop" value="and">
+        <label for="sfl" class="sound_only">검색대상</label>
+        <label for="sfl" class="select">
+            <select name="sfl" id="sfl">
+                <?php echo get_qa_sfl_select_options($sfl); ?>
+            </select><i></i>
+        </label>
         <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
         <div class="input input-button">
             <input type="text" name="stx" value="<?php echo stripslashes($stx); ?>" required id="stx" size="15" maxlength="15" placeholder="1:1문의 검색">
-            <div class="button"><input type="submit" value="검색">검색</div>
+            <div class="button"><input type="submit" value="검색..">검색</div>
         </div>
         </form>
     </div>
