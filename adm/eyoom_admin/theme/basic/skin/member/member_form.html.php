@@ -175,8 +175,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <div class="inline-group">
-                                <label for="mb_certify_ipin" class="radio"><input type="radio" name="mb_certify_case" value="ipin" id="mb_certify_ipin" <?php if($mb['mb_certify_case'] == 'ipin') echo 'checked="checked"'; ?>><i></i> 아이핀</label>
+                                <label for="mb_certify_sa" class="radio"><input type="radio" name="mb_certify_case" value="simple" id="mb_certify_sa" <?php if($mb['mb_certify_case'] == 'simple') echo 'checked="checked"'; ?>><i></i> 간편인증</label>
                                 <label for="mb_certify_hp" class="radio"><input type="radio" name="mb_certify_case" value="hp" id="mb_certify_hp" <?php if($mb['mb_certify_case'] == 'hp') echo 'checked="checked"'; ?>><i></i> 휴대폰</label>
+                                <label for="mb_certify_ipin" class="radio"><input type="radio" name="mb_certify_case" value="ipin" id="mb_certify_ipin" <?php if($mb['mb_certify_case'] == 'ipin') echo 'checked="checked"'; ?>><i></i> 아이핀</label>
                             </div>
                         </td>
                     </tr>
@@ -350,6 +351,42 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </label>
                         </td>
                     </tr>
+                    <tr>
+                        <th class="table-form-th">
+                            <label for="mb_cert_history" class="label">본인인증 내역</label>
+                        </th>
+                        <td colspan="3">
+                            <?php 
+                            $cnt = 0;
+                            while ($row = sql_fetch_array($mb_cert_history)) {
+                                $cnt++;
+                                switch($row['ch_type']){
+                                    case 'simple':
+                                        $cert_type = '간편인증';
+                                        break;
+                                    case 'hp':
+                                        $cert_type = '휴대폰';
+                                        break;
+                                    case 'ipin':
+                                        $cert_type = '아이핀';
+                                        break;
+                                }
+                            ?>
+                            <div>
+                                [<?php echo $row['ch_datetime']; ?>]
+                                <?php echo $row['mb_id']; ?> /
+                                <?php echo $row['ch_name']; ?> /
+                                <?php echo $row['ch_hp']; ?> /
+                                <?php echo $cert_type; ?>
+                            </div>
+                            <?php } ?>
+
+                            <?php if ($cnt == 0) { ?>
+                                본인인증 내역이 없습니다.
+                            <?php } ?>
+                        </td>
+                    </tr>
+
                     <?php if ($w == 'u') { ?>
                     <tr>
                         <th class="table-form-th">

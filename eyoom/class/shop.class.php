@@ -576,24 +576,15 @@ class shop extends eyoom
             return '';
     
         $filename = $thumb = $img = '';
-    
-        $k=0;
-        for($i=1;$i<=10; $i++) {
-            if ($i==1) continue;
-            $file = G5_DATA_PATH.'/item/'.$row['it_img'.$i];
-            if(is_file($file) && $row['it_img'.$i]) {
-                $size = @getimagesize($file);
-                if($size[2] < 1 || $size[2] > 3)
-                    continue;
-    
-                $filename = basename($file);
-                $filepath = dirname($file);
-                $img_width = $size[0];
-                $img_height = $size[1];
-    
-                if ($k==1) break;
-                $k++;
-            }
+        $file = G5_DATA_PATH.'/item/'.$row['it_img2'];
+
+        if(is_file($file) && $row['it_img2']) {
+            $size = @getimagesize($file);
+
+            $filename = basename($file);
+            $filepath = dirname($file);
+            $img_width = $size[0];
+            $img_height = $size[1];
         }
     
         if($img_width && !$height) {

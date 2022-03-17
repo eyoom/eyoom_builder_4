@@ -5,27 +5,24 @@
 if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab_scroll_category.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnific-popup/magnific-popup.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.faq-wrap .panel-heading {padding:13px 15px;background:#fbfbfb}
-.faq-wrap .panel-title {font-size:13px}
-.faq-wrap .panel-title a p {margin-bottom:0;font-weight:bold}
+.faq-wrap img {max-width:100%;height:auto}
 .faq-img {text-align:center;margin-bottom:30px}
 .faq-html {position:relative;border:1px solid #c5c5c5;background:#f8f8f8;padding:15px;margin-bottom:30px}
-.faq-html p:last-child {margin-bottom:0}
+.faq-search-form {max-width:300px;margin:30px auto 0}
 </style>
 
 <div class="faq-wrap">
     <?php if ($admin_href) { ?>
-    <div class="text-right margin-bottom-10">
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqmasterform&amp;w=u&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-sm btn-e-red">FAQ 수정</a>
+    <div class="text-end m-b-10">
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqmasterform&amp;w=u&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-red">FAQ 수정</a>
     </div>
     <?php } ?>
 
     <?php if ($himg_src) { ?>
-    <div id="faq_himg" class="faq-img"><img src="<?php echo $himg_src; ?>" class="img-responsive"></div>
+    <div id="faq_himg" class="faq-img"><img src="<?php echo $himg_src; ?>" class="img-fluid"></div>
     <?php } ?>
     <?php if ($fm['fm_head_html']) { ?>
     <div id="faq_hhtml" class="faq-html"><?php echo stripslashes($fm['fm_head_html']); ?></div>
@@ -54,19 +51,19 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     </div>
     <?php } ?>
 
-    <div id="faq_wrap" class="faq_<?php echo $fm_id; ?>">
+    <div class="faq-<?php echo $fm_id; ?>">
         <?php if (count((array)$faq_list) > 0) { ?>
         <div class="panel-group accordion-default panel-group-control panel-group-control-right" id="accordion-faq">
             <?php for ($i=0; $i<count((array)$faq_list); $i++) { ?>
-            <div class="panel panel-default">
+            <div class="panel">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion-faq" href="#collapse-faq-<?php echo $i+1; ?>" class="collapsed">
+                    <h6 class="panel-title">
+                        <a data-bs-toggle="collapse" href="#collapse-faq-<?php echo $i+1; ?>" class="collapsed">
                             <?php echo conv_content($faq_list[$i]['fa_subject'], 1); ?>
                         </a>
-                    </h4>
+                    </h6>
                 </div>
-                <div id="collapse-faq-<?php echo $i+1; ?>" class="panel-collapse collapse">
+                <div id="collapse-faq-<?php echo $i+1; ?>" class="panel-collapse collapse" data-bs-parent="#accordion-faq">
                     <div id="faq_con" class="panel-body">
                         <?php echo conv_content($faq_list[$i]['fa_content'], 1); ?>
                     </div>
@@ -76,10 +73,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
         </div>
         <?php } else { ?>
             <?php if ($stx) { ?>
-        <div class="text-center color-grey margin-bottom-30"><i class="fa fa-exclamation-circle"></i> 검색된 게시물이 없습니다.</p>
+        <div class="text-center text-gray m-b-30"><i class="fas fa-exclamation-circle"></i> 검색된 게시물이 없습니다.</p>
             <?php } else { ?>
-        <div class="text-center margin-bottom-30">
-        <i class="fa fa-exclamation-circle"></i> 등록된 FAQ가 없습니다.
+        <div class="text-center m-b-30">
+        <i class="fas fa-exclamation-circle"></i> 등록된 FAQ가 없습니다.
             <?php if ($is_admin) { ?>
         <br>FAQ를 새로 등록하시려면 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqmasterlist"><u>FAQ 관리</u></a> 메뉴를 이용하십시오.
             <?php } ?>
@@ -88,7 +85,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
         <?php } ?>
     </div>
 
-    <div class="margin-bottom-30">
+    <div class="m-b-30">
         <?php /* 페이지 */ ?>
         <?php echo eb_paging($eyoom['paging_skin']);?>
     </div>
@@ -97,24 +94,20 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
     <div id="faq_thtml" class="faq-html"><?php stripslashes($fm['fm_tail_html']); ?></div>
     <?php } ?>
     <?php if ($timg_src) { ?>
-    <div id="faq_timg" class="faq-img"><img src="<?php echo $timg_src; ?>" class="img-responsive"></div>
+    <div id="faq_timg" class="faq-img"><img src="<?php echo $timg_src; ?>" class="img-fluid"></div>
     <?php } ?>
-
-    <form name="faq_search_form" method="get" class="eyoom-form">
-    <input type="hidden" name="fm_id" value="<?php echo $fm_id; ?>">
-    <div class="row">
-        <section class="col col-4"></section>
-        <section class="col col-4">
-            <div class="input input-button">
-                <input type="text" name="stx" value="<?php echo $stx; ?>" required id="stx" size="15" maxlength="15" placeholder="FAQ 검색">
-                <div class="button"><input type="submit" value="검색">검색</div>
-            </div>
-        </section>
+    
+    <div class="faq-search-form">
+        <form name="faq_search_form" method="get" class="eyoom-form">
+        <input type="hidden" name="fm_id" value="<?php echo $fm_id; ?>">
+        <div class="input input-button">
+            <input type="text" name="stx" value="<?php echo $stx; ?>" required id="stx" size="15" maxlength="15" placeholder="FAQ 검색">
+            <div class="button"><input type="submit" value="검색">검색</div>
+        </div>
+        </form>
     </div>
-    </form>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/magnific-popup/magnific-popup.min.js"></script>
 <?php if (count((array)$faq_master_list)) { ?>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>
@@ -150,30 +143,3 @@ $(function() {
 });
 </script>
 <?php } ?>
-
-<script>
-$(function() {
-    $(".closer_btn").on("click", function() {
-        $(this).closest(".con_inner").slideToggle();
-    });
-    $("#faq_hhtml img").addClass("img-responsive");
-    $("#faq_hhtml img").removeAttr("style");
-    $("#faq_thtml img").addClass("img-responsive");
-    $("#faq_thtml img").removeAttr("style");
-    $("#faq_con img").addClass("img-responsive");
-    $("#faq_con img").removeAttr("style");
-    $('#faq_con img').wrap('<a class="view-image-popup">');
-    $('#faq_con img').each(function() {
-        var imgURL = $(this).attr('src');
-        $(this).parent().attr('href', imgURL);
-    });
-    $('.view-image-popup').magnificPopup({
-        type: 'image',
-        closeOnContentClick: true,
-        mainClass: 'mfp-img-mobile',
-        image: {
-            verticalFit: true
-        }
-    });
-});
-</script>

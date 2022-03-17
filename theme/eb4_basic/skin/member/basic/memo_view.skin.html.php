@@ -4,32 +4,26 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab_scroll_category.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.memo-view {position:relative;overflow:hidden;padding:5px}
-.memo-view .memo-content .panel-title {font-size:14px}
-.memo-view .memo-content .memo-box {position:relative;overflow:hidden;background-image:url("<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/paper_line.png");background-repeat:repeat;padding:15px;border:1px solid #d5d5d5}
-.memo-view .memo-content .memo-box h5 {margin:0 0 15px}
-<?php if (G5_IS_MOBILE) { ?>
-.memo-view {padding:20px 15px}
-.memo-view .win-title {position:relative;margin:0 0 20px;font-size:18px;height:50px;line-height:30px;padding:10px;background:#555;color:#fff}
-.memo-view .win-close-btn {position:absolute;top:10px;right:10px;width:30px;height:30px;line-height:30px;text-align:center;margin:0;padding:0;border:0;background:none;color:#fff;float:right}
-<?php } ?>
+.memo-view {position:relative;overflow:hidden}
+.memo-view .memo-content .memo-box {position:relative;overflow:hidden;background-image:url("<?php echo EYOOM_THEME_URL; ?>/skin/member/basic/img/paper_line.png");background-repeat:repeat;padding:15px;border:1px solid #b5b5b5;min-height:100px}
 </style>
+<?php if (G5_IS_MOBILE) { ?>
+<style>
+.memo-view {padding:15px}
+.memo-view .win-title {pposition:relative;margin:0 0 20px;font-size:1.0625rem;height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
+.memo-view .btn-close {position:absolute;top:19px;right:10px}
+</style>
+<?php } ?>
 
 <div class="memo-view">
     <?php if (G5_IS_MOBILE) { ?>
     <h4 class="win-title">
         <strong>내 쪽지함</strong>
-        <button type="button" onclick="window.close();" class="win-close-btn"><i class="fas fa-times"></i></button>
-        <div class="clearfix"></div>
+        <button type="button" class="btn-close btn-close-white" onclick="window.close();" aria-label="Close"></button>
     </h4>
     <?php } ?>
     <div class="tab-scroll-category">
@@ -70,45 +64,43 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     </div>
 
     <div class="memo-content">
-        <div class="margin-bottom-30">
+        <div class="m-b-30">
             <ul class="list-unstyled list-inline">
-                <li class="margin-bottom-10">
+                <li class="m-b-10">
                     <span><?php echo $kind_str; ?>사람 : </span>
                     <strong><?php echo eb_nameview($mb['mb_id'], $mb['mb_nick'], $mb['mb_email'], $mb['mb_homepage']); ?></strong>
                 </li>
-                <li>
+                <li class="m-b-20">
                     <span><?php echo $kind_date; ?>시간 : </span>
-                    <strong><i class="far fa-clock color-grey"></i> <?php echo $memo['me_send_datetime']; ?></strong>
+                    <strong><?php echo $memo['me_send_datetime']; ?></strong>
                 </li>
             </ul>
+            <h5 class="f-s-15r m-b-10"><strong>쪽지 내용</strong></h5>
             <div class="memo-box">
-                <h5><i class="far fa-envelope-open font-size-20 color-grey margin-right-10"></i><strong>쪽지 내용</strong></h5>
                 <div class="memo-box-cont"><?php echo conv_content($memo['me_memo'], 0); ?></div>
             </div>
         </div>
     </div>
 
-    <div class="text-center margin-bottom-30">
+    <div class="text-center m-b-30">
         <?php if ($prev_link) { ?>
-        <a href="<?php echo $prev_link; ?>" class="btn-e btn-e-default">이전쪽지</a>
+        <a href="<?php echo $prev_link; ?>" class="btn-e btn-e-gray">이전쪽지</a>
         <?php } ?>
         <?php if ($next_link) { ?>
-        <a href="<?php echo $next_link; ?>" class="btn-e btn-e-default">다음쪽지</a>
+        <a href="<?php echo $next_link; ?>" class="btn-e btn-e-gray">다음쪽지</a>
         <?php } ?>
         <a href="<?php echo $list_link ?>" class="btn-e btn-e-dark">목록보기</a>
         <?php if ($kind == 'recv') { ?>
         <a href="<?php echo G5_BBS_URL; ?>/memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id']; ?>&amp;me_id=<?php echo $memo['me_id']; ?>" class="btn-e btn-e-red">답장</a>
         <?php } ?>
         <?php if (G5_IS_MOBILE) { ?>
-        <div class="text-center margin-top-30">
-            <button type="button" onclick="window.close();" class="btn-e btn-e-xlg btn-e-dark">창닫기</button>
+        <div class="text-center m-t-30">
+            <button type="button" onclick="window.close();" class="btn-e btn-e-xl btn-e-dark">창닫기</button>
         </div>
         <?php } ?>
     </div>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>
 <script>
@@ -142,7 +134,3 @@ $(function() {
     }
 });
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-<![endif]-->

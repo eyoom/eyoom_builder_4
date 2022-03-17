@@ -190,12 +190,12 @@ if ($bo_use_anonymous == '1') {
     $up_set['wr_anonymous'] = $_POST['wr_anonymous'];
 } else if ($bo_use_anonymous == '2') {
     $up_set['wr_anonymous'] = '1';
-    $up_set['wr_bo_anonymous'] = '1';
+    $wr_bo_anonymous = '1';
 } else {
     $up_set['wr_anonymous'] = '';
-    $up_set['wr_bo_anonymous'] = '';
+    $wr_bo_anonymous = '';
 }
-sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$up_set['wr_bo_anonymous']}' where wr_id='{$comment_id}' ");
+sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' where wr_id='{$comment_id}' ");
 
 /**
  * 내글반응 적용하기

@@ -4,13 +4,13 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
+.board-view-ans {font-size:.9375rem}
+.board-view-ans .board-write-title {position:relative;border-bottom:1px solid #959595;padding-bottom:15px;margin-bottom:15px}
 .board-view-ans textarea {min-height:250px}
-.view-ans-divider {position:relative;height:1px;border-top:1px solid #d5d5d5;margin:30px 0}
-.view-ans-divider .divider-circle {position:absolute;top:-7px;left:50%;margin-left:-7px;width:14px;height:14px;border:2px solid #d5d5d5;background:#fff;z-index:1px;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
 /* Ckeditor */
 .board-view-ans a.cke_button {padding:2px 5px}
 .board-view-ans a.cke_button_on {padding:1px 4px}
@@ -26,10 +26,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .panel-heading.note-toolbar .note-color .dropdown-menu {padding-top:6px;padding-bottom:6px;padding-left:1px}
 </style>
 
-<div class="view-ans-divider"><span class="divider-circle"></span></div>
 <div class="board-view-ans">
     <?php if ($is_admin) { //#1 ?>
-    <h4><strong>답변등록</strong></h4>
+    <h5 class="board-write-title"><strong>답변등록</strong></h5>
+
     <form name="fanswer" method="post" action="<?php echo G5_BBS_URL; ?>/qawrite_update.php" onsubmit="return fwrite_submit(this);" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="qa_id" value="<?php echo $view['qa_id']; ?>">
     <input type="hidden" name="w" value="a">
@@ -40,14 +40,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php if ($is_dhtml_editor) { ?>
     <input type="hidden" name="qa_html" value="1">
     <?php } ?>
-    <div class="margin-hr-15"></div>
     <section>
         <label for="qa_subject" class="label">제목<strong class="sound_only"> 필수</strong></label>
         <label class="input required-mark">
             <input type="text" name="qa_subject" value="" id="qa_subject" required size="50" maxlength="255">
         </label>
     </section>
-    <div class="margin-hr-15"></div>
     <?php if (!$is_dhtml_editor) { ?>
     <section>
         <div class="row">
@@ -56,7 +54,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
     </section>
-    <div class="margin-hr-15"></div>
     <?php } ?>
     <section>
         <label class="label">답변 내용</label>
@@ -64,33 +61,29 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php echo $editor_html; ?>
         </label>
     </section>
-    <div class="margin-hr-15"></div>
-    <section class="text-center">
-        <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-red btn-e-xlg">
+    <section class="text-center m-t-30">
+        <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-crimson btn-e-xl">
     </section>
     </form>
     <?php } else { //#1 ?>
-    <h6 class="text-center margin-top-10">고객님의 문의에 대한 답변을 준비 중입니다.</h6>
+    <h6 class="text-center m-t-20">고객님의 문의에 대한 답변을 준비 중입니다.</h6>
     <?php } //#1 ?>
 </div>
-<div class="view-ans-divider"><span class="divider-circle"></span></div>
 
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
 function html_auto_br(obj) {
     if (obj.checked) {
-        swal({
+        Swal.fire({
             title: "자동 줄바꿈",
-            text: "자동 줄바꿈을 하시겠습니까?\n자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
-            type: "warning",
+            text: "자동 줄바꿈을 하시겠습니까? 자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
+            icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#FF9500",
+            confirmButtonColor: "#00897b",
             confirmButtonText: "승인",
-            cancelButtonText: "취소",
-            closeOnConfirm: true,
-            closeOnCancel: true
-        },
-        function(isConfirm){
-            if (isConfirm) {
+            cancelButtonText: "취소"
+        }).then((result) => {
+            if (result.isConfirmed) {
                 obj.value = "2";
             } else {
                 obj.value = "1";
@@ -123,12 +116,11 @@ function fwrite_submit(f) {
     });
 
     if (subject) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "제목에 금지단어 '<strong class='color-red'>"+subject+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            html: "제목에 금지단어 '<span class='text-crimson'>"+subject+"</span>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         f.qa_subject.focus();
@@ -136,12 +128,11 @@ function fwrite_submit(f) {
     }
 
     if (content) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "내용에 금지단어 '<strong class='color-red'>"+content+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            text: "내용에 금지단어 '<span class='text-crimson'>"+content+"</span>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         if (typeof(ed_qa_content) != "undefined")
@@ -150,23 +141,6 @@ function fwrite_submit(f) {
             f.qa_content.focus();
         return false;
     }
-
-    $.ajax({
-        type: "POST",
-        url: g5_bbs_url+"/ajax.write.token.php",
-        data: { 'token_case' : 'qa_write' },
-        cache: false,
-        async: false,
-        dataType: "json",
-        success: function(data) {
-            if (typeof data.token !== "undefined") {
-                token = data.token;
-                if(typeof f.token === "undefined")
-                    $(f).prepend('<input type="hidden" name="token" value="">');
-                $(f).find("input[name=token]").val(token);
-            }
-        }
-    });
 
     document.getElementById("btn_submit").disabled = "disabled";
     return true;

@@ -34,14 +34,14 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .hp_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f3cd";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon {background:#fff}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f09d";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
-.shop-personalpay-form .btn_confirm .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin-bottom:15px}
-.shop-personalpay-form .btn_confirm a.btn_cancel {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
+#display_pay_button {background:none;padding:0;border:0 none}
+#display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#cc2300;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin:15px 0;border-radius:3px}
+#display_pay_button a.btn_cancel {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;margin:15px 0;border-radius:3px}
+#display_pay_button a.btn01 {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;margin:15px 0;border-radius:3px}
 @media (max-width:991px) {
     .shop-personalpay-form .personal-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-personalpay-form .personal-table td {padding:5px 0}
 }
-<?php } ?>
 </style>
 
 <div class="shop-personalpay-form">
@@ -116,7 +116,7 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
         </div>
 
         <div class="payment-select-wrap">
-            <h5 class="payment-select-title"><strong>결제수단</strong></h5>
+            <div class="headline-short"><h4><strong>결제수단</strong></h4></div>
             <?php if ($default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use']) { ?>
             <div id="sod_frm_paysel">
             <?php } ?>
@@ -142,7 +142,7 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
             <?php } ?>
 
             <?php if ($multi_settle == 0) { ?>
-            <p>결제할 방법이 없습니다.<br>운영자에게 알려주시면 감사하겠습니다.</p>
+            <p class="text-gray"><i class="fas fa-exclamation-circle"></i> 결제할 방법이 없습니다.<br>운영자에게 알려주시면 감사하겠습니다.</p>
             <?php } ?>
         </div>
 

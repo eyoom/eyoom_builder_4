@@ -622,7 +622,7 @@ class eyoom extends qfile
      * 레벨 포인트
      */
     public function level_point($point,$r_id='',$r_point=0) {
-        global $eyoomer, $is_admin;
+        global $eyoomer;
         if ($point) {
             $level_point = $eyoomer['level_point'];
             $point_sum = $level_point + $point;
@@ -1314,37 +1314,55 @@ class eyoom extends qfile
      * 소셜 정보 가져오기
      */
     public function sns_open_graph () {
-        global $config, $write, $bo_table, $wr_id, $it_id;
+        global $config, $write, $board, $bo_table, $wr_id, $it_id;
 
-        if ($it_id) {
-            $sitem = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '".$it_id."'");
-            $head_title = strip_tags(conv_subject($sitem['it_name'], 255)) . ' | ' . $config['cf_title'];
-            $sns_image = G5_DATA_URL . '/item/'.$sitem['it_img1'];
+        if ($it_id && !is_array($it_id)) {
+            $it = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '".$it_id."'");
+            $head_title = strip_tags(conv_subject($it['it_name'], 255)) . ' - ' . $config['cf_title'];
+            $sns_image = $it['it_img1'] ? G5_DATA_URL . '/item/'.$it['it_img1']: '';
             $target_url = shop_item_url($it_id);
-            $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$sitem['it_explan'])))),200, '…');
+            $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$it['it_explan'])))),200, '…');
         } else {
             /**
              * 게시판 썸네일 라이브러리
              */
             @include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
-            $head_title = strip_tags(conv_subject($write['wr_subject'], 255)) . ' > ' . $board['bo_subject'] . ' | ' . $config['cf_title'];
+            $head_title = strip_tags(conv_subject($write['wr_subject'], 255)) . ' > ' . $board['bo_subject'] . ' - ' . $config['cf_title'];
             $first_image = get_list_thumbnail($bo_table, $wr_id, 600, 0);
-            $sns_image = $first_image['src'];
+            $sns_image = $first_image['src'] ? $first_image['src']: '';
             $target_url = get_eyoom_pretty_url($bo_table,$wr_id);
             $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$write['wr_content'])))),200, '…');
+        }
+
+        if (!$sns_image) {
+            $sns_image = EYOOM_THEME_URL.'/image/site_logo.png';
+            $sns_image_path = G5_PATH.'/theme/'.$theme.'/image/site_logo.png';
+        }
+
+        if ($sns_image) {
+            $sns_image_path = str_replace(G5_URL, G5_PATH, $sns_image);
+            if (file_exists($sns_image_path) && !is_dir($sns_image_path)) {
+                $sns_image_size = @getimagesize($sns_image_path);
+                $sns_image_width = $sns_image_size[0];
+                $sns_image_height = $sns_image_size[1];
+            } else {
+                $sns_image_width = '';
+                $sns_image_height = '';
+            }
         }
 
         $meta_tag = '
 <meta property="og:id" content="'.G5_URL.'" />
 <meta property="og:url" content="'.$target_url.'" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:title" content="'.preg_replace('/"/','',$head_title).'" />
+<meta property="og:locale" content="ko_KR" />
 <meta property="og:site_name" content="'.$config['cf_title'].'" />
 <meta property="og:description" content="'.$contents.'"/>
 <meta property="og:image" content="'.$sns_image.'" />
-<meta property="og:image:width" content="600" />
-<meta property="og:image:height" content="600" />
+<meta property="og:image:width" content="'.$sns_image_width.'" />
+<meta property="og:image:height" content="'.$sns_image_height.'" />
         ';
 
         return $meta_tag;

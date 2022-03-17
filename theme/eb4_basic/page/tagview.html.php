@@ -32,8 +32,7 @@ if (!defined('_EYOOM_')) exit;
 .board-webzine .webzine-item-body .webzine-noimg-desc h4 {margin-left:0}
 .board-webzine .webzine-item-body .webzine-noimg-desc .webzine-cont {margin-left:0}
 .board-webzine .webzine-item-body .webzine-noimg-desc .webzine-info {margin-left:0}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width: 550px) {
+@media (max-width: 576px) {
     .board-webzine .webzine-item-heading {padding:8px 10px}
     .board-webzine .webzine-item-body {padding:15px 10px}
     .board-webzine .webzine-item-body .webzine-img {top:54px;left:10px;width:100px}
@@ -44,7 +43,6 @@ if (!defined('_EYOOM_')) exit;
     .board-webzine .webzine-item-body .webzine-info {margin-left:0;padding-top:10px}
     .board-webzine .webzine-item-body .webzine-noimg-desc .webzine-cont {height:70px;font-size:12px;overflow:hidden}
 }
-<?php } ?>
 </style>
 
 <?php if ($tag_info['count'] > 0) { ?>

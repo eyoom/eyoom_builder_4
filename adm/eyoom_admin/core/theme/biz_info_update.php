@@ -30,6 +30,7 @@ $top_logo = $bottom_logo = $top_mobile_logo = $bottom_mobile_logo = $top_shoplog
 if (isset($_FILES['top_logo']['name']) && $_FILES['top_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_logo'], G5_DATA_PATH."/common", $is_img);
     $top_logo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -38,6 +39,7 @@ if (isset($_FILES['top_logo']['name']) && $_FILES['top_logo']['name']) {
 if (isset($_FILES['bottom_logo']['name']) && $_FILES['bottom_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_logo'], G5_DATA_PATH."/common", $is_img);
     $bottom_logo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -46,6 +48,7 @@ if (isset($_FILES['bottom_logo']['name']) && $_FILES['bottom_logo']['name']) {
 if (isset($_FILES['top_mobile_logo']['name']) && $_FILES['top_mobile_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_mobile_logo'], G5_DATA_PATH."/common", $is_img);
     $top_mobile_logo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -54,6 +57,7 @@ if (isset($_FILES['top_mobile_logo']['name']) && $_FILES['top_mobile_logo']['nam
 if (isset($_FILES['bottom_mobile_logo']['name']) && $_FILES['bottom_mobile_logo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_mobile_logo'], G5_DATA_PATH."/common", $is_img);
     $bottom_mobile_logo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -62,6 +66,7 @@ if (isset($_FILES['bottom_mobile_logo']['name']) && $_FILES['bottom_mobile_logo'
 if (isset($_FILES['top_shoplogo']['name']) && $_FILES['top_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $top_shoplogo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -70,6 +75,7 @@ if (isset($_FILES['top_shoplogo']['name']) && $_FILES['top_shoplogo']['name']) {
 if (isset($_FILES['bottom_shoplogo']['name']) && $_FILES['bottom_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $bottom_shoplogo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -78,6 +84,7 @@ if (isset($_FILES['bottom_shoplogo']['name']) && $_FILES['bottom_shoplogo']['nam
 if (isset($_FILES['top_mobile_shoplogo']['name']) && $_FILES['top_mobile_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['top_mobile_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $top_mobile_shoplogo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**
@@ -86,6 +93,7 @@ if (isset($_FILES['top_mobile_shoplogo']['name']) && $_FILES['top_mobile_shoplog
 if (isset($_FILES['bottom_mobile_shoplogo']['name']) && $_FILES['bottom_mobile_shoplogo']['name']) {
     $upfile = $upload->upload_file($_FILES['bottom_mobile_shoplogo'], G5_DATA_PATH."/common", $is_img);
     $bottom_mobile_shoplogo = $upfile['destfile'];
+    unset($upfile);
 }
 
 /**

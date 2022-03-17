@@ -10,8 +10,8 @@ if (!defined('_EYOOM_')) exit;
     <h3 class="h-hidden">등록된 상품문의</h3>
 
     <div class="product-qa-btn">
-        <a href="<?php echo $itemqa_form; ?>" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemqa_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?> class="btn-e btn-e-xlg btn-e-red">상품문의 쓰기</a>
-        <a href="<?php echo $itemqa_list; ?>" class="btn-e btn-e-xlg btn-e-dark">더보기</a>
+        <a href="<?php echo $itemqa_form; ?>" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemqa_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?> class="btn-e btn-e-md btn-e-red bd-r-0">상품문의 쓰기</a>
+        <a href="<?php echo $itemqa_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
     </div>
     <div class="clearfix"></div>
 
@@ -26,6 +26,8 @@ if (!defined('_EYOOM_')) exit;
                 <dt>작성일</dt>
                 <dd><i class="far fa-clock" aria-hidden="true"></i> <?php echo $info['iq_time']; ?></dd>
             </dl>
+
+            <div class="clearfix"></div>
 
             <div id="sit_qa_con_<?php echo $k; ?>" class="product-qa-cont">
                 <div class="product-qa-p">
@@ -55,7 +57,7 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
     <?php } else { ?>
-    <p class="text-center color-grey font-size-12 margin-top-10"><i class="fas fa-exclamation-circle"></i> 상품문의가 없습니다.</p>
+    <p class="text-center text-gray m-t-20 m-b-40"><i class="fas fa-exclamation-circle"></i> 상품문의가 없습니다.</p>
     <?php } ?>
 </section>
 

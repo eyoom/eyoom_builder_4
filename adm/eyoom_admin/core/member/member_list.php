@@ -196,27 +196,26 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $row['mb_status'] = "정상";
     }
 
-    switch($row['mb_certify']) {
-        case 'hp':
-            $mb_certify_case = '휴대폰';
-            $mb_certify_val = 'hp';
-            break;
-        case 'ipin':
-            $mb_certify_case = '아이핀';
-            $mb_certify_val = '';
-            break;
-        case 'admin':
-            $mb_certify_case = '관리자';
-            $mb_certify_val = 'admin';
-            break;
-        default:
-            $mb_certify_case = '&nbsp;';
-            $mb_certify_val = 'admin';
-            break;
-    }
     $mb_level = get_member_level_select("mb_level[$i]", 1, $member['mb_level'], $row['mb_level']);
 
     $list[$i] = $row;
+    switch($row['mb_certify']) {
+        case 'hp':
+            $list[$i]['mb_certify_case'] = '휴대폰';
+            break;
+        case 'ipin':
+            $list[$i]['mb_certify_case'] = '아이핀';
+            break;
+        case 'simple':
+            $list[$i]['mb_certify_case'] = '간편인증';
+            break;
+        case 'admin':
+            $list[$i]['mb_certify_case'] = '관리자';
+            break;
+        default:
+            $list[$i]['mb_certify_case'] = '-';
+            break;
+    }
     $list[$i]['intercept_date'] = $intercept_date;
 
     $list[$i]['mb_level_select'] = preg_replace("/(\\n|\\r)/","",str_replace('"', "'", $mb_level));

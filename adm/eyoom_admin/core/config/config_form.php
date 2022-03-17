@@ -287,6 +287,29 @@ if( ! isset($config['cf_icode_token_key']) ){
     sql_query($sql, false);
 }
 
+// 아이디/비밀번호 찾기에 본인확인 사용 여부 필드 추가
+if(!isset($config['cf_cert_find']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}` 
+            ADD COLUMN `cf_cert_find` TINYINT(4) NOT NULL DEFAULT '0' AFTER `cf_cert_use`; ";
+    sql_query($sql, false);
+}
+// 간편인증 필드 추가
+if(!isset($config['cf_cert_simple']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}` 
+            ADD COLUMN `cf_cert_simple` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_cert_hp`; ";
+    sql_query($sql, false);
+}
+if(!isset($config['cf_cert_kg_cd']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}`
+            ADD COLUMN `cf_cert_kg_cd` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_cert_simple`; ";
+    sql_query($sql, false);
+}
+if(!isset($config['cf_cert_kg_mid']) ){
+    $sql = "ALTER TABLE `{$g5['config_table']}`
+            ADD COLUMN `cf_cert_kg_mid` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_cert_kg_cd`; ";
+    sql_query($sql, false);
+}
+
 /**
  * 슬랙 토큰정보 필드 제거
  */

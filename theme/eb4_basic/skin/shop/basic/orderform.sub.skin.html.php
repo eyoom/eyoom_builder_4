@@ -37,79 +37,86 @@ if($is_kakaopay_use) {
 .shop-steps {position:relative;margin-bottom:30px}
 .shop-steps .step-indicator {border-collapse:separate;display:table;margin-left:0;position:relative;table-layout:fixed;vertical-align:middle}
 .shop-steps .step-indicator li {display:table-cell;float:none;padding:0;width:1%}
-.shop-steps .step-indicator li:before {background-color:#d5d5d5;content:"";display:block;height:1px;position:relative;top:25px}
+.shop-steps .step-indicator li:before {background-color:#d5d5d5;content:"";display:block;height:1px;position:relative;top:40px}
 .shop-steps .step-indicator li:first-child:before {left:50%}
 .shop-steps .step-indicator li:last-child:before {right:50%}
-.shop-steps .step-indicator .step {background-color:#fff;border:2px solid #e5e5e5;color:#e5e5e5;font-size:20px;width:50px;height:50px;line-height:48px;border-radius:25px !important;margin:0 auto;position:relative;z-index:1}
-.shop-steps .step-indicator .caption {box-sizing:border-box;color:#e5e5e5;padding:10px 15px;font-size:14px;font-weight:bold}
-.shop-steps .step-indicator .active .step {border-color:#2B2B2E;color:#2B2B2E}
-.shop-steps .step-indicator .active .caption {color:#2B2B2E}
+.shop-steps .step-indicator .step {background-color:#fff;border:5px solid #e5e5e5;color:#e5e5e5;font-size:1.875rem;width:80px;height:80px;line-height:70px;border-radius:50% !important;margin:0 auto;position:relative;z-index:1}
+.shop-steps .step-indicator .caption {box-sizing:border-box;color:#e5e5e5;padding:10px 5px;font-size:.9375rem;font-weight:700}
+.shop-steps .step-indicator .active .step {border-color:#252525;color:#252525}
+.shop-steps .step-indicator .active .caption {color:#252525}
 .shop-steps .step-indicator .complete .step {border-color:#b5b5b5;color:#b5b5b5}
 .shop-steps .step-indicator .complete .caption {color:#b5b5b5}
 .shop-steps .step-indicator .incomplete .step {border-color:#b5b5b5;color:#b5b5b5}
 .shop-steps .step-indicator .incomplete .caption {color:#b5b5b5}
 .shop-steps .step-indicator .inactive .caption {color:#b5b5b5}
-.shop-steps .alarm-marker .alarm-point {top:3px;right:3px}
-.shop-steps .alarm-marker .alarm-effect {top:-7px;right:-7px}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width:600px) {
-    .shop-steps .step-indicator .caption {font-size:11px;font-weight:normal}
+.shop-steps .alarm-marker .alarm-point {top:15px;right:15px}
+.shop-steps .alarm-marker .alarm-effect {top:5px;right:5px}
+.shop-cart .shop-cart-li-wrap, .shop-cart .table-list-eb .td-item-name ul, .shop-cart .shop-cart-li-wrap .li-opt ul {padding:0;list-style:none}
+@media (max-width:576px) {
+    .shop-steps .step-indicator li:before {top:30px}
+    .shop-steps .step-indicator .step {border:3px solid #e5e5e5;font-size:20px;width:60px;height:60px;line-height:54px}
+    .shop-steps .step-indicator .caption {font-size:.875rem}
+    .shop-steps .alarm-marker .alarm-point {top:10px;right:10px}
+    .shop-steps .alarm-marker .alarm-effect {top:0px;right:0px}
 }
-<?php } ?>
-.shop-order-form .table-list-eb .table {margin-bottom:0}
+.shop-order-form {font-size:.9375rem}
+.shop-order-form .table-list-eb .table {border-bottom:1px solid #e5e5e5;margin-bottom:0;white-space:nowrap}
 .shop-order-form .table-list-eb .td-item-desc {position:relative;min-height:80px}
 .shop-order-form .table-list-eb .td-image {position:absolute;top:0;left:0;width:80px;height:80px;overflow:hidden}
-.shop-order-form .table-list-eb .td-image img {display:block;width:100% \9;max-width:100%;height:auto}
-.shop-order-form .table-list-eb .td-item-name {margin-left:90px}
+.shop-order-form .table-list-eb .td-image img {display:block;max-width:100%;height:auto}
+.shop-order-form .table-list-eb .td-item-name {margin-left:95px}
 .sod_opt {padding:0;margin:0}
 .shop-order-form .table-list-eb .td-item-name .sod_opt ul {list-style:none;padding:0;margin:5px 0}
-.shop-order-form .table-list-eb .td-item-name .sod_opt ul li {color:#959595;font-size:12px;background:none;line-height:1.5;padding:0;font-weight:normal}
+.shop-order-form .table-list-eb .td-item-name .sod_opt ul li {color:#757575;background:none;line-height:1.5;padding:0;font-weight:normal}
 .sod_opt li:before {display:none}
-.shop-order-form .table-list-eb .td-item-name .cp_btn {height:inherit;margin:5px 0 0}
-.shop-order-form .table-list-eb .td-item-name .cp_cancel {display:inline-block;margin:0 0 0 3px;font-weight:normal;text-align:center;background:#fff;border:1px solid #d5d5d5;padding:4px 12px;color:#757575;font-size:12px;line-height:1;height:inherit}
+.shop-order-form .table-list-eb .td-item-name .cp_btn {margin-top:5px;margin-right:2px}
+.shop-order-form .table-list-eb .td-item-name .cp_cancel {margin-top:5px}
 .shop-order-form .order-member-payment {position:relative;border:1px solid #e5e5e5}
 .shop-order-form .order-member-area {position:relative;margin-right:370px}
-.shop-order-form .order-member-area .headline-short {margin-bottom:50px}
+.shop-order-form .order-member-area .sod-frm-title {position:relative;height:70px;margin:-30px -15px 30px;padding:25px 20px;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.shop-order-form .order-member-area .sod-frm-title h4 {font-size:1.25rem;line-height:1}
+.shop-order-form .order-member-area .sod-frm-title h4:after {content:"";display:block;position:absolute;top:-1px;left:-1px;width:0;height:0;border-top:20px solid #5c6bc0;border-right:20px solid transparent}
 .shop-order-form .order-member-area .sod-frm-orderer {padding:30px 15px 40px;border-bottom:1px solid #e5e5e5}
 .shop-order-form .order-member-area .sod-frm-taker {padding:30px 15px 40px}
 .shop-order-form .order-table {margin:0}
 .shop-order-form .order-table table {width:100%;border-collapse:collapse;border-spacing:0}
-.shop-order-form .order-table th {width:90px;padding:5px 10px;background:none;text-align:right}
+.shop-order-form .order-table th {width:100px;padding:5px 10px;background:none;text-align:right}
 .shop-order-form .order-table td {padding:5px 10px;background:transparent}
-.shop-order-form .order-table textarea {padding:2px 2px 3px;width:100%;height:100px}
+.shop-order-form .order-table textarea {width:100%;height:100px}
 .shop-order-form .order-table a {text-decoration:none}
-.shop-order-form .order-payment-area {position:absolute;top:0;right:0;width:370px;height:100%;border-left:1px solid #e5e5e5;background:#fafafa;padding:15px;box-sizing:border-box}
+.shop-order-form .order-payment-area {position:absolute;top:0;right:0;width:370px;height:100%;border-left:1px solid #e5e5e5;background:#fafafa;padding:20px 15px}
 .shop-order-form .order-payment-total {margin-bottom:20px}
 .shop-order-form .payment-calc-wrap {position:relative;overflow:hidden;clear:both;border:1px solid #e5e5e5;background:#fff}
-.shop-order-form .payment-calc-box {position:relative;float:left;width:33.33333%;text-align:center;padding:20px 0;font-size:13px;color:#757575}
+.shop-order-form .payment-calc-box {position:relative;float:left;width:33.33333%;text-align:center;padding:20px 0;color:#757575}
 .shop-order-form .payment-calc-box span {display:block;margin-bottom:10px}
-.shop-order-form .payment-calc-box strong {color:#000;font-size:14px}
+.shop-order-form .payment-calc-box strong {color:#000}
 .shop-order-form .payment-calc-box:before {content:"";width:1px;height:100%;background:#f0f0f0;position:absolute;top:0;right:0}
 .shop-order-form .payment-calc-box:last-child:before {display:none}
-.shop-order-form .payment-calc-box:nth-child(1):after {font-family:'Font Awesome\ 5 Free';content:"\f068";font-weight:900;color:#FF7070;font-size:12px;text-align:center;width:20px;height:20px;line-height:20px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-10px;margin-top:-10px;z-index:1}
-.shop-order-form .payment-calc-box:nth-child(2):after {font-family:'Font Awesome\ 5 Free';content:"\f067";font-weight:900;color:#FF7070;font-size:12px;text-align:center;width:20px;height:20px;line-height:20px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-10px;margin-top:-10px;z-index:1}
-.shop-order-form .payment-point-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;font-size:13px;color:#757575}
+.shop-order-form .payment-calc-box:nth-child(1):after {font-family:'Font Awesome\ 5 Free';content:"\f068";font-weight:900;color:#cc2300;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
+.shop-order-form .payment-calc-box:nth-child(2):after {font-family:'Font Awesome\ 5 Free';content:"\f067";font-weight:900;color:#cc2300;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
+.shop-order-form .payment-point-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;color:#757575}
 .shop-order-form .payment-point-box span {float:left}
 .shop-order-form .payment-point-box strong {color:#000}
-.shop-order-form .payment-total-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;font-size:13px;color:#757575}
+.shop-order-form .payment-total-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;color:#757575}
 .shop-order-form .payment-total-box span {float:left}
-.shop-order-form .payment-total-box strong {color:#FF4848;font-size:14px}
+.shop-order-form .payment-total-box strong {color:#cc2300}
 .shop-order-form .order-payment-info {margin-bottom:20px}
 .shop-order-form .order-payment-info h2 {position:absolute;border:0;font-size:0;line-height:0;content:""}
-.shop-order-form .payment-info-box {position:relative;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;text-align:right;font-size:13px;color:#757575}
-.shop-order-form .payment-info-box.border-color-red {border-color:#FF7070}
+.shop-order-form .payment-info-box {position:relative;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;text-align:right;color:#757575}
+.shop-order-form .payment-info-box.border-color-red {border-color:#cc2300}
 .shop-order-form .payment-info-box span {float:left}
-.shop-order-form .payment-info-box strong {color:#000;font-size:14px}
-.shop-order-form .payment-info-box .cp_cancel {display:inline-block;margin:0 0 0 3px;font-weight:normal;text-align:center;background:#fff;border:1px solid #d5d5d5;padding:4px 12px;color:#757575;font-size:12px;line-height:1;height:inherit}
-.shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;font-size:14px;line-height:inherit;background:none}
-.shop-order-form #od_tot_price .print_price {color:#FF4848;font-size:14px}
+.shop-order-form .payment-info-box strong {color:#000}
+.shop-order-form .payment-info-box .cp_cancel {margin-top:5px}
+.shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;line-height:inherit;background:#fff}
+.shop-order-form #od_tot_price span {line-height:30px}
+.shop-order-form #od_tot_price .print_price {color:#cc2300;font-size:1.25rem}
 .shop-order-form .payment-select-wrap {position:relative;margin-top:20px}
-.shop-order-form .payment-select-title {margin:0 0 10px}
+.shop-order-form .payment-select-title {margin:0 0 10px;font-size:1.125rem}
 .shop-order-form .payment-select-wrap #sod_frm_paysel {padding:0 0 0 2px;background:none;border:0 none}
 .shop-order-form .payment-select-wrap input[type="radio"] {position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;text-indent:-999px;left:0;z-index:-1px}
 .shop-order-form .payment-select-wrap .payment-select-box {position:relative;overflow:hidden;float:left;width:50% !important;background:#fff;cursor:pointer;height:60px;box-sizing:border-box;border:1px solid #e5e5e5;margin:-1px 0 0 -1px;padding:20px 0 0 80px !important;text-indent:inherit !important}
-.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #FF7070;z-index:3}
-.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:5px;right:10px;color:#FF4848;font-size:16px}
+.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #cc2300;z-index:3}
+.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:2px;right:5px;color:#cc2300;font-size:1rem}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .bank_icon {background:#fff}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .bank_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f53c";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .vbank_icon {background:#fff}
@@ -126,14 +133,14 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-select-wrap #sod_frm_paysel .PAYCO {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/payco.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .inicis_lpay {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/lpay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 #display_pay_button {background:none;padding:0;border:0 none}
-.shop-order-form #display_pay_button .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin-bottom:15px}
-.shop-order-form #display_pay_button a.btn01 {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
+.shop-order-form #display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#cc2300;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin-bottom:15px}
+.shop-order-form #display_pay_button a.btn01 {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5}
 #settle_bank label {float:none;width:auto;line-height:inherit}
 .shop-order-form .payment-point-use-box {margin-top:20px}
-.shop-order-form .payment-point-use {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;font-size:12px;color:#757575}
+.shop-order-form .payment-point-use {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;color:#757575}
 .shop-order-form .payment-point-use label {line-height:30px;margin-bottom:0}
 .shop-order-form .payment-point-use .input {margin-bottom:0}
-.shop-order-form #settle_bank {position:relative;padding:15px;border:1px solid #FF7070;margin:20px 0 0;display:none}
+.shop-order-form #settle_bank {position:relative;padding:15px;border:1px solid #cc2300;margin:20px 0 0;display:none}
 .shop-order-form #settle_bank .select {margin-bottom:10px}
 #settle_bank select {width:100%;border:1px solid #ccc}
 .shop-order-form #settle_bank .input {margin-bottom:0}
@@ -146,14 +153,12 @@ if($is_kakaopay_use) {
 .ui-datepicker .ui-datepicker-buttonpane button {margin:10px 0 0;padding:5px 15px;border:0;background:#171C29;color:#fff}
 .ui-datepicker .ui-datepicker-buttonpane button:hover {background:#1F263B !important}
 .ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {border:0}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-order-form .order-member-area {margin-right:0}
     .shop-order-form .order-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-order-form .order-table td {padding:5px 0}
     .shop-order-form .order-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
-<?php } ?>
 </style>
 
 <div class="shop-steps">
@@ -185,20 +190,18 @@ if($is_kakaopay_use) {
 
 <form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off" class="eyoom-form">
 <div class="shop-order-form">
-    <?php if (G5_IS_MOBILE) { ?>
-    <p class="text-right font-size-11 margin-bottom-5 color-grey">Note! 좌우 스크롤 (<i class="fas fa-arrows-alt-h"></i>)</p>
-    <?php } ?>
-    <div class="table-list-eb margin-bottom-30">
+    <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="fas fa-arrows-alt-h"></i>)</p>
+    <div class="table-list-eb m-b-30">
         <div class="table-responsive">
             <table id="sod_list" class="table">
                 <thead>
                     <tr>
-                        <th scope="col">상품명</th>
-                        <th scope="col">총수량</th>
-                        <th scope="col">판매가</th>
-                        <th scope="col">소계</th>
-                        <th scope="col">포인트</th>
-                        <th scope="col">배송비</th>
+                        <th>상품명</th>
+                        <th class="width-100px tbd-both">총수량</th>
+                        <th class="width-100px">판매가</th>
+                        <th class="width-100px tbd-both">소계</th>
+                        <th class="width-100px tbd-r">포인트</th>
+                        <th class="width-100px">배송비</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -217,17 +220,17 @@ if($is_kakaopay_use) {
                                     <?php if($default['de_tax_flag_use']) { ?>
                                     <input type="hidden" name="it_notax[<?php echo $i; ?>]" value="<?php echo $list[$i]['it_notax']; ?>">
                                     <?php } ?>
-                                    <div class="font-size-14"><b><?php echo $list[$i]['it_name']; ?></b></strong>
+                                    <div><?php echo $list[$i]['it_name']; ?></div>
                                     <?php if ($list[$i]['cp_count']) { ?>
-                                    <button type="button" class="btn-e btn-e-dark cp_btn" data-toggle="modal" data-target="#modal_coupon_apply">쿠폰적용</button>
+                                    <button type="button" class="btn-e btn-e-dark cp_btn" data-bs-toggle="modal" data-bs-target="#modal_coupon_apply">쿠폰적용</button>
                                     <?php } ?>
                                 </div>
                             </div>
                         </td>
-                        <td class="td-border text-center"><?php echo number_format($list[$i]['sum_qty']); ?></td>
-                        <td class="text-right"><?php echo number_format($list[$i]['ct_price']); ?></td>
-                        <td class="td-border text-right"><span class="total_price"><?php echo number_format($list[$i]['sell_price']); ?></span></td>
-                        <td class="td-border-right text-right"><?php echo number_format($list[$i]['point']); ?></td>
+                        <td class="text-center tbd-both"><?php echo number_format($list[$i]['sum_qty']); ?></td>
+                        <td class="text-center"><?php echo number_format($list[$i]['ct_price']); ?></td>
+                        <td class="text-center tbd-both"><span class="total_price"><?php echo number_format($list[$i]['sell_price']); ?></span></td>
+                        <td class="text-center tbd-r"><?php echo number_format($list[$i]['point']); ?></td>
                         <td class="text-center"><?php echo $list[$i]['ct_send_cost']; ?></td>
                     </tr>
                     <?php } ?>
@@ -258,14 +261,14 @@ if($is_kakaopay_use) {
 
             <?php /* ---------- 주문하시는 분 입력 시작 ---------- */ ?>
             <div class="sod-frm-orderer">
-                <div class="headline-short"><h4><strong>주문하시는 분</strong></h4></div>
+                <div class="sod-frm-title"><h4><strong>주문하시는 분</strong></h4></div>
                 <div class="order-table">
                     <table>
                         <tbody>
                             <tr>
                                 <th scope="row"><label for="od_name">이름<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="od_name" class="hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_name" class="label hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="od_name" value="<?php echo get_text($member['mb_name']); ?>" id="od_name" required maxlength="20">
                                     </label>
@@ -276,7 +279,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_pwd">비밀번호</label></th>
                                 <td>
-                                    <label for="od_pwd" class="hidden-lg hidden-md">비밀번호<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_pwd" class="label hidden-lg hidden-md">비밀번호<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="password" name="od_pwd" id="od_pwd" required maxlength="20">
                                     </label>
@@ -288,7 +291,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="od_tel" class="hidden-lg hidden-md">전화번호<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_tel" class="label hidden-lg hidden-md">전화번호<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="od_tel" value="<?php echo get_text($member['mb_tel']); ?>" id="od_tel" required maxlength="20">
                                     </label>
@@ -297,7 +300,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_hp">핸드폰</label></th>
                                 <td>
-                                    <label for="od_hp" class="hidden-lg hidden-md">핸드폰</label>
+                                    <label for="od_hp" class="label hidden-lg hidden-md">핸드폰</label>
                                     <label class="input width-200px">
                                         <input type="text" name="od_hp" value="<?php echo get_text($member['mb_hp']); ?>" id="od_hp" maxlength="20">
                                     </label>
@@ -306,16 +309,16 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row">주소</th>
                                 <td>
-                                    <label class="hidden-lg hidden-md">주소</label>
+                                    <label class="label hidden-lg hidden-md">주소</label>
                                     <label for="od_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
                                     <div class="clearfix"></div>
-                                    <label class="input width-150px margin-right-5 pull-left">
+                                    <label class="input width-150px m-r-5 float-start">
                                         <i class="icon-append fas fa-question-circle"></i>
                                         <input type="text" name="od_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="required" size="8" maxlength="6" placeholder="우편번호">
                                         <b class="tooltip tooltip-top-right">우편번호 (주소 검색 버튼을 클릭하여 조회)</b>
                                     </label>
                                     <button type="button" class="btn-e btn-e-lg btn-e-red" onclick="win_zip('forderform', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button>
-                                    <div class="clearfix margin-bottom-10"></div>
+                                    <div class="clearfix m-b-10"></div>
                                     <label for="od_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label>
                                     <label class="input required-mark">
                                         <input type="text" name="od_addr1" value="<?php echo get_text($member['mb_addr1']) ?>" id="od_addr1" required size="60" placeholder="기본주소">
@@ -334,7 +337,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_email">E-mail<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="od_email" class="hidden-lg hidden-md">E-mail<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_email" class="label hidden-lg hidden-md">E-mail<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="od_email" value="<?php echo $member['mb_email']; ?>" id="od_email" required size="35" maxlength="100">
                                     </label>
@@ -355,7 +358,7 @@ if($is_kakaopay_use) {
                                     }
                                     ?>
                                     </select> -->
-                                    <label class="input width-100px margin-right-5 pull-left">
+                                    <label class="input width-100px m-r-5 float-start">
                                         <input type="text" name="od_hope_date" value="" id="od_hope_date" required class="required" size="11" maxlength="10" readonly="readonly">
                                     </label>
                                     <span>이후로 배송 바랍니다.</span>
@@ -371,14 +374,14 @@ if($is_kakaopay_use) {
 
             <?php /* ---------- 받으시는 분 입력 시작 ---------- */ ?>
             <div class="sod-frm-taker">
-                <div class="headline-short"><h4><strong>받으시는 분</strong></h4></div>
+                <div class="sod-frm-title"><h4><strong>받으시는 분</strong></h4></div>
                 <div class="order-table">
                     <table>
                         <tbody>
                             <tr>
                                 <th scope="row">배송지선택</th>
                                 <td>
-                                    <label class="hidden-lg hidden-md">배송지선택</label>
+                                    <label class="label hidden-lg hidden-md">배송지선택</label>
                                     <div class="inline-group">
                                     <?php if ($is_member) { ?>
                                         <label for="ad_sel_addr_same" class="radio"><input type="radio" name="ad_sel_addr" value="same" id="ad_sel_addr_same"><i class="rounded-x"></i>주문자와 동일</label>
@@ -402,12 +405,12 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="ad_subject">배송지명</label></th>
                                 <td>
-                                    <label for="ad_subject" class="hidden-lg hidden-md">배송지명</label>
+                                    <label for="ad_subject" class="label hidden-lg hidden-md">배송지명</label>
                                     <div class="clearfix"></div>
-                                    <label class="input width-200px margin-right-10 pull-left">
+                                    <label class="input width-200px m-r-10 float-start">
                                         <input type="text" name="ad_subject" id="ad_subject" maxlength="20">
                                     </label>
-                                    <div class="position-relative pull-left">
+                                    <div class="position-relative float-start">
                                         <label class="checkbox">
                                             <input type="checkbox" name="ad_default" id="ad_default" value="1"><i></i>기본배송지로 설정
                                         </label>
@@ -419,7 +422,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_b_name">이름<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="od_b_name" class="hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_b_name" class="label hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="od_b_name" id="od_b_name" required maxlength="20">
                                     </label>
@@ -428,7 +431,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_b_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="od_b_tel" class="hidden-lg hidden-md">전화번호<strong class="sound_only"> 필수</strong></label>
+                                    <label for="od_b_tel" class="label hidden-lg hidden-md">전화번호<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="od_b_tel" id="od_b_tel" required maxlength="20">
                                     </label>
@@ -437,7 +440,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_b_hp">핸드폰</label></th>
                                 <td>
-                                    <label for="od_b_hp" class="hidden-lg hidden-md">핸드폰</label>
+                                    <label for="od_b_hp" class="label hidden-lg hidden-md">핸드폰</label>
                                     <label class="input width-200px">
                                         <input type="text" name="od_b_hp" id="od_b_hp" maxlength="20">
                                     </label>
@@ -446,16 +449,16 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row">주소</th>
                                 <td id="sod_frm_addr">
-                                    <label class="hidden-lg hidden-md">주소</label>
+                                    <label class="label hidden-lg hidden-md">주소</label>
                                     <div class="clearfix"></div>
                                     <label for="od_b_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                                    <label class="input width-150px margin-right-5 pull-left">
+                                    <label class="input width-150px m-r-5 float-start">
                                         <i class="icon-append fas fa-question-circle"></i>
                                         <input type="text" name="od_b_zip" id="od_b_zip" required class="required" size="8" maxlength="6" placeholder="우편번호">
                                         <b class="tooltip tooltip-top-right">우편번호 (주소 검색 버튼을 클릭하여 조회)</b>
                                     </label>
                                     <button type="button" class="btn-e btn-e-lg btn-e-red" onclick="win_zip('forderform', 'od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon');">주소 검색</button>
-                                    <div class="clearfix margin-bottom-10"></div>
+                                    <div class="clearfix m-b-10"></div>
                                     <label for="od_b_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label>
                                     <label class="input required-mark">
                                         <input type="text" name="od_b_addr1" id="od_b_addr1" size="60" placeholder="기본주소">
@@ -474,7 +477,7 @@ if($is_kakaopay_use) {
                             <tr>
                                 <th scope="row"><label for="od_memo">전하실말씀</label></th>
                                 <td>
-                                    <label for="od_memo" class="hidden-lg hidden-md">전하실말씀</label>
+                                    <label for="od_memo" class="label hidden-lg hidden-md">전하실말씀</label>
                                     <label class="textarea">
                                         <textarea rows="3" name="od_memo" id="od_memo"></textarea>
                                     </label>
@@ -523,7 +526,7 @@ if($is_kakaopay_use) {
                     <span>주문할인</span>
                     <strong id="od_cp_price">0</strong>원
                     <input type="hidden" name="od_cp_id" value="">
-                    <button type="button" id="od_coupon_btn" class="btn-e btn-e-dark margin-left-5" data-toggle="modal" data-target="#modal_od_coupon_apply">쿠폰적용</button>
+                    <button type="button" id="od_coupon_btn" class="btn-e btn-e-dark m-l-5" data-bs-toggle="modal" data-bs-target="#modal_od_coupon_apply">쿠폰적용</button>
                 </div>
                 <?php } ?>
                 <?php if($sc_cnt > 0) { ?>
@@ -531,24 +534,24 @@ if($is_kakaopay_use) {
                     <span>배송비할인</span>
                     <strong id="sc_cp_price">0</strong>원
                     <input type="hidden" name="sc_cp_id" value="">
-                    <button type="button" id="sc_coupon_btn" class="btn-e btn-e-dark margin-left-5">쿠폰적용</button>
+                    <button type="button" id="sc_coupon_btn" class="btn-e btn-e-dark m-l-5">쿠폰적용</button>
                 </div>
                 <?php } ?>
                 <div class="payment-info-box">
                     <span>추가배송비</span>
                     <strong id="od_send_cost2">0</strong>원
-                    <div class="font-size-11 color-grey margin-top-5">* 지역에 따라 추가되는 도선료 등의 배송비입니다.</div>
+                    <div class="f-s-13r text-gray m-t-10"><b class="text-red">*</b> 지역에 따라 추가되는 도선료 등의 배송비입니다.</div>
                 </div>
-                <div class="margin-bottom-20"></div>
+                <div class="m-b-20"></div>
                 <div id="od_tot_price" class="payment-info-box border-color-red">
-                    <span class="color-black font-bold">총 주문금액</span>
+                    <span class="text-black">총 주문금액</span>
                     <strong class="print_price"><?php echo number_format($tot_price); ?></strong>원
                 </div>
 
                 <div class="payment-select-wrap">
                     <h5 class="payment-select-title"><strong>결제수단</strong></h5>
                     <?php if (!$default['de_card_point']) { ?>
-                    <p class="color-grey font-size-11">* <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 포인트를 적립해드리지 않습니다.</p>
+                    <p class="text-gray f-s-13r m-b-15"><b class="text-red">*</b> <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 포인트를 적립해드리지 않습니다.</p>
                     <?php } ?>
 
                     <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use']) { ?>
@@ -636,8 +639,8 @@ if($is_kakaopay_use) {
                     <?php if ($temp_point) { // 회원이면서 포인트사용이면 ?>
                     <div class="payment-point-use-box">
                         <div class="payment-point-use">
-                            <label for="od_temp_point" class="pull-left">사용 포인트(<?php echo $point_unit; ?>점 단위)</label>
-                            <div class="pull-right width-120px">
+                            <label for="od_temp_point" class="float-start">사용 포인트(<?php echo $point_unit; ?>점 단위)</label>
+                            <div class="float-end width-120px">
                                 <input type="hidden" name="max_temp_point" value="<?php echo $temp_point; ?>">
                                 <label class="input">
                                 <i class="icon-append font-style-normal">점</i>
@@ -646,9 +649,9 @@ if($is_kakaopay_use) {
                             </div>
                         </div>
                         <div class="payment-point-use">
-                            <strong class="pull-left">보유포인트</strong><span class="pull-right"><?php echo display_point($member['mb_point']); ?></span>
+                            <strong class="float-start">보유포인트</strong><span class="float-end"><?php echo display_point($member['mb_point']); ?></span>
                             <div class="clearfix"></div>
-                            <strong class="pull-left">최대 사용 가능 포인트</strong><strong class="pull-right color-black"><?php echo display_point($temp_point); ?></strong>
+                            <strong class="float-start">최대 사용 가능 포인트</strong><strong class="float-end text-black"><?php echo display_point($temp_point); ?></strong>
                         </div>
                     </div>
                     <?php $multi_settle++; } ?>
@@ -669,7 +672,7 @@ if($is_kakaopay_use) {
                             <i></i>
                         </label>
                         <?php } ?>
-                        <div class="clearfix margin-bottom-10"></div>
+                        <div class="clearfix m-b-10"></div>
                         <label for="od_deposit_name">입금자명</label>
                         <label class="input">
                             <input type="text" name="od_deposit_name" id="od_deposit_name" size="10" maxlength="20">
@@ -709,32 +712,26 @@ if($is_kakaopay_use) {
 
 </form>
 
-<div id="modal_coupon_apply" class="modal fade">
-    <div class="modal-dialog modal-default">
+<div id="modal_coupon_apply" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <button type="button" class="close cp-close" data-dismiss="modal">×</button>
-                <h4 class="modal-title"><strong>쿠폰 선택</strong></h4>
+            <div class="modal-header">
+                <h5 class="modal-title f-s-20r"><strong>쿠폰 선택</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn-e btn-e-lg btn-e-dark cp-close" data-dismiss="modal"><i class="fas fa-times"></i> 닫기</button>
-            </div>
         </div>
     </div>
 </div>
 
-<div id="modal_od_coupon_apply" class="modal fade">
-    <div class="modal-dialog modal-default">
+<div id="modal_od_coupon_apply" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <button type="button" class="close od-coupon-close" data-dismiss="modal">×</button>
-                <h4 class="modal-title"><strong>쿠폰 선택</strong></h4>
+            <div class="modal-header">
+                <h5 class="modal-title f-s-20r"><strong>쿠폰 선택</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn-e btn-e-lg btn-e-dark od-coupon-close" data-dismiss="modal"><i class="fas fa-times"></i> 닫기</button>
-            </div>
         </div>
     </div>
 </div>
@@ -749,6 +746,11 @@ if(function_exists('is_use_easypay') && is_use_easypay('global_nhnkcp')){  // �
 }
 ?>
 <script>
+window.closeCouponModal = function(){
+    $('#modal_coupon_apply').modal('hide');
+    $('#modal_od_coupon_apply').modal('hide');
+};
+
 var zipcode = "";
 var form_action_url = "<?php echo $order_action_url; ?>";
 
@@ -824,7 +826,7 @@ $(function() {
 
         if(cp_dup) {
             var it_name = $("input[name='it_name["+cp_dup_idx+"]']").val();
-            if(!confirm(subj+ "쿠폰은 "+it_name+"에 사용되었습니다.\n"+it_name+"의 쿠폰을 취소한 후 적용하시겠습니까?")) {
+            if(!confirm(subj+ "쿠폰은\n"+it_name+"에 사용되었습니다.\n"+it_name+"의 쿠폰을 취소한 후 적용하시겠습니까?")) {
                 return false;
             } else {
                 coupon_cancel($cp_dup_el);
@@ -849,7 +851,7 @@ $(function() {
         cp_form_close();
         $cp_btn_el.text("쿠폰변경").focus();
         if(!$cp_row_el.find(".cp_cancel").size())
-            $cp_btn_el.after("<button type=\"button\" class=\"cp_cancel\">취소</button>");
+            $cp_btn_el.after("<button type=\"button\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
     $(document).on("click", ".cp-close", function() {
@@ -922,7 +924,7 @@ $(function() {
         od_coupon_close();
         $("#od_coupon_btn").text("쿠폰변경").focus();
         if(!$("#od_coupon_cancel").size())
-            $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"cp_cancel\">취소</button>");
+            $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
     $(document).on("click", ".od-coupon-close", function() {
@@ -987,7 +989,7 @@ $(function() {
         $("#sc_coupon_frm").remove();
         $("#sc_coupon_btn").text("쿠폰변경").focus();
         if(!$("#sc_coupon_cancel").size())
-            $("#sc_coupon_btn").after("<button type=\"button\" id=\"sc_coupon_cancel\" class=\"cp_cancel\">취소</button>");
+            $("#sc_coupon_btn").after("<button type=\"button\" id=\"sc_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
     $(document).on("click", "#sc_coupon_close", function() {

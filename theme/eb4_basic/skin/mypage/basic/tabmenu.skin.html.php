@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
             <span<?php if ($tg == 'timeline') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'timeline'); ?>">타임라인</a></span>
             <span<?php if ($tg == 'favorite') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'favorite'); ?>">관심게시판</a></span>
             <?php if ($eyoom['is_community_theme'] == 'y') { ?>
-            <span<?php if ($tg == 'followinggul') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'followinggul'); ?>">팔로윙글</a></span>
+            <span<?php if ($tg == 'followinggul') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'followinggul'); ?>">팔로잉글</a></span>
             <?php } ?>
             <span<?php if ($tg == 'subscribe') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'subscribe'); ?>">구독글</a></span>
             <span<?php if ($tg == 'pinboard') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'pinboard'); ?>">핀보드</a></span>

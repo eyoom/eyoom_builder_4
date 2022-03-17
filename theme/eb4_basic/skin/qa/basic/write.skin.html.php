@@ -4,11 +4,12 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.board-write textarea {min-height:250px}
+.board-write {font-size:.9375rem}
+.board-write .board-write-title {position:relative;border-bottom:1px solid #959595;padding-bottom:15px;margin-bottom:15px}
 /* Ckeditor */
 .board-write a.cke_button {padding:2px 5px}
 .board-write a.cke_button_on {padding:1px 4px}
@@ -18,13 +19,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .btn_cke_sc {padding:0 10px}
 .cke_sc_def {padding:10px;margin-bottom:10px;margin-top:10px}
 .cke_sc_def button {padding:3px 15px;background:#555555;color:#fff;border:none}
-/* Summernote */
-.eyoom-form .note-editor *, .eyoom-form .note-editor *:after, .eyoom-form .note-editor *:before {box-sizing:border-box;-moz-box-sizing:border-box}
-.eyoom-form .note-editor.panel-default>.panel-heading {background-color:#eaecee;border:0;border-bottom:1px solid #A9A9A9}
-.panel-heading.note-toolbar .note-color .dropdown-menu {padding-top:6px;padding-bottom:6px;padding-left:1px}
 </style>
 
 <div class="board-write">
+    <h5 class="board-write-title">
+        <strong><?php echo $g5['title']; ?></strong>
+    </h5>
+
     <form name="fwrite" id="fwrite" action="<?php echo $action_url; ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="qa_id" value="<?php echo $qa_id; ?>">
@@ -35,19 +36,22 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php if ($is_dhtml_editor) { ?>
     <input type="hidden" name="qa_html" value="1">
     <?php } ?>
+
     <?php if ($category_option) { ?>
-    <section class="row">
-        <div class="col col-4">
-            <label class="select">
-                <select name="qa_category" id="qa_category" required class="form-control">
-                    <option value="">선택하세요 - 필수</option>
-                    <?php echo $category_option; ?>
-                </select>
-                <i></i>
-            </label>
+    <section>
+        <div class="row">
+            <div class="col col-4">
+                <label class="select">
+                    <select name="qa_category" id="qa_category" required class="form-control">
+                        <option value="">분류 선택 - 필수</option>
+                        <?php echo $category_option; ?>
+                    </select>
+                    <i></i>
+                </label>
+            </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
+    <p class="f-s-13r text-gray m-b-20"><span class="text-crimson">*</span> '구매한 유료상품 관련' 문의는 해당 상품명을 꼭 알려주시기 바랍니다.</p>
     <?php } ?>
     <?php if ($is_email) { ?>
     <section>
@@ -63,7 +67,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <?php } ?>
     <?php if ($is_hp) { ?>
     <section>
@@ -81,7 +84,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php } ?>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <?php } ?>
     <section>
         <label for="qa_subject" class="label">제목<strong class="sound_only"> 필수</strong></label>
@@ -89,7 +91,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <input type="text" name="qa_subject" value="<?php echo $write['qa_subject']; ?>" id="qa_subject" required size="50" maxlength="255">
         </label>
     </section>
-    <div class="margin-hr-15"></div>
     <?php if (!$is_dhtml_editor) { ?>
     <section>
         <div class="row">
@@ -98,20 +99,19 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <?php } ?>
-    <section>
+    <section class="m-b-30">
         <label class="label">문의 내용</label>
         <label class="textarea textarea-resizable">
             <?php echo $editor_html; ?>
         </label>
     </section>
-    <div class="margin-hr-10"></div>
     <section>
         <div class="row">
             <div class="col col-12">
-                <label for="file" class="input input-file">
-                    <div class="button bg-color-light-grey"><input type="file" name="bf_file[1]" title="파일첨부 1 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">파일 1 선택</div><input type="text" readonly>
+                <label class="input">
+                    <input type="file" class="form-control" name="bf_file[1]">
+                    <b class="tooltip tooltip-top-right">파일첨부 1 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능</b>
                 </label>
             </div>
             <div class="col col-12">
@@ -121,12 +121,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <section>
         <div class="row">
             <div class="col col-12">
-                <label for="file" class="input input-file">
-                    <div class="button bg-color-light-grey"><input type="file" name="bf_file[2]" title="파일첨부 2 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">파일 2 선택</div><input type="text" readonly>
+                <label class="input">
+                    <input type="file" class="form-control" name="bf_file[2]">
+                    <b class="tooltip tooltip-top-right">파일첨부 2 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능</b>
                 </label>
             </div>
             <div class="col col-12">
@@ -136,31 +136,27 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <div class="text-center">
-        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xlg btn-e-red">
-        <a href="<?php echo $list_href; ?>" class="btn-e btn-e-xlg btn-e-dark">목록</a>
+        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xl btn-e-crimson">
+        <a href="<?php echo $list_href; ?>" class="btn-e btn-e-xl btn-e-dark">목록</a>
     </div>
     </form>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
 function html_auto_br(obj) {
     if (obj.checked) {
-        swal({
+        Swal.fire({
             title: "자동 줄바꿈",
-            text: "자동 줄바꿈을 하시겠습니까?\n자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
-            type: "warning",
+            text: "자동 줄바꿈을 하시겠습니까? 자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
+            icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#FDAB29",
+            confirmButtonColor: "#00897b",
             confirmButtonText: "승인",
-            cancelButtonText: "취소",
-            closeOnConfirm: true,
-            closeOnCancel: true
-        },
-        function(isConfirm){
-            if (isConfirm) {
+            cancelButtonText: "취소"
+        }).then((result) => {
+            if (result.isConfirmed) {
                 obj.value = "2";
             } else {
                 obj.value = "1";
@@ -193,25 +189,23 @@ function fwrite_submit(f) {
     });
 
     if (subject) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "제목에 금지단어 '<strong class='color-red'>"+subject+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            html: "제목에 금지단어 '<span class='text-crimson'>"+subject+"</span>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         f.qa_subject.focus();
         return false;
     }
-
+    이윰빌더 및 이윰 테마 설치가 잘 안되거나 정상 출력이 안돼요.
     if (content) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "내용에 금지단어 '<strong class='color-red'>"+content+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            html: "내용에 금지단어 '<span class='text-crimson'>"+content+"</span>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         if (typeof(ed_qa_content) != "undefined")
@@ -224,36 +218,16 @@ function fwrite_submit(f) {
     <?php if ($is_hp) { ?>
     var hp = f.qa_hp.value.replace(/[0-9\-]/g, "");
     if (hp.length > 0) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "휴대폰번호는 <strong class='color-red'>숫자, -</strong> 으로만 입력해 주십시오",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            html: "휴대폰번호는 <span class='text-crimson'>숫자, -</span> 으로만 입력해 주십시오",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         return false;
     }
     <?php } ?>
-
-    $.ajax({
-        type: "POST",
-        url: g5_bbs_url+"/ajax.write.token.php",
-        data: { 'token_case' : 'qa_write' },
-        cache: false,
-        async: false,
-        dataType: "json",
-        success: function(data) {
-            if (typeof data.token !== "undefined") {
-                token = data.token;
-
-                if(typeof f.token === "undefined")
-                    $(f).prepend('<input type="hidden" name="token" value="">');
-
-                $(f).find("input[name=token]").val(token);
-            }
-        }
-    });
 
     document.getElementById("btn_submit").disabled = "disabled";
 

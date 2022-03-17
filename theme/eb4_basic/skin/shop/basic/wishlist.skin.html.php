@@ -6,38 +6,41 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
+.shop-wishlist {font-size:.9375rem}
 .shop-wishlist .wishlist-container {margin-left:-10px;margin-right:-10px}
 .shop-wishlist .wishlist-box {position:relative;width:25%}
 .shop-wishlist .wishlist-box-pd {padding:10px}
-.shop-wishlist .wishlist-box-in {position:relative;border:1px solid #dadada;padding:10px;background:#fff}
+.shop-wishlist .wishlist-box-in {position:relative;border:1px solid #e5e5e5;padding:10px;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
+.shop-wishlist .wishlist-box-in:hover {border-color:#757575}
 .shop-wishlist .wishlist-box .wishlist-img {margin-bottom:15px}
-.shop-wishlist .wishlist-box .wishlist-img img {display:block;width:100% \9;max-width:100%;height:auto}
+.shop-wishlist .wishlist-box .wishlist-img img {display:block;max-width:100%;height:auto}
 .shop-wishlist .wishlist-info {position:relative}
-.shop-wishlist .wishlist-desc h5 {position:relative;overflow:hidden;height:42px;margin:0 0 5px;font-size:15px;line-height:1.5}
-.shop-wishlist .wishlist-desc .wishlist-desc-date {font-size:12px;color:#757575}
+.shop-wishlist .wishlist-desc h5 {position:relative;overflow:hidden;margin:0 0 5px;font-size:1.125rem;font-weight:700;line-height:1.4;height:48px;color:#000}
+.shop-wishlist .wishlist-desc .wishlist-desc-date {color:#757575}
 .shop-wishlist .wishlist-desc .wishlist-desc-date i {color:#b5b5b5}
-.shop-wishlist .wishlist-bottom {position:relative;height:30px;background:#f2f2f2;padding:0 5px;margin-top:10px}
+.shop-wishlist .wishlist-bottom {position:relative;height:30px;margin-top:10px}
 .shop-wishlist .wishlist-bottom .wishlist-check {line-height:30px}
 .shop-wishlist .wishlist-bottom .wishlist-check .checkbox i {top:7px}
 .shop-wishlist .wishlist-bottom .wishlist-del-btn {position:absolute;top:0;right:0;width:30px;height:30px;line-height:30px;text-align:center;color:#fff;background:#4B4B4D}
 .shop-wishlist .wishlist-bottom .wishlist-del-btn:hover {background:#2B2B2E}
 .shop-wishlist .wishlist-act-btn {margin-top:30px;text-align:center}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width:991px) {
+.shop-wishlist .wishlist-box-in:hover .wishlist-desc h5 {text-decoration:underline}
+@media (max-width:1199px) {
+    .shop-wishlist .wishlist-container {margin-left:-5px;margin-right:-5px}
     .shop-wishlist .wishlist-box {width:33.33333%}
+    .shop-wishlist .wishlist-box-pd {padding:5px}
+}
+@media (max-width:991px) {
+    .shop-wishlist .wishlist-box {width:50%}
 }
 @media (max-width:767px) {
-    .shop-wishlist .wishlist-container {margin-left:-5px;margin-right:-5px}
+    .shop-wishlist .wishlist-container {margin-left:-2px;margin-right:-2px}
     .shop-wishlist .wishlist-box {width:50%}
-    .shop-wishlist .wishlist-box-pd {padding:5px}
-    .shop-wishlist .wishlist-desc h5 {font-size:13px;height:38px}
+    .shop-wishlist .wishlist-box-pd {padding:5px 2px}
 }
-<?php } ?>
 </style>
 
 <?php /* ---------- 위시리스트 시작 ---------- */ ?>
-<div id="fakeloader"></div>
-
 <div class="shop-wishlist">
     <form name="fwishlist" method="post" action="<?php echo G5_SHOP_URL; ?>/cartupdate.php">
     <input type="hidden" name="act" value="multi">
@@ -62,7 +65,7 @@ if (!defined('_EYOOM_')) exit;
                         <div class="wishlist-bottom">
                             <div class="wishlist-check eyoom-form">
                                 <?php if(is_soldout($list[$i]['it_id'])) { // 품절검사 ?>
-                                <span class="font-size-12 color-red">품절</span>
+                                <strong class="text-crimson">품절</strong>
                                 <?php } else { //품절이 아니면 체크할수 있도록한다 ?>
                                 <label for="chk_it_id_<?php echo $i; ?>" class="sound_only"><?php echo $list[$i]['it_name']; ?></label>
                                 <label class="checkbox">
@@ -75,42 +78,29 @@ if (!defined('_EYOOM_')) exit;
                                 <input type="hidden" name="io_value[<?php echo $list[$i]['it_id']; ?>][0]" value="<?php echo $list[$i]['it_name']; ?>">
                                 <input type="hidden" name="ct_qty[<?php echo $list[$i]['it_id']; ?>][0]" value="1">
                             </div>
-                            <a href="<?php echo G5_SHOP_URL; ?>/wishupdate.php?w=d&amp;wi_id=<?php echo $list[$i]['wi_id']; ?>" class="wishlist-del-btn"><i class="fas fa-trash" aria-hidden="true"></i><span class="sound_only">삭제</span></a>
+                            <a href="<?php echo G5_SHOP_URL; ?>/wishupdate.php?w=d&amp;wi_id=<?php echo $list[$i]['wi_id']; ?>" class="wishlist-del-btn"><i class="far fa-trash-alt" aria-hidden="true"></i><span class="sound_only">삭제</span></a>
                         </div>
-                   </div>
+                    </div>
                 </div>
             </div>
         </div>
         <?php } ?>
-
-        <?php if (count((array)$list)==0) {?>
-        <p class="text-center font-size-14 color-grey margin-top-20"><i class="fa fa-exclamation-circle"></i> 보관함이 비었습니다.</p>
-        <?php } ?>
     </div>
+    <?php if (count((array)$list)==0) {?>
+    <p class="text-center text-gray m-t-50 m-b-50"><i class="fa fa-exclamation-circle"></i> 보관함이 비었습니다.</p>
+    <?php } ?>
 
     <div class="wishlist-act-btn">
-        <button type="submit" class="btn-e btn-e-brd btn-e-xxlg btn-e-default" onclick="return fwishlist_check(document.fwishlist,'');"><i class="fas fa-shopping-cart" aria-hidden="true"></i> 장바구니 담기</button>
-        <button type="submit" class="btn-e btn-e-xxlg btn-e-red" onclick="return fwishlist_check(document.fwishlist,'direct_buy');"><i class="fas fa-credit-card" aria-hidden="true"></i> 주문하기</button>
+        <button type="submit" class="btn-e btn-e-brd btn-e-xl btn-e-dark" onclick="return fwishlist_check(document.fwishlist,'');"><i class="fas fa-shopping-cart m-r-5"></i>장바구니 담기</button>
+        <button type="submit" class="btn-e btn-e-xl btn-e-red" onclick="return fwishlist_check(document.fwishlist,'direct_buy');"><i class="fas fa-credit-card m-r-5"></i>주문하기</button>
     </div>
     </form>
 </div>
 <?php /* ---------- 위시리스트 끝 ---------- */ ?>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script>
-$('#fakeloader').fakeLoader({
-    timeToHide:3000,
-    zIndex:"11",
-    spinner:"spinner6",
-    bgColor:"#fff",
-});
-
-$(window).load(function(){
-    $('#fakeloader').fadeOut(300);
-});
-
 $(document).ready(function(){
     var $container = $('.wishlist-container');
     $container.imagesLoaded(function() {

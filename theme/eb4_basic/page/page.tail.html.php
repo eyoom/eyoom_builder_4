@@ -5,6 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
+<?php if(0) { ?>
 <?php if ($config['cf_map_google_id'] || $config['cf_map_naver_id'] || $config['cf_map_daum_id']) { ?>
 <?php if ($config['cf_map_google_id']) { ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config['cf_map_google_id']; ?>" async defer></script>
@@ -34,4 +35,5 @@ $(function(){
     });
 });
 </script>
+<?php } ?>
 <?php } ?>

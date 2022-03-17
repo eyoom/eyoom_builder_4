@@ -22,6 +22,8 @@ if (!$exists_db_config || !$exists_eyoom_config) {
     exit;
 }
 
+$tmp_bo_table   = array ("notice", "qa", "free", "gallery");
+
 $mysql_host         = defined('G5_MYSQL_HOST')      ? G5_MYSQL_HOST     : safe_install_string_check($_POST['mysql_host']);
 $mysql_user         = defined('G5_MYSQL_USER')      ? G5_MYSQL_USER     : safe_install_string_check($_POST['mysql_user']);
 $mysql_pass         = defined('G5_MYSQL_PASSWORD')  ? G5_MYSQL_PASSWORD : safe_install_string_check($_POST['mysql_pass']);
@@ -301,7 +303,6 @@ if($g5_install || !$result) {
     sql_query(" insert into `{$table_prefix}group` set gr_id = '$tmp_gr_id', gr_subject = '$tmp_gr_subject' ", true, $dblink);
 
     // 게시판 생성
-    $tmp_bo_table   = array ("notice", "qa", "free", "gallery");
     $tmp_bo_subject = array ("공지사항", "질문답변", "자유게시판", "갤러리");
     for ($i=0; $i<count((array)$tmp_bo_table); $i++)
     {
@@ -640,12 +641,13 @@ fwrite($f, "\$g5['autosave_table'] = G5_TABLE_PREFIX.'autosave'; // 게시글 �
 fwrite($f, "\$g5['cert_history_table'] = G5_TABLE_PREFIX.'cert_history'; // 인증내역 테이블\n");
 fwrite($f, "\$g5['qa_config_table'] = G5_TABLE_PREFIX.'qa_config'; // 1:1문의 설정테이블\n");
 fwrite($f, "\$g5['qa_content_table'] = G5_TABLE_PREFIX.'qa_content'; // 1:1문의 테이블\n");
-fwrite($f, "\$g5['content_table'] = G5_TABLE_PREFIX.'content'; // 내용(콘텐츠)정보 테이블\n");
+fwrite($f, "\$g5['content_table'] = G5_TABLE_PREFIX.'content'; // 내용(컨텐츠)정보 테이블\n");
 fwrite($f, "\$g5['faq_table'] = G5_TABLE_PREFIX.'faq'; // 자주하시는 질문 테이블\n");
 fwrite($f, "\$g5['faq_master_table'] = G5_TABLE_PREFIX.'faq_master'; // 자주하시는 질문 마스터 테이블\n");
 fwrite($f, "\$g5['new_win_table'] = G5_TABLE_PREFIX.'new_win'; // 새창 테이블\n");
 fwrite($f, "\$g5['menu_table'] = G5_TABLE_PREFIX.'menu'; // 메뉴관리 테이블\n");
 fwrite($f, "\$g5['social_profile_table'] = G5_TABLE_PREFIX.'member_social_profiles'; // 소셜 로그인 테이블\n");
+fwrite($f, "\$g5['member_cert_history_table'] = G5_TABLE_PREFIX.'member_cert_history'; // 본인인증 변경내역 테이블\n");
 
 if($g5_shop_install) {
     fwrite($f, "\n");

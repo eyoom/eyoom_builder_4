@@ -4,26 +4,27 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/venobox/venobox.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/venobox/venobox.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.board-write .board-setup {position:relative;border:1px solid #d5d5d5;height:30px;margin-bottom:20px}
+.board-write {font-size:.9375rem}
+.board-write .board-setup {position:relative;border:1px solid #d5d5d5;height:38px;margin-bottom:20px}
 .board-write .board-setup .select {position:absolute;top:-1px;left:-1px;display:inline-block;width:200px}
 .board-write .board-setup-btn-box {position:absolute;top:-1px;right:-1px;display:inline-block;width:420px}
-.board-write .board-setup-btn {float:left;width:25%;height:30px;line-height:30px;color:#fff;text-align:center;font-size:12px}
-.board-write .board-setup-btn:nth-child(odd) {background:#59595B}
-.board-write .board-setup-btn:nth-child(even) {background:#676769}
+.board-write .board-setup-btn {float:left;width:25%;height:38px;line-height:38px;color:#fff;text-align:center;font-size:.8125rem}
+.board-write .board-setup-btn:nth-child(odd) {background-color:#000}
+.board-write .board-setup-btn:nth-child(even) {background-color:#3c3c3e}
 .board-write .board-setup-btn:hover {opacity:0.8}
-.board-write .board-write-title {position:relative;border-bottom:1px solid #b5b5b5;padding-bottom:15px}
+.board-write .board-write-title {position:relative;border-bottom:1px solid #959595;padding-bottom:15px;margin-bottom:15px}
 .board-write .blind {position:absolute;top:-10px;left:-100000px;display:none}
-.board-write .write-edit-wrap #wr_content {display:block;box-sizing:border-box;-moz-box-sizing:border-box;width:100%;min-height:200px;padding:6px 10px;outline:none;border-width:1px;border-style:solid;border-radius:0;background:#FFF;color:#353535;appearance:normal;-moz-appearance:none;-webkit-appearance:none;resize:vertical}
-.board-write .write-option-btn {float:left;padding:0 15px;margin-bottom:3px;height:24px;line-height:24px;color:#fff;text-align:center;font-size:11px}
-.board-write .write-option-btn:nth-child(odd) {background:#59595B}
-.board-write .write-option-btn:nth-child(even) {background:#676769}
+.board-write .write-edit-wrap #wr_content {display:block;width:100%;min-height:200px;padding:6px 10px;outline:none;border-width:1px;border-style:solid;border-radius:0;background:#FFF;color:#353535;appearance:normal;-moz-appearance:none;-webkit-appearance:none;resize:vertical}
+.board-write .write-option-btn {float:left;padding:0 15px;margin-bottom:3px;height:32px;line-height:32px;color:#fff;text-align:center;font-size:.8125rem}
+.board-write .write-option-btn:nth-child(odd) {background:#000}
+.board-write .write-option-btn:nth-child(even) {background:#3c3c3e}
 .board-write .write-option-btn:hover {color:#fff;opacity:0.8}
-.board-write .write-collapse-box {margin-top:10px;background:#f8f8f8;border:1px solid #d5d5d5;padding:15px 10px}
+.board-write .write-collapse-box {margin:10px 0;background:#f8f8f8;border:1px solid #d5d5d5;padding:15px 10px}
 .board-write #modal_video_note .table-list-eb .table thead>tr>th {text-align:left}
 /* Auto Save */
 .autosave-btn {position:absolute;top:0;right:0}
@@ -33,19 +34,20 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 #autosave_pop div {text-align:right}
 #autosave_pop button {margin:0;padding:0;border:0;background:transparent;margin-left:10px}
 #autosave_pop ul {margin:10px 0;padding:0;border-top:1px solid #e9e9e9;list-style:none}
-#autosave_pop li {padding:7px 0;border-bottom:1px solid #e9e9e9;zoom:1;font-size:12px}
+#autosave_pop li {padding:7px 0;border-bottom:1px solid #e9e9e9;zoom:1;font-size:.75rem}
 #autosave_pop li:after {display:block;visibility:hidden;clear:both;content:""}
 #autosave_pop a {display:block;float:left}
 #autosave_pop span {display:block;float:right}
 #autosave_pop .autosave_heading {text-align:left}
-#autosave_pop strong {font-size:13px}
+#autosave_pop strong {font-size:.8125rem}
 #autosave_pop .fa-times {position:absolute;top:10px;right:15px}
 .autosave_close {cursor:pointer}
 .autosave_content {display:none}
 /* Tag */
-#tag-box {border:1px dashed #c5c5c5;min-height:20px;padding:5px;background:#fff;margin-top:15px}
-#tag-cloud div {display:inline-block;line-height:1;background:#676769;padding:3px 7px;margin:2px 3px;font-size:11px;color:#fff;border-radius:2px !important}
-#tag-cloud div i {cursor:pointer}
+#tag-box {position:relative;border:1px dashed #c5c5c5;min-height:47px;padding:10px;background:#fafafa;margin-top:15px}
+#tag-box:before {content:"태그 박스";display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.8125rem;color:#d5d5d5}
+#tag-cloud div {position:relative;display:inline-block;line-height:1;background:#676769;padding:5px 10px;margin:2px 3px;font-size:.9375rem;color:#fff;border-radius:2px;z-index:1}
+#tag-cloud div i {cursor:pointer;margin-left:5px}
 /* Ckeditor */
 .board-write a.cke_button {padding:2px 5px}
 .board-write a.cke_button_on {padding:1px 4px}
@@ -55,10 +57,6 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 .btn_cke_sc {padding:0 10px}
 .cke_sc_def {padding:10px;margin-bottom:10px;margin-top:10px}
 .cke_sc_def button {padding:3px 15px;background:#555555;color:#fff;border:none}
-/* Summernote */
-.eyoom-form .note-editor *, .eyoom-form .note-editor *:after, .eyoom-form .note-editor *:before {box-sizing:border-box;-moz-box-sizing:border-box}
-.eyoom-form .note-editor.panel-default>.panel-heading {background-color:#eaecee;border:0;border-bottom:1px solid #A9A9A9}
-.panel-heading.note-toolbar .note-color .dropdown-menu {padding-top:6px;padding-bottom:6px;padding-left:1px}
 /* Map */
 #map_canvas {width:1000px;height:400px;display:none}
 <?php if ($wmode) { ?>
@@ -88,9 +86,9 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
     </div>
     <?php } ?>
 
-    <h4 class="board-write-title">
+    <h5 class="board-write-title">
         <strong><?php echo $g5['title']; ?></strong>
-    </h4>
+    </h5>
 
     <form name="fwrite" id="fwrite" action="<?php echo $action_url; ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
@@ -118,12 +116,12 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
     <input type="hidden" name="eb_10" id="eb_10" value="<?php echo $eb_10; ?>">
 
     <?php if (($is_name) || ($is_password && !$is_admin) || ($is_email) || ($is_homepage)) { ?>
-    <section class="margin-top-20">
+    <section>
         <div class="row">
             <?php if ($is_name) { ?>
             <div class="col col-3">
                 <label for="wr_name" class="label">이름<strong class="sound_only">필수</strong></label>
-                <label class="input required-mark margin-bottom-10">
+                <label class="input required-mark m-b-10">
                     <i class="icon-append fas fa-user"></i>
                     <input type="text" name="wr_name" value="<?php echo $name; ?>" id="wr_name" required size="10" maxlength="20">
                 </label>
@@ -132,7 +130,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <?php if ($is_password && !$is_admin) { ?>
             <div class="col col-3">
                 <label for="wr_password" class="label">비밀번호<strong class="sound_only">필수</strong></label>
-                <label class="input required-mark margin-bottom-10">
+                <label class="input required-mark m-b-10">
                     <i class="icon-append fas fa-lock"></i>
                     <input type="password" name="wr_password" id="wr_password" required maxlength="20">
                 </label>
@@ -141,7 +139,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <?php if ($is_email) { ?>
             <div class="col col-3">
                 <label for="wr_email" class="label">이메일</label>
-                <label class="input margin-bottom-10">
+                <label class="input m-b-10">
                     <i class="icon-append fas fa-envelope"></i>
                     <input type="text" name="wr_email" value="<?php echo $email; ?>" id="wr_email" size="50" maxlength="100">
                 </label>
@@ -150,7 +148,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <?php if ($is_homepage) { ?>
             <div class="col col-3">
                 <label for="wr_homepage" class="label">홈페이지</label>
-                <label class="input margin-bottom-10">
+                <label class="input m-b-10">
                     <i class="icon-append fas fa-home"></i>
                     <input type="text" name="wr_homepage" value="<?php echo $homepage; ?>" id="wr_homepage" size="50">
                 </label>
@@ -158,7 +156,6 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <?php } ?>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <?php } ?>
     <section>
         <div class="row">
@@ -166,7 +163,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <div class="col col-4">
                 <label class="select">
                     <select name="ca_name" id="ca_name" required class="form-control">
-                        <option value="">선택하세요 - 필수</option>
+                        <option value="">분류 선택 - 필수</option>
                         <?php echo $category_option; ?>
                     </select>
                     <i></i>
@@ -208,10 +205,9 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <section>
         <div class="row">
-            <div class="col col-12 md-margin-bottom-10">
+            <div class="col col-12 md-m-b-10">
                 <div class="position-relative">
                     <label for="wr_subject" class="label">
                         제목<strong class="sound_only"> 필수</strong>
@@ -222,7 +218,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php if ($is_member) { //임시 저장된 글 기능 ?>
                     <span class="autosave-btn">
                         <script src="<?php echo G5_URL; ?>/js/autosave.js"></script>
-                        <button type="button" id="btn_autosave" class="btn-e btn-e-xs btn-e-dark position-relative">임시 저장된 글 <span id="autosave_count" class="badge badge-red rounded"><?php echo $autosave_count; ?></span></button>
+                        <button type="button" id="btn_autosave" class="btn-e btn-dark position-relative">임시 저장된 글 <span id="autosave_count" class="badge badge-red rounded"><?php echo $autosave_count; ?></span></button>
                         <div id="autosave_pop">
                             <div class="autosave_heading">
                                 <strong>임시 저장된 글 목록</strong>
@@ -238,9 +234,8 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <?php if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && $member['mb_level'] >= $eyoom_board['bo_tag_level']) { ?>
-    <section>
+    <section class="m-b-20">
         <label class="label">태그 입력</label>
         <div class="input input-button">
             <i class="icon-prepend fas fa-tags"></i>
@@ -260,45 +255,44 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
         <input type="hidden" name="wr_tag" id="wr_tag" value="<?php echo $write['wr_tag']; ?>">
         <input type="hidden" name="del_tag" id="del_tag" value="">
     </section>
-    <div class="margin-hr-10"></div>
     <?php } ?>
     <section>
         <div class="wr_content">
-            <div id="write-option">
+            <div id="write_option">
                 <div class="panel panel-default">
                     <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
-                    <a class="write-option-btn" data-toggle="collapse" data-parent="#write-option" href="#collapse-video-wr"><i class="fas fa-play-circle"></i> 동영상</a>
+                    <a class="write-option-btn" data-bs-toggle="collapse" href="#collapse-video-wr"><i class="fas fa-play-circle"></i> 동영상</a>
                     <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_soundcloud'] == '1') { ?>
-                    <a class="write-option-btn" data-toggle="collapse" data-parent="#write-option" href="#collapse-sound-wr"><i class="fab fa-soundcloud"></i> 사운드클라우드</a>
+                    <a class="write-option-btn" data-bs-toggle="collapse" href="#collapse-sound-wr"><i class="fab fa-soundcloud"></i> 사운드클라우드</a>
                     <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_map'] == '1') { ?>
-                    <a class="write-option-btn" data-toggle="collapse" data-parent="#write-option" href="#collapse-map-wr"><i class="fas fa-map-marker-alt"></i> 지도</a>
+                    <a class="write-option-btn" data-bs-toggle="collapse" href="#collapse-map-wr"><i class="fas fa-map-marker-alt"></i> 지도</a>
                     <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
-                    <a class="write-option-btn pull-right emoticon" data-vbtype="iframe" title="이모티콘" href="<?php echo EYOOM_CORE_URL;?>/board/emoticon.php"><i class="far fa-smile"></i> 이모티콘</a>
+                    <a class="write-option-btn float-end emoticon" data-vbtype="iframe" title="이모티콘" href="<?php echo EYOOM_CORE_URL;?>/board/emoticon.php"><i class="far fa-smile"></i> 이모티콘</a>
                     <?php } ?>
                     <div class="clearfix"></div>
                     <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
-                    <div id="collapse-video-wr" class="panel-collapse collapse">
+                    <div id="collapse-video-wr" class="panel-collapse collapse" data-bs-parent="#write_option">
                         <div class="write-collapse-box">
                             <div class="input input-button">
                                 <input type="text" id="video_url" placeholder="동영상주소 입력">
                                 <div class="button"><input type="button" id="btn_video" onclick="return false;">적용하기</div>
                             </div>
                             <div class="note">
-                                <span class="color-red">*</span> <a href="#" data-toggle="modal" data-target="#modal_video_note"><u>지원 동영상 서비스 목록 보기</u></a>
+                                <span class="text-crimson">*</span> <a href="#" data-bs-toggle="modal" data-bs-target="#modal_video_note"><u>지원 동영상 서비스 목록 보기</u></a>
                             </div>
-                            <div id="modal_video_note" class="modal fade">
-                                <div class="modal-dialog modal-sm">
+                            <div id="modal_video_note" class="modal fade" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">×</button>
-                                            <h4 class="modal-title"><i class="fas fa-play-circle color-grey"></i> <strong>지원 동영상 서비스 목록</strong></h4>
+                                            <h5 class="modal-title f-s-20r"><i class="fas fa-play-circle text-gray m-r-7"></i><strong>지원 동영상 서비스 목록</strong></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="table-list-eb">
-                                                <table class="table font-size-12">
+                                                <table class="table">
                                                     <thead>
                                                         <tr><th>서비스명</th><th>URL 주소</th></tr>
                                                     </thead>
@@ -317,9 +311,6 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button data-dismiss="modal" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +318,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     </div>
                     <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_soundcloud'] == '1') { ?>
-                    <div id="collapse-sound-wr" class="panel-collapse collapse">
+                    <div id="collapse-sound-wr" class="panel-collapse collapse" data-bs-parent="#write_option">
                         <div class="write-collapse-box">
                             <div class="input input-button">
                                 <input type="text" id="scloud_url" placeholder="사운드클라우드 음원주소 입력">
@@ -338,15 +329,15 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     </div>
                     <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_map'] == '1') { ?>
-                    <div id="collapse-map-wr" class="panel-collapse collapse">
+                    <div id="collapse-map-wr" class="panel-collapse collapse" data-bs-parent="#write_option">
                         <?php if ($config['cf_map_google_id'] || $config['cf_map_naver_id'] || $config['cf_map_daum_id']) { ?>
                         <div class="write-collapse-box">
                             <div class="row">
-                                <div class="col col-6 md-margin-bottom-10">
+                                <div class="col col-6 md-m-b-10">
                                     <div class="input input-button">
                                         <i class="icon-prepend fas fa-question-circle"></i>
                                         <input type="text" name="map_zip" id="map_zip" size="5" maxlength="6" readonly>
-                                        <b class="tooltip tooltip-top-left">우편번호 - 우측 <span class="color-yellow">주소검색</span> 클릭하여 검색</b>
+                                        <b class="tooltip tooltip-top-left">우편번호 - 우측 <span class="text-orange">주소검색</span> 클릭하여 검색</b>
                                         <div class="button"><input type="button" onclick="win_zip('fwrite', 'map_zip', 'map_addr1', 'map_addr2', 'map_addr3', 'map_addr_jibeon');"><i class="fas fa-search"></i> 주소검색</div>
                                     </div>
                                 </div>
@@ -368,13 +359,13 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                                     <?php } ?>
                                 </div>
                             </div>
-                            <div class="margin-bottom-10"></div>
+                            <div class="m-b-10"></div>
                             <div class="row">
                                 <div class="col col-12">
                                     <label class="input">
                                         <input type="text" name="map_addr1" id="map_addr1" size="50">
                                     </label>
-                                    <div class="note margin-bottom-10"><strong>Note:</strong> 기본주소</div>
+                                    <div class="note m-b-10"><strong>Note:</strong> 기본주소</div>
                                 </div>
                             </div>
                             <div class="row">
@@ -382,16 +373,15 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                                     <label class="input">
                                         <input type="text" name="map_addr2" id="map_addr2" size="50">
                                     </label>
-                                    <div class="note margin-bottom-10"><strong>Note:</strong> 상세주소</div>
+                                    <div class="note m-b-10"><strong>Note:</strong> 상세주소</div>
                                 </div>
                                 <div class="col col-6">
                                     <label class="input">
                                         <input type="text" name="map_name" id="map_name" size="50">
                                     </label>
-                                    <div class="note margin-bottom-10"><strong>Note:</strong> 장소명</div>
+                                    <div class="note m-b-10"><strong>Note:</strong> 장소명</div>
                                 </div>
                             </div>
-                            <div class="margin-hr-10"></div>
                             <div class="row">
                                 <div class="col col-12">
                                     <input type="hidden" name="map_addr3" id="map_addr3" value="">
@@ -412,7 +402,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php } ?>
                 </div>
             </div>
-            <div class="margin-bottom-15"></div>
+            <div class="m-b-15"></div>
             <label class="label" for="wr_content">본문 내용</label>
             <div class="wr_content  <?php echo $is_dhtml_editor ? $config['cf_editor'] : ''; ?>">
                 <?php if($write_min || $write_max) { ?>
@@ -430,7 +420,6 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
         </div>
     </section>
-    <div class="margin-hr-10"></div>
     <section>
         <?php $wl_cnt = count((array)$wr_link); ?>
         <?php for ($i=1; $i<=$wl_cnt; $i++) { ?>
@@ -444,7 +433,6 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                 </label>
             </div>
         </div>
-        <div class="margin-hr-10"></div>
         <?php } ?>
     </section>
     <section>
@@ -452,13 +440,14 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
         <?php for ($i=0; $i<$wf_cnt; $i++) { ?>
         <div class="row">
             <div class="col col-12">
-                <label class="label">파일 <?php echo $i+1; ?> 업로드</label>
-                <label for="file" class="input input-file">
-                    <div class="button bg-color-light-grey"><input type="file" id="bf_file_<?php echo $i+1 ?>" name="bf_file[]" value="사진선택" title="파일첨부 <?php echo $i+1; ?> : 용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">파일<?php echo $i+1; ?> 선택</div><input type="text" readonly>
+                <label for="bf_file_<?php echo $i+1 ?>" class="label">파일 <?php echo $i+1; ?> 업로드</label>
+                <label class="input">
+                    <input type="file" class="form-control" id="bf_file_<?php echo $i+1 ?>" name="bf_file[]" value="사진선택">
+                    <b class="tooltip tooltip-top-right">파일첨부 <?php echo $i+1; ?> : 용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능</b>
                 </label>
             </div>
             <?php if ($is_file_content) { ?>
-            <div class="col col-12 margin-top-10">
+            <div class="col col-12">
                 <label class="input">
                     <i class="icon-append fas fa-question-circle"></i>
                     <input type="text" name="bf_content[]" value="<?php if ($w == 'u') echo $wr_file[$i]['bf_content']; ?>" class="form-control" size="50" placeholder="파일<?php echo $i+1; ?> 설명">
@@ -468,19 +457,18 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             <div class="clearfix"></div>
             <?php } ?>
             <?php if ($w=='u' && $wr_file[$i]['file']) { ?>
-            <div class="col col-6">
+            <div class="col col-12 m-b-15">
                 <label for="bf_file_del<?php echo $i; ?>" class="checkbox"><input type="checkbox" id="bf_file_del<?php echo $i; ?>" name="bf_file_del[<?php echo $i; ?>]" value="1"><i></i><?php echo $wr_file[$i]['source'];?> (<?php echo $wr_file[$i]['size']; ?>) 파일삭제</label>
             </div>
             <?php } ?>
         </div>
-        <div class="margin-hr-10"></div>
         <?php } ?>
     </section>
     <?php if ($is_use_captcha) { ?>
     <section>
         <label class="label">자동등록방지</label>
         <div class="vc-captcha"><?php echo $captcha_html; ?></div>
-        <div class="margin-bottom-20"></div>
+        <div class="m-b-20"></div>
     </section>
     <?php } ?>
 
@@ -492,7 +480,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 </div>
 <div id="map_canvas"></div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/venobox/venobox.min.js"></script>
 <?php } ?>
@@ -510,7 +498,10 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 <script>
 $(document).ready(function(){
     <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
-    $(".emoticon").venobox();
+    $(".emoticon").venobox({
+        framewidth : '800px',
+        frameheight: '500px'
+    });
     <?php } ?>
 
     <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
@@ -518,11 +509,11 @@ $(document).ready(function(){
     $("#btn_video").click(function(){
         var v_url = $("#video_url").val();
         if (!v_url){
-            swal({
+            Swal.fire({
                 title: "중요!",
                 text: "동영상 주소를 입력해 주세요.",
-                confirmButtonColor: "#FF4848",
-                type: "error",
+                confirmButtonColor: "#e53935",
+                icon: "warning",
                 confirmButtonText: "확인"
             });
         } else {
@@ -537,11 +528,11 @@ $(document).ready(function(){
     $("#btn_scloud").click(function(){
         var s_url = $("#scloud_url").val();
         if (!s_url){
-            swal({
+            Swal.fire({
                 title: "중요!",
                 text: "사운드클라우드 주소를 입력해 주세요.",
-                confirmButtonColor: "#FF4848",
-                type: "error",
+                confirmButtonColor: "#e53935",
+                icon: "warning",
                 confirmButtonText: "확인"
             });
         } else {
@@ -606,11 +597,11 @@ function set_map_google_address(map_type, map_addr1, map_addr2, map_name) {
             var latlng = map.getCenter();
             set_textarea_contents('map', map_type+'^|^'+address+'^|^'+map_name+'^|^'+latlng);
         } else {
-            swal({
+            Swal.fire({
                 title: "중요!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#FF4848",
-                type: "error",
+                confirmButtonColor: "#e53935",
+                icon: "warning",
                 confirmButtonText: "확인"
             });
         }
@@ -626,11 +617,11 @@ function set_map_naver_address(map_type, map_addr1, map_addr2, map_name) {
         address: map_addr1
     }, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
-            swal({
+            Swal.fire({
                 title: "중요!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#FF4848",
-                type: "error",
+                confirmButtonColor: "#e53935",
+                icon: "warning",
                 confirmButtonText: "확인"
             });
         }
@@ -715,19 +706,16 @@ $(function() {
 
 function html_auto_br(obj) {
     if (obj.checked) {
-        swal({
+        Swal.fire({
             title: "자동 줄바꿈",
-            text: "자동 줄바꿈을 하시겠습니까?\n자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
-            type: "warning",
+            text: "자동 줄바꿈을 하시겠습니까? 자동 줄바꿈은 게시물 내용 중 줄바뀐 곳을 <br>태그로 변환하는 기능입니다.",
+            icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#FDAB29",
+            confirmButtonColor: "#00897b",
             confirmButtonText: "승인",
-            cancelButtonText: "취소",
-            closeOnConfirm: true,
-            closeOnCancel: true
-        },
-        function(isConfirm){
-            if (isConfirm) {
+            cancelButtonText: "취소"
+        }).then((result) => {
+            if (result.isConfirmed) {
                 obj.value = "html2";
             } else {
                 obj.value = "html1";
@@ -760,12 +748,11 @@ function fwrite_submit(f) {
     });
 
     if (subject) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "제목에 금지단어 '<strong class='color-red'>"+subject+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            html: "제목에 금지단어 '<strong class='text-crimson'>"+subject+"</strong>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "error",
             confirmButtonText: "확인"
         });
         f.wr_subject.focus();
@@ -773,12 +760,11 @@ function fwrite_submit(f) {
     }
 
     if (content) {
-        swal({
-            html: true,
+        Swal.fire({
             title: "알림!",
-            text: "내용에 금지단어 '<strong class='color-red'>"+content+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#FDAB29",
-            type: "warning",
+            text: "내용에 금지단어 '<strong class='text-crimson'>"+content+"</strong>' 단어가 포함되어있습니다.",
+            confirmButtonColor: "#e53935",
+            icon: "error",
             confirmButtonText: "확인"
         });
         if (typeof(ed_wr_content) != "undefined")
@@ -792,23 +778,21 @@ function fwrite_submit(f) {
         if (char_min > 0 || char_max > 0) {
             var cnt = parseInt(check_byte("wr_content", "char_count"));
             if (char_min > 0 && char_min > cnt) {
-                swal({
-                    html: true,
+                Swal.fire({
                     title: "알림!",
-                    text: "내용은 <strong class='color-red'>"+char_min+"</strong> 글자 이상 쓰셔야 합니다.",
-                    confirmButtonColor: "#FDAB29",
-                    type: "warning",
+                    html: "내용은 <strong class='text-crimson'>"+char_min+"</strong> 글자 이상 쓰셔야 합니다.",
+                    confirmButtonColor: "#e53935",
+                    icon: "error",
                     confirmButtonText: "확인"
                 });
                 return false;
             }
             else if (char_max > 0 && char_max < cnt) {
-                swal({
-                    html: true,
+                Swal.fire({
                     title: "알림!",
-                    text: "내용은 <strong class='color-red'>"+char_max+"</strong> 글자 이하로 쓰셔야 합니다.",
-                    confirmButtonColor: "#FDAB29",
-                    type: "warning",
+                    html: "내용은 <strong class='text-crimson'>"+char_max+"</strong> 글자 이하로 쓰셔야 합니다.",
+                    confirmButtonColor: "#e53935",
+                    icon: "error",
                     confirmButtonText: "확인"
                 });
                 return false;
@@ -845,12 +829,11 @@ $(function(){
             var limit = '<?php echo $eyoom_board['bo_tag_limit'];?>';
             var max = parseInt(limit)-1;
             if (count > max) {
-                swal({
-                    html: true,
+                Swal.fire({
                     title: "알림!",
-                    text: "태그는 <strong class='color-red'>"+limit+"</strong> 개까지 등록가능합니다.",
-                    confirmButtonColor: "#FDAB29",
-                    type: "warning",
+                    html: "태그는 <strong class='text-crimson'>"+limit+"</strong> 개까지 등록가능합니다.",
+                    confirmButtonColor: "#e53935",
+                    icon: "warning",
                     confirmButtonText: "확인"
                 });
                 obj.val('');
@@ -865,11 +848,11 @@ $(function(){
                 }
             });
             if (duplicate) {
-                swal({
+                Swal.fire({
                     title: "알림!",
                     text: "중복된 태그입니다.",
-                    confirmButtonColor: "#FDAB29",
-                    type: "warning",
+                    confirmButtonColor: "#e53935",
+                    icon: "error",
                     confirmButtonText: "확인"
                 });
                 obj.val('');
@@ -877,7 +860,7 @@ $(function(){
                 return;
             }
             var tag_html = $('#tag-cloud').html();
-            tag_html += '<div id="tag_box_'+tag_size+'">'+tag+' <i class="fas fa-close" onclick="del_tags(\''+tag+'\',\''+tag_size+'\');"></i></div>';
+            tag_html += '<div id="tag_box_'+tag_size+'">'+tag+' <i class="fas fa-times" onclick="del_tags(\''+tag+'\',\''+tag_size+'\');"></i></div>';
             $('#tag-cloud').html(tag_html);
 
             var add_tags = $('#wr_tag').val();
@@ -910,11 +893,11 @@ $(function() {
     $(".set_bo_skin").change(function() {
         var skin = $(this).val();
         if (!skin) {
-            swal({
+            Swal.fire({
                 title: "알림",
                 text: '스킨을 선택해 주세요.',
-                confirmButtonColor: "#FF4848",
-                type: "warning",
+                confirmButtonColor: "#e53935",
+                icon: "warning",
                 confirmButtonText: "확인"
             });
         } else {

@@ -6,17 +6,17 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.statistics-wrap {position:relative;border:1px solid #e5e5e5;padding:15px 10px;margin:0px 0 25px;background:#fff}
+.statistics-wrap {position:relative;border:1px solid #e5e5e5;padding:15px 10px;margin:0;background:#fff}
 .statistics-wrap ul {margin-bottom:0}
-.statistics-list li {color:#555555;font-size:12px;padding:5px 0;display:block;border-top:1px dotted #e5e5e5}
+.statistics-list li {color:#555555;padding:6px 0;display:block;border-top:1px dotted #e5e5e5}
 .statistics-list li:first-child {border-top:none}
-.statistics-list li a {color:#000;font-size:12px;display:block}
-.statistics-list li strong {color:#353535;float:right}
+.statistics-list li a {color:#000;display:block}
+.statistics-list li strong {color:#353535;float:right;font-weight:400}
 </style>
 
 <div class="statistics-wrap">
     <div class="headline-short">
-        <h5><strong>사이트 통계</strong></h5>
+        <h5>사이트 통계</h5>
     </div>
     <ul class="list-unstyled statistics-list">
         <li><?php echo eb_connect($eyoom['connect_skin']); ?></li>

@@ -6,39 +6,38 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.sub-page p, .sub-page li {word-break:keep-all;font-size:13px}
-.sub-title {position:relative;font-size:37px;color:#333;margin:10px 0 70px;font-weight:300}
-.sub-title small {display:block;margin-top:10px;font-size:13px;border-top:1px solid #333;padding-top:10px}
-.contact-info h3 {margin:0;padding-left:5px;font-size:15px;font-weight:bold}
-.contact-info li {margin:3px 0;padding:5px;border-top:1px solid #aaa;color:#707070}
-.contact-info li span {display:inline-block;width:70px;color:#333;font-weight:bold;margin-right:10px}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width:767px){
-    .sub-title {margin-bottom:40px}
-	.contact-img {margin-bottom:20px;max-height:300px;overflow:hidden}
-}
-<?php } ?>
+.sub-title {position:relative;font-size:36px;margin:10px 0 50px}
+.sub-title small {display:block;margin-top:10px;font-size:.9375rem;border-top:1px solid #757575;padding-top:10px}
+.contact-img {margin-bottom:50px}
+.contact-info h3 {margin:0 0 20px;font-size:1.375rem}
+.contact-info ul {position:relative;border-bottom:1px solid #c5c5c5}
+.contact-info ul:after {content:"";position:absolute;bottom:-2px;left:0;width:80px;height:2px;background:#353535}
+.contact-info li {position:relative;padding:15px 0 15px 90px;border-top:1px solid #c5c5c5;color:#757575}
+.contact-info li span {position:absolute;top:-1px;left:0;display:block;width:80px;color:#252525;border-top:2px solid #353535;padding-top:15px}
+.map-box {margin-top:30px}
 </style>
+
 <div class="sub-page page-contact">
 	<h3 class="sub-title">Contact Us <small>초기 목표설정을 통해 계획적인 진행을 거쳐 임무를 완수할 수 있는 시스템을 만들어 내고 그 결과물로 한단계 더 성장합니다.</small></h3>
 
 	<div class="contact-top">
-		<div class="contact-info">
-			<div class="row">
-				<div class="col-sm-5">
-					<div class="contact-img"><img src="<?php echo EYOOM_THEME_PAGE_URL; ?>/img/contactus_01.jpg" alt="building" class="img-responsive"></div>
-				</div>
-				<div class="col-sm-7">
-					<h3>회사정보</h3>
-					<ul class="list-unstyled">
-						<li><span>&middot; 주소</span> <?php echo $bizinfo['bi_company_zip']; ?> <?php echo $bizinfo['bi_company_addr1']; ?> <?php echo $bizinfo['bi_company_addr2']; ?> <?php echo $bizinfo['bi_company_addr3']; ?></li>
-						<li><span>&middot; 이메일</span> <a href="mailto:<?php echo $bizinfo['bi_cs_email']; ?>"><?php echo $bizinfo['bi_cs_email']; ?></a></li>
-						<li><span>&middot; 전화번호</span> <?php echo $bizinfo['bi_cs_tel1']; ?></li>
-						<li><span>&middot; 팩스번호</span> <?php echo $bizinfo['bi_cs_fax']; ?></li>
-					</ul>
-					<div class="map-box">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.323218901836!2d126.97694200000001!3d37.57100600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2ec98800045%3A0xdd5786518f45a705!2z7J207Iic7Iug7J6l6rWw64-Z7IOB!5e0!3m2!1sko!2skr!4v1430703770386" width=100% height="300" frameborder="0" style="border:0"></iframe>
-					</div>
+		<div class="contact-info-wrap">
+			<div class="contact-img"><img src="<?php echo EYOOM_THEME_PAGE_URL; ?>/img/contactus_01.jpg" class="img-fluid" alt=""></div>
+			<div class="contact-info">
+				<h3>회사정보</h3>
+				<ul class="list-unstyled">
+					<li><span>&middot; 회사명</span> <?php echo $bizinfo['bi_company_name']; ?></li>
+					<li><span>&middot; 주소</span> <?php echo $bizinfo['bi_company_zip']; ?> <?php echo $bizinfo['bi_company_addr1']; ?> <?php echo $bizinfo['bi_company_addr2']; ?> <?php echo $bizinfo['bi_company_addr3']; ?></li>
+					<li><span>&middot; 이메일</span> <a href="mailto:<?php echo $bizinfo['bi_cs_email']; ?>"><?php echo $bizinfo['bi_cs_email']; ?></a></li>
+					<?php if($bizinfo['bi_cs_tel1']) { ?>
+					<li><span>&middot; 전화번호</span> <?php echo $bizinfo['bi_cs_tel1']; ?></li>
+					<?php } ?>
+					<?php if($bizinfo['bi_cs_fax']) { ?>
+					<li><span>&middot; 팩스번호</span> <?php echo $bizinfo['bi_cs_fax']; ?></li>
+					<?php } ?>
+				</ul>
+				<div class="map-box">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1581.054867924505!2d126.9761484873726!3d37.576033597526504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eaa004eda1%3A0xf00ffa78293b4ece!2z7ISc7Jq47Yq567OE7IucIOyiheuhnOq1rCDsooXroZwxLjIuMy406rCA64-ZIDEtNTY!5e0!3m2!1sko!2skr!4v1631585905886!5m2!1sko!2skr" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 				</div>
 			</div>
 		</div>

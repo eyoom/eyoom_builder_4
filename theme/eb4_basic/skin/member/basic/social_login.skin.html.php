@@ -21,12 +21,12 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
 ?>
 
 <style>
-#sns_login {margin-top:15px;padding:5px 0 0;border-top:1px dotted #e5e5e5}
+#sns_login {margin-top:15px;padding:15px 0 0;border-top:0}
 #sns_login h5 {text-align:center;color:#959595;font-size:13px;margin-bottom:15px}
 #sns_login .social-login {list-style:none;margin:0 -3px;padding:0}
 #sns_login .social-login:after {content:"";display:block;clear:both}
 #sns_login .social-login li {position:relative;overflow:hidden;float:left;width:50%;height:35px;padding:0 3px;margin-bottom:6px;box-sizing:border-box}
-#sns_login .social-login li a {display:block;line-height:35px;color:#fff;font-size:12px;font-weight:bold}
+#sns_login .social-login li a {display:block;color:#fff;font-size:.75rem}
 #sns_login .social-login li a:hover {text-decoration:none}
 #sns_login .social-login li img {width:35px;height:35px;border-right:1px solid rgba(255, 255, 255, 0.2)}
 #sns_login .social-login li span {margin-left:10px}

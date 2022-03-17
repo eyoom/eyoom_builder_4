@@ -5,6 +5,15 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * SNS용 이미지/제목/내용 추가 메타태그
+ */
+if (isset($it_id) && !is_array($it_id)) {
+	$og_meta = $eb->sns_open_graph();
+	if ($og_meta) $config['cf_add_meta'] .= $og_meta;
+	unset($og_meta);
+}
+
+/**
  * 쇼핑몰 코어 파일
  */
 if ($eyoom_shop_controller = $shop->eyoom_shop_controller($pathinfo)) {

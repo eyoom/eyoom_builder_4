@@ -5,23 +5,30 @@
 if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.member-skin {font-size:12px}
-.member-skin .content-box {border-color:#b5b5b5}
+.member-skin {font-size:.9375rem}
+.member-skin  .content-box {position:relative;border:1px solid #b5b5b5;background:#FFF}
+.member-skin  .content-box-header {padding:15px;border-bottom:1px solid #E5E5E5;background:#F5F5F5}
+.member-skin  .content-box-header h1, .member-skin  .content-box-header h2, .member-skin  .content-box-header h3, .member-skin  .content-box-header h4, .member-skin  .content-box-header h5, .content-box-header h6 {line-height:1;margin:0}
+.member-skin  .content-box-body {padding:15px}
+.member-skin  .content-box-body p:last-child {margin-bottom:0}
+.member-skin  .content-box-footer {padding:10px 15px;border-top:1px solid #E5E5E5;background:#F5F5F5;text-align:right}
 .member-skin #register_scroll_1 {position:relative;overflow:hidden;height:250px}
 .member-skin #register_scroll_2 {position:relative;overflow:hidden;height:250px}
 .member-skin .member-box {border:1px solid #ddd;margin-bottom:30px}
-.member-skin .eyoom-form header {padding:15px;background:#fafafa}
-.member-skin .eyoom-form footer {padding:10px 15px;text-align:right}
-.member-skin .eyoom-form fieldse {padding:0}
+.member-skin .eyoom-form header {padding:20px 15px;background:#fafafa}
+.member-skin .eyoom-form header h5 {line-height:1;font-size:1.125rem}
+.member-skin .eyoom-form footer {padding:15px;text-align:right}
+.member-skin .eyoom-form fieldset {padding:0}
 .member-skin .eyoom-form fieldset {padding:0}
 .member-skin .member-agree {padding:15px}
+.member-skin .member-agree h5 {font-size:.9375rem}
 .member-skin .fregister-agree label {display:inline-block;margin-right:5px}
-.member-skin #sns_register {border:1px solid #d5d5d5;box-shadow:none;margin-bottom:30px}
-.member-skin #sns_register h2 {margin:0;padding:15px;font-weight:bold;background:#fafafa;font-size:15px}
+.member-skin #sns_register {border:1px solid #d5d5d5;box-shadow:none;border-radius:0;margin-bottom:30px}
+.member-skin #sns_register h2 {margin:0;padding:15px;font-weight:700;background:#fafafa;font-size:.875rem;line-height:1.5}
 </style>
 
 <div class="member-skin contents-box-inner">
@@ -32,9 +39,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
     <form name="fregister" id="fregister" action="<?php echo $register_action_url; ?>" onsubmit="return fregister_submit(this);" method="POST" autocomplete="off" class="eyoom-form">
 
-    <div class="content-box margin-bottom-30">
+    <div class="content-box m-b-30">
         <div class="content-box-body">
-            <p><i class="fas fa-exclamation-circle"></i> <strong>회원가입약관 및 개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.</strong></p>
+            <p class="text-indigo"><i class="fas fa-exclamation-circle"></i> <span>회원가입약관 및 개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.</span></p>
         </div>
         <div class="content-box-footer">
             <div class="fregister-agree">
@@ -46,7 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     </div>
 
     <section id="fregister_term" class="member-box">
-        <header><h5 class="margin-0"><strong>회원가입약관</strong></h5></header>
+        <header><h5 class="m-0 f-w-700">회원가입약관</h5></header>
         <div class="member-agree">
             <div id="register_scroll_1" class="panel-body ps-container">
                 <?php
@@ -64,34 +71,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     </section>
 
     <section id="fregister_private" class="member-box">
-        <header><h5 class="margin-0"><strong>개인정보처리방침안내</strong></h5></header>
+        <header><h5 class="m-0 f-w-700">개인정보처리방침안내</h5></header>
         <div class="member-agree">
             <div id="register_scroll_2" class="panel-body ps-container">
-                <div class="table-list-eb">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>목적</th>
-                                    <th>항목</th>
-                                    <th>보유기간</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>이용자 식별 및 본인여부 확인</th>
-                                    <td>아이디, 이름, 비밀번호</td>
-                                    <td>회원 탈퇴 시까지</td>
-                                </tr>
-                                <tr>
-                                    <th>고객서비스 이용에 관한 통지,<br>CS대응을 위한 이용자 식별</th>
-                                    <td>연락처 (이메일, 휴대전화번호)</td>
-                                    <td>회원 탈퇴 시까지</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <?php
+                @include_once(EYOOM_THEME_PATH . '/page/privacy.html.php')
+                ?>
             </div>
         </div>
         <footer>
@@ -104,14 +89,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     </section>
 
     <div class="btn_confirm text-center">
-        <button class="btn-e btn-e-xlg btn-e-red" type="submit" value="회원가입"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
+        <button class="btn-e btn-e-xl btn-crimson" type="submit" value="회원가입"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
     </div>
 
     </form>
 </div>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
 $(document).ready(function(){
     new PerfectScrollbar('#register_scroll_1');
@@ -120,22 +105,22 @@ $(document).ready(function(){
 
 function fregister_submit(f) {
     if (!f.agree.checked) {
-        swal({
+        Swal.fire({
             title: "중요!",
             text: "회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.",
-            confirmButtonColor: "#FF9500",
-            type: "warning",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         f.agree.focus();
         return false;
     }
     if (!f.agree2.checked) {
-        swal({
+        Swal.fire({
             title: "중요!",
             text: "개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.",
-            confirmButtonColor: "#FF9500",
-            type: "warning",
+            confirmButtonColor: "#e53935",
+            icon: "warning",
             confirmButtonText: "확인"
         });
         f.agree2.focus();

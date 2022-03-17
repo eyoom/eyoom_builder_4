@@ -4,60 +4,58 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.poll-result {position:relative;overflow:hidden;padding:5px}
+.poll-result {position:relative;overflow:hidden;padding:15px;border:1px solid #e5e5e5}
+.poll-result .win-title {position:relative;margin:0 0 20px;font-size:1.0625rem}
 .poll-result .etc-list {border-bottom:1px solid #eaeaea;padding:10px 0}
 .poll-result .etc-write {position:relative;background:#fbfbfb;border:1px solid #e5e5e5;padding:10px;margin-top:20px}
-<?php if (G5_IS_MOBILE) { ?>
-.poll-result {padding:20px 15px}
-.poll-result .win-title {position:relative;margin:0 0 20px;font-size:18px;height:50px;line-height:30px;padding:10px;background:#555;color:#fff}
-.poll-result .win-close-btn {position:absolute;top:10px;right:10px;width:30px;height:30px;line-height:30px;text-align:center;margin:0;padding:0;border:0;background:none;color:#fff;float:right}
-<?php } ?>
 </style>
+<?php if (G5_IS_MOBILE) { ?>
+<style>
+.poll-result {padding:15px;border:0}
+.poll-result .win-title {height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
+.poll-result .btn-close {position:absolute;top:19px;right:10px}
+</style>
+<?php } ?>
 
 <div class="poll-result">
     <?php if (G5_IS_MOBILE) { ?>
     <h4 class="win-title">
         <strong>투표 결과 보기</strong>
-        <button type="button" onclick="window.close();" class="win-close-btn"><i class="fas fa-times"></i></button>
-        <div class="clearfix"></div>
+        <button type="button" class="btn-close btn-close-white" onclick="self.close();" aria-label="Close"></button>
     </h4>
     <?php } ?>
-    <h4 class="margin-bottom-20"><strong><?php echo $po_subject; ?></strong></h4>
-    <div class="panel panel-dark">
+    <h5 class="m-b-20"><strong><?php echo $po_subject; ?></strong></h5>
+    <div class="panel panel-dark m-b-30">
         <div class="panel-heading">
-            <h4 class="panel-title"><i class="fas fa-align-justify"></i> 투표결과</h4>
+            <h6 class="panel-title">투표결과</h6>
         </div>
         <div class="panel-body">
-            <h6><strong class="color-red">전체 <?php echo $nf_total_po_cnt; ?>표</strong></h6>
+            <h6>[ <strong class="text-crimson">전체 <?php echo $nf_total_po_cnt; ?>표</strong> ]</h6>
             <div class="margin-hr-15"></div>
             <?php if (is_array($list) ) { ?>
             <?php foreach ($list as $key => $poitem ) { ?>
-            <p><strong class="font-size-13"><?php echo $key; ?>. <?php echo $poitem['content']; ?></strong></p>
-            <span class="progress-info-left"><strong class="color-red"><?php echo $poitem['cnt']; ?></strong> <strong>표</strong></span>
-            <span class="progress-info-right"><?php echo number_format($poitem['rate'], 1); ?>%</span>
+            <p class="m-b-10"><strong><?php echo $key; ?>. <?php echo $poitem['content']; ?></strong></p>
+            <div class="progress-info-wrap">
+                <span class="progress-info-left"><strong class="text-crimson"><?php echo $poitem['cnt']; ?></strong> 표</span>
+                <span class="progress-info-right"><?php echo number_format($poitem['rate'], 1); ?>%</span>
+            </div>
             <div class="progress progress-e progress-xxs progress-striped active">
                 <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="<?php echo number_format($poitem['rate'], 1); ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo number_format($poitem['rate'], 1); ?>%">
                 </div>
             </div>
-            <div class="margin-bottom-20"></div>
+            <div class="m-b-20"></div>
             <?php } ?>
             <?php } ?>
         </div>
     </div>
     <?php if ($is_etc) { ?>
-    <div class="panel panel-dark">
+    <div class="panel panel-dark m-b-30">
         <div class="panel-heading">
-            <h4 class="panel-title"><i class="fas fa-align-justify"></i> 기타의견</h4>
+            <h6 class="panel-title">기타의견</h6>
         </div>
         <div class="panel-body">
             <blockquote class="hero">
@@ -66,12 +64,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
             <?php if (is_array($list2) ){ ?>
             <?php foreach ($list2 as $key => $poetc) { ?>
             <article class="etc-list">
-                <span class="pull-left font-size-12"><strong><?php echo $poetc['pc_name']; ?></strong> 님의 의견</span>
-                <span class="pull-right font-size-12 color-grey"><i class="far fa-clock"></i> <?php echo $poetc['datetime']; ?></span>
+                <span class="float-start text-gray"><strong class="text-black"><?php echo $poetc['pc_name']; ?></strong>님</span>
+                <span class="float-end text-gray"><i class="far fa-clock"></i> <?php echo $poetc['datetime']; ?></span>
                 <div class="clearfix"></div>
-                <p class="margin-top-5"><?php echo $poetc['idea']; ?></p>
+                <p class="m-t-10"><?php echo $poetc['idea']; ?></p>
                 <?php if ( $poetc['del'] ) { ?>
-                <div class="text-right">
+                <div class="text-end m-t-10">
                     <?php echo $poetc['del']; ?><span class="btn-e btn-e-xs btn-e-dark">삭제</span></a>
                 </div>
                 <?php } ?>
@@ -108,7 +106,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                     <div class="vc-captcha"><?php echo captcha_html(); ?></div>
                 </section>
                 <?php } ?>
-                <div class="text-center margin-bottom-10 margin-top-20">
+                <div class="text-center m-b-10 m-t-20">
                     <input type="submit" class="btn-e btn-e-lg btn-e-red" value="의견남기기">
                 </div>
             </div>
@@ -119,28 +117,26 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     <?php } ?>
     <div class="panel panel-dark">
         <div class="panel-heading">
-            <h4 class="panel-title"><i class="fas fa-align-justify"></i> 전체 투표결과 목록</h4>
+            <h6 class="panel-title">전체 투표결과 목록</h6>
         </div>
         <div class="panel-body">
             <ul>
                 <?php if (is_array($list3) ) { ?>
                 <?php foreach ($list3 as $key => $pores) { ?>
-                <li><a href="<?php echo G5_BBS_URL; ?>/poll_result.php?po_id=<?php echo $pores['po_id']; ?>&amp;skin_dir=<?php echo $skin_dir; ?>"><span class="color-grey">[<?php echo $pores['date']; ?>]</span> <?php echo $pores['subject']; ?></a></li>
+                <li><a href="<?php echo G5_BBS_URL; ?>/poll_result.php?po_id=<?php echo $pores['po_id']; ?>&amp;skin_dir=<?php echo $skin_dir; ?>"><span class="text-gray">[<?php echo $pores['date']; ?>]</span> <?php echo $pores['subject']; ?></a></li>
                 <?php } ?>
                 <?php } ?>
             </ul>
         </div>
     </div>
     <?php if (G5_IS_MOBILE) { ?>
-    <div class="text-center margin-top-30 margin-bottom-30">
-        <button class="btn-e btn-e-xlg btn-e-dark" type="button" onclick="window.close();">창닫기</button>
+    <div class="text-center m-t-30 m-b-30">
+        <button class="btn-e btn-e-xl btn-e-dark" type="button" onclick="window.close();">창닫기</button>
     </div>
     <?php } ?>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
 $(function() {
     $(".poll_delete").click(function(e) {
@@ -149,19 +145,20 @@ $(function() {
         etc_delete_link(linkURL);
     });
     function etc_delete_link(linkURL) {
-        swal({
+        Swal.fire({
             title: "삭제",
             text: "해당 기타의견을 삭제하시겠습니까?",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#FF9500",
+            confirmButtonColor: "#e53935",
             confirmButtonText: "삭제",
             cancelButtonText: "취소",
             closeOnConfirm: true,
             closeOnCancel: true
-        },
-        function(){
-            window.location.href = linkURL;
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = linkURL;
+            }
         });
     }
 });
@@ -174,8 +171,3 @@ function fpollresult_submit(f) {
     return true;
 }
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->

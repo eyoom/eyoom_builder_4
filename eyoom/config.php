@@ -168,11 +168,6 @@ $g5['eyoom_theme'] = G5_TABLE_PREFIX . 'eyoom_theme';
 $g5['eyoom_board'] = G5_TABLE_PREFIX . 'eyoom_board';
 
 /**
- * 배너/광고 관리
- */
-$g5['eyoom_banner'] = G5_TABLE_PREFIX . 'eyoom_banner';
-
-/**
  * 이윰 메뉴 관리
  */
 $g5['eyoom_menu'] = G5_TABLE_PREFIX . 'eyoom_menu';

@@ -13,7 +13,7 @@ if (!defined('_EYOOM_')) exit;
 제 5 장 : 계약해지 및 이용제한<br>
 제 6 장 : 기타<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제1장 총 칙</strong></h5>
+<h5 style="margin:0 0 20px"><span>제1장 총 칙</span></h5>
 
 제1조(목적)<br><br>
 
@@ -41,7 +41,7 @@ if (!defined('_EYOOM_')) exit;
 
 이 약관에 명시되지 않은 사항은 전기통신기본법, 전기통신사업법 및 기타 관련법령의 규정에 따릅니다.<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제2장 서비스 이용계약</strong></h5>
+<h5 style="margin:0 0 20px"><span>제2장 서비스 이용계약</span></h5>
 
 제5조(이용계약의 성립)<br><br>
 
@@ -65,7 +65,7 @@ if (!defined('_EYOOM_')) exit;
 
 회원은 이용신청시 기재한 사항이 변경되었을 경우에는 수정하여야 하며, 수정하지 아니하여 발생하는 문제의 책임은 회원에게 있습니다.<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제3장 계약당사자의 의무</strong></h5>
+<h5 style="margin:0 0 20px"><span>제3장 계약당사자의 의무</span></h5>
 
 제9조(회사의 의무)<br><br>
 
@@ -83,7 +83,7 @@ if (!defined('_EYOOM_')) exit;
 ② 회원은 서비스를 이용하여 영업활동을 할 수 없으며, 영업활동에 이용하여 발생한 결과에 대하여 회사는 책임을 지지 않습니다.<br>
 ③ 회원은 서비스의 이용권한, 기타 이용계약상 지위를 타인에게 양도하거나 증여할 수 없으며, 이를 담보로도 제공할 수 없습니다.<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제4장 서비스 이용</strong></h5>
+<h5 style="margin:0 0 20px"><span>제4장 서비스 이용</span></h5>
 
 제11조(회원의 의무)<br><br>
 
@@ -121,7 +121,7 @@ if (!defined('_EYOOM_')) exit;
 3. 시스템 점검이 필요한 경우<br>
 4. 기타 불가항력적 사유가 있는 경우<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제5장 계약해지 및 이용제한</strong></h5>
+<h5 style="margin:0 0 20px"><span>제5장 계약해지 및 이용제한</span></h5>
 
 제17조(계약해지 및 이용제한)<br><br>
 
@@ -140,7 +140,7 @@ if (!defined('_EYOOM_')) exit;
 11. 회원이 자신의 홈페이지나 게시판 등에 음란물을 게재하거나 음란 사이트를 링크하는 경우<br>
 12. 기타 관련법령에 위반된다고 판단되는 경우<br><br>
 
-<h5 style="margin:0 0 20px"><strong>제6장 기 타</strong></h5>
+<h5 style="margin:0 0 20px"><span>제6장 기 타</span></h5>
 
 제18조(양도금지)<br><br>
 
@@ -161,7 +161,7 @@ if (!defined('_EYOOM_')) exit;
 
 서비스 이용으로 발생한 분쟁에 대해 소송이 제기 될 경우 회사의 소재지를 관할하는 법원을 전속 관할법원으로 합니다.<br><br>
 
-<h5 style="margin:0 0 20px"><strong>부 칙</strong></h5>
+<h5 style="margin:0 0 20px"><span>부 칙</span></h5>
 
 (시행일) 이 약관은 OOOO년 OO월 OO일부터 시행합니다.<br><br>
 </div>

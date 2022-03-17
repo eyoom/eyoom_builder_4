@@ -103,6 +103,10 @@ else
 
 // 본인확인방법
 switch($mb['mb_certify']) {
+    case 'simple':
+        $mb_certify_case = '간편인증';
+        $mb_certify_val = 'simple';
+        break;
     case 'hp':
         $mb_certify_case = '휴대폰';
         $mb_certify_val = 'hp';
@@ -174,6 +178,31 @@ if(!isset($mb['mb_dupinfo'])) {
 // 이메일인증 체크 필드추가
 if(!isset($mb['mb_email_certify2'])) {
     sql_query(" ALTER TABLE {$g5['member_table']} ADD `mb_email_certify2` varchar(255) NOT NULL DEFAULT '' AFTER `mb_email_certify` ", false);
+}
+
+// 본인인증 내역 테이블 정보가 dbconfig에 없으면 소셜 테이블 정의
+if( !isset($g5['member_cert_history']) ){
+    $g5['member_cert_history_table'] = G5_TABLE_PREFIX.'member_cert_history';
+}
+// 멤버 본인인증 정보 변경 내역 테이블 없을 경우 생성
+if(isset($g5['member_cert_history_table']) && !sql_query(" DESC {$g5['member_cert_history_table']} ", false)) {
+    sql_query(" CREATE TABLE IF NOT EXISTS `{$g5['member_cert_history_table']}` (
+                    `ch_id` int(11) NOT NULL auto_increment,
+                    `mb_id` varchar(20) NOT NULL DEFAULT '',
+                    `ch_name` varchar(255) NOT NULL DEFAULT '',
+                    `ch_hp` varchar(255) NOT NULL DEFAULT '',
+                    `ch_birth` varchar(255) NOT NULL DEFAULT '',
+                    `ch_type` varchar(20) NOT NULL DEFAULT '',
+                    `ch_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+                    PRIMARY KEY (`ch_id`),
+                    KEY `mb_id` (`mb_id`)
+                ) ", true);
+}
+
+$mb_cert_history = '';
+if (isset($mb_id) && $mb_id) {
+    $sql = "select * from {$g5['member_cert_history_table']} where mb_id = '{$mb_id}' order by ch_id asc";
+    $mb_cert_history = sql_query($sql);
 }
 
 if ($mb['mb_intercept_date']) $g5['title'] = "차단된 ";

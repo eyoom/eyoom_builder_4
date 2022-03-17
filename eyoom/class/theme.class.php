@@ -1039,6 +1039,8 @@ class theme extends qfile
             case 'register'         : $title = '약관동의'; $cate_name = '회원가입'; break;
             case 'register_form'    : $title = $is_member ? '정보수정': '정보입력'; $cate_name = $is_member ? '멤버쉽': '회원가입'; break;
             case 'register_result'  : $title = '회원가입완료'; $cate_name = '회원가입'; break;
+            case 'password_lost'    : $title = '회원정보찾기'; $cate_name = '회원정보'; break;
+            case 'password_reset'   : $title = '비밀번호재설정'; $cate_name = '회원정보'; break;
             case 'cart'             : $title = '장바구니'; $cate_name = '쇼핑몰'; break;
             case 'wishlist'         : $title = '위시리스트'; $cate_name = '쇼핑몰'; break;
             case 'orderform'        : $title = '주문하기'; $cate_name = '쇼핑몰'; break;

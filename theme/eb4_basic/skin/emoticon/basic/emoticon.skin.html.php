@@ -10,7 +10,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-f
 <style>
 body {background:#fff}
 .emoticon-list .eyoom-form {margin:15px 15px 25px}
-.emoticon-list .emoticon-label {width:100px;float:right;text-align:right;padding:7px 10px 0 0}
+.emoticon-list .emoticon-label {width:110px;float:right;text-align:right;padding:7px 10px 0 0}
 .emoticon-list .emoticon-select {width:170px;float:right}
 .emoticon-list .emoticons {list-style:none;margin:0;padding:0}
 .emoticon-list .emoticons li {float:left;min-height:65px;margin:5px 13px}

@@ -17,8 +17,8 @@ if (!defined('_EYOOM_')) exit;
         총 <strong><?php echo $total_count; ?></strong> 건 사용후기
         <?php } ?>
         <div class="product-use-btn">
-            <a href="<?php echo $itemuse_form; ?>" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemuse_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?> class="btn-e btn-e-xlg btn-e-red">사용후기 쓰기</a>
-            <a href="<?php echo $itemuse_list; ?>" class="btn-e btn-e-xlg btn-e-dark">더보기</a>
+            <a href="<?php echo $itemuse_form; ?>" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemuse_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?> class="btn-e btn-e-md btn-e-red bd-r-0">사용후기 쓰기</a>
+            <a href="<?php echo $itemuse_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -31,7 +31,7 @@ if (!defined('_EYOOM_')) exit;
             <div class="product-use-thumbnail"><?php echo $info['is_thumb']; ?></div>
             <?php } ?>
             <div class="product-use-title"><?php echo $info['is_subject']; ?></div>
-            <button type="button" class="product-use-more">내용보기 <i class="fas fa-caret-down" aria-hidden="true"></i></button>
+            <button type="button" class="product-use-more">내용보기<i class="fas fa-caret-down m-l-5"></i></button>
             <div class="clearfix"></div> 
             <dl class="product-use-dl">
                 <dt>평점<dt>
@@ -73,7 +73,7 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
     <?php } else { ?>
-    <p class="text-center color-grey font-size-12 margin-top-10"><i class="fas fa-exclamation-circle"></i> 사용후기가 없습니다.</p>
+    <p class="text-center text-gray m-t-20 m-b-40"><i class="fas fa-exclamation-circle"></i> 사용후기가 없습니다.</p>
     <?php } ?>
 </section>
 

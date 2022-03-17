@@ -3,23 +3,18 @@
  * skin file : /theme/THEME_NAME/skin/member/basic/password.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.password-confirm {position:relative;width:300px;padding:15px;background:#fff;border:1px solid #c5c5c5;margin:40px auto 30px;-webkit-border-radius:2px !important;-moz-border-radius:2px !important;border-radius:2px !important}
+.password-confirm {position:relative;width:360px;padding:25px 15px;background:#fff;margin:50px auto;border:1px solid #d5d5d5}
+@media (max-width:576px) {
+    .password-confirm {width:inherit;margin:30px 15px}
+}
 </style>
 
 <div class="password-confirm">
-    <h4 class="margin-bottom-20"><i class="fas fa-lock"></i> <strong>비밀번호 확인</strong></h4>
-    <div class="margin-hr-15"></div>
-    <h6><strong>해당글: <span class="color-red"><?php $g5['title']; ?></span></strong></h6>
+    <h5 class="m-b-15"><strong>비밀번호 확인</strong></h5>
+    <h6 class="m-b-15"><strong>해당글: <span class="text-crimson"><?php echo $g5['title'] ?></span></strong></h6>
     <form name="fboardpassword" action="<?php echo $action; ?>" method="post" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
@@ -44,7 +39,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
         </div>
         <?php } ?>
     </section>
-    <div class="margin-hr-15"></div>
     <section>
         <label for="pw_wr_password" class="label">비밀번호<strong class="sound_only">필수</strong></label>
         <label class="input required-mark">
@@ -52,8 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
             <input type="password" name="wr_password" id="password_wr_password" required size="15" maxLength="20">
         </label>
     </section>
-    <div class="margin-hr-15"></div>
-    <div class="text-center">
+    <div class="text-center m-t-25">
         <input type="submit" value="확인" class="btn-e btn-e-red btn-e-lg">
     </div>
     </form>
@@ -62,8 +55,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     <a href="<?php echo $return_url; ?>"><u>이전 페이지로 돌아가기</u></a>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script>
 $("input, textarea, select").on({ 'touchstart' : function() {
     zoomDisable();
@@ -80,8 +71,3 @@ function zoomEnable(){
     $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
 }
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->

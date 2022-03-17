@@ -6,215 +6,230 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.my-followinggul .favorite-hero {position:relative;padding:10px 15px 9px}
-.my-followinggul .favorite-hero p {margin:0;font-size:12px;color:#757575}
-.my-followinggul .favorite-select-left {position:absolute;top:4px;right:139px;width:130px}
-.my-followinggul .favorite-select-right {position:absolute;top:4px;right:4px;width:130px}
-.followinggul-head {position:relative;border-top:2px solid #757575;border-bottom:1px solid #959595;padding:12px 0;background:#fafafa;font-weight:bold}
-.followinggul-head .followinggul-head-subj {text-align:center;padding-right:375px}
-.followinggul-head .followinggul-head-info {position:absolute;top:12px;right:0}
-.followinggul-head .followinggul-head-marker, .followinggul-head .followinggul-head-member, .followinggul-head .followinggul-head-date {position:relative;float:left;width:100px;padding-right:10px}
-.followinggul-head .followinggul-head-hit {position:relative;float:left;width:60px;text-align:center}
-.my-followinggul .infinite-container {position:relative;border-bottom:1px solid #eaeaea}
-.followinggul-box {position:relative;border-top:1px solid #eaeaea;background:#fff}
-.followinggul-box .followinggul-list {position:relative;height:56px}
-.followinggul-box .followinggul-img-box {position:absolute;top:5px;left:0;width:46px;height:46px;overflow:hidden}
-.followinggul-box .followinggul-img {position:relative;overflow:hidden;width:106px;margin-left:-30px;margin-top:-10px}
-.followinggul-box .followinggul-subj {margin:0;line-height:56px;font-size:12px}
-.followinggul-box .followinggul-subj:hover {text-decoration:underline}
-.followinggul-box .followinggul-subj strong {font-weight:normal}
-.followinggul-box .followinggul-subj.followinggul-subj-margin {margin-left:60px}
-.followinggul-box .followinggul-subj .followinggul-type {color:#b5b5b5;margin-right:3px;letter-spacing:-1px}
-.followinggul-box .followinggul-subj .followinggul-comment {display:inline-block;white-space:nowrap;vertical-align:baseline;text-align:center;min-width:35px;padding:1px;font-size:10px;line-height:1;color:#fff;background-color:#757575;margin-right:5px}
-.followinggul-box .followinggul-info {position:absolute;top:5px;right:0;font-size:12px;height:46px;line-height:46px;padding-left:15px;background:#fff}
-.followinggul-box .followinggul-info .followinggul-marker {position:relative;float:left;width:100px;padding-right:10px}
-.followinggul-box .followinggul-info .followinggul-member {position:relative;float:left;width:100px;padding-right:10px}
-.followinggul-box .followinggul-info .followinggul-member .followinggul-photo {position:absolute;top:12px;left:0;overflow:hidden;width:20px;height:20px;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.followinggul-box .followinggul-info .followinggul-member .followinggul-photo img {display:block;width:100% \9;max-width:100%;height:auto}
-.followinggul-box .followinggul-info .followinggul-member .followinggul-nick {display:inline-block;margin-left:25px}
-.followinggul-box .followinggul-info .followinggul-member .followinggul-nick .sv_wrap > a {display:block;overflow:hidden;white-space:nowrap;word-wrap:normal;text-overflow:ellipsis;color:#252525;width:65px}
-.followinggul-box .followinggul-info .followinggul-member .followinggul-nick .sv_wrap > .dropdown-menu {margin-top:-10px}
-.followinggul-box .followinggul-info .followinggul-date {position:relative;float:left;width:100px;padding-right:10px;color:#959595}
-.followinggul-box .followinggul-info .followinggul-hit {position:relative;float:left;width:60px;text-align:center;color:#959595}
-.followinggul-box:nth-child(odd) .followinggul-list {background:#fcfcfc}
-.followinggul-box:nth-child(odd) .followinggul-info {background:#fcfcfc}
-.my-followinggul .view-infinite-more .btn-e-xlg {position:relative;height:40px;line-height:40px;padding:0 100px;font-size:16px !important;border:1px solid #b5b5b5;background:#fff;color:#757575}
-.my-followinggul .view-infinite-more .btn-e-xlg i {position:absolute;top:5px;right:5px;font-size:30px;color:#fff;transition:all 0.2s ease-in-out}
-.my-followinggul .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
-.my-followinggul .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
+.followinggul-list {font-size:.9375rem}
+.followinggul-list .followinggul-select {position:absolute;top:7px;right:7px;width:310px}
+.followinggul-list .followinggul-select .followinggul-select-left {width:150px}
+.followinggul-list .followinggul-select .followinggul-select-right {width:150px}
+.followinggul-list .fl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
+.followinggul-list .fl-wrap > div:nth-last-child(1), .followinggul-list .fl-wrap > div:nth-last-child(2) {border-bottom:0}
+.followinggul-list .fl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.followinggul-list .fl-head > div {position:relative}
+.followinggul-list .fl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
+.followinggul-list .fl-head > div:last-child:before {display:none}
+.followinggul-list .fl-head .fl-item {display:table-cell;vertical-align:middle;width:120px;text-align:center}
+.followinggul-list .fl-head .fl-num {width:90px}
+.followinggul-list .fl-head .fl-num-short {width:80px}
+.followinggul-list .fl-head .fl-author {width:150px;padding:0 10}
+.followinggul-list .fl-head .fl-subj {display:table-cell;vertical-align:middle;text-align:center}
+.followinggul-list .fl-list {position:relative;display:table;table-layout:fixed;;width:100%;height:46px;border-bottom:1px solid #eaeaea;padding:8px 0}
+.followinggul-list .fl-list > div {position:relative}
+.followinggul-list .fl-list > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#dadada;transform:translateY(-50%)}
+.followinggul-list .fl-list > div:last-child:before {display:none}
+.followinggul-list .fl-list .fl-item {display:table-cell;vertical-align:middle;width:120px;text-align:center}
+.followinggul-list .fl-list .fl-num {width:90px}
+.followinggul-list .fl-list .fl-num-short {width:80px}
+.followinggul-list .fl-list .fl-author {width:150px;padding:0 10px;text-align:left}
+.followinggul-list .fl-list .fl-subj {display:table-cell;vertical-align:middle}
+.followinggul-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
+-webkit-box-orient:vertical}
+.followinggul-list .fl-list .fl-subj a:hover {color:#000;text-decoration:underline}
+.followinggul-list .fl-list .fl-subj .fl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
+.followinggul-list .fl-list .fl-subj .fl-img img {background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-position:50% 50%;height:100%}
+.followinggul-list .fl-list .fl-subj .fl-type {color:#959595;margin-right:3px}
+.followinggul-list .fl-list .fl-subj-img {padding-left:60px;height:50px}
+.followinggul-list .fl-list .fl-comment {color:#959595}
+.followinggul-list .fl-list .fl-comment strong {color:#f4511e;font-weight:400}
+.followinggul-list .fl-list .fl-photo {display:inline-block;margin-right:2px}
+.followinggul-list .fl-list .fl-photo img {width:17px;height:17px;border-radius:50%}
+.followinggul-list .fl-list .fl-photo .fl-user-icon {font-size:.9375rem}
+.followinggul-list .fl-mobile {position:relative;border-bottom:1px solid #eaeaea;padding:0 0 8px;color:#959595;display:none}
+.followinggul-list .fl-mobile .fl-photo {display:inline-block;margin-right:2px}
+.followinggul-list .fl-mobile .fl-photo img {width:17px;height:17px;border-radius:50%}
+.followinggul-list .fl-mobile .fl-photo .fl-user-icon {font-size:.9375rem}
+.followinggul-list .fl-mobile-right {float:right}
+.followinggul-list .fl-no-list {text-align:center;color:#959595;padding:70px 0}
+.followinggul-list .view-infinite-more .btn-e-xlg {position:relative;height:50px;line-height:50px;padding:0 120px;font-size:1.0625rem !important;border:1px solid #b5b5b5;background:#fff;color:#757575}
+.followinggul-list .view-infinite-more .btn-e-xlg i {position:absolute;top:10px;right:5px;font-size:30px;color:#fff;transition:all 0.2s ease-in-out}
+.followinggul-list .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
+.followinggul-list .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width: 767px) {
-    .my-followinggul .favorite-select-left {position:absolute;top:-50px;right:115px;width:110px}
-    .my-followinggul .favorite-select-right {position:absolute;top:-50px;right:0;width:110px}
-    .followinggul-head .followinggul-head-subj {text-align:center;padding-right:0}
-    .followinggul-head .followinggul-head-info {display:none}
-    .followinggul-box .followinggul-subj {line-height:30px}
-    .followinggul-box .followinggul-subj strong {font-weight:bold}
-    .followinggul-box .followinggul-info {top:inherit;right:inherit;bottom:5px;left:0;padding-left:0;height:23px;line-height:23px;background:transparent}
-    .followinggul-box .followinggul-info.followinggul-info-margin {left:60px}
-    .followinggul-box .followinggul-info .followinggul-marker, .followinggul-box .followinggul-info .followinggul-member, .followinggul-box .followinggul-info .followinggul-date, .followinggul-box .followinggul-info .followinggul-hit {width:auto}
-    .followinggul-box .followinggul-info .followinggul-marker {color:#959595}
-    .followinggul-box .followinggul-info .followinggul-member .followinggul-photo {display:none}
-    .followinggul-box .followinggul-info .followinggul-member .followinggul-nick {margin-left:0}
-    .followinggul-box .followinggul-info .followinggul-member .followinggul-nick .sv_wrap > a {display:inherit;overflow:inherit;white-space:inherit;word-wrap:inherit;text-overflow:inherit;color:#252525;width:auto}
-    .followinggul-box .followinggul-info .followinggul-member .followinggul-nick .sv_wrap > .dropdown-menu {margin-top:5px}
-}
-<?php } ?>
-@media (min-width: 768px) {
-    .my-followinggul-modal {width:720px;margin:10px auto}
-    .my-followinggul-modal .modal-header, .my-followinggul-modal .modal-body, .my-followinggul-modal .modal-footer {padding:10px 20px}
-}
-@media (min-width: 992px) {
-    .my-followinggul-modal {width:940px}
-}
-@media (min-width: 1200px) {
-    .my-followinggul-modal {width:1140px}
+@media (max-width:991px) {
+    .followinggul-list .followinggul-select {position:relative;top:inherit;right:inherit;width:310px;margin-top:10px}
+    .followinggul-list .followinggul-select .eyoom-form label {margin-bottom:0}
+    .followinggul-list .fl-head {display:none}
+    .followinggul-list .fl-head-checkbox {display:table}
+    .followinggul-list .fl-head > div:before, .followinggul-list .fl-list > div:before, .followinggul-list .fl-head .fl-item, .followinggul-list .fl-list .fl-item {display:none}
+    .followinggul-list .fl-head .fl-num-checkbox, .followinggul-list .fl-list .fl-num-checkbox {display:table-cell;width:25px}
+    .followinggul-list .fl-head .fl-num-checkbox .fl-txt, .followinggul-list .fl-list .fl-num-checkbox .fl-txt {visibility:visible;opacity:0}
+    .followinggul-list .fl-head .checkbox, .followinggul-list .fl-list .checkbox {z-index:1}
+    .followinggul-list .fl-list {border-bottom:0}
+    .followinggul-list .fl-list .fl-subj a {padding:0}
+    .followinggul-list .fl-list .fl-subj .fl-img {left:inherit;right:0}
+    .followinggul-list .fl-list .fl-subj-img {padding-left:0;padding-right:60px}
+    .followinggul-list .fl-mobile {display:block}
 }
 </style>
+<?php if ($side_layout['use'] == 'yes') { ?>
+<style>
+@media (max-width:1199px) {
+    .followinggul-list .followinggul-select {position:relative;top:inherit;right:inherit;width:310px;margin-top:10px}
+    .followinggul-list .followinggul-select .eyoom-form label {margin-bottom:0}
+    .followinggul-list .fl-head {display:none}
+    .followinggul-list .fl-head-checkbox {display:table}
+    .followinggul-list .fl-head > div:before, .followinggul-list .fl-list > div:before, .followinggul-list .fl-head .fl-item, .followinggul-list .fl-list .fl-item {display:none}
+    .followinggul-list .fl-head .fl-num-checkbox, .followinggul-list .fl-list .fl-num-checkbox {display:table-cell;width:25px}
+    .followinggul-list .fl-head .fl-num-checkbox .fl-txt, .followinggul-list .fl-list .fl-num-checkbox .fl-txt {visibility:visible;opacity:0}
+    .followinggul-list .fl-head .checkbox, .followinggul-list .fl-list .checkbox {z-index:1}
+    .followinggul-list .fl-list {border-bottom:0}
+    .followinggul-list .fl-list .fl-subj a {padding:0}
+    .followinggul-list .fl-list .fl-subj .fl-img {left:inherit;right:0}
+    .followinggul-list .fl-list .fl-subj-img {padding-left:0;padding-right:60px}
+    .followinggul-list .fl-mobile {display:block}
+}
+</style>
+<?php } ?>
 
-<div class="my-followinggul">
-    <div class="headline-short">
-        <h4><strong>팔로윙글</strong></h4>
-    </div>
-    <blockquote class="hero favorite-hero">
-        <p><i class="fas fa-exclamation-circle"></i> 내가 팔로우(친구맺기)한 회원들의 글을 모아 봅니다.</p>
-        <form name="fmypage" method="get" class="eyoom-form">
-        <input type="hidden" name="t" value="followinggul">
-            <?php if (is_array($my_following)) { ?>
-            <div class="favorite-select-left">
-                <label class="select">
-                    <select name="mbid" onchange="this.form.submit();">
-                        <option value=''>팔로우 선택</option>
-                        <?php foreach ($my_following as $k => $f_member) { ?>
-                        <option value="<?php echo $f_member['mb_id']; ?>" <?php echo $f_member['mb_id'] == $_GET['mbid'] ? 'selected': ''; ?>><?php echo $f_member['mb_nick']; ?></option>
-                        <?php } ?>
-                    </select><i></i>
-                </label>
-            </div>
-            <?php } ?>
-            <?php if (is_array($board_info)) { ?>
-            <div class="favorite-select-right">
-                <label class="select">
-                    <select name="bo_table" onchange="this.form.submit();">
-                        <option value=''>게시판 선택</option>
-                        <?php foreach ($board_info as $_bo_table => $bo_info) { ?>
-                        <option value="<?php echo $_bo_table; ?>" <?php echo $_bo_table == $_GET['bo_table'] ? 'selected': ''; ?>><?php echo $bo_info['bo_name']; ?></option>
-                        <?php } ?>
-                    </select><i></i>
-                </label>
-            </div>
-            <?php } ?>
-        </form>
-    </blockquote>
-    <?php if ($following && isset($list) && is_array($list)) { ?>
-    <div class="infinite-container">
-        <div class="followinggul-head">
-            <div class="followinggul-head-subj">제목 / 이미지</div>
-            <div class="followinggul-head-info">
-                <div class="followinggul-head-marker">게시판</div>
-                <div class="followinggul-head-member">글쓴이</div>
-                <div class="followinggul-head-date">날짜</div>
-                <div class="followinggul-head-hit">뷰</div>
-            </div>
+<div class="followinggul-list">
+    <blockquote class="hero m-b-30">
+        <p class="li-p"><i class="fas fa-exclamation-circle li-p-fa"></i> 내가 팔로우(친구맺기)한 회원들의 글을 모아 봅니다.</p>
+        <div class="followinggul-select">
+            <form name="fmypage" method="get" class="eyoom-form">
+            <input type="hidden" name="t" value="followinggul">
+                <?php if (is_array($my_following)) { ?>
+                <div class="followinggul-select-left float-start">
+                    <label class="select">
+                        <select name="mbid" onchange="this.form.submit();">
+                            <option value=''>팔로우 선택</option>
+                            <?php foreach ($my_following as $k => $f_member) { ?>
+                            <option value="<?php echo $f_member['mb_id']; ?>" <?php echo $f_member['mb_id'] == $_GET['mbid'] ? 'selected': ''; ?>><?php echo $f_member['mb_nick']; ?></option>
+                            <?php } ?>
+                        </select><i></i>
+                    </label>
+                </div>
+                <?php } ?>
+                <?php if (is_array($board_info)) { ?>
+                <div class="followinggul-select-right float-end">
+                    <label class="select">
+                        <select name="bo_table" onchange="this.form.submit();">
+                            <option value=''>게시판 선택</option>
+                            <?php foreach ($board_info as $_bo_table => $bo_info) { ?>
+                            <option value="<?php echo $_bo_table; ?>" <?php echo $_bo_table == $_GET['bo_table'] ? 'selected': ''; ?>><?php echo $bo_info['bo_name']; ?></option>
+                            <?php } ?>
+                        </select><i></i>
+                    </label>
+                </div>
+                <?php } ?>
+                <div class="clearfix"></div>
+            </form>
         </div>
+    </blockquote>
+
+    <div class="fl-wrap">
+        <div class="fl-head">
+            <div class="fl-subj">제목 / 이미지</div>
+            <div class="fl-item fl-author">글쓴이</div>
+            <div class="fl-item">게시판</div>
+            <div class="fl-item">날짜</div>
+            <div class="fl-item fl-num">조회</div>
+        </div>
+        <?php if ($following && isset($list) && is_array($list)) { ?>
         <?php foreach ($list as $key => $li) { ?>
-        <article class="followinggul-box">
-            <?php if ($li['wr_id'] == $li['wr_parent']) { ?>
-            <div class="followinggul-list">
-                <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="followinggul_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+        <div class="fl-list-wrap">
+            <div class="fl-list">
+                <?php if ($li['wr_id'] == $li['wr_parent']) { ?>
+                <div class="fl-subj <?php if ($li['wr_image']) { ?>fl-subj-img<?php } ?>">
                     <?php if ($li['wr_image']) { ?>
-                    <div class="followinggul-img-box">
-                        <div class="followinggul-img">
-                            <img src="<?php echo $li['wr_image']; ?>" class="img-responsive" alt="">
-                        </div>
+                    <div class="fl-img">
+                        <img src="<?php echo $li['wr_image']; ?>" alt="">
                     </div>
                     <?php } ?>
-                    <h5 class="followinggul-subj ellipsis <?php if ($li['wr_image']) { ?>followinggul-subj-margin<?php } ?>">
+                    <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="followinggul_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                        <span class="subj"><?php echo get_text($li['wr_subject']); ?></span>
                         <?php if ($li['wr_comment']) { ?>
-                        <span class="followinggul-comment">+<?php echo number_format($li['wr_comment']); ?></span>
+                        <span class="sound_only">댓글</span><span class="fl-comment m-l-5"><strong><i class="far fa-comment-dots"></i> <?php echo number_format($li['wr_comment']); ?></strong></span><span class="sound_only">개</span>
                         <?php } ?>
-                        <strong><?php echo get_text($li['wr_subject']); ?></strong>
-                    </h5>
-                </a>
-                <div class="followinggul-info <?php if ($li['wr_image']) { ?>followinggul-info-margin<?php } ?>">
-                    <div class="followinggul-marker ellipsis">
-                        <?php echo $li['bo_info']['bo_name']; ?>
-                    </div>
-                    <div class="followinggul-member">
-                        <div class="followinggul-photo">
-                            <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
-                        </div>
-                        <div class="followinggul-nick"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></div>
-                    </div>
-                    <div class="followinggul-date">
-                        <i class="far fa-clock margin-right-5"></i><?php echo $eb->date_time('Y-m-d',$li['datetime']); ?>
-                    </div>
-                    <div class="followinggul-hit ellipsis hidden-xs">
-                        <i class="fas fa-eye margin-right-5 hidden-lg hidden-md hidden-sm"></i><?php echo $li['wr_hit']; ?>
-                    </div>
+                    </a>
+                </div>
+                <?php } else { ?>
+                <div class="fl-subj">
+                    <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="followinggul_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
+                        <span class="fl-type">[댓글]</span>
+                        <span class="subj text-gray"><?php echo conv_subject($li['wr_content'],100,'…'); ?></span>
+                    </a>
+                </div>
+                <?php } ?>
+                <div class="fl-item fl-author">
+                    <span class="fl-photo">
+                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
+                        <span class="fl-user-icon"><i class="far fa-user-circle"></i></span>
+                        <?php } ?>
+                    </span>
+                    <span class="fl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
+                </div>
+                <div class="fl-item text-gray">
+                    <?php echo $li['bo_info']['bo_name']; ?>
+                </div>
+                <div class="fl-item">
+                    <?php echo $eb->date_time('Y-m-d',$li['datetime']); ?>
+                </div>
+                <div class="fl-item fl-num text-gray">
+                    <?php if($li['wr_hit'] == 0) { ?>
+                    -
+                    <?php } else { ?>
+                    <?php echo number_format($li['wr_hit']); ?>
+                    <?php } ?>
                 </div>
             </div>
-            <?php } else { ?>
-            <div class="followinggul-list">
-                <a href="<?php echo $li['href']; ?>" <?php if ($li['secret']) { ?>onclick="return false;"<?php } else if (!G5_IS_MOBILE) { ?>onclick="followinggul_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>
-                    <h5 class="followinggul-subj ellipsis">
-                        <span class="followinggul-type">[ 댓글 ]</span>
-                        <?php echo conv_subject($li['wr_content'],100,'…'); ?>
-                    </h5>
-                </a>
-                <div class="followinggul-info">
-                    <div class="followinggul-marker ellipsis">
-                        <?php echo $li['bo_info']['bo_name']; ?>
-                    </div>
-                    <div class="followinggul-member">
-                        <div class="followinggul-photo">
-                            <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
-                        </div>
-                        <div class="followinggul-nick"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></div>
-                    </div>
-                    <div class="followinggul-date">
-                        <i class="far fa-clock margin-right-5"></i><?php echo $eb->date_time('Y-m-d',$li['datetime']); ?>
-                    </div>
-                    <div class="followinggul-hit ellipsis hidden-xs">
-                        -
-                    </div>
+            <div class="fl-mobile"><?php /* 991px 이하에서만 보임 */ ?>
+                <span class="m-r-5">
+                    <span class="fl-photo">
+                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
+                        <span class="fl-user-icon"><i class="far fa-user-circle"></i></span>
+                        <?php } ?>
+                    </span>
+                    <span class="fl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
+                </span>
+                <span class="m-r-5">
+                    [<?php echo $li['bo_info']['bo_name']; ?>]
+                </span>
+                <div class="fl-mobile-right">
+                    <span class="m-l-5"><i class="far fa-clock"></i> <?php echo $eb->date_time('Y-m-d',$li['datetime']); ?></span>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <?php } ?>
-        </article>
+        </div>
+        <?php } ?>
+        <?php } ?>
+        <?php if (count((array)$list) == 0) { ?>
+        <div class="fl-no-list">
+            <i class="fas fa-exclamation-circle"></i> 팔로윙 글이 없습니다.
+        </div>
         <?php } ?>
     </div>
+    <?php if (count((array)$list) > 0) { ?>
     <div id="infinite_pagination">
         <a class="next" href="<?php echo G5_URL; ?>/mypage/?t=followinggul<?php echo $qstr;?>&amp;page=<?php echo ($page+1); ?>"></a>
     </div>
-    <div class="view-infinite-more text-center margin-top-40 margin-bottom-20">
-        <a id="my-followinggul-more" href="#" class="btn btn-default btn-e-xlg">더 보기<i class="far fa-arrow-alt-circle-down"></i></a>
-    </div>
-    <?php } else { ?>
-    <div class="text-center margin-top-30 margin-bottom-30 color-grey font-size-13">
-        <i class="fa fa-exclamation-circle"></i> 팔로윙 글이 없습니다.
+    <div class="view-infinite-more text-center m-t-30">
+        <a id="my-followinggul-more" href="#" class="btn btn-e-xlg">더 보기<i class="far fa-arrow-alt-circle-down"></i></a>
     </div>
     <?php } ?>
 </div>
 
-<?php /* 팔로윙글 상세보기 모달 시작 */ ?>
-<div class="modal fade followinggul-iframe-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog my-followinggul-modal">
+<?php /* 관심게시판 상세보기 모달 시작 */ ?>
+<div class="modal fade followinggul-iframe-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <iframe id="followinggul-iframe" width="100%" frameborder="0"></iframe>
             </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn-e btn-e-xlg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
-            </div>
         </div>
     </div>
 </div>
-<?php /* 팔로윙글 상세보기 모달 끝 */ ?>
+<?php /* 관심게시판 상세보기 모달 끝 */ ?>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/infinite-scroll/jquery.infinitescroll.min.js"></script>
@@ -233,11 +248,11 @@ function followinggul_modal(href) {
 }
 
 $(function(){
-    var $container = $('.infinite-container');
+    var $container = $('.fl-wrap');
     $container.infinitescroll({
         navSelector  : "#infinite_pagination",
         nextSelector : "#infinite_pagination .next",
-        itemSelector : ".followinggul-box",
+        itemSelector : ".fl-list-wrap",
         loading: {
             finishedMsg: 'END',
             img: '<?php echo EYOOM_THEME_URL; ?>/image/loading.gif'

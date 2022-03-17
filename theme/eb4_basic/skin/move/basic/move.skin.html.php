@@ -3,23 +3,14 @@
  * skin file : /theme/THEME_NAME/skin/move/basic/move.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.copy-move {position:relative;padding:15px;font-size:12px}
-.copy-move .table-list-eb thead {border-top:2px solid #757575;border-bottom:1px solid #959595}
-.copy-move .table-list-eb .table thead > tr > th {border-bottom:1px solid #959595}
+.copy-move {position:relative;overflow:hidden;padding:15px;font-size:.9375rem}
 .copy-move .eyoom-form {border:0}
 .copy-move .eyoom-form label {margin-bottom:0}
-.copy-move .eyoom-form .checkbox i {top:1px}
-.copy-move .copymove_current {color:#FF4848;padding:0;width:17px;height:17px;border-radius:50% !important}
+.copy-move .eyoom-form .checkbox i {top:-8px}
+.copy-move .copymove_current {color:#e53935;padding:0;width:17px;height:17px;border-radius:50%}
 .copy-move .copy-move-list label span {margin-right:10px}
 </style>
 
@@ -35,10 +26,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     <input type="hidden" name="act" value="<?php echo $act; ?>">
     <input type="hidden" name="url" value="<?php echo $SERVER['HTTP_REFERER']; ?>">
     <input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
-    <h4 class="margin-bottom-20"><strong><?php echo $g5['title']; ?></strong></h4>
+    <h5 class="m-b-20"><strong><?php echo $g5['title']; ?></strong></h5>
     <div class="table-list-eb">
         <div class="board-list-body">
-            <table class="table table-hover">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>
@@ -73,12 +64,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
     <div class="win-btn text-center">
         <input type="submit" value="<?php echo $act; ?>" id="btn_submit" class="btn-e btn-e-lg btn-e-red">
     </div>
-    <div class="margin-bottom-20"></div>
+    <div class="m-b-20"></div>
     </form>
 </div>
 
-<script type="text/javascript" src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script>
 $(function() {
     $(".win-btn").append("<button type=\"button\" class=\"btn-e btn-e-lg btn-e-dark\">창닫기</button>");
@@ -121,8 +110,3 @@ function fboardmoveall_submit(f) {
     return true;
 }
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->

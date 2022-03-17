@@ -8,13 +8,14 @@ if (!defined('_EYOOM_')) exit;
 <style>
 .blind {display:none}
 #eyoom-push:before,#eyoom-push:after {content:"";display:block;width:0;height:0;position:absolute}
-#eyoom-push:before {border-left:44px solid transparent;border-right:0 solid transparent;border-top:45px solid #666;bottom:-45px;right:20px}
+#eyoom-push:before {border-left:44px solid transparent;border-right:0 solid transparent;border-top:45px solid #656565;bottom:-45px;right:20px}
 #eyoom-push:after {border-left:30px solid transparent;border-right:0 solid transparent;border-top:33px solid #fff;bottom:-33px;right:25px}
-#eyoom-push {position:fixed;width:300px;height:auto;padding:15px;bottom:50px;right:30px;background:#fff;border:5px solid #666;border-radius:15px !important;z-index:1000;-webkit-box-shadow:0 6px 12px rgba(0,0,0,.175);box-shadow:0 6px 12px rgba(0,0,0,.175)}
-.push-headline {border-bottom:1px solid #aaa}
-#eyoom-push h6 {margin:0;display:inline-block;font-weight:bold}
-#eyoom-push .message-box {padding:10px;margin:10px 0 5px;background:#f8f8f8}
-#eyoom-push .config-push {font-size:11px;color:#9a9a9a}
+#eyoom-push {position:fixed;width:300px;height:auto;padding:15px;bottom:50px;right:30px;background:#fff;border:5px solid #666;border-radius:15px !important;z-index:1010;-webkit-box-shadow:0 6px 12px rgba(0,0,0,.175);box-shadow:0 6px 12px rgba(0,0,0,.175)}
+.push-headline {position:relative;border-bottom:1px solid #a5a5a5;padding-bottom:10px}
+#eyoom-push h5 {margin:0;display:inline-block;font-weight:700;font-size:1rem}
+#eyoom-push .close-push {display:block;width:20px;height:20px;line-height:20px;text-align:center;position:absolute;top:0;right:0;cursor:pointer}
+#eyoom-push .message-box {padding:10px;margin:10px 0;background:#f8f8f8}
+#eyoom-push .config-push {font-size:.6875rem;color:#959595}
 </style>
 
 <script>
@@ -138,9 +139,8 @@ function close_push() {
 
 <div id="eyoom-push" class="blind">
     <div class="push-headline">
-        <h6>알림</h6>
-        <span class="close-push"><a href="javascript:;" onclick="close_push();" class="pull-right"><i class="fa fa-times"></i></a></span>
-        <div class="clearfix"></div>
+        <h5>알림</h5>
+        <span onclick="close_push();" class="close-push"><i class="fas fa-times"></i></span>
     </div>
     <div class="message-box"></div>
     <div class="config-push"><i class="fa fa-exclamation-circle"></i> 푸시 메세지를 받고 싶지 않을 경우 <a href="<?php echo G5_URL; ?>/mypage/config.php">[환경설정]</a>에서 설정할 수 있습니다.</div>

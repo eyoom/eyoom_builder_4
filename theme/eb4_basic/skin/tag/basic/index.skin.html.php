@@ -6,109 +6,99 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.board-webzine .webzine-item {position:relative;font-size:13px;margin-bottom:30px;border:1px solid #d5d5d5;background:#fff;width:100%}
-.board-webzine .webzine-item-heading {position:relative;padding:8px 15px;border-bottom:1px solid #e5e5e5;background:#f8f8f8}
-.board-webzine .webzine-item-heading .webzine-photo {display:inline-block;width:26px;height:26px;margin-right:2px;border:1px solid #e5e5e5;padding:1px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.board-webzine .webzine-item-heading .webzine-photo img {width:100%;height:auto;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.board-webzine .webzine-item-heading .webzine-photo .webzine-user-icon {width:22px;height:22px;font-size:14px;line-height:22px;text-align:center;background:#959595;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;white-space:nowrap;vertical-align:baseline;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.board-webzine .webzine-item-heading .webzine-date {margin-left:7px;font-size:12px}
-.board-webzine .webzine-item-heading .webzine-date i {color:#959595}
-.board-webzine .webzine-item-body {position:relative;overflow:hidden;padding:15px;min-height:130px;box-sizing:content-box}
-.board-webzine .webzine-item-body .webzine-img {position:absolute;top:15px;left:15px;width:200px;z-index:1}
-.board-webzine .webzine-item-body .webzine-desc {position:relative}
-.board-webzine .webzine-item-body .webzine-noimg-desc {position:relative}
-.board-webzine .webzine-item-body .webzine-img-box {position:relative;overflow:hidden;height:130px;padding:3px;background:#fff;border:1px solid #ddd;box-sizing:border-box;border-radius:3px !important}
-.board-webzine .webzine-item-body .webzine-img-box-in {position:relative;overflow:hidden;height:122px;border-radius:2px !important}
-.board-webzine .webzine-item-body .webzine-img-box-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.45)}
-.board-webzine .webzine-item-body .webzine-img-box-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;color:#fff;font-size:42px;line-height:1;margin-top:-21px;margin-left:-18px;z-index:1}
-.board-webzine .webzine-item:hover .webzine-img-box-in:after {opacity:1}
-.board-webzine .webzine-item-body h4 {font-size:15px;color:#000;margin-left:215px}
-.board-webzine .webzine-item:hover .webzine-item-body h4 {text-decoration:underline;color:#005cff}
-.board-webzine .webzine-item-body .webzine-cont {position:relative;font-weight:300;color:#757575;margin-left:215px}
-.board-webzine .webzine-item-body .webzine-info {position:relative;border-top:1px solid #f2f2f2;padding-top:7px;margin-left:215px}
-.board-webzine .webzine-item-body .webzine-info span {color:#959595;font-size:11px}
-.board-webzine .webzine-item-body .webzine-info span i {margin-right:5px}
-.board-webzine .webzine-item-body .webzine-info strong {font-weight:normal;margin-right:10px}
-.board-webzine .webzine-item-body .webzine-noimg-desc h4 {margin-left:0}
-.board-webzine .webzine-item-body .webzine-noimg-desc .webzine-cont {margin-left:0}
-.board-webzine .webzine-item-body .webzine-noimg-desc .webzine-info {margin-left:0}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width: 550px) {
-    .board-webzine .webzine-item-heading {padding:8px 10px}
-    .board-webzine .webzine-item-body {padding:15px 10px}
-    .board-webzine .webzine-item-body .webzine-img {top:54px;left:10px;width:100px}
-    .board-webzine .webzine-item-body .webzine-img-box {height:70px}
-    .board-webzine .webzine-item-body .webzine-img-box-in {height:62px}
-    .board-webzine .webzine-item-body h4 {margin-left:0}
-    .board-webzine .webzine-item-body .webzine-cont {margin-left:110px;height:72px;font-size:12px;overflow:hidden;margin-bottom:15px}
-    .board-webzine .webzine-item-body .webzine-info {margin-left:0;padding-top:10px}
-    .board-webzine .webzine-item-body .webzine-noimg-desc .webzine-cont {height:70px;font-size:12px;overflow:hidden}
+.tag-index .tag-item {position:relative;margin-bottom:30px;border:1px solid #d5d5d5;background:#fff;width:100%}
+.tag-index .tag-item-heading {position:relative;padding:15px;border-bottom:1px solid #d5d5d5;background:#f8f8f8}
+.tag-index .tag-item-heading .tag-photo {display:inline-block;margin-right:2px}
+.tag-index .tag-item-heading .tag-photo img {width:17px;height:17px;border-radius:50%}
+.tag-index .tag-item-heading .tag-user-icon {color:#959595}
+.tag-index .tag-item-heading .tag-date {margin-left:7px}
+.tag-index .tag-item-heading .tag-date i {color:#959595}
+.tag-index .tag-item-heading .tag-view {margin-left:7px}
+.tag-index .tag-item-heading .tag-view i {color:#959595}
+.tag-index .tag-item-body {position:relative;overflow:hidden;padding:15px;min-height:130px}
+.tag-index .tag-item-body .tag-img {position:absolute;top:15px;left:15px;width:200px;z-index:1}
+.tag-index .tag-item-body .tag-desc {position:relative}
+.tag-index .tag-item-body .tag-noimg-desc {position:relative}
+.tag-index .tag-item-body .tag-img-box {position:relative;overflow:hidden;height:130px;padding:3px;background:#fff;border:1px solid #ddd;border-radius:3px}
+.tag-index .tag-item-body .tag-img-box-in {position:relative;overflow:hidden;height:122px;border-radius:2px}
+.tag-index .tag-item-body .tag-img-box-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.45)}
+.tag-index .tag-item-body .tag-img-box-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;color:#fff;font-size:42px;line-height:1;margin-top:-21px;margin-left:-18px;z-index:1}
+.tag-index .tag-item:hover .tag-img-box-in:after {opacity:1}
+.tag-index .tag-item-body h5 {font-size:1.125rem;margin-left:215px;margin-bottom:10px}
+.tag-index .tag-item:hover .tag-item-body h5 {text-decoration:underline}
+.tag-index .tag-item-body .tag-cont {position:relative;overflow:hidden;color:#757575;height:90px;margin-left:215px;margin-bottom:10px}
+.tag-index .tag-item-body .tag-noimg-desc h5 {margin-left:0}
+.tag-index .tag-item-body .tag-noimg-desc .tag-cont {margin-left:0;margin-bottom:0}
+.tag-index .tag-item-body .tag-noimg-desc .tag-info {margin-left:0}
+@media (max-width: 767px) {
+    .tag-index .tag-item-body .tag-img {top:45px;left:10px;width:100px}
+    .tag-index .tag-item-body .tag-img-box {height:70px}
+    .tag-index .tag-item-body .tag-img-box-in {height:62px}
+    .tag-index .tag-item-body h5 {margin-left:0}
+    .tag-index .tag-item-body .tag-cont {margin-left:110px;margin-bottom:0;height:68px}
+    .tag-index .tag-item-body .tag-info {margin-left:0;padding-top:10px}
+    .tag-index .tag-item-body .tag-noimg-desc .tag-cont {height:68px}
 }
-<?php } ?>
 </style>
 
 <?php if (count((array)$rel_tags) > 0) { ?>
-<div class="content-box margin-bottom-30">
-    <div class="content-box-header">
-        <h4 class="font-bold"><strong>연관태그 검색</strong> <small>[태그 in 태그]</small></h4>
+<div class="panel m-b-30">
+    <div class="panel-heading">
+        <h5 class="panel-title"><strong>연관태그 검색</strong> <small>[태그 in 태그]</small></h5>
     </div>
-    <div class="content-box-body">
+    <div class="panel-body">
         <?php for ($i=0; $i<count((array)$rel_tags); $i++) { ?>
-        <span><a href="<?php echo $rel_tags[$i]['href']; ?>" class="btn-e btn-e-xs btn-e-default"><?php echo $rel_tags[$i]['tag']; ?></a></span>
+        <span><a href="<?php echo $rel_tags[$i]['href']; ?>" class="btn-e btn-e-xs btn-e-gray"><?php echo $rel_tags[$i]['tag']; ?></a></span>
         <?php } ?>
     </div>
 </div>
 <?php } ?>
 
-<div class="board-webzine">
-    <div class="margin-bottom-20 font-size-12 color-grey">
+<div class="tag-index">
+    <div class="m-b-20 text-gray">
         <u>전체 <?php echo number_format($total_count); ?> 건 - <?php echo $page; ?> 페이지</u>
     </div>
     <?php for ($i=0; $i<count((array)$list); $i++) { ?>
-    <div class="webzine-item">
-        <div class="webzine-item-heading">
-            <span class="webzine-photo">
-                <?php if ($list[$i]['mb_photo']) { ?>
+    <div class="tag-item">
+        <div class="tag-item-heading">
+            <?php if ($list[$i]['mb_photo']) { ?>
+            <span class="tag-photo">
                 <?php echo $list[$i]['mb_photo']; ?>
-                <?php } else { ?>
-                <span class="webzine-user-icon"><i class="fas fa-user"></i></span>
-                <?php } ?>
             </span>
-            <span><?php echo eb_nameview('basic', $list[$i]['mb_nick'], $list[$i]['mb_id'], $list[$i]['email'], $list[$i]['homepage']); ?></span>
-            <span class="webzine-date">
-                <i class="far fa-clock"></i> <?php echo $eb->date_format('Y-m-d', $list[$i]['tw_datetime']); ?>
-            </span>
+            <?php } else { ?>
+            <span class="tag-user-icon"><i class="far fa-user-circle"></i></span>
+            <?php } ?>
+            <span><?php echo $list[$i]['mb_name']; ?></span>
+            <span class="tag-date"><i class="far fa-clock"></i> <?php echo $eb->date_format('Y-m-d', $list[$i]['tw_datetime']); ?></span>
+            <span class="tag-view"><i class="far fa-eye"></i> <?php echo number_format($list[$i]['wr_hit']); ?></span>
         </div>
-        <div class="webzine-item-body">
+        <div class="tag-item-body">
             <?php if ($list[$i]['image']) { ?>
-            <div class="webzine-img">
+            <div class="tag-img">
                 <a href="<?php echo get_eyoom_pretty_url($list[$i]['bo_table'],$list[$i]['wr_id']); ?>">
-                    <div class="webzine-img-box">
-                        <div class="webzine-img-box-in">
-                            <img class="img-responsive" src="<?php echo $list[$i]['image']; ?>" alt="">
+                    <div class="tag-img-box">
+                        <div class="tag-img-box-in">
+                            <img src="<?php echo $list[$i]['image']; ?>" class="img-fluid" alt="">
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="webzine-desc">
+            <div class="tag-desc">
             <?php } else { ?>
-            <div class="webzine-noimg-desc">
+            <div class="tag-noimg-desc">
             <?php } ?>
-                <h4 class="ellipsis">
+                <h5 class="ellipsis">
                     <a href="<?php echo get_eyoom_pretty_url($list[$i]['bo_table'],$list[$i]['wr_id']); ?>">
                         <strong><?php echo $list[$i]['wr_subject']; ?></strong>
                     </a>
-                </h4>
-                <p class="webzine-cont"><?php echo $list[$i]['wr_content']; ?></p>
-                <div class="webzine-info">
-                    <span><i class="fas fa-eye"></i><strong class="color-black"><?php echo number_format($list[$i]['wr_hit']); ?></strong></span>
-                </div>
+                </h5>
+                <p class="tag-cont"><?php echo $list[$i]['wr_content']; ?></p>
             </div>
         </div>
     </div>
     <?php } ?>
     <?php if (count((array)$list) == 0) { ?>
-    <div class="text-center color-grey font-size-14"><i class="fas fa-exclamation-circle"></i> 출력할 내용이 없습니다.</div>
+    <div class="text-center text-gray"><i class="fas fa-exclamation-circle"></i> 출력할 내용이 없습니다.</div>
     <?php } ?>
 </div>
 

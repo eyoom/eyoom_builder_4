@@ -7,23 +7,19 @@ if (!defined('_EYOOM_')) exit;
 
 <style>
 .shop-list-sort-wrap {position:relative}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-list-sort-wrap .tab-scroll-category {margin-bottom:20px}
 }
-<?php } ?>
 </style>
-
-<div id="fakeloader"></div>
 
 <div class="shop-event">
     <?php /* 이벤트 헤더 이미지 */ ?>
     <?php if (file_exists($himg)) { ?>
-    <div id="sev_himg" class="sev_img"><img src="<?php echo G5_DATA_URL.'/event/'.$ev_id.'_h'; ?>" alt=""></div>
+    <div id="sev_himg" class="sev_img m-b-40"><img src="<?php echo G5_DATA_URL.'/event/'.$ev_id.'_h'; ?>" class="img-fluid" alt=""></div>
     <?php } ?>
 
     <?php /* 상단 HTML */ ?>
-    <div id="sev_hhtml" class="margin-bottom-20"><?php echo conv_content($ev['ev_head_html'], 1); ?></div>
+    <div id="sev_hhtml" class="m-b-40"><?php echo conv_content($ev['ev_head_html'], 1); ?></div>
 
     <div class="shop-list-sort-wrap">
         <?php include $sort_skin; ?>
@@ -36,27 +32,15 @@ if (!defined('_EYOOM_')) exit;
     <?php echo eb_paging($eyoom['paging_skin']);?>
 
     <?php /* 하단 HTML */ ?>
-    <div id="sev_thtml"><?php echo conv_content($ev['ev_tail_html'], 1); ?></div>
+    <div id="sev_thtml" class="m-t-40"><?php echo conv_content($ev['ev_tail_html'], 1); ?></div>
 
     <?php /* 이벤트 테일 이미지 */ ?>
     <?php if (file_exists($timg)) { ?>
-    <div id="sev_timg" class="sev_img"><img src="<?php echo G5_DATA_URL.'/event/'.$ev_id.'_t'; ?>" alt=""></div>
+    <div id="sev_timg" class="sev_img m-t-40"><img src="<?php echo G5_DATA_URL.'/event/'.$ev_id.'_t'; ?>" class="img-fluid" alt=""></div>
     <?php } ?>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script>
-$('#fakeloader').fakeLoader({
-    timeToHide:3000,
-    zIndex:"11",
-    spinner:"spinner6",
-    bgColor:"#f4f4f4",
-});
-
-$(window).load(function(){
-    $('#fakeloader').fadeOut(300);
-});
-
 var itemlist_ca_id = "<?php echo $ca_id; ?>";
 
 $.fn.listType = function(type) {

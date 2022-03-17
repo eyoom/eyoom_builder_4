@@ -10,9 +10,15 @@ if (!defined('_SHOP_')) {
     $pop_division = 'shop';
 }
 
+if (G5_IS_MOBILE) {
+    $pop_device = 'mobile';
+} else {
+    $pop_device = 'pc';
+}
+
 $sql = " select * from {$g5['new_win_table']}
           where '".G5_TIME_YMDHIS."' between nw_begin_time and nw_end_time
-            and nw_device IN ( 'both', 'pc' ) and nw_division IN ( 'both', '".$pop_division."' )
+            and nw_device IN ( 'both', '".$pop_device."' ) and nw_division IN ( 'both', '".$pop_division."' )
           order by nw_id asc ";
 $result = sql_query($sql, false);
 
@@ -20,7 +26,7 @@ $newwin = array();
 
 for ($i=0; $nw=sql_fetch_array($result); $i++) {
     // 이미 체크 되었다면 Continue
-    if ($_COOKIE["hd_pops_list"])
+    if (isset($_COOKIE["hd_pops_{$nw['nw_id']}"]) && $_COOKIE["hd_pops_{$nw['nw_id']}"])
         continue;
 
     $newwin[$i] = $nw;

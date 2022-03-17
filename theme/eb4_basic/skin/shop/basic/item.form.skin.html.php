@@ -15,19 +15,19 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 
 <div class="shop-product">
     <?php if ($is_admin) { ?>
-    <div class="text-right margin-bottom-10">
+    <div class="text-end m-b-10">
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemform&amp;w=u&amp;it_id=<?php echo $it_id; ?>&amp;wmode=1"  onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-red btn-edit-mode">상품 관리</a>
     </div>
     <?php }?>
 
     <div class="row">
-        <div class="col-sm-6 sm-margin-bottom-30">
+        <div class="col-md-5 md-m-b-30">
             <?php /* ---------- 상품이미지 미리보기 시작 ---------- */ ?>
             <?php if ($item_view == 'zoom') { // 상품이미지 미리보기 종류 - zoom ?>
             <div class="shop-product-img">
                 <div class="product-img-big">
                     <?php foreach ($big_img as $k => $bimg) { ?>
-                    <a href="javascript:void(0);" <?php if (!G5_IS_MOBILE) { ?>class="elevaterzoom_item" data-toggle="modal" data-target=".shop-img-modal"<?php } ?>>
+                    <a href="javascript:void(0);" <?php if (!G5_IS_MOBILE) { ?>class="elevaterzoom_item" data-bs-toggle="modal" data-bs-target=".shop-img-modal"<?php } ?>>
                         <?php echo $bimg['image']; ?>
                     </a>
                     <?php } ?>
@@ -47,7 +47,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
             </div>
             <?php } else if ($item_view == 'slider') { ?>
             <div class="shop-product-img">
-                <div class="product-img-big fotorama" data-nav="thumbs" data-max-width="100%" data-loop="true" data-allowfullscreen="true">
+                <div class="product-img-big fotorama" data-nav="thumbs" data-max-width="100%" data-loop="true" data-allowfullscreen="false">
                     <?php foreach ($big_img as $k => $bimg) { ?>
                     <?php echo $bimg['image']; ?>
                     <?php } ?>
@@ -57,7 +57,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                 </div>
             </div>
             <?php } ?>
-            <div class="margin-bottom-20"></div>
+            <div class="m-b-20"></div>
 
             <?php /* 다른 상품 보기 시작 */ ?>
             <div class="shop-product-prev-next">
@@ -80,19 +80,19 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                 <?php if ($star_score) { ?>
                 <span class="sound_only">고객평점</span>
                 <img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $star_score?>.png" alt="" class="sit_star" width="80">
-                <span class="margin-left-5">별<?php echo $star_score?>개</span>
+                <span class="m-l-5">별<?php echo $star_score?>개</span>
                 <span class="li-divider"></span>
                 <?php } ?>
-                <i class="far fa-comment-dots" aria-hidden="true"></i><span class="sound_only">리뷰</span> <?php echo $it['it_use_cnt']; ?>
+                <span title="사용후기"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="sound_only">사용후기</span> <?php echo $item_use_count; ?></span>
                 <span class="li-divider"></span>
-                <i class="far fa-heart" aria-hidden="true"></i><span class="sound_only">위시</span> <?php echo get_wishlist_count_by_item($it['it_id']); ?>
+                <span title="위시리스트저장"><i class="far fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트저장</span> <?php echo get_wishlist_count_by_item($it['it_id']); ?></span>
                 <div class="btn-group item-share-wrap">
-                    <button type="button" class="item-share-btn" data-toggle="dropdown"><i class="fas fa-share-alt" aria-hidden="true"></i><span class="sound_only">sns 공유</span></button>
+                    <button type="button" class="item-share-btn" data-bs-toggle="dropdown"><i class="fas fa-share-alt" aria-hidden="true"></i><span class="sound_only">sns 공유</span></button>
                     <div class="dropdown-menu">
                         <div class="share-sns">
                             <?php echo $sns_share_links; ?>
                         </div>
-                        <a href="javascript:popup_item_recommend('<?php echo $it['it_id']; ?>');" class="share-rec"><i class="far fa-envelope" aria-hidden="true"></i><span class="sound_only">추천하기</span></a>
+                        <a href="javascript:popup_item_recommend('<?php echo $it['it_id']; ?>');" class="share-rec" title="추천하기"><i class="far fa-envelope" aria-hidden="true"></i><span class="sound_only">추천하기</span></a>
                     </div>
                 </div>
             </div>
@@ -100,14 +100,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
             <?php /* ---------- 상품이미지 미리보기 끝 ---------- */ ?>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-md-7">
             <?php /* ---------- 상품 요약정보 및 구매 시작 ---------- */ ?>
             <div class="shop-product-form 2017_renewal_itemform">
                 <h3 class="product-title">
                     <strong><?php echo stripslashes($it['it_name']); ?></strong>
                     <span class="sound_only">요약정보 및 구매</span>
                 </h3>
-                <p class="font-size-14 color-grey"><?php echo $it['it_basic']; ?></p>
+                <p class="text-gray"><?php echo $it['it_basic']; ?></p>
                 <?php if ($is_orderable) { ?>
                 <p class="sound_only">
                     상품 선택옵션 <?php echo $option_count; ?> 개, 추가옵션 <?php echo $supply_count; ?> 개
@@ -230,7 +230,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                     <?php for($i=0; $i<$option_count; $i++) { ?>
                     <div class="get_item_options">
                         <label for="it_option_<?php echo $optitem[$i]['seq']; ?>"><?php echo $optitem[$i]['subject']; ?></label>
-                        <div class="select margin-bottom-10">
+                        <div class="select m-b-10">
                             <select id="it_option_<?php echo $optitem[$i]['seq']; ?>" class="it_option" <?php echo $optitem[$i]['disabled']; ?>>
                                 <option value="">선택</option>
                                 <?php foreach ($optitem[$i]['select'] as $k => $select) { ?>
@@ -243,7 +243,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                     <?php } else { ?>
                     <div class="get_item_options">
                         <label for="it_option_1"><?php echo $optitem['subject']; ?></label>
-                        <div class="select margin-bottom-10">
+                        <div class="select m-b-10">
                             <select id="it_option_1" class="it_option">
                                 <option value="">선택</option>
                                 <?php foreach ($optitem['select'] as $k => $select) { ?>
@@ -264,7 +264,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                     <?php for($i=0; $i<$supply_count; $i++) { ?>
                     <div class="get_item_supply">
                         <label for="it_supply_<?php echo $supitem[$i]['seq']; ?>"><?php echo $supitem[$i]['subject']; ?></label>
-                        <div class="select margin-bottom-10">
+                        <div class="select m-b-10">
                             <select id="it_supply_<?php echo $supitem[$i]['seq']; ?>" class="it_supply">
                                 <option value="">선택</option>
                                 <?php foreach ($supitem[$i]['select'] as $k => $select) { ?>
@@ -373,8 +373,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 </form>
 
 <?php /* ---------- 상품이미지 크게 보기 모달 시작 ---------- */ ?>
-<div class="modal fade shop-img-modal" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade shop-img-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="fotorama" data-nav="thumbs" data-max-width="100%" data-loop="true">
@@ -384,7 +384,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                 </div>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
+                <button data-bs-dismiss="modal" aria-label="Close" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
             </div>
         </div>
     </div>
@@ -401,8 +401,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 $(document).ready(function(){
     <?php if (!G5_IS_MOBILE) { // PC버전의 경우에만 줌적용 ?>
     $('.elevaterzoom_item img').elevateZoom({
-        zoomWindowWidth: 534,
-        zoomWindowHeight: 534,
+        zoomWindowWidth: 526,
+        zoomWindowHeight: 526,
         borderSize: 0,
         borderColour: "#000"
     });

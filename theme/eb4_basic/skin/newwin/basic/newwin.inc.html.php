@@ -20,15 +20,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 .modal-dialog {display:none}
 .modal-dialog .hd-pops-content {display:none;position:relative;margin:10px 20px 20px}
 .modal-dialog .hd-pops-list {position:relative;overflow:hidden;outline:none}
-.modal-dialog .hd-pops-list img {display:block;width:100% \9;max-width:100%;height:auto}
+.modal-dialog .hd-pops-list img {display:block;max-width:100%;height:auto}
 </style>
 
 <div id="hd_pop">
-    <div id="modal_hd_pop" class="modal fade" aria-hidden="true">
+    <div id="modal_hd_pop" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="hd-pops-content">
@@ -40,8 +40,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="hd_pops_reject btn-e btn-e-dark" data-dismiss="modal">24시간 동안 열지 않기</button>
-                    <button type="button" class="btn-e btn-e-dark" data-dismiss="modal">닫기</button>
+                    <button type="button" class="hd_pops_reject btn-e btn-e-dark" data-bs-dismiss="modal">24시간 동안 열지 않기</button>
+                    <button type="button" class="btn-e btn-e-dark" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>

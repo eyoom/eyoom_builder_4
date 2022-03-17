@@ -4,30 +4,25 @@
  */
 if (!defined('_EYOOM_')) exit;
 
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab_scroll_category.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.memo-write {position:relative;overflow:hidden;padding:5px}
-<?php if (G5_IS_MOBILE) { ?>
-.memo-write {padding:20px 15px}
-.memo-write .win-title {position:relative;margin:0 0 20px;font-size:18px;height:50px;line-height:30px;padding:10px;background:#555;color:#fff}
-.memo-write .win-close-btn {position:absolute;top:10px;right:10px;width:30px;height:30px;line-height:30px;text-align:center;margin:0;padding:0;border:0;background:none;color:#fff;float:right}
-<?php } ?>
+.memo-write {position:relative;overflow:hidden}
 </style>
+<?php if (G5_IS_MOBILE) { ?>
+<style>
+.memo-write {padding:15px}
+.memo-write .win-title {pposition:relative;margin:0 0 20px;font-size:1.0625rem;height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
+.memo-write .btn-close {position:absolute;top:19px;right:10px}
+</style>
+<?php } ?>
 
 <div class="memo-write">
     <?php if (G5_IS_MOBILE) { ?>
     <h4 class="win-title">
         <strong>내 쪽지함</strong>
-        <button type="button" onclick="window.close();" class="win-close-btn"><i class="fas fa-times"></i></button>
-        <div class="clearfix"></div>
+        <button type="button" class="btn-close btn-close-white" onclick="window.close();" aria-label="Close"></button>
     </h4>
     <?php } ?>
     <div class="tab-scroll-category">
@@ -59,32 +54,28 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/custom.css"
                 <i class="icon-append fas fa-user"></i>
                 <input type="text" name="me_recv_mb_id" value="<?php echo $me_recv_mb_id; ?>" id="me_recv_mb_id" required size="47">
             </label>
-            <div class="note margin-bottom-10"><strong>Note:</strong> 여러 회원에게 보낼때는 컴마 ( , )로 구분하세요.</div>
+            <div class="note m-b-15"><strong>Note:</strong> 여러 회원에게 보낼때는 컴마 ( , )로 구분하세요.</div>
         </section>
-        <div class="margin-hr-15"></div>
         <section>
             <label for="me_memo" class="label">쪽지내용</label>
             <label class="textarea textarea-resizable required-mark">
                 <textarea name="me_memo" id="me_memo" rows="7" required><?php echo $content; ?></textarea>
             </label>
         </section>
-        <div class="margin-hr-15"></div>
         <section>
             <label class="label">자동등록방지</label>
             <div class="vc-captcha"><?php echo captcha_html(); ?></div>
         </section>
-        <div class="text-center margin-top-30 margin-bottom-30">
-            <input type="submit" value="보내기" id="btn_submit" class="btn-e btn-e-xlg btn-e-red">
+        <div class="text-center m-t-30 m-b-30">
+            <input type="submit" value="보내기" id="btn_submit" class="btn-e btn-e-xl btn-e-red">
             <?php if (G5_IS_MOBILE) { ?>
-            <button type="button" onclick="window.close();" class="btn-e btn-e-xlg btn-e-dark">창닫기</button>
+            <button type="button" onclick="window.close();" class="btn-e btn-e-xl btn-e-dark">창닫기</button>
             <?php } ?>
         </div>
         </form>
     </div>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>
 <script>
@@ -139,8 +130,3 @@ function zoomEnable(){
     $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
 }
 </script>
-<!--[if lt IE 9]>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/respond.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/html5shiv.min.js"></script>
-    <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/js/eyoom-form-ie8.js"></script>
-<![endif]-->

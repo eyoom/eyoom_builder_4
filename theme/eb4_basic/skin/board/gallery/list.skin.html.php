@@ -5,89 +5,106 @@
 if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab_scroll_category.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert/sweetalert.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-.board-list .board-setup {position:relative;border:1px solid #d5d5d5;height:30px;margin-bottom:20px}
+.board-list {font-size:.9375rem}
+.board-list .board-setup {position:relative;border:1px solid #d5d5d5;height:38px;margin-bottom:20px}
 .board-list .board-setup .select {position:absolute;top:-1px;left:-1px;display:inline-block;width:200px}
 .board-list .board-setup-btn-box {position:absolute;top:-1px;right:-1px;display:inline-block;width:420px}
-.board-list .board-setup-btn {float:left;width:25%;height:30px;line-height:30px;color:#fff;text-align:center;font-size:12px}
-.board-list .board-setup-btn:nth-child(odd) {background:#59595B}
-.board-list .board-setup-btn:nth-child(even) {background:#676769}
+.board-list .board-setup-btn {float:left;width:25%;height:38px;line-height:38px;color:#fff;text-align:center;font-size:.8125rem}
+.board-list .board-setup-btn:nth-child(odd) {background-color:#000}
+.board-list .board-setup-btn:nth-child(even) {background-color:#3c3c3e}
 .board-list .board-setup-btn:hover {opacity:0.8}
-.board-list .bo_current {color:#FF4848}
-.board-list .board-btn-adm li {float:left;margin-right:5px}
-.board-list .board-list-footer {margin-top:20px}
-.board-list .favorite-setup {display:inline-block;width:100px;margin-left:15px}
-.board-list .favorite-setup .toggle {padding-right:37px}
-.board-gallery {margin-left:-5px;margin-right:-5px}
+.board-list .favorite-setup {display:inline-block;width:125px;margin-left:15px}
+.board-list .favorite-setup .toggle {padding-right:45px}
+.board-gallery {margin-left:-10px;margin-right:-10px}
 .board-gallery .gallery-item, .board-gallery .gallery-sizer {position:relative;width:33.33333%}
-.board-gallery .gallery-item-pd {padding:5px}
-.board-gallery .gallery-item-in {position:relative;background:#fff;border:1px solid #e5e5e5}
-.board-gallery .gallery-item-in .gallery-item-category {position:relative;background:#fff;padding:10px;color:#959595;font-weight:bold;border-bottom:1px solid #ededed}
-.board-gallery .gallery-item .gallery-item-image {position:relative;overflow:hidden;padding:10px 10px 0}
+.board-gallery .gallery-item-pd {padding:10px}
+.board-gallery .gallery-item-in {position:relative;background:#fff;border:1px solid #e5e5e5;-webkit-transition:all 0.2s ease-in-out;transition:all .2s ease-in-out}
+.board-gallery .gallery-item-in:hover {border-color:#959595}
+.board-gallery .gallery-item-in .gallery-item-category {position:relative;background:#fff;padding:15px;color:#959595;font-weight:bold;border-bottom:1px solid #e5e5e5}
+.board-gallery .gallery-item .gallery-item-image {position:relative;overflow:hidden;padding:15px 15px 0}
 .board-gallery .gallery-item .gallery-item-image-in {position:relative;overflow:hidden;max-height:500px}
-.board-gallery .gallery-item .gallery-item-image-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.45)}
-.board-gallery .gallery-item .gallery-item-image-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;width:40px;height:40px;line-height:40px;text-align:center;color:#fff;font-size:30px;margin-top:-20px;margin-left:-20px;z-index:1}
+.board-gallery .gallery-item .gallery-item-image-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.3)}
+.board-gallery .gallery-item .gallery-item-image-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;width:50px;height:50px;line-height:50px;text-align:center;color:#fff;font-size:40px;transform:translate(-50%,-50%);z-index:1}
 .board-gallery .gallery-item:hover .gallery-item-image-in:after {opacity:1}
 .board-gallery .gallery-item:hover .gallery-item-image-in {box-shadow:none}
-.board-gallery .gallery-item .gallery-item-info {position:relative;padding:0 10px;margin-top:5px}
-.board-gallery .gallery-item .gallery-item-info h4 {font-size:15px;color:#000}
-.board-gallery .gallery-item .gallery-item-info .gallery-checkbox {display:inline-block;position:absolute;top:-5px;right:0;z-index:1}
+.board-gallery .gallery-item .gallery-item-info {position:relative;padding:15px}
+.board-gallery .gallery-item .gallery-item-info h4 {font-size:1.0625rem;color:#252525;line-height:1.4;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:15px}
+.board-gallery .gallery-item .gallery-item-info h4 .gallery-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
+.board-gallery .gallery-item .gallery-item-info h4 .gallery-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
+.board-gallery .gallery-item .gallery-item-info h4 .gallery-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
+.board-gallery .gallery-item .gallery-item-info h4 .gallery-new-icon b {position:absolute;top:3px;left:8px;width:2px;height:8px;background-color:#fff;transform:rotate(-60deg)}
+.board-gallery .gallery-item .gallery-item-info .gallery-checkbox {display:inline-block;position:absolute;top:12px;right:5px;z-index:1}
 .board-gallery .gallery-item:hover .gallery-item-info h4 {text-decoration:underline}
-.board-gallery .gallery-item .gallery-item-info .gallery-cont {position:relative;overflow:hidden;color:#757575;font-weight:200;font-size:12px}
+.board-gallery .gallery-item .gallery-item-info .gallery-cont {position:relative;color:#959595;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
+-webkit-box-orient:vertical}
 .board-gallery .gallery-desc {position:relative;margin-bottom:10px}
-.board-gallery .gallery-desc .gallery-photo {display:inline-block;width:26px;height:26px;margin-right:2px;border:1px solid #e5e5e5;padding:1px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.board-gallery .gallery-desc .gallery-photo img {width:100%;height:auto;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
-.board-gallery .gallery-desc .gallery-photo .desc-user-icon {width:22px;height:22px;font-size:14px;line-height:22px;text-align:center;background:#959595;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;white-space:nowrap;vertical-align:baseline;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important}
+.board-gallery .gallery-desc .gallery-photo {display:inline-block;margin-right:2px}
+.board-gallery .gallery-desc .gallery-photo img {width:17px;height:17px;border-radius:50%}
+.board-gallery .gallery-desc .gallery-photo .desc-user-icon {font-size:.9375rem}
 .board-gallery .gallery-desc .gallery-lv-icon {display:inline-block;margin-left:2px}
-.board-gallery .gallery-ratings .star-ratings-list {position:absolute;top:3px;right:0;width:60px;height:18px;background:#fff}
+.board-gallery .gallery-ratings .star-ratings-list {position:absolute;top:0;right:0;width:80px;height:18px;background:#fff}
 .board-gallery .gallery-ratings .star-ratings-list li {padding:0;float:left;margin-right:0}
-.board-gallery .gallery-ratings .star-ratings-list li .rating {color:#a5a5a5;font-size:10px;line-height:normal}
-.board-gallery .gallery-ratings .star-ratings-list li .rating-selected {color:#FF4848;font-size:10px}
-.board-gallery .gallery-item .gallery-item-bottom {position:relative;border-top:1px solid #e5e5e5;font-size:11px;color:#000}
-.board-gallery .gallery-item .gallery-item-bottom .pull-left {padding:7px 10px}
-.board-gallery .gallery-item .gallery-item-bottom .pull-left i {color:#959595}
-.board-gallery .gallery-item .gallery-item-bottom .pull-right {padding:7px 10px;border-left:1px solid #e5e5e5}
-.board-gallery .gallery-item .gallery-item-bottom .pull-right i {margin:0 5px}
-.board-gallery .masonry-blick-100 {width:100% !important;padding:0 5px;box-sizing:border-box}
-.board-gallery .masonry-blick-100 .gallery-item-in {box-shadow:none;margin:0;margin-bottom:18px}
-.board-gallery .gallery-box-notice {position:relative;overflow:hidden;border:1px solid #e5e5e5;background:#fff;padding:8px 10px}
-.board-gallery .gallery-box-notice:hover {background:#fff;border:solid 1px #e5e5e5;box-shadow:none}
+.board-gallery .gallery-ratings .star-ratings-list li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
+.board-gallery .gallery-ratings .star-ratings-list li .rating-selected {color:#cc2300;font-size:.8125rem}
+.board-gallery .gallery-item .gallery-item-bottom {position:relative;border-top:1px solid #e5e5e5}
+.board-gallery .gallery-item .gallery-item-bottom .float-start {padding:15px}
+.board-gallery .gallery-item .gallery-item-bottom .float-start i {color:#b5b5b5}
+.board-gallery .gallery-item .gallery-item-bottom .float-end {padding:15px;border-left:1px solid #e5e5e5}
+.board-gallery .gallery-item .gallery-item-bottom .float-end i {color:#b5b5b5}
+.board-gallery .masonry-blick-100 {width:100% !important;padding:0 10px 10px}
+.board-gallery .masonry-blick-100 .gallery-item-in {box-shadow:none;margin:0}
+.board-gallery .gallery-box-notice {position:relative;overflow:hidden;border:1px solid #757575;padding:12px 15px}
+.board-gallery .gallery-box-notice:hover {border:solid 1px #757575}
 .board-gallery .gallery-box-notice:first-child {margin-top:0}
-.board-gallery .gallery-box-notice .label {font-size:11px;font-weight:normal;margin-bottom:0}
+.board-gallery .gallery-box-notice .label {font-size:.8125rem;font-weight:normal;margin-bottom:0}
 .board-list .view-infinite-more {margin-top:30px;margin-bottom:40px}
-.board-list .view-infinite-more .btn-e-xlg {position:relative;height:40px;line-height:40px;padding:0 100px;font-size:16px !important;border:1px solid #b5b5b5;background:#fff;color:#757575}
-.board-list .view-infinite-more .btn-e-xlg i {position:absolute;top:5px;right:5px;font-size:30px;color:#fff;transition:all 0.2s ease-in-out}
+.board-list .view-infinite-more .btn-e-xlg {position:relative;height:50px;line-height:50px;padding:0 120px;font-size:1.0625rem !important;border:1px solid #b5b5b5;background:#fff;color:#757575}
+.board-list .view-infinite-more .btn-e-xlg i {position:absolute;top:10px;right:5px;font-size:30px;color:#fff;transition:all 0.2s ease-in-out}
 .board-list .view-infinite-more .btn-e-xlg:hover {border:1px solid #959595;background:#f5f5f5;color:#000}
 .board-list .view-infinite-more .btn-e-xlg:hover i {color:#b5b5b5}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width:767px) {
+.board-list .board-list-button-wrap:after {content:"";display:block;clear:both}
+.board-list .board-list-button-wrap .blbw-left {float:left;margin-top:5px}
+.board-list .board-list-button-wrap .blbw-right {float:right;margin-top:5px}
+@media (max-width:1199px) {
+    .board-gallery .gallery-item .gallery-item-bottom {font-size:.8125rem}
+}
+@media (max-width:991px) {
     .board-gallery .gallery-item, .board-gallery .gallery-sizer {width:50%}
-    .board-gallery .gallery-item-in .gallery-item-category {padding:5px}
-    .board-gallery .gallery-item .gallery-item-image {padding:5px 5px 0}
-    .board-gallery .gallery-item .gallery-item-info {padding:0 5px}
-    .board-gallery .gallery-item .gallery-item-info h4 {font-size:13px}
-    .board-gallery .gallery-item .gallery-item-info .gallery-checkbox {right:-5px}
-    .board-gallery .gallery-item .gallery-item-bottom .pull-left {padding:5px}
-    .board-gallery .gallery-item .gallery-item-bottom .pull-right {padding:5px}
 }
-<?php } ?>
-@media (min-width: 768px) {
-    .board-view-modal {width:720px;margin:10px auto}
-    .board-view-modal .modal-header, .board-view-modal .modal-body, .board-view-modal .modal-footer {padding:10px 20px}
+@media (max-width:767px) {
+    .board-gallery .gallery-item-in .gallery-item-category {padding:10px}
+    .board-gallery .gallery-item .gallery-item-image {padding:10px 10px 0}
+    .board-gallery .gallery-item .gallery-item-image-in .movie-icon {width:40px;height:40px;line-height:40px;font-size:30px}
+    .board-gallery .gallery-item .gallery-item-info {padding:10px}
+    .board-gallery .gallery-item .gallery-item-info h4 {font-size:1rem;margin-bottom:10px}
+    .board-gallery .gallery-item .gallery-item-info .gallery-checkbox {top:5px;right:0}
+    .board-gallery .gallery-item .gallery-item-bottom .float-start {padding:10px}
+    .board-gallery .gallery-item .gallery-item-bottom .float-end {padding:10px}
 }
-@media (min-width: 992px) {
-    .board-view-modal {width:940px}
-}
-@media (min-width: 1200px) {
-    .board-view-modal {width:1140px}
+@media (max-width:576px) {
+    .board-gallery {margin-left:-5px;margin-right:-5px}
+    .board-gallery .gallery-item-pd {padding:5px 5px 15px}
+    .board-gallery .gallery-item-in {border:0}
+    .board-gallery .gallery-item-in .gallery-item-category {padding:10px 0 5px;border-bottom:0}
+    .board-gallery .gallery-item .gallery-item-image {padding:0}
+    .board-gallery .gallery-item .gallery-item-info {padding:10px 0}
+    .board-gallery .gallery-item .gallery-item-info .gallery-checkbox {right:-10px}
+    .board-gallery .gallery-item .gallery-item-bottom {border-top:0}
+    .board-gallery .gallery-item .gallery-item-bottom .float-start {padding:0 0 10px}
 }
 </style>
-
-<div id="fakeloader"></div>
+<?php if ($side_layout['use'] == 'yes') { ?>
+<style>
+@media (max-width:1199px) {
+    .board-gallery .gallery-item, .board-gallery .gallery-sizer {width:50%}
+}
+</style>
+<?php } ?>
 
 <div class="board-list">
     <?php if ($is_admin && !G5_IS_MOBILE && !$wmode) { ?>
@@ -112,31 +129,26 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
 
     <?php /* 게시판 페이지 정보 및 버튼 시작 */ ?>
-    <div class="board-info margin-bottom-20">
-        <div class="pull-left margin-top-5 font-size-12 color-grey">
+    <div class="board-info m-b-20">
+        <div class="float-start m-t-5 text-gray">
             <u>전체 <?php echo number_format($total_count); ?> 건 - <?php echo $page; ?> 페이지</u>
             <?php if ($is_member && $eyoom['is_community_theme'] == 'y') { ?>
             <span class="favorite-setup eyoom-form">
                 <label class="toggle small-toggle green-toggle">
                     <input type="hidden" name="favorite_board" id="favorite_board" value="<?php echo !$is_bo_favorite ? 'n': 'y'; ?>">
-                    <input type="checkbox" class="btn_favorite_toggle" value="favorite_board" <?php echo $is_bo_favorite ? 'checked':''; ?>><i></i><span class="color-grey font-size-12">관심게시판</span>
+                    <input type="checkbox" class="btn_favorite_toggle" value="favorite_board" <?php echo $is_bo_favorite ? 'checked':''; ?>><i></i><span class="text-gray">관심게시판</span>
                 </label>
             </span>
             <?php } ?>
         </div>
         <?php if ($write_href) { ?>
-        <div class="pull-right">
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-red" type="button">글쓰기</a>
+        <div class="float-end">
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-indigo" type="button">글쓰기</a>
         </div>
         <?php } ?>
         <div class="clearfix"></div>
     </div>
     <?php /* 게시판 페이지 정보 및 버튼 끝 */ ?>
-
-    <?php /* Hot 게시글 */ ?>
-    <?php if ($eyoom_board['bo_use_hotgul'] == 1) { ?>
-    <?php //echo $latest->latest_hot('basic', 'count=5||cut_subject=30||photo=y'); ?>
-    <?php } ?>
 
     <?php /* 게시판 카테고리 시작 */ ?>
     <?php if ($is_category) { ?>
@@ -174,27 +186,27 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="sw" value="">
     <?php } ?>
-    <div class="margin-bottom-20">
-        <?php if ($is_checkbox) { ?>
-        <ul class="list-unstyled board-btn-adm pull-left">
-            <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button></li>
-            <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button></li>
-            <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button></li>
-        </ul>
-        <?php } ?>
-        <span class="pull-left">
-            <?php if ($rss_href) { ?>
-            <a href="<?php echo $rss_href; ?>" class="btn-e btn-e-yellow" type="button"><i class="fas fa-rss"></i></a>
+
+    <div class="board-list-button-wrap m-b-15">
+        <div class="blbw-left">
+            <?php if ($is_checkbox) { ?>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button>
             <?php } ?>
-            <a class="btn-e btn-e-dark" type="button" data-toggle="modal" data-target=".search-modal"><i class="fas fa-search"></i></a>
-        </span>
-        <div class="clearfix"></div>
+            <?php if ($rss_href) { ?>
+            <a href="<?php echo $rss_href; ?>" class="btn-e btn-e-sm btn-amber" type="button"><i class="fas fa-rss"></i></a>
+            <?php } ?>
+            <a class="btn-e btn-e-sm btn-dark" type="button" data-bs-toggle="modal" data-bs-target=".search-modal"><i class="fas fa-search"></i></a>
+        </div>
     </div>
+    
     <?php if ($is_checkbox) { ?>
-    <div class="margin-bottom-15">
+    <div class="m-b-10">
         <label class="checkbox"><input type="checkbox" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);"><i></i>현재 페이지 게시물 전체선택</label>
     </div>
     <?php } ?>
+
     <div class="board-gallery">
         <div class="gallery-sizer"></div>
     <?php for ($i=0; $i<count((array)$list); $i++) { ?>
@@ -202,7 +214,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php if ($list[$i]['is_notice']) { ?>
             <div class="gallery-item-in gallery-box-notice">
                 <div class="ellipsis">
-                    <span class="label label-dark color-white margin-right-5">공지</span><a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode? 'onclick="eb_modal(this.href); return false;"': ''; ?>><?php echo $list[$i]['subject']; ?></a>
+                    <span class="label label-dark text-white m-r-10">공지</span><a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode? 'onclick="eb_modal(this.href); return false;"': ''; ?>><strong class="f-s-15r"><?php echo $list[$i]['subject']; ?></strong></a>
                 </div>
             </div>
             <?php } else { ?>
@@ -213,25 +225,28 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         <?php echo $list[$i]['ca_name']; ?>
                     </div>
                     <?php } ?>
+                    <?php if ($list[$i]['img_content'] && !preg_match('/no image/',$list[$i]['img_content'])) { ?>
                     <div class="gallery-item-image">
                         <a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode ? 'onclick="eb_modal(this.href); return false;"': ''; ?>>
                             <div class="gallery-item-image-in">
-                            <?php if ($list[$i]['img_content'] && !preg_match('/no image/',$list[$i]['img_content'])) { ?>
                                 <?php echo $list[$i]['img_content']; ?>
                                 <?php if ($list[$i]['is_video']) { ?>
                                 <span class="movie-icon"><i class="far fa-play-circle"></i></span>
                                 <?php } ?>
-                            <?php } ?>
                             </div>
                         </a>
                     </div>
+                    <?php } ?>
                     <div class="gallery-item-info">
-                        <h4 class="ellipsis">
+                        <h4>
                             <a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode ? 'onclick="eb_modal(this.href); return false;"': ''; ?>>
+                                <?php if ($list[$i]['icon_new']) { ?>
+                                <span class="gallery-new-icon"><b></b></span>
+                                <?php } ?>
                                 <?php if ($wr_id == $list[$i]['wr_id']) { ?>
-                                <strong><span class="color-red margin-right-5">열람중</span><?php echo $list[$i]['subject']; ?></strong>
+                                <span class="text-crimson m-r-5">열람중</span><?php echo $list[$i]['subject']; ?>
                                 <?php } else { ?>
-                                <strong><?php echo $list[$i]['subject']; ?></strong>
+                                <?php echo $list[$i]['subject']; ?>
                                 <?php } ?>
                             </a>
                             <?php if ($is_checkbox) { ?>
@@ -249,13 +264,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                                 <?php if ($list[$i]['mb_photo']) { ?>
                                 <?php echo $list[$i]['mb_photo']; ?>
                                 <?php } else { ?>
-                                <span class="desc-user-icon"><i class="fas fa-user"></i></span>
+                                <span class="desc-user-icon"><i class="far fa-user-circle"></i></span>
                                 <?php } ?>
                             </span>
                             <?php } ?>
                             <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
                             <?php if ($eyoom_board['bo_use_rating'] == '1' && $eyoom_board['bo_use_rating_list'] == '1') { ?>
-                            <div class="gallery-ratings">
+                            <div class="gallery-ratings hidden-xs">
                                 <ul class="list-unstyled star-ratings-list">
                                     <li><i class="<?php if ($list[$i]['star'] <= 0) { ?>rating far fa-star<?php } else if ($list[$i]['star'] > 0.3 && $list[$i]['star'] <= 0.7) { ?>rating-selected fas fa-star-half<?php } else if ($list[$i]['star'] > 0.8) { ?>rating-selected fas fa-star<?php } ?>"></i></li>
                                     <li><i class="<?php if ($list[$i]['star'] <= 1) { ?>rating far fa-star<?php } else if ($list[$i]['star'] > 1.3 && $list[$i]['star'] <= 1.7) { ?>rating-selected fas fa-star-half<?php } else if ($list[$i]['star'] > 1.8) { ?>rating-selected fas fa-star<?php } ?>"></i></li>
@@ -269,7 +284,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         <?php if ($list[$i]['content']) { ?>
                         <p class="gallery-cont">
                             <?php if (!G5_IS_MOBILE) { ?>
-                            <?php echo cut_str($list[$i]['content'],70, '…'); ?>
+                            <?php echo cut_str($list[$i]['content'],100, '…'); ?>
                             <?php } else { ?>
                             <?php echo cut_str($list[$i]['content'],40, '…'); ?>
                             <?php } ?>
@@ -277,26 +292,25 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         <?php } ?>
                     </div>
                     <div class="gallery-item-bottom clearfix">
-                        <div class="pull-left">
+                        <div class="float-start">
                             <?php if ($eyoom_board['bo_sel_date_type'] == '1') { ?>
-                            <i class="far fa-clock"></i> <?php echo $eb->date_time('Y.m.d', $list[$i]['wr_datetime']); ?>
+                            <span><i class="far fa-clock m-r-5"></i><?php echo $eb->date_time('Y-m-d', $list[$i]['wr_datetime']); ?></span>
                             <?php } else if ($eyoom_board['bo_sel_date_type'] == '2') { ?>
-                            <i class="far fa-clock"></i> <?php echo $eb->date_format('Y.m.d', $list[$i]['wr_datetime']); ?>
+                            <span><i class="far fa-clock"></i><?php echo $eb->date_format('Y-m-d', $list[$i]['wr_datetime']); ?></span>
                             <?php } ?>
                             <?php if ($list[$i]['wr_comment']) { ?>
-                            <i class="far fa-comments margin-left-5"></i> <span class="color-red"><?php echo number_format($list[$i]['wr_comment']); ?></span>
+                            <span><i class="far fa-comment-dots m-l-7 m-r-5 text-deep-orange"></i><span class="text-deep-orange"><?php echo number_format($list[$i]['wr_comment']); ?></span></span>
                             <?php } ?>
                             <?php if ($is_good && $list[$i]['wr_good'] > 0) { ?>
-                            <i class="far fa-thumbs-up margin-left-5"></i> <span class="color-green"><?php echo number_format($list[$i]['wr_good']); ?></span>
+                            <span class="hidden-xs"><i class="far fa-thumbs-up m-l-7 m-r-5"></i><span class="text-teal"><?php echo number_format($list[$i]['wr_good']); ?></span></span>
                             <?php } ?>
                             <?php if ($is_nogood && $list[$i]['wr_nogood'] > 0) { ?>
-                            <i class="far fa-thumbs-down margin-left-5"></i> <span class="color-brown"><?php echo number_format($list[$i]['wr_nogood']); ?></span>
+                            <span class="hidden-xs"><i class="far fa-thumbs-down m-l-7 m-r-5"></i><span class="text-pink"><?php echo number_format($list[$i]['wr_nogood']); ?></span></span>
                             <?php } ?>
                         </div>
-                        <div class="pull-right color-grey hidden-xs">
-                            <i class="fas fa-eye"></i> <?php echo number_format($list[$i]['wr_hit']); ?>
+                        <div class="float-end text-gray hidden-xs">
+                            <i class="far fa-eye m-r-5"></i><?php echo number_format($list[$i]['wr_hit']); ?>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
@@ -304,53 +318,57 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
     <?php } ?>
     <?php if (count((array)$list) == 0) { ?>
-        <div class="text-center color-grey font-size-14"><i class="fas fa-exclamation-circle"></i> 게시물이 없습니다.</div>
+        <div class="text-center text-gray f-s-13r"><i class="fas fa-exclamation-circle m-r-5"></i>게시물이 없습니다.</div>
     <?php } ?>
     </div>
     <?php if ($list && $eyoom_board['bo_use_infinite_scroll'] == '1') { ?>
     <div class="view-infinite-more text-center">
-        <a id="view-infinite-more" href="#" class="btn btn-default btn-e-xlg">더 보기<i class="far fa-arrow-alt-circle-down"></i></a>
+        <a id="view-infinite-more" href="#" class="btn-e btn-e-brd btn-gray btn-e-xlg"><strong>더 보기</strong><i class="far fa-arrow-alt-circle-down"></i></a>
     </div>
     <?php } ?>
-    <div class="board-list-footer">
-        <div class="pull-left">
+
+    <div class="board-list-button-wrap m-t-15">
+        <div class="blbw-left">
             <?php if ($is_checkbox) { ?>
-            <ul class="list-unstyled board-btn-adm pull-left">
-                <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button></li>
-                <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button></li>
-                <li><button class="btn-e btn-e-default" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button></li>
-            </ul>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button>
+                <button class="btn-e btn-e-sm btn-gray" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button>
             <?php } ?>
-            <span class="pull-left">
-                <?php if ($rss_href) { ?>
-                <a href="<?php echo $rss_href; ?>" class="btn-e btn-e-yellow" type="button"><i class="fas fa-rss"></i></a>
-                <?php } ?>
-                <a class="btn-e btn-e-dark" type="button" data-toggle="modal" data-target=".search-modal"><i class="fas fa-search"></i></a>
-            </span>
+            <?php if ($rss_href) { ?>
+            <a href="<?php echo $rss_href; ?>" class="btn-e btn-e-sm btn-amber" type="button"><i class="fas fa-rss"></i></a>
+            <?php } ?>
+            <a class="btn-e btn-e-sm btn-dark" type="button" data-bs-toggle="modal" data-bs-target=".search-modal"><i class="fas fa-search"></i></a>
         </div>
-        <div class="pull-right">
-            <?php if ($list_href || $write_href) { ?>
-            <ul class="list-unstyled">
-                <?php if ($write_href) { ?>
-                <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-red" type="button">글쓰기</a></li>
-                <?php } ?>
-            </ul>
+        <div class="blbw-right">
+            <?php if ($write_href) { ?>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-sm btn-indigo" type="button">글쓰기</a>
             <?php } ?>
         </div>
-        <div class="clearfix"></div>
     </div>
+
     <?php if ($is_admin) { ?>
     </form>
     <?php } ?>
 </div>
 
+<div class="board-pagination">
+    <?php if ($eyoom_board['bo_use_infinite_scroll'] != '1') { ?>
+    <?php /* 페이지 */ ?>
+    <?php echo eb_paging($eyoom['paging_skin']);?>
+    <?php } else { ?>
+    <div id="infinite_pagination">
+        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;page='.($page+1)); ?>"></a>
+    </div>
+    <?php } ?>
+</div>
+
 <?php /* 게시판 검색 모달 시작 */ ?>
-<div class="modal fade search-modal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<div class="modal fade search-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h5 class="modal-title"><i class="fas fa-search color-grey"></i> <strong><?php echo $board['bo_subject']; ?> 검색</strong></h5>
+                <h5 class="modal-title f-s-20r"><i class="fas fa-search text-gray m-r-7"></i><strong><?php echo $board['bo_subject']; ?> 검색</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?php /* 게시판 검색 시작 */ ?>
@@ -360,7 +378,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <input type="hidden" name="sca" value="<?php echo $sca; ?>">
                     <input type="hidden" name="sop" value="and">
                     <label for="sfl" class="sound_only">검색대상</label>
-                    <section class="margin-top-10">
+                    <section class="m-t-10">
                         <label class="select">
                             <select name="sfl" id="sfl" class="form-control">
                                 <option value="wr_subject"<?php get_selected($sfl, 'wr_subject', true); ?>>제목</option>
@@ -390,28 +408,21 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </fieldset>
                 <?php /* 게시판 검색 끝 */ ?>
             </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
-            </div>
         </div>
     </div>
 </div>
-<iframe name="photoframe" id="photoframe" style="display:none;"></iframe>
 <?php /* 게시판 검색 모달 끝 */ ?>
 
 <?php if ($infinite_wmode) { ?>
 <?php /* 게시판 상세보기 모달 시작 */ ?>
-<div class="modal fade view-iframe-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog board-view-modal">
+<div class="modal fade view-iframe-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <iframe id="view-iframe" width="100%" frameborder="0"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn-e btn-e-xlg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
             </div>
         </div>
     </div>
@@ -421,23 +432,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
 <?php if ($is_checkbox) { ?>
 <noscript>
-<p>자바스크립트를 사용하지 않는 경우<br>별도의 확인 절차 없이 바로 선택삭제 처리하므로 주의하시기 바랍니다.</p>
+<p class="text-gray f-s-12r m-t-20"><i class="fas fa-exclamation-circle"></i> 자바스크립트를 사용하지 않는 경우 별도의 확인 절차 없이 바로 선택삭제 처리하므로 주의하시기 바랍니다.</p>
 </noscript>
 <?php } ?>
 
-<div class="board-pagination">
-    <?php if ($eyoom_board['bo_use_infinite_scroll'] != '1') { ?>
-    <?php /* 페이지 */ ?>
-    <?php echo eb_paging($eyoom['paging_skin']);?>
-    <?php } else { ?>
-    <div id="infinite_pagination">
-        <a class="next" href="<?php echo get_eyoom_pretty_url($bo_table,'','&amp;sca='.$sca.'&amp;page='.($page+1)); ?>"></a>
-    </div>
-    <?php } ?>
-</div>
-
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <?php if ($eyoom_board['bo_use_infinite_scroll'] == '1') { ?>
@@ -480,17 +479,6 @@ $(function() {
 <?php } ?>
 
 <script>
-$('#fakeloader').fakeLoader({
-    timeToHide:3000,
-    zIndex:"11",
-    spinner:"spinner6",
-    bgColor:"#fff",
-});
-
-$(window).load(function(){
-    $('#fakeloader').fadeOut(300);
-});
-
 <?php if ($eyoom_board['bo_use_infinite_scroll'] == '1') { ?>
 function eb_modal(href) {
     $('.view-iframe-modal').modal('show').on('hidden.bs.modal', function () {
@@ -590,13 +578,12 @@ function fboardlist_submit(f) {
             chk_count++;
     }
     if (!chk_count) {
-        swal({
-            html: true,
-            title: "중요!",
-            text: "<strong class='color-red'>" + document.pressed + "</strong> 할 게시물을 하나 이상 선택하세요.",
-            confirmButtonColor: "#FF4848",
-            type: "error",
-            confirmButtonText: "확인"
+        Swal.fire({
+            title: '<strong class="f-s-20r">중요!</strong>',
+            html: "<strong class='text-crimson'>" + document.pressed + "</strong> 할 게시물을 하나 이상 선택하세요.",
+            icon: 'error',
+            confirmButtonColor: '#e53935',
+            confirmButtonText: '확인'
         });
         return false;
     }
@@ -628,7 +615,7 @@ function select_copy(sw) {
     var sub_win = window.open("", "move", "left=50, top=50, width=500, height=550, scrollbars=1");
     f.sw.value = sw;
     f.target = "move";
-    f.action = "./move.php";
+    f.action = "./bbs/move.php";
     f.submit();
 }
 </script>
@@ -640,11 +627,11 @@ $(function() {
     $(".set_bo_skin").change(function() {
         var skin = $(this).val();
         if (!skin) {
-            swal({
-                title: "알림",
-                text: '스킨을 선택해 주세요.',
-                confirmButtonColor: "#FF4848",
-                type: "warning",
+            Swal.fire({
+                title: '<strong class="f-s-20r">알림</strong>',
+                html: '<span class="f-s-15r">스킨을 선택해 주세요.</span>',
+                icon: 'warning',
+                confirmButtonColor: "#e53935",
                 confirmButtonText: "확인"
             });
         } else {
@@ -668,21 +655,21 @@ $(function() {
         $.post('<?php echo EYOOM_CORE_URL; ?>/board/favorite_board.php', { bo_table: "<?php echo $bo_table; ?>", favorite: favorite });
         if (favorite == 'y') {
             $("#favorite_board").val('n');
-            swal({
-                title: "알림",
-                text: '관심게시판에서 해제하였습니다.',
-                confirmButtonColor: "#FF4848",
-                type: "warning",
-                confirmButtonText: "확인"
+            Swal.fire({
+                title: '<strong class="f-s-20r">알림</strong>',
+                html: '<span class="f-s-15r">관심게시판에서 <strong class="text-crimson">해제</strong>하였습니다.</span>',
+                icon: 'success',
+                confirmButtonColor: '#e53935',
+                confirmButtonText: '확인'
             });
         } else if (favorite == 'n') {
             $("#favorite_board").val('y');
-            swal({
-                title: "알림",
-                text: '관심게시판으로 등록하였습니다.',
-                confirmButtonColor: "#FF4848",
-                type: "warning",
-                confirmButtonText: "확인"
+            Swal.fire({
+                title: '<strong class="f-s-20r">알림</strong>',
+                html: '<span class="f-s-15r">관심게시판으로 <strong class="text-crimson">등록</strong>하였습니다.</span>',
+                icon: 'success',
+                confirmButtonColor: '#e53935',
+                confirmButtonText: '확인'
             });
         }
     });

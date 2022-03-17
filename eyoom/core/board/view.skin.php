@@ -105,6 +105,7 @@ $i=1;
 $view_link = array();
 if(isset($view['link']) && array_filter($view['link'])) {
     foreach ($view['link'] as $k => $v) {
+        if (!$view['link'][$i]) continue;
         $view_link[$i]['link']  = cut_str($view['link'][$i], 70);
         $view_link[$i]['href']  = $view['link_href'][$i];
         $view_link[$i]['hit']   = $view['link_hit'][$i];

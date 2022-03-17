@@ -1124,6 +1124,45 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                         </tr>
                         <tr>
                             <th class="table-form-th cf_cert_service">
+                                <label for="cf_cert_find" class="label">회원정보찾기</label>
+                            </th>
+                            <td class="cf_cert_service">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="cf_cert_find" id="cf_cert_find" value="1" <?php echo isset($config['cf_cert_find']) && $config['cf_cert_find'] == 1 ? 'checked': ''; ?>><i></i>아이디/비밀번호 찾기에 사용하기
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 휴대폰/아이핀 본인확인을 이용하시다가 간편인증을 이용하시는 경우, 기존 회원은 아이디/비밀번호 찾기에 사용할 수 없을 수 있습니다.</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th cf_cert_service">
+                                <label for="cf_cert_simple" class="label">통합인증(간편인증)</label>
+                            </th>
+                            <td class="cf_cert_service">
+                                <label class="select form-width-250px">
+                                    <select name="cf_cert_simple" id="cf_cert_simple">
+                                        <?php echo option_selected("", $config['cf_cert_simple'], "사용안함"); ?>
+                                        <?php echo option_selected("inicis", $config['cf_cert_simple'], "KG이니시스 통합인증(간편인증)"); ?>
+                                    </select><i></i>
+                                </label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> KG이니시스의 통합인증(간편인증+전자서명) 서비스에서 전자서명을 제외한 간편인증 서비스 입니다. <a href="https://www.inicis.com/all-auth-service" target="_blank"><u>KG이니시스 통합인증 안내</u></a></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th cf_cert_service">
+                                <label for="cf_cert_hp" class="label">휴대폰 본인확인</label>
+                            </th>
+                            <td class="cf_cert_service">
+                                <label class="select form-width-250px">
+                                    <select name="cf_cert_hp" id="cf_cert_hp">
+                                        <?php echo option_selected("", $config['cf_cert_hp'], "사용안함"); ?>
+                                        <?php echo option_selected("kcb", $config['cf_cert_hp'], "코리아크레딧뷰로(KCB) 휴대폰 본인확인"); ?>
+                                        <?php echo option_selected("kcp", $config['cf_cert_hp'], "NHN KCP 휴대폰 본인확인"); ?>
+                                    </select><i></i>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th cf_cert_service">
                                 <label for="cf_cert_ipin" class="label">아이핀 본인확인</label>
                             </th>
                             <td class="cf_cert_service">
@@ -1137,17 +1176,34 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                         </tr>
                         <tr>
                             <th class="table-form-th cf_cert_service">
-                                <label for="cf_cert_hp" class="label">휴대폰 본인확인</label>
+                                <label for="cf_cert_kg_mid" class="label">KG이니시스 간편인증 MID</label>
                             </th>
                             <td class="cf_cert_service">
-                                <label class="select form-width-250px">
-                                    <select name="cf_cert_hp" id="cf_cert_hp">
-                                        <?php echo option_selected("", $config['cf_cert_hp'], "사용안함"); ?>
-                                        <?php echo option_selected("kcb", $config['cf_cert_hp'], "코리아크레딧뷰로(KCB) 휴대폰 본인확인"); ?>
-                                        <?php echo option_selected("kcp", $config['cf_cert_hp'], "NHN KCP 휴대폰 본인확인"); ?>
-                                        <?php echo option_selected("lg", $config['cf_cert_hp'], "LG유플러스 휴대폰 본인확인"); ?>
-                                    </select><i></i>
-                                </label>
+                                <div class="inline-group">
+                                    <span>
+                                        <label class="input form-width-250px">
+                                            <i class="icon-prepend text-width">SRA</i>
+                                            <input type="text" name="cf_cert_kg_mid" value="<?php echo get_sanitize_input($config['cf_cert_kg_mid']); ?>" id="cf_cert_kg_mid" minlength="7" maxlength="7">
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <a href="http://sir.kr/main/service/inicis_cert_form.php" target="_blank" class="btn-e btn-e-md btn-e-dark">KG이니시스 간편인증 신청페이지</a>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th cf_cert_service">
+                                <label for="cf_cert_kg_cd" class="label">KG이니시스 간편인증 API KEY</label>
+                            </th>
+                            <td class="cf_cert_service">
+                                <div class="inline-group">
+                                    <span>
+                                        <label class="input form-width-250px">
+                                            <input type="text" name="cf_cert_kg_cd" value="<?php echo get_sanitize_input($config['cf_cert_kg_cd']); ?>" id="cf_cert_kg_cd" minlength="32" maxlength="32">
+                                        </label>
+                                    </span>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -1160,10 +1216,6 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                         <label class="input form-width-250px">
                                             <input type="text" name="cf_cert_kcb_cd" value="<?php echo get_sanitize_input($config['cf_cert_kcb_cd']); ?>" id="cf_cert_kcb_cd">
                                         </label>
-                                    </span>
-                                    <span>
-                                        <a href="http://sir.kr/main/service/b_ipin.php" target="_blank" class="btn-e btn-e-md btn-e-dark">KCB 아이핀 서비스 신청페이지</a>
-                                        <a href="http://sir.kr/main/service/b_cert.php" target="_blank" class="btn-e btn-e-md btn-e-dark">KCB 휴대폰 본인확인 서비스 신청페이지</a>
                                     </span>
                                 </div>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> KCB 회원사ID를 입력해 주십시오.<br>서비스에 가입되어 있지 않다면, KCB와 계약체결 후 회원사ID를 발급 받으실 수 있습니다. 이용하시려는 서비스에 대한 계약을 아이핀, 휴대폰 본인확인 각각 체결해주셔야 합니다. 아이핀 본인확인 테스트의 경우에는 KCB 회원사ID가 필요 없으나, 휴대폰 본인확인 테스트의 경우 KCB 에서 따로 발급 받으셔야 합니다.</div>
@@ -1190,36 +1242,6 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                         </tr>
                         <tr>
                             <th class="table-form-th cf_cert_service">
-                                <label for="cf_lg_mid" class="label">LG유플러스 상점아이디</label>
-                            </th>
-                            <td class="cf_cert_service">
-                                <div class="inline-group">
-                                    <span>
-                                        <label class="input form-width-250px">
-                                            <i class="icon-prepend">si_</i>
-                                            <input type="text" name="cf_lg_mid" value="<?php echo get_sanitize_input($config['cf_lg_mid']); ?>" id="cf_lg_mid">
-                                        </label>
-                                    </span>
-                                    <span>
-                                        <a href="http://sir.kr/main/service/lg_cert.php" target="_blank" class="btn-e btn-e-md btn-e-dark">LG유플러스 본인확인 서비스 신청페이지</a>
-                                    </span>
-                                </div>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> LG유플러스 상점아이디 중 si_를 제외한 나머지 아이디만 입력해 주십시오.<br>서비스에 가입되어 있지 않다면, 본인확인 서비스 신청페이지에서 서비스 신청 후 상점아이디를 발급 받으실 수 있습니다. <strong>LG유플러스 휴대폰본인확인은 ActiveX 설치가 필요하므로 Internet Explorer 에서만 사용할 수 있습니다.</strong></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th cf_cert_service">
-                                <label for="cf_lg_mert_key" class="label">LG유플러스 MERT KEY</label>
-                            </th>
-                            <td class="cf_cert_service">
-                                <label class="input form-width-250px">
-                                    <input type="text" name="cf_lg_mert_key" value="<?php echo get_sanitize_input($config['cf_lg_mert_key']); ?>" id="cf_lg_mert_key">
-                                </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> LG유플러스 상점MertKey는 상점관리자 -> 계약정보 -> 상점정보관리에서 확인하실 수 있습니다.</strong></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th cf_cert_service">
                                 <label for="cf_cert_limit" class="label">본인확인 이용제한</label>
                             </th>
                             <td class="cf_cert_service">
@@ -1227,7 +1249,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                     <i class="icon-append">회</i>
                                     <input type="text" name="cf_cert_limit" value="<?php echo (int) $config['cf_cert_limit']; ?>" id="cf_cert_limit" class="text-right">
                                 </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 하루동안 아이핀과 휴대폰 본인확인 인증 이용회수를 제한할 수 있습니다.<br>회수제한은 실서비스에서 아이핀과 휴대폰 본인확인 인증에 개별 적용됩니다.<br>0 으로 설정하시면 회수제한이 적용되지 않습니다.</div>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 1일 단위 본인인증을 시도할 수 있는 최대횟수를 지정합니다. (0으로 설정 시 무한으로 인증시도 가능)<br>아이핀/휴대폰/간편인증에서 개별 적용됩니다.)</div>
                             </td>
                         </tr>
                         <tr>

@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_use_addon_soundcloud` char(1) NOT NULL default '0',
   `bo_use_addon_map` char(1) NOT NULL default '0',
   `bo_use_addon_cmtfile` char(1) NOT NULL default '1',
+  `bo_count_cmtfile` smallint(2) NOT NULL default '1',
   `bo_use_extimg` char(1) NOT NULL default '0',
   `bo_use_adopt_point` char(1) NOT NULL default '0',
   `bo_adopt_minpoint` int(7) NOT NULL default '0',
@@ -194,21 +195,6 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_theme` (
   `tm_last` varchar(20) NOT NULL,
   `tm_time` varchar(20) NOT NULL,
   UNIQUE KEY `tm_name` (`tm_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `g5_eyoom_link`
---
-
-DROP TABLE IF EXISTS `g5_eyoom_link`;
-CREATE TABLE IF NOT EXISTS `g5_eyoom_link` (
-  `s_no` int(11) unsigned NOT NULL auto_increment,
-  `bo_table` varchar(20) NOT NULL,
-  `wr_id` int(11) unsigned NOT NULL default '0',
-  `theme` varchar(40) NOT NULL,
-  PRIMARY KEY  (`s_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -319,12 +305,12 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_goods` (
   `eg_no` int(10) unsigned NOT NULL auto_increment,
   `eg_code` varchar(20) NOT NULL,
   `eg_subject` varchar(255) NOT NULL,
-  `eg_theme` varchar(30) NOT NULL DEFAULT 'eb4_basic',
-  `eg_skin` varchar(50) NOT NULL DEFAULT 'basic',
-  `eg_state` smallint(1) NOT NULL DEFAULT '0',
+  `eg_theme` varchar(30) NOT NULL default 'eb4_basic',
+  `eg_skin` varchar(50) NOT NULL default 'basic',
+  `eg_state` smallint(1) NOT NULL default '0',
   `eg_link` varchar(255) NOT NULL,
   `eg_target` varchar(10) NOT NULL,
-  `eg_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `eg_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`eg_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -531,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_pin` (
   `mb_id` varchar(30) NOT NULL,
   `bo_table` varchar(20) NOT NULL default '',
   `wr_id` int(11) NOT NULL,
-  `it_id` varchar(20) NOT NULL DEFAULT '',
+  `it_id` varchar(20) NOT NULL default '',
   `pn_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`pn_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -660,33 +646,4 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_latest_item` (
   `li_view_level` tinyint(4) NOT NULL default '1',
   `li_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`li_no`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `g5_eyoom_banner`
---
-
-DROP TABLE IF EXISTS `g5_eyoom_banner`;
-CREATE TABLE IF NOT EXISTS `g5_eyoom_banner` (
-  `bn_no` int(10) unsigned NOT NULL,
-  `bn_code` varchar(20) NOT NULL,
-  `bn_type` enum('intra','extra') NOT NULL DEFAULT 'intra',
-  `bn_subject` varchar(255) NOT NULL DEFAULT '0',
-  `bn_link` text,
-  `bn_img` varchar(100) NOT NULL DEFAULT '',
-  `bn_target` varchar(20) NOT NULL DEFAULT '',
-  `bn_script` text NOT NULL,
-  `bn_sort` int(10) DEFAULT '0',
-  `bn_theme` varchar(30) NOT NULL DEFAULT 'default',
-  `bn_state` smallint(1) NOT NULL DEFAULT '0',
-  `bn_period` char(1) NOT NULL DEFAULT '1',
-  `bn_start` varchar(10) NOT NULL,
-  `bn_end` varchar(10) NOT NULL,
-  `bn_exposed` mediumint(10) NOT NULL DEFAULT '0',
-  `bn_clicked` mediumint(10) NOT NULL DEFAULT '0',
-  `bn_view_level` tinyint(4) NOT NULL DEFAULT '1',
-  `bn_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY  (`bn_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

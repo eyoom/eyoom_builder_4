@@ -4,16 +4,15 @@
  */
 if (!defined('_EYOOM_')) exit;
 ?>
-
 <style>
 .eb-pagination-wrap {position:relative;text-align:center;padding:7px;margin-top:30px}
 .eb-pagination {position:relative;list-style:none;display:inline-block;padding:0;margin:0}
 .eb-pagination li {display:inline}
-.eb-pagination a {display:inline-block;font-size:12px;text-decoration:none;min-width:28px;height:28px;padding:0 5px;color:#fff;border:1px solid transparent;line-height:26px;text-align:center;color:#757575;position:relative;z-index:1}
+.eb-pagination a {display:inline-block;font-size:.8125rem;text-decoration:none;min-width:30px;height:30px;padding:0 5px;border:1px solid #dadada;line-height:28px;text-align:center;color:#757575;position:relative;z-index:1}
 .eb-pagination a:active {outline:none}
-.eb-pagination a:hover {color:#000;background:#e5e5e5}
-.eb-pagination a.active {cursor:default;background:#4B4B4D;color:#fff}
-.eb-pagination a.active:hover {color:#fff;background:#4B4B4D}
+.eb-pagination a:hover {color:#000;background:#eaeaea}
+.eb-pagination a.active {cursor:default;background:#2b2b2e;color:#fff;border:0}
+.eb-pagination a.active:hover {color:#fff;background:#2b2b2e}
 .eb-pagination a.next,.eb-pagination a.prev {color:#959595}
 .eb-pagination a.next:hover,.eb-pagination a.prev:hover {color:#000}
 </style>

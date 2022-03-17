@@ -20,7 +20,7 @@ if (!$ca['ca_id'])
 /**
  * 본인인증, 성인인증체크
  */
-if(!$is_admin) {
+if(!$is_admin && $config['cf_cert_use']) {
     $msg = shop_member_cert_check($ca_id, 'list');
     if($msg)
         alert($msg, G5_SHOP_URL);

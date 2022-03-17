@@ -22,7 +22,5 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </ul>
 
-    <?php if ($wish_count > 0) { ?>
-    <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php" class="btn-e btn-e-xlg btn-e-block btn-e-default">위시리스트 바로가기</a>
-    <?php } ?>
+    <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php" class="btn-e btn-e-lg btn-e-block btn-e-dark btn-e-brd">위시리스트 바로가기<i class="far fa-arrow-alt-circle-right m-l-5"></i></a>
 </aside>

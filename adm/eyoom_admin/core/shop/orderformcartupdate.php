@@ -34,7 +34,7 @@ $arr_it_id = array();
 
 for ($i=0; $i<$cnt; $i++)
 {
-    $k = isset($_POST['ct_chk'][$i]) ? (int) $_POST['ct_chk'][$i] : 0;
+    $k = isset($_POST['ct_chk'][$i]) ? (int) $_POST['ct_chk'][$i] : '';
 
     if($k === '') continue;
 

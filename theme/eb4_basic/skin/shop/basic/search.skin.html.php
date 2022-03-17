@@ -8,11 +8,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 ?>
 
 <style>
-.shop-search .shop-search-form .search-input input {height:42px;background:#f8f8f8;font-size:13px;font-weight:bold}
-.shop-search .shop-search-form .search-input .icon-prepend {background-color:transparent;width:42px;height:40px;line-height:40px;border:0;color:#959595;font-size:14px}
+.shop-search .shop-search-form .search-box {margin-bottom:30px}
+.shop-search .shop-search-form .search-box-header h4 {font-size:1.25rem;padding-bottom:10px;margin-bottom:20px;border-bottom:1px solid #757575}
+.shop-search .shop-search-form .search-box-footer {color:#757575}
+.shop-search .shop-search-form .search-input input {height:42px;background:#f8f8f8;font-weight:700;border:1px solid #757575}
+.shop-search .shop-search-form .search-input .icon-prepend {background-color:transparent;width:42px;height:40px;line-height:40px;border:0;color:#959595}
 .shop-search .shop-search-form .input-button .button {height:40px;line-height:40px;background:#fff;padding:0 30px;font-size:13px}
-.shop-search .shop-search-form .content-box-header h4 {font-size:16px}
-.shop-search .shop-search-form .content-box-footer {color:#757575}
 .shop-search .search-tab {background-color:#D6D6D6;height:40px;margin-bottom:30px}
 .shop-search .search-tab #tab-search-result {display:none}
 .shop-search .search-tab .scroll_tabs_container {text-align:center;margin-bottom:0}
@@ -22,31 +23,29 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 .shop-search .search-cate {margin-bottom:30px}
 .shop-search .search-cate ul {padding-left:1px;zoom:1;list-style:none}
 .shop-search .search-cate ul:after {display:block;visibility:hidden;clear:both;content:""}
-.shop-search .search-cate li {float:left;width:20%;border:1px solid #d5d5d5;margin-left:-1px;margin-top:-1px}
-.shop-search .search-cate a {display:block;padding:0 10px;line-height:40px;font-size:12px}
-.shop-search .search-cate a:hover {background:#f5f5f5;color:#FF4848}
+.shop-search .search-cate li {float:left;width:20%;border:1px solid #757575;margin-left:-1px;margin-top:-1px}
+.shop-search .search-cate a {display:block;padding:0 5px;line-height:40px;font-size:.8125rem;text-align:center}
+.shop-search .search-cate a:hover {background:#fafafa;color:#cc2300}
 .shop-search #sct_lst {position:absolute;top:6px;right:0;margin-bottom:0;z-index:1;list-style:none}
 .shop-search #sct_lst li {position:relative;float:left}
-.shop-search #sct_lst button {position:relative;margin:0;padding:0;width:40px;height:40px;border:1px solid #d5d5d5;cursor:pointer;background:#fff;font-size:15px;color:#454545}
+.shop-search #sct_lst button {position:relative;margin:0;padding:0;width:40px;height:40px;border:1px solid #d5d5d5;cursor:pointer;background:#fff;font-size:.9375rem;color:#454545}
 .shop-search #sct_lst button.product-type-list-btn {border-right:0}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
 @media (max-width:991px) {
     .shop-search .tab-scroll-category {margin-bottom:20px}
     .shop-search #sct_lst {position:relative;top:inherit;right:inherit;float:right;margin-bottom:20px}
 }
-@media (max-width:767px) {
+@media (max-width:991px) {
     .shop-search .search-cate li {width:33.33333%}
 }
-@media (max-width:550px) {
+@media (max-width:576px) {
     .shop-search .search-cate li {width:50%}
 }
-<?php } ?>
 </style>
 
 <div id="fakeloader"></div>
 
 <?php if ($is_admin) { ?>
-<div class="text-right margin-bottom-10">
+<div class="text-end m-b-10">
     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=configform#anc_scf_etc" class="btn-e btn-e-red">검색 설정</a>
 </div>
 <?php } ?>
@@ -60,13 +59,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
         <input type="hidden" name="qorder" id="qorder" value="<?php echo $qorder ?>">
         <input type="hidden" name="qcaid" id="qcaid" value="<?php echo $qcaid ?>">
 
-        <div class="content-box margin-bottom-30">
-            <div class="content-box-header">
-                <h4><strong class="color-red"><?php echo $q; ?></strong> 검색결과 <small class="font-size-13 color-grey">(총 <strong class="color-red"><?php echo $total_count; ?></strong> 건)</small></h4>
+        <div class="search-box">
+            <div class="search-box-header">
+                <h4><strong class="text-crimson"><?php echo $q; ?></strong> 검색결과 <span class="text-gray">(총 <strong class="text-crimson"><?php echo $total_count; ?></strong> 건)</span></h4>
             </div>
-            <div class="content-box-body">
+            <div class="search-box-body">
                 <div class="row">
-                    <section class="col col-6">
+                    <section class="col-md-6">
                         <label class="label">검색범위</label>
                         <div class="inline-group">
                             <label for="ssch_qname" class="checkbox">
@@ -83,14 +82,14 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
                             </label>
                         </div>
                     </section>
-                    <section class="col col-3">
+                    <section class="col-md-3">
                         <label for="ssch_qfrom" class="label">최소 가격</label>
                         <label class="input">
                             <i class="icon-append font-style-normal">원</i>
                             <input type="text" name="qfrom" value="<?php echo $qfrom; ?>" id="ssch_qfrom" size="10">
                         </label>
                     </section>
-                    <section class="col col-3">
+                    <section class="col-md-3">
                         <label for="ssch_qto" class="label">최대 가격</label>
                         <label class="input">
                             <i class="icon-append font-style-normal">원</i>
@@ -98,7 +97,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
                         </label>
                     </section>
                     <div class="clearfix"></div>
-                    <section class="col col-12 margin-bottom-0">
+                    <section class="col-md-12">
                         <label for="ssch_q" class="sound_only">검색어 입력 필수</label>
                         <div class="input input-button search-input">
                             <i class="icon-prepend fa fa-search"></i>
@@ -108,11 +107,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
                     </section>
                 </div>
             </div>
-            <div class="content-box-footer">
-                <div class="text-left font-size-12">
-                    * 상세검색을 선택하지 않거나, 상품가격을 입력하지 않으면 전체에서 검색합니다.<br>
-                    * 검색어는 최대 30글자까지, 여러개의 검색어를 공백으로 구분하여 입력 할수 있습니다.
-                </div>
+            <div class="search-box-footer">
+                <p class="li-p-sq f-s-13r">상세검색을 선택하지 않거나, 상품가격을 입력하지 않으면 전체에서 검색합니다.</p>
+                <p class="li-p-sq f-s-13r">검색어는 최대 30글자까지, 여러개의 검색어를 공백으로 구분하여 입력 할수 있습니다.</p>
             </div>
         </div>
         </form>
@@ -124,7 +121,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
         <ul>
             <?php if ($sca_count > 0) { ?>
             <?php for ($i=0; $i<$sca_count; $i++) { ?>
-            <li><a href="#" onclick="set_ca_id('<?php echo $sca_list[$i]['ca_id']; ?>'); return false;"><?php echo $sca_list[$i]['ca_name']; ?> (<?php echo $sca_list[$i]['cnt']; ?>)</a></li>
+            <li><a href="#" onclick="set_ca_id('<?php echo $sca_list[$i]['ca_id']; ?>'); return false;" class="ellipsis"><?php echo $sca_list[$i]['ca_name']; ?> (<?php echo $sca_list[$i]['cnt']; ?>)</a></li>
             <?php } ?>
             <?php } ?>
             <li><a href="#" onclick="set_ca_id(''); return false;">전체분류 <span>(<?php echo $sca_total_cnt; ?>)</span></a></li>
@@ -192,21 +189,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 </div>
 <?php /* ---------- 쇼핑몰 검색 끝 ---------- */ ?>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/vendor_plugins.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/sly/sly.min.js"></script>
 <script>
-$('#fakeloader').fakeLoader({
-    timeToHide:3000,
-    zIndex:"11",
-    spinner:"spinner6",
-    bgColor:"#f4f4f4",
-});
-
-$(window).load(function(){
-    $('#fakeloader').fadeOut(300);
-});
-
 $(function() {
     var $frame = $('#tab-category');
     var $wrap  = $frame.parent();

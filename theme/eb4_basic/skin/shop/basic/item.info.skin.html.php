@@ -22,7 +22,7 @@ if (!defined('_EYOOM_')) exit;
     <?php if ($it['it_basic']) { // 상품 기본설명 ?>
     <h3 class="h-hidden">상품 기본설명</h3>
     <blockquote class="hero">
-    	<p><?php echo $it['it_basic']; ?></p>
+        <p><?php echo $it['it_basic']; ?></p>
     </blockquote>
     <?php } ?>
 
@@ -108,9 +108,9 @@ $('.pg-anchor-in a').on('click', function(e) {
     e.stopPropagation();
     var scrollTopSpace;
     if (window.innerWidth >= 992) {
-        scrollTopSpace = 120;
+        scrollTopSpace = 90;
     } else {
-        scrollTopSpace = 65;
+        scrollTopSpace = 70;
     }
     var tabLink = $(this).attr('href');
     var offset = $(tabLink).offset().top;

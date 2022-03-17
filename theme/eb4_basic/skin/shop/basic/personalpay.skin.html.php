@@ -9,23 +9,23 @@ if (!defined('_EYOOM_')) exit;
 .shop-personalpay .personalpay-container {margin-left:-10px;margin-right:-10px}
 .shop-personalpay .personalpay-box {position:relative;width:25%}
 .shop-personalpay .personalpay-box-pd {padding:10px}
-.shop-personalpay .personalpay-box-in {position:relative;border:1px solid #dadada;padding:10px;background:#fff}
+.shop-personalpay .personalpay-box-in {position:relative;border:1px solid #e5e5e5;padding:10px;background:#fff}
 .shop-personalpay .personalpay-box .personalpay-img {margin-bottom:15px}
-.shop-personalpay .personalpay-box h5 {font-size:14px}
-.shop-personalpay .personalpay-box .personalpay-cost {font-size:14px;color:#FF4848;font-weight:bold}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
-@media (max-width:991px) {
+.shop-personalpay .personalpay-box h5 {font-size:1.125rem;margin:0 0 10px}
+.shop-personalpay .personalpay-box .personalpay-cost {font-size:1.125rem;color:#cc2300;font-weight:700}
+@media (max-width:1199px) {
     .shop-personalpay .personalpay-box {width:33.33333%}
 }
-@media (max-width:767px) {
+@media (max-width:991px) {
     .shop-personalpay .personalpay-container {margin-left:-5px;margin-right:-5px}
     .shop-personalpay .personalpay-box {width:50%}
     .shop-personalpay .personalpay-box-pd {padding:5px}
 }
-<?php } ?>
+@media (max-width:767px) {
+    .shop-personalpay .personalpay-container {margin-left:-2px;margin-right:-2px}
+    .shop-personalpay .personalpay-box-pd {padding:5px 2px}
+}
 </style>
-
-<div id="fakeloader"></div>
 
 <div class="shop-personalpay">
     <?php if ($count > 0) { ?>
@@ -45,25 +45,13 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </div>
     <?php } else { ?>
-    <p class="text-center font-size-14 color-grey margin-top-20"><i class="fas fa-exclamation-circle"></i> 등록된 개인결제가 없습니다.</p>
+    <p class="text-center text-gray m-t-100 m-b-100"><i class="fas fa-exclamation-circle"></i> 등록된 개인결제가 없습니다.</p>
     <?php } ?>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fakeLoader/fakeLoader.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script>
-$('#fakeloader').fakeLoader({
-    timeToHide:3000,
-    zIndex:"11",
-    spinner:"spinner6",
-    bgColor:"#fff",
-});
-
-$(window).load(function(){
-    $('#fakeloader').fadeOut(300);
-});
-
 $(document).ready(function(){
     var $container = $('.personalpay-container');
     $container.imagesLoaded(function() {

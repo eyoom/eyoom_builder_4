@@ -255,7 +255,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="li_type_2" class="radio"><input type="radio" name="li_type" id="li_type_2" value="w" <?php echo $li['li_type'] == 'w' || !$li['li_type'] ? 'checked': ''; ?>><i></i> 원글만</label>
                                 <label for="li_type_3" class="radio"><input type="radio" name="li_type" id="li_type_3" value="c" <?php echo $li['li_type'] == 'c' ? 'checked': ''; ?>><i></i> 댓글만</label>
                             </div>
-                            <div class="note"><strong>Note:</strong> 최신글로 추출할 대상을 설정합니다.</div>
+                            <div class="note"><strong>Note:</strong> 최신글로 추출할 대상을 설정합니다. 전체 또는 댓글만 설정시, 제목 출력을 위해 [게시물 내용 출력 여부]를 '사용'으로 설정하셔야 합니다.</div>
                         </td>
                     </tr>
                     <tr>

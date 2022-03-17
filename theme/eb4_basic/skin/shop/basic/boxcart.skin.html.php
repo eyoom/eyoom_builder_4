@@ -12,8 +12,8 @@ if (!defined('_EYOOM_')) exit;
         <?php if (is_array($ct_list)) { $i=0; ?>
         <?php foreach ($ct_list as $k => $info) { ?>
         <li>
-            <a href="<?php echo G5_SHOP_URL; ?>/cart.php"><?php echo get_text($info['it_name']); ?></a>
             <div class="prd-img"><?php echo $info['it_img']; ?></div>
+            <a href="<?php echo G5_SHOP_URL; ?>/cart.php"><?php echo get_text($info['it_name']); ?></a>
         </li>
         <input type="hidden" name="act" value="buy">
         <input type="hidden" name="ct_chk[<?php echo $i; ?>]" value="1">
@@ -28,8 +28,8 @@ if (!defined('_EYOOM_')) exit;
     </ul>
 
     <?php if ($ct_count > 0) { ?>
-    <button type="submit" class="btn-e btn-e-xlg btn-e-block btn-e-red margin-bottom-5">바로구매</button>
-    <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="btn-e btn-e-xlg btn-e-block btn-e-default">장바구니 바로가기</a>
+    <button type="submit" class="btn-e btn-e-lg btn-e-block btn-e-crimson m-b-5">바로구매</button>
     <?php } ?>
+    <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="btn-e btn-e-lg btn-e-block btn-e-dark btn-e-brd">장바구니 바로가기<i class="far fa-arrow-alt-circle-right m-l-5"></i></a>
     </form>
 </div>

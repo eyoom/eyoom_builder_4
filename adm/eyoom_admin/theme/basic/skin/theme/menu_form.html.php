@@ -69,7 +69,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td colspan="3">
                             <label class="input input-button form-width-300px">
                                 <input type="text" name="me_icon" id="me_icon" value="<?php echo $meinfo['me_icon']; ?>">
-                                <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank" class="button">Font Awesome</a>
+                                <a href="https://fontawesome.com/v5/search?m=free" target="_blank" class="button">Font Awesome</a>
                             </label>
                             <div class="note"><strong>예:</strong> fas fa-circle 또는 far fa-circle</div>
                         </td>
@@ -239,7 +239,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td>
                             <label class="input input-button form-width-300px">
                                 <input type="text" name="subme_icon" id="subme_icon" value="">
-                                <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank" class="button">Font Awesome</a>
+                                <a href="https://fontawesome.com/v5/search?m=free" target="_blank" class="button">Font Awesome</a>
                             </label>
                             <div class="note"><strong>예:</strong> fas fa-circle 또는 far fa-circle</div>
                         </td>

@@ -477,6 +477,8 @@ if ($_POST['amode'] == 'ittype') {
                     cf_lg_mert_key          = '{$cf_lg_mert_key}' ";
     sql_query($sql);
 
+    run_event('shop_admin_configformupdate');
+
     if( $warning_msg ){
         alert($warning_msg, G5_ADMIN_URL . "/?dir=shop&amp;pid=configform");
     } else {

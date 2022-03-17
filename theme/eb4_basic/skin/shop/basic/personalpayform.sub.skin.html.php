@@ -13,18 +13,19 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 <style>
 .shop-personalpay-form .personal-member-payment {position:relative;border:1px solid #e5e5e5}
 .shop-personalpay-form .personal-member-area {position:relative;margin-right:370px}
-.shop-personalpay-form .personal-member-area .headline-short {margin-bottom:50px}
+.shop-personalpay-form .personal-member-area .sod-frm-title {position:relative;height:70px;margin:-30px -15px 30px;padding:25px 20px;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.shop-personalpay-form .personal-member-area .sod-frm-title h4 {font-size:1.25rem;line-height:1}
+.shop-personalpay-form .personal-member-area .sod-frm-title h4:after {content:"";display:block;position:absolute;top:-1px;left:-1px;width:0;height:0;border-top:20px solid #5c6bc0;border-right:20px solid transparent}
 .shop-personalpay-form .personal-member-area .sod-frm-pay {padding:30px 15px 40px}
 .shop-personalpay-form .personal-table {margin:0}
 .shop-personalpay-form .personal-table table {width:100%;border-collapse:collapse;border-spacing:0}
 .shop-personalpay-form .personal-table th {width:90px;padding:5px 10px;background:none;text-align:right}
 .shop-personalpay-form .personal-table td {padding:5px 10px;background:transparent}
-.shop-personalpay-form .personal-table textarea {padding:2px 2px 3px;width:100%;height:100px}
+.shop-personalpay-form .personal-table textarea {width:100%;height:100px}
 .shop-personalpay-form .personal-table a {text-decoration:none}
-.shop-personalpay-form .personal-table .td-box {min-height:30px;padding:6px 12px;border:1px solid #c5c5c5;box-sizing:border-box;margin-bottom:5px;background:#fafafa;cursor:not-allowed}
-.shop-personalpay-form .personal-payment-area {position:absolute;top:0;right:0;width:370px;height:100%;border-left:1px solid #e5e5e5;background:#fafafa;padding:15px;box-sizing:border-box}
-.shop-personalpay-form .payment-select-wrap {position:relative;margin-top:20px}
-.shop-personalpay-form .payment-select-wrap h2 {position:absolute;border:0;font-size:0;line-height:0;content:""}
+.shop-personalpay-form .personal-table .td-box {min-height:30px;padding:7px 12px;border:1px solid #d5d5d5;margin-bottom:5px;background:#fafafa;cursor:not-allowed}
+.shop-personalpay-form .personal-payment-area {position:absolute;top:0;right:0;width:370px;height:100%;border-left:1px solid #e5e5e5;background:#fafafa;padding:20px 15px}
+.shop-personalpay-form .payment-select-wrap {position:relative}
 .shop-personalpay-form .payment-select-title {margin:0 0 10px}
 .shop-personalpay-form .payment-select-wrap fieldset {padding:0 0 0 2px;background:none}
 .shop-personalpay-form .payment-select-wrap input[type="radio"] {position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;text-indent:-999px;left:0;z-index:-1px}
@@ -41,16 +42,15 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .hp_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f3cd";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon {background:#fff}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f09d";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
-.shop-personalpay-form .btn_confirm .btn_submit {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#FF4848;color:#fff;font-size:14px;font-weight:bold;letter-spacing:0;border:0;margin:15px 0}
-.shop-personalpay-form .btn_confirm a.btn01 {display:block;width:100%;height:40px;line-height:40px;padding:0;background:#fff;color:#757575;font-size:14px;font-weight:bold;letter-spacing:0;border:1px solid #d5d5d5;box-sizing:border-box}
-<?php if ($eyoom['is_responsive'] == '1' || G5_IS_MOBILE) { // 반응형 또는 모바일일때 ?>
+#display_pay_button {background:none;padding:0;border:0 none}
+#display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#cc2300;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin:15px 0;border-radius:3px}
+#display_pay_button a.btn01 {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;margin:15px 0;border-radius:3px}
 @media (max-width:991px) {
     .shop-personalpay-form .personal-member-area {margin-right:0}
     .shop-personalpay-form .personal-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-personalpay-form .personal-table td {padding:5px 0}
     .shop-personalpay-form .personal-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
-<?php } ?>
 </style>
 
 <form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off" class="eyoom-form">
@@ -65,7 +65,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
     <div class="personal-member-payment">
         <div class="personal-member-area">
             <div class="sod-frm-pay">
-                <div class="headline-short"><h4><strong>개인결제정보</strong></h4></div>
+                <div class="sod-frm-title"><h4><strong>개인결제정보</strong></h4></div>
                 <div class="personal-table">
                     <table>
                         <tbody>
@@ -73,7 +73,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                             <tr>
                                 <th scope="row">상세내용</th>
                                 <td>
-                                    <label class="hidden-lg hidden-md">상세내용</strong></label>
+                                    <label class="label hidden-lg hidden-md">상세내용</strong></label>
                                     <div class="td-box">
                                         <?php echo conv_content($pp['pp_content'], 0); ?>
                                     </div>
@@ -83,7 +83,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                             <tr>
                                 <th scope="row">결제금액</th>
                                 <td>
-                                    <label class="hidden-lg hidden-md">결제금액</strong></label>
+                                    <label class="label hidden-lg hidden-md">결제금액</strong></label>
                                     <div class="td-box width-200px">
                                         <strong class="color-red"><?php echo display_price($pp['pp_price']); ?></strong>
                                     </div>
@@ -92,7 +92,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                             <tr>
                                 <th scope="row"><label for="pp_name">이름<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="pp_name" class="hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
+                                    <label for="pp_name" class="label hidden-lg hidden-md">이름<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="pp_name" value="<?php echo get_text($pp['pp_name']); ?>" id="pp_name" required>
                                     </label>
@@ -101,7 +101,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                             <tr>
                                 <th scope="row"><label for="pp_email">이메일<strong class="sound_only"> 필수</strong></label></th>
                                 <td>
-                                    <label for="pp_email" class="hidden-lg hidden-md">이메일<strong class="sound_only"> 필수</strong></label>
+                                    <label for="pp_email" class="label hidden-lg hidden-md">이메일<strong class="sound_only"> 필수</strong></label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="pp_email" value="<?php echo $member['mb_email']; ?>" id="pp_email" required size="30">
                                     </label>
@@ -110,7 +110,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                             <tr>
                                 <th scope="row"><label for="pp_hp">휴대폰</label></th>
                                 <td>
-                                    <label for="pp_hp" class="hidden-lg hidden-md">휴대폰</label>
+                                    <label for="pp_hp" class="label hidden-lg hidden-md">휴대폰</label>
                                     <label class="input width-200px required-mark">
                                         <input type="text" name="pp_hp" value="<?php echo get_text($member['mb_hp']); ?>" id="pp_hp" required>
                                     </label>
@@ -123,7 +123,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
         </div>
         <div class="personal-payment-area">
             <div class="payment-select-wrap">
-                <h2>결제수단</h2>
+                <h5 class="payment-select-title"><strong>결제수단</strong></h5>
                 <?php if ($default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use']) { ?>
                 <fieldset id="sod_frm_paysel">
                 <legend>결제방법 선택</legend>
@@ -150,7 +150,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                 <?php } ?>
 
                 <?php if ($multi_settle == 0) { ?>
-                <p>결제할 방법이 없습니다.<br>운영자에게 알려주시면 감사하겠습니다.</p>
+                <p class="text-gray"><i class="fas fa-exclamation-circle"></i> 결제할 방법이 없습니다.<br>운영자에게 알려주시면 감사하겠습니다.</p>
                 <?php } ?>
 
                 <?php
@@ -310,7 +310,7 @@ function forderform_check(f)
     f.LGD_TAXFREEAMOUNT.value = 0;
 
     if(f.LGD_CUSTOM_FIRSTPAY.value != "무통장") {
-          launchCrossPlatform(f);
+        launchCrossPlatform(f);
     } else {
         f.submit();
     }
