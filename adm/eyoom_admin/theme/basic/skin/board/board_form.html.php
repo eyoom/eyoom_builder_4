@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/board/board_form.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -657,6 +658,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                         if ($config['cf_cert_use']) {
                                             echo option_selected("cert",  $board['bo_use_cert'], "본인확인된 회원전체");
                                             echo option_selected("adult", $board['bo_use_cert'], "본인확인된 성인회원만");
+                                            echo option_selected("hp-cert",  $board['bo_use_cert'], "휴대폰 본인확인된 회원전체");
+                                            echo option_selected("hp-adult", $board['bo_use_cert'], "휴대폰 본인확인된 성인회원만");
                                         }
                                         ?>
                                     </select><i></i>
@@ -975,9 +978,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="bo_content_head" class="label">상단 내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html("bo_content_head", get_text(html_purifier($board['bo_content_head']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">
@@ -991,9 +994,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="bo_content_tail" class="label">하단 내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html("bo_content_tail", get_text(html_purifier($board['bo_content_tail']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">
@@ -1007,9 +1010,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="bo_mobile_content_head" class="label">모바일 상단 내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html("bo_mobile_content_head", get_text(html_purifier($board['bo_mobile_content_head']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">
@@ -1023,9 +1026,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="bo_mobile_content_tail" class="label">모바일 하단 내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html("bo_mobile_content_tail", get_text(html_purifier($board['bo_mobile_content_tail']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">

@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/member/faqform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <div class="admin-faqform">
@@ -50,9 +51,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_head_html" class="label">질문</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fa_subject', get_text(html_purifier($fa['fa_subject']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -60,9 +61,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_head_html" class="label">답변</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fa_content', get_text(html_purifier($fa['fa_content']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

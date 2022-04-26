@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/shop/itemqaform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -98,9 +99,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="iq_question" class="label">질문</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('iq_question', get_text(html_purifier($iq['iq_question']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -108,9 +109,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="iq_answer" class="label">답변</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('iq_answer', get_text(html_purifier($iq['iq_answer']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

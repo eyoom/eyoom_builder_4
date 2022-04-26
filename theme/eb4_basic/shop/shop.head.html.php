@@ -188,8 +188,8 @@ $item_view = 'slider';
                                 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
                                 <div class="adm-edit-btn btn-edit-mode" style="top:0;text-align:right">
                                     <div class="btn-group">
-                                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=menu_list&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 메뉴 설정</a>
-                                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=menu_list&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
+                                        <a href="<?php echo $shopmenu_link; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 쇼핑몰 메뉴 설정</a>
+                                        <a href="<?php echo $shopmenu_link; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>

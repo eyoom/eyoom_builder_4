@@ -55,7 +55,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </ul>
                     <h5><a href="http://shopping.daum.net/" target="_blank"><strong>다음 쇼핑하우</strong></a></h5>
                     <ul>
-                        <li>입점 안내 : <a href="http://commerceone.biz.daum.net/join/intro.daum" target="_blank"><u>http://commerceone.biz.daum.net/join/intro.daum</u></a></li>
+                        <li>입점 안내 : <a href="https://shopping.biz.daum.net/join/main" target="_blank">https://shopping.biz.daum.net/join/main</a></li>
                         <li>전체상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/daum.php" target="_blank"><u><?php echo G5_SHOP_URL; ?>/price/daum.php</u></a></li>
                         <li>요약상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/daum_summary.php" target="_blank"><u><?php echo G5_SHOP_URL; ?>/price/daum_summary.php</u></a></li>
                     </ul>

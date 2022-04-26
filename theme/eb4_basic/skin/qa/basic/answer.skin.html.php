@@ -17,9 +17,8 @@ if (!defined('_EYOOM_')) exit;
     <div class="ans-datetime">
         <i class="far fa-clock"></i> <?php echo $answer['qa_datetime']; ?>
     </div>
-    <div class="ans-con">
-        <?php echo get_view_thumbnail(conv_content($answer['qa_content'], $answer['qa_html']), $qaconfig['qa_image_width']); ?>
-    </div>
+    <div id="ans_con" class="ans-con"><?php echo get_view_thumbnail(conv_content($answer['qa_content'], $answer['qa_html']), $qaconfig['qa_image_width']); ?></div>
+    <?php echo $config['cf_editor'] == 'tuieditor' ? $bbs->tuieditor_viewer("ans_con"): ''; ?>
     <div class="float-start">
         <?php if ($answer_update_href) { ?>
         <a href="<?php echo $answer_update_href; ?>" class="btn-e btn-gray">답변수정</a>

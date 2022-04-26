@@ -284,6 +284,8 @@ class bbs extends eyoom
      * 게시판 내용 필터
      */
     public function board_content($content, $bo_table='', $wr_id='', $c_id='') {
+        global $config;
+
         if ($bo_table) $this->bo_table = $bo_table;
         if ($wr_id) $this->wr_id = $wr_id;
         if ($c_id) $this->c_id = $c_id;
@@ -298,25 +300,28 @@ class bbs extends eyoom
          */
         $this->content = $this->get_thumbnail($this->content);
 
-        /**
-         * 동영상
-         */
-        $this->content = preg_replace_callback('/{동영상\s*\:([^}]*)}/i', array($this,'video_content'), $this->content);
 
-        /**
-         * 이모티콘
-         */
-        $this->content = preg_replace_callback('/{이모티콘\s*\:([^}]*)}/i', array($this, 'emoticon_image'), $this->content);
+        if (!($config['cf_editor'] == 'tuieditor' && $c_id == null)) {
+            /**
+             * 동영상
+             */
+            $this->content = preg_replace_callback('/{동영상\s*\:([^}]*)}/i', array($this,'video_content'), $this->content);
 
-        /**
-         * 사운드클라우드
-         */
-        $this->content = preg_replace_callback('/{soundcloud\s*\:([^}]*)}/i', array($this, 'soundcloud_content'), $this->content);
+            /**
+             * 이모티콘
+             */
+            $this->content = preg_replace_callback('/{이모티콘\s*\:([^}]*)}/i', array($this, 'emoticon_image'), $this->content);
 
-        /**
-         * 지도
-         */
-        $this->content = preg_replace_callback('/{지도\s*\:([^}]*)}/i', array($this, 'map_content'), $this->content);
+            /**
+             * 사운드클라우드
+             */
+            $this->content = preg_replace_callback('/{soundcloud\s*\:([^}]*)}/i', array($this, 'soundcloud_content'), $this->content);
+
+            /**
+             * 지도
+             */
+            $this->content = preg_replace_callback('/{지도\s*\:([^}]*)}/i', array($this, 'map_content'), $this->content);
+        }
 
         return $this->content;
     }
@@ -1665,5 +1670,40 @@ class bbs extends eyoom
         $wr_content = $length ? cut_str($wr_content, $length, '…'): $wr_content;
 
         return $wr_content;
+    }
+
+    /**
+     * tuieditor viewer
+     */
+    public function tuieditor_viewer ($id) {
+        global $config;
+
+        $tuieditor_url = G5_EDITOR_URL.'/'.$config['cf_editor'];
+
+        add_javascript('<script src="'.$tuieditor_url.'/js/toastui-editor-viewer.js"></script>',10);
+        add_javascript('<script src="'.$tuieditor_url.'/js/toastui-custom-plugin.js"></script>',10);
+        add_stylesheet('<link rel="stylesheet" href="'.$tuieditor_url.'/css/toastui-editor-viewer.min.css">',10);
+        if ($_COOKIE['mode'] == 'dark') {
+            add_stylesheet('<link rel="stylesheet" href="'.$tuieditor_url.'/css/toastui-editor-dark.min.css">',10);
+        }
+
+        $script = '';
+        $script .= "<script>\n";
+        $script .= "const text_{$id} = unescapeHTML(document.getElementById('".$id."').innerHTML);\n";
+        $script .= "const Viewer_{$id} = toastui.Editor;\n";
+        $script .= "const viewer_{$id} = new Viewer_{$id}({\n";
+        $script .= "\tel: document.querySelector('#".$id."'),\n";
+        $script .= "\tinitialValue: text_{$id},\n";
+        $script .= $_COOKIE['mode'] == 'dark' ? "\ttheme: 'dark'\n": '';
+        $script .= "}).setMarkdown(text_{$id});\n";
+        $script .= "var content = document.getElementById('".$id."').innerHTML;\n";
+        $script .= "var url = '".$tuieditor_url."/ajax.contents.php';\n";
+        $script .= "$.post(url, {content:content}, function (data) {\n";
+        $script .= "\t$('#".$id."').empty().html(data);\n";
+        $script .= "});\n";
+        $script .= "$('#".$id."').show();\n";
+        $script .= "</script>\n";
+
+        return $script;
     }
 }

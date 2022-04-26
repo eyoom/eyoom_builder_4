@@ -6,6 +6,7 @@
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/magnific-popup/magnific-popup.min.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -505,9 +506,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_explan" class="label">상품설명</label>
                             </th>
                             <td colspan="2">
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_explan', get_text(html_purifier($it['it_explan']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -515,9 +516,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_mobile_explan" class="label">모바일 상품설명</label>
                             </th>
                             <td colspan="2">
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_mobile_explan', get_text(html_purifier($it['it_mobile_explan']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -1842,9 +1843,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_head_html" class="label">상품상단내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_head_html', get_text(html_purifier($it['it_head_html']), 0)); ?>
-                                </label>
+                                </div>
                                 <div class="note"><strong>Note:</strong> 상품상세설명 페이지 상단에 출력하는 HTML 내용입니다.</div>
                             </td>
                             <td class="table-chk-td">
@@ -1859,9 +1860,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_tail_html" class="label">상품하단내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_tail_html', get_text(html_purifier($it['it_tail_html']), 0)); ?>
-                                </label>
+                                </div>
                                 <div class="note"><strong>Note:</strong> 상품상세설명 페이지 하단에 출력하는 HTML 내용입니다.</div>
                             </td>
                             <td class="table-chk-td">
@@ -1876,9 +1877,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_mobile_head_html" class="label">모바일 상품상단내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_mobile_head_html', get_text(html_purifier($it['it_mobile_head_html']), 0)); ?>
-                                </label>
+                                </div>
                                 <div class="note"><strong>Note:</strong> 모바일 상품상세설명 페이지 상단에 출력하는 HTML 내용입니다.</div>
                             </td>
                             <td class="table-chk-td">
@@ -1893,9 +1894,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 <label for="it_mobile_tail_html" class="label">모바일 상품하단내용</label>
                             </th>
                             <td>
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('it_mobile_tail_html', get_text(html_purifier($it['it_mobile_tail_html']), 0)); ?>
-                                </label>
+                                </div>
                                 <div class="note"><strong>Note:</strong> 모바일 상품상세설명 페이지 하단에 출력하는 HTML 내용입니다.</div>
                             </td>
                             <td class="table-chk-td">

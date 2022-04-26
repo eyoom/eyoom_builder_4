@@ -6,6 +6,7 @@ if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/venobox/venobox.min.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -683,6 +684,8 @@ function set_textarea_contents(type,value) {
         CKEDITOR.instances.wr_content.insertHtml(content);
     } else if (g5_editor.indexOf('smarteditor')!=-1 && !g5_is_mobile) {
         oEditors.getById["wr_content"].exec("PASTE_HTML", [content]);
+    } else if (g5_editor.indexOf('tuieditor')!=-1 && !g5_is_mobile) {
+        tui_wr_content.insertText(content);
     } else {
         var wr_html = $("#wr_content").val();
         var wr_emo = content;

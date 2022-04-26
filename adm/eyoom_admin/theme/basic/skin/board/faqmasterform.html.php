@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/member/faqmasterform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <div class="admin-faqmasterform">
@@ -89,9 +90,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_head_html" class="label">상단 내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fm_head_html', get_text(html_purifier($fm['fm_head_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -99,9 +100,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_tail_html" class="label">하단 내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fm_tail_html', get_text(html_purifier($fm['fm_tail_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -109,9 +110,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_mobile_head_html" class="label">모바일 상단 내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fm_mobile_head_html', get_text(html_purifier($fm['fm_mobile_head_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -119,9 +120,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="fm_mobile_tail_html" class="label">모바일 하단 내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('fm_mobile_tail_html', get_text(html_purifier($fm['fm_mobile_tail_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

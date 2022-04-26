@@ -316,8 +316,8 @@ class shop extends eyoom
         
                 $output['select'] .= "<option value=\"{$info['ca_id']}\">$nbsp{$info['ca_name']}</option>\n";
         
-                $output['script'] .= "ca_use['{$info['ca_id']}'] = {$info['ca_use']};\n";
-                $output['script'] .= "ca_stock_qty['{$info['ca_id']}'] = {$info['ca_stock_qty']};\n";
+                $output['script'] .= "ca_use['{$info['ca_id']}'] = '{$info['ca_use']}';\n";
+                $output['script'] .= "ca_stock_qty['{$info['ca_id']}'] = '{$info['ca_stock_qty']}';\n";
                 $output['script'] .= "ca_sell_email['{$info['ca_id']}'] = '{$info['ca_sell_email']}';\n";
     
                 if (is_array($info['ca_sub'])) {

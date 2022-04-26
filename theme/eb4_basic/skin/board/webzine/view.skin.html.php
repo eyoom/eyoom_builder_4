@@ -422,7 +422,8 @@ button.mfp-close {position:fixed;color:#fff !important}
         <?php if ($eb_5['yc_blind'] == 'y') { ?>
         <p class="text-center m-t-40 m-b-40"><strong class="text-pink">----- <i class="fas fa-exclamation-circle"></i> 블라인드 처리된 글입니다. -----</strong></p>
         <?php } ?>
-        <div class="board-view-con view-content"><?php echo $view_content; ?></div>
+        <div id="board_view_con" class="board-view-con view-content"><?php echo $view_content; ?></div>
+        <?php echo $config['cf_editor'] == 'tuieditor' ? $bbs->tuieditor_viewer("board_view_con"): ''; ?>
         <?php /* 본문 내용 끝 */?>
 
         <?php /* 추천 비추천 시작 */?>
@@ -614,7 +615,7 @@ button.mfp-close {position:fixed;color:#fff !important}
 <?php } ?>
 <script src="<?php echo EYOOM_THEME_URL; ?>/js/eyoom.map.js"></script>
 <script>
-$(function(){
+$(window).load(function() {
     $(".map-content-wrap").each(function(){
         var id      = $(this).find('div').attr('id');
         var type    = $(this).attr('data-map-type');
@@ -634,7 +635,7 @@ $(function(){
 <?php } ?>
 <script>
 <?php if ($board['bo_download_point'] < 0) { ?>
-$(function() {
+$(window).load(function() {
     $("a.view_file_download").click(function(e) {
         if (!g5_is_member) {
             Swal.fire({
@@ -677,7 +678,7 @@ function board_move(href) {
     window.open(href, "boardmove", "left=50, top=50, width=500, height=550, scrollbars=1");
 }
 
-$(function() {
+$(window).load(function() {
     // 이미지 리사이즈
     $(".board-view-atc").viewimageresize();
 
@@ -1021,7 +1022,7 @@ function excute_good(href, $el, $tx, $good) {
 }
 
 <?php if ($is_admin) { ?>
-$(function() {
+$(window).load(function() {
     $(".set_bo_skin").change(function() {
         var skin = $(this).val();
         if (!skin) {

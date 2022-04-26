@@ -142,7 +142,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
         <?php } ?>
 
         <?php /* 본문 내용 시작 */?>
-        <div class="board-view-con view-content"><?php echo get_view_thumbnail($view['content'], $qaconfig['qa_image_width']); ?></div>
+        <div id="board_view_con" class="board-view-con view-content"><?php echo get_view_thumbnail($view['content'], $qaconfig['qa_image_width']); ?></div>
+        <?php echo $config['cf_editor'] == 'tuieditor' ? $bbs->tuieditor_viewer("board_view_con"): ''; ?>
         <?php /* 본문 내용 끝 */?>
 
         <?php if ($view['qa_type']) { ?>

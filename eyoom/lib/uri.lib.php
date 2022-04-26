@@ -196,6 +196,16 @@ function get_query_url ($info) {
     }
     else if ($info[1] == 'mypage') {
         $url = G5_URL."/mypage/";
+    }
+    else if ($info[1] == 'shop') {
+        $tmp = explode('-', $info[2]);
+        if ($tmp[0] == 'list') {
+            $url = G5_URL."/shop/list.php?ca_id={$tmp[1]}";
+        } else if ($tmp[0] == 'type') {
+            $url = G5_URL."/shop/listtype.php?type={$tmp[1]}";
+        } else {
+            $url = G5_URL."/shop/item.php?it_id={$tmp[1]}";
+        }
     } else {
         $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
     }

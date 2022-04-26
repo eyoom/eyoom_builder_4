@@ -264,8 +264,20 @@
     .basic-body-side {width:30%}
 }
 @media (max-width:991px) {
-    .basic-body-side {width:100%}
-    .page-body .basic-body-side {display:none}
+    .basic-body-side {width:100%;float:inherit;padding:0;width:inherit}
+}
+
+/*---------- Sidebar User ----------*/
+.sidebar-user-btn {position:fixed;bottom:10px;left:10px;width:45px;height:45px;line-height:45px;background:#4b4b4d;font-size:1rem;color:#fff;border:0;border-radius:50%;display:none}
+.sidebar-user .offcanvas-header {display:none}
+@media (min-width:992px) {
+    .sidebar-user {position:inherit;top:inherit;bottom:inherit;right:inherit;z-index:0;display:inherit;flex-direction:inherit;max-width:inherit;visibility:inherit !important;background-color:inherit;background-clip:inherit;border-left:inherit;outline:inherit;transition:inherit;transform:inherit;width:100%}
+}
+@media (max-width:991px) {
+    .sidebar-user-btn.mo-btn {display:block;z-index:1000}
+    .sidebar-user {position:fixed;bottom:0;display:flex;flex-direction:column;max-width:100%;width:300px;visibility:hidden;background-clip:padding-box;outline:0;transition:transform .3s ease-in-out;overflow-y:auto !important;height:100%;-webkit-overflow-scrolling:touch}
+    .sidebar-user .offcanvas-header {display:flex}
+    .sidebar-user .side-contents {padding:15px}
 }
 
 /*---------- Footer ----------*/

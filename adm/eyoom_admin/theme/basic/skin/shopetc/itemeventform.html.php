@@ -6,6 +6,7 @@
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/magnific-popup/magnific-popup.min.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -380,9 +381,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label for="ev_head_html" class="label">상단내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('ev_head_html', get_text(html_purifier($ev['ev_head_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -390,9 +391,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label for="ev_head_html" class="label">하단내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('ev_tail_html', get_text(html_purifier($ev['ev_tail_html']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -115,41 +115,41 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
         </fieldset>
         <header class="border-top"><h5 class="m-0"><strong>개인정보 입력</strong></h5></header>
         <fieldset>
-            <div class="row">
+            <?php if ($config['cf_cert_use']) { ?>
+            <div class="row m-b-20">
                 <div class="col-lg-12">
-                    <?php if ($config['cf_cert_use']) { ?>
-                        <?php if ($config['cf_cert_simple']) { ?>
-                        <button type="button" id="win_simple_cert" class="btn-e btn-e-dark btn-e-cert win_sa_cert" data-type="">간편인증</button>
-                        <?php } ?>
-                        <?php if ($config['cf_cert_hp']) { ?>
-                        <button type="button" id="win_hp_cert" class="btn-e btn-e-dark btn-e-cert">휴대폰 본인확인</button>
-                        <?php } ?>
-                        <?php if ($config['cf_cert_ipin']) { ?>
-                        <button type="button" id="win_ipin_cert" class="btn-e btn-e-dark btn-e-cert">아이핀 본인확인</button>
-                        <?php } ?>
-                        <noscript>본인확인을 위해서는 자바스크립트 사용이 가능해야합니다.</noscript>
-                        <?php
-                        if ($config['cf_cert_use'] && $member['mb_certify']) {
-                            switch  ($member['mb_certify']) {
-                                case "simple": 
-                                    $mb_cert = "간편인증";
-                                    break;
-                                case "ipin": 
-                                    $mb_cert = "아이핀";
-                                    break;
-                                case "hp": 
-                                    $mb_cert = "휴대폰";
-                                    break;
-                            }
-                        }
-                        ?>
-                        <div id="msg_certify">
-                            <strong><?php echo $mb_cert; ?> 본인확인</strong><?php if ($member['mb_adult']) { ?> 및 <strong>성인인증</strong><?php } ?> 완료
-                        </div>
+                    <?php if ($config['cf_cert_simple']) { ?>
+                    <button type="button" id="win_simple_cert" class="btn-e btn-e-dark btn-e-cert win_sa_cert" data-type="">간편인증</button>
                     <?php } ?>
+                    <?php if ($config['cf_cert_hp']) { ?>
+                    <button type="button" id="win_hp_cert" class="btn-e btn-e-dark btn-e-cert">휴대폰 본인확인</button>
+                    <?php } ?>
+                    <?php if ($config['cf_cert_ipin']) { ?>
+                    <button type="button" id="win_ipin_cert" class="btn-e btn-e-dark btn-e-cert">아이핀 본인확인</button>
+                    <?php } ?>
+                    <noscript>본인확인을 위해서는 자바스크립트 사용이 가능해야합니다.</noscript>
+                    <?php
+                    if ($config['cf_cert_use'] && $member['mb_certify']) {
+                        switch  ($member['mb_certify']) {
+                            case "simple": 
+                                $mb_cert = "간편인증";
+                                break;
+                            case "ipin": 
+                                $mb_cert = "아이핀";
+                                break;
+                            case "hp": 
+                                $mb_cert = "휴대폰";
+                                break;
+                        }
+                    }
+                    ?>
+                    <div id="msg_certify" class="text-crimson m-t-10">
+                        <strong><?php echo $mb_cert; ?> 본인확인</strong><?php if ($member['mb_adult']) { ?> 및 <strong>성인인증</strong><?php } ?> 완료
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
+            <?php } ?>
             <div class="row">
                 <div class="col-lg-12 m-b-0">
                     <label for="reg_mb_name" class="label">이름<strong class="sound_only">필수</strong></label>

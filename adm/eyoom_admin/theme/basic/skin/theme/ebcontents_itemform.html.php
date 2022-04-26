@@ -7,6 +7,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/magnific-popup/magnific-popup.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/venobox/venobox.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -286,9 +287,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/v
                                     <?php } ?>
                                 </div>
                             </div>
-                            <label for="ci_content" class="textarea">
+                            <div for="ci_content" class="textarea">
                                 <?php echo editor_html("ci_content", stripslashes($ci['ci_content'])); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <?php for($i=0; $i<$ec['ec_link_cnt']; $i++) { ?>

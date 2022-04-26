@@ -142,6 +142,9 @@ if (!defined('_EYOOM_')) exit;
 <?php /*----- 전체 검색 입력창 끝 -----*/ ?>
 <?php } // !$wmode ?>
 
+<?php /* 사이드바 회원 버튼 */ ?>
+<button type="button" class="sidebar-user-trigger sidebar-user-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserRight" aria-controls="offcanvasUserRight"><i class="fas fa-user-alt"></i></button>
+
 <?php /* Back To Top */ ?>
 <div class="eb-backtotop">
 	<svg class="backtotop-progress" width="100%" height="100%" viewBox="-1 -1 102 102">

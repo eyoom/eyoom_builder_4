@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/shop/configform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -1538,9 +1539,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <label class="label">배송정보</label>
                             </th>
                             <td>
-                                <label for="de_baesong_content" class="textarea">
+                                <div for="de_baesong_content" class="textarea">
                                     <?php echo editor_html('de_baesong_content', get_text(html_purifier($default['de_baesong_content']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -1548,9 +1549,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <label class="label">교환/반품</label>
                             </th>
                             <td>
-                                <label for="de_change_content" class="textarea">
+                                <div for="de_change_content" class="textarea">
                                     <?php echo editor_html('de_change_content', get_text(html_purifier($default['de_change_content']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -1915,17 +1916,6 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                         </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label for="de_code_dup_use" class="label">코드 중복검사</label>
-                            </th>
-                            <td>
-                                <label for="de_code_dup_use" class="checkbox form-width-100px">
-                                    <input type="checkbox" name="de_code_dup_use" value="1" id="de_code_dup_use"<?php echo $default['de_code_dup_use']?' checked':''; ?>><i></i> 사용
-                                </label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 분류, 상품 등을 추가할 때 자동으로 코드 중복검사를 하려면 체크하십시오.</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th">
                                 <label for="de_cart_keep_term" class="label">장바구니 보관기간</label>
                             </th>
                             <td>
@@ -1997,9 +1987,9 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <label for="de_guest_cart_use" class="label">비회원에 대한 개인정보수집 내용</label>
                             </th>
                             <td>
-                                <label for="de_guest_privacy" class="textarea">
+                                <div for="de_guest_privacy" class="textarea">
                                     <?php echo editor_html('de_guest_privacy', get_text(html_purifier($default['de_guest_privacy']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                         <tr>

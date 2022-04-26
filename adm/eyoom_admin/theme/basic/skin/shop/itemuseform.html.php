@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/shop/itemuseform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -92,9 +93,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="label">내용</label>
                         </th>
                         <td>
-                            <label for="is_content" class="textarea">
+                            <div for="is_content" class="textarea">
                                 <?php echo editor_html('is_content', get_text(html_purifier($is['is_content']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -112,9 +113,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label class="label">내용</label>
                         </th>
                         <td>
-                            <label for="is_reply_content" class="textarea">
+                            <div for="is_reply_content" class="textarea">
                                 <?php echo editor_html('is_reply_content', get_text(html_purifier($is['is_reply_content']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>

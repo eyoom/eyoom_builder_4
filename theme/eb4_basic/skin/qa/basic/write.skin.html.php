@@ -5,6 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -102,9 +103,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
     <section class="m-b-30">
         <label class="label">문의 내용</label>
-        <label class="textarea textarea-resizable">
+        <div class="textarea textarea-resizable">
             <?php echo $editor_html; ?>
-        </label>
+        </div>
     </section>
     <section>
         <div class="row">
@@ -191,7 +192,7 @@ function fwrite_submit(f) {
     if (subject) {
         Swal.fire({
             title: "알림!",
-            html: "제목에 금지단어 '<span class='text-crimson'>"+subject+"</span>' 단어가 포함되어있습니다.",
+            html: "제목에 금지단어 '<strong class='text-crimson'>"+subject+"</strong>' 단어가 포함되어있습니다.",
             confirmButtonColor: "#e53935",
             icon: "warning",
             confirmButtonText: "확인"
@@ -199,11 +200,11 @@ function fwrite_submit(f) {
         f.qa_subject.focus();
         return false;
     }
-    이윰빌더 및 이윰 테마 설치가 잘 안되거나 정상 출력이 안돼요.
+
     if (content) {
         Swal.fire({
             title: "알림!",
-            html: "내용에 금지단어 '<span class='text-crimson'>"+content+"</span>' 단어가 포함되어있습니다.",
+            html: "내용에 금지단어 '<strong class='text-crimson'>"+content+"</strong>' 단어가 포함되어있습니다.",
             confirmButtonColor: "#e53935",
             icon: "warning",
             confirmButtonText: "확인"
@@ -220,7 +221,7 @@ function fwrite_submit(f) {
     if (hp.length > 0) {
         Swal.fire({
             title: "알림!",
-            html: "휴대폰번호는 <span class='text-crimson'>숫자, -</span> 으로만 입력해 주십시오",
+            html: "휴대폰번호는 <strong class='text-crimson'>숫자, -</strong> 으로만 입력해 주십시오",
             confirmButtonColor: "#e53935",
             icon: "warning",
             confirmButtonText: "확인"

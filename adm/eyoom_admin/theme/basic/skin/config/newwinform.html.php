@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/config/newwinform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <div class="admin-newwinform">
@@ -124,7 +125,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </label>
                             </td>
                         </tr>
-                        <?php if(1) { //팝업 사이즈, 팝업 위치 숨김 처리 시작 (해당 기능 불필요) ?>
+                        <?php if(0) { //팝업 사이즈, 팝업 위치 숨김 처리 시작 (해당 기능 불필요) ?>
                         <tr>
                             <th class="table-form-th">
                                 <label class="label">팝업 사이즈</label>
@@ -175,9 +176,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 <label for="nw_content" class="label">팝업 내용</label>
                             </th>
                             <td colspan="3">
-                                <label class="textarea">
+                                <div class="textarea">
                                     <?php echo editor_html('nw_content', get_text(html_purifier($nw['nw_content']), 0)); ?>
-                                </label>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

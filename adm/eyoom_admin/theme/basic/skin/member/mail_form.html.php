@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/member/mail_form.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -31,9 +32,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             <input type="text" name="ma_subject" id="ma_subject" value="<?php echo get_sanitize_input($ma['ma_subject']); ?>" required>
         </label>
         <label class="label">메일 내용</label>
-        <label class="textarea">
+        <div class="textarea">
             <?php echo editor_html("ma_content", get_text(html_purifier($ma['ma_content']), 0)); ?>
-        </label>
+        </div>
     </div>
 
     <?php echo $frm_submit; ?>

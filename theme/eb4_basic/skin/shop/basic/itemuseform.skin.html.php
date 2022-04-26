@@ -3,6 +3,7 @@
  * skin file : /theme/THEME_NAME/skin/shop/basic/itemuseform.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -137,5 +138,19 @@ $(function(){
         $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
     }
 });
+
+<?php /* 다크모드 JS 시작 */ ?>
+const currentMode = localStorage.getItem("mode");
+
+if (currentMode == "dark") {
+	document.body.classList.toggle("dark-mode");
+	<?php if($editor_html && preg_match('/ckeditor/i', $config['cf_editor'])) { ?>
+	CKEDITOR.on('instanceReady', function(e) {
+		e.editor.document.getBody().setStyle('background-color', '#000');
+		e.editor.document.getBody().setStyle('color', '#858585');
+	});
+	<?php } ?>
+}
+<?php /* 다크모드 JS 끝 */ ?>
 </script>
 <?php /* ---------- 사용후기 쓰기 끝 ---------- */ ?>

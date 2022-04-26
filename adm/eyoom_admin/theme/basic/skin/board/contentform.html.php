@@ -4,6 +4,7 @@
  * @file    ~/theme/basic/skin/board/contentform.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <div class="admin-contentform">
@@ -59,9 +60,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="co_content" class="label">내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('co_content', get_text(html_purifier($co['co_content']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -69,9 +70,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="co_mobile_content" class="label">모바일 내용</label>
                         </th>
                         <td>
-                            <label class="textarea">
+                            <div class="textarea">
                                 <?php echo editor_html('co_mobile_content', get_text(html_purifier($co['co_mobile_content']), 0)); ?>
-                            </label>
+                            </div>
                         </td>
                     </tr>
                     <tr>

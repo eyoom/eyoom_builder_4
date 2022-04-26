@@ -5,6 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
+if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 ?>
 
 <style>
@@ -57,9 +58,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php } ?>
     <section>
         <label class="label">답변 내용</label>
-        <label class="textarea textarea-resizable">
+        <div class="textarea textarea-resizable">
             <?php echo $editor_html; ?>
-        </label>
+        </div>
     </section>
     <section class="text-center m-t-30">
         <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-crimson btn-e-xl">
