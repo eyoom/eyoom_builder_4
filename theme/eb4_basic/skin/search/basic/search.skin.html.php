@@ -137,9 +137,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 $comment_href = '';
             }
 
-            $level = $list[$idx][$i]['eb_1'] ? $eb->level_info($list[$idx][$i]['eb_1']):'';
-            if (is_array($level) && $level['anonymous']) {
+            if ($list[$idx][$i]['wr_anonymous'] || in_array($search_table[$idx],$anonymous_table)) {
                 $data['mb_id'] = 'anonymous';
+                $data['mb_photo'] = '';
                 $data['name'] = '익명';
             } else {
                 $data['mb_photo'] = $eb->mb_photo($list[$idx][$i]['mb_id']);

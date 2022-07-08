@@ -8,15 +8,16 @@ $sub_menu = '100310';
 
 auth_check_menu($auth, $sub_menu, "r");
 
-if( !isset($g5['new_win_table']) ){
+if (!isset($g5['new_win_table'])) {
     die('<meta charset="utf-8">/data/dbconfig.php 파일에 <strong>$g5[\'new_win_table\'] = G5_TABLE_PREFIX.\'new_win\';</strong> 를 추가해 주세요.');
 }
 //내용(컨텐츠)정보 테이블이 있는지 검사한다.
-if(!sql_query(" DESCRIBE {$g5['new_win_table']} ", false)) {
-    if(sql_query(" DESCRIBE {$g5['g5_shop_new_win_table']} ", false)) {
+if (!sql_query(" DESCRIBE {$g5['new_win_table']} ", false)) {
+    if (sql_query(" DESCRIBE {$g5['g5_shop_new_win_table']} ", false)) {
         sql_query(" ALTER TABLE {$g5['g5_shop_new_win_table']} RENAME TO `{$g5['new_win_table']}` ;", false);
     } else {
-       $query_cp = sql_query(" CREATE TABLE IF NOT EXISTS `{$g5['new_win_table']}` (
+        $query_cp = sql_query(
+            " CREATE TABLE IF NOT EXISTS `{$g5['new_win_table']}` (
                       `nw_id` int(11) NOT NULL AUTO_INCREMENT,
                       `nw_division` varchar(10) NOT NULL DEFAULT 'both',
                       `nw_device` varchar(10) NOT NULL DEFAULT 'both',
@@ -31,7 +32,9 @@ if(!sql_query(" DESCRIBE {$g5['new_win_table']} ", false)) {
                       `nw_content` text NOT NULL,
                       `nw_content_html` tinyint(4) NOT NULL DEFAULT '0',
                       PRIMARY KEY (`nw_id`)
-                    ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ", true);
+                    ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ",
+            true
+        );
     }
 }
 
@@ -75,7 +78,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = "select * {$sql_common} {$sql_search} order by nw_id desc limit {$from_record}, {$rows}";

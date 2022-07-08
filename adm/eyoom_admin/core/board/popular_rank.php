@@ -11,8 +11,12 @@ auth_check_menu($auth, $sub_menu, 'r');
 $fr_date = isset($_REQUEST['fr_date']) ? $_REQUEST['fr_date'] : '';
 $to_date = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : '';
 
-if (empty($fr_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = G5_TIME_YMD;
-if (empty($to_date) || ! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = G5_TIME_YMD;
+if (empty($fr_date) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date)) {
+    $fr_date = G5_TIME_YMD;
+}
+if (empty($to_date) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date)) {
+    $to_date = G5_TIME_YMD;
+}
 
 $qstr = "fr_date={$fr_date}&amp;to_date={$to_date}";
 
@@ -27,7 +31,9 @@ $total_count = sql_num_rows($result);
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1;
+} // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select pp_word, count(*) as cnt {$sql_common} {$sql_search} {$sql_group} {$sql_order} limit {$from_record}, {$rows} ";

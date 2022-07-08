@@ -87,16 +87,12 @@ if (!defined('_INDEX_')) {
     $sidemenu = '';
     $subinfo = $thema->subpage_info($menu);
     if ($subinfo['registed'] == 'y') $sidemenu = $thema->submenu_create($menu_flag);
-}
-else {
+} else {
     /**
      * 팝업창
      */
     if ($eyoom['use_gnu_newwin'] == 'n') {
         @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
-    }
-    else {
-        @include_once(G5_BBS_PATH.'/newwin.inc.php');
     }
 }
 

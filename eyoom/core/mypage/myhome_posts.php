@@ -21,6 +21,12 @@ $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
  */
 $where = " find_in_set(bo_table,'".implode(',',$bo_possible)."') and wr_id = wr_parent and mb_id = '{$user['mb_id']}' ";
 
+/**
+ * 다른 사람의 홈페이지의 글에서는 익명글 제외하기
+ */
+if ($member['mb_id'] != $user['mb_id']) {
+    $where .= " and wr_anonymous='' && wr_bo_anonymous='' ";
+}
 
 $sql = "select * from {$g5['board_new_table']} where {$where} order by bn_datetime desc limit {$from_record}, $page_rows ";
 $result = sql_query($sql, false);

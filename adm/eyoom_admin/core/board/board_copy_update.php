@@ -13,30 +13,36 @@ auth_check_menu($auth, $sub_menu, 'w');
 check_admin_token();
 
 $copy_config    = clean_xss_tags(trim($_POST['copy_config']));
+$bo_table       = isset($_POST['bo_table']) ? $_POST['bo_table'] : null;
 $target_table   = isset($_POST['target_table']) ? trim($_POST['target_table']) : '';
 $target_subject = isset($_POST['target_subject']) ? trim($_POST['target_subject']) : '';
 
 $target_subject = strip_tags(clean_xss_attributes($target_subject));
+
+$file_copy      = array();
+
+if (empty($bo_table)) {
+    alert("원본 테이블 정보가 없습니다.");
+}
 
 if (!preg_match('/[A-Za-z0-9_]{1,20}/', $target_table)) {
     alert('게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)');
 }
 
 // 게시판명이 금지된 단어로 되어 있으면
-if ( $w == '' && in_array($target_table, get_bo_table_banned_word()) ){
+if ($w == '' && in_array($target_table, get_bo_table_banned_word())) {
     alert('입력한 게시판 TABLE명을 사용할수 없습니다. 다른 이름으로 입력해 주세요.');
 }
 
 $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where bo_table = '$target_table' ");
-if ($row['cnt'])
-    alert($target_table.'은(는) 이미 존재하는 게시판 테이블명 입니다.\\n복사할 테이블명으로 사용할 수 없습니다.');
+if ($row['cnt']) {
+    alert($target_table . '은(는) 이미 존재하는 게시판 테이블명 입니다.\\n복사할 테이블명으로 사용할 수 없습니다.');
+}
 
 // 게시판 테이블 생성
 $sql = get_table_define($g5['write_prefix'] . $bo_table);
 $sql = str_replace($g5['write_prefix'] . $bo_table, $g5['write_prefix'] . $target_table, $sql);
 sql_query($sql, false);
-
-$file_copy = array();
 
 // 구조만 복사시에는 공지사항 번호는 복사하지 않는다.
 if ($copy_case == 'schema_only') {
@@ -155,21 +161,22 @@ if ($copy_case == 'schema_data_both') {
         if ($entry == '.' || $entry == '..') continue;
 
         // 김선용 201007 :
-        if(is_dir(G5_DATA_PATH.'/file/'.$bo_table.'/'.$entry)){
-            $dd = dir(G5_DATA_PATH.'/file/'.$bo_table.'/'.$entry);
-            @mkdir(G5_DATA_PATH.'/file/'.$target_table.'/'.$entry, G5_DIR_PERMISSION);
-            @chmod(G5_DATA_PATH.'/file/'.$target_table.'/'.$entry, G5_DIR_PERMISSION);
+        if (is_dir(G5_DATA_PATH . '/file/' . $bo_table . '/' . $entry)) {
+            $dd = dir(G5_DATA_PATH . '/file/' . $bo_table . '/' . $entry);
+            @mkdir(G5_DATA_PATH . '/file/' . $target_table . '/' . $entry, G5_DIR_PERMISSION);
+            @chmod(G5_DATA_PATH . '/file/' . $target_table . '/' . $entry, G5_DIR_PERMISSION);
             while ($entry2 = $dd->read()) {
-                if ($entry2 == '.' || $entry2 == '..') continue;
-                @copy(G5_DATA_PATH.'/file/'.$bo_table.'/'.$entry.'/'.$entry2, G5_DATA_PATH.'/file/'.$target_table.'/'.$entry.'/'.$entry2);
-                @chmod(G5_DATA_PATH.'/file/'.$target_table.'/'.$entry.'/'.$entry2, G5_DIR_PERMISSION);
+                if ($entry2 == '.' || $entry2 == '..') {
+                    continue;
+                }
+                @copy(G5_DATA_PATH . '/file/' . $bo_table . '/' . $entry . '/' . $entry2, G5_DATA_PATH . '/file/' . $target_table . '/' . $entry . '/' . $entry2);
+                @chmod(G5_DATA_PATH . '/file/' . $target_table . '/' . $entry . '/' . $entry2, G5_DIR_PERMISSION);
                 $copy_file++;
             }
             $dd->close();
-        }
-        else {
-            @copy(G5_DATA_PATH.'/file/'.$bo_table.'/'.$entry, G5_DATA_PATH.'/file/'.$target_table.'/'.$entry);
-            @chmod(G5_DATA_PATH.'/file/'.$target_table.'/'.$entry, G5_DIR_PERMISSION);
+        } else {
+            @copy(G5_DATA_PATH . '/file/' . $bo_table . '/' . $entry, G5_DATA_PATH . '/file/' . $target_table . '/' . $entry);
+            @chmod(G5_DATA_PATH . '/file/' . $target_table . '/' . $entry, G5_DIR_PERMISSION);
             $copy_file++;
         }
     }

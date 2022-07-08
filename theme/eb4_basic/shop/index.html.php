@@ -19,11 +19,16 @@ if (!defined('_EYOOM_')) exit;
 </div>
 <?php /* ---------- 쇼핑몰 메인 EB 슬라이더 끝 ---------- */ ?>
 
-<?php if(0) { // 영카트 매인 배너 스킨 이윰빌더에서는 사용안함 (위 EB 슬라이더로 대체) ?>
-<?php /* ---------- 메인 배너 시작 ---------- */ ?>
-<?php echo eb_display_banner('메인', 'mainbanner.10.skin.php'); ?>
-<?php /* ---------- 메인 배너 끝 ---------- */ ?>
+<?php /* ---------- 쇼핑몰 브랜드 시작 ---------- */ ?>
+<?php if ($eyoom['use_brand'] != 'n') { ?>
+<div class="container">
+    <div class="main-heading">
+        <h2><strong>브랜드</strong></h2>
+    </div>
+    <?php echo eb_brand('basic'); ?>
+</div>
 <?php } ?>
+<?php /* ---------- 쇼핑몰 브랜드 끝 ---------- */ ?>
 
 <div class="container">
     <?php /* ---------- 히트상품 시작 ---------- */ ?>

@@ -244,6 +244,18 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <tbody>
                         <tr>
                             <th class="table-form-th">
+                                <label class="label">쇼핑몰 브랜드노출</label>
+                            </th>
+                            <td colspan="3">
+                                <div class="inline-group">
+                                    <label for="use_brand1" class="radio"><input type="radio" name="use_brand" id="use_brand1" value="y" <?php echo $eyoom['use_brand'] == 'y' || !$eyoom['use_brand'] ? 'checked':''; ?>><i></i> 사용</label>
+                                    <label for="use_brand2" class="radio"><input type="radio" name="use_brand" id="use_brand2" value="n" <?php echo $eyoom['use_brand'] == 'n' ? 'checked':''; ?>><i></i> 사용하지 않음</label>
+                                </div>
+                                <div class="note"><strong>Note:</strong> 브랜드 디자인을 메인 및 브랜드 페이지 상단에 노출할지 여부를 설정합니다.</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
                                 <label class="label">회원 사이드뷰</label>
                             </th>
                             <td colspan="3">

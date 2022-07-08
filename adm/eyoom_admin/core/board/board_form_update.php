@@ -6,25 +6,34 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "300100";
 
-if ($w == 'u')
+if ($w == 'u') {
     check_demo();
+}
 
 auth_check_menu($auth, $sub_menu, 'w');
 
 check_admin_token();
 
-$gr_id = isset($_POST['gr_id']) ? preg_replace('/[^a-z0-9_]/i', '', $_POST['gr_id']) : '';
-$bo_admin = isset($_POST['bo_admin']) ? preg_replace('/[^a-z0-9_\, \|\#]/i', '', $_POST['bo_admin']) : '';
-$bo_subject = isset($_POST['bo_subject']) ? strip_tags(clean_xss_attributes($_POST['bo_subject'])) : '';
-$bo_mobile_subject = isset($_POST['bo_mobile_subject']) ? strip_tags(clean_xss_attributes($_POST['bo_mobile_subject'])) : '';
+$gr_id              = isset($_POST['gr_id']) ? preg_replace('/[^a-z0-9_]/i', '', (string)$_POST['gr_id']) : '';
+$bo_admin           = isset($_POST['bo_admin']) ? preg_replace('/[^a-z0-9_\, \|\#]/i', '', $_POST['bo_admin']) : '';
+$bo_subject         = isset($_POST['bo_subject']) ? strip_tags(clean_xss_attributes($_POST['bo_subject'])) : '';
+$bo_mobile_subject  = isset($_POST['bo_mobile_subject']) ? strip_tags(clean_xss_attributes($_POST['bo_mobile_subject'])) : '';
 
-if (!$gr_id) { alert('그룹 ID는 반드시 선택하세요.'); }
-if (!$bo_table) { alert('게시판 TABLE명은 반드시 입력하세요.'); }
-if (!preg_match("/^([A-Za-z0-9_]{1,20})$/", $bo_table)) { alert('게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)'); }
-if (!$bo_subject) { alert('게시판 제목을 입력하세요.'); }
+if (!$gr_id) {
+    alert('그룹 ID는 반드시 선택하세요.');
+}
+if (!$bo_table) {
+    alert('게시판 TABLE명은 반드시 입력하세요.');
+}
+if (!preg_match("/^([A-Za-z0-9_]{1,20})$/", $bo_table)) {
+    alert('게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)');
+}
+if (!$bo_subject) {
+    alert('게시판 제목을 입력하세요.');
+}
 
 // 게시판명이 금지된 단어로 되어 있으면
-if ( $w == '' && in_array($bo_table, get_bo_table_banned_word()) ){
+if ($w == '' && in_array($bo_table, get_bo_table_banned_word())) {
     alert('입력한 게시판 TABLE명을 사용할수 없습니다. 다른 이름으로 입력해 주세요.');
 }
 
@@ -32,8 +41,8 @@ $bo_include_head = isset($_POST['bo_include_head']) ? preg_replace(array("#[\\\]
 $bo_include_tail = isset($_POST['bo_include_tail']) ? preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($_POST['bo_include_tail'], 0, 255)) : '';
 
 // 관리자가 자동등록방지를 사용해야 할 경우
-if ($board && ($board['bo_include_head'] !== $bo_include_head || $board['bo_include_tail'] !== $bo_include_tail) && function_exists('get_admin_captcha_by') && get_admin_captcha_by()){
-    include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
+if ($board && (isset($board['bo_include_head']) && $board['bo_include_head'] !== $bo_include_head || $board['bo_include_tail'] !== $bo_include_tail) && function_exists('get_admin_captcha_by') && get_admin_captcha_by()) {
+    include_once(G5_CAPTCHA_PATH . '/captcha.lib.php');
 
     if (!chk_captcha()) {
         alert('자동등록방지 숫자가 틀렸습니다.');
@@ -43,7 +52,7 @@ if ($board && ($board['bo_include_head'] !== $bo_include_head || $board['bo_incl
 if ($file = $bo_include_head) {
     $file_ext = pathinfo($file, PATHINFO_EXTENSION);
 
-    if( ! $file_ext || ! in_array($file_ext, array('php', 'htm', 'html')) || ! preg_match('/^.*\.(php|htm|html)$/i', $file) ) {
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
         alert('상단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
     }
 }
@@ -51,25 +60,25 @@ if ($file = $bo_include_head) {
 if ($file = $bo_include_tail) {
     $file_ext = pathinfo($file, PATHINFO_EXTENSION);
 
-    if( ! $file_ext || ! in_array($file_ext, array('php', 'htm', 'html')) || ! preg_match('/^.*\.(php|htm|html)$/i', $file) ) {
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
         alert('하단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
     }
 }
 
-if(!is_include_path_check($bo_include_head, 1)) {
+if (!is_include_path_check($bo_include_head, 1)) {
     alert('상단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
 }
 
-if(!is_include_path_check($bo_include_tail, 1)) {
+if (!is_include_path_check($bo_include_tail, 1)) {
     alert('하단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
 }
 
-if( function_exists('filter_input_include_path') ){
+if (function_exists('filter_input_include_path')) {
     $bo_include_head = filter_input_include_path($bo_include_head);
     $bo_include_tail = filter_input_include_path($bo_include_tail);
 }
 
-$board_path = G5_DATA_PATH.'/file/'.$bo_table;
+$board_path = G5_DATA_PATH . '/file/' . $bo_table;
 
 // 게시판 디렉토리 생성
 @mkdir($board_path, G5_DIR_PERMISSION);
@@ -77,7 +86,7 @@ $board_path = G5_DATA_PATH.'/file/'.$bo_table;
 
 // 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
 $file = $board_path . '/index.php';
-if( $f = @fopen($file, 'w') ){
+if ($f = @fopen($file, 'w')) {
     @fwrite($f, '');
     @fclose($f);
     @chmod($file, G5_FILE_PERMISSION);
@@ -88,7 +97,7 @@ $src_char = array('&', '=');
 $dst_char = array('＆', '〓');
 $bo_category_list = isset($_POST['bo_category_list']) ? str_replace($src_char, $dst_char, $_POST['bo_category_list']) : '';
 //https://github.com/gnuboard/gnuboard5/commit/f5f4925d4eb28ba1af728e1065fc2bdd9ce1da58 에 따른 조치
-$str_bo_category_list = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", $bo_category_list);
+$str_bo_category_list = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", (string)$bo_category_list);
 
 $bo_use_category = isset($_POST['bo_use_category']) ? (int) $_POST['bo_use_category'] : 0;
 $bo_use_sideview = isset($_POST['bo_use_sideview']) ? (int) $_POST['bo_use_sideview'] : 0;
@@ -158,9 +167,9 @@ $bo_sort_field = isset($_POST['bo_sort_field']) ? clean_xss_tags($_POST['bo_sort
 
 $etcs = array();
 
-for($i=1;$i<=10;$i++){
-    $etcs['bo_'.$i.'_subj'] = ${'bo_'.$i.'_subj'} = isset($_POST['bo_'.$i.'_subj']) ? $_POST['bo_'.$i.'_subj'] : '';
-    $etcs['bo_'.$i] = ${'bo_'.$i} = isset($_POST['bo_'.$i]) ? $_POST['bo_'.$i] : '';
+for ($i = 1; $i <= 10; $i++) {
+    $etcs['bo_' . $i . '_subj'] = ${'bo_' . $i . '_subj'} = isset($_POST['bo_' . $i . '_subj']) ? $_POST['bo_' . $i . '_subj'] : '';
+    $etcs['bo_' . $i] = ${'bo_' . $i} = isset($_POST['bo_' . $i]) ? $_POST['bo_' . $i] : '';
 }
 
 $sql_common = " gr_id               = '{$gr_id}',
@@ -216,9 +225,9 @@ $sql_common = " gr_id               = '{$gr_id}',
                 ";
 
 // 최고 관리자인 경우에만 수정가능
-if ($is_admin === 'super'){
-$sql_common .= " bo_include_head     = '".$bo_include_head."',
-                bo_include_tail     = '".$bo_include_tail."',
+if ($is_admin === 'super') {
+    $sql_common .= " bo_include_head     = '" . $bo_include_head . "',
+                bo_include_tail     = '" . $bo_include_tail . "',
                 bo_content_head     = '{$bo_content_head}',
                 bo_content_tail     = '{$bo_content_tail}',
                 bo_mobile_content_head     = '{$bo_mobile_content_head}',
@@ -264,10 +273,10 @@ $sql_common .= " bo_insert_content   = '{$bo_insert_content}',
                 bo_10               = '{$bo_10}' ";
 
 if ($w == '') {
-
     $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where bo_table = '{$bo_table}' ");
-    if ($row['cnt'])
-        alert($bo_table.' 은(는) 이미 존재하는 TABLE 입니다.');
+    if ($row['cnt']) {
+        alert($bo_table . ' 은(는) 이미 존재하는 TABLE 입니다.');
+    }
 
     $sql = " insert into {$g5['board_table']}
                 set bo_table = '{$bo_table}',
@@ -277,7 +286,7 @@ if ($w == '') {
     sql_query($sql);
 
     // 게시판 테이블 생성
-    $file = file(G5_ADMIN_PATH . '/sql_write.sql');
+    $file = file('./sql_write.sql');
     $file = get_db_create_replace($file);
 
     $sql = implode("\n", $file);
@@ -288,12 +297,8 @@ if ($w == '') {
     $source = array('/__TABLE_NAME__/', '/;/');
     $target = array($create_table, '');
     $sql = preg_replace($source, $target, $sql);
-    sql_query($sql, FALSE);
-
-    $msg = "게시판을 정상적으로 생성하였습니다.";
-
-} else if ($w == 'u') {
-
+    sql_query($sql, false);
+} elseif ($w == 'u') {
     // 게시판의 글 수
     $sql = " select count(*) as cnt from {$g5['write_prefix']}{$bo_table} where wr_is_comment = 0 ";
     $row = sql_fetch($sql);
@@ -314,7 +319,7 @@ if ($w == '') {
         //$sql = " select wr_id from {$g5['write_prefix']}{$bo_table} where wr_is_comment = 0 ";
         $sql = " select a.wr_id, (count(b.wr_parent) - 1) as cnt from {$g5['write_prefix']}{$bo_table} a, {$g5['write_prefix']}{$bo_table} b where a.wr_id=b.wr_parent and a.wr_is_comment=0 group by a.wr_id ";
         $result = sql_query($sql);
-        for ($i=0; $row=sql_fetch_array($result); $i++) {
+        for ($i = 0; $row = sql_fetch_array($result); $i++) {
             /*
             // 코멘트수를 얻습니다.
             $sql2 = " select count(*) as cnt from {$g5['write_prefix']}$bo_table where wr_parent = '{$row['wr_id']}' and wr_is_comment = 1 ";
@@ -330,11 +335,10 @@ if ($w == '') {
     $lf = "";
     if ($board['bo_notice']) {
         $tmp_array = explode(",", $board['bo_notice']);
-        for ($i=0; $i<count($tmp_array); $i++) {
+        for ($i = 0; $i < count($tmp_array); $i++) {
             $tmp_wr_id = trim($tmp_array[$i]);
             $row = sql_fetch(" select count(*) as cnt from {$g5['write_prefix']}{$bo_table} where wr_id = '{$tmp_wr_id}' ");
-            if ($row['cnt'])
-            {
+            if ($row['cnt']) {
                 $bo_notice .= $lf . $tmp_wr_id;
                 $lf = ",";
             }

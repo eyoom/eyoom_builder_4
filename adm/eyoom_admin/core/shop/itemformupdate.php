@@ -427,6 +427,29 @@ $sql_common = " ca_id               = '$ca_id',
                 it_10               = '$it_10'
                 ";
 
+/**
+ * 브랜드코드가 있는지 체크
+ */
+if(sql_query(" DESC {$g5['eyoom_brand']} ", false)) {
+    $it_brcode = clean_xss_tags(trim($_POST['it_brcode']));
+    $it_brand_prev = clean_xss_tags(trim($_POST['it_brand_prev']));
+    if (!$it_brcode || $it_brand != $it_brand_prev) {
+        if ($it_brand) {
+            $row = sql_fetch("select * from {$g5['eyoom_brand']} where br_name='{$it_brand}'");
+            if ($row['br_no']) {
+                $it_brcode = $row['br_code'];
+            } else {
+                $max = sql_fetch("select max(br_sort) as snum from {$g5['eyoom_brand']} where 1 ");
+                $br_sort = $max['snum'] + 1;
+                $it_brcode = time();
+                $sql = " insert into {$g5['eyoom_brand']} set br_code = '{$it_brcode}', br_name = '{$it_brand}', br_sort = '{$br_sort}', br_open = 'y', br_regdt = '".G5_TIME_YMDHIS."'"; 
+                sql_query($sql);
+            }
+        }
+    }
+    $sql_common .= ", it_brcode = '{$it_brcode}' ";
+}
+
 if ($w == "")
 {
     $it_id = isset($_POST['it_id']) ? $_POST['it_id'] : '';
@@ -482,13 +505,13 @@ if ($w == "" || $w == "u")
         {
             $sql = " insert into {$g5['g5_shop_item_relation_table']}
                         set it_id  = '$it_id',
-                            it_id2 = '$it_id2[$i]',
+                            it_id2 = '".sql_real_escape_string($it_id2[$i])."',
                             ir_no = '$i' ";
             sql_query($sql, false);
 
             // 관련상품의 반대로도 등록
             $sql = " insert into {$g5['g5_shop_item_relation_table']}
-                        set it_id  = '$it_id2[$i]',
+                        set it_id  = '".sql_real_escape_string($it_id2[$i])."',
                             it_id2 = '$it_id',
                             ir_no = '$i' ";
             sql_query($sql, false);
@@ -502,7 +525,7 @@ if ($w == "" || $w == "u")
         if (trim($ev_id[$i]))
         {
             $sql = " insert into {$g5['g5_shop_event_item_table']}
-                        set ev_id = '$ev_id[$i]',
+                        set ev_id = '".sql_real_escape_string($ev_id[$i])."',
                             it_id = '$it_id' ";
             sql_query($sql, false);
         }
@@ -516,7 +539,7 @@ if($option_count) {
                     ( `io_id`, `io_type`, `it_id`, `io_price`, `io_stock_qty`, `io_noti_qty`, `io_use` )
                 VALUES ";
     for($i=0; $i<$option_count; $i++) {
-        $sql .= $comma . " ( '{$_POST['opt_id'][$i]}', '0', '$it_id', '{$_POST['opt_price'][$i]}', '{$_POST['opt_stock_qty'][$i]}', '{$_POST['opt_noti_qty'][$i]}', '{$_POST['opt_use'][$i]}' )";
+        $sql .= $comma . " ( '".sql_real_escape_string($_POST['opt_id'][$i])."', '0', '$it_id', '".sql_real_escape_string($_POST['opt_price'][$i])."', '".sql_real_escape_string($_POST['opt_stock_qty'][$i])."', '".sql_real_escape_string($_POST['opt_noti_qty'][$i])."', '".sql_real_escape_string($_POST['opt_use'][$i])."' )";
         $comma = ' , ';
     }
 
@@ -530,7 +553,7 @@ if($supply_count) {
                     ( `io_id`, `io_type`, `it_id`, `io_price`, `io_stock_qty`, `io_noti_qty`, `io_use` )
                 VALUES ";
     for($i=0; $i<$supply_count; $i++) {
-        $sql .= $comma . " ( '{$_POST['spl_id'][$i]}', '1', '$it_id', '{$_POST['spl_price'][$i]}', '{$_POST['spl_stock_qty'][$i]}', '{$_POST['spl_noti_qty'][$i]}', '{$_POST['spl_use'][$i]}' )";
+        $sql .= $comma . " ( '".sql_real_escape_string($_POST['spl_id'][$i])."', '1', '$it_id', '".sql_real_escape_string($_POST['spl_price'][$i])."', '".sql_real_escape_string($_POST['spl_stock_qty'][$i])."', '".sql_real_escape_string($_POST['spl_noti_qty'][$i])."', '".sql_real_escape_string($_POST['spl_use'][$i])."' )";
         $comma = ' , ';
     }
 
@@ -580,6 +603,13 @@ if(is_checked('chk_ca_7'))                      $ca_fields .= " , it_7_subj = '$
 if(is_checked('chk_ca_8'))                      $ca_fields .= " , it_8_subj = '$it_8_subj', it_8 = '$it_8' ";
 if(is_checked('chk_ca_9'))                      $ca_fields .= " , it_9_subj = '$it_9_subj', it_9 = '$it_9' ";
 if(is_checked('chk_ca_10'))                     $ca_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
+
+/**
+ * 브랜드 코드 관련 추가
+ */
+if(is_checked('chk_ca_it_brand') && sql_query(" DESC {$g5['eyoom_brand']} ", false)) {
+    $ca_fields .= " , it_brcode = '$it_brcode' ";
+}
 
 if($ca_fields) {
     sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id = '$ca_id' ");
@@ -632,6 +662,13 @@ if(is_checked('chk_all_7'))                      $all_fields .= " , it_7_subj = 
 if(is_checked('chk_all_8'))                      $all_fields .= " , it_8_subj = '$it_8_subj', it_8 = '$it_8' ";
 if(is_checked('chk_all_9'))                      $all_fields .= " , it_9_subj = '$it_9_subj', it_9 = '$it_9' ";
 if(is_checked('chk_all_10'))                     $all_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
+
+/**
+ * 브랜드 코드 관련 추가
+ */
+if(is_checked('chk_all_it_brand') && sql_query(" DESC {$g5['eyoom_brand']} ", false)) {
+    $all_fields .= " , it_brcode = '$it_brcode' ";
+}
 
 if($all_fields) {
     sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");

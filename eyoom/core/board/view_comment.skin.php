@@ -123,7 +123,12 @@ for ($i=0; $i<$cmt_amt; $i++) {
         if ($w == 'cu') {
             $sql = " select wr_id, wr_content from $write_table where wr_id = '$c_id' and wr_is_comment = '1' ";
             $cmt = sql_fetch($sql);
-            $cmt[$i]['c_wr_content'] = $cmt['wr_content'];
+            if (isset($cmt)) {
+                if (!($is_admin || ($member['mb_id'] == $cmt['mb_id'] && $cmt['mb_id']))) {
+                    $cmt['wr_content'] = '';
+                }
+                $cmt[$i]['c_wr_content'] = $cmt['wr_content'];
+            }
         }
         $cmt[$i]['c_reply_href'] = $comment_common_url.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=c#bo_vc_w';
         $cmt[$i]['c_edit_href'] = $comment_common_url.'&amp;c_id='.$cmt[$i]['comment_id'].'&amp;w=cu#bo_vc_w';

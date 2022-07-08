@@ -158,7 +158,6 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 <?php /*----- 쇼핑몰 회원 사이드바 끝 -----*/ ?>
-<?php } // !$wmode ?>
 
 <?php /* Back To Top */ ?>
 <div class="eb-backtotop">
@@ -167,6 +166,7 @@ if (!defined('_EYOOM_')) exit;
 		<span class="progress-count"></span>
 	</svg>
 </div>
+<?php } // !$wmode ?>
 
 <form name="fitem_for_list" method="post" action="" onsubmit="return fitem_for_list_submit(this);">
 <input type="hidden" name="url">

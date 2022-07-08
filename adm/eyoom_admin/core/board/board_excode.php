@@ -10,7 +10,9 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 $ex_no = clean_xss_tags(trim($_GET['ex_no']));
 
-if (!$board || !$ex_no) alert("잘못된 접근입니다.");
+if (!$board || !$ex_no) {
+    alert("잘못된 접근입니다.");
+}
 
 /**
  * 확장필드의 정보 가져오기

@@ -66,8 +66,8 @@ $(function() {
         dragHandle: 1,
         dynamicHandle: 1,
         clickBar: 1,
-        prev: $wrap.find('.prev'),
-        next: $wrap.find('.next')
+        prevPage: $wrap.find('.prev'),
+        nextPage: $wrap.find('.next')
     });
     var tabWidth = $('#tab-category').width();
     var categoryWidth = $('.category-list').width();

@@ -42,6 +42,13 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
             array('200990', '포인트 압축하기', G5_ADMIN_URL.'/point_compress.php', 'mb_point_compress')
         );
 
+        /**
+         * 쇼핑몰 브랜드관리
+         */
+        array_push ($menu['menu400'], 
+            array('400350', '브랜드관리', G5_ADMIN_URL.'/brandlist.php', 'brandlist')
+        );
+
     } else {
         /**
          * 그외 고객관리자 메뉴

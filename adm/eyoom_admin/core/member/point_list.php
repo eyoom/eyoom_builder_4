@@ -11,17 +11,17 @@ $action_url2 = G5_ADMIN_URL . '/?dir=member&amp;pid=point_update&amp;smode=1';
 
 auth_check_menu($auth, $sub_menu, 'r');
 
-$sql_common = " from {$g5['point_table']} ";
+$sql_common = " from {$g5['point_table']} po";
 
 $sql_search = " where (1) ";
 
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case 'mb_id' :
-            $sql_search .= " ({$sfl} = '{$stx}') ";
+        case 'mb_id':
+            $sql_search .= " (po.{$sfl} = '{$stx}') ";
             break;
-        default :
+        default:
             $sql_search .= " ({$sfl} like '%{$stx}%') ";
             break;
     }
@@ -52,29 +52,34 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
-$sql = " select *
+$sql = " select po.*, mb.mb_name, mb.mb_nick, mb.mb_email, mb.mb_homepage, mb.mb_point
             {$sql_common}
+            LEFT JOIN {$g5['member_table']} mb ON po.mb_id = mb.mb_id 
             {$sql_search}
             {$sql_order}
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
 
 $mb = array();
-if ($sfl == 'mb_id' && $stx)
+if ($sfl == 'mb_id' && $stx) {
     $mb = get_member($stx);
+}
 
 $po_expire_term = '';
-if($config['cf_point_term'] > 0) {
+if ($config['cf_point_term'] > 0) {
     $po_expire_term = $config['cf_point_term'];
 }
 
-if (strstr($sfl, "mb_id"))
+if (strstr($sfl, "mb_id")) {
     $mb_id = $stx;
-else
+} else {
     $mb_id = "";
+}
 
 if (!(isset($mb['mb_id']) && $mb['mb_id'])) {
     $row2 = sql_fetch(" select sum(po_point) as sum_point from {$g5['point_table']} ");
@@ -97,8 +102,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 
     $expr = '';
-    if($row['po_expired'] == 1)
+    if ($row['po_expired'] == 1) {
         $expr = ' txt_expired';
+    }
 
     $list[$i] = $row;
     $list[$i]['mb_name'] = $row2['mb_name'];

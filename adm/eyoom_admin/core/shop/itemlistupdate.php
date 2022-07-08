@@ -29,8 +29,8 @@ if ($post_act_button == "선택수정") {
         $p_it_cust_price = (isset($_POST['it_cust_price']) && is_array($_POST['it_cust_price'])) ? strip_tags($_POST['it_cust_price'][$k]) : '';
         $p_it_price = (isset($_POST['it_price']) && is_array($_POST['it_price'])) ? strip_tags($_POST['it_price'][$k]) : '';
         $p_it_stock_qty = (isset($_POST['it_stock_qty']) && is_array($_POST['it_stock_qty'])) ? strip_tags($_POST['it_stock_qty'][$k]) : '';
-        $p_it_use = (isset($_POST['it_use']) && is_array($_POST['it_use'])) ? strip_tags($_POST['it_use'][$k]) : '';
-        $p_it_soldout = (isset($_POST['it_soldout']) && is_array($_POST['it_soldout'])) ? strip_tags($_POST['it_soldout'][$k]) : '';
+        $p_it_use       = isset($_POST['it_use'][$k])       ? clean_xss_tags($_POST['it_use'][$k], 1, 1)        : 0;
+        $p_it_soldout   = isset($_POST['it_soldout'][$k])   ? clean_xss_tags($_POST['it_soldout'][$k], 1, 1)    : 0;
         $p_it_order = (isset($_POST['it_order']) && is_array($_POST['it_order'])) ? strip_tags($_POST['it_order'][$k]) : '';
         $p_it_type1 = (isset($_POST['it_type1']) && is_array($_POST['it_type1'])) ? strip_tags($_POST['it_type1'][$k]) : '';
         $p_it_type2 = (isset($_POST['it_type2']) && is_array($_POST['it_type2'])) ? strip_tags($_POST['it_type2'][$k]) : '';

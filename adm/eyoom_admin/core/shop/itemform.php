@@ -244,6 +244,24 @@ if(!sql_query(" select it_info_use from {$g5['g5_shop_item_table']} limit 1", fa
 }
 
 /**
+ * 브랜드 테이블이 존재한다면
+ */
+if(sql_query(" DESC {$g5['eyoom_brand']} ", false)) {
+    if (!sql_query(" select it_brcode from {$g5['g5_shop_item_table']} limit 1", false)) {
+        sql_query(" ALTER TABLE `{$g5['g5_shop_item_table']}`
+        ADD `it_brcode` varchar(255) NOT NULL DEFAULT '' AFTER `it_brand` ", true);
+    }
+
+    $sql = "select * from {$g5['eyoom_brand']} where (1) order by br_name asc";
+    $result = sql_query($sql);
+    $brlist= array();
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $brlist[$i] = $row;
+    }
+    $br_cnt = count($brlist);
+}
+
+/**
  * 상품선택옵션
  */
 $opt_subject = explode(',', $it['it_option_subject']);

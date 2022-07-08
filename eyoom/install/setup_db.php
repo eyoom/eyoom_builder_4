@@ -29,10 +29,10 @@ $mysql_user         = defined('G5_MYSQL_USER')      ? G5_MYSQL_USER     : safe_i
 $mysql_pass         = defined('G5_MYSQL_PASSWORD')  ? G5_MYSQL_PASSWORD : safe_install_string_check($_POST['mysql_pass']);
 $mysql_db           = defined('G5_MYSQL_DB')        ? G5_MYSQL_DB       : safe_install_string_check($_POST['mysql_db']);
 $table_prefix       = defined('G5_TABLE_PREFIX')    ? G5_TABLE_PREFIX   : safe_install_string_check($_POST['table_prefix']);
-$admin_id           = $_POST['admin_id'];
-$admin_pass         = $_POST['admin_pass'];
-$admin_name         = $_POST['admin_name'];
-$admin_email        = $_POST['admin_email'];
+$admin_id           = isset($_POST['admin_id']) ? $_POST['admin_id'] : '';
+$admin_pass         = isset($_POST['admin_pass']) ? $_POST['admin_pass'] : '';
+$admin_name         = isset($_POST['admin_name']) ? $_POST['admin_name'] : '';
+$admin_email        = isset($_POST['admin_email']) ? $_POST['admin_email'] : '';
 
 $tm_key             = time();
 $cm_key             = '';
@@ -616,6 +616,7 @@ fwrite($f, "define('G5_MYSQL_PASSWORD', '".addcslashes($mysql_pass, "\\'")."');\
 fwrite($f, "define('G5_MYSQL_DB', '".addcslashes($mysql_db, "\\'")."');\n");
 fwrite($f, "define('G5_MYSQL_SET_MODE', {$mysql_set_mode});\n\n");
 fwrite($f, "define('G5_TABLE_PREFIX', '{$table_prefix}');\n\n");
+fwrite($f, "define('G5_TOKEN_ENCRYPTION_KEY', '".get_random_token_string(16)."'); // 토큰 암호화에 사용할 키\n\n");
 fwrite($f, "\$g5['write_prefix'] = G5_TABLE_PREFIX.'write_'; // 게시판 테이블명 접두사\n\n");
 fwrite($f, "\$g5['auth_table'] = G5_TABLE_PREFIX.'auth'; // 관리권한 설정 테이블\n");
 fwrite($f, "\$g5['config_table'] = G5_TABLE_PREFIX.'config'; // 기본환경 설정 테이블\n");
@@ -695,6 +696,7 @@ $str = <<<EOD
 Order allow,deny
 Deny from all
 </FilesMatch>
+RedirectMatch 403 /session/.*
 EOD;
 fwrite($f, $str);
 fclose($f);

@@ -133,7 +133,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $temporary_qty = $row['it_stock_qty'] - $wait_qty;
 
     // 통보수량보다 재고수량이 작을 때
-    $it_stock_qty = number_format($row['it_stock_qty']);
+    $it_stock_qty = number_format((int)$row['it_stock_qty']);
     $it_stock_qty_st = ''; // 스타일 정의
     if($row['it_stock_qty'] <= $row['it_noti_qty']) {
         $it_stock_qty_st = ' sit_stock_qty_alert';
@@ -143,8 +143,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i] = $row;
     $list[$i]['it_name'] = preg_replace('/\r\n|\r|\n/', '', cut_str(stripslashes($row['it_name']), 60, "&#133"));
     $list[$i]['href'] = $href;
-    $list[$i]['wait_qty'] = $wait_qty;
-    $list[$i]['temporary_qty'] = $temporary_qty;
+    $list[$i]['wait_qty'] = (float)$wait_qty;
+    $list[$i]['temporary_qty'] = (float)$temporary_qty;
     $list[$i]['it_stock_qty_st'] = $it_stock_qty_st;
     $list[$i]['it_stock_qty_str'] = $it_stock_qty;
     $list[$i]['image'] = str_replace('"', "'", get_it_image($row['it_id'], 160, 160));

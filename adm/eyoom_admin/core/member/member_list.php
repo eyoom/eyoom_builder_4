@@ -10,7 +10,9 @@ $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=member_list_update&amp;smode
 
 auth_check_menu($auth, $sub_menu, 'r');
 
-if ($wmode) $qstr .= "&amp;wmode=1";
+if ($wmode) {
+    $qstr .= "&amp;wmode=1";
+}
 
 $sql_common = " from {$g5['member_table']} as a left join {$g5['eyoom_member']} as b on a.mb_id = b.mb_id ";
 
@@ -18,18 +20,18 @@ $sql_search = " where (1) ";
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case 'mb_point' :
+        case 'mb_point':
             $sql_search .= " ({$sfl} >= '{$stx}') ";
             break;
-        case 'mb_level' :
+        case 'mb_level':
             $sql_search .= " ({$sfl} = '{$stx}') ";
             break;
-        case 'mb_tel' :
-        case 'mb_hp' :
+        case 'mb_tel':
+        case 'mb_hp':
             $sql_search .= " ({$sfl} like '%{$stx}') ";
             break;
-        default :
-            $sql_search .= " ({$sfl} like '%{$stx}%') ";
+        default:
+            $sql_search .= " ({$sfl} like '{$stx}%') ";
             break;
     }
     $sql_search .= " ) ";
@@ -149,7 +151,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 // 탈퇴회원수

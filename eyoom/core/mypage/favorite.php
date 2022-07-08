@@ -10,6 +10,11 @@ if (!defined('_EYOOM_')) exit;
 if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);
 
 /**
+ * 익명 게시판
+ */
+$anonymous_table = $bbs->anonymous_table();
+
+/**
  * 관심게시판
  */
 $favorite = $eb->mb_unserialize($eyoomer['favorite']);
@@ -33,9 +38,8 @@ if (is_array($favorite)) {
 
 $where = '1';
 switch($eyoomer['view_favorite']) {
-    case '2': $where .= " and wr_id = wr_parent "; $anonymouse_key = 'eb_1'; break;
-    case '3': $where .= " and wr_id <> wr_parent "; $anonymouse_key = 'mb_level'; break;
-    default : $anonymouse_key = 'eb_1'; break;
+    case '2': $where .= " and wr_id = wr_parent "; break;
+    case '3': $where .= " and wr_id <> wr_parent "; break;
 }
 
 $page = (int)$_GET['page'];
@@ -57,6 +61,7 @@ if (is_array($bo_tables)) {
     } else {
         $where .= " and find_in_set(bo_table,'".implode(',',$bo_tables)."')";
     }
+
     $sql = "select * from {$g5['board_new_table']} where $where order by bn_datetime desc limit $from_record, $page_rows";
     $result = sql_query($sql, false);
     for ($i=0; $row=sql_fetch_array($result); $i++) {

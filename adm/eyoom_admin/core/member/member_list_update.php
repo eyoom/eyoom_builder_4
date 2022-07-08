@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    /adm/eyoom_admin/core/member/member_form_update.php
+ * @file    /adm/eyoom_admin/core/member/member_list_update.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
@@ -24,7 +24,6 @@ $mb_datas = array();
 $msg = '';
 
 if ($act_button == "선택수정") {
-
     $rm = 0;
     $rc = 0;
 
@@ -47,17 +46,15 @@ if ($act_button == "선택수정") {
         $post_mb_open = isset($_POST['mb_open'][$k]) ? (int) $_POST['mb_open'][$k] : 0;
         $post_mb_id= isset($_POST['mb_id'][$k]) ? trim($_POST['mb_id'][$k]) : '';
         
+        $mb_datas[] = $mb = get_member($_POST['mb_id'][$k]);
 
-        $mb_datas[] = $mb = get_member($post_mb_id);
-
-        if (! (isset($mb['mb_id']) && $mb['mb_id'])) {
-            $msg .= $mb['mb_id'].' : 회원자료가 존재하지 않습니다.\\n';
-        } else if ($is_admin != 'super' && $mb['mb_level'] >= $member['mb_level']) {
-            $msg .= $mb['mb_id'].' : 자신보다 권한이 높거나 같은 회원은 수정할 수 없습니다.\\n';
-        } else if ($member['mb_id'] == $mb['mb_id']) {
-            $msg .= $mb['mb_id'].' : 로그인 중인 관리자는 수정 할 수 없습니다.\\n';
+        if (!(isset($mb['mb_id']) && $mb['mb_id'])) {
+            $msg .= $mb['mb_id'] . ' : 회원자료가 존재하지 않습니다.\\n';
+        } elseif ($is_admin != 'super' && $mb['mb_level'] >= $member['mb_level']) {
+            $msg .= $mb['mb_id'] . ' : 자신보다 권한이 높거나 같은 회원은 수정할 수 없습니다.\\n';
+        } elseif ($member['mb_id'] == $mb['mb_id']) {
+            $msg .= $mb['mb_id'] . ' : 로그인 중인 관리자는 수정 할 수 없습니다.\\n';
         } else {
-
             // 대상 그누레벨
             $mb_level = $post_mb_level * 1;
 
@@ -117,29 +114,28 @@ if ($act_button == "선택수정") {
                 sql_query($sql);
             }
 
-            if($post_mb_certify)
+            if ($post_mb_certify) {
                 $mb_adult = isset($_POST['mb_adult'][$k]) ? (int) $_POST['mb_adult'][$k] : 0;
-            else
+            } else {
                 $mb_adult = 0;
+            }
 
             $sql = " update {$g5['member_table']}
-                set mb_level = '".$post_mb_level."',
-                    mb_intercept_date = '".sql_real_escape_string($post_mb_intercept_date)."',
-                    mb_mailling = '".$post_mb_mailling."',
-                    mb_sms = '".$post_mb_sms."',
-                    mb_open = '".$post_mb_open."',
-                    mb_certify = '".sql_real_escape_string($post_mb_certify)."',
-                    mb_adult = '{$mb_adult}'
-                where mb_id = '".sql_real_escape_string($mb['mb_id'])."' ";
+                        set mb_level = '" . $post_mb_level . "',
+                            mb_intercept_date = '" . sql_real_escape_string($post_mb_intercept_date) . "',
+                            mb_mailling = '" . $post_mb_mailling . "',
+                            mb_sms = '" . $post_mb_sms . "',
+                            mb_open = '" . $post_mb_open . "',
+                            mb_certify = '" . sql_real_escape_string($post_mb_certify) . "',
+                            mb_adult = '{$mb_adult}'
+                        where mb_id = '" . sql_real_escape_string($mb['mb_id']) . "' ";
             sql_query($sql);
         }
     }
     $message = "선택한 회원 정보를 수정하였습니다.";
 
-} else if ($act_button == "선택삭제") {
-
-    for ($i=0; $i<count((array)$_POST['chk']); $i++)
-    {
+} elseif ($_POST['act_button'] == "선택삭제") {
+    for ($i = 0; $i < count($_POST['chk']); $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
 

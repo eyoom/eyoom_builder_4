@@ -10,6 +10,11 @@ if (!defined('_EYOOM_')) exit;
 if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);
 
 /**
+ * 익명 게시판
+ */
+$anonymous_table = $bbs->anonymous_table();
+
+/**
  * 목록보기 권한 체크
  */
 $bo_info = $bbs->list_possible_board($member['mb_level']);
@@ -21,7 +26,15 @@ if (!$page) $page = 1;
 if (!$page_rows) $page_rows = 20;
 $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
-$sql = "select * from {$g5['board_good_table']} where (1) and mb_id='{$member['mb_id']}' and find_in_set(bo_table,'".implode(',',$bo_possible)."') order by bg_datetime desc limit $from_record, $page_rows";
+$where = " (1) and mb_id='{$member['mb_id']}' and find_in_set(bo_table,'".implode(',',$bo_possible)."') ";
+
+/**
+ * 익명글 제외하기
+ */
+$where .= " and find_in_set(bo_table, '".implode(',', $anonymous_table)."')=0 ";
+
+
+$sql = "select * from {$g5['board_good_table']} where {$where} order by bg_datetime desc limit $from_record, $page_rows";
 $result = sql_query($sql, false);
 $k=0;
 $list = array();

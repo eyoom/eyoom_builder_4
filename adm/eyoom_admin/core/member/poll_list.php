@@ -16,7 +16,7 @@ $sql_search = " where (1) ";
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        default :
+        default:
             $sql_search .= " ({$sfl} like '%{$stx}%') ";
             break;
     }
@@ -24,7 +24,7 @@ if ($stx) {
 }
 
 if (!$sst) {
-    $sst  = "po_id";
+    $sst = "po_id";
     $sod = "desc";
 }
 $sql_order = " order by {$sst} {$sod} ";
@@ -38,7 +38,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select *
@@ -47,6 +49,7 @@ $sql = " select *
             {$sql_order}
             limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
+
 $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql2 = " select sum(po_cnt1+po_cnt2+po_cnt3+po_cnt4+po_cnt5+po_cnt6+po_cnt7+po_cnt8+po_cnt9) as sum_po_cnt from {$g5['poll_table']} where po_id = '{$row['po_id']}' ";

@@ -30,6 +30,16 @@ if (isset($eyoom['use_shop_itemtype']) && $eyoom['use_shop_itemtype'] == 'y') {
 include_once(EYOOM_PATH . '/head.php');
 
 /**
+ * 팝업창
+ */
+if ($eyoom['use_gnu_newwin'] == 'n') {
+    @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
+}
+else {
+    @include_once(G5_BBS_PATH.'/newwin.inc.php');
+}
+
+/**
  * 메인 디자인 출력
  */
 $eb->print_mainpage();

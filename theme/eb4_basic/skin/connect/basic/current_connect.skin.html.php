@@ -38,7 +38,7 @@ if (!defined('_EYOOM_')) exit;
                         <td class="td-num text-start"><?php echo $list[$i]['num']; ?></td>
                         <td class="text-center">
                             <?php if ($list[$i]['mb_id']) { ?>
-                            <span class="connect-nameview"><?php echo eb_nameview($eyoom['nameview_skin'], $list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?></span>
+                            <span class="connect-nameview"><?php echo eb_nameview($eyoom['nameview_skin'], $list[$i]['mb_nick'], $list[$i]['mb_id'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?></span>
                             <?php } else { ?>
                             <span><?php echo $list[$i]['name']; ?></span>
                             <?php } ?>

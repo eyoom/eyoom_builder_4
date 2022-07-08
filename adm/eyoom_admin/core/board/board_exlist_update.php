@@ -59,7 +59,7 @@ if ($_POST['act_button'] == "선택수정") {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
         $del_ex_no[$i] = isset($_POST['ex_no'][$k]) ? (int) $_POST['ex_no'][$k] : 0;
-        $ex_fname = isset($_POST['ex_fname'][$k]) ? (int) $_POST['ex_fname'][$k] : '';
+        $ex_fname = isset($_POST['ex_fname'][$k]) ? clean_xss_tags($_POST['ex_fname'][$k]) : '';
         $sql = " alter table `{$write_table}` drop `{$ex_fname}`";
         sql_query($sql, true);
     }

@@ -48,13 +48,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <th>
                     <div class="item-supply-th">
                         <label for="spl_chk_<?php echo $key; ?>" class="checkbox">
-                            <input type="checkbox" name="spl_chk[]" id="spl_chk_<?php echo $key; ?>" value="1"><i></i> <?php echo $supply['spl_subject'].' &gt; '.$supply['spl']; ?>
+                            <input type="checkbox" name="spl_chk[]" id="spl_chk_<?php echo $key; ?>" value="1"><i></i> <?php echo get_text($supply['spl_subject'].' &gt; '.$supply['spl']); ?>
                         </label>
-                        <input type="hidden" name="spl_id[]" value="<?php echo $supply['spl_id']; ?>">
+                        <input type="hidden" name="spl_id[]" value="<?php echo get_text($supply['spl_id']); ?>">
                     </div>
                 </th>
                 <td>
-                    <div class="spl-subject-cell"><?php echo $supply['spl_subject']; ?></div>
+                    <div class="spl-subject-cell"><?php echo get_text($supply['spl_subject']); ?></div>
                 </td>
                 <td>
                     <div class="spl-cell"><?php echo $supply['spl']; ?></div>

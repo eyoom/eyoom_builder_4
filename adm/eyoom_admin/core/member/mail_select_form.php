@@ -8,8 +8,9 @@ $sub_menu = "200300";
 
 $action_url1 = G5_ADMIN_URL . '/?dir=member&amp;pid=mail_select_list';
 
-if (!$config['cf_email_use'])
+if (!$config['cf_email_use']) {
     alert('환경설정에서 \'메일발송 사용\'에 체크하셔야 메일을 발송할 수 있습니다.');
+}
 
 auth_check_menu($auth, $sub_menu, 'r');
 
@@ -17,8 +18,9 @@ $ma_id = isset($_GET['ma_id']) ? (int) $_GET['ma_id'] : 0;
 
 $sql = " select * from {$g5['mail_table']} where ma_id = '$ma_id' ";
 $ma = sql_fetch($sql);
-if (!$ma['ma_id'])
+if (!$ma['ma_id']) {
     alert('보내실 내용을 선택하여 주십시오.');
+}
 
 // 전체회원수
 $sql = " select COUNT(*) as cnt from {$g5['member_table']} ";
@@ -31,17 +33,27 @@ $row = sql_fetch($sql);
 $finish_cnt = $row['cnt'];
 
 $last_option = explode('||', $ma['ma_last_option']);
-for ($i=0; $i<count($last_option); $i++) {
+for ($i = 0; $i < count($last_option); $i++) {
     $option = explode('=', $last_option[$i]);
     // 동적변수
     $var = isset($option[0]) ? $option[0] : '';
-    if( isset($option[1]) ) $$var = $option[1];
+    if (isset($option[1])) {
+        $$var = $option[1];
+    }
 }
 
-if (!isset($mb_id1)) $mb_id1 = 1;
-if (!isset($mb_level_from)) $mb_level_from = 1;
-if (!isset($mb_level_to)) $mb_level_to = 10;
-if (!isset($mb_mailling)) $mb_mailling = 1;
+if (!isset($mb_id1)) {
+    $mb_id1 = 1;
+}
+if (!isset($mb_level_from)) {
+    $mb_level_from = 1;
+}
+if (!isset($mb_level_to)) {
+    $mb_level_to = 10;
+}
+if (!isset($mb_mailling)) {
+    $mb_mailling = 1;
+}
 
 $mb_id1_from = isset($mb_id1_from) ? clean_xss_tags($mb_id1_from, 1, 1, 30) : '';
 $mb_id1_to = isset($mb_id1_to) ? clean_xss_tags($mb_id1_to, 1, 1, 30) : '';

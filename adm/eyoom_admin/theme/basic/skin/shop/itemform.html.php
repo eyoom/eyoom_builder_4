@@ -410,10 +410,29 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                                 <label for="it_brand" class="label">브랜드</label>
                             </th>
                             <td>
-                                <label class="input form-width-250px">
-                                    <input type="text" name="it_brand" value="<?php echo get_text($it['it_brand']); ?>" id="it_brand">
-                                </label>
-                                <div class="note"><strong>Note:</strong> 입력하지 않으면 상품상세페이지에 출력하지 않습니다.</div>
+                                <div class="inline-group inline-mix">
+                                    <label class="input form-width-250px display-inline-block margin-right-5">
+                                        <input type="text" name="it_brand" value="<?php echo get_text($it['it_brand']); ?>" id="it_brand">
+                                    </label>
+                                    <input type="hidden" name="it_brand_prev" value="<?php echo get_text($it['it_brand']); ?>">
+                                    <?php if ($br_cnt > 0) { ?>
+                                    <label for="it_brcode" class="select form-width-250px display-inline-block">
+                                        <select name="it_brcode" id="it_brcode" onchange="set_brand(this);">
+                                            <option value="">:: 브랜드 선택 ::</option>
+                                            <?php foreach ($brlist as $k => $li) { ?>
+                                            <option value="<?php echo $li['br_code']; ?>" <?php echo $li['br_code'] == $it['it_brcode'] ? 'selected': ''; ?>><?php echo $li['br_name']; ?></option>
+                                            <?php } ?>
+                                        </select><i></i>
+                                    </label>
+                                    <script>
+                                    function set_brand(sel) {
+                                        var brand = sel.options[sel.selectedIndex].text;
+                                        $("#it_brand").val(brand);
+                                    }
+                                    </script>
+                                    <?php } ?>
+                                </div>
+                                <div class="note"><strong>Note:</strong> 선택할 브랜드가 없다면 브랜드명을 입력해 주세요. 입력하지 않으면 상품상세페이지에 출력하지 않습니다.</div>
                             </td>
                             <td class="table-chk-td">
                                 <div class="inline-group">

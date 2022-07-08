@@ -8,18 +8,17 @@ $sub_menu = "300100";
 
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_form_update&amp;smode=1';
 
-include_once(G5_EDITOR_LIB);
+require_once G5_EDITOR_LIB;
 
 auth_check_menu($auth, $sub_menu, 'w');
 
 $sql = " select count(*) as cnt from {$g5['group_table']} ";
 $row = sql_fetch($sql);
-if (!$row['cnt'])
-    alert('게시판그룹이 한개 이상 생성되어야 합니다.', G5_ADMIN_URL . '/?dir=board&pid=boardgroup_form');
+if (!$row['cnt']) {
+    alert('게시판그룹이 한개 이상 생성되어야 합니다.', './boardgroup_form.php');
+}
 
 $html_title = '게시판';
-$reaonly = '';
-$required_valid = '';
 
 if (!isset($board['bo_device'])) {
     // 게시판 사용 필드 추가
@@ -59,15 +58,17 @@ if (!isset($board['bo_use_sns'])) {
 
     $result = sql_query(" select bo_table from `{$g5['board_table']}` ");
     for ($i=0; $row=sql_fetch_array($result); $i++) {
-        sql_query(" ALTER TABLE `{$g5['write_prefix']}{$row['bo_table']}`
+        sql_query(
+            " ALTER TABLE `{$g5['write_prefix']}{$row['bo_table']}`
                     ADD `wr_facebook_user` VARCHAR(255) NOT NULL DEFAULT '' AFTER `wr_ip`,
-                    ADD `wr_twitter_user` VARCHAR(255) NOT NULL DEFAULT '' AFTER `wr_facebook_user` ", false);
+                    ADD `wr_twitter_user` VARCHAR(255) NOT NULL DEFAULT '' AFTER `wr_facebook_user` ", false
+        );
     }
 }
 
 $sql = " SHOW COLUMNS FROM `{$g5['board_table']}` LIKE 'bo_use_cert' ";
 $row = sql_fetch($sql);
-if(strpos($row['Type'], 'hp-') === false) {
+if (strpos($row['Type'], 'hp-') === false) {
     sql_query(" ALTER TABLE `{$g5['board_table']}` CHANGE `bo_use_cert` `bo_use_cert` ENUM('','cert','adult','hp-cert','hp-adult') NOT NULL DEFAULT '' ", false);
 }
 
@@ -76,36 +77,10 @@ if (!isset($board['bo_use_list_file'])) {
 
     $result = sql_query(" select bo_table from `{$g5['board_table']}` ");
     for ($i=0; $row=sql_fetch_array($result); $i++) {
-        sql_query(" ALTER TABLE `{$g5['write_prefix']}{$row['bo_table']}`
-                    ADD `wr_file` TINYINT NOT NULL DEFAULT '0' AFTER `wr_datetime` ", false);
-    }
-}
-
-if (!isset($board['bo_mobile_subject'])) {
-    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_mobile_subject` VARCHAR(255) NOT NULL DEFAULT '' AFTER `bo_subject` ", false);
-}
-
-if (!isset($board['bo_use_captcha'])) {
-    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_use_captcha` TINYINT NOT NULL DEFAULT '0' AFTER `bo_use_sns` ", false);
-}
-
-if (!isset($board['bo_select_editor'])) {
-    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_select_editor` VARCHAR(50) NOT NULL DEFAULT '' AFTER `bo_use_dhtml_editor` ", false);
-}
-
-$sql = " SHOW COLUMNS FROM `{$g5['board_table']}` LIKE 'bo_use_cert' ";
-$row = sql_fetch($sql);
-if(strpos($row['Type'], 'hp-') === false) {
-    sql_query(" ALTER TABLE `{$g5['board_table']}` CHANGE `bo_use_cert` `bo_use_cert` ENUM('','cert','adult','hp-cert','hp-adult') NOT NULL DEFAULT '' ", false);
-}
-
-if (!isset($board['bo_use_list_file'])) {
-    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_use_list_file` TINYINT NOT NULL DEFAULT '0' AFTER `bo_use_list_view` ", false);
-
-    $result = sql_query(" select bo_table from `{$g5['board_table']}` ");
-    for ($i=0; $row=sql_fetch_array($result); $i++) {
-        sql_query(" ALTER TABLE `{$g5['write_prefix']}{$row['bo_table']}`
-                    ADD `wr_file` TINYINT NOT NULL DEFAULT '0' AFTER `wr_datetime` ", false);
+        sql_query(
+            " ALTER TABLE `{$g5['write_prefix']}{$row['bo_table']}`
+                    ADD `wr_file` TINYINT NOT NULL DEFAULT '0' AFTER `wr_datetime` ", false
+        );
     }
 }
 
@@ -122,50 +97,50 @@ if (!isset($board['bo_select_editor'])) {
 }
 
 $board_default = array(
-    'bo_mobile_subject'=>'',
-    'bo_device'=>'',
-    'bo_use_category'=>0,
-    'bo_category_list'=>'',
-    'bo_admin'=>'',
-    'bo_list_level'=>0,
-    'bo_read_level'=>0,
-    'bo_write_level'=>0,
-    'bo_reply_level'=>0,
-    'bo_comment_level'=>0,
-    'bo_link_level'=>0,
-    'bo_upload_level'=>0,
-    'bo_download_level'=>0,
-    'bo_html_level'=>0,
-    'bo_use_sideview'=>0,
-    'bo_select_editor'=>'',
-    'bo_use_rss_view'=>0,
-    'bo_use_good'=>0,
-    'bo_use_nogood'=>0,
-    'bo_use_name'=>0,
-    'bo_use_signature'=>0,
-    'bo_use_ip_view'=>0,
-    'bo_use_list_content'=>0,
-    'bo_use_list_file'=>0,
-    'bo_use_list_view'=>0,
-    'bo_use_email'=>0,
-    'bo_use_file_content'=>0,
-    'bo_use_cert'=>'',
-    'bo_write_min'=>0,
-    'bo_write_max'=>0,
-    'bo_comment_min'=>0,
-    'bo_comment_max'=>0,
-    'bo_use_sns'=>0,
-    'bo_order'=>0,
-    'bo_use_captcha'=>0,
-    'bo_content_head'=>'',
-    'bo_content_tail'=>'',
-    'bo_mobile_content_head'=>'',
-    'bo_mobile_content_tail'=>'',
-    'bo_insert_content'=>'',
-    'bo_sort_field'=>'',
+'bo_mobile_subject'=>'',
+'bo_device'=>'',
+'bo_use_category'=>0,
+'bo_category_list'=>'',
+'bo_admin'=>'',
+'bo_list_level'=>0,
+'bo_read_level'=>0,
+'bo_write_level'=>0,
+'bo_reply_level'=>0,
+'bo_comment_level'=>0,
+'bo_link_level'=>0,
+'bo_upload_level'=>0,
+'bo_download_level'=>0,
+'bo_html_level'=>0,
+'bo_use_sideview'=>0,
+'bo_select_editor'=>'',
+'bo_use_rss_view'=>0,
+'bo_use_good'=>0,
+'bo_use_nogood'=>0,
+'bo_use_name'=>0,
+'bo_use_signature'=>0,
+'bo_use_ip_view'=>0,
+'bo_use_list_content'=>0,
+'bo_use_list_file'=>0,
+'bo_use_list_view'=>0,
+'bo_use_email'=>0,
+'bo_use_file_content'=>0,
+'bo_use_cert'=>'',
+'bo_write_min'=>0,
+'bo_write_max'=>0,
+'bo_comment_min'=>0,
+'bo_comment_max'=>0,
+'bo_use_sns'=>0,
+'bo_order'=>0,
+'bo_use_captcha'=>0,
+'bo_content_head'=>'',
+'bo_content_tail'=>'',
+'bo_mobile_content_head'=>'',
+'bo_mobile_content_tail'=>'',
+'bo_insert_content'=>'',
+'bo_sort_field'=>'',
 );
 
-for($i=0;$i<=10;$i++){
+for ($i = 0; $i <= 10; $i++) {
     $board_default['bo_'.$i.'_subj'] = '';
     $board_default['bo_'.$i] = '';
 }
@@ -177,8 +152,8 @@ run_event('adm_board_form_before', $board, $w);
 $required = "";
 $readonly = "";
 $sound_only = "";
+$required_valid = "";
 if ($w == '') {
-
     $html_title .= ' 생성';
 
     $required = 'required';
@@ -215,21 +190,20 @@ if ($w == '') {
     $board['bo_use_secret'] = 0;
     $board['bo_include_head'] = '_head.php';
     $board['bo_include_tail'] = '_tail.php';
-
-} else if ($w == 'u') {
-
+} elseif ($w == 'u') {
     $html_title .= ' 수정';
 
-    if (!$board['bo_table'])
+    if (!$board['bo_table']) {
         alert('존재하지 않은 게시판 입니다.');
+    }
 
     if ($is_admin == 'group') {
-        if ($member['mb_id'] != $group['gr_admin'])
+        if ($member['mb_id'] != $group['gr_admin']) {
             alert('그룹이 틀립니다.');
+        }
     }
 
     $readonly = 'readonly';
-
 }
 
 if ($is_admin != 'super') {

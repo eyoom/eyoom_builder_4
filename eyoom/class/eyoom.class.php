@@ -1123,6 +1123,9 @@ class eyoom extends qfile
                     case 'itemsearch':
                         $url = G5_SHOP_URL.'/search.php?'.$qstr;
                         break;
+                    case 'brand':
+                        $url = G5_SHOP_URL.'/brand.php?'.$qstr;
+                        break;
                     default:
                         $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr;
                         break;
@@ -1172,6 +1175,9 @@ class eyoom extends qfile
                         break;
                     case 'itemsearch':
                         $url = G5_SHOP_URL.'/search.php?'.$qstr.'&amp;page=';
+                        break;
+                    case 'brand':
+                        $url = G5_SHOP_URL.'/brand.php?'.$qstr.'&amp;page=';
                         break;
                     default:
                         $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr.'&amp;page=';

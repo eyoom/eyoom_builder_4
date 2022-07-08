@@ -121,11 +121,10 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                                     <input type="text" name="nw_end_time" id="nw_end_time" value="<?php echo $nw['nw_end_time']; ?>" required maxlength="19">
                                 </label>
                                 <label class="checkbox" style="width:200px;">
-                                    <input type="checkbox" name="nw_end_chk" value="<?php echo date('Y-m-d 00:00:00', G5_SERVER_TIME+(60*60*24*7)); ?>" id="nw_end_chk" onclick="if (this.checked == true) this.form.nw_end_time.value=this.form.nw_end_chk.value; else this.form.nw_end_time.value = this.form.nw_end_time.defaultValue;"><i></i> 종료일시를 오늘로부터 7일 후로
+                                    <input type="checkbox" name="nw_end_chk" value="<?php echo date('Y-m-d 23:59:59', G5_SERVER_TIME+(60*60*24*7)); ?>" id="nw_end_chk" onclick="if (this.checked == true) this.form.nw_end_time.value=this.form.nw_end_chk.value; else this.form.nw_end_time.value = this.form.nw_end_time.defaultValue;"><i></i> 종료일시를 오늘로부터 7일 후로
                                 </label>
                             </td>
                         </tr>
-                        <?php if(0) { //팝업 사이즈, 팝업 위치 숨김 처리 시작 (해당 기능 불필요) ?>
                         <tr>
                             <th class="table-form-th">
                                 <label class="label">팝업 사이즈</label>
@@ -170,7 +169,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                                 </label>
                             </td>
                         </tr>
-                        <?php } //팝업 사이즈, 팝업 위치 숨김 처리 끝 ?>
+
                         <tr>
                             <th class="table-form-th">
                                 <label for="nw_content" class="label">팝업 내용</label>

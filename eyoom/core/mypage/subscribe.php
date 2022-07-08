@@ -10,6 +10,11 @@ if (!defined('_EYOOM_')) exit;
 if (!$is_member) alert('회원만 접근하실 수 있습니다.',G5_URL);
 
 /**
+ * 익명 게시판
+ */
+$anonymous_table = $bbs->anonymous_table();
+
+/**
  * 목록보기 권한 체크
  */
 $bo_info = $bbs->list_possible_board($member['mb_level']);
@@ -28,7 +33,6 @@ if (is_array($my_subscribe)) {
 
 $where = '1';
 $where .= " and wr_id = wr_parent ";
-$anonymouse_key = 'eb_1';
 
 $page = (int)$_GET['page'];
 if (!$page) $page = 1;
@@ -56,6 +60,14 @@ if (is_array($sb_member)) {
         $qstr .= "&amp;mbid={$mbid}";
     } else {
         $where .= " and find_in_set(mb_id,'".implode(',',$sb_member)."') ";
+    }
+
+    /**
+     * 익명글 제외하기
+     */
+    if ($member['mb_id'] != $mbid) {
+        $where .= " and wr_anonymous='' ";
+        $where .= " and find_in_set(bo_table, '".implode(',', $anonymous_table)."')=0 ";
     }
 
     $sql = "select * from {$g5['board_new_table']} where $where order by bn_datetime desc limit $from_record, $page_rows";

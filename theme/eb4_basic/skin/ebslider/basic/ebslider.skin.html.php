@@ -76,9 +76,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
 </style>
 
 <div class="ebs-basic-wrap-<?php echo $es_code; ?>">
+    <?php if (is_array($slider)) { ?>
     <div class="ebs-basic-in">
         <div class="ebs-basic">
-        <?php if (is_array($slider)) { ?>
             <?php foreach ($slider as $k => $item) { ?>
             <div class="ebs-basic-item">
                 <?php if ($item['href_1']) { ?>
@@ -105,7 +105,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                 <?php if ($item['href_1']) { ?>
                 </a>
                 <?php } ?>
-
                 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
                 <div class="adm-edit-btn btn-edit-mode" style="top:40px">
                     <div class="btn-group">
@@ -118,10 +117,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                 <?php } ?>
             </div>
             <?php } ?>
-        <?php } ?>
         </div>
     </div>
-
+    <?php } ?>
     <?php if ($es_default) { ?>
     <div class="ebs-basic-in">
         <div class="ebs-basic">

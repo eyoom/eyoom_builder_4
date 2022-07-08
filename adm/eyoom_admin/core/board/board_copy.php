@@ -10,6 +10,11 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_copy_update&amp;smode=1';
 
+$bo_table = $_REQUEST['bo_table'];
+if (empty($bo_table)) {
+    alert_close("정상적인 방법으로 이용해주세요.");
+}
+
 /**
  * 버튼
  */

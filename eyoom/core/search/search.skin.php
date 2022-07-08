@@ -20,6 +20,11 @@ $sel_group = $eb->get_group();
 $board['bo_use_sideview'] = 'y';
 
 /**
+ * 익명 게시판
+ */
+$anonymous_table = $bbs->anonymous_table();
+
+/**
  * 페이징
  */
 $paging = $eb->set_paging('search', '', $search_query.'&amp;gr_id='.$gr_id.'&amp;srows='.$srows.'&amp;onetable='.$onetable);

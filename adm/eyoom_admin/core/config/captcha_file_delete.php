@@ -6,8 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = '100910';
 
-if ($is_admin != 'super')
+if ($is_admin != 'super') {
     alert('최고관리자만 접근 가능합니다.', G5_URL);
+}
 
 flush();
 
@@ -24,7 +25,9 @@ if (is_array($files)) {
     foreach ($files as $gcaptcha_file) {
         $modification_time = filemtime($gcaptcha_file); // 파일접근시간
 
-        if ($modification_time > $before_time) continue;
+        if ($modification_time > $before_time) {
+            continue;
+        }
 
         $cnt++;
         unlink($gcaptcha_file);

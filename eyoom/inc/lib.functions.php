@@ -37,6 +37,7 @@ unset($lib_target);
 @include_once(EYOOM_LIB_PATH . '/ebgoods.lib.php');
 @include_once(EYOOM_LIB_PATH . '/uri.lib.php');
 @include_once(EYOOM_LIB_PATH . '/visit.lib.php');
+@include_once(EYOOM_LIB_PATH . '/brand.lib.php');
 
 /**
  * 쇼핑몰 이윰 라이브러리 함수

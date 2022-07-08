@@ -15,6 +15,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/style
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
 ?>
 
+<script>
+var g5_admin_csrf_token_key = "<?php echo (function_exists('admin_csrf_token_key')) ? admin_csrf_token_key() : ''; ?>";
+</script>
+
 <?php if (!$wmode) { ?>
 <div class="wrapper">
     <div class="eb-logo waves-effect waves-light">

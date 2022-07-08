@@ -140,7 +140,6 @@ if (!defined('_EYOOM_')) exit;
 	</fieldset>
 </div>
 <?php /*----- 전체 검색 입력창 끝 -----*/ ?>
-<?php } // !$wmode ?>
 
 <?php /* 사이드바 회원 버튼 */ ?>
 <button type="button" class="sidebar-user-trigger sidebar-user-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserRight" aria-controls="offcanvasUserRight"><i class="fas fa-user-alt"></i></button>
@@ -152,6 +151,7 @@ if (!defined('_EYOOM_')) exit;
 		<span class="progress-count"></span>
 	</svg>
 </div>
+<?php } // !$wmode ?>
 
 <?php
 include_once(EYOOM_THEME_PATH . '/misc.html.php');

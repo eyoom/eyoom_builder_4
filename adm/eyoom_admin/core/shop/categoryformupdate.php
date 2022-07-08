@@ -101,7 +101,7 @@ switch($_POST['mode']) {
             $sql = " select MAX(SUBSTRING(ca_id,$len2,2)) as max_subid from {$g5['g5_shop_category_table']} where SUBSTRING(ca_id,1,$len) = '$ca_id' ";
             $row = sql_fetch($sql);
 
-            $subid = base_convert($row['max_subid'], 36, 10);
+            $subid = base_convert((string)$row['max_subid'], 36, 10);
             $subid += 36;
             if ($subid >= 36 * 36) {
                 //alert("분류를 더 이상 추가할 수 없습니다.");

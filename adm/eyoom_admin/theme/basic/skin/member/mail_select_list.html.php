@@ -20,7 +20,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 
     <form name="fmailselectlist" id="fmailselectlist" method="post" action="<?php echo $action_url1; ?>" class="eyoom-form">
     <input type="hidden" name="token" value="">
-    <input type="hidden" name="ma_id" value="<?php echo $ma_id; ?>">
+    <input type="hidden" name="ma_id" value="<?php echo get_text($ma_id); ?>">
 
     <div id="mail-list"></div>
 

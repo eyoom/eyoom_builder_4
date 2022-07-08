@@ -176,6 +176,19 @@ class bbs extends eyoom
     }
 
     /**
+     * 익명 게시판 배열로 가져오기
+     */
+    public function anonymous_table() {
+        $sql = "select bo_table from `{$this->g5['eyoom_board']}` where bo_use_anonymous='2' ";
+        $result = sql_query($sql);
+        $bo_table = array();
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $bo_table[$i] = $row['bo_table'];
+        }
+        return $bo_table;
+    }
+
+    /**
      * 이윰빌더 시즌4에서는 그누보드 여분필드를 사용하지 않고 eb_1 ~ eb_10을 활용
      */
     public function convert_to_eb_fields($bo_table) {
@@ -1463,10 +1476,8 @@ class bbs extends eyoom
         $where = '1';
         if (!$is_cmt) {
             $where .= " and wr_id = wr_parent ";
-            $anonymouse_key = 'eb_1';
         } else {
             $where .= " and wr_id <> wr_parent ";
-            $anonymouse_key = 'mb_level';
         }
 
         /**
@@ -1495,7 +1506,7 @@ class bbs extends eyoom
      * 최신 게시글 추출
      */
     public function board_latest_record($row, $bo_info, $datetime='bn_datetime') {
-        global $query_wmode;
+        global $query_wmode, $anonymous_table;
 
         /**
          * 게시판 썸네일 라이브러리
@@ -1593,6 +1604,25 @@ class bbs extends eyoom
                 }
             }
         }
+
+        /**
+         * 익명글 처리
+         */
+        $list['is_anonymous'] = false;
+        if ($row['wr_anonymous'] == '1' || in_array($row['bo_table'], $anonymous_table)) {
+            $list['is_anonymous'] = true;
+            $list['mb_photo'] = '';
+            $list['mb_id'] = 'anonymous';
+            $list['wr_name'] = '익명';
+            $list['email'] = '';
+            $list['homepage'] = '';
+            $list['gnu_level'] = '';
+            $list['gnu_icon'] = '';
+            $list['eyoom_icon'] = '';
+            $list['lv_gnu_name'] = '';
+            $list['lv_name'] = '';
+        }
+
         $list['datetime'] = $row[$datetime];
         $list['bo_info'] = $bo_info[$row['bo_table']];
 

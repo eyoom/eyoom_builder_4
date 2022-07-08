@@ -29,13 +29,13 @@ if ($is_admin != "super") {
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case "bo_table" :
+        case "bo_table":
             $sql_search .= " ($sfl like '$stx%') ";
             break;
-        case "a.gr_id" :
+        case "a.gr_id":
             $sql_search .= " ($sfl = '$stx') ";
             break;
-        default :
+        default:
             $sql_search .= " ($sfl like '%$stx%') ";
             break;
     }
@@ -242,7 +242,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";

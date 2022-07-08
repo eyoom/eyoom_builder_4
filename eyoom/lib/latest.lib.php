@@ -5,11 +5,16 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 익명 게시판
+ */
+$anonymous_table = $bbs->anonymous_table();
+
+/**
  * eb_latest function
  * 최신글 추출
  */
 function eb_latest ($el_code) {
-    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $latest, $qfile, $eb, $config;
+    global $g5, $theme, $shop_theme, $eyoom, $member, $is_admin, $latest, $qfile, $eb, $config, $anonymous_table;
 
     /**
      * 쇼핑몰 테마인지 체크
@@ -219,7 +224,7 @@ function eb_latest ($el_code) {
                      * 익명글 처리
                      */
                     $loop[$k]['is_anonymous'] = false;
-                    if ($row['wr_anonymous'] == '1' || $row['wr_bo_anonymous'] == '1') {
+                    if ($row['wr_anonymous'] == '1' || in_array($row['bo_table'], $anonymous_table)) {
                         $loop[$k]['is_anonymous'] = true;
                         $loop[$k]['mb_photo'] = '';
                         $loop[$k]['mb_id'] = 'anonymous';

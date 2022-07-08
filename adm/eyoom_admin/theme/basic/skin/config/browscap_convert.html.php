@@ -28,8 +28,10 @@ $(function() {
 
         $.ajax({
             method: "GET",
-            url: "./browscap_converter.php",
-            data: { rows: "<?php echo $rows; ?>" },
+            url: "<?php echo G5_ADMIN_URL; ?>/browscap_converter.php",
+            data: {
+                rows: "<?php echo strval($rows); ?>"
+            },
             async: true,
             cache: false,
             dataType: "html",

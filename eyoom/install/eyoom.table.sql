@@ -647,3 +647,16 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_latest_item` (
   `li_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`li_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `g5_eyoom_brand`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_brand` (
+  `br_no` int(10) unsigned NOT NULL auto_increment,
+  `br_code` varchar(255) NOT NULL,
+  `br_name` varchar(255) NOT NULL,
+  `br_basic` varchar(255) NULL,
+  `br_sort` smallint(3) NOT NULL DEFAULT '0',
+  `br_open` enum('y','n') NOT NULL DEFAULT 'y',
+  `br_img` varchar(255) NULL,
+  `br_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`br_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

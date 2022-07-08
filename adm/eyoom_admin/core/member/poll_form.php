@@ -12,21 +12,24 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 $po_id = isset($po_id) ? (int) $po_id : 0;
 $po = array(
-    'po_subject'=>'',
-    'po_etc'=>'',
-    'po_level'=>'',
-    'po_point'=>'',
+    'po_subject' => '',
+    'po_etc' => '',
+    'po_level' => '',
+    'po_point' => '',
 );
 
 $html_title = '투표';
-if ($w == '')
+if ($w == '') {
     $html_title .= ' 생성';
-else if ($w == 'u')  {
+} elseif ($w == 'u') {
     $html_title .= ' 수정';
     $sql = " select * from {$g5['poll_table']} where po_id = '{$po_id}' ";
     $po = sql_fetch($sql);
-} else
+} else {
     alert('w 값이 제대로 넘어오지 않았습니다.');
+}
+
+$g5['title'] = $html_title;
 
 /**
  * 버튼

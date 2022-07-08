@@ -9,12 +9,12 @@ $sub_menu = "300700";
 auth_check_menu($auth, $sub_menu, "r");
 
 $g5['title'] = 'FAQ 상세관리';
-if (isset($_REQUEST['fm_subject'])){
+if (isset($_REQUEST['fm_subject'])) {
     $fm_subject = clean_xss_tags($_REQUEST['fm_subject'], 1, 1, 255);
-    $g5['title'] .= ' : '.$fm_subject;
+    $g5['title'] .= ' : ' . $fm_subject;
 }
 
-$fm_id = (int) $fm_id;
+$fm_id = isset($fm_id) ? (int) $fm_id : 0;
 
 $sql = " select * from {$g5['faq_master_table']} where fm_id = '$fm_id' ";
 $fm = sql_fetch($sql);

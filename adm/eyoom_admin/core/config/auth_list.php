@@ -6,8 +6,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "100200";
 
-if ($is_admin != 'super')
+if ($is_admin != 'super') {
     alert('최고관리자만 접근 가능합니다.');
+}
 
 /**
  * form action
@@ -59,7 +60,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select *
@@ -100,7 +103,7 @@ if (strstr($sfl, 'mb_id')) {
     $mb_id = '';
 }
 
-include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
+require_once G5_CAPTCHA_PATH.'/captcha.lib.php';
 $captcha_html = captcha_html();
 $captcha_js   = chk_captcha_js();
 

@@ -52,7 +52,6 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
             </div>
         </div>
     </section>
-    <p class="f-s-13r text-gray m-b-20"><span class="text-crimson">*</span> '구매한 유료상품 관련' 문의는 해당 상품명을 꼭 알려주시기 바랍니다.</p>
     <?php } ?>
     <?php if ($is_email) { ?>
     <section>

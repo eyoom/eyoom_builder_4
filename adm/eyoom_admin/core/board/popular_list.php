@@ -10,7 +10,7 @@ auth_check_menu($auth, $sub_menu, 'r');
 
 // 체크된 자료 삭제
 if (isset($_POST['chk']) && is_array($_POST['chk'])) {
-    for ($i=0; $i<count($_POST['chk']); $i++) {
+    for ($i = 0; $i < count($_POST['chk']); $i++) {
         $pp_id = (int) $_POST['chk'][$i];
 
         sql_query(" delete from {$g5['popular_table']} where pp_id = '$pp_id' ", true);
@@ -23,13 +23,13 @@ $sql_search = " where (1) ";
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case "pp_word" :
+        case "pp_word":
             $sql_search .= " ({$sfl} like '{$stx}%') ";
             break;
-        case "pp_date" :
+        case "pp_date":
             $sql_search .= " ({$sfl} = '{$stx}') ";
             break;
-        default :
+        default:
             $sql_search .= " ({$sfl} like '%{$stx}%') ";
             break;
     }
@@ -51,7 +51,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1;
+} // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select *

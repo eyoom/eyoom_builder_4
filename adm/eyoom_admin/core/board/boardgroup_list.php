@@ -22,27 +22,29 @@ if (!isset($group['gr_device'])) {
 $sql_common = " from {$g5['group_table']} ";
 
 $sql_search = " where (1) ";
-if ($is_admin != 'super')
+if ($is_admin != 'super') {
     $sql_search .= " and (gr_admin = '{$member['mb_id']}') ";
+}
 
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case "gr_id" :
-        case "gr_admin" :
+        case "gr_id":
+        case "gr_admin":
             $sql_search .= " ({$sfl} = '{$stx}') ";
             break;
-        default :
+        default:
             $sql_search .= " ({$sfl} like '%{$stx}%') ";
             break;
     }
     $sql_search .= " ) ";
 }
 
-if ($sst)
+if ($sst) {
     $sql_order = " order by {$sst} {$sod} ";
-else
+} else {
     $sql_order = " order by gr_id asc ";
+}
 
 $sql = " select count(*) as cnt {$sql_common} {$sql_search} {$sql_order} ";
 $row = sql_fetch($sql);
@@ -50,7 +52,9 @@ $total_count = $row['cnt'];
 
 $rows = $config['cf_page_rows'];
 $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
-if ($page < 1) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+if ($page < 1) {
+    $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
+}
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
 $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";

@@ -46,11 +46,12 @@ $mb = array(
 );
 
 $sound_only = '';
+$required_mb_id = '';
 $required_mb_id_class = '';
 $required_mb_password = '';
+$html_title = '';
 
-if ($w == '')
-{
+if ($w == '') {
     $required_mb_id = 'required';
     $required_mb_id_class = 'required alnum_';
     $required_mb_password = 'required';
@@ -60,16 +61,15 @@ if ($w == '')
     $mb['mb_open'] = 1;
     $mb['mb_level'] = $config['cf_register_level'];
     $html_title = '추가';
-}
-else if ($w == 'u')
-{
+} elseif ($w == 'u') {
     $mb = get_member($mb_id);
-    $eb_member = sql_fetch("select * from {$g5['eyoom_member']} where mb_id = '{$mb_id}' ");
-    if (!$mb['mb_id'])
+    if (!$mb['mb_id']) {
         alert('존재하지 않는 회원자료입니다.');
+    }
 
-    if ($is_admin != 'super' && $mb['mb_level'] >= $member['mb_level'])
+    if ($is_admin != 'super' && $mb['mb_level'] >= $member['mb_level']) {
         alert('자신보다 권한이 높거나 같은 회원은 수정할 수 없습니다.');
+    }
 
     $required_mb_id = 'readonly';
     $html_title = '수정';
@@ -97,12 +97,12 @@ else if ($w == 'u')
     $mb['mb_8'] = get_text($mb['mb_8']);
     $mb['mb_9'] = get_text($mb['mb_9']);
     $mb['mb_10'] = get_text($mb['mb_10']);
-}
-else
+} else {
     alert('제대로 된 값이 넘어오지 않았습니다.');
+}
 
 // 본인확인방법
-switch($mb['mb_certify']) {
+switch ($mb['mb_certify']) {
     case 'simple':
         $mb_certify_case = '간편인증';
         $mb_certify_val = 'simple';
@@ -154,39 +154,40 @@ if (isset($mb['mb_certify'])) {
     sql_query(" ALTER TABLE `{$g5['member_table']}` ADD `mb_certify` TINYINT(4) NOT NULL DEFAULT '0' AFTER `mb_hp` ", false);
 }
 
-if(isset($mb['mb_adult'])) {
+if (isset($mb['mb_adult'])) {
     sql_query(" ALTER TABLE `{$g5['member_table']}` CHANGE `mb_adult` `mb_adult` TINYINT(4) NOT NULL DEFAULT '0' ", false);
 } else {
     sql_query(" ALTER TABLE `{$g5['member_table']}` ADD `mb_adult` TINYINT NOT NULL DEFAULT '0' AFTER `mb_certify` ", false);
 }
 
 // 지번주소 필드추가
-if(!isset($mb['mb_addr_jibeon'])) {
+if (!isset($mb['mb_addr_jibeon'])) {
     sql_query(" ALTER TABLE {$g5['member_table']} ADD `mb_addr_jibeon` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
 }
 
 // 건물명필드추가
-if(!isset($mb['mb_addr3'])) {
+if (!isset($mb['mb_addr3'])) {
     sql_query(" ALTER TABLE {$g5['member_table']} ADD `mb_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
 }
 
 // 중복가입 확인필드 추가
-if(!isset($mb['mb_dupinfo'])) {
+if (!isset($mb['mb_dupinfo'])) {
     sql_query(" ALTER TABLE {$g5['member_table']} ADD `mb_dupinfo` varchar(255) NOT NULL DEFAULT '' AFTER `mb_adult` ", false);
 }
 
 // 이메일인증 체크 필드추가
-if(!isset($mb['mb_email_certify2'])) {
+if (!isset($mb['mb_email_certify2'])) {
     sql_query(" ALTER TABLE {$g5['member_table']} ADD `mb_email_certify2` varchar(255) NOT NULL DEFAULT '' AFTER `mb_email_certify` ", false);
 }
 
 // 본인인증 내역 테이블 정보가 dbconfig에 없으면 소셜 테이블 정의
-if( !isset($g5['member_cert_history']) ){
-    $g5['member_cert_history_table'] = G5_TABLE_PREFIX.'member_cert_history';
+if (!isset($g5['member_cert_history'])) {
+    $g5['member_cert_history_table'] = G5_TABLE_PREFIX . 'member_cert_history';
 }
 // 멤버 본인인증 정보 변경 내역 테이블 없을 경우 생성
-if(isset($g5['member_cert_history_table']) && !sql_query(" DESC {$g5['member_cert_history_table']} ", false)) {
-    sql_query(" CREATE TABLE IF NOT EXISTS `{$g5['member_cert_history_table']}` (
+if (isset($g5['member_cert_history_table']) && !sql_query(" DESC {$g5['member_cert_history_table']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['member_cert_history_table']}` (
                     `ch_id` int(11) NOT NULL auto_increment,
                     `mb_id` varchar(20) NOT NULL DEFAULT '',
                     `ch_name` varchar(255) NOT NULL DEFAULT '',
@@ -196,7 +197,9 @@ if(isset($g5['member_cert_history_table']) && !sql_query(" DESC {$g5['member_cer
                     `ch_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
                     PRIMARY KEY (`ch_id`),
                     KEY `mb_id` (`mb_id`)
-                ) ", true);
+                ) ",
+        true
+    );
 }
 
 $mb_cert_history = '';
@@ -205,7 +208,11 @@ if (isset($mb_id) && $mb_id) {
     $mb_cert_history = sql_query($sql);
 }
 
-if ($mb['mb_intercept_date']) $g5['title'] = "차단된 ";
+if ($mb['mb_intercept_date']) {
+    $g5['title'] = "차단된 ";
+} else {
+    $g5['title'] .= "";
+}
 
 // add_javascript('js 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js

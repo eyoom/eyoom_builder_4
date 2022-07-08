@@ -19,7 +19,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 <?php if (G5_IS_MOBILE) { ?>
 <style>
 .memo-list {padding:15px}
-.memo-list .win-title {pposition:relative;margin:0 0 20px;font-size:1.0625rem;height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
+.memo-list .win-title {position:relative;margin:0 0 20px;font-size:1.0625rem;height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
 .memo-list .btn-close {position:absolute;top:19px;right:10px}
 </style>
 <?php } ?>

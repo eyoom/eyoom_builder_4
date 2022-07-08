@@ -18,19 +18,16 @@ if (G5_IS_MOBILE && $eyoom['use_shop_mobile'] == 'y') {
 }
 
 /**
- * 팝업창
- */
-if ($eyoom['use_gnu_newwin'] == 'n') {
-    @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
-}
-else {
-    @include_once(G5_BBS_PATH.'/newwin.inc.php');
-}
-
-/**
  * 헤더 디자인 출력
  */
 include_once(EYOOM_SHOP_PATH . '/shop.head.php');
+
+/**
+ * 팝업창
+ */
+if ($eyoom['use_gnu_newwin'] == 'y') {
+    @include_once(G5_BBS_PATH.'/newwin.inc.php');
+}
 
 /**
  * 쇼핑몰 메인

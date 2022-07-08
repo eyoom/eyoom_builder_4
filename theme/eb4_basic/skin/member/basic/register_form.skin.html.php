@@ -36,13 +36,16 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
 .register-form .security_3 .security-heading .float-end:after {content:"강함"}
 .register-form .security_4 .security-heading .float-end:after {content:"아주강함"}
 .register-form .btn-e-cert {padding:7px 12px}
+.register-form .frm_label {font-weight:700}
+.register-form .sns-wrap-reg {margin-bottom:20px}
+.register-form .sns-wrap {text-align:left}
 </style>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/js/zxcvbn.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/js/jquery.password.strength.js"></script>
 
 <div class="register-form">
-    <form id="fregisterform" name="fregisterform" action="<?php echo $register_action_url; ?>" onsubmit="return fregisterform_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
+    <form name="fregisterform" action="<?php echo $register_action_url; ?>" onsubmit="return fregisterform_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="url" value="<?php echo $urlencode; ?>">
     <input type="hidden" name="agree" value="<?php echo $agree; ?>">
@@ -118,16 +121,29 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
             <?php if ($config['cf_cert_use']) { ?>
             <div class="row m-b-20">
                 <div class="col-lg-12">
-                    <?php if ($config['cf_cert_simple']) { ?>
-                    <button type="button" id="win_simple_cert" class="btn-e btn-e-dark btn-e-cert win_sa_cert" data-type="">간편인증</button>
-                    <?php } ?>
-                    <?php if ($config['cf_cert_hp']) { ?>
-                    <button type="button" id="win_hp_cert" class="btn-e btn-e-dark btn-e-cert">휴대폰 본인확인</button>
-                    <?php } ?>
-                    <?php if ($config['cf_cert_ipin']) { ?>
-                    <button type="button" id="win_ipin_cert" class="btn-e btn-e-dark btn-e-cert">아이핀 본인확인</button>
-                    <?php } ?>
-                    <noscript>본인확인을 위해서는 자바스크립트 사용이 가능해야합니다.</noscript>
+                    <?php 
+                    $desc_name = '';
+                    $desc_phone = '';
+                    if ($config['cf_cert_use']) {
+                        $desc_name = ' <span class="text-crimson f-w-400">- 본인확인 시 자동입력</span>';
+                        $desc_phone = ' <span class="text-crimson f-w-400">- 본인확인 시 자동입력</span>';
+                    
+                        if (!$config['cf_cert_simple'] && !$config['cf_cert_hp'] && $config['cf_cert_ipin']) {
+                            $desc_phone = '';
+                        }
+                    
+                        if ($config['cf_cert_simple']) {
+                            echo '<button type="button" id="win_sa_kakao_cert" class="btn-e btn-e-dark btn-e-cert win_sa_cert" data-type="">간편인증</button>'.PHP_EOL;
+                        }
+                        if ($config['cf_cert_hp'])
+                            echo '<button type="button" id="win_hp_cert" class="btn-e btn-e-dark btn-e-cert">휴대폰 본인확인</button>'.PHP_EOL;
+                        if ($config['cf_cert_ipin'])
+                            echo '<button type="button" id="win_ipin_cert" class="btn-e btn-e-dark btn-e-cert">아이핀 본인확인</button>'.PHP_EOL;
+                    
+                        echo '<span class="cert_req text-crimson m-l-5">(필수)</span>';
+                        echo '<noscript>본인확인을 위해서는 자바스크립트 사용이 가능해야합니다.</noscript>'.PHP_EOL;
+                    }
+                    ?>
                     <?php
                     if ($config['cf_cert_use'] && $member['mb_certify']) {
                         switch  ($member['mb_certify']) {
@@ -140,44 +156,28 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                             case "hp": 
                                 $mb_cert = "휴대폰";
                                 break;
-                        }
-                    }
+                        }    
                     ?>
                     <div id="msg_certify" class="text-crimson m-t-10">
                         <strong><?php echo $mb_cert; ?> 본인확인</strong><?php if ($member['mb_adult']) { ?> 및 <strong>성인인증</strong><?php } ?> 완료
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <?php } ?>
             <div class="row">
-                <div class="col-lg-12 m-b-0">
-                    <label for="reg_mb_name" class="label">이름<strong class="sound_only">필수</strong></label>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-lg-6">
+                <section class="col-lg-6">
+                    <label for="reg_mb_name" class="label">이름<strong class="sound_only">필수</strong><?php echo $desc_name ?></label>
                     <label class="input required-mark">
                         <i class="icon-prepend fas fa-male"></i>
                         <input type="text" name="mb_name" id="reg_mb_name"  value="<?php echo $member['mb_name']; ?>" <?php if ($w!='') { ?>required readonly<?php } ?> size="10">
                     </label>
-                </div>
-                <div class="clearfix"></div>
-                <?php if ($config['cf_cert_use']) { ?>
-                <div class="col-lg-12">
-                    <div class="alert alert-warning m-b-15 m-t-15"><strong>Note:</strong> 아이핀 본인확인 후에는 이름이 자동 입력되고 휴대폰 본인확인 후에는 이름과 휴대폰번호가 자동 입력되어 수동으로 입력할수 없게 됩니다.</div>
-                </div>
-                <?php } ?>
-                <?php if ($config['cf_cert_use'] && $member['mb_certify']) { ?>
-                <div class="col-lg-12">
-                    <div id="msg_certify">
-                        <strong><?php if ($member['mb_certify'] == 'ipin') { ?>아이핀<?php } else { ?>휴대폰<?php } ?> 본인확인</strong><?php if ($member['mb_adult']) { ?> 및 <strong>성인인증</strong><?php } ?> 완료
-                    </div>
-                </div>
-                <?php } ?>
+                </section>
             </div>
             <?php if ($req_nick) { ?>
             <div class="row">
-                <div class="col-lg-6">
+                <section class="col-lg-6">
                     <label for="reg_mb_nick" class="label">
                         닉네임<strong class="sound_only">필수</strong>
                     </label>
@@ -194,17 +194,17 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                     <?php if ($w=='') { ?>
                     <div class="note"><strong>Note:</strong> 닉네임 입력 후 <span class="text-crimson">중복체크 필수</span></div>
                     <?php } ?>
-                </div>
-                <div class="clear"></div>
-                <div class="col-lg-12">
+                </section>
+                <div class="clearfix"></div>
+                <section class="col-lg-12">
                     <div class="alert alert-warning m-t-15">
                         <strong>Note:</strong> 공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상) | 닉네임을 바꾸시면 앞으로 <?php echo $config['cf_nick_modify']*1; ?>일 이내에는 변경 할 수 없습니다.
                     </div>
-                </div>
+                </section>
             </div>
             <?php } ?>
             <div class="row">
-                <div class="col-lg-6">
+                <section class="col-lg-6">
                     <label for="reg_mb_email" class="label">
                         이메일<strong class="sound_only"> 필수</strong>
                     </label>
@@ -220,7 +220,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                     <?php if ($w=='') { ?>
                     <div class="note m-b-15"><strong>Note:</strong> 이메일 입력 후 <span class="text-crimson">중복체크 필수</span></div>
                     <?php } ?>
-                </div>
+                </section>
                 <?php if ($config['cf_use_email_certify']) { ?>
                 <div class="col-lg-12">
                     <div class="alert alert-warning m-t-15">
@@ -250,7 +250,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                 <?php } ?>
                 <?php if ($config['cf_use_hp'] || ($config['cf_cert_use'] && $config['cf_cert_hp'])) { ?>
                 <section class="col-lg-4">
-                    <label for="reg_mb_hp" class="label">휴대폰번호<?php if ($config['cf_req_hp']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
+                    <label for="reg_mb_hp" class="label">휴대폰번호<?php if ($config['cf_req_hp']) { ?><strong class="sound_only">필수</strong><?php } ?><?php echo $desc_phone ?></label>
                     <label class="input <?php if ($config['cf_req_hp']) { ?>required-mark<?php } ?>">
                         <i class="icon-prepend fas fa-mobile-alt"></i>
                         <input type="text" name="mb_hp" value="<?php echo $member['mb_hp']; ?>" id="reg_mb_hp" <?php if ($config['cf_req_hp']) { ?>required<?php } ?> maxlength="20">
@@ -393,12 +393,6 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                     <div class="note m-b-10"><strong>Note:</strong> 정보공개는 수정후 <?php $config['cf_open_modify']*1; ?>일 이내, <?php echo $open_day; ?> 까지는 변경이 안됩니다.<br>이렇게 하는 이유는 잦은 정보공개 수정으로 인하여 쪽지를 보낸 후 받지 않는 경우를 막기 위해서 입니다.</div>
                 </section>
                 <?php } ?>
-                <?php
-                //회원정보 수정인 경우 소셜 계정 출력
-                if( $w == 'u' && function_exists('social_member_provider_manage') ){
-                    social_member_provider_manage();
-                }
-                ?>
                 <?php if ($w=='' && $config['cf_use_recommend']) { ?>
                 <section class="col-lg-6">
                     <label for="reg_mb_recommend" class="label">추천인아이디</label>
@@ -409,6 +403,11 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                         <b class="tooltip tooltip-top-right">추천인 아이디를 남겨주세요.</b>
                     </label>
                 </section>
+                <?php } ?>
+                <?php if ($w=='u' && function_exists('social_member_provider_manage')) { ?>
+                <ul class="list-unstyle">
+                    <?php echo social_member_provider_manage(); ?>
+                </ul>
                 <?php } ?>
             </div>
             <div class="row">
@@ -443,22 +442,21 @@ $(function() {
     var request_url = "";
 
 	$(".win_sa_cert").click(function() {
-		if(!cert_confirm()) return false;
-		type = $(this).data("type");
+        if(!cert_confirm()) return false;
+        type = $(this).data("type");
         params = "?directAgency=" + type + "&" + pageTypeParam;
         request_url = url + params;
         call_sa(request_url);
-	});
+    });
     <?php } ?>
 
     <?php if ($config['cf_cert_use'] && $config['cf_cert_ipin']) { ?>
     // 아이핀인증
     var params = "";
     $("#win_ipin_cert").click(function() {
-        if (!cert_confirm())
-            return false;
-
-        var url = "<?php echo G5_OKNAME_URL; ?>/ipin1.php";
+        if(!cert_confirm()) return false;
+        params = "?" + pageTypeParam;
+        var url = "<?php echo G5_OKNAME_URL; ?>/ipin1.php"+params;
         certify_win_open('kcb-ipin', url);
         return;
     });
@@ -466,12 +464,13 @@ $(function() {
 
     <?php if ($config['cf_cert_use'] && $config['cf_cert_hp']) { ?>
     // 휴대폰인증
+    var params = "";
     $("#win_hp_cert").click(function() {
-		if(!cert_confirm()) return false;
+        if(!cert_confirm()) return false;
         params = "?" + pageTypeParam;
         <?php     
         switch($config['cf_cert_hp']) {
-            case 'kcb':                
+            case 'kcb':                    
                 $cert_url = G5_OKNAME_URL.'/hpcert1.php';
                 $cert_type = 'kcb-hp';
                 break;
@@ -488,13 +487,38 @@ $(function() {
                 echo 'return false;';
                 break;
         }
-        ?>
-        
+        ?>            
         certify_win_open("<?php echo $cert_type; ?>", "<?php echo $cert_url; ?>"+params);
         return;
     });
     <?php } ?>
 });
+
+// 인증체크
+function cert_confirm()
+{
+    var val = document.fregisterform.cert_type.value;
+    var type;
+
+    switch(val) {
+        case "simple":
+            type = "간편인증";
+            break;
+        case "ipin":
+            type = "아이핀";
+            break;
+        case "hp":
+            type = "휴대폰";
+            break;
+        default:
+            return true;
+    }
+
+    if(confirm("이미 "+type+"으로 본인확인을 완료하셨습니다.\n\n이전 인증을 취소하고 다시 인증하시겠습니까?"))
+        return true;
+    else
+        return false;
+}
 
 // submit 최종 폼체크
 function fregisterform_submit(f)

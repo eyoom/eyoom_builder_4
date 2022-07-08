@@ -184,7 +184,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 <?php } ?>
                 <div class="m-b-20"></div>
                 <div class="alert alert-info">
-                    <p>커버이미지는 이미지(gif/jpg/png) 파일만 등록가능하며, 가로x세로 1400x380픽셀 사이즈로 업로드하세요.</p>
+                    <p>커버이미지는 이미지(gif/jpg/png) 파일만 등록가능하며, 가로x세로 1400x520픽셀 사이즈로 업로드하세요.</p>
                 </div>
                 <label for="file" class="label">메인 커버이미지 선택</label>
                 <div class="input">

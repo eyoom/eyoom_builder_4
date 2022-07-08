@@ -10,7 +10,7 @@ check_demo();
 
 auth_check_menu($auth, $sub_menu, "w");
 
-check_admin_token();
+if ($_POST['amode'] != 'ittype') check_admin_token();
 
 $check_skin_keys = array('de_type1_list_skin', 'de_type2_list_skin', 'de_type3_list_skin', 'de_type4_list_skin', 'de_type5_list_skin', 'de_mobile_type1_list_skin', 'de_mobile_type2_list_skin', 'de_mobile_type3_list_skin', 'de_mobile_type4_list_skin', 'de_mobile_type5_list_skin', 'de_rel_list_skin', 'de_mobile_rel_list_skin', 'de_search_list_skin', 'de_mobile_search_list_skin', 'de_listtype_list_skin', 'de_mobile_listtype_list_skin');
 
@@ -195,7 +195,11 @@ $check_sanitize_keys = array(
 );
 
 foreach( $check_sanitize_keys as $key ){
-    $$key = isset($_POST[$key]) ? clean_xss_tags($_POST[$key], 1, 1) : '';
+    if( in_array($key, array('de_bank_account')) ){
+        $$key = isset($_POST[$key]) ? clean_xss_tags($_POST[$key], 1, 1, 0, 0) : '';
+    } else {
+        $$key = isset($_POST[$key]) ? clean_xss_tags($_POST[$key], 1, 1) : '';
+    }
 }
 
 $cfg_upset = "

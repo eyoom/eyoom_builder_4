@@ -1064,6 +1064,7 @@ class theme extends qfile
                     case 5: $title = '할인상품'; $cate_name = '쇼핑몰'; break;
                 }
                 break;
+            case 'brand': $title = '브랜드'; $cate_name = '쇼핑몰'; break;
             case 'group':
                 if ($gr_id) {
                     $gr = sql_fetch("select * from {$this->g5['group_table']} where gr_id = '{$gr_id}' ");

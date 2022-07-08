@@ -4,6 +4,15 @@
  */
 if (!defined('_EYOOM_')) exit;
 
+$slType = 'gallery';
+if (!empty($_COOKIE[shop_search])) {
+    if ($_COOKIE[shop_search] == 'list') {
+        $slType = 'list';
+    } else if ($_COOKIE[shop_search] == 'gallery') {
+        $slType = 'gallery';
+    }
+}
+
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab_scroll_category.css" type="text/css" media="screen">',0);
 ?>
 
@@ -179,8 +188,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 
     <?php /* 검색결과 시작 */ ?>
     <div>
-        <?php /* 리스트 유형별로 출력 */ ?>
-        <?php echo $ssch_list; ?>
+        <div id="product_list" class="product-type-<?php echo $slType; ?>">
+            <?php /* 리스트 유형별로 출력 */ ?>
+            <?php echo $ssch_list; ?>
+        </div>
 
         <?php /* 페이지 */ ?>
         <?php echo eb_paging($eyoom['paging_skin']);?>
@@ -212,8 +223,8 @@ $(function() {
         dragHandle: 1,
         dynamicHandle: 1,
         clickBar: 1,
-        prev: $wrap.find('.prev'),
-        next: $wrap.find('.next')
+        prevPage: $wrap.find('.prev'),
+        nextPage: $wrap.find('.next')
     });
     var tabWidth = $('#tab-category').width();
     var categoryWidth = $('.category-list').width();
@@ -235,49 +246,47 @@ function set_ca_id(qcaid) {
     f.submit();
 }
 
-var itemlist_ca_id = "<?php echo $ca_id; ?>";
+var listCaId = "shop_search";
+var currentSlType = localStorage.getItem(listCaId);
 
-$.fn.listType = function(type) {
-    var $el = this.find(".item-list");
-    var count = $el.size();
+$.fn.listType = function(sltype) {
+    var itemList = this.find(".item-list");
+    var count = itemList.size();
     if(count < 1)
         return;
 
-    var cl = this.attr("class");
-    if(cl && !this.data("class")) {
-        this.data("class", cl);
+    var cls = this.attr("class");
+    if(cls && !this.data("class")) {
+        this.data("class", cls);
     }
 
     $("button.product-type-btn span").removeClass("product-type-on").html("");
 
-    if(type == "gallery") {
-        this.removeClass("product-type-gallery");
+    if(sltype == "gallery") {
         if(this.data("class")) {
-            this.attr("class", this.data("class"));
+            this.removeAttr("class");
         }
-
+        this.addClass("product-type-gallery");
         $("button.product-type-gallery-btn span").addClass("product-type-on").html("<b class=\"sound_only\"> 선택됨</b>");
-    } else {
+    } else if(sltype == "list") {
         if(this.data("class")) {
             this.removeAttr("class");
         }
         this.addClass("product-type-list");
-
         $("button.product-type-list-btn span").addClass("product-type-on").html("<b class=\"sound_only\"> 선택됨</b>");
     }
 
-    set_cookie("ck_itemlist"+itemlist_ca_id+"_type", type, 1, g5_cookie_domain);
+    localStorage.setItem(listCaId, sltype);
+    set_cookie(listCaId, sltype, 100);
 }
 
 $(function() {
-    if(itemlist_type = get_cookie("ck_itemlist"+itemlist_ca_id+"_type")) {
-        $("#product_list").listType(itemlist_type);
-    }
+    $("#product_list").listType(currentSlType);
 
     $("button.product-type-btn").on("click", function() {
         if($(this).hasClass("product-type-gallery-btn")) {
             $("#product_list").listType("gallery");
-        } else {
+        } else if($(this).hasClass("product-type-list-btn")) {
             $("#product_list").listType("list");
         }
     });

@@ -131,6 +131,15 @@ $logo_src['mobile_top'] = str_replace(G5_PATH, G5_URL, $top_mobile_logo);
 $logo_src['mobile_bottom'] = str_replace(G5_PATH, G5_URL, $bottom_mobile_logo);
 
 /**
+ * 팝업창
+ */
+if (defined('_INDEX_')) {
+    if ($eyoom['use_gnu_newwin'] == 'n') {
+        @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
+    }
+}
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_SHOP_PATH . '/shop.head.php');
