@@ -1736,4 +1736,83 @@ class bbs extends eyoom
 
         return $script;
     }
+
+    /**
+     * 게시물 상단고정 진행 함수
+     */
+    public function bo_wrfixed ($bo_table, $wr_id) {
+        global $g5, $member, $theme, $is_admin;
+        
+        /**
+         * 게시판 정보 가져오기
+         */
+        $eyoom_board = $this->board_info($bo_table, $theme);
+        
+        /**
+         * 게시물 상위노출에 이미 있는지 체크
+         */
+        $sql = "select * from {$g5['eyoom_wrfixed']} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='y' order by bf_datetime desc limit 1";
+        $row = sql_fetch($sql);
+        
+        if ($row) {
+            $ex_time = get_exdatetime($eyoom_board['bo_wrfixed_date'], $row['ex_datetime']);
+            $ex_datetime = date('Y-m-d H:i:s', $ex_time);
+            $set = "
+                bf_wrfixed_point = bf_wrfixed_point + {$eyoom_board['bo_wrfixed_point']},
+                bf_wrfixed_date = bf_wrfixed_date + {$eyoom_board['bo_wrfixed_date']},
+                ex_datetime = '{$ex_datetime}',
+                bf_datetime = '" . G5_TIME_YMDHIS . "'
+            ";
+            $sql = "update {$g5['eyoom_wrfixed']} set {$set} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='y' ";
+            $msg = "게시물의 상단고정을 연장처리하였습니다.";
+        } else {
+            if ($eyoom_board['bo_wrfixed_type'] == '2' || $is_admin == 'super') {
+                $bf_open = 'y';
+                $ex_time = $this->get_exdatetime($eyoom_board['bo_wrfixed_date']);
+                $ex_datetime = date('Y-m-d H:i:s', $ex_time);
+                $po_datetime = G5_TIME_YMDHIS;
+                $msg = "정상적으로 게시물을 상단고정 처리하였습니다.";
+            } else {
+                $bf_open = 'n';
+                $ex_datetime = '';
+                $po_datetime = '';
+                $msg = "게시물의 상단고정을 요청했습니다. 관리자 승인 후 적용됩니다.";
+            }
+            $set = "
+                bo_table = '{$bo_table}',
+                wr_id = '{$wr_id}',
+                mb_id = '{$member['mb_id']}',
+                bf_wrfixed_point = '{$eyoom_board['bo_wrfixed_point']}',
+                bf_wrfixed_date = '{$eyoom_board['bo_wrfixed_date']}',
+                bf_open = '{$bf_open}',
+                ex_datetime = '{$ex_datetime}',
+                po_datetime = '" . $po_datetime . "',
+                bf_datetime = '" . G5_TIME_YMDHIS . "'
+            ";
+            $sql = "insert into {$g5['eyoom_wrfixed']} set {$set} ";
+        }
+        
+        if (sql_query($sql)) {
+            return $msg;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 상단고정 파기시간 계산하기
+     */
+    public function get_exdatetime ($day, $date='') {
+        if (!$day) {
+            return false;
+        } else {
+            if (!$date) {
+                $datetime = time();
+            } else {
+                $datetime = strtotime($date);
+            }
+            
+            return $datetime + (60*60*24) * $day;   
+        }
+    }
 }

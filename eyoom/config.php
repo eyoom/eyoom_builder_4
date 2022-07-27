@@ -283,6 +283,11 @@ $g5['eyoom_exboard'] = G5_TABLE_PREFIX . 'eyoom_exboard';
 $g5['eyoom_brand'] = G5_TABLE_PREFIX . 'eyoom_brand';
 
 /**
+ * 이윰 상단고정 게시물 관리
+ */
+$g5['eyoom_wrfixed'] = G5_TABLE_PREFIX . 'eyoom_wrfixed';
+
+/**
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;

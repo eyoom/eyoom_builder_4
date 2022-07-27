@@ -8,7 +8,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 ?>
 
 <style>
-.brand-wrap {position:relative;margin-bottom:50px}
+.brand-wrap {position:relative}
 .brand-box .tab-scroll-category {margin-bottom:0}
 .brand-box .tab-scroll-category #tab-category {height:auto;line-height:inherit}
 .brand-box .category-list {margin:0px auto;display:none}
@@ -51,10 +51,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
                     </span>
                     <?php } ?>
                     <?php if (count((array)$list) == 0) { ?>
-                    <span><i class="fas fa-exclamation-circle"></i> 출력할 브랜드가 없습니다.</span>
+                    <span class="width-100"><div class="m-t-30 m-b-50"><i class="fas fa-exclamation-circle"></i> 출력할 브랜드가 없습니다.</div></span>
                     <?php } ?>
+                    <?php if (count((array)$list) > 0) { ?>
                     <span class="fake-span"></span>
                     <span class="fake-span"></span>
+                    <?php } ?>
                 </div>
                 <div class="controls">
                     <button class="btn prev"><i class="fas fa-chevron-left"></i></button>

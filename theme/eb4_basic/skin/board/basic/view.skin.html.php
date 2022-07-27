@@ -528,6 +528,32 @@ button.mfp-close {position:fixed;color:#fff !important}
         <?php } ?>
         <?php /* 추천 비추천 끝 */?>
 
+        <?php /* 게시물 상단고정 시작 */
+            $bo_notice = explode(',', $board['bo_notice']);
+            $sql = "select count(*) as cnt from {$g5['eyoom_wrfixed']} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='y' ";
+            $wr_fixed = sql_fetch($sql);
+        ?>
+        <?php if ($eyoom_board['bo_use_wrfixed'] == '1' && (isset($member['mb_id']) && $member['mb_id'] == $view['mb_id'] || $is_admin) && !in_array($wr_id, $bo_notice) && $wr_fixed['cnt']==0) { ?>
+        <div id="wrfixed" class="text-center">
+            <a href="javascript:;" id="bo_wrfixed" class="btn-e btn-e-purple btn-e-md">게시물 <?php echo $eyoom_board['bo_wrfixed_date']; ?>일간 상단노출 (<?php echo number_format($eyoom_board['bo_wrfixed_point']); ?>포인트 소모)</a>
+        </div>
+        <script>
+        $(function() {
+            $(document).on("click","#bo_wrfixed",function() {
+                if (confirm("본 게시물을 상단에 <?php echo $eyoom_board['bo_wrfixed_date']; ?>일간 노출하는데 총 <?php echo number_format($eyoom_board['bo_wrfixed_point']); ?>포인트가 소모됩니다.\n정말로 상단노출을 진행하시겠습니다?")) {
+                    var url = "<?php echo EYOOM_CORE_URL; ?>/board/wr_fixed.php";
+                    $.post(url, {bo_table: '<?php echo $bo_table; ?>', wr_id: '<?php echo $wr_id; ?>'}, function(data) {
+                        alert(data.msg);
+                    }, "json");
+                } else {
+                    return false;
+                }
+            });
+        });
+        </script>
+        <?php } ?>
+        <?php /* 게시물 상단고정 끝 */ ?>
+
         <?php /* 서명 시작 */?>
         <?php if ($is_signature && $view['mb_id']!='anonymous') { ?>
             <?php include_once(EYOOM_CORE_PATH . '/signature/signature.skin.php'); ?>

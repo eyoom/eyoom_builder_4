@@ -298,6 +298,8 @@ if ($w == '') {
     $target = array($create_table, '');
     $sql = preg_replace($source, $target, $sql);
     sql_query($sql, false);
+
+    $msg = "게시판 정상적으로 생성하였습니다.";
 } elseif ($w == 'u') {
     // 게시판의 글 수
     $sql = " select count(*) as cnt from {$g5['write_prefix']}{$bo_table} where wr_is_comment = 0 ";

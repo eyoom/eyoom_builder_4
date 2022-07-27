@@ -19,7 +19,7 @@ if (!defined('_EYOOM_')) exit;
     <form name="fpasswordreset" action="<?php echo $action_url; ?>" onsubmit="return fpasswordreset_submit(this);" method="post" autocomplete="off" class="eyoom-form">
     <section>
         <label for="mb_id" class="label">아이디</label>
-        <label class="input state-disabled"">
+        <label class="input state-disabled">
             <i class="icon-append fas fa-user"></i>
             <input type="text" name="mb_id" size="20" maxLength="20" value="<?php echo get_text($_POST['mb_id']); ?>" readonly>
         </label>

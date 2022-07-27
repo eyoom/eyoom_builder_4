@@ -236,7 +236,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_include_head" value="<?php echo $qaconfig['qa_include_head']; ?>" id="qa_include_head">
+                                <input type="text" name="qa_include_head" value="<?php echo get_sanitize_input($qaconfig['qa_include_head']); ?>" id="qa_include_head">
                             </label>
                         </td>
                     </tr>
@@ -246,7 +246,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                         </th>
                         <td colspan="3">
                             <label class="input form-width-250px">
-                                <input type="text" name="qa_include_tail" value="<?php echo $qaconfig['qa_include_tail']; ?>" id="qa_include_tail">
+                                <input type="text" name="qa_include_tail" value="<?php echo get_sanitize_input($qaconfig['qa_include_tail']); ?>" id="qa_include_tail">
                             </label>
                         </td>
                     </tr>
@@ -354,7 +354,9 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 </div>
 
 <script>
-var captcha_chk = false;
+var captcha_chk = false,
+    qa_include_head = jQuery.trim(jQuery("#qa_include_head").val()),
+    qa_include_tail = jQuery.trim(jQuery("#qa_include_tail").val());
 
 function use_captcha_check(){
     $.ajax({
@@ -370,8 +372,6 @@ function use_captcha_check(){
 }
 
 function frm_check_file(){
-    var qa_include_head = "<?php echo $qaconfig['qa_include_head']; ?>";
-    var qa_include_tail = "<?php echo $qaconfig['qa_include_tail']; ?>";
     var head = jQuery.trim(jQuery("#qa_include_head").val());
     var tail = jQuery.trim(jQuery("#qa_include_tail").val());
 

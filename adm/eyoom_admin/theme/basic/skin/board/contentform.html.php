@@ -117,7 +117,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                         </th>
                         <td>
                             <label class="input form-width-250px">
-                                <input type="text" name="co_include_head" value="<?php echo $co['co_include_head']; ?>" id="co_include_head">
+                                <input type="text" name="co_include_head" value="<?php echo get_sanitize_input($co['co_include_head']); ?>" id="co_include_head">
                             </label>
                             <div class="note"><strong>Note:</strong> 설정값이 없으면 기본 상단 파일을 사용합니다.</div>
                         </td>
@@ -128,7 +128,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                         </th>
                         <td>
                             <label class="input form-width-250px">
-                                <input type="text" name="co_include_tail" value="<?php echo $co['co_include_tail']; ?>" id="co_include_tail">
+                                <input type="text" name="co_include_tail" value="<?php echo get_sanitize_input($co['co_include_tail']); ?>" id="co_include_tail">
                             </label>
                             <div class="note"><strong>Note:</strong> 설정값이 없으면 기본 하단 파일을 사용합니다..</div>
                         </td>

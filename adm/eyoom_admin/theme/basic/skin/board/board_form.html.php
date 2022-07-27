@@ -931,7 +931,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="bo_include_head" id="bo_include_head" value="<?php echo $board['bo_include_head'] ?>">
+                                    <input type="text" name="bo_include_head" id="bo_include_head" value="<?php echo get_sanitize_input($board['bo_include_head']); ?>">
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -947,7 +947,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                             </th>
                             <td>
                                 <label class="input form-width-250px">
-                                    <input type="text" name="bo_include_tail" id="bo_include_tail" value="<?php echo $board['bo_include_tail'] ?>">
+                                    <input type="text" name="bo_include_tail" id="bo_include_tail" value="<?php echo get_sanitize_input($board['bo_include_tail']); ?>">
                                 </label>
                             </td>
                             <td class="table-chk-td">
@@ -1623,9 +1623,10 @@ function use_captcha_check(){
     });
 }
 
+var bo_include_head = jQuery.trim(jQuery("#bo_include_head").val()),
+    bo_include_tail = jQuery.trim(jQuery("#bo_include_tail").val());
+
 function frm_check_file(){
-    var bo_include_head = "<?php echo $board['bo_include_head']; ?>";
-    var bo_include_tail = "<?php echo $board['bo_include_tail']; ?>";
     var head = jQuery.trim(jQuery("#bo_include_head").val());
     var tail = jQuery.trim(jQuery("#bo_include_tail").val());
 

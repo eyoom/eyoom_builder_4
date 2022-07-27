@@ -69,6 +69,37 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
     sql_query($sql, true);
 }
 
+/**
+ * 게시물 상단고정 설정 필드 추가
+ */
+if(!sql_query(" select bo_use_wrfixed from {$g5['eyoom_board']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['eyoom_board']}`
+        add `bo_use_wrfixed` char(1) NOT NULL default '' after `bo_adopt_ratio`,
+        add `bo_wrfixed_type` char(1) NOT NULL default '1' after `bo_use_wrfixed`,
+        add `bo_wrfixed_point` int(7) NOT NULL default '1000' after `bo_wrfixed_type`,
+        add `bo_wrfixed_date` smallint(3) NOT NULL default '5' after `bo_wrfixed_point`
+    ";
+    sql_query($sql, true);
+}
+
+// 게시물 상단고정 관리 테이블 없을 경우 생성
+if (!sql_query(" DESC {$g5['eyoom_wrfixed']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_wrfixed']}` (
+                    `bo_table` varchar(20) NOT NULL DEFAULT '',
+                    `wr_id` int(11) NOT NULL DEFAULT '0',
+                    `mb_id` varchar(30) NOT NULL,
+                    `bf_wrfixed_point` int(11) NOT NULL DEFAULT '0',
+                    `bf_wrfixed_date` smallint(3) NOT NULL DEFAULT '1',
+                    `bf_open` enum('y','n') NOT NULL DEFAULT 'n',
+                    `po_datetime` datetime NOT NULL,
+                    `ex_datetime` datetime NOT NULL,
+                    `bf_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+                ) ",
+        true
+    );
+}
+
 $use_shop_skin = isset($_POST['use_shop_skin']) ? clean_xss_tags($_POST['use_shop_skin'], 1, 1) : '';
 $use_gnu_skin = isset($_POST['use_gnu_skin']) ? clean_xss_tags($_POST['use_gnu_skin'], 1, 1) : '';
 $bo_skin = isset($_POST['bo_skin']) ? clean_xss_tags($_POST['bo_skin'], 1, 1) : '';
@@ -89,6 +120,10 @@ $bo_use_adopt_point = isset($_POST['bo_use_adopt_point']) ? (int) $_POST['bo_use
 $bo_adopt_minpoint = isset($_POST['bo_adopt_minpoint']) ? (int) $_POST['bo_adopt_minpoint'] : 0;
 $bo_adopt_maxpoint = isset($_POST['bo_adopt_maxpoint']) ? (int) $_POST['bo_adopt_maxpoint'] : 0;
 $bo_adopt_ratio = isset($_POST['bo_adopt_ratio']) ? (int) $_POST['bo_adopt_ratio'] : 0;
+$bo_use_wrfixed = isset($_POST['bo_use_wrfixed']) ? (int) $_POST['bo_use_wrfixed'] : 0;
+$bo_wrfixed_type = isset($_POST['bo_wrfixed_type']) ? (int) $_POST['bo_wrfixed_type'] : 1;
+$bo_wrfixed_point = isset($_POST['bo_wrfixed_point']) ? (int) $_POST['bo_wrfixed_point'] : 1000;
+$bo_wrfixed_date = isset($_POST['bo_wrfixed_date']) ? (int) $_POST['bo_wrfixed_date'] : 5;
 $bo_write_limit = isset($_POST['bo_write_limit']) ? (int) $_POST['bo_write_limit'] : 0;
 $bo_use_profile_photo = isset($_POST['bo_use_profile_photo']) ? (int) $_POST['bo_use_profile_photo']: 0;
 $bo_sel_date_type = isset($_POST['bo_sel_date_type']) ? (int) $_POST['bo_sel_date_type'] : 1;
@@ -150,6 +185,10 @@ $set = "
     bo_adopt_minpoint       = '{$bo_adopt_minpoint}',
     bo_adopt_maxpoint       = '{$bo_adopt_maxpoint}',
     bo_adopt_ratio          = '{$bo_adopt_ratio}',
+    bo_use_wrfixed          = '{$bo_use_wrfixed}',
+    bo_wrfixed_type         = '{$bo_wrfixed_type}',
+    bo_wrfixed_point        = '{$bo_wrfixed_point}',
+    bo_wrfixed_date         = '{$bo_wrfixed_date}',
     bo_write_limit          = '{$bo_write_limit}',
     bo_use_profile_photo    = '{$bo_use_profile_photo}',
     bo_sel_date_type        = '{$bo_sel_date_type}',
@@ -219,6 +258,10 @@ if (is_checked('chk_grp_rating_score'))     $grp_fields .= " , bo_use_rating_sco
 if (is_checked('chk_grp_rating_comment'))   $grp_fields .= " , bo_use_rating_comment = '{$bo_use_rating_comment}' ";
 if (is_checked('chk_grp_rating_point'))     $grp_fields .= " , bo_rating_point = '{$bo_rating_point}' ";
 if (is_checked('chk_grp_use_tag'))          $grp_fields .= " , bo_use_tag = '{$bo_use_tag}' ";
+if (is_checked('chk_grp_use_wrfixed'))      $grp_fields .= " , bo_use_wrfixed = '{$bo_use_wrfixed}' ";
+if (is_checked('chk_grp_wrfixed_type'))     $grp_fields .= " , bo_wrfixed_type = '{$bo_wrfixed_type}' ";
+if (is_checked('chk_grp_wrfixed_point'))    $grp_fields .= " , bo_wrfixed_point = '{$bo_wrfixed_point}' ";
+if (is_checked('chk_grp_wrfixed_date'))     $grp_fields .= " , bo_wrfixed_date = '{$bo_wrfixed_date}' ";
 if (is_checked('chk_grp_use_automove'))     $grp_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
 if (is_checked('chk_grp_addon_emoticon'))   $grp_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_grp_addon_video'))      $grp_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";
@@ -284,6 +327,10 @@ if (is_checked('chk_all_rating_score'))     $all_fields .= " , bo_use_rating_sco
 if (is_checked('chk_all_rating_comment'))   $all_fields .= " , bo_use_rating_comment = '{$bo_use_rating_comment}' ";
 if (is_checked('chk_all_rating_point'))     $all_fields .= " , bo_rating_point = '{$bo_rating_point}' ";
 if (is_checked('chk_all_use_tag'))          $all_fields .= " , bo_use_tag = '{$bo_use_tag}' ";
+if (is_checked('chk_all_use_wrfixed'))      $all_fields .= " , bo_use_wrfixed = '{$bo_use_wrfixed}' ";
+if (is_checked('chk_all_wrfixed_type'))     $all_fields .= " , bo_wrfixed_type = '{$bo_wrfixed_type}' ";
+if (is_checked('chk_all_wrfixed_point'))    $all_fields .= " , bo_wrfixed_point = '{$bo_wrfixed_point}' ";
+if (is_checked('chk_all_wrfixed_date'))     $all_fields .= " , bo_wrfixed_date = '{$bo_wrfixed_date}' ";
 if (is_checked('chk_all_use_automove'))     $all_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
 if (is_checked('chk_all_addon_emoticon'))   $all_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_all_addon_video'))      $all_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";

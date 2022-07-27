@@ -25,7 +25,19 @@ if (!defined('_EYOOM_')) exit;
     <div class="main-heading">
         <h2><strong>브랜드</strong></h2>
     </div>
-    <?php echo eb_brand('basic'); ?>
+    <div class="m-b-30">
+        <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
+        <div class="adm-edit-btn btn-edit-mode" style="margin-top:-30px;">
+            <div class="btn-group">
+                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=brandlist&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 브랜드관리 설정</a>
+                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=brandlist" target="_blank" class="ae-btn-r" title="새창 열기">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+        <?php } ?>
+        <?php echo eb_brand('basic'); ?>
+    </div>
 </div>
 <?php } ?>
 <?php /* ---------- 쇼핑몰 브랜드 끝 ---------- */ ?>

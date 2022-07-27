@@ -112,23 +112,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     </form>
 </div>
 
-<div class="modal fade admin-iframe-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">브랜드 관리</h4>
-            </div>
-            <div class="modal-body">
-                <iframe id="modal-iframe" width="100%" frameborder="0"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn-e btn-e-lg btn-e-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <?php /* 페이지 */ ?>
 <?php echo eb_paging($eyoom['paging_skin']);?>
 
@@ -160,26 +143,6 @@ function fsearchform_submit(num) {
     }
     f.submit();
 }
-
-function eb_modal(href) {
-    <?php if (!(G5_IS_MOBILE || $wmode)) { ?>
-    $('.admin-iframe-modal').modal('show').on('hidden.bs.modal', function () {
-        $("#modal-iframe").attr("src", "");
-        $('html').css({overflow: ''});
-    });
-    $('.admin-iframe-modal').modal('show').on('shown.bs.modal', function () {
-        $("#modal-iframe").attr("src", href);
-        $('#modal-iframe').height(parseInt($(window).height() * 0.85));
-        $('html').css({overflow: 'hidden'});
-    });
-    <?php } ?>
-    return false;
-}
-
-window.closeModal = function(url){
-    $('.admin-iframe-modal').modal('hide');
-    document.location.href = url;
-};
 
 !function () {
     var db = {
@@ -237,10 +200,6 @@ $(document).ready(function(){
             { name: "순서", type: "text", align: "center", width: 60 },
             { name: "등록일", type: "text", align: "center", width: 80 },
         ]
-    })
-    $("#sort").click(function() {
-        var field = $("#sortingField").val();
-        $("#admin-shop-brandlist").jsGrid("sort", field);
     });
 
     var $chk = $(".jsgrid-table th:first-child");
@@ -257,14 +216,4 @@ function del_confirm() {
         return false;
     }
 }
-
-<?php if($_wmode) { ?>
-$(function() {
-    $(".goods-select").click(function(){
-        var pfno = $(this).attr('title');
-        parent.set_goods(pfno);
-        parent.jQuery('.vbox-close, .vbox-overlay').trigger('click');
-    });
-});
-<?php } ?>
 </script>

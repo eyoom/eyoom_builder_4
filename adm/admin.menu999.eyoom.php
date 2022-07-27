@@ -43,6 +43,13 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
         );
 
         /**
+         * 상단고정 게시물 추가메뉴
+         */
+        array_push ($menu['menu300'],
+            array('300900', '상단고정 게시물 관리', G5_ADMIN_URL.'/wrfixed_list.php', 'wrfixed_list')
+        );
+
+        /**
          * 쇼핑몰 브랜드관리
          */
         array_push ($menu['menu400'], 

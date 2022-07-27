@@ -37,7 +37,8 @@ $pg_anchor = array(
     'anc_bo_addon'      => '애드온기능',
     'anc_bo_cmtbest'    => '댓글베스트',
     'anc_bo_exif'       => '이미지 EXIF',
-    'anc_bo_cmtpoint'   => '댓글포인트'
+    'anc_bo_cmtpoint'   => '댓글포인트',
+    'anc_bo_wrfixed'    => '게시물 상단고정'
 );
 
 /**

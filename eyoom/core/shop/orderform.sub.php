@@ -313,10 +313,10 @@ if ($default['de_bank_use']) {
 	if (count($bank_str) <= 1) {
 		$bank_account = $bank_str[0];
 	} else {
-        $bank_account = $bank_str = array();
-		for ($i=0; $i<count($bank_str); $i++) {
+        $bank_account = array();
+		for ($i=0; $i<count((array)$bank_str); $i++) {
 			$bank_str[$i] = trim($bank_str[$i]);
-			$bank_account[$i]['bank'] .= $bank_str[$i];
+			$bank_account[$i]['bank'] = $bank_str[$i];
 		}
 	}
 }

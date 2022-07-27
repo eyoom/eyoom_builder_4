@@ -1159,6 +1159,104 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
     <?php echo $frm_submit; ?>
 
+    <div id="anc_bo_wrfixed">
+        <div class="pg-anchor">
+        <?php echo adm_pg_anchor('anc_bo_wrfixed'); ?>
+        </div>
+        <div class="adm-table-form-wrap margin-bottom-30">
+            <header><strong><i class="fas fa-caret-right"></i> 게시물 상단고정 설정 [ 게시판명 : <span class='color-pink'><?php echo $board['bo_subject']; ?></span> ]</strong></header>
+            <fieldset>
+                <div class="cont-text-bg">
+                    <p class="bg-danger font-size-12 margin-bottom-0"><i class="fas fa-info-circle"></i> <strong>알림</strong> : 게시판별로 게시물의 상단고정 기능의 조건을 설정하실 수 있습니다.</p>
+                </div>
+            </fieldset>
+
+            <div class="table-list-eb">
+                <?php if (!G5_IS_MOBILE) { ?>
+                <div class="table-responsive">
+                <?php } ?>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="table-form-th">
+                                <label class="label">게시물 상단고정 사용여부</label>
+                            </th>
+                            <td>
+                                <label for="bo_use_wrfixed" class="checkbox" style="width:80px;">
+                                    <input type="checkbox" name="bo_use_wrfixed" id="bo_use_wrfixed" value="1" <?php echo $eyoom_board['bo_use_wrfixed'] == '1' ? 'checked': ''; ?>><i></i> 사용
+                                </label>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group pull-right">
+                                    <label for="chk_grp_use_wrfixed" class="checkbox"><input type="checkbox" name="chk_grp_use_wrfixed" id="chk_grp_use_wrfixed"><i></i>그룹적용</label>
+                                    <label for="chk_all_use_wrfixed" class="checkbox"><input type="checkbox" name="chk_all_use_wrfixed" id="chk_all_use_wrfixed"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label class="label">게시물 상단고정 노출방식</label>
+                            </th>
+                            <td>
+                                <div class="inline-group">
+                                    <label for="bo_wrfixed_type_1" class="radio"><input type="radio" name="bo_wrfixed_type" id="bo_wrfixed_type_1" value="1" <?php echo $eyoom_board['bo_wrfixed_type']=='1' ? 'checked': ''; ?>><i></i> 관지라 승인 후 적용하기</label>
+                                    <label for="bo_wrfixed_type_2" class="radio"><input type="radio" name="bo_wrfixed_type" id="bo_wrfixed_type_2" value="2" <?php echo $eyoom_board['bo_wrfixed_type']=='2' ? 'checked': ''; ?>><i></i> 게시물 상단노출 신청시 바로 적용하기</label>
+                                </div>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group pull-right">
+                                    <label for="chk_grp_wrfixed_type" class="checkbox"><input type="checkbox" name="chk_grp_wrfixed_type" id="chk_grp_wrfixed_type"><i></i>그룹적용</label>
+                                    <label for="chk_all_wrfixed_type" class="checkbox"><input type="checkbox" name="chk_all_wrfixed_type" id="chk_all_wrfixed_type"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label class="label">차감 포인트 설정</label>
+                            </th>
+                            <td>
+                                <label for="bo_wrfixed_point" class="input form-width-250px">
+                                    <i class="icon-append width-60px"><?php echo $levelset['gnu_name']; ?></i>
+                                    <input type="text" name="bo_wrfixed_point" id="bo_wrfixed_point" value="<?php echo $eyoom_board['bo_wrfixed_point'] ? $eyoom_board['bo_wrfixed_point']: '1000'; ?>">
+                                </label>
+                                <div class="note"><strong>Note: </strong>게시물을 상단고정 시킬 때 필요한 차감 포인트를 설정합니다. (숫자만 입력해 주세요)</div>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group pull-right">
+                                    <label for="chk_grp_wrfixed_point" class="checkbox"><input type="checkbox" name="chk_grp_wrfixed_point" id="chk_grp_wrfixed_point"><i></i>그룹적용</label>
+                                    <label for="chk_all_wrfixed_point" class="checkbox"><input type="checkbox" name="chk_all_wrfixed_point" id="chk_all_wrfixed_point"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label class="label">상단고정 일수</label>
+                            </th>
+                            <td>
+                                <label for="bo_wrfixed_date" class="input form-width-250px">
+                                    <i class="icon-append">일</i>
+                                    <input type="text" name="bo_wrfixed_date" id="bo_wrfixed_date" value="<?php echo $eyoom_board['bo_wrfixed_date'] ? $eyoom_board['bo_wrfixed_date']: '5'; ?>">
+                                </label>
+                                <div class="note"><strong>Note: 상단고정 일수를 설정할 수 있습니다. (게시물의 상단고정 시간을 기준으로 해당일 만큼 지나면 자동으로 기능이 해제됩니다.</div>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group pull-right">
+                                    <label for="chk_grp_wrfixed_date" class="checkbox"><input type="checkbox" name="chk_grp_wrfixed_date" id="chk_grp_wrfixed_date"><i></i>그룹적용</label>
+                                    <label for="chk_all_wrfixed_date" class="checkbox"><input type="checkbox" name="chk_all_wrfixed_date" id="chk_all_wrfixed_date"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php if (!G5_IS_MOBILE) { ?>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $frm_submit; ?>
+    
     <?php if (preg_match('/adopt/i', $eyoom_board['bo_skin'])) { ?>
     <div id="anc_bo_adopt">
         <div class="pg-anchor">
