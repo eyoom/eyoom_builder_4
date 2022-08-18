@@ -47,6 +47,14 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                 <tbody>
                     <tr>
                         <th class="table-form-th">
+                            <label class="label">문의 상품</label>
+                        </th>
+                        <td>
+                            <strong><a href="<?php echo shop_item_url($iq['it_id']); ?>" target="_blank"><?php echo $iq['it_id']; ?></a></strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-form-th">
                             <label class="label">이름</label>
                         </th>
                         <td>

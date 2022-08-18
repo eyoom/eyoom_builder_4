@@ -100,8 +100,8 @@ $item_view = 'slider';
                 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
                 <div class="adm-edit-btn btn-edit-mode" style="top:0">
                     <div class="btn-group">
-                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=logo&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 로고 설정</a>
-                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=logo&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
+                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=shoplogo&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 로고 설정</a>
+                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=shoplogo&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
@@ -198,7 +198,37 @@ $item_view = 'slider';
                                 <li class="navbar-nav-home">
                                     <a href="<?php echo G5_SHOP_URL; ?>" class="nav-link">HOME</a>
                                 </li>
-
+                                
+                            <?php if ($eyoom['use_eyoom_shopmenu'] == 'n') { // 영카트 분류가 쇼핑몰 메뉴 출력 ?>
+                                <?php if (isset($menu) && is_array($menu)) { ?>
+                                <?php foreach ($menu as $key => $menu_1) { ?>
+                                <li class="dropdown">
+                                    <a href="<?php echo $menu_1['href']; ?>" class="dropdown-toggle nav-link">
+                                        <?php echo $menu_1['ca_name']; ?>
+                                    </a>
+                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
+                                    <a href="#" class="cate-dropdown-open dorpdown-toggle" data-bs-toggle="dropdown"></a>
+                                    <?php } ?>
+                                    <?php $index2 = 0; $size2 = count((array)$menu_1['submenu']); ?>
+                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
+                                    <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
+                                    <?php if ($index2 == 0) { ?>
+                                    <div class="dropdown-menu">
+                                        <ul>
+                                        <?php } ?>
+                                            <li class="dropdown-submenu">
+                                                <a href="<?php echo $menu_2['href']; ?>" class="dropdown-item nav-link"><?php echo $menu_2['ca_name']; ?></a>
+                                            </li>
+                                        <?php if ($index2 == $size2 - 1) { ?>
+                                        </ul>
+                                    </div>
+                                    <?php } ?>
+                                    <?php $index2++; } ?>
+                                    <?php } ?>
+                                </li>
+                                <?php } ?>
+                                <?php } ?>
+                            <?php } else if ($eyoom['use_eyoom_shopmenu'] == 'y') { // 이윰 쇼핑몰 메뉴 출력 ?>
                                 <?php if (isset($menu) && is_array($menu)) { ?>
                                 <?php foreach ($menu as $key => $menu_1) { ?>
                                 <li class="dropdown">
@@ -311,6 +341,7 @@ $item_view = 'slider';
                                     </div>
                                 </li>
                                 <?php } ?>
+                            <?php } // 영카트 분류 / 이윰 쇼핑몰 메뉴 출력 끝 ?>
                                 <li class="search-menu d-none d-lg-block">
                                     <a href="javascript:void(0);" class="nav-link search-toggle pc-search-btn" title="전체 게시글 검색"><i class="fas fa-search"></i></a>
                                 </li>

@@ -89,7 +89,7 @@ if ($act_button === "선택수정") {
     }
 
     /**
-     * EB최신글 master 파일 경로
+     * EB최신글 아이템 설정 파일 삭제
      */
     $el_item_file = G5_DATA_PATH . '/eblatest/'.$post_theme.'/el_item_'.$el_code.'.php';
     @unlink($el_item_file);

@@ -170,7 +170,7 @@ function fsearchform_submit(num) {
             브랜드코드: "<strong><a href='<?php echo G5_SHOP_URL; ?>/brand.php?br_cd=<?php echo $list[$i]['br_code']; ?>' target='_blank'><?php echo $list[$i]['br_code']; ?></a></strong>",
             브랜드명: "<label class='input'><input type='text' name='br_name[<?php echo $i; ?>]' id='br_name_<?php echo $i; ?>' value='<?php echo get_text($list[$i]['br_name']); ?>' required></label>",
             노출여부: "<div class='inline-group'><label for='br_open_<?php echo $i; ?>_y' class='radio'><input type='radio' name='br_open[<?php echo $i; ?>]' id='br_open_<?php echo $i; ?>_y' value='y' <?php echo $list[$i]['br_open']=='y' ? 'checked': ''; ?>><i></i> 예</label><label for='br_open_<?php echo $i; ?>_n' class='radio'><input type='radio' name='br_open[<?php echo $i; ?>]' id='br_open_<?php echo $i; ?>_n' value='n' <?php echo $list[$i]['br_open']=='n' ? 'checked': ''; ?>><i></i> 아니오</label></div>",
-            순서: "<label class='input'><input type='text' name='br_sort[<?php echo $i; ?>]' id='br_sort_<?php echo $i; ?>' value='<?php echo $list[$i]['br_sort']; ?>'>",
+            순서: "<label class='input'><input type='text' name='br_sort[<?php echo $i; ?>]' id='br_sort_<?php echo $i; ?>' value='<?php echo $list[$i]['br_sort']; ?>'></label>",
             등록일: "<?php echo date("Y-m-d", strtotime($list[$i]['br_regdt'])); ?>",
         },
         <?php } ?>

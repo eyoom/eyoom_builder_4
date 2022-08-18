@@ -211,11 +211,6 @@ class latest extends qfile
         $bo_info = $this->bbs->get_bo_subject();
 
         /**
-         * 내용 길이 제한
-         */
-        $cut_subject = $el_item['li_cut_content'] ? $el_item['li_cut_subject']: 600;
-
-        /**
          * 최신글 레코드 선언
          */
         $latest_list = array();

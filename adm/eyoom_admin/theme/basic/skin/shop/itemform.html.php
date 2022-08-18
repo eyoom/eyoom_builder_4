@@ -427,7 +427,12 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                                     <script>
                                     function set_brand(sel) {
                                         var brand = sel.options[sel.selectedIndex].text;
-                                        $("#it_brand").val(brand);
+                                        var brcode = sel.options[sel.selectedIndex].value;
+                                        if (brcode) {
+                                            $("#it_brand").val(brand);
+                                        } else {
+                                            $("#it_brand").val('');
+                                        }
                                     }
                                     </script>
                                     <?php } ?>

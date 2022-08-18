@@ -234,6 +234,11 @@ class theme extends qfile
             set_cookie('unique_theme_id',$unique_theme_id,3600);
         }
 
+        /**
+         * [KVE-2022-0622] 원격코드실행 취약점 패치
+         */
+        $unique_theme_id = preg_replace("/[^0-9]*/s", '', $unique_theme_id);
+
         $file = $this->tmp_path . '/' . $_SERVER['REMOTE_ADDR'] . '.' . $unique_theme_id . '.php';
         if (file_exists($file)) {
             include_once($file);

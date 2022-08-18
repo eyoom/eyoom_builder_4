@@ -44,18 +44,7 @@ $li_view_level  = isset($_POST['li_view_leveliw']) ? clean_xss_tags(trim($_POST[
 $li_renew       = isset($_POST['li_renew']) ? clean_xss_tags(trim($_POST['li_renew'])) : '';
 
 /**
- * 제외 테이블
- */
-$ex_tables = array();
-$bo_exclude = explode(',', $li_exclude);
-if (is_array($bo_exclude)) {
-    foreach ($bo_exclude as $k => $bo_table) {
-        $ex_tables[$k] = trim($bo_table);
-    }
-}
-
-/**
- * 포함 테이블
+ * 포함 게시판 테이블
  */
 $in_tables = array();
 $bo_include = explode(',', $li_include);
@@ -66,7 +55,7 @@ if (is_array($bo_include)) {
 }
 
 /**
- * 그룹 테이블
+ * 그룹 게시판 테이블
  */
 $gr_tables = array();
 if ($li_gr_id) {
@@ -76,9 +65,7 @@ if ($li_gr_id) {
 /**
  * 대상 테이블
  */
-$li_table = array();
-$li_table = array_merge($gr_tables, $in_tables);
-$li_table = array_diff($li_table, $ex_tables);
+$li_table = $li_include || $li_gr_id ? array_merge($gr_tables, $in_tables): array();
 
 /**
  * 단일 테이블 설정
@@ -88,18 +75,29 @@ if ($li_bo_table) {
 }
 
 /**
- * 대상 테이블이 없다면, 모든 게시판에서 추춣을 의미 함
+ * 대상 테이블이 없다면, 모든 게시판에서 추출을 의미 함
  */
 if (count((array)$li_table) == 0) {
     $bo_info = $bbs->get_bo_subject();
     $li_table = array_keys($bo_info);
-    $li_table = array_diff($li_table, $ex_tables);
 }
 
 /**
  * 최신글 대상 게시판은 유니크해야 함
  */
 $li_table = array_unique($li_table);
+
+/**
+ * 제외 게시판 && Empty Value 배열 제거
+ */
+$ex_tables = array();
+$bo_exclude = explode(',', $li_exclude);
+if (is_array($bo_exclude)) {
+    foreach ($bo_exclude as $k => $bo_table) {
+        $ex_tables[$k] = trim($bo_table);
+    }
+}
+$li_table = array_filter(array_diff($li_table, $ex_tables));
 
 /**
  * 최신글 대상 게시판 테이블

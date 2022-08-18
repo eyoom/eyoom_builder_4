@@ -120,7 +120,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                 <tbody>
                     <tr>
                         <th class="table-form-th">
-                            <label for="br_skin" class="label">브랜드코드</label>
+                            <label for="br_code" class="label">브랜드코드</label>
                         </th>
                         <td>
                             <?php if ($w == '') { ?>

@@ -253,7 +253,7 @@ class item_list
     // class 에 설정된 값으로 최종 실행합니다.
     function run() {
 
-        global $g5, $config, $member, $default;
+        global $g5, $config, $member, $default, $br_cd;
         
         $list = array();
 
@@ -286,6 +286,10 @@ class item_list
                     $where_ca_id[] = " ca_id3 like '{$this->ca_id3}%' ";
                 }
                 $where[] = " ( " . implode(" or ", $where_ca_id) . " ) ";
+            }
+
+            if ($br_cd) {
+                $where[] = " it_brcode = '{$br_cd}' ";
             }
 
             if ($this->order_by) {

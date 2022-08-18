@@ -75,7 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                 </span>
                                 <span>
                                     <label for="li_target" class="select form-width-150px">
-                                        <select name="li_target" id="ec_target">
+                                        <select name="li_target" id="li_target">
                                             <option value="">타겟을 선택하세요.</option>
                                             <option value="_blank" <?php echo $li['li_target'] == '_blank' ? 'selected':''; ?>>새창</option>
                                             <option value="_self" <?php echo $li['li_target'] == '_self' ? 'selected':''; ?>>현재창</option>
@@ -148,7 +148,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <label for="li_gr_id" class="select form-width-250px">
                                 <select name="li_gr_id" id="li_gr_id">
                                     <option value="">::선택::</option>
-                                    <?php foreach ($gr_info as $k => $gr) { ?><!--{@ gr_info}-->
+                                    <?php foreach ($gr_info as $k => $gr) { ?>
                                     <option value="<?php echo $gr['gr_id']; ?>" <?php echo $li['li_gr_id'] == $gr['gr_id'] ? 'selected':''; ?>>[<?php echo $gr['gr_id']; ?>] <?php echo $gr['gr_subject']; ?></option>
                                     <?php } ?>
                                 </select><i></i>

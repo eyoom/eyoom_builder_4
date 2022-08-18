@@ -20,7 +20,7 @@ $es_code = isset($_GET['es_code']) ? clean_xss_tags(trim($_GET['es_code'])): '';
 $ei_no = isset($_GET['ei_no']) ? clean_xss_tags(trim($_GET['ei_no'])): '';
 
 /**
- * 배너/광고 정보 가져오기
+ * 유튜브 슬라이더 아이템 정보 가져오기
  */
 if ($iw == 'u') {
     $ei = sql_fetch("select * from {$g5['eyoom_slider_ytitem']} where ei_no = '{$ei_no}' and ei_theme='{$this_theme}'");

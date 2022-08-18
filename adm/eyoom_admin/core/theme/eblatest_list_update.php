@@ -72,6 +72,14 @@ if ($act_button == "선택수정") {
         $el_item_file = G5_DATA_PATH . '/eblatest/'.$post_theme.'/el_item_' . $el_code . '.php';
         @unlink ($el_master_file);
         @unlink ($el_item_file);
+
+        /**
+         * EB최신글 캐시파일 삭제
+         */
+        $unlink_files = glob(G5_DATA_PATH . '/eblatest/'.$post_theme.'/latest_' . $el_code . '_*.php');
+        foreach ($unlink_files as $unlink_file) {
+            @unlink($unlink_file);
+        }
     }
 
     /**
