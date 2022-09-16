@@ -1297,3 +1297,6 @@ input[type=text]:focus,input[type=password]:focus,  textarea:focus,select:focus 
 .cke_dialog_tab {color:#252525 !important}
 pre[class*="language-"] {border-radius:0 !important}
 .tooltip > .tooltip-inner {word-break:keep-all}
+/*Social Login*/
+.mbskin .toggle .toggle-title {line-height:25px !important}
+#fregisterform .btn_confirm .btn_cancel {vertical-align:inherit;border-radius:3px;color:#fff !important}

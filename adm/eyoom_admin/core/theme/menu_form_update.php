@@ -53,7 +53,8 @@ switch($mode) {
             $subme_path = $me_path ? $me_path.' > '.$subme_name: $subme_name;
 
             $subme_code = strip_tags($me_code);
-            $subme_name = strip_tags($subme_name);
+            $subme_name = strip_tags(trim($subme_name));
+            $subme_name = str_replace(array("\r\n","\r","\n"), '', $subme_name);
 
             $length = strlen($subme_code)+3;
             $where = " me_theme='{$theme}' and me_code like '{$subme_code}%' and length(me_code)=$length and me_shop='{$me_shop}'";
@@ -104,7 +105,8 @@ switch($mode) {
             $me_info['me_link'] = html_purifier($me_info['me_link']);
 
             $me_code = strip_tags($me_code);
-            $me_name = strip_tags($me_name);
+            $me_name = strip_tags(trim($me_name));
+            $me_name = str_replace(array("\r\n","\r","\n"), '', $me_name);
 
             /**
              * 출력순서값이 수정될 경우, 입력된 순서 이상은 +1처리

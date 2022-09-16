@@ -32,7 +32,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                 </div>
                 <div class="modal-body">
                     <div class="hd-pops-content">
-                        <?php foreach ($newwin as $k => $popup) { ?>
+                        <?php foreach ($newwin as $k => $popup) { 
+                            if ($k==0) $nw_disable_hours = $popup['nw_disable_hours']; 
+                        ?>
                         <div id="hd_pops_list" class="hd-pops-list">
                             <?php echo conv_content(($popup['nw_content']), 1); ?>
                         </div>
@@ -40,7 +42,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="hd_pops_reject btn-e btn-e-dark" data-bs-dismiss="modal">24시간 동안 열지 않기</button>
+                    <button type="button" class="hd_pops_reject btn-e btn-e-dark" data-bs-dismiss="modal"><?php echo $nw_disable_hours; ?>시간 동안 열지 않기</button>
                     <button type="button" class="btn-e btn-e-dark" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
@@ -73,7 +75,10 @@ $(function() {
 
 $(function() {
     $(".hd_pops_reject").click(function() {
-        set_cookie('hd_pops_list', 1, 24, g5_cookie_domain);
+        var ck_name = 'hd_pops_list';
+        var nw_disable_hours = '<?php echo $nw_disable_hours; ?>';
+        var exp_time = parseInt(nw_disable_hours);
+        set_cookie(ck_name, 1, exp_time, g5_cookie_domain);
     });
 });
 </script>

@@ -121,7 +121,8 @@ switch($_POST['mode']) {
             $row2 = sql_fetch($sql);
             $ca_order = $row2['max'] + 1;
 
-            $p_subca_name = strip_tags($_POST['subca_name']);
+            $p_subca_name = strip_tags(trim($_POST['subca_name']));
+            $p_subca_name = str_replace(array("\r\n","\r","\n"), '', $p_subca_name);
             
             $set = "
                 ca_id                   = '".sql_real_escape_string(strip_tags($subid))."',
@@ -181,7 +182,8 @@ switch($_POST['mode']) {
                 sql_query($sql, false);
             }
 
-            $p_ca_name = strip_tags($_POST['ca_name']);
+            $p_ca_name = strip_tags(trim($_POST['ca_name']));
+            $p_ca_name = str_replace(array("\r\n","\r","\n"), '', $p_ca_name);
 
             $set = "
                 ca_order                = '".sql_real_escape_string(strip_tags($ca_order))."',

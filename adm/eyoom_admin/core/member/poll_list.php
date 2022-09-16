@@ -55,11 +55,13 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql2 = " select sum(po_cnt1+po_cnt2+po_cnt3+po_cnt4+po_cnt5+po_cnt6+po_cnt7+po_cnt8+po_cnt9) as sum_po_cnt from {$g5['poll_table']} where po_id = '{$row['po_id']}' ";
     $row2 = sql_fetch($sql2);
     $po_etc = ($row['po_etc']) ? "사용" : "미사용";
+    $po_use = ($row['po_use']) ? "사용" : "미사용";
 
     $s_mod = "<a href='".G5_ADMIN_URL."/?dir=member&amp;pid=poll_form&amp;".$qstr."&amp;w=u&amp;po_id=".$row['po_id']."' class='btn-e btn-e-red btn-e-sm'>수정</a>";
 
     $list[$i] = $row;
     $list[$i]['po_etc'] = $po_etc;
+    $list[$i]['po_use'] = $po_use;
     $list[$i]['s_mode'] = $s_mod;
 }
 

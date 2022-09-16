@@ -8,7 +8,7 @@ $action     = isset($_POST['action']) ? clean_xss_tags($_POST['action']): '';
 $bo_table   = isset($_POST['bo_table']) ? clean_xss_tags($_POST['bo_table']): '';
 $wr_id      = isset($_POST['wr_id']) ? clean_xss_tags($_POST['wr_id']): '';
 $cmt_id     = isset($_POST['cmt_id']) ? clean_xss_tags($_POST['cmt_id']): '';
-$yc_reason  = isset($_POST['yc_reason']) ? clean_xss_tags($_POST['yc_reason']): '';
+$yc_reason  = isset($_POST['reason']) ? clean_xss_tags($_POST['reason']): '';
 
 if (!$action) exit;
 if (!$bo_table) exit;

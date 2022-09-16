@@ -752,15 +752,16 @@ $(window).load(function() {
             var bo_table = '<?php echo $bo_table; ?>';
             var wr_id = '<?php echo $wr_id; ?>';
             var url = '<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php';
-            $.post('<?php echo EYOOM_CORE_URL; ?>/board/yellow_card.php', { bo_table: bo_table, wr_id: wr_id, cmt_id: cmt_id, action: "add", reason: yc_reason }, function() {
+            $.post(url, { bo_table: bo_table, wr_id: wr_id, cmt_id: cmt_id, action: "add", reason: yc_reason }, function() {
                 Swal.fire({
                     title: "알림!",
                     text: "정상적으로 신고처리 하였습니다.",
                     confirmButtonColor: "#e53935",
                     icon: "success",
                     confirmButtonText: "확인"
+                }).then(() => {
+                    document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
                 });
-                document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
             });
         }
     });

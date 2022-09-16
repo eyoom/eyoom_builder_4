@@ -838,7 +838,7 @@ $(function() {
         calculate_total_price();
         $("#cp_frm").remove();
         $cp_btn_el.text("쿠폰변경").addClass("cp_mod").focus();
-        if(!$cp_row_el.find(".cp_cancel").size())
+        if(!$cp_row_el.find(".cp_cancel").length)
             $cp_btn_el.after("<button type=\"button\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
@@ -911,8 +911,8 @@ $(function() {
         }
         $("#od_coupon_frm").remove();
         $("#od_coupon_btn").text("쿠폰변경").focus();
-        if(!$("#od_coupon_cancel").size())
-            $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel1\">취소</button>");
+        if(!$("#od_coupon_cancel").length)
+            $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"cp_cancel cp_cancel1\">취소</button>");
     });
 
     $(document).on("click", ".od-coupon-close", function() {
@@ -976,7 +976,7 @@ $(function() {
         calculate_order_price();
         $("#sc_coupon_frm").remove();
         $("#sc_coupon_btn").text("쿠폰변경").focus();
-        if(!$("#sc_coupon_cancel").size())
+        if(!$("#sc_coupon_cancel").length)
             $("#sc_coupon_btn").after("<button type=\"button\" id=\"sc_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel1\">취소</button>");
     });
 
@@ -1104,7 +1104,7 @@ function calculate_total_price()
     <?php if($oc_cnt > 0) { ?>
     $("input[name=od_cp_id]").val("");
     $("#od_cp_price").text(0);
-    if($("#od_coupon_cancel").size()) {
+    if($("#od_coupon_cancel").length) {
         $("#od_coupon_btn").text("쿠폰적용");
         $("#od_coupon_cancel").remove();
     }
@@ -1112,7 +1112,7 @@ function calculate_total_price()
     <?php if($sc_cnt > 0) { ?>
     $("input[name=sc_cp_id]").val("");
     $("#sc_cp_price").text(0);
-    if($("#sc_coupon_cancel").size()) {
+    if($("#sc_coupon_cancel").length) {
         $("#sc_coupon_btn").text("쿠폰적용");
         $("#sc_coupon_cancel").remove();
     }
@@ -1201,7 +1201,7 @@ function calculate_tax()
         }
     });
 
-    if($("input[name=od_temp_point]").size())
+    if($("input[name=od_temp_point]").length)
         temp_point = parseInt($("input[name=od_temp_point]").val()) || 0;
 
     tot_mny += (send_cost + send_cost2 - od_coupon - send_coupon - temp_point);

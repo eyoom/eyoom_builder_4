@@ -4,12 +4,12 @@
 @header('X-Robots-Tag: noindex');
 
 $g5_path['path'] = '../..';
-include_once ('../../config.php');
-include_once ('../../lib/common.lib.php');
+include_once('../../config.php');
+include_once('../../lib/common.lib.php');
 
 $title = G5_VERSION." &amp; 이윰빌더 설치 완료";
-include_once ('./setup.head.php');
-include_once ('../class/qfile.class.php');
+include_once('./setup.head.php');
+include_once('../class/qfile.class.php');
 include_once('../../install/install.function.php');    // 인스톨 과정 함수 모음
 
 include_once('../../lib/hook.lib.php');    // hook 함수 파일
@@ -18,7 +18,7 @@ include_once('../../lib/uri.lib.php');    // URL 함수 파일
 include_once('../../lib/cache.lib.php');
 
 if (!$exists_db_config || !$exists_eyoom_config) {
-    include_once ('./setup.tail.php');
+    include_once('./setup.tail.php');
     exit;
 }
 

@@ -106,7 +106,7 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-info-box.border-color-red {border-color:#cc2300}
 .shop-order-form .payment-info-box span {float:left}
 .shop-order-form .payment-info-box strong {color:#000}
-.shop-order-form .payment-info-box .cp_cancel {margin-top:5px}
+.shop-order-form .payment-info-box .cp_cancel {margin-left:3px;height:inherit;}
 .shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;line-height:inherit;background:#fff}
 .shop-order-form #od_tot_price span {line-height:30px}
 .shop-order-form #od_tot_price .print_price {color:#cc2300;font-size:1.25rem}
@@ -159,6 +159,19 @@ if($is_kakaopay_use) {
     .shop-order-form .order-table td {padding:5px 0}
     .shop-order-form .order-payment-area {position:relative;top:inherit;right:inherit;width:100%;height:auto;border-left:0;border-top:1px solid #e5e5e5;background:#fafafa}
 }
+@media (min-width:992px) and (max-width:1199px){
+    .gnb-wrap .gnb .gnb-nav > li {padding-right:10px;}
+    .gnb-wrap .gnb .gnb-nav > li > a {font-size:var(--small-font-size);}
+}
+/* 쿠폰 선택 테이블 */
+.shop-order-form .payment-info-box .od_coupon h3 {padding: 0 10px;margin: 10px 0 7px;line-height: 35px;font-size: 13px;color:#fff;background:#333;}
+.shop-order-form .payment-info-box .od_coupon .btn_close {top: 45px;right: 15px;width: 35px;height: 35px;color:#ddd;border:0 none;}
+.shop-order-form .payment-info-box .od_coupon .btn_close:hover {color:#fff;background:transparent;}
+.shop-order-form .payment-info-box .od_coupon .tbl_head02 {margin: 0;}
+.shop-order-form .payment-info-box #sc_coupon_frm table thead th,
+.shop-order-form .payment-info-box #sc_coupon_frm table tbody td {font-size: 12px;text-align: center;}
+.shop-order-form .payment-info-box #sc_coupon_frm a.btn_frmline,
+.shop-order-form .payment-info-box #sc_coupon_frm button.btn_frmline {width:auto;height:inherit;padding:4px 10px;font-size: 12px;}
 </style>
 
 <div class="shop-steps">
@@ -850,7 +863,7 @@ $(function() {
         calculate_total_price();
         cp_form_close();
         $cp_btn_el.text("쿠폰변경").focus();
-        if(!$cp_row_el.find(".cp_cancel").size())
+        if(!$cp_row_el.find(".cp_cancel").length)
             $cp_btn_el.after("<button type=\"button\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
@@ -923,7 +936,7 @@ $(function() {
         }
         od_coupon_close();
         $("#od_coupon_btn").text("쿠폰변경").focus();
-        if(!$("#od_coupon_cancel").size())
+        if(!$("#od_coupon_cancel").length)
             $("#od_coupon_btn").after("<button type=\"button\" id=\"od_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
@@ -988,7 +1001,7 @@ $(function() {
         calculate_order_price();
         $("#sc_coupon_frm").remove();
         $("#sc_coupon_btn").text("쿠폰변경").focus();
-        if(!$("#sc_coupon_cancel").size())
+        if(!$("#sc_coupon_cancel").length)
             $("#sc_coupon_btn").after("<button type=\"button\" id=\"sc_coupon_cancel\" class=\"btn-e btn-e-gray cp_cancel\">취소</button>");
     });
 
@@ -1112,7 +1125,7 @@ function calculate_total_price()
     <?php if($oc_cnt > 0) { ?>
     $("input[name=od_cp_id]").val("");
     $("#od_cp_price").text(0);
-    if($("#od_coupon_cancel").size()) {
+    if($("#od_coupon_cancel").length) {
         $("#od_coupon_btn").text("쿠폰적용");
         $("#od_coupon_cancel").remove();
     }
@@ -1120,7 +1133,7 @@ function calculate_total_price()
     <?php if($sc_cnt > 0) { ?>
     $("input[name=sc_cp_id]").val("");
     $("#sc_cp_price").text(0);
-    if($("#sc_coupon_cancel").size()) {
+    if($("#sc_coupon_cancel").length) {
         $("#sc_coupon_btn").text("쿠폰적용");
         $("#sc_coupon_cancel").remove();
     }
@@ -1209,7 +1222,7 @@ function calculate_tax()
         }
     });
 
-    if($("input[name=od_temp_point]").size())
+    if($("input[name=od_temp_point]").length)
         temp_point = parseInt($("input[name=od_temp_point]").val());
 
     tot_mny += (send_cost + send_cost2 - od_coupon - send_coupon - temp_point);

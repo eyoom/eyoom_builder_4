@@ -1069,29 +1069,34 @@ class bbs extends eyoom
         // $contents 중 img 태그 추출
         $matches = get_editor_image($contents, true);
 
-        if(empty($matches)) return $contents;
+        if(empty($matches))
+            return $contents;
+
+        $extensions = array(1=>'gif', 2=>'jpg', 3=>'png', 18=>'webp');
 
         for($i=0; $i<count($matches[1]); $i++) {
 
             $img = $matches[1][$i];
+            $img_tag = isset($matches[0][$i]) ? $matches[0][$i] : '';
+    
             preg_match("/src=[\'\"]?([^>\'\"]+[^>\'\"]+)/i", $img, $m);
-            $src = $m[1];
+            $src = isset($m[1]) ? $m[1] : '';
             preg_match("/style=[\"\']?([^\"\'>]+)/i", $img, $m);
-            $style = $m[1];
+            $style = isset($m[1]) ? $m[1] : '';
             preg_match("/width:\s*(\d+)px/", $style, $m);
-            $width = $m[1];
+            $width = isset($m[1]) ? $m[1] : '';
             preg_match("/height:\s*(\d+)px/", $style, $m);
-            $height = $m[1];
+            $height = isset($m[1]) ? $m[1] : '';
             preg_match("/alt=[\"\']?([^\"\']*)[\"\']?/", $img, $m);
-            $alt = get_text($m[1]);
-
+            $alt = isset($m[1]) ? get_text($m[1]) : '';
+    
             // 이미지 path 구함
             $p = parse_url($src);
             if(strpos($p['path'], '/'.G5_DATA_DIR.'/') != 0)
                 $data_path = preg_replace('/^\/.*\/'.G5_DATA_DIR.'/', '/'.G5_DATA_DIR, $p['path']);
             else
                 $data_path = $p['path'];
-
+    
             $srcfile = G5_PATH.$data_path;
 
             if(is_file($srcfile)) {
@@ -1103,6 +1108,9 @@ class bbs extends eyoom
                 $size = @getimagesize($srcfile);
                 if(empty($size))
                     continue;
+    
+                $file_ext = $extensions[$size[2]];
+                if (!$file_ext) continue;
 
                 // jpg 이면 exif 체크
                 if($size[2] == 2 && function_exists('exif_read_data')) {
@@ -1136,9 +1144,19 @@ class bbs extends eyoom
 
                 // Animated GIF 체크
                 $is_animated = false;
-                if($size[2] == 1) {
+                if($file_ext === 'gif') {
                     $is_animated = is_animated_gif($srcfile);
+    
+                    if($replace_content = run_replace('thumbnail_is_animated_gif_content', '', $contents, $srcfile, $is_animated, $img_tag, $data_path, $size)){
+    
+                        $contents = $replace_content;
+                        continue;
+                    }
                 }
+
+                // 원본 width가 thumb_width보다 작다면
+                if($size[0] <= $thumb_width)
+                    continue;
 
                 // 썸네일 높이
                 $thumb_height = round(($thumb_width * $size[1]) / $size[0]);

@@ -29,6 +29,9 @@ for ($i=0; $nw=sql_fetch_array($result); $i++) {
     if (isset($_COOKIE["hd_pops_{$nw['nw_id']}"]) && $_COOKIE["hd_pops_{$nw['nw_id']}"])
         continue;
 
+    // 이윰빌더 팝업스킨의 경우 체크되었다면 모든 팝업 쿠키적용
+    if (isset($_COOKIE['hd_pops_list']) && $_COOKIE['hd_pops_list']) break;
+
     $newwin[$i] = $nw;
 }
 

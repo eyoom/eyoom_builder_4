@@ -7,7 +7,8 @@ if (!defined('_EYOOM_')) exit;
 
 <style>
 .current-connect {font-size:.9375rem}
-.current-connect .table-list-eb .td-mobile td {padding-top:0;color:#959595}
+.current-connect .table-list-eb .td-location {white-space:normal;word-break:break-all;}
+.current-connect .table-list-eb .td-mobile td {padding-top:0;color:#959595;white-space:normal;word-break:break-all;}
 .current-connect .table-list-eb .td-mobile td a {color:#959595}
 .current-connect .connect-nameview {color:#3949ab !important}
 .current-connect .connect-nameview .sv_wrap > a {color:#3949ab}
@@ -43,7 +44,7 @@ if (!defined('_EYOOM_')) exit;
                             <span><?php echo $list[$i]['name']; ?></span>
                             <?php } ?>
                         </td>
-                        <td class="hidden-xs">
+                        <td class="hidden-xs td-location">
                             <?php if ($list[$i]['lo_url'] && $is_admin == 'super') { ?>
                             <a href="<?php echo $list[$i]['lo_url']; ?>" class="connect-url"><?php echo $list[$i]['lo_location']; ?></a>
                             <?php } else { ?>

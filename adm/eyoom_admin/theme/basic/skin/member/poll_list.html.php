@@ -121,6 +121,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             투표권한: "<?php echo $list[$i]['po_level']; ?>",
             투표수: "<?php echo $list[$i]['sum_po_cnt']; ?>",
             기타의견: "<?php echo $list[$i]['po_etc']; ?>",
+            사용: "<?php echo $list[$i]['po_use']; ?>",
         },
         <?php } ?>
     ]
@@ -146,7 +147,8 @@ $(function() {
             { name: "제목", type: "text", width: 250 },
             { name: "투표권한", type: "text", width: 60 },
             { name: "투표수", type: "number", width: 60 },
-            { name: "기타의견", type: "text", width: 60 },
+            { name: "기타의견", type: "text", width: 100 },
+            { name: "사용", type: "text", width: 60 },
         ]
     });
 
