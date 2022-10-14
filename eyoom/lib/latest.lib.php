@@ -176,7 +176,7 @@ function eb_latest ($el_code) {
                      * 제목이 없다면 댓글
                      */
                     $loop[$k]['is_cmt'] = false;
-                    if (!$row['wr_subject']) {
+                    if ($row['wr_id'] != $row['wr_parent']) {
                         $loop[$k]['wr_subject'] = cut_str(preg_replace("/(\\n|\\r)/",'',htmlspecialchars_decode($row['wr_content'])), $cut_subject, '…');
                         $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],'#c_'.$row['wr_id']);
                         $loop[$k]['is_cmt'] = true;

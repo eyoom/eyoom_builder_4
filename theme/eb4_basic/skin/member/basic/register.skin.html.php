@@ -39,20 +39,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
     <form name="fregister" id="fregister" action="<?php echo $register_action_url; ?>" onsubmit="return fregister_submit(this);" method="POST" autocomplete="off" class="eyoom-form">
 
-    <div class="content-box m-b-30">
-        <div class="content-box-body">
-            <p class="text-indigo"><i class="fas fa-exclamation-circle"></i> <span>회원가입약관 및 개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.</span></p>
-        </div>
-        <div class="content-box-footer">
-            <div class="fregister-agree">
-                <label class="checkbox" for="agree_all">
-                    <input type="checkbox" name="agree_all" value="1" id="agree_all"><i></i><span>아래 약관 및 안내 내용에 <u class="color-red">모두 동의</u></span>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <section id="fregister_term" class="member-box">
+    <section class="member-box">
         <header><h5 class="m-0 f-w-700">회원가입약관</h5></header>
         <div class="member-agree">
             <div id="register_scroll_1" class="panel-body ps-container">
@@ -70,7 +57,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </footer>
     </section>
 
-    <section id="fregister_private" class="member-box">
+    <section class="member-box">
         <header><h5 class="m-0 f-w-700">개인정보처리방침안내</h5></header>
         <div class="member-agree">
             <div id="register_scroll_2" class="panel-body ps-container">
@@ -88,7 +75,17 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </footer>
     </section>
 
-    <div class="btn_confirm text-center">
+    <div class="content-box m-b-30">
+        <div class="content-box-body">
+            <div class="fregister-agree text-center">
+                <label class="checkbox" for="agree_all">
+                    <input type="checkbox" name="agree_all" value="1" id="agree_all"><i></i><span>전체 약관에 동의합니다.</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="register-btn-box text-center">
         <button class="btn-e btn-e-xl btn-crimson" type="submit" value="회원가입"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
     </div>
 

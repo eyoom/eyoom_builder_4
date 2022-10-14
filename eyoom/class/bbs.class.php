@@ -144,7 +144,7 @@ class bbs extends eyoom
     }
 
     public function make_anonymous_fields($bo_table) {
-        global $is_admin;
+        global $is_admin, $latest;
 
         /**
          * 최고관리자일 경우만 허용
@@ -152,6 +152,22 @@ class bbs extends eyoom
         if ($is_admin != 'super') return;
 
         $write_table = $this->g5['write_prefix'] . $bo_table;
+
+        /**
+         * g5_board_new 테이블에 wr_hit 및 wr_comment 필드 체크 후, 없다면 추가
+         */
+        if(!sql_query(" select wr_hit from {$this->g5['board_new_table']} limit 1 ", false)) {
+            $sql = " alter table `{$this->g5['board_new_table']}`
+                        add `wr_hit` int(11) NOT NULL default '0' after `mb_id`,
+                        add `wr_comment` int(11) NOT NULL default '0' after `wr_hit`
+            ";
+            sql_query($sql, true);
+
+            /**
+             * 추가된 wr_id에 실제 히트수 업데이트
+             */
+            $latest->update_wr_id();
+        }
 
         /**
          * 게시판 테이블에 익명글 관련 필드 추가

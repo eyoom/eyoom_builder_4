@@ -44,19 +44,3 @@ sql_query(" OPTIMIZE TABLE `{$g5['eyoom_member']}` ");
  */
 $push_file_path = G5_DATA_PATH . '/member/push';
 $qfile->del_timeover_file($push_file_path, 86400, 'push');
-
-/**
- * g5_board_new 테이블에 wr_hit 및 wr_comment 필드 체크 후, 없다면 추가
- */
-if(!sql_query(" select wr_hit from {$g5['board_new_table']} limit 1 ", false)) {
-    $sql = " alter table `{$g5['board_new_table']}`
-                add `wr_hit` int(11) NOT NULL default '0' after `mb_id`,
-                add `wr_comment` int(11) NOT NULL default '0' after `wr_hit`
-    ";
-    sql_query($sql, true);
-
-    /**
-     * 추가된 wr_id에 실제 히트수 업데이트
-     */
-    $latest->update_wr_id();
-}

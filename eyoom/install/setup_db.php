@@ -149,10 +149,11 @@ if($g5_install || !$result) {
     $file = preg_replace('/`g5_([^`]+`)/', '`'.$table_prefix.'$1', $file);
     $f = explode(';', $file);
     for ($i=0; $i<count($f); $i++) {
-        if (trim($f[$i]) == '') continue;
+        if (trim($f[$i]) == '') {
+            continue;
+        }
 
         $sql = get_db_create_replace($f[$i]);
-
         sql_query($sql, true, $dblink);
     }
 }
@@ -165,10 +166,11 @@ if($g5_shop_install) {
     $file = preg_replace('/`g5_shop_([^`]+`)/', '`'.$g5_shop_prefix.'$1', $file);
     $f = explode(';', $file);
     for ($i=0; $i<count($f); $i++) {
-        if (trim($f[$i]) == '') continue;
+        if (trim($f[$i]) == '') {
+            continue;
+        }
 
         $sql = get_db_create_replace($f[$i]);
-
         sql_query($sql, true, $dblink);
     }
 }
@@ -1022,8 +1024,12 @@ if(!$result) {
     $f = explode(';', $file);
 
     for ($i=0; $i<count($f); $i++) {
-        if (trim($f[$i]) == '') continue;
-        sql_query($f[$i], false, $dblink) or die(mysqli_error());
+        if (trim($f[$i]) == '') {
+            continue;
+        }
+
+        $sql = get_db_create_replace($f[$i]);
+        sql_query($sql, true, $dblink) or die(mysqli_error());
     }
 
     // 이윰메뉴 생성 -----------------------------------
@@ -1038,8 +1044,12 @@ if(!$result) {
         $q = explode(';', $file);
 
         for ($i=0; $i<count($q); $i++) {
-            if (trim($q[$i]) == '') continue;
-            sql_query($q[$i], false, $dblink) or die(mysqli_error());
+            if (trim($q[$i]) == '') {
+                continue;
+            }
+
+            $sql = get_db_create_replace($q[$i]);
+            sql_query($sql, true, $dblink) or die(mysqli_error());
         }
     }
     

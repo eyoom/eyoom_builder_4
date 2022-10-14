@@ -1035,6 +1035,7 @@ class theme extends qfile
             case 'respond'          : $title = '내글반응'; break;
             case 'search'           : $title = '전체검색'; break;
             case 'bo_search'        : $title = '검색결과'; $cate_name = $board['bo_subject']; break;
+            case 'write'            :
             case 'board'            : $title = $board['bo_subject']; $cate_name = '게시판'; break;
             case 'faq'              : $title = '자주하시는 질문'; break;
             case 'qalist'           :
