@@ -8,7 +8,7 @@ $sub_menu = "999200";
 
 auth_check_menu($auth, $sub_menu, 'w');
 
-if ($w == 'u') check_demo();
+check_demo();
 
 check_admin_token();
 
@@ -125,7 +125,6 @@ $bo_wrfixed_type = isset($_POST['bo_wrfixed_type']) ? (int) $_POST['bo_wrfixed_t
 $bo_wrfixed_point = isset($_POST['bo_wrfixed_point']) ? (int) $_POST['bo_wrfixed_point'] : 1000;
 $bo_wrfixed_date = isset($_POST['bo_wrfixed_date']) ? (int) $_POST['bo_wrfixed_date'] : 5;
 $bo_write_limit = isset($_POST['bo_write_limit']) ? (int) $_POST['bo_write_limit'] : 0;
-$bo_use_profile_photo = isset($_POST['bo_use_profile_photo']) ? (int) $_POST['bo_use_profile_photo']: 0;
 $bo_sel_date_type = isset($_POST['bo_sel_date_type']) ? (int) $_POST['bo_sel_date_type'] : 1;
 $bo_use_hotgul = isset($_POST['bo_use_hotgul']) ? (int) $_POST['bo_use_hotgul'] : 1;
 $bo_use_anonymous = isset($_POST['bo_use_anonymous']) ? (int) $_POST['bo_use_anonymous'] : 0;
@@ -190,7 +189,6 @@ $set = "
     bo_wrfixed_point        = '{$bo_wrfixed_point}',
     bo_wrfixed_date         = '{$bo_wrfixed_date}',
     bo_write_limit          = '{$bo_write_limit}',
-    bo_use_profile_photo    = '{$bo_use_profile_photo}',
     bo_sel_date_type        = '{$bo_sel_date_type}',
     bo_use_hotgul           = '{$bo_use_hotgul}',
     bo_use_anonymous        = '{$bo_use_anonymous}',
@@ -238,7 +236,6 @@ $grp_fields = '';
 if (is_checked('chk_grp_shop_skin'))        $grp_fields .= " , use_shop_skin = '{$use_shop_skin}' ";
 if (is_checked('chk_grp_gnu_skin'))         $grp_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
 if (is_checked('chk_grp_bo_skin'))          $grp_fields .= " , bo_skin = '{$bo_skin}' ";
-if (is_checked('chk_grp_profile_photo'))    $grp_fields .= " , bo_use_profile_photo = '{$bo_use_profile_photo}' ";
 if (is_checked('chk_grp_date_type'))        $grp_fields .= " , bo_sel_date_type = '{$bo_sel_date_type}' ";
 if (is_checked('chk_grp_hotgul'))           $grp_fields .= " , bo_use_hotgul = '{$bo_use_hotgul}' ";
 if (is_checked('chk_grp_anonymous'))        $grp_fields .= " , bo_use_anonymous = '{$bo_use_anonymous}' ";
@@ -307,7 +304,6 @@ $all_fields = '';
 if (is_checked('chk_all_shop_skin'))        $all_fields .= " , use_shop_skin = '{$use_shop_skin}' ";
 if (is_checked('chk_all_gnu_skin'))         $all_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
 if (is_checked('chk_all_bo_skin'))          $all_fields .= " , bo_skin = '{$bo_skin}' ";
-if (is_checked('chk_all_profile_photo'))    $all_fields .= " , bo_use_profile_photo = '{$bo_use_profile_photo}' ";
 if (is_checked('chk_all_date_type'))        $all_fields .= " , bo_sel_date_type = '{$bo_sel_date_type}' ";
 if (is_checked('chk_all_hotgul'))           $all_fields .= " , bo_use_hotgul = '{$bo_use_hotgul}' ";
 if (is_checked('chk_all_anonymous'))        $all_fields .= " , bo_use_anonymous = '{$bo_use_anonymous}' ";

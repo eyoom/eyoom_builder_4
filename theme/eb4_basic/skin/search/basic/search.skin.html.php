@@ -139,10 +139,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
             if ($list[$idx][$i]['wr_anonymous'] || in_array($search_table[$idx],$anonymous_table)) {
                 $data['mb_id'] = 'anonymous';
-                $data['mb_photo'] = '';
                 $data['name'] = '익명';
             } else {
-                $data['mb_photo'] = $eb->mb_photo($list[$idx][$i]['mb_id']);
                 $data['name'] = eb_nameview($list[$idx][$i]['mb_id'], $list[$idx][$i]['wr_name'], $list[$idx][$i]['wr_email'], $list[$idx][$i]['homepage']);
             }
 
@@ -183,11 +181,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     </div>
                 </div>
                 <div class="result-list-info">
-                    <?php if($data['mb_photo']) { ?>
-                    <span class="info-photo"><?php echo $data['mb_photo'] ?></span>
-                    <?php } else { ?>
-                    <span class="info-icon"><i class="far fa-user-circle"></i></span>
-                    <?php } ?>
                     <span class="info-name"><?php echo $data['name'] ?></span>
                     <span class="info-date"><i class="far fa-clock m-l-10 m-r-5"></i><?php echo $list[$idx][$i]['wr_datetime'] ?></span>
                 </div>
@@ -221,7 +214,8 @@ $(window).load(function(){
 document.getElementById("gr_id").value = "<?php echo $gr_id; ?>";
 
 function fsearch_submit(f) {
-    if (f.stx.value.length < 2) {
+    var stx = f.stx.value.trim();
+    if (stx.length < 2) {
         Swal.fire({
             title: "중요!",
             text: "검색어는 두글자 이상 입력하십시오.",
@@ -234,10 +228,11 @@ function fsearch_submit(f) {
         return false;
     }
     var cnt = 0;
-    for (var i=0; i<f.stx.value.length; i++) {
-        if (f.stx.value.charAt(i) == ' ')
+    for (var i = 0; i < stx.length; i++) {
+        if (stx.charAt(i) == ' ')
             cnt++;
     }
+
     if (cnt > 1) {
         Swal.fire({
             title: "중요!",
@@ -250,6 +245,8 @@ function fsearch_submit(f) {
         f.stx.focus();
         return false;
     }
+    f.stx.value = stx;
+
     f.action = "";
     return true;
 }

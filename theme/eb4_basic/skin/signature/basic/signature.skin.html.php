@@ -50,12 +50,12 @@ if (!defined('_EYOOM_')) exit;
 <div class="member-signature">
     <div class="member-signature-profile">
         <div class="signature-member">
-            <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+            <?php if ($config['cf_use_member_icon']) { ?>
             <div class="signature-photo">
                 <?php if ($view['mb_photo']) { echo $view['mb_photo']; } else { ?><span class="signature-user-icon"><i class="fas fa-user-circle"></i></span><?php } ?>
             </div>
             <?php } ?>
-            <div class="signature-info" <?php if($eyoom_board['bo_use_profile_photo'] == 1) { ?>style="margin-left:60px"<?php } ?>>
+            <div class="signature-info" <?php if($config['cf_use_member_icon']) { ?>style="margin-left:60px"<?php } ?>>
                 <span><?php echo eb_nameview($view['mb_id'], $view['wr_name'], $view['wr_email'], $view['wr_homepage']); ?></span>
                 <?php if ($lv['gnu_icon']) { ?>
                 <span class="signature-lv-icon"><img src="<?php echo $lv['gnu_icon']; ?>" alt="레벨"></span>

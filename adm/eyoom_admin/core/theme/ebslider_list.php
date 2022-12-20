@@ -36,6 +36,7 @@ $sql = "
       PRIMARY KEY  (`es_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
+$sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 /**

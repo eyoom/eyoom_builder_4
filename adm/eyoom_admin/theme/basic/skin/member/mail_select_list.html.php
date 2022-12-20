@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 
     <div id="mail-list"></div>
 
-    <textarea name="ma_list" style="display:none"><?php echo $ma_list; ?></textarea>
+    <textarea name="ma_list" style="display:none"><?php echo html_purifier($ma_list); ?></textarea>
 
     <?php echo $frm_submit; ?>
 

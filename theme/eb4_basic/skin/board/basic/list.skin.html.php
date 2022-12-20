@@ -249,15 +249,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </a>
             </div>
             <div class="bl-item bl-author">
-                <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
-                <span class="bl-photo">
-                    <?php if ($list[$i]['mb_photo']) { ?>
-                    <?php echo $list[$i]['mb_photo']; ?>
-                    <?php } else { ?>
-                    <span class="bl-user-icon"><i class="far fa-user-circle"></i></span>
-                    <?php } ?>
-                </span>
-                <?php } ?>
                 <?php if ($list[$i]['gnu_icon']) { ?>
                 <span class="bl-lv-icon"><img src="<?php echo $list[$i]['gnu_icon']; ?>" align="absmiddle" alt="레벨"></span>
                 <?php } ?>
@@ -293,11 +284,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php } ?>
         </div>
         <div class="bl-mobile <?php if ($list[$i]['is_notice']) { ?>bl-notice<?php } ?>"><?php /* 991px 이하에서만 보임 */ ?>
-            <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
-            <span class="bl-photo">
-                <?php if ($list[$i]['mb_photo']) { ?><?php echo $list[$i]['mb_photo']; ?><?php } else { ?><span class="bl-user-icon"><i class="far fa-user-circle"></i></span><?php } ?>
-            </span>
-            <?php } ?>
             <?php if ($list[$i]['gnu_icon']) { ?>
             <span class="bl-lv-icon"><img src="<?php echo $list[$i]['gnu_icon']; ?>" align="absmiddle" alt="레벨"></span>
             <?php } ?>
@@ -493,7 +479,7 @@ function select_copy(sw) {
     var sub_win = window.open("", "move", "left=50, top=50, width=500, height=550, scrollbars=1");
     f.sw.value = sw;
     f.target = "move";
-    f.action = "./move.php";
+    f.action = g5_bbs_url+"/move.php";
     f.submit();
 }
 </script>

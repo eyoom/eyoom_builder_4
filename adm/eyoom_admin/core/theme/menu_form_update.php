@@ -4,8 +4,7 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
-if ($w == "u" || $w == "d")
-    check_demo();
+check_demo();
 
 auth_check_menu($auth, $sub_menu, 'w');
 

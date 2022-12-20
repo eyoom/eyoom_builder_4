@@ -34,6 +34,7 @@ $exboard_sql = "
       PRIMARY KEY  (`ex_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
+$sql = get_db_create_replace($sql);
 sql_query($exboard_sql, true);
 
 /**

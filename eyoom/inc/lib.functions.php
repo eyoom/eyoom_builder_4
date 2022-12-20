@@ -35,6 +35,7 @@ unset($lib_target);
 @include_once(EYOOM_LIB_PATH . '/ebslider.lib.php');
 @include_once(EYOOM_LIB_PATH . '/ebcontents.lib.php');
 @include_once(EYOOM_LIB_PATH . '/ebgoods.lib.php');
+@include_once(EYOOM_LIB_PATH . '/ebbanner.lib.php');
 @include_once(EYOOM_LIB_PATH . '/uri.lib.php');
 @include_once(EYOOM_LIB_PATH . '/visit.lib.php');
 @include_once(EYOOM_LIB_PATH . '/brand.lib.php');

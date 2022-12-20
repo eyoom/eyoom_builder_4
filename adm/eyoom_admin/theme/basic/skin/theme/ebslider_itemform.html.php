@@ -73,7 +73,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </th>
                         <td colspan="3">
                             <label for="ei_title" class="input">
-                                <input type="text" name="ei_title" id="ei_title" value="<?php echo $es_item['ei_title']; ?>" required>
+                                <input type="text" name="ei_title" id="ei_title" value="<?php echo $es_item['ei_title']; ?>">
                             </label>
                         </td>
                     </tr>

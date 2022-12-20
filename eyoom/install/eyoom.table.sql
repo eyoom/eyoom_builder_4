@@ -90,7 +90,6 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_skin` varchar(40) NOT NULL,
   `use_gnu_skin` enum('y','n') NOT NULL default 'n',
   `use_shop_skin` enum('y','n') NOT NULL default 'n',
-  `bo_use_profile_photo` char(1) NOT NULL default '1',
   `bo_sel_date_type` enum('1','2') NOT NULL default '1',
   `bo_use_hotgul` char(1) NOT NULL default '1',
   `bo_use_anonymous` char(1) NOT NULL default '',

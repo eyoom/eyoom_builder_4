@@ -149,23 +149,14 @@ function adm_pg_anchor($anc_id) {
 
 function mb_photo_url($mb_id) {
     $photo_url = '';
-    $dest_path = G5_DATA_PATH.'/member/profile/';
-    $dest_url = G5_DATA_URL.'/member/profile/';
-    $permit = array('jpg', 'jpeg', 'gif', 'png');
 
-    foreach($permit as $val) {
-        $photo_name = $mb_id.'.'.$val;
-        $photo_file = $dest_path.$photo_name;
-
-        // 사진이 있다면 변수 넘김
-        if(file_exists($photo_file) && !is_dir($photo_file)) {
-            $photo_url = $dest_url.$photo_name;
-            break;
-        }
+    $mb_dir = substr($mb_id,0,2);
+    $icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif';
+    if (file_exists($icon_file)) {
+        $photo_url = G5_DATA_URL.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif';
     }
 
     if ($photo_url) {
         return $photo_url;
     } else return false;
 }
-

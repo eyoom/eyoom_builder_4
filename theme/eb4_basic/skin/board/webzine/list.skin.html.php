@@ -229,15 +229,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <?php } ?>
                 </p>
                 <div class="webzine-info">
-                    <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
-                    <span class="webzine-photo">
-                        <?php if ($list[$i]['mb_photo']) { ?>
-                        <?php echo $list[$i]['mb_photo']; ?>
-                        <?php } else { ?>
-                        <span class="webzine-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
-                    <?php } ?>
                     <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
                     <?php if ($list[$i]['gnu_icon']) { ?>
                     <span class="webzine-lv-icon"><img src="<?php echo $list[$i]['gnu_icon']; ?>" alt="레벨"></span>
@@ -550,7 +541,7 @@ function select_copy(sw) {
     var sub_win = window.open("", "move", "left=50, top=50, width=500, height=550, scrollbars=1");
     f.sw.value = sw;
     f.target = "move";
-    f.action = "./move.php";
+    f.action = g5_bbs_url+"/move.php";
     f.submit();
 }
 </script>

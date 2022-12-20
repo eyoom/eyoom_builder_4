@@ -17,6 +17,8 @@ if ($is_admin != 'super') {
     alert('최고관리자만 접근 가능합니다.');
 }
 
+$copy_config = get_config(true);
+
 if (!isset($config['cf_add_script'])) {
     sql_query(
         " ALTER TABLE `{$g5['config_table']}`

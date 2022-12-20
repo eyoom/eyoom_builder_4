@@ -88,7 +88,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $respond[$i]['delete'] = './respond_chk.php?rid='.$row['rid'].'&act=delete'.$get;
     $respond[$i]['datetime'] = $datetime;
     $respond[$i]['datetime2'] = $datetime2;
-    $respond[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
+    $respond[$i]['mb_photo'] = $eb->mb_photo($row['mb_id'], 'icon');
 }
 $count = count($respond);
 

@@ -8,6 +8,8 @@ $sub_menu = "999800";
 
 auth_check_menu($auth, $sub_menu, "w");
 
+check_demo();
+
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
 /**

@@ -154,7 +154,7 @@ button.mfp-close {position:fixed;color:#fff !important}
         <strong><?php echo cut_str(get_text($view['wr_subject']), 70); ?></strong>
     </h3>
     <div class="board-view-info">
-        <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+        <?php if ($config['cf_use_member_icon']) { ?>
         <div class="view-photo-box">
             <?php if ($view['mb_photo']) { ?>
             <span class="view-photo m-r-5"><?php echo $view['mb_photo'] ?></span>
@@ -163,7 +163,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             <?php } ?>
         </div>
         <?php } ?>
-        <div class="view-info-box" <?php if($eyoom_board['bo_use_profile_photo'] == 1) { ?>style="margin-left:60px"<?php } ?>>
+        <div class="view-info-box" <?php if($config['cf_use_member_icon']) { ?>style="margin-left:60px"<?php } ?>>
             <div class="info-box-top">
                 <span class="view-nick">
                     <?php echo eb_nameview($view['mb_id'], $view['wr_name'], $view['wr_email'], $view['wr_homepage']); ?>
@@ -273,7 +273,7 @@ button.mfp-close {position:fixed;color:#fff !important}
         <div id="collapse-rating-result" class="collapse-rating-result-panel collapse">
             <?php foreach ($mb_rating as $mb_id => $rinfo) { ?>
             <span <?php echo $mb_id == $member['mb_id'] ? 'class="active"': ''; ?>>
-                <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+                <?php if ($config['cf_use_member_icon']) { ?>
                 <span class="rating-mb-photo">
                     <?php if ($rinfo['mb_photo']) { ?>
                     <?php echo $rinfo['mb_photo']; ?>
@@ -484,7 +484,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             <h5>추천한 회원</h5>
             <?php foreach ($goods as $k => $gmember) { ?>
             <span>
-                <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+                <?php if ($config['cf_use_member_icon']) { ?>
                 <span class="good-mb-photo">
                     <span class="good-photo">
                     <?php if ($gmember['mb_photo']) { ?>
@@ -508,7 +508,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             <h5>비추천 회원</h5>
             <?php foreach ($nogoods as $k => $nogmember) { ?>
             <span>
-                <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+                <?php if ($config['cf_use_member_icon']) { ?>
                 <span class="good-mb-photo">
                     <span class="view-photo">
                     <?php if ($nogmember['mb_photo']) { ?>

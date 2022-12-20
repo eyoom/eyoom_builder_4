@@ -103,14 +103,16 @@ for ($i=0; $i<$cmt_amt; $i++) {
         $cmt[$i]['lv_name'] = '';
         $cmt[$i]['gnu_icon'] = '';
         $cmt[$i]['eyoom_icon'] = '';
-    } else if (is_array($level)) {
+    } else {
         $cmt[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
-        $cmt[$i]['gnu_level'] = $level['gnu_level'];
-        $cmt[$i]['eyoom_level'] = $level['eyoom_level'];
-        $cmt[$i]['lv_gnu_name'] = $level['gnu_name'];
-        $cmt[$i]['lv_name'] = $level['name'];
-        $cmt[$i]['gnu_icon'] = $level['gnu_icon'];
-        $cmt[$i]['eyoom_icon'] = $level['eyoom_icon'];
+        if (is_array($level)) {
+            $cmt[$i]['gnu_level'] = $level['gnu_level'];
+            $cmt[$i]['eyoom_level'] = $level['eyoom_level'];
+            $cmt[$i]['lv_gnu_name'] = $level['gnu_name'];
+            $cmt[$i]['lv_name'] = $level['name'];
+            $cmt[$i]['gnu_icon'] = $level['gnu_icon'];
+            $cmt[$i]['eyoom_icon'] = $level['eyoom_icon'];
+        }
     }
 
     if ($list[$i]['is_reply'] || $list[$i]['is_edit'] || $list[$i]['is_del']) {

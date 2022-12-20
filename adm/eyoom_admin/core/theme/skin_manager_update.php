@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 auth_check_menu($auth, $sub_menu, "w");
 
+check_demo();
+
 check_admin_token();
 
 unset($theme);

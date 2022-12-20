@@ -820,7 +820,7 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                             </th>
                             <td>
                                 <label class="textarea">
-                                    <textarea name="de_bank_account" id="de_bank_account"><?php echo $default['de_bank_account']; ?></textarea>
+                                    <textarea name="de_bank_account" id="de_bank_account"><?php echo html_purifier($default['de_bank_account']); ?></textarea>
                                 </label>
                                 <div class="note margin-bottom-10"><strong>Note:</strong> 무통장 계좌번호를 입력해 주세요. 엔터를 입력하여 여러개의 계좌번호를 등록하실 수 있습니다.</div>
                             </td>

@@ -1045,6 +1045,7 @@ class theme extends qfile
             case 'register'         : $title = '약관동의'; $cate_name = '회원가입'; break;
             case 'register_form'    : $title = $is_member ? '정보수정': '정보입력'; $cate_name = $is_member ? '멤버쉽': '회원가입'; break;
             case 'register_result'  : $title = '회원가입완료'; $cate_name = '회원가입'; break;
+            case 'register_member'  : $title = '회원가입'; $cate_name = '소셜로그인 회원가입'; break;
             case 'password_lost'    : $title = '회원정보찾기'; $cate_name = '회원정보'; break;
             case 'password_reset'   : $title = '비밀번호재설정'; $cate_name = '회원정보'; break;
             case 'cart'             : $title = '장바구니'; $cate_name = '쇼핑몰'; break;
@@ -1290,5 +1291,39 @@ class theme extends qfile
         parent::save_file('eg_item', $eg_item_file, $eg_item, true);
 
         return $eg_item;
+    }
+
+    /**
+     * EB배너 아이템 파일 생성
+     */
+    public function save_ebbanner_item($code, $theme) {
+        /**
+         * 설정된 정보를 파일로 저장 - 캐쉬 기능
+         */
+        $link_path = G5_DATA_URL.'/ebbanner';
+
+        $sql = "select * from {$this->g5['eyoom_banner_item']} where bn_code = '{$code}' and bi_theme = '{$theme}' and bi_state = '1' order by bi_sort asc ";
+        $result = sql_query($sql, false);
+        $this_date = date('Ymd');
+        $bn_item = array();
+        for($i=0; $row=sql_fetch_array($result); $i++) {
+            if($row['bi_period'] == '2') {
+                if($this_date >= $row['bi_start'] && $this_date <= $row['bi_end']) {
+                    $bn_item[$i] = $row;
+                } else continue;
+            } else {
+                $bn_item[$i] = $row;
+            }
+        }
+
+        /**
+         * EB배너 아이템파일
+         */
+        $bn_item_file = G5_DATA_PATH . '/ebbanner/'.$theme.'/bn_item_' . $code . '.php';
+
+        /**
+         * 설정파일 저장
+         */
+        parent::save_file('bn_item', $bn_item_file, $bn_item, true);
     }
 }

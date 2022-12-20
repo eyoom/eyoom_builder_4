@@ -67,13 +67,8 @@ function eb_outlogin ($skin_dir = 'basic') {
         /**
          * 프로필 사진 정보
          */
-        $photo = G5_DATA_PATH."/member/profile/".$eyoomer['photo'];
-        if (file_exists($photo) && $eyoomer['photo']) {
-            $profile_photo = '<img src="'.G5_DATA_URL.'/member/profile/'.$eyoomer['photo'].'" alt="회원사진">';
-        } else {
-            $profile_photo = '<i class="fa fa-user"></i>';
-        }
-        
+        $profile_photo = $eb->mb_photo($member['mb_id']);
+
         /**
          * 소셜정보
          */

@@ -33,14 +33,10 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
             $tmp_name = '<a href="'.G5_BBS_URL.'/profile.php?mb_id='.$mb_id.'" data-toggle="dropdown" data-bs-toggle="dropdown" title="'.$name.' 자기소개" target="_blank" rel="nofollow" onclick="return false;">';
 
             if ($config['cf_use_member_icon']) {
-                $mb_dir = substr($mb_id,0,2);
-                $icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.$mb_id.'.gif';
+                $mb_photo = $eb->mb_photo($mb_id, 'icon');
 
-                if (file_exists($icon_file)) {
-                    $width = $config['cf_member_icon_width'];
-                    $height = $config['cf_member_icon_height'];
-                    $icon_file_url = G5_DATA_URL.'/member/'.$mb_dir.'/'.$mb_id.'.gif';
-                    $tmp_name .= '<img src="'.$icon_file_url.'" width="'.$width.'" height="'.$height.'" alt="">';
+                if ($mb_photo) {
+                    $tmp_name .= '<span class="bl-photo">'.$mb_photo.'</span>';
 
                     if ($config['cf_use_member_icon'] == 2) // 회원아이콘+이름
                         $tmp_name = $tmp_name.' '.$name;

@@ -273,6 +273,21 @@ $g5['eyoom_latest'] = G5_TABLE_PREFIX . 'eyoom_latest';
 $g5['eyoom_latest_item'] = G5_TABLE_PREFIX . 'eyoom_latest_item';
 
 /**
+ * EB배너 마스터
+ */
+$g5['eyoom_banner'] = G5_TABLE_PREFIX . 'eyoom_banner';
+
+/**
+ * EB배너 아이템
+ */
+$g5['eyoom_banner_item'] = G5_TABLE_PREFIX . 'eyoom_banner_item';
+
+/**
+ * EB배너 조회수
+ */
+$g5['eyoom_banner_hit'] = G5_TABLE_PREFIX . 'eyoom_banner_hit';
+
+/**
  * 이윰 게시판 확장필드 관리
  */
 $g5['eyoom_exboard'] = G5_TABLE_PREFIX . 'eyoom_exboard';

@@ -8,6 +8,8 @@ $sub_menu = "999600";
 
 auth_check_menu($auth, $sub_menu, 'w');
 
+check_demo();
+
 $es_master['es_code'] = $es_code = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
 $es_master['es_theme']      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
 $es_master['es_state']      = isset($_POST['es_state']) ? clean_xss_tags(trim($_POST['es_state'])) : '';

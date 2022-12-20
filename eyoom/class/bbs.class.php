@@ -34,7 +34,6 @@ class bbs extends eyoom
                 'bo_skin'                   => 'basic',
                 'use_gnu_skin'              => 'n',
                 'use_shop_skin'             => 'n',
-                'bo_use_profile_photo'      => 1,
                 'bo_sel_date_type'          => 1,
                 'bo_use_hotgul'             => 0,
                 'bo_use_anonymous'          => 0,
@@ -1593,7 +1592,7 @@ class bbs extends eyoom
             /**
              * 회원포토
              */
-            $list['mb_photo'] = parent::mb_photo($write['mb_id']);
+            $list['mb_photo'] = parent::mb_photo($write['mb_id'], 'icon');
 
             /**
              * 별점

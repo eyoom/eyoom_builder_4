@@ -148,15 +148,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <td class="td-border-right"><?php echo number_format($ordinfo[$i]['od_send_cost2']); ?></td>
                             <td></td>
                         </tr>
-                    </tbody>
-                    <tfoot>
                         <tr>
                             <th scope="row" colspan="2" class="td-border-right">합계</th>
                             <td class="td-border-right"><?php echo number_format($ordinfo[$i]['sub_tot_qty']); ?></td>
                             <td class="td-border-right"><?php echo number_format($ordinfo[$i]['sub_tot_price'] + $ordinfo[$i]['od_send_cost '] + $ordinfo[$i]['od_send_cost2']); ?></td>
                             <td></td>
                         </tr>
-                    </tfoot>
+                        </tbody>
                 </table>
             </div>
         </div>

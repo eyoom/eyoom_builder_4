@@ -76,7 +76,7 @@ function get_eyoom_ranking($type, $cnt=10) {
         $level = $eb->level_info($level_info);
         $list[$i]['eyoom_icon'] = $level['eyoom_icon'];
         $list[$i]['gnu_icon'] = $level['gnu_icon'];
-        $list[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
+        $list[$i]['mb_photo'] = $eb->mb_photo($row['mb_id'], 'icon');
     }
 
     if (isset($list)) {

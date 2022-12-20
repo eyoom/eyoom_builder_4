@@ -22,7 +22,6 @@ $colspan = 5;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
 if ($is_nogood) $colspan++;
-if ($eyoom_board['bo_use_profile_photo']) $colspan++;
 if ($eyoom_board['bo_use_rating']) $colspan++;
 
 /**
@@ -56,7 +55,7 @@ foreach ($list as $i => $val) {
         $list[$i]['lv_gnu_name'] = '';
         $list[$i]['lv_name'] = '';
     } else if (is_array($level)) {
-        $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
+        $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id'], 'icon');
         $list[$i]['gnu_level'] = $level['gnu_level'];
         $list[$i]['eyoom_level'] = $level['eyoom_level'];
         $list[$i]['lv_gnu_name'] = $level['gnu_name'];

@@ -33,7 +33,7 @@ if (!isset($is['is_reply_subject'])) {
                 ", true);
 }
 
-$mb_photo = $eb->mb_photo($is['mb_id']);
+$mb_photo = $eb->mb_photo($is['mb_id'], 'icon');
 //$name = get_sideview($is['mb_id'], get_text($is['is_name']), $is['mb_email'], $is['mb_homepage']);
 $board['bo_use_sideview'] = 'y';
 $name = eb_nameview($is['mb_id'], get_text($is['is_name']), $is['mb_email'], $is['mb_homepage']);

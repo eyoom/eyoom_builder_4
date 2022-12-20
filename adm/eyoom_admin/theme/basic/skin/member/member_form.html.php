@@ -337,7 +337,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label for="mb_signature" class="textarea">
-                                <textarea name="mb_signature" id="mb_signature" rows="5"><?php echo $mb['mb_signature']; ?></textarea>
+                                <textarea name="mb_signature" id="mb_signature" rows="5"><?php echo html_purifier($mb['mb_signature']); ?></textarea>
                             </label>
                         </td>
                     </tr>
@@ -347,7 +347,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label for="mb_profile" class="textarea">
-                                <textarea name="mb_profile" id="mb_profile" rows="5"><?php echo $mb['mb_profile']; ?></textarea>
+                                <textarea name="mb_profile" id="mb_profile" rows="5"><?php echo html_purifier($mb['mb_profile']); ?></textarea>
                             </label>
                         </td>
                     </tr>
@@ -357,7 +357,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td colspan="3">
                             <label for="mb_memo" class="textarea">
-                                <textarea name="mb_memo" id="mb_memo" rows="5"><?php echo $mb['mb_memo']; ?></textarea>
+                                <textarea name="mb_memo" id="mb_memo" rows="5"><?php echo html_purifier($mb['mb_memo']); ?></textarea>
                             </label>
                         </td>
                     </tr>

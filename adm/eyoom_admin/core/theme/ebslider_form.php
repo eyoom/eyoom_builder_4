@@ -49,6 +49,7 @@ $sql = "
       PRIMARY KEY  (`ei_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
+$sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 /**
@@ -75,6 +76,7 @@ $sql = "
       PRIMARY KEY  (`ei_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
+$sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 // 유튜브동영상 아이템 테이블에 필드 추가

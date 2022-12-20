@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "999100";
 
+check_demo();
+
 if($is_admin != 'super') alert('최고관리자만 설정을 변경할 수 있습니다.');
 
 $tm_key         = isset($_POST['tm_key']) ? clean_xss_tags(get_text(trim($_POST['tm_key']))): '';

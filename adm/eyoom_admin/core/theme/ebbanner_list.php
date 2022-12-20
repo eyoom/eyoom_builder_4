@@ -20,31 +20,22 @@ $action_url1 = G5_ADMIN_URL . '/?dir=theme&amp;pid=ebbanner_list_update&amp;smod
  */
 $sql = "
     CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_banner'] . "` (
-      `bn_no` int(10) unsigned NOT NULL,
+      `bn_no` int(10) unsigned NOT NULL auto_increment,
       `bn_code` varchar(20) NOT NULL,
-      `bn_type` enum('intra','extra') NOT NULL DEFAULT 'intra',
       `bn_subject` varchar(255) NOT NULL DEFAULT '0',
-      `bn_link` text,
-      `bn_img` varchar(100) NOT NULL DEFAULT '',
-      `bn_target` varchar(20) NOT NULL DEFAULT '',
-      `bn_script` text NOT NULL,
-      `bn_sort` int(10) DEFAULT '0',
-      `bn_theme` varchar(30) NOT NULL DEFAULT 'default',
+      `bn_theme` varchar(30) NOT NULL default 'eb4_basic',
+      `bn_skin` varchar(50) NOT NULL default 'basic',
       `bn_state` smallint(1) NOT NULL DEFAULT '0',
-      `bn_period` char(1) NOT NULL DEFAULT '1',
-      `bn_start` varchar(10) NOT NULL,
-      `bn_end` varchar(10) NOT NULL,
-      `bn_exposed` mediumint(10) NOT NULL DEFAULT '0',
-      `bn_clicked` mediumint(10) NOT NULL DEFAULT '0',
-      `bn_view_level` tinyint(4) NOT NULL DEFAULT '1',
-      `bn_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+      `bn_image` varchar(255) NOT NULL,
+      `bn_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
       PRIMARY KEY  (`bn_no`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
+$sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 /**
- * EB최신글 아이템 파일 저장 경로
+ * EB배너 아이템 파일 저장 경로
  */
 $ebbanner_folder = G5_DATA_PATH.'/ebbanner/';
 if(!@is_dir($ebbanner_folder) ) {
@@ -53,9 +44,9 @@ if(!@is_dir($ebbanner_folder) ) {
 }
 
 /**
- * 작업테마의 최신글 레코드 정보 가져오기
+ * 작업테마의 배너 레코드 정보 가져오기
  */
-$sql_common = " from {$g5['eyoom_latest']} ";
+$sql_common = " from {$g5['eyoom_banner']} ";
 
 /**
  * 작업테마 조건문
@@ -76,7 +67,7 @@ $result = sql_query($sql);
 $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
-    $list[$i]['bn_chg_code']    = "&lt;?php echo eb_latest('{$row['bn_code']}'); ?&gt;";
+    $list[$i]['bn_chg_code']    = "&lt;?php echo eb_banner('{$row['bn_code']}'); ?&gt;";
 }
 
 /**

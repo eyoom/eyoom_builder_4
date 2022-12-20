@@ -20,7 +20,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
     <div class="adm-headline adm-headline-btn">
         <h3>EB배너 관리</h3>
         <?php if (!$wmode) { ?>
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebbanner_form&amp;thema=<?php echo $this_theme; ?>" class="btn-e btn-e-red btn-e-lg"><i class="fas fa-plus"></i> EB배너 추가하기</a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebbanner_form&amp;thema=<?php echo $this_theme; ?>" class="btn-e btn-e-red btn-e-lg"><i class="fas fa-plus"></i> EB배너 마스터추가</a>
         <div class="clearfix"></div>
         <?php } ?>
     </div>
@@ -87,14 +87,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
             체크: "<label for='chk_<?php echo $i; ?>' class='checkbox'><input type='checkbox' name='chk[]' id='chk_<?php echo $i; ?>' value='<?php echo $i; ?>'><i></i></label><input type='hidden' name='bn_no[<?php echo $i; ?>]' value='<?php echo $list[$i]['bn_no']; ?>'><input type='hidden' name='bn_code[<?php echo $i; ?>]' value='<?php echo $list[$i]['bn_code']; ?>'>",
             관리: "<a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebbanner_form&amp;bn_code=<?php echo $list[$i]['bn_code']; ?>&amp;w=u'><u>수정</u></a>",
             배너제목: "<?php echo get_text($list[$i]['bn_subject']); ?>",
-            치환코드: "<div class='eb-clipboard'><div id='subs_code_<?php echo $i; ?>' class='eb-clipboard-cont'><?php echo $list[$i]['bn_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code_<?php echo $i; ?>'>코드복사</div></div>",
-            이미지: "<?php echo $list[$i]['bn_image']; ?>",
+            치환코드: "<div class='eb-clipboard'><div id='subs_code_<?php echo $i; ?>' class='eb-clipboard-cont'><?php echo $list[$i]['bn_chg_code']; ?></div><div class='eb-clipboard-btn' data-clipboard-target='#subs_code_<?php echo $i; ?>'>코드복사</div></div>",
             상태: "<label for='bn_state_<?php echo $i; ?>' class='select'><select name='bn_state[<?php echo $i; ?>]' id='bn_state_<?php echo $i; ?>'><option value=''>선택</option><option value='1' <?php echo  $list[$i]['bn_state'] == '1' ? 'selected':''; ?>>보이기</option><option value='2' <?php echo  $list[$i]['bn_state'] == '2' ? 'selected':''; ?>>숨기기</option></select><i></i></label>",
-	        노출수: "<?php echo number_format($list[$i]['bn_exposed']); ?>",
-	        클릭수: "<?php echo number_format($list[$i]['bn_clicked']); ?>",
-	        클릭률: "<?php echo $list[$i]['bn_ratio']; ?>%",
-	        시작일: "<?php echo $list[$i]['bn_start']; ?>",
-	        종료일: "<?php echo $list[$i]['bn_end']; ?>",
             등록일: "<?php echo substr($list[$i]['bn_regdt'], 0, 10); ?>",
         },
         <?php } ?>
@@ -118,14 +112,8 @@ $(function() {
             { name: "체크", type: "text", width: 40 },
             { name: "관리", type: "text", align: "center", width: 80, headercss: "set-btn-header", css: "set-btn-field" },
             { name: "배너제목", type: "text", width: 120 },
-            { name: "치환코드", type: "text", align: "center", width: 250 },
-            { name: "이미지", type: "text", align: "center", width: 120 },
-            { name: "상태", type: "text", align: "center", width: 100 },
-            { name: "노출수", type: "number", width: 60 },
-            { name: "클릭수", type: "number", width: 60 },
-            { name: "클릭률", type: "number", width: 60 },
-            { name: "시작일", type: "text", align: "center", width: 80 },
-            { name: "종료일", type: "text", align: "center", width: 80 },
+            { name: "치환코드", type: "text", align: "center", width: 350 },
+            { name: "상태", type: "text", align: "center", width: 120 },
             { name: "등록일", type: "text", align: "center", width: 80 },
         ]
     });

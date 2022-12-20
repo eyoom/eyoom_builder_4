@@ -70,7 +70,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $level = $wr_1 ? $eb->level_info($wr_1):'';
     if (is_array($level)) {
         if (!$level['anonymous']) {
-            $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id']);
+            $list[$i]['mb_photo'] = $eb->mb_photo($list[$i]['mb_id'], 'icon');
         } else {
             $list[$i]['mb_photo'] = '';
             $list[$i]['mb_id'] = 'anonymous';

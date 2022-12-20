@@ -266,7 +266,7 @@ function eb_latest ($el_code) {
                          * 프로필 포토
                          */
                         if ($el_item[$i]['li_photo'] == 'y' && !$loop[$k]['is_anonymous']) {
-                            $loop[$k]['mb_photo'] = $eb->mb_photo($row['mb_id']);
+                            $loop[$k]['mb_photo'] = $eb->mb_photo($row['mb_id'], 'icon');
                         }
 
                         /**

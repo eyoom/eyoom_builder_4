@@ -21,7 +21,7 @@ $sql = " select *
 $iq = sql_fetch($sql);
 if (! (isset($iq['iq_id']) && $iq['iq_id'])) alert('등록된 자료가 없습니다.');
 
-$mb_photo = $eb->mb_photo($iq['mb_id']);
+$mb_photo = $eb->mb_photo($iq['mb_id'], 'icon');
 //$name = get_sideview($iq['mb_id'], get_text($iq['iq_name']), $iq['mb_email'], $iq['mb_homepage']);
 $board['bo_use_sideview'] = 'y';
 $name = eb_nameview($iq['mb_id'], get_text($iq['iq_name']), $iq['mb_email'], $iq['mb_homepage']);

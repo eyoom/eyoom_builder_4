@@ -199,8 +199,8 @@ $is_megamenu = 'yes';
                                     <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
                                     <a href="#" class="cate-dropdown-open dorpdown-toggle <?php if (isset($menu_1['active']) && $menu_1['active']) echo 'show'; ?>" data-bs-toggle="dropdown"></a>
                                     <?php } ?>
-                                    <?php $index2 = 0; $size2 = count((array)$menu_1['submenu']); ?>
-                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
+                                    <?php $index2 = $size2 = 0; ?>
+                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { $size2 = count($menu_1['submenu']); ?>
                                     <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
                                     <?php if ($index2 == 0) { ?>
                                     <div class="dropdown-menu <?php if (isset($menu_1['active']) && $menu_1['active']) echo 'show'; ?>">
@@ -220,8 +220,8 @@ $is_megamenu = 'yes';
                                                 <i class="fas fa-angle-right sub-caret hidden-sm hidden-xs"></i><i class="fas fa-angle-down sub-caret hidden-md hidden-lg"></i>
                                                 <?php } ?>
                                             </a>
-                                            <?php $index3 = 0; $size3 = count((array)$menu_2['subsub']); ?>
-                                            <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { ?>
+                                            <?php $index3 = $size3 = 0; ?>
+                                            <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { $size3 = count($menu_2['subsub']); ?>
                                             <?php foreach ($menu_2['subsub'] as $ssubkey => $menu_3) { ?>
                                             <?php if ($index3 == 0) { ?>
                                             <ul class="dropdown-menu">
@@ -266,16 +266,16 @@ $is_megamenu = 'yes';
                                             <?php foreach ($menu as $key => $menu_1) { ?>
                                             <li class="mega-menu-col">
                                             <h5><a href="<?php echo $menu_1['me_link']; ?>" target="_<?php echo $menu_1['me_target']; ?>" class="<?php if ($menu_1['active']) echo 'active';?>"><?php echo $menu_1['me_name']?></a></h5>
-                                                <?php $index2 = 0; $size2 = count($menu_1['submenu']); ?>
-                                                <?php if (is_array($menu_1['submenu'])) { ?>
+                                                <?php $index2 = $size2 = 0; ?>
+                                                <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { $size2 = count($menu_1['submenu']); ?>
                                                 <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
                                                 <?php if ($index2 == 0) { ?>
                                                 <ul>
                                                 <?php } ?>
                                                     <li>
                                                         <a href="<?php echo $menu_2['me_link']; ?>" target="_<?php echo $menu_2['me_target']; ?>" class="mega-menu-item <?php if ($menu_2['active']) echo 'active';?>"><?php echo $menu_2['me_name']; ?></a>
-                                                        <?php $index3 = 0; $size3 = count((array)$menu_2['subsub']); ?>
-                                                        <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { ?>
+                                                        <?php $index3 = $size3 = 0; ?>
+                                                        <?php if (isset($menu_2['subsub']) && is_array($menu_2['subsub'])) { $size3 = count($menu_2['subsub']); ?>
                                                         <?php foreach ($menu_2['subsub'] as $ssubkey => $menu_3) { ?>
                                                         <?php if ($index3 == 0) { ?>
                                                         <ul class="menu3-ul">

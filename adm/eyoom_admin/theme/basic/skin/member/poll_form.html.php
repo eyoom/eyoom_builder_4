@@ -125,7 +125,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <textarea name="po_ips" id="po_ips" readonly rows="5"><?php echo preg_replace("/\n/", " / ", $po['po_ips']) ?></textarea>
+                                <textarea name="po_ips" id="po_ips" readonly rows="5"><?php echo html_purifier(preg_replace("/\n/", " / ", $po['po_ips'])); ?></textarea>
                             </label>
                         </td>
                     </tr>
@@ -135,7 +135,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </th>
                         <td>
                             <label class="textarea">
-                                <textarea name="mb_ids" id="mb_ids" readonly rows="5"><?php echo preg_replace("/\n/", " / ", $po['mb_ids']) ?></textarea>
+                                <textarea name="mb_ids" id="mb_ids" readonly rows="5"><?php echo html_purifier(preg_replace("/\n/", " / ", $po['mb_ids'])); ?></textarea>
                             </label>
                         </td>
                     </tr>

@@ -404,7 +404,7 @@ class eyoom extends qfile
         if ($single) {
             $user = sql_fetch($sql, false);
             if ($user['mb_id']) {
-                $user['mb_photo'] = $this->mb_photo($user['mb_id'],$user['photo']);
+                $user['mb_photo'] = $this->mb_photo($user['mb_id']);
                 $user['wallpaper'] = $this->myhome_cover($user['mb_id'],$user['myhome_cover']);
                 return $user;
             } else {
@@ -548,32 +548,173 @@ class eyoom extends qfile
 
     /**
      * 회원 프로필 사진
+     * $type : img or icon
      */
-    public function mb_photo($mb_id,$photo_filename='') {
-        $photo = '';
-        $dest_path = G5_DATA_PATH.'/member/profile/';
-        $dest_url = G5_DATA_URL.'/member/profile/';
-        $permit = array('jpg','gif','png');
-        if ($photo_filename) {
-            $photo_file = $dest_path.$photo_filename;
-            if (file_exists($photo_file)) {
-                $photo = '<img class="user-photo" src="'.$dest_url.$photo_filename.'" alt="회원사진">';
-            }
-        } else {
-            foreach ($permit as $val) {
-                $photo_name = $mb_id.'.'.$val;
-                $photo_file = $dest_path.$photo_name;
+    public function mb_photo($mb_id, $type='img') {
+        global $config;
 
-                /**
-                 * 사진이 있다면 변수 넘김
-                 */
-                if (file_exists($photo_file)) {
-                    $photo = '<img class="user-photo" src="'.$dest_url.$photo_name.'" alt="회원사진">';
-                    break;
+        if (!$type) $type = 'img';
+        if ($type == 'icon' && $config['cf_use_member_icon']) {
+            $mb_dir = substr($mb_id,0,2);
+            $icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif';
+            if (file_exists($icon_file)) {
+                $icon_filemtile = (defined('G5_USE_MEMBER_IMAGE_FILETIME') && G5_USE_MEMBER_IMAGE_FILETIME) ? '?'.filemtime($icon_file) : '';
+                $width = $config['cf_member_icon_width'];
+                $height = $config['cf_member_icon_height'];
+                $icon_file_url = G5_DATA_URL.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif'.$icon_filemtile;
+                $photo = '<img src="'.$icon_file_url.'" width="'.$width.'" height="'.$height.'">';
+            }
+        } else if ($type == 'img') {
+            $photo = get_member_profile_img($mb_id);
+            if (preg_match("/no_profile/i", $photo)) {
+                $photo = '';
+                $src_path = G5_DATA_PATH.'/member/profile/';
+                $permit = array('jpg', 'jpeg', 'gif','png');
+    
+                foreach ($permit as $val) {
+                    $photo_name = $mb_id.'.'.$val;
+                    $photo_file = $src_path.$photo_name;
+    
+                    /**
+                     * 사진이 있다면 변수 넘김
+                     */
+                    if (file_exists($photo_file)) {
+                        $src_photo['path'] = $src_path;
+                        $src_photo['name'] = $photo_name;
+                        $this->moveto_mb_photo($mb_id, $src_photo);
+                        $photo = get_member_profile_img($mb_id);
+                        break;
+                    }
+                }
+    
+                if (!$photo) {
+                    $photo = $this->make_mb_default_photo($mb_id);
                 }
             }
         }
+        
         return $photo;
+    }
+    
+    /**
+     * 기본으로 등록된 회원 이미지 랜덤 설정
+     */
+    public function make_mb_default_photo ($mb_id) {
+        $src_path = EYOOM_MISC_PATH.'/member_icon/';
+        
+        $photo_file = array();
+        $tmp = @dir($src_path);
+        if ($tmp) {
+            while ($entry = $tmp->read()) {
+                if ($entry == '.' || $entry == '..') {
+                    continue;
+                } else {
+                    $photo_file[] = $entry;   
+                }
+            }
+        }
+
+        $pf_cnt = count($photo_file);
+        if ($pf_cnt > 0) {
+            $hash_key = $this->random_num(1000)%$pf_cnt;
+            $photo_name = $photo_file[$hash_key];
+            $src_photo['path'] = $src_path;
+            $src_photo['name'] = $photo_name;
+            $this->moveto_mb_photo ($mb_id, $src_photo);
+            $photo = get_member_profile_img($mb_id);
+        }
+
+        return $photo;
+    }
+
+    /**
+     * 그누보드 회원 이미지로 적용하기
+     */
+    private function moveto_mb_photo ($mb_id, $src_photo) {
+        global $config;
+
+        $src_path = $src_photo['path'];
+        $src_name = $src_photo['name'];
+        $image_regex = "/(\.(gif|jpe?g|png))$/i";
+        $mb_photo_img = get_mb_icon_name($mb_id).'.gif';
+
+        if( $config['cf_member_img_width'] && $config['cf_member_img_height'] ) {
+            $mb_img_tmp_dir = G5_DATA_PATH.'/member_image/';
+            $mb_icon_tmp_dir = G5_DATA_PATH.'/member/';
+            $mb_img_dir = $mb_img_tmp_dir.substr($mb_id,0,2);
+            $mb_icon_dir = $mb_icon_tmp_dir.substr($mb_id,0,2);
+            if( !is_dir($mb_img_tmp_dir) ){
+                @mkdir($mb_img_tmp_dir, G5_DIR_PERMISSION);
+                @chmod($mb_img_tmp_dir, G5_DIR_PERMISSION);
+            }
+            if( !is_dir($mb_icon_tmp_dir) ){
+                @mkdir($mb_icon_tmp_dir, G5_DIR_PERMISSION);
+                @chmod($mb_icon_tmp_dir, G5_DIR_PERMISSION);
+            }
+
+            if (file_exists($src_path.$src_name) && preg_match($image_regex, $src_name) ) {
+                @mkdir($mb_img_dir, G5_DIR_PERMISSION);
+                @chmod($mb_img_dir, G5_DIR_PERMISSION);
+                @mkdir($mb_icon_dir, G5_DIR_PERMISSION);
+                @chmod($mb_icon_dir, G5_DIR_PERMISSION);
+
+                $dest_img_path = $mb_img_dir.'/'.$mb_photo_img;
+                $dest_icon_path = $mb_icon_dir.'/'.$mb_photo_img;
+
+                if (file_exists($src_path.$src_name)) {
+                    @copy($src_path.$src_name, $dest_img_path);
+                    @chmod($dest_img_path, G5_FILE_PERMISSION);
+                    
+                    if (file_exists($dest_img_path)) {
+                        $size = @getimagesize($dest_img_path);
+                        if (!($size[2] === 1 || $size[2] === 2 || $size[2] === 3)) {
+                            @unlink($dest_img_path);
+                        } else {
+                            $thumb_img = null;
+                            if($size[2] === 2 || $size[2] === 3) {
+                                //jpg 또는 png 파일 적용
+                                $thumb_img = thumbnail($mb_photo_img, $mb_img_dir, $mb_img_dir, $config['cf_member_img_width'], $config['cf_member_img_height'], true, true);
+                                if($thumb_img) {
+                                    @unlink($dest_img_path);
+                                    rename($mb_img_dir.'/'.$thumb_img, $dest_img_path);
+                                }
+
+                                // 회원아이콘 만들기
+                                if (!file_exists($dest_icon_path)) {
+                                    @copy($src_path.$src_name, $dest_icon_path);
+                                    @chmod($dest_icon_path, G5_FILE_PERMISSION);
+
+                                    $size2 = @getimagesize($dest_icon_path);
+                                    if (!($size2[2] === 1 || $size2[2] === 2 || $size2[2] === 3)) {
+                                        @unlink($dest_icon_path);
+                                    } else if ($size2[0] > $config['cf_member_icon_width'] || $size2[1] > $config['cf_member_icon_height']) {
+                                        $thumb_icon = null;
+                                        if($size2[2] === 2 || $size2[2] === 3) {
+                                            //jpg 또는 png 파일 적용
+                                            $thumb_icon = thumbnail($mb_photo_img, $mb_icon_dir, $mb_icon_dir, $config['cf_member_icon_width'], $config['cf_member_icon_height'], true, true);
+                                            if($thumb_icon) {
+                                                @unlink($dest_icon_path);
+                                                rename($mb_icon_dir.'/'.$thumb_icon, $dest_icon_path);
+                                            }
+                                        }
+                                        if( !$thumb_icon ){
+                                            // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
+                                            @unlink($dest_icon_path);
+                                        }
+                                    }
+                                }
+                            }
+                            if( !$thumb_img ){
+                                // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
+                                @unlink($dest_img_path);
+                            }
+                        }
+
+                        sql_query("update {$this->g5['eyoom_member']} set photo = '".$mb_photo_img."' where mb_id='".$mb_id."'");
+                    }
+                }
+            }
+        }
     }
 
     /**

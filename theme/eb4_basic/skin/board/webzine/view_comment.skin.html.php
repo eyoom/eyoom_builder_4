@@ -127,7 +127,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <?php if ($cmt[$i]['cmt_depth']) { ?>
                 <div class="view-comment-depth"></div>
                 <?php } ?>
-                <?php if ($eyoom_board['bo_use_profile_photo'] == 1) { ?>
+                <?php if ($config['cf_use_member_icon']) { ?>
                 <div class="view-comment-photo <?php if (!$cmt[$i]['cmt_depth']) { ?>no-depth-photo<?php }  ?>">
                     <?php if ($cmt[$i]['mb_photo']) { ?>
                     <?php echo $cmt[$i]['mb_photo']; ?>
@@ -643,7 +643,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                             <?php if ($eyoom_board['bo_lucky_point_type'] == 1) { ?>
                             <p>댓글을 작성하면 <span class="text-crimson"><?php echo ceil(($eyoom_board['bo_lucky_point_ratio']/100)*100); ?>% 확률</span>로 최대 <span class="text-crimson"><?php echo $eyoom_board['bo_lucky_point']; ?><?php echo $levelset['gnu_name']; ?> 이내에서 랜덤으로 행운의<?php echo $levelset['gnu_name']; ?></span>를 지급합니다.</p>
                             <?php } else { ?>
-                            <p>댓글을 작성하면 <span class="text-crimson"><u><?php echo ceil(($eyoom_board['bo_lucky_point_ratio']/100)*100); ?>% 확률</span>로 <span class="text-crimson"><?php echo $eyoom_board['bo_lucky_point']; ?><?php echo $levelset['gnu_name']; ?></span>를 행운의<?php echo $levelset['gnu_name']; ?>로 지급합니다.</p>
+                            <p>댓글을 작성하면 <span class="text-crimson"><?php echo ceil(($eyoom_board['bo_lucky_point_ratio']/100)*100); ?>% 확률</span>로 <span class="text-crimson"><?php echo $eyoom_board['bo_lucky_point']; ?><?php echo $levelset['gnu_name']; ?></span>를 행운의<?php echo $levelset['gnu_name']; ?>로 지급합니다.</p>
                             <?php } ?>
                         </div>
                     </div>

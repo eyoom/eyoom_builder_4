@@ -25,22 +25,28 @@ if (!defined('_EYOOM_')) exit;
                 </form>
                 <script>
                 function fsearchbox_submit(f) {
-                    if (f.stx.value.length < 2 || f.stx.value == $(".sch_stx").attr("placeholder")) {
+                    var stx = f.stx.value.trim();
+                    if (stx.length < 2 || stx == $(".sch_stx").attr("placeholder")) {
                         alert("검색어는 두글자 이상 입력하십시오.");
                         f.stx.select();
                         f.stx.focus();
                         return false;
                     }
+
                     var cnt = 0;
-                    for (var i=0; i<f.stx.value.length; i++) {
-                        if (f.stx.value.charAt(i) == ' ') cnt++;
+                    for (var i = 0; i < stx.length; i++) {
+                        if (stx.charAt(i) == ' ')
+                            cnt++;
                     }
+
                     if (cnt > 1) {
                         alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
                         f.stx.select();
                         f.stx.focus();
                         return false;
                     }
+                    f.stx.value = stx;
+
                     return true;
                 }
                 </script>
@@ -58,20 +64,44 @@ if (!defined('_EYOOM_')) exit;
             <form name="profile_photo" method="post" action="<?php echo EYOOM_CORE_URL; ?>/member/photo_update.php" enctype="multipart/form-data" class="eyoom-form">
             <input type="hidden" name="old_photo" value="<?php echo $eyoomer['photo']; ?>">
             <input type="hidden" name="back_url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+            <input type="hidden" name="selected_icon" id="selected_icon" value="">
             <div class="modal-header">
-                <h5 class="modal-title f-s-20r"><i class="fas fa-user-circle text-gray m-r-7"></i><strong>프로필 사진변경</strong></h5>
+                <h5 class="modal-title f-s-20r"><i class="fas fa-user-circle text-gray m-r-7"></i><strong>프로필 사진 변경</strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="profile-photo"><?php if ($eyoomer['mb_photo']) echo $eyoomer['mb_photo']; else { ?><img src="<?php echo EYOOM_THEME_URL; ?>/image/user.jpg"><?php } ?></div>
-                <div class="alert alert-info">
-                    <p>프로필 사진은 이미지(gif/jpg/png) 파일만 등록가능하며, 정사각형 비율로 업로드하여 주세요. (100x100픽셀 사이즈 권장)</p>
-                </div>
-                <label for="photo_file" class="label">사진 선택</label>
-                <div class="input m-b-5">
-                    <input type="file" class="form-control" id="photo_file" name="photo" value="사진선택">
+                <div class="m-b-10">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#profile_photo_type1" data-bs-toggle="tab" class="active">기본 이미지 선택</a></li>
+                        <li><a href="#profile_photo_type2" data-bs-toggle="tab">이미지 직접 업로드</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active in" id="profile_photo_type1">
+                            <div class="default-photo-box">
+                                <div class="default-photo-img" id="default-photo-img">
+                                    <?php if ($eyoomer['mb_photo']) echo $eyoomer['mb_photo']; else { ?><img src="<?php echo EYOOM_THEME_URL; ?>/image/user.jpg"><?php } ?>
+                                </div>
+                                <div class="default-photo-btn">
+                                    <a href="<?php echo EYOOM_CORE_URL;?>/member/member_icon.php" class="btn-e btn-e-lg btn-e-dark btn-e-brd btn-e-block default-img-btn" onclick="profile_default_img_modal(this.href); return false;"><i class="far fa-user-check m-r-7"></i></i>기본 이미지 선택하기</a>
+                                </div>
+                            </div>
+                            <?php if ($is_admin) { ?>
+                            <p class="li-p f-s-13r text-gray m-t-10"><i class="fas fa-exclamation-circle li-p-fa text-crimson"></i>프로필 사진 기본 이미지는 /eyoom/misc/member_icon 폴더에서 추가 및 수정할수 있으니 참고 바랍니다.</p>
+                            <?php } ?>
+                        </div>
+                        <div class="tab-pane in" id="profile_photo_type2">
+                            <div class="input">
+                                <input type="file" class="form-control" id="photo_file" name="photo" value="사진선택">
+                            </div>
+                            <div class="alert alert-warning m-b-0">
+                                <p>jpg, png, gif 파일만 등록가능하며, 정사각형 비율로 업로드하여 주세요. (<?php echo $config['cf_member_img_width']; ?>x<?php echo $config['cf_member_img_height']; ?>픽셀 사이즈 권장)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <?php if ($eyoomer['photo']) { ?><label class="checkbox"><input type="checkbox" name="del_photo" value="1"><i></i>프로필사진 삭제</label><?php } ?>
+                <label class="checkbox"><input type="checkbox" name="apply_icon" value="1"><i></i>회원 아이콘 자동생성 <span class="text-light-gray">(권장 | 동일한 이미지의 아이콘 생성)</span></label>
             </div>
             <div class="modal-footer">
                 <button class="btn-e btn-e-lg btn-red" type="submit" value="저장하기">저장하기</button>
@@ -81,7 +111,32 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
 </div>
+<script>
+function set_member_icon (icon) {
+    var icon_url = g5_url+'/eyoom/misc/member_icon/'+icon;
+    var selected_icon_html = '<img src="'+icon_url+'">';
+    $("#selected_icon").val(icon);
+    $("#default-photo-img").empty().html(selected_icon_html);
+     $('.profile-default-img-modal').modal('hide');
+}
+</script>
 <?php /* 프로필 사진 모달 끝 */ ?>
+
+<?php /* 프로필 사진 기본 이미지 모달 시작 */ ?>
+<div class="modal fade profile-default-img-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title f-s-20r"><i class="far fa-user-circle text-gray m-r-7"></i><strong>프로필 이미지 선택</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="profile-default-img-iframe" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<?php /* 프로필 사진 기본 이미지 모달 끝 */ ?>
 
 <?php /* 회원 자기소개 모달 시작 */ ?>
 <div class="modal fade member-profile-iframe-modal" tabindex="-1" aria-hidden="true">
@@ -222,6 +277,19 @@ function close_modal_and_reload() {
 <?php /* 관리자 iframe 설정 모달 끝 */ ?>
 
 <script>
+function profile_default_img_modal(href) {
+    $('.profile-default-img-modal').modal('show').on('hidden.bs.modal', function() {
+        $("#profile-default-img-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.profile-default-img-modal').modal('show').on('shown.bs.modal', function() {
+        $("#profile-default-img-iframe").attr("src", href);
+        $('#profile-default-img-iframe').height(500);
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
+}
+
 function member_profile_modal(href) {
     $('.member-profile-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#member-profile-iframe").attr("src", "");

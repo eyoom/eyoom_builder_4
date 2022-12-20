@@ -1248,6 +1248,21 @@ img.img-circle {border-radius:50% !important}
 .sv_wrap .sv_on {top:inherit;left:inherit}
 .sv_wrap .btn-e-block {text-align:left;padding:2px 10px;font-size:.875rem;border-radius:0}
 
+/*---------- Profile Modal ----------*/
+.profile-modal .nav-tabs {border:1px solid #e5e5e5;border-bottom:0}
+.profile-modal .nav-tabs li {width:50%}
+.profile-modal .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:10px 5px;font-size:.9375rem;border-top:0}
+.profile-modal .nav-tabs li:first-child a {margin-left:0;border-left:0}
+.profile-modal .nav-tabs li:last-child a {border-right:0}
+.profile-modal .nav-tabs li a:hover {background:#fff;border-bottom:1px solid #e5e5e5}
+.profile-modal .nav-tabs li a.active {z-index:1;background:#fff;color:#000;border-bottom:1px solid transparent}
+.profile-modal .nav-tabs li .cursor-pointer:hover {cursor:pointer}
+.profile-modal .tab-content {position:relative;border:1px solid #e5e5e5;border-top:0;padding:20px}
+.profile-modal .default-photo-box {display:flex}
+.profile-modal .default-photo-img {flex-shrink:0;width:50px;display:flex;align-items:center}
+.profile-modal .default-photo-img img {width:35px;height:35px}
+.profile-modal .default-photo-btn {flex-grow:1;position:relative}
+
 /*---------- EXIF INFO ----------*/
 .exif_info {position:relative;overflow:hidden;border:1px solid #d5d5d5;padding:7px 10px;background:#fafafa;margin:10px 0 20px}
 .exif_info ul {list-style:none;margin-bottom:0;-webkit-padding-start:0}
@@ -1298,5 +1313,6 @@ input[type=text]:focus,input[type=password]:focus,  textarea:focus,select:focus 
 pre[class*="language-"] {border-radius:0 !important}
 .tooltip > .tooltip-inner {word-break:keep-all}
 /*Social Login*/
+.selec_chk {visibility:hidden;opacity:0}
 .mbskin .toggle .toggle-title {line-height:25px !important}
 #fregisterform .btn_confirm .btn_cancel {vertical-align:inherit;border-radius:3px;color:#fff !important}

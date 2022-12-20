@@ -117,22 +117,6 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label class="label">프로필 사진 사용여부</label>
-                            </th>
-                            <td>
-                                <label for="bo_use_profile_photo" class="checkbox">
-                                    <input type="checkbox" name="bo_use_profile_photo" id="bo_use_profile_photo" value="1" <?php echo $eyoom_board['bo_use_profile_photo'] == '1' ? 'checked': ''; ?>><i></i> 사용 <span class="note"> (체크하시면 게시물 작성자의 프로필 사진이 출력됩니다.)</span>
-                                </label>
-                            </td>
-                            <td class="table-chk-td">
-                                <div class="inline-group pull-right">
-                                    <label for="chk_grp_profile_photo" class="checkbox"><input type="checkbox" name="chk_grp_profile_photo" id="chk_grp_profile_photo"><i></i>그룹적용</label>
-                                    <label for="chk_all_profile_photo" class="checkbox"><input type="checkbox" name="chk_all_profile_photo" id="chk_all_profile_photo"><i></i>전체적용</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-form-th">
                                 <label class="label">작성일 표기방식</label>
                             </th>
                             <td>

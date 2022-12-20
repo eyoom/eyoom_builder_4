@@ -6,7 +6,7 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <?php if (G5_IS_MOBILE && $config['cf_kakao_js_apikey']) { ?>
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js" async></script>
 <script src="<?php echo G5_URL; ?>/js/kakaolink.js"></script>
 <script>
     // 사용할 앱의 Javascript 키를 설정해 주세요.

@@ -39,6 +39,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
 .register-form .frm_label {font-weight:700}
 .register-form .sns-wrap-reg {margin-bottom:20px}
 .register-form .sns-wrap {text-align:left}
+.register-form #reg_mb_icon, .register-form #reg_mb_img {float:inherit}
 </style>
 
 <script src="<?php echo EYOOM_THEME_URL; ?>/js/zxcvbn.js"></script>
@@ -327,14 +328,14 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
             <div class="row">
                 <section class="col-lg-12">
                     <label for="reg_mb_icon" class="label">회원아이콘</label>
-                    <label for="file" class="input input-file">
-                        <div class="button bg-color-light-grey"><input type="file" id="reg_mb_icon" name="mb_icon" value="파일선택" title="파일첨부" onchange="this.parentNode.nextSibling.value = this.value">파일 선택</div><input type="text" readonly>
-                    </label>
+                    <div class="input m-b-10">
+                        <input type="file" class="form-control" id="reg_mb_icon" name="mb_icon" value="파일선택">
+                    </div>
                     <div class="clearfix"></div>
                     <?php if ($w == 'u' && file_exists($mb_icon_path)) {  ?>
-                    <img src="<?php echo $mb_icon_url ?>" alt="회원아이콘">
-                    <input type="checkbox" name="del_mb_icon" value="1" id="del_mb_icon">
-                    <label for="del_mb_icon" class="inline">삭제</label>
+                    <img src="<?php echo $mb_icon_url ?>" alt="회원아이콘" class="float-start m-r-10">
+                    <label class="checkbox float-start p-l-20"><input type="checkbox" name="del_mb_icon" value="1" id="del_mb_icon"><i></i>삭제</label>
+                    <div class="clearfix"></div>
                     <?php }  ?>
                     <div class="note m-b-10"><strong>Note:</strong> 이미지 크기는 가로 <?php echo $config['cf_member_icon_width'] ?>픽셀, 세로 <?php echo $config['cf_member_icon_height'] ?>픽셀 이하로 해주세요.<br>gif, jpg, png파일만 가능하며 용량 <?php echo number_format($config['cf_member_icon_size']) ?>바이트 이하만 등록됩니다.</div>
                 </section>
@@ -344,14 +345,14 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
             <div class="row">
                 <section class="col-lg-12">
                     <label for="reg_mb_img" class="label">회원이미지</label>
-                    <label for="file" class="input input-file">
-                        <div class="button bg-color-light-grey"><input type="file" id="reg_mb_img" name="mb_img" value="파일선택" title="파일첨부" onchange="this.parentNode.nextSibling.value = this.value">파일 선택</div><input type="text" readonly>
-                    </label>
+                    <div class="input m-b-10">
+                        <input type="file" class="form-control" id="reg_mb_img" name="mb_img" value="파일선택">
+                    </div>
                     <div class="clearfix"></div>
                     <?php if ($w == 'u' && file_exists($mb_img_path)) {  ?>
-                    <img src="<?php echo $mb_img_url ?>" alt="회원이미지">
-                    <input type="checkbox" name="del_mb_img" value="1" id="del_mb_img">
-                    <label for="del_mb_img" class="inline">삭제</label>
+                    <img src="<?php echo $mb_img_url ?>" alt="회원이미지" class="float-start m-r-10">
+                    <label class="checkbox float-start p-l-20"><input type="checkbox" name="del_mb_img" value="1" id="del_mb_img"><i></i>삭제</label>
+                    <div class="clearfix"></div>
                     <?php }  ?>
                     <div class="note m-b-10"><strong>Note:</strong> 이미지 크기는 가로 <?php echo $config['cf_member_img_width'] ?>픽셀, 세로 <?php echo $config['cf_member_img_height'] ?>픽셀 이하로 해주세요.<br>gif, jpg, png파일만 가능하며 용량 <?php echo number_format($config['cf_member_img_size']) ?>바이트 이하만 등록됩니다.</div>
                 </section>
