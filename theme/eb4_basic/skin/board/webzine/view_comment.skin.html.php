@@ -378,7 +378,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                         <div class="inline-group">
                             <label class="checkbox"><input type="checkbox" name="wr_secret" value="secret" id="wr_secret"><i></i>비밀글 사용</label>
                             <?php if ($bo_use_anonymous == '1') { ?>
-                            <label class="checkbox"><input type="checkbox" name="wr_anonymous" value="1" id="wr_anonymous"><i></i>익명글 사용</label>
+                            <label class="checkbox"><input type="checkbox" name="wr_anonymous" value="1" id="wr_anonymous"><i></i><?php echo $eyoom['anonymous_title']; ?>글 사용</label>
                             <?php } ?>
                         </div>
                     </section>

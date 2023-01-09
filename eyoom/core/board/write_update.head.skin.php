@@ -7,7 +7,7 @@ if (!defined('_EYOOM_')) exit;
 /**
  * 글등록 회수 제한이 있는지 체크
  */
-if ($eyoom_board['bo_write_limit'] && !$is_admin) {
+if ($w=='' && $eyoom_board['bo_write_limit'] && !$is_admin) {
     if (!$is_member) {
         alert("비회원은 본 게시판에 글을 작성하실 수 없습니다.");
     } else {

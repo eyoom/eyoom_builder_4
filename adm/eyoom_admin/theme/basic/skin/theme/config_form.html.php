@@ -341,27 +341,13 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </tr>
                         <tr>
                             <th class="table-form-th">
-                                <label class="label">프로필 이미지 사이즈</label>
+                                <label class="label">익명 타이틀</label>
                             </th>
                             <td colspan="3">
-                                <div class="inline-group">
-                                    <span>
-                                        <label for="photo_width" class="input form-width-200px">
-                                            <i class="icon-prepend">폭</i>
-                                            <i class="icon-append text-width">px</i>
-                                            <input type="text" name="photo_width" id="photo_width" value="<?php echo $eyoom['photo_width']; ?>" class="text-right">
-                                        </label>
-                                    </span>
-                                    <span> X </span>
-                                    <span>
-                                        <label for="photo_height" class="input form-width-200px">
-                                            <i class="icon-prepend text-width">높이</i>
-                                            <i class="icon-append text-width">px</i>
-                                            <input type="text" name="photo_height" id="photo_height" value="<?php echo $eyoom['photo_height']; ?>" class="text-right">
-                                        </label>
-                                    </span>
-                                </div>
-                                <div class="note"><strong>Note:</strong> 회원의 프로필 이미지의 사이즈를 설정합니다.</div>
+                                <label for="anonymous_title" class="input form-width-200px">
+                                    <input type="text" name="anonymous_title" id="anonymous_title" value="<?php echo $eyoom['anonymous_title']; ?>">
+                                </label>
+                                <div class="note"><strong>Note:</strong> 익명 게시판의 경우 작성자명을 설정한 명칭으로 출력합니다. </div>
                             </td>
                         </tr>
                         <tr>

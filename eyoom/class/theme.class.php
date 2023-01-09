@@ -779,7 +779,7 @@ class theme extends qfile
             parse_str($url['query'],$query);
             if ($query['pid'] && $query['theme']) unset($query['theme']);
             foreach ($query as $key => $val) {
-                if (in_array($key,array('theme', 'shop_theme', 'bo_table', 'gr_id', 'co_id', 'ca_id', 'it_id', 'pid', 'faq', 'fm_id', 'sca', 'sfl', 'tag', 'po_id', 'ev_id'))) {
+                if (in_array($key,array('theme', 'shop_theme', 'bo_table', 'gr_id', 'co_id', 'type', 'ca_id', 'it_id', 'br_cd', 'pid', 'faq', 'fm_id', 'sca', 'sfl', 'tag', 'po_id', 'ev_id', 't'))) {
                     switch($key) {
                         case 'theme'        : $info['me_type'] = 'theme'; break;
                         case 'shop_theme'   : $info['me_type'] = 'shop_theme'; break;
@@ -787,7 +787,9 @@ class theme extends qfile
                         case 'gr_id'        : $info['me_type'] = 'group'; break;
                         case 'co_id'        : $info['me_type'] = 'page'; break;
                         case 'ca_id'        : $info['me_type'] = 'shop'; break;
+                        case 'br_cd'        : $info['me_type'] = 'brand'; break;
                         case 'it_id'        : $info['me_type'] = 'item'; break;
+                        case 'type'         : $info['me_type'] = 'type'; break;
                         case 'pid'          : $info['me_type'] = 'pid'; break;
                         case 'faq'          : $info['me_type'] = 'faq'; break;
                         case 'fm_id'        : $info['me_type'] = 'faq'; break;
@@ -797,6 +799,7 @@ class theme extends qfile
                         case 'tag'          : $info['me_type'] = 'tag'; break;
                         case 'po_id'        : $info['me_type'] = 'poll'; break;
                         case 'ev_id'        : $info['me_type'] = 'event'; break;
+                        case 't'            : $info['me_type'] = 'mypage'; break;
                     }
                     $info['me_pid']  = $val;
                     $info['me_link'] = $url['path']."?".$url['query'];

@@ -148,6 +148,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                                         <input type="text" name="bi_link" id="bi_link" value="<?php echo $bn_item['bi_link']; ?>">
                                     </label>
                                 </span>
+                                <span>
+                                    <label for="bi_target" class="select form-width-150px">
+                                        <select name="bi_target" id="bi_target">
+                                            <option value="">타겟을 선택하세요.</option>
+                                            <option value="_blank" <?php echo $bn_item['bi_target'] == '_blank' ? 'selected':''; ?>>새창</option>
+                                            <option value="_self" <?php echo $bn_item['bi_target'] == '_self' ? 'selected':''; ?>>현재창</option>
+                                        </select><i></i>
+                                    </label>
+                                </span>
                             </div>
                             <div class="note"><strong>Note:</strong> EB배너 아이템에 사용할 링크주소를 입력해 주세요.</div>
                         </td>

@@ -258,11 +258,6 @@ $g5['eyoom_contents'] = G5_TABLE_PREFIX . 'eyoom_contents';
 $g5['eyoom_contents_item'] = G5_TABLE_PREFIX . 'eyoom_contents_item';
 
 /**
- * 최신글 관리
- */
-$g5['eyoom_new'] = G5_TABLE_PREFIX . 'eyoom_new';
-
-/**
  * EB최신글 마스터
  */
 $g5['eyoom_latest'] = G5_TABLE_PREFIX . 'eyoom_latest';

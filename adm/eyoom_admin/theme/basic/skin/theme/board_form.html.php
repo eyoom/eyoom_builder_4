@@ -652,35 +652,99 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <td>
                                 <div class="inline-group">
                                     <span>
-                                        <label for="bo_automove_type" class="select form-width-150px">
-                                            <select name="bo_automove[type]" id="bo_automove_type">
-                                                <option value="hit" <?php echo $bo_automove['type']=='hit' ? 'selected': ''; ?>>조회수가</option>
-                                                <option value="good" <?php echo $bo_automove['type']=='good' ? 'selected': ''; ?>>추천수가</option>
-                                                <option value="nogood" <?php echo $bo_automove['type']=='nogood' ? 'selected': ''; ?>>비추천수가</option>
+                                        <label for="bo_automove_type1" class="select form-width-150px">
+                                            <select name="bo_automove_type1" id="bo_automove_type1">
+                                                <option value="hit" <?php echo $bo_automove['type1']=='hit' ? 'selected': ''; ?>>[규칙1] 조회수가</option>
                                             </select><i></i>
                                         </label>
                                     </span>
                                     <span>
-                                        <label for="bo_automove_count" class="input form-width-150px">
+                                        <label for="bo_automove_count1" class="input form-width-150px">
                                             <i class="icon-append width-60px">이상이면</i>
-                                            <input type="text" name="bo_automove[count]" id="bo_automove_count" value="<?php echo $bo_automove['count'] ? $bo_automove['count']: '100'; ?>">
+                                            <input type="text" name="bo_automove_count1" id="bo_automove_count1" value="<?php echo $bo_automove['count1'] ? $bo_automove['count1']: '100'; ?>">
                                         </label>
                                     </span>
                                     <span>
-                                        <label for="bo_automove_target" class="select form-width-300px">
-                                            <select name="bo_automove[target]" id="bo_automove_target">
+                                        <label for="bo_automove_target1" class="select form-width-300px">
+                                            <select name="bo_automove_target1" id="bo_automove_target1">
                                                 <option value="">선택한 게시판으로</option>
-                                                <?php foreach ($bo_list as $bo) { ?>
-                                                <option value="<?php echo $bo['bo_table']; ?>" <?php echo $bo_automove['target'] == $bo['bo_table'] ? 'selected': ''; ?>><?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>] 으로</option>
+                                                <?php foreach ($bo_list as $bo) { if ($bo['bo_table'] == $bo_table) continue; ?>
+                                                <option value="<?php echo $bo['bo_table']; ?>" <?php echo $bo_automove['target1'] == $bo['bo_table'] ? 'selected': ''; ?>><?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>] 으로</option>
                                                 <?php } ?>
                                             </select><i></i>
                                         </label>
                                     </span>
                                     <span>
-                                        <label for="bo_automove_action" class="select form-width-200px">
-                                            <select name="bo_automove[action]" id="bo_automove_action">
-                                                <option value="move" <?php echo $bo_automove['action']=='move' ? 'selected': ''; ?>>이동합니다.</option>
-                                                <option value="copy" <?php echo $bo_automove['action']=='copy' ? 'selected': ''; ?>>복사합니다.</option>
+                                        <label for="bo_automove_action1" class="select form-width-200px">
+                                            <select name="bo_automove_action1" id="bo_automove_action1">
+                                                <option value="move" <?php echo $bo_automove['action1']=='move' ? 'selected': ''; ?>>이동합니다.</option>
+                                                <option value="copy" <?php echo $bo_automove['action1']=='copy' ? 'selected': ''; ?>>복사합니다.</option>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                </div>
+                                <div class="inline-group">
+                                    <span>
+                                        <label for="bo_automove_type2" class="select form-width-150px">
+                                            <select name="bo_automove_type2" id="bo_automove_type2">
+                                                <option value="good" <?php echo $bo_automove['type2']=='good' ? 'selected': ''; ?>>[규칙2] 추천수가</option>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_count2" class="input form-width-150px">
+                                            <i class="icon-append width-60px">이상이면</i>
+                                            <input type="text" name="bo_automove_count2" id="bo_automove_count2" value="<?php echo $bo_automove['count2'] ? $bo_automove['count2']: '100'; ?>">
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_target2" class="select form-width-300px">
+                                            <select name="bo_automove_target2" id="bo_automove_target2">
+                                                <option value="">선택한 게시판으로</option>
+                                                <?php foreach ($bo_list as $bo) { if ($bo['bo_table'] == $bo_table) continue; ?>
+                                                <option value="<?php echo $bo['bo_table']; ?>" <?php echo $bo_automove['target2'] == $bo['bo_table'] ? 'selected': ''; ?>><?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>] 으로</option>
+                                                <?php } ?>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_action2" class="select form-width-200px">
+                                            <select name="bo_automove_action2" id="bo_automove_action2">
+                                                <option value="move" <?php echo $bo_automove['action2']=='move' ? 'selected': ''; ?>>이동합니다.</option>
+                                                <option value="copy" <?php echo $bo_automove['action2']=='copy' ? 'selected': ''; ?>>복사합니다.</option>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                </div>
+                                <div class="inline-group">
+                                    <span>
+                                        <label for="bo_automove_type3" class="select form-width-150px">
+                                            <select name="bo_automove_type3" id="bo_automove_type3">
+                                                <option value="nogood" <?php echo $bo_automove['type3']=='nogood' ? 'selected': ''; ?>>[규칙3] 비추천수가</option>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_count3" class="input form-width-150px">
+                                            <i class="icon-append width-60px">이상이면</i>
+                                            <input type="text" name="bo_automove_count3" id="bo_automove_count3" value="<?php echo $bo_automove['count3'] ? $bo_automove['count3']: '100'; ?>">
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_target3" class="select form-width-300px">
+                                            <select name="bo_automove_target3" id="bo_automove_target3">
+                                                <option value="">선택한 게시판으로</option>
+                                                <?php foreach ($bo_list as $bo) { if ($bo['bo_table'] == $bo_table) continue; ?>
+                                                <option value="<?php echo $bo['bo_table']; ?>" <?php echo $bo_automove['target3'] == $bo['bo_table'] ? 'selected': ''; ?>><?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>] 으로</option>
+                                                <?php } ?>
+                                            </select><i></i>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label for="bo_automove_action3" class="select form-width-200px">
+                                            <select name="bo_automove_action3" id="bo_automove_action3">
+                                                <option value="move" <?php echo $bo_automove['action3']=='move' ? 'selected': ''; ?>>이동합니다.</option>
+                                                <option value="copy" <?php echo $bo_automove['action3']=='copy' ? 'selected': ''; ?>>복사합니다.</option>
                                             </select><i></i>
                                         </label>
                                     </span>

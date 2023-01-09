@@ -53,7 +53,6 @@ if (($is_member && $member['mb_id'] == $wr_data['mb_id']) || $is_admin) {
 
         $eb_6 = serialize($eb_6);
         sql_query("update {$write_table} set eb_6 = '{$eb_6}' where wr_id = '{$wr_id}' ");
-        sql_query("update {$g5['eyoom_new']} set eb_6 = '{$eb_6}' where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
 
         // 알람설정
         $adopt_info['bo_table'] = trim($bo_table);

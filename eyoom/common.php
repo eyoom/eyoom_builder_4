@@ -122,6 +122,13 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
          * 내글 반응
          */
         $respond_not_read = $eyoomer['respond'];
+
+        /**
+         * 첫 로그인 포인트 로그인시 바로 적용하기 - 마젠토님이 제안해 주셨습니다.
+         */
+        if (substr($member['mb_today_login'], 0, 10) != G5_TIME_YMD) {
+            $member['mb_point'] += $config['cf_login_point'];
+        }
     }
 
     /**

@@ -61,6 +61,11 @@ foreach ($_POST as $key => $val) {
 }
 
 /**
+ * 사용하지 않는 설정값 제거
+ */
+$eyoom = array_diff_key($eyoom, array('photo_width'=>'', 'photo_height'=>''));
+
+/**
  * 설정정보 업데이트
  */
 $qfile->save_file('eyoom', $eyoom_config_file, $eyoom);

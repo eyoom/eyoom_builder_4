@@ -83,7 +83,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/slick/s
             <div class="ebs-basic-item">
                 <?php if ($item['bi_type'] == 'intra') { // 내부배너 ?>
                 <?php if ($item['bi_href']) { ?>
-                <a href="<?php echo $item['bi_href']; ?>" target="_blank">
+                <a href="<?php echo $item['bi_href']; ?>" target="<?php echo $item['bi_target']; ?>">
                 <?php } ?>
                     <picture>
                         <source srcset="<?php echo $item['bi_img_url']?>" media="(min-width:768px)">

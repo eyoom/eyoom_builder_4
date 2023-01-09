@@ -139,7 +139,7 @@ if ($act_button == "선택수정") {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
 
-        $post_mb_id= isset($_POST['mb_id'][$k]) ? (int) $_POST['mb_id'][$k] : '';
+        $post_mb_id= isset($_POST['mb_id'][$k]) ? $_POST['mb_id'][$k] : '';
 
         $mb_datas[] = $mb = get_member($post_mb_id);
 

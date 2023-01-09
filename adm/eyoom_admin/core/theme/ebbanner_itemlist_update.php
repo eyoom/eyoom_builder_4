@@ -32,12 +32,22 @@ if ($act_button === "선택수정") {
         $post_bi_sort = isset($_POST['bi_sort'][$k]) ? clean_xss_tags($_POST['bi_sort'][$k], 1, 1) : '';
         $post_bi_state = isset($_POST['bi_state'][$k]) ? clean_xss_tags($_POST['bi_state'][$k], 1, 1) : '';
         $bi_view_level = isset($_POST['bi_view_level'][$k]) ? clean_xss_tags($_POST['bi_view_level'][$k], 1, 1) : 1;
+        $bi_link = isset($_POST['bi_link'][$k]) ? clean_xss_tags($_POST['bi_link'][$k], 1, 1) : '';
+        $bi_target = isset($_POST['bi_target'][$k]) ? clean_xss_tags($_POST['bi_target'][$k], 1, '_blank') : '';
         $bi_no = isset($_POST['bi_no'][$k]) ? clean_xss_tags($_POST['bi_no'][$k], 1, 1) : '';
+
+        if ($bi_link) {
+            $bi_link = substr($bi_link,0,1000);
+            $bi_link = trim(strip_tags($bi_link));
+            $bi_link = preg_replace("#[\\\]+$#", "", $bi_link);
+        }
 
         $sql = " update {$g5['eyoom_banner_item']}
                     set bi_sort = '{$post_bi_sort}',
                         bi_state = '{$post_bi_state}',
-                        bi_view_level = '{$bi_view_level}'
+                        bi_view_level = '{$bi_view_level}',
+                        bi_link = '{$bi_link}',
+                        bi_target = '{$bi_target}'
                  where bi_no = '{$bi_no}' and bi_theme = '{$post_theme}' ";
         sql_query($sql);
     }

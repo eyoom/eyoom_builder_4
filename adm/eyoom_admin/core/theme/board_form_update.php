@@ -100,6 +100,25 @@ if (!sql_query(" DESC {$g5['eyoom_wrfixed']} ", false)) {
     );
 }
 
+/**
+ * 게시물 자동 이동/복사
+ */
+$bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
+if ($bo_use_automove) {
+    $post_bo_automove['count1'] = isset($_POST['bo_automove_count1']) ? clean_xss_tags(trim($_POST['bo_automove_count1'])) : '';
+    $post_bo_automove['target1'] = isset($_POST['bo_automove_target1']) ? clean_xss_tags(trim($_POST['bo_automove_target1'])) : '';
+    $post_bo_automove['action1'] = isset($_POST['bo_automove_action1']) ? clean_xss_tags(trim($_POST['bo_automove_action1'])) : '';
+    $post_bo_automove['count2'] = isset($_POST['bo_automove_count2']) ? clean_xss_tags(trim($_POST['bo_automove_count2'])) : '';
+    $post_bo_automove['target2'] = isset($_POST['bo_automove_target2']) ? clean_xss_tags(trim($_POST['bo_automove_target2'])) : '';
+    $post_bo_automove['action2'] = isset($_POST['bo_automove_action2']) ? clean_xss_tags(trim($_POST['bo_automove_action2'])) : '';
+    $post_bo_automove['count3'] = isset($_POST['bo_automove_count3']) ? clean_xss_tags(trim($_POST['bo_automove_count3'])) : '';
+    $post_bo_automove['target3'] = isset($_POST['bo_automove_target3']) ? clean_xss_tags(trim($_POST['bo_automove_target3'])) : '';
+    $post_bo_automove['action3'] = isset($_POST['bo_automove_action3']) ? clean_xss_tags(trim($_POST['bo_automove_action3'])) : '';
+    $bo_automove = serialize($post_bo_automove);
+} else {
+    $bo_automove = '';
+}
+
 $use_shop_skin = isset($_POST['use_shop_skin']) ? clean_xss_tags($_POST['use_shop_skin'], 1, 1) : '';
 $use_gnu_skin = isset($_POST['use_gnu_skin']) ? clean_xss_tags($_POST['use_gnu_skin'], 1, 1) : '';
 $bo_skin = isset($_POST['bo_skin']) ? clean_xss_tags($_POST['bo_skin'], 1, 1) : '';
@@ -144,7 +163,6 @@ $bo_use_rating_score = isset($_POST['bo_use_rating_score']) ? (int) $_POST['bo_u
 $bo_use_rating_comment = isset($_POST['bo_use_rating_comment']) ? (int) $_POST['bo_use_rating_comment'] : 0;
 $bo_rating_point = isset($_POST['bo_rating_point']) ? (int) $_POST['bo_rating_point'] : 0;
 $bo_use_tag = isset($_POST['bo_use_tag']) ? (int) $_POST['bo_use_tag'] : 0;
-$bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
 $bo_use_addon_emoticon = isset($_POST['bo_use_addon_emoticon']) ? (int) $_POST['bo_use_addon_emoticon'] : 0;
 $bo_use_addon_video = isset($_POST['bo_use_addon_video']) ? (int) $_POST['bo_use_addon_video'] : 0;
 $bo_use_addon_coding = isset($_POST['bo_use_addon_coding']) ? (int) $_POST['bo_use_addon_coding'] : 0;
@@ -156,7 +174,6 @@ $bo_cmt_best_min = isset($_POST['bo_cmt_best_min']) ? (int) $_POST['bo_cmt_best_
 $bo_cmt_best_limit = isset($_POST['bo_cmt_best_limit']) ? (int) $_POST['bo_cmt_best_limit'] : 5;
 $bo_tag_level = isset($_POST['bo_tag_level']) ? (int) $_POST['bo_tag_level'] : 2;
 $bo_tag_limit = isset($_POST['bo_tag_limit']) ? (int) $_POST['bo_tag_limit'] : 10;
-$bo_automove = isset($_POST['bo_automove']) ? serialize($bo_automove) : '';
 $bo_blind_limit = isset($_POST['bo_blind_limit']) ? (int) $_POST['bo_blind_limit'] : 5;
 $bo_blind_view = isset($_POST['bo_blind_view']) ? (int) $_POST['bo_blind_view'] : 10;
 $bo_blind_direct = isset($_POST['bo_blind_direct']) ? (int) $_POST['bo_blind_direct'] : 10;

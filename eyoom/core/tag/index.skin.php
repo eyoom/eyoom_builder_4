@@ -76,7 +76,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
         } else {
             $list[$i]['mb_photo'] = '';
             $list[$i]['mb_id'] = 'anonymous';
-            $list[$i]['mb_nick'] = '익명';
+            $list[$i]['mb_nick'] = $eyoom['anonymous_title'];
             $list[$i]['email'] = '';
             $list[$i]['homepage'] = '';
             $list[$i]['gnu_level'] = '';

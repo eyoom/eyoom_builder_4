@@ -67,7 +67,7 @@ class eyoom extends qfile
                 if ($i==2) break; // GET변수는 3개까지만 허용
                 $i++;
             }
-            if ($index || $dummy_id == 'home' || $dummy_id == 'auto_login' || $dummy_id == 'device') {
+            if ($index || $dummy_id == 'home' || $dummy_id == 'auto_login' || $dummy_id == 'device' || $dummy_id == 'fbclid') {
                 // 홈으로 이동
                 $this->go_index_page();
             } else {
@@ -169,7 +169,7 @@ class eyoom extends qfile
             $mb_nick = $member['mb_nick'];
         } else {
             $mb_id = 'anonymous';
-            $mb_nick = '익명';
+            $mb_nick = $eyoom['anonymous_title'];
         }
 
         $set = "
@@ -563,6 +563,8 @@ class eyoom extends qfile
                 $height = $config['cf_member_icon_height'];
                 $icon_file_url = G5_DATA_URL.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif'.$icon_filemtile;
                 $photo = '<img src="'.$icon_file_url.'" width="'.$width.'" height="'.$height.'">';
+            } else {
+                $photo = '<i class="fa fa-user"></i>';
             }
         } else if ($type == 'img') {
             $photo = get_member_profile_img($mb_id);
@@ -590,6 +592,10 @@ class eyoom extends qfile
                 if (!$photo) {
                     $photo = $this->make_mb_default_photo($mb_id);
                 }
+            }
+            
+            if (!$photo) {
+                $photo = '<i class="fa fa-user"></i>';
             }
         }
         
@@ -1106,6 +1112,7 @@ class eyoom extends qfile
          */
         $target = array(
             'move'              => 'board',
+            'move_update'       => 'board',
             'group'             => 'board',
             'sns_send'          => 'board',
             'new_delete'        => 'new',

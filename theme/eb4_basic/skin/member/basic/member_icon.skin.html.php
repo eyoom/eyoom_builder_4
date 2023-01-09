@@ -3,28 +3,21 @@
  * skin file : /theme/THEME_NAME/skin/member/basic/member_icon.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
 ?>
 
 <style>
-body {background:#fff}
-.member_icon-list .eyoom-form {margin:15px 15px 25px}
-.member_icon-list .member_icon-label {width:110px;float:right;text-align:right;padding:7px 10px 0 0}
-.member_icon-list .member_icon-select {width:170px;float:right}
-.member_icon-list .member_icons {list-style:none;margin:0;padding:0}
-.member_icon-list .member_icons li {float:left;min-height:80px;margin:5px 13px}
-.member_icon-list .member_icons li img {width:66px}
+.member-icon-list {position:relative;overflow:hidden}
+.member-icon-list .member-icons {list-style:none;margin:0;padding:0;margin-left:-10px;margin-right:-10px}
+.member-icon-list .member-icons:after {content:"";display:block;clear:both}
+.member-icon-list .member-icons li {float:left;min-height:90px;padding:10px 5px}
+.member-icon-list .member-icons li img {width:58px;height:auto}
 </style>
 
-<div class="member_icon-list">
-    <div class="eyoom-form">
-        <div class="member_icon-label">
-            <label class="label">아이콘 선택</label>
-        </div>
-        <div class="clearfix"></div>
+<div class="member-icon-list">
+    <div class="cont-text-bg m-b-20">
+        <p class="bg-info"><i class="fas fa-info-circle"></i> 원하시는 이미지를 선택하여 주세요.</p>
     </div>
-    <ul class="member_icons">
+    <ul class="member-icons">
         <?php foreach ($micon as $key => $icon) { ?>
         <li><a href="javascript:void(0);" onclick="set_member_icon('<?php echo $icon['file']; ?>');"><img src="<?php echo $icon['url']; ?>"></a></li>
         <?php } ?>

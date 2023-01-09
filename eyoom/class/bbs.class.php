@@ -259,7 +259,7 @@ class bbs extends eyoom
             $mb_nick = $member['mb_nick'];
         } else {
             $mb_id = 'anonymous';
-            $mb_nick = '익명';
+            $mb_nick = $eyoom['anonymous_title'];
         }
 
         $set = "
@@ -1646,7 +1646,7 @@ class bbs extends eyoom
             $list['is_anonymous'] = true;
             $list['mb_photo'] = '';
             $list['mb_id'] = 'anonymous';
-            $list['wr_name'] = '익명';
+            $list['wr_name'] = $eyoom['anonymous_title'];
             $list['email'] = '';
             $list['homepage'] = '';
             $list['gnu_level'] = '';

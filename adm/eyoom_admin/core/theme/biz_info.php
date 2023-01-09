@@ -26,6 +26,17 @@ include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
 $action_url1 = G5_ADMIN_URL . "/?dir=theme&amp;pid=biz_info_update&amp;smode=1";
 
 /**
+ * 작업중인 테마의 기업정보 가져오기
+ */
+$bizinfo_config = G5_DATA_PATH . '/bizinfo/bizinfo.'.$this_theme.'.config.php';
+unset($bizinfo);
+if (file_exists($bizinfo_config) && !is_dir($bizinfo_config)) {
+    @include($bizinfo_config);
+} else {
+    $bizinfo = $thema->default_bizinfo();
+}
+
+/**
  * 탭메뉴
  */
 $pg_anchor = array(

@@ -5,57 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<?php /* 전체 게시판 검색 모달 시작 */ ?>
-<div class="modal fade all-search-modal eb-search-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title f-s-20r"><i class="fas fa-search text-gray m-r-7"></i><strong>전체 게시판 검색</strong></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL; ?>/search.php" onsubmit="return fsearchbox_submit(this);" class="eyoom-form">
-                <input type="hidden" name="sfl" value="wr_subject||wr_content">
-                <input type="hidden" name="sop" value="and">
-                <label for="modal_sch_stx" class="sound_only"><strong>검색어 입력 필수</strong></label>
-                <div class="input input-button">
-                    <input type="text" name="stx" id="modal_sch_stx" class="sch_stx" maxlength="20" placeholder="검색어 입력">
-                    <div class="button"><input type="submit">검색</div>
-                </div>
-                </form>
-                <script>
-                function fsearchbox_submit(f) {
-                    var stx = f.stx.value.trim();
-                    if (stx.length < 2 || stx == $(".sch_stx").attr("placeholder")) {
-                        alert("검색어는 두글자 이상 입력하십시오.");
-                        f.stx.select();
-                        f.stx.focus();
-                        return false;
-                    }
-
-                    var cnt = 0;
-                    for (var i = 0; i < stx.length; i++) {
-                        if (stx.charAt(i) == ' ')
-                            cnt++;
-                    }
-
-                    if (cnt > 1) {
-                        alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
-                        f.stx.select();
-                        f.stx.focus();
-                        return false;
-                    }
-                    f.stx.value = stx;
-
-                    return true;
-                }
-                </script>
-            </div>
-        </div>
-    </div>
-</div>
-<?php /* 전체 게시판 검색 모달 끝 */ ?>
-
 <?php if ($is_member) { //회원일때 사용되는 모달 창 ?>
 <?php /* 프로필 사진 모달 시작 */ ?>
 <div class="modal fade profile-modal" tabindex="-1" aria-hidden="true">
@@ -83,7 +32,7 @@ if (!defined('_EYOOM_')) exit;
                                     <?php if ($eyoomer['mb_photo']) echo $eyoomer['mb_photo']; else { ?><img src="<?php echo EYOOM_THEME_URL; ?>/image/user.jpg"><?php } ?>
                                 </div>
                                 <div class="default-photo-btn">
-                                    <a href="<?php echo EYOOM_CORE_URL;?>/member/member_icon.php" class="btn-e btn-e-lg btn-e-dark btn-e-brd btn-e-block default-img-btn" onclick="profile_default_img_modal(this.href); return false;"><i class="far fa-user-check m-r-7"></i></i>기본 이미지 선택하기</a>
+                                    <a href="<?php echo EYOOM_CORE_URL;?>/member/member_icon.php" class="btn-e btn-e-lg btn-e-dark btn-e-brd btn-e-block default-img-btn" onclick="profile_default_img_modal(this.href); return false;"><i class="fas fa-user-check m-r-7"></i>기본 이미지 선택하기</a>
                                 </div>
                             </div>
                             <?php if ($is_admin) { ?>

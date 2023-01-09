@@ -70,6 +70,13 @@ $sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 /**
+ * 배너 링크 타겟 필드 추가
+ */
+if (!sql_query(" select bi_target from {$g5['eyoom_banner_item']} limit 1 ", false)) {
+    sql_query("ALTER TABLE `{$g5['eyoom_banner_item']}` ADD `bi_target` ENUM('_self', '_blank') NOT NULL DEFAULT '_blank' AFTER `bi_link`", true);
+}
+
+/**
  * 디렉토리가 없다면 생성
  */
 @mkdir(G5_DATA_PATH.'/ebbanner/'.$this_theme.'/', G5_DIR_PERMISSION);
@@ -130,4 +137,5 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     sql_query($sql3);
 
     $list[$i]['bi_clicked'] = $row2['cnt'];
+    $list[$i]['bi_ratio'] = $list[$i]['bi_exposed'] > 0 ? ceil($row2['cnt']*10000/$list[$i]['bi_exposed'])/100: 0;
 }

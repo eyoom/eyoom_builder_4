@@ -46,7 +46,7 @@ foreach ($list as $i => $val) {
     if ($is_anonymous) {
         $list[$i]['mb_photo'] = '';
         $list[$i]['mb_id'] = 'anonymous';
-        $list[$i]['wr_name'] = '익명';
+        $list[$i]['wr_name'] = $eyoom['anonymous_title'];
         $list[$i]['email'] = '';
         $list[$i]['homepage'] = '';
         $list[$i]['gnu_level'] = '';

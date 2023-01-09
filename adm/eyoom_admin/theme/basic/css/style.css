@@ -46,6 +46,7 @@
 }
 .eb-admr-box {position:relative;overflow:hidden;width:250px;padding:15px;margin:0 -10px;background:#000}
 .eb-admr-photo {position:relative;float:left;width:60px;height:60px;line-height:56px;text-align:center;border:1px solid #868696;padding:2px;font-size:35px;color:#abafb3}
+.eb-admr-photo img {display:block;max-width:100%;height:auto}
 .eb-admr-info {position:relative;float:right;width:145px}
 .eb-admr-info h5 {font-weight:bold;font-size:14px;color:#abafb3;padding:0;margin:4px 0 7px}
 .eb-admr-info h6 {font-size:12px;color:#868696;padding:0;margin:0 0 3px}

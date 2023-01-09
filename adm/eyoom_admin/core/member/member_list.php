@@ -166,6 +166,11 @@ $sql = " select count(*) as cnt {$sql_common} {$sql_search} and mb_intercept_dat
 $row = sql_fetch($sql);
 $intercept_count = $row['cnt'];
 
+// 탈퇴회원이나 차단회원 검색조건
+if ($sst == 'mb_leave_date' || $sst == 'mb_intercept_date') {
+    $sql_search .= " and {$sst} <> '' ";
+}
+
 $sql = " select *, a.mb_id as mb_id {$sql_common} {$sql_search} {$sql_order} limit {$from_record}, {$rows} ";
 $result = sql_query($sql);
 $list = array();

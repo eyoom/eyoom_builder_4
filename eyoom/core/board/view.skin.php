@@ -162,7 +162,7 @@ if ($bo_use_anonymous == '1') {
 if ($is_anonymous) {
     $view['mb_photo'] = '';
     $view['mb_id'] = 'anonymous';
-    $view['wr_name'] = '익명';
+    $view['wr_name'] = $eyoom['anonymous_title'];
     $view['wr_email'] = '';
     $view['wr_homepage'] = '';
     $view['gnu_level'] = '';
@@ -283,6 +283,41 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
             $view_tags[$i]['href'] = G5_URL . '/tag/?tag=' . str_replace('&', '^', $_tag);
             $i++;
         }
+    }
+}
+
+/**
+ * 게시물 조회수에 따른 자동 이동/복사
+ * 관리자가 작성한 공지글은 제외하기
+ */
+$arr_notice = explode(',', trim($board['bo_notice']));
+$is_automove = false;
+if (!in_array($wr_id, $arr_notice)) {
+    // 조회수가 일치하면 게시물 자동 이동/복사
+    if ($eyoom_board['bo_use_automove'] && $bo_automove['count1'] && $bo_automove['target1'] && $bo_automove['action1'] && $bo_automove['count1'] <= $write['wr_hit']+1) {
+        $sw = $bo_automove['action1'];
+        $tg_table = $bo_automove['target1'];
+        $is_automove = true;
+    }
+}
+
+/**
+ * 자동 이동/복사 실행
+ */
+if (($write['mb_id'] && $write['mb_id']!=$config['cf_admin'] && $write['mb_id']!=$board['bo_admin']) || !$write['mb_id']) {
+    if ($is_automove && $write['wr_10'] != $tg_table) {
+        define("G5_AUTOMOVE", true);
+
+        $chk_bo_table = array($tg_table);
+        $wr_id_list = $wr_id;
+
+        $binfo = sql_fetch("select bo_subject from {$g5['board_table']} where bo_table = '{$tg_table}'");
+
+        switch ($sw) {
+            case 'copy': $act = '복사'; break;
+            case 'move': $act = '이동'; break;
+        }
+        @include_once(EYOOM_CORE_PATH . "/board/move_update.php");
     }
 }
 

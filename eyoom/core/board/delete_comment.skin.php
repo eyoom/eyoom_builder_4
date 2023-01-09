@@ -30,16 +30,6 @@ if ($row['wr_id']) {
 }
 
 /**
- * 원글의 코멘트 숫자를 감소
- */
-sql_query(" update {$g5['eyoom_new']} set wr_comment = wr_comment - 1 where wr_id = '{$write['wr_parent']}' ");
-
-/**
- * 이윰 새글 테이블에서 댓글내용 삭제
- */
-sql_query("delete from {$g5['eyoom_new']} where bo_table = '{$bo_table}' and wr_id = '{$comment_id}'");
-
-/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/delete_comment.skin.php');

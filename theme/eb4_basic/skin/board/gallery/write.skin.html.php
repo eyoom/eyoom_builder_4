@@ -195,7 +195,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php } ?>
 
                     <?php if ($bo_use_anonymous == '1') { ?>
-                    <label for="wr_anonymous" class="checkbox"><input type="checkbox" id="wr_anonymous" name="wr_anonymous" value="1" <?php echo $wr_anonymous_checked; ?>><i></i>익명글</label>
+                    <label for="wr_anonymous" class="checkbox"><input type="checkbox" id="wr_anonymous" name="wr_anonymous" value="1" <?php echo $wr_anonymous_checked; ?>><i></i><?php echo $eyoom['anonymous_title']; ?>글</label>
                     <?php } ?>
 
                     <?php if ($is_mail) { ?>

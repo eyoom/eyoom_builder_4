@@ -139,7 +139,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
             if ($list[$idx][$i]['wr_anonymous'] || in_array($search_table[$idx],$anonymous_table)) {
                 $data['mb_id'] = 'anonymous';
-                $data['name'] = '익명';
+                $data['name'] = $eyoom['anonymous_title'];
             } else {
                 $data['name'] = eb_nameview($list[$idx][$i]['mb_id'], $list[$idx][$i]['wr_name'], $list[$idx][$i]['wr_email'], $list[$idx][$i]['homepage']);
             }

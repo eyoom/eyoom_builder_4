@@ -228,7 +228,7 @@ function eb_latest ($el_code) {
                         $loop[$k]['is_anonymous'] = true;
                         $loop[$k]['mb_photo'] = '';
                         $loop[$k]['mb_id'] = 'anonymous';
-                        $loop[$k]['wr_name'] = '익명';
+                        $loop[$k]['wr_name'] = $eyoom['anonymous_title'];
                         $loop[$k]['email'] = '';
                         $loop[$k]['homepage'] = '';
                         $loop[$k]['gnu_level'] = '';

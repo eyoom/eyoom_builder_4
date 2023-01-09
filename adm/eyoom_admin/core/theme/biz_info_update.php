@@ -144,7 +144,7 @@ if ($bottom_mobile_shoplogo) $bizinfo['bi_bottom_mobile_shoplogo'] = $bottom_mob
 $qfile->save_file('bizinfo', $bizinfo_config_file, $bizinfo);
 
 $qstr = '';
-$qstr .= "&amp;amode={$amode}";
-$qstr .= "&amp;wmode={$wmode}";
+$qstr .= $amode ? "&amp;amode={$amode}": '';
+$qstr .= $wmode ? "&amp;wmode={$wmode}": '';
 
-alert("기본정보를 적용하였습니다.", G5_ADMIN_URL. '/?dir=theme&amp;pid=biz_info&amp;'.$qstr);
+alert("기본정보를 적용하였습니다.", G5_ADMIN_URL. '/?dir=theme&amp;pid=biz_info'.$qstr);

@@ -13,6 +13,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/w
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
+
+$mb_photo = $eb->mb_photo($member['mb_id'], 'img');
 ?>
 
 <script>
@@ -29,10 +31,10 @@ var g5_admin_csrf_token_key = "<?php echo (function_exists('admin_csrf_token_key
     <div id="sidebar_left_scroll" class="eb-sidebar-left">
         <div class="eb-admr-box">
             <div class="eb-admr-photo">
-                <?php if (!$member['photo_url']) { ?>
+                <?php if (!$mb_photo) { ?>
                 <i class="fas fa-user-circle"></i>
                 <?php } else { ?>
-                <img src="<?php echo $member['photo_url']; ?>" class="img-responsive">
+                <?php echo $mb_photo; ?>
                 <?php } ?>
             </div>
             <div class="eb-admr-info">

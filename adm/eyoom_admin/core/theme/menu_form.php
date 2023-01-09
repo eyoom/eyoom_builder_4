@@ -26,12 +26,18 @@ if($theme && $me_code) {
     if(!$meinfo['me_path']) {
         $meinfo['me_path'] = $thema->get_path($meinfo['me_code']);
     }
-    $g5_url = parse_url(G5_URL);
-    $meinfo['me_link'] = str_replace($g5_url['path'],'',$meinfo['me_link']);
-    if(!preg_match('/(http|https):/i',$meinfo['me_link'])) {
-        $meinfo['me_url'] = G5_URL.$meinfo['me_link'];
+    
+    // 짧은주소 사용
+    if ($config['cf_bbs_rewrite']) {
+        $meinfo['me_url'] = get_pretty_eyoom_menu_url($meinfo['me_type'], $meinfo['me_pid'], $meinfo['me_link']);
     } else {
-        $meinfo['me_url'] = $meinfo['me_link'];
+        $g5_url = parse_url(G5_URL);
+        $meinfo['me_link'] = str_replace($g5_url['path'],'',$meinfo['me_link']);
+        if(!preg_match('/(http|https):/i',$meinfo['me_link'])) {
+            $meinfo['me_url'] = G5_URL.$meinfo['me_link'];
+        } else {
+            $meinfo['me_url'] = $meinfo['me_link'];
+        }
     }
 }
 

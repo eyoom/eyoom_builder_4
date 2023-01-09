@@ -27,20 +27,55 @@ $act_contents['wr_id'] = $wr_id;
 $eb->insert_activity($member['mb_id'], $good, $act_contents);
 
 /**
- * 추천 비추천 포인트 지급 및 추천수 이윰NEW에 업데이트
+ * 추천 비추천 포인트 지급 및 자동 이동/복사
+ * 관리자가 작성한 공지글은 제외하기
  */
-switch($good) {
-    case 'good' :
-        $eb->level_point($levelset['good'], $write['mb_id'], $levelset['regood']);
+$arr_notice = explode(',', trim($board['bo_notice']));
+$is_automove = false;
+if (!in_array($wr_id, $arr_notice)) {
+    switch($good) {
+        case 'good' :
+            $eb->level_point($levelset['good'], $write['mb_id'], $levelset['regood']);
 
-        // 추천 기록 적용
-        $sql = "update {$g5['eyoom_new']} as a set a.wr_good=(select b.wr_good from {$g5['write_prefix']}{$bo_table} as b where b.wr_id='{$wr_id}') where a.bo_table='{$bo_table}' and a.wr_id = a.wr_parent and a.wr_id='{$wr_id}'";
-        sql_query($sql,false);
-        break;
+            // 추천수 게시물 자동 이동/복사
+            if ($eyoom_board['bo_use_automove'] && $bo_automove['count2'] && $bo_automove['target2'] && $bo_automove['action2'] && $bo_automove['count2'] <= $write['wr_good']+1) {
+                $sw = $bo_automove['action2'];
+                $tg_table = $bo_automove['target2'];
+                $is_automove = true;
+            }
+            break;
 
-    case 'nogood' :
-        $eb->level_point($levelset['nogood'], $write['mb_id'], $levelset['renogood']);
-        break;
+        case 'nogood' :
+            $eb->level_point($levelset['nogood'], $write['mb_id'], $levelset['renogood']);
+
+            // 비추천수 게시물 자동 이동/복사
+            if ($eyoom_board['bo_use_automove'] && $bo_automove['count3'] && $bo_automove['target3'] && $bo_automove['action3'] && $bo_automove['count3'] <= $write['wr_nogood']+1) {
+                $sw = $bo_automove['action3'];
+                $tg_table = $bo_automove['target3'];
+                $is_automove = true;
+            }
+            break;
+    }
+}
+
+/**
+ * 자동 이동/복사 실행
+ */
+if (($write['mb_id'] && $write['mb_id']!=$config['cf_admin'] && $write['mb_id']!=$board['bo_admin']) || !$write['mb_id']) {
+    if ($is_automove && $write['wr_10'] != $tg_table) {
+        define("G5_AUTOMOVE", true);
+
+        $chk_bo_table = array($tg_table);
+        $wr_id_list = $wr_id;
+
+        $binfo = sql_fetch("select bo_subject from {$g5['board_table']} where bo_table = '{$tg_table}'");
+
+        switch ($sw) {
+            case 'copy': $act = '복사'; break;
+            case 'move': $act = '이동'; break;
+        }
+        @include_once(EYOOM_CORE_PATH . "/board/move_update.php");
+    }
 }
 
 /**

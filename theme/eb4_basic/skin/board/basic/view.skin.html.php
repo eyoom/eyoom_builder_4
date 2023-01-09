@@ -273,15 +273,6 @@ button.mfp-close {position:fixed;color:#fff !important}
         <div id="collapse-rating-result" class="collapse-rating-result-panel collapse">
             <?php foreach ($mb_rating as $mb_id => $rinfo) { ?>
             <span <?php echo $mb_id == $member['mb_id'] ? 'class="active"': ''; ?>>
-                <?php if ($config['cf_use_member_icon']) { ?>
-                <span class="rating-mb-photo">
-                    <?php if ($rinfo['mb_photo']) { ?>
-                    <?php echo $rinfo['mb_photo']; ?>
-                    <?php } else { ?>
-                    <span class="rating-user-icon"><i class="far fa-user-circle"></i></span>
-                    <?php } ?>
-                </span>
-                <?php } ?>
                 <?php echo eb_nameview($rinfo['mb_id'], $rinfo['mb_nick'], $rinfo['mb_email'], $rinfo['mb_homepage']); ?><?php echo ($mb_id == $member['mb_id'] && $eyoom_board['bo_use_rating_score'] != '1') || $eyoom_board['bo_use_rating_score'] == '1' ? '['.number_format($rinfo['rating']).']':''; ?>
             </span>
             <?php } ?>
@@ -484,17 +475,6 @@ button.mfp-close {position:fixed;color:#fff !important}
             <h5>추천한 회원</h5>
             <?php foreach ($goods as $k => $gmember) { ?>
             <span>
-                <?php if ($config['cf_use_member_icon']) { ?>
-                <span class="good-mb-photo">
-                    <span class="good-photo">
-                    <?php if ($gmember['mb_photo']) { ?>
-                    <?php echo $gmember['mb_photo'] ?>
-                    <?php } else { ?>
-                    <span class="good-user-icon"><i class="far fa-user-circle"></i></span>
-                    <?php } ?>
-                    </span>
-                </span>
-                <?php } ?>
                 <span class="view-nick">
                     <?php echo eb_nameview($gmember['mb_id'], $gmember['mb_nick'], $gmember['mb_email'], $gmember['mb_homepage']); ?>
                 </span>
@@ -508,17 +488,6 @@ button.mfp-close {position:fixed;color:#fff !important}
             <h5>비추천 회원</h5>
             <?php foreach ($nogoods as $k => $nogmember) { ?>
             <span>
-                <?php if ($config['cf_use_member_icon']) { ?>
-                <span class="good-mb-photo">
-                    <span class="view-photo">
-                    <?php if ($nogmember['mb_photo']) { ?>
-                    <?php echo $nogmember['mb_photo'] ?>
-                    <?php } else { ?>
-                    <span class="good-user-icon"><i class="far fa-user-circle"></i></span>
-                    <?php } ?>
-                    </span>
-                </span>
-                <?php } ?>
                 <span class="view-nick">
                     <?php echo eb_nameview($nogmember['mb_id'], $nogmember['mb_nick'], $nogmember['mb_email'], $nogmember['mb_homepage']); ?>
                 </span>

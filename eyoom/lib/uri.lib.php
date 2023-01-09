@@ -45,6 +45,10 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
             $segments[1] = $folder;
             $segments[2] = urlencode($no);
         }
+        else if ( $folder === 'mypage' && $no ) {
+            $segments[1] = $folder;
+            $segments[2] = urlencode($no);
+        }
         else if(in_array($folder, $boards)) {     // 게시판
 
 			$segments[1] = $folder;
@@ -142,7 +146,30 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
                 return get_eyoom_pretty_url('page', $me_pid);
             break;
 
+            case 'mypage':
+                return get_eyoom_pretty_url('mypage', $me_pid);
+            break;
+
+            case 'shop':
+                return shop_category_url($me_pid);
+            break;
+
+            case 'item':
+                return shop_item_url($me_pid);
+            break;
+
+            case 'type':
+                return shop_type_url($me_pid);
+            break;
+
+            case 'brand':
+                return shop_brand_url($me_pid);
+            break;
+
             case 'userpage':
+                if(!preg_match('/(http|https):/i',$me_link)) {
+                    $me_link = G5_URL.$me_link;
+                }
                 return $me_link;
             break;
         }
@@ -196,6 +223,18 @@ function get_query_url ($info) {
     }
     else if ($info[1] == 'mypage') {
         $url = G5_URL."/mypage/";
+        switch ($info[2]) {
+            default: $url .= $info[2]; break;
+            case 'favorite':
+            case 'followinggul':
+            case 'goodpost':
+            case 'pinboard':
+            case 'starpost':
+            case 'subscribe':
+            case 'timeline':
+                $url .= "?t=".$info[2];
+                break;
+        }
     }
     else if ($info[1] == 'shop') {
         $tmp = explode('-', $info[2]);
@@ -203,6 +242,8 @@ function get_query_url ($info) {
             $url = G5_URL."/shop/list.php?ca_id={$tmp[1]}";
         } else if ($tmp[0] == 'type') {
             $url = G5_URL."/shop/listtype.php?type={$tmp[1]}";
+        } else if ($tmp[0] == 'brand') {
+            $url = G5_URL."/shop/brand.php?br_cd={$tmp[1]}";
         } else {
             $url = G5_URL."/shop/item.php?it_id={$tmp[1]}";
         }
@@ -211,6 +252,21 @@ function get_query_url ($info) {
     }
 
     return $url;
+}
+
+/**
+ * 쇼핑몰 브랜드 URL
+ */
+function shop_brand_url($br_cd, $add_param=''){
+    global $config;
+
+    $add_params = $add_param ? '&'.$add_param : '';
+
+    if( $config['cf_bbs_rewrite'] ) {
+        return G5_SHOP_URL.'/brand-'.$br_cd.$add_params;
+    } else {
+        return G5_SHOP_URL.'/brand.php?br_cd='.urlencode($br_cd).$add_params;
+    }
 }
 
 /**
@@ -227,6 +283,7 @@ function get_eyoom_nginx_conf_rules($return_string=false){
     $rules[] = '#### '.G5_VERSION.' nginx rules BEGIN #####';
     $rules[] = 'if (!-e $request_filename){';
 
+    $rules[] = "rewrite ^{$base_path}shop/brand-([0-9a-zA-Z_]+)$ {$base_path}".G5_SHOP_DIR."/brand.php?br_cd=$1&rewrite=1 break;";
     if( $add_rules = run_replace('add_nginx_conf_rules', '', $get_path_url, $base_path, $return_string) ){
         $rules[] = $add_rules;
     }
@@ -266,6 +323,7 @@ function get_eyoom_mod_rewrite_rules($return_string=false){
     $rules[] = 'RewriteCond %{REQUEST_FILENAME} -d';
     $rules[] = 'RewriteRule ^ - [L]';
 
+    $rules[] = 'RewriteRule ^shop/brand-([0-9a-z]+)$  '.G5_SHOP_DIR.'/brand.php?br_cd=$1&rewrite=1  [QSA,L]';
     if( $add_rules = run_replace('add_mod_rewrite_rules', '', $get_path_url, $base_path, $return_string) ){
         $rules[] = $add_rules;
     }
