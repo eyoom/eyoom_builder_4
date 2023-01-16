@@ -22,7 +22,7 @@ else
 $sql = " select SUM( IF(io_type = '1', io_price * ct_qty, (ct_price + io_price) * ct_qty)) as sum_price
             from {$g5['g5_shop_cart_table']}
             where od_id = '$cart_id'
-              and it_id = '$it_id' ";
+              and it_id = '" . sql_real_escape_string($it_id) . "' ";
 $ct = sql_fetch($sql);
 $item_price = $ct['sum_price'];
 

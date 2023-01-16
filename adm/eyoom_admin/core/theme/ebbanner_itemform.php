@@ -38,10 +38,13 @@ if ($iw == 'u') {
             $bn_item[$key] = stripslashes($value);
         }
 
-        unset($bi_file);
-        $bi_file = G5_DATA_PATH.'/ebbanner/'.$bi['bi_theme'].'/img/'.$bi['bi_img'];
-        if (file_exists($bi_file) && !is_dir($bi_file) && $bi['bi_img']) {
-            $bi_url = G5_DATA_URL.'/ebbanner/'.$bi['bi_theme'].'/img/'.$bi['bi_img'];
+        $bi_img = isset($bi['bi_img']) ? $eb->mb_unserialize($bi['bi_img']): array();
+        for($i=0; $i<2; $i++) {
+            unset($bi_file);
+            $bi_file = G5_DATA_PATH.'/ebbanner/'.$bi['bi_theme'].'/img/'.$bi_img[$i];
+            if (file_exists($bi_file) && !is_dir($bi_file) && $bi_file[$i]) {
+                $bi_url[$i] = G5_DATA_URL.'/ebbanner/'.$bi['bi_theme'].'/img/'.$bi_img[$i];
+            }
         }
     } else {
         alert('존재하지 않는 아이템입니다.');

@@ -42,7 +42,7 @@ if ($stx != "") {
     if ($sfl != "") {
         $sql_search .= " and $sfl like '%$stx%' ";
     }
-    if ($save_stx != $stx)
+    if (isset($save_stx) && $save_stx && ($save_stx != $stx))
         $page = 1;
 }
 

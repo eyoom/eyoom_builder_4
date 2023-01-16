@@ -245,6 +245,13 @@ foreach($board_auth as $key => $val) {
     $i++;
 }
 
+/**
+ * 게시물 랜덤노출 기능 추가
+ */
+$bo_sort_fields = get_board_sort_fields($board);
+$bo_sort_rand = array("rand()","랜덤");
+$bo_sort_fields = $eb->insert_array($bo_sort_fields, 1, $bo_sort_rand);
+
 // query string
 $qstr .= $gr_id ? '&amp;gr_id='.$gr_id: '';
 $qstr .= $bo_skin ? '&amp;bo_skin='.$bo_skin: '';

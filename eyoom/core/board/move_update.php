@@ -132,7 +132,7 @@ while ($row = sql_fetch_array($result)) {
                 $save_parent = $insert_id;
 
                 // 메뉴에서 해당 게시물 정보 가져옮
-                $eyoom_tag = sql_fetch("select * from {$g5['eyoom_tag_write']} where tw_theme='{$theme}' and bo_table='$bo_table' and wr_id='{$row2['wr_id']}'");
+                $eyoom_tag = sql_fetch("select * from {$g5['eyoom_tag_write']} where tw_theme='" . sql_real_escape_string($theme) . "' and bo_table='$bo_table' and wr_id='{$row2['wr_id']}'");
 
                 $sql3 = " select * from {$g5['board_file_table']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' order by bf_no ";
                 $result3 = sql_query($sql3);
@@ -207,9 +207,9 @@ while ($row = sql_fetch_array($result)) {
 
                     // 이윰 태그글
                     if ($eyoom_tag['wr_tag']) {
-                        sql_query(" update {$g5['eyoom_tag_write']} set bo_table = '$move_bo_table', wr_id = '$save_parent', wr_image='{$wr_image}' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '{$theme}' ");
+                        sql_query(" update {$g5['eyoom_tag_write']} set bo_table = '$move_bo_table', wr_id = '$save_parent', wr_image='{$wr_image}' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '" . sql_real_escape_string($theme) . "' ");
                     } else {
-                        sql_query(" delete from {$g5['eyoom_tag_write']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '{$theme}' ");
+                        sql_query(" delete from {$g5['eyoom_tag_write']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '" . sql_real_escape_string($theme) . "' ");
                     }
                 }
 
@@ -235,7 +235,7 @@ while ($row = sql_fetch_array($result)) {
                         $copy_set .= "tw_datetime='".G5_TIME_YMDHIS."'";
                         sql_query("insert into {$g5['eyoom_tag_write']} set {$copy_set}");
                     } else {
-                        sql_query(" delete from {$g5['eyoom_tag_write']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '{$theme}' ");
+                        sql_query(" delete from {$g5['eyoom_tag_write']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' and tw_theme = '" . sql_real_escape_string($theme) . "' ");
                     }
                 }
             } else {

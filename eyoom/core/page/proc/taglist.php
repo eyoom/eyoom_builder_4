@@ -5,7 +5,7 @@
 if (!defined('_EYOOM_')) exit;
 
 // 기본쿼리
-$sql_common = " from {$g5['eyoom_tag']} where (1) and tg_theme = '{$theme}' ";
+$sql_common = " from {$g5['eyoom_tag']} where (1) and tg_theme = '" . sql_real_escape_string($theme) . "' ";
 
 $sql_order = " order by tg_word asc, tg_regdt desc ";
 

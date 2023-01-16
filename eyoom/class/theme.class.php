@@ -206,7 +206,7 @@ class theme extends qfile
         /**
          * 테마정보 가져오기
          */
-        $tminfo = sql_fetch("select * from {$this->g5['eyoom_theme']} where tm_name='{$tm_name}' || tm_alias='{$tm_name}'",false);
+        $tminfo = sql_fetch("select * from {$this->g5['eyoom_theme']} where tm_name='" . sql_real_escape_string($tm_name) . "' || tm_alias='" . sql_real_escape_string($tm_name) . "'",false);
 
         /**
          * 지정한 사용자 테마 체크
@@ -400,23 +400,21 @@ class theme extends qfile
         $new = $this->eyoom_menu_new();
         $ca_new = $this->eyoom_menu_ca_new();
 
-        /**
-         * 메뉴생성
-         */
-        foreach ($menu_package as $key => $menuset) {
-            $menuset['me_link'] = $menuset['me_type'] == 'shop' ? shop_category_url($menuset['me_pid']): get_pretty_eyoom_menu_url($menuset['me_type'], $menuset['me_pid'], $menuset['me_link']);
-
-            foreach ($menuset as $k => $menu_sub) {
-                if (!is_array($menu_sub)) {
-                    if ($member['mb_level'] < $menuset['me_permit_level']) continue;
-                    $mk1 = $menuset['me_order'].$key;
-                    $menu[$mk1][$k] = $menu_sub;
-                    if ($menuset['me_sca']) {
-                        if ($menuset['me_type'] == $this->page_type && $menuset['me_pid'] == $this->me_pid && $menuset['me_sca'] == urldecode($sca)) {
+        foreach ($menu_package as $k0 => $menu0) {
+            $menu0['me_link'] = $menu0['me_type'] == 'shop' ? shop_category_url($menu0['me_pid']): get_pretty_eyoom_menu_url($menu0['me_type'], $menu0['me_pid'], $menu0['me_link']);
+            
+            foreach ($menu0 as $k1 => $menu1) {
+                if (!is_array($menu1)) {
+                    if ($member['mb_level'] < $menu0['me_permit_level']) continue;
+                    $mk1 = $menu0['me_order'].$k0;
+                    $menu[$mk1][$k1] = $menu1;
+                    
+                    if ($menu0['me_sca']) {
+                        if ($menu0['me_type'] == $this->page_type && $menu0['me_pid'] == $this->me_pid && $menu0['me_sca'] == urldecode($sca)) {
                             if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                         }
                     } else {
-                        if ($menuset['me_type'] == $this->page_type && $menuset['me_pid'] == $this->me_pid) {
+                        if ($menu0['me_type'] == $this->page_type && $menu0['me_pid'] == $this->me_pid) {
                             if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                         }
                     }
@@ -424,79 +422,174 @@ class theme extends qfile
                     @ksort($menu);
                 } else {
                     $cate1 = &$menu[$mk1]['submenu'];
-                    $menu_sub['me_link'] = $menu_sub['me_type'] == 'shop' ? shop_category_url($menu_sub['me_pid']): get_pretty_eyoom_menu_url($menu_sub['me_type'], $menu_sub['me_pid'], $menu_sub['me_link']);
-                    foreach ($menu_sub as $m => $sub) {
-                        if (!is_array($sub)) {
-                            if ($member['mb_level'] < $menu_sub['me_permit_level']) continue;
-                            $mk2 = $menu_sub['me_order'].$k;
-                            $cate1[$mk2][$m] = $sub;
-                            if ($menu_sub['me_sca']) {
-                                if ($menu_sub['me_type'] == $this->page_type && $menu_sub['me_pid'] == $this->me_pid && $menu_sub['me_sca'] == urldecode($sca)) {
+                    $menu1['me_link'] = $menu1['me_type'] == 'shop' ? shop_category_url($menu1['me_pid']): get_pretty_eyoom_menu_url($menu1['me_type'], $menu1['me_pid'], $menu1['me_link']);
+                    foreach ($menu1 as $k2 => $menu2) {
+                        if (!is_array($menu2)) {
+                            if ($member['mb_level'] < $menu1['me_permit_level']) continue;
+                            $mk2 = $menu1['me_order'].$k1;
+                            $cate1[$mk2][$k2] = $menu2;
+                            
+                            if ($menu1['me_sca']) {
+                                if ($menu1['me_type'] == $this->page_type && $menu1['me_pid'] == $this->me_pid && $menu1['me_sca'] == urldecode($sca)) {
                                     if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                     $cate1[$mk2]['active'] = true;
                                 }
                             } else {
-                                if ($menu_sub['me_type'] == $this->page_type && $menu_sub['me_pid'] == $this->me_pid) {
+                                if ($menu1['me_type'] == $this->page_type && $menu1['me_pid'] == $this->me_pid) {
                                     if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                     $cate1[$mk2]['active'] = true;
                                 }
                             }
+        
                             @ksort($cate1);
                         } else {
                             $cate1[$mk2]['sub'] = 'on';
                             $cate2 = &$cate1[$mk2]['subsub'];
-                            $sub['me_link'] = $sub['me_type'] == 'shop' ? shop_category_url($sub['me_pid']): get_pretty_eyoom_menu_url($sub['me_type'], $sub['me_pid'], $sub['me_link']);
-                            foreach ($sub as $n => $subsub) {
-                                if (!is_array($subsub)) {
-                                    if ($member['mb_level'] < $sub['me_permit_level']) continue;
-                                    $mk3 = $sub['me_order'].$m;
-                                    $cate2[$mk3][$n] = $subsub;
-                                    if ($sub['me_sca']) {
-                                        if ($sub['me_type'] == $this->page_type && $sub['me_pid'] == $this->me_pid && $sub['me_sca'] == urldecode($sca)) {
+                            $menu2['me_link'] = $menu2['me_type'] == 'shop' ? shop_category_url($menu2['me_pid']): get_pretty_eyoom_menu_url($menu2['me_type'], $menu2['me_pid'], $menu2['me_link']);
+                            foreach ($menu2 as $k3 => $menu3) {
+                                if (!is_array($menu3)) {
+                                    if ($member['mb_level'] < $menu2['me_permit_level']) continue;
+                                    $mk3 = $menu2['me_order'].$k2;
+                                    $cate2[$mk3][$k3] = $menu3;
+                                    
+                                    if ($menu2['me_sca']) {
+                                        if ($menu2['me_type'] == $this->page_type && $menu2['me_pid'] == $this->me_pid && $menu2['me_sca'] == urldecode($sca)) {
                                             if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                             $cate1[$mk2]['active'] = true;
                                             $cate2[$mk3]['active'] = true;
                                         }
                                     } else {
-                                        if ($sub['me_type'] == $this->page_type && $sub['me_pid'] == $this->me_pid) {
+                                        if ($menu2['me_type'] == $this->page_type && $menu2['me_pid'] == $this->me_pid) {
                                             if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                             $cate1[$mk2]['active'] = true;
                                             $cate2[$mk3]['active'] = true;
                                         }
                                     }
+                
                                     @ksort($cate2);
                                 } else {
                                     $cate1[$mk2]['sub'] = 'on';
                                     $cate2[$mk3]['sub'] = 'on';
                                     $cate3 = &$cate2[$mk3]['ssubsub'];
-                                    $subsub['me_link'] = $subsub['me_type'] == 'shop' ? shop_category_url($subsub['me_pid']): get_pretty_eyoom_menu_url($subsub['me_type'], $subsub['me_pid'], $subsub['me_link']);
-                                    foreach ($subsub as $o => $ssubsub) {
-                                        if (!is_array($ssubsub)) {
-                                            if ($member['mb_level'] < $subsub['me_permit_level']) continue;
-                                            $mk4 = $subsub['me_order'].$n;
-                                            $cate3[$mk4][$o] = $ssubsub;
-                                            if ($subsub['me_sca']) {
-                                                if ($subsub['me_type'] == $this->page_type && $subsub['me_pid'] == $this->me_pid && $subsub['me_sca'] == urldecode($sca)) {
+                                    $menu3['me_link'] = $menu3['me_type'] == 'shop' ? shop_category_url($menu3['me_pid']): get_pretty_eyoom_menu_url($menu3['me_type'], $menu3['me_pid'], $menu3['me_link']);
+                                    foreach ($menu3 as $k4 => $menu4) {
+                                        if (!is_array($menu4)) {
+                                            if ($member['mb_level'] < $menu3['me_permit_level']) continue;
+                                            $mk4 = $menu3['me_order'].$k3;
+                                            $cate3[$mk4][$k4] = $menu4;
+                                            
+                                            if ($menu3['me_sca']) {
+                                                if ($menu3['me_type'] == $this->page_type && $menu3['me_pid'] == $this->me_pid && $menu3['me_sca'] == urldecode($sca)) {
                                                     if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                                     $cate1[$mk2]['active'] = true;
                                                     $cate2[$mk3]['active'] = true;
                                                     $cate3[$mk4]['active'] = true;
                                                 }
                                             } else {
-                                                if ($subsub['me_type'] == $this->page_type && $subsub['me_pid'] == $this->me_pid) {
+                                                if ($menu3['me_type'] == $this->page_type && $menu3['me_pid'] == $this->me_pid) {
                                                     if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
                                                     $cate1[$mk2]['active'] = true;
                                                     $cate2[$mk3]['active'] = true;
                                                     $cate3[$mk4]['active'] = true;
                                                 }
                                             }
+                        
                                             @ksort($cate3);
+                                        } else {
+                                            $cate1[$mk2]['sub'] = 'on';
+                                            $cate2[$mk3]['sub'] = 'on';
+                                            $cate3[$mk4]['sub'] = 'on';
+                                            $cate4 = &$cate3[$mk4]['sssubsub'];
+                                            $menu4['me_link'] = $menu4['me_type'] == 'shop' ? shop_category_url($menu4['me_pid']): get_pretty_eyoom_menu_url($menu4['me_type'], $menu4['me_pid'], $menu4['me_link']);
+                                            foreach ($menu4 as $k5 => $menu5) {
+                                                if (!is_array($menu5)) {
+                                                    if ($member['mb_level'] < $menu4['me_permit_level']) continue;
+                                                    $mk5 = $menu4['me_order'].$k4;
+                                                    $cate4[$mk5][$k5] = $menu5;
+                                                    
+                                                    if ($menu4['me_sca']) {
+                                                        if ($menu4['me_type'] == $this->page_type && $menu4['me_pid'] == $this->me_pid && $menu4['me_sca'] == urldecode($sca)) {
+                                                            if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
+                                                            $cate1[$mk2]['active'] = true;
+                                                            $cate2[$mk3]['active'] = true;
+                                                            $cate3[$mk4]['active'] = true;
+                                                            $cate4[$mk5]['active'] = true;
+                                                        }
+                                                    } else {
+                                                        if ($menu4['me_type'] == $this->page_type && $menu4['me_pid'] == $this->me_pid) {
+                                                            if (!defined('_INDEX_')) $menu[$mk1]['active'] = true;
+                                                            $cate1[$mk2]['active'] = true;
+                                                            $cate2[$mk3]['active'] = true;
+                                                            $cate3[$mk4]['active'] = true;
+                                                            $cate4[$mk5]['active'] = true;
+                                                        }
+                                                    }
+                                
+                                                    @ksort($cate4);
+                                                } else {
+                                                    $cate1[$mk2]['sub'] = 'on';
+                                                    $cate2[$mk3]['sub'] = 'on';
+                                                    $cate3[$mk4]['sub'] = 'on';
+                                                    $cate4[$mk5]['sub'] = 'on';
+                                                    $cate5 = &$cate4[$mk5]['ssssubsub'];
+                                                    $menu5['me_link'] = $menu5['me_type'] == 'shop' ? shop_category_url($menu5['me_pid']): get_pretty_eyoom_menu_url($menu5['me_type'], $menu5['me_pid'], $menu5['me_link']);
+                                                    foreach ($menu5 as $k6 => $menu6) {
+                                                        ;
+                                                    }
+                                                    
+                                                    if ($menu5['me_type'] == 'board' && $menu5['me_pid']) {
+                                                        $tmp_bo_table = $menu5['me_pid'];
+                                                        if ($menu5['me_sca']) {
+                                                            if ($ca_new[$menu4['me_sca']]>0) {
+                                                                $cate5[$mk6]['new'] = true;
+                                                                $cate4[$mk5]['new'] = true;
+                                                                $cate3[$mk4]['new'] = true;
+                                                                $cate2[$mk3]['new'] = true;
+                                                                $cate1[$mk2]['new'] = true;
+                                                                $menu[$mk1]['new'] = true;
+                                                            }
+                                                        } else {
+                                                            if ($new[$tmp_bo_table]>0) {
+                                                                $cate5[$mk6]['new'] = true;
+                                                                $cate4[$mk5]['new'] = true;
+                                                                $cate3[$mk4]['new'] = true;
+                                                                $cate2[$mk3]['new'] = true;
+                                                                $cate1[$mk2]['new'] = true;
+                                                                $menu[$mk1]['new'] = true;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+                                            
+                                            if ($menu4['me_type'] == 'board' && $menu4['me_pid']) {
+                                                $tmp_bo_table = $menu4['me_pid'];
+                                                if ($menu4['me_sca']) {
+                                                    if ($ca_new[$menu4['me_sca']]>0) {
+                                                        $cate4[$mk5]['new'] = true;
+                                                        $cate3[$mk4]['new'] = true;
+                                                        $cate2[$mk3]['new'] = true;
+                                                        $cate1[$mk2]['new'] = true;
+                                                        $menu[$mk1]['new'] = true;
+                                                    }
+                                                } else {
+                                                    if ($new[$tmp_bo_table]>0) {
+                                                        $cate4[$mk5]['new'] = true;
+                                                        $cate3[$mk4]['new'] = true;
+                                                        $cate2[$mk3]['new'] = true;
+                                                        $cate1[$mk2]['new'] = true;
+                                                        $menu[$mk1]['new'] = true;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
-                                    if ($subsub['me_type'] == 'board' && $subsub['me_pid']) {
-                                        $tmp_bo_table = $subsub['me_pid'];
-                                        if ($sub['me_sca']) {
-                                            if ($ca_new[$sub['me_sca']]>0) {
+                                    
+                                    if ($menu3['me_type'] == 'board' && $menu3['me_pid']) {
+                                        $tmp_bo_table = $menu3['me_pid'];
+                                        if ($menu3['me_sca']) {
+                                            if ($ca_new[$menu3['me_sca']]>0) {
                                                 $cate3[$mk4]['new'] = true;
                                                 $cate2[$mk3]['new'] = true;
                                                 $cate1[$mk2]['new'] = true;
@@ -513,10 +606,11 @@ class theme extends qfile
                                     }
                                 }
                             }
-                            if ($sub['me_type'] == 'board' && $sub['me_pid']) {
-                                $tmp_bo_table = $sub['me_pid'];
-                                if ($sub['me_sca']) {
-                                    if ($ca_new[$sub['me_sca']]>0) {
+                            
+                            if ($menu2['me_type'] == 'board' && $menu2['me_pid']) {
+                                $tmp_bo_table = $menu2['me_pid'];
+                                if ($menu2['me_sca']) {
+                                    if ($ca_new[$menu2['me_sca']]>0) {
                                         $cate2[$mk3]['new'] = true;
                                         $cate1[$mk2]['new'] = true;
                                         $menu[$mk1]['new'] = true;
@@ -531,10 +625,11 @@ class theme extends qfile
                             }
                         }
                     }
-                    if ($menu_sub['me_type'] == 'board' && $menu_sub['me_pid']) {
-                        $tmp_bo_table = $menu_sub['me_pid'];
-                        if ($menu_sub['me_sca']) {
-                            if ($ca_new[$menu_sub['me_sca']]>0) {
+                    
+                    if ($menu1['me_type'] == 'board' && $menu1['me_pid']) {
+                        $tmp_bo_table = $menu1['me_pid'];
+                        if ($menu1['me_sca']) {
+                            if ($ca_new[$menu1['me_sca']]>0) {
                                 $cate1[$mk2]['new'] = true;
                                 $menu[$mk1]['new'] = true;
                             }
@@ -547,10 +642,11 @@ class theme extends qfile
                     }
                 }
             }
-            if ($menuset['me_type'] == 'board' && $menuset['me_pid']) {
-                $tmp_bo_table = $menuset['me_pid'];
-                if ($menuset['me_sca']) {
-                    if ($ca_new[$menuset['me_sca']]>0) {
+            
+            if ($menu0['me_type'] == 'board' && $menu0['me_pid']) {
+                $tmp_bo_table = $menu0['me_pid'];
+                if ($menu0['me_sca']) {
+                    if ($ca_new[$menu0['me_sca']]>0) {
                         $menu[$mk1]['new'] = true;
                     }
                 } else {
@@ -560,6 +656,7 @@ class theme extends qfile
                 }
             }
         }
+        
         return $menu;
     }
 
@@ -618,7 +715,7 @@ class theme extends qfile
         $theme_name = $me_shop == 1 || defined('_SHOP_') ? $this->shop_theme: $this->theme;
         if ($admin_mode) $theme_name = $theme ? $theme: $this->theme;
         $addwhere .= " and me_shop = '".$me_shop."' ";
-        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='{$theme_name}' {$addwhere} order by me_code asc, me_order asc";
+        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($theme_name) . "' {$addwhere} order by me_code asc, me_order asc";
         $res = sql_query($sql, false);
         $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
@@ -676,7 +773,7 @@ class theme extends qfile
     private function eyoom_pagemenu_info() {
         $url = $this->compare_host_from_link($_SERVER['REQUEST_URI']);
         $info = $this->get_meinfo_link($url);
-        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='{$this->theme}' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}'";
+        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($this->theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}'";
         $data = sql_fetch($sql,false);
         return $data;
     }
@@ -688,7 +785,7 @@ class theme extends qfile
         if (!$data) $data = $this->eyoom_pagemenu_info();
         if (!$admin_mode) $addwhere = " and me_use = 'y' "; // 감추기 기능 연동 - fm25님이 제보해 주셨습니다.
         $me_code = str_split($data['me_code'],3);
-        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='{$this->theme}' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere} order by me_code asc, me_order asc";
+        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($this->theme) . "' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere} order by me_code asc, me_order asc";
         $res = sql_query($sql, false);
         $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
@@ -896,12 +993,12 @@ class theme extends qfile
          */
         $_sca = $this->get_sca_from_link($info['me_link']);
         if ($_sca) {
-            $where = " me_theme='{$theme}' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='{$_sca}' ";
+            $where = " me_theme='" . sql_real_escape_string($theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='{$_sca}' ";
         } else {
             if (!$board['bo_use_category']) {
-                $where = " me_theme='{$theme}' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' ";
+                $where = " me_theme='" . sql_real_escape_string($theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' ";
             } else {
-                $where = " me_theme='{$theme}' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='' ";
+                $where = " me_theme='" . sql_real_escape_string($theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='' ";
             }
         }
 
@@ -919,7 +1016,7 @@ class theme extends qfile
         $data = sql_fetch($sql,false);
 
         if ($_sca && !$data['me_id']) {
-            $where = " me_theme='{$theme}' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='' ";
+            $where = " me_theme='" . sql_real_escape_string($theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='' ";
 
             if ($it_id) $where .= " and me_link='{$info['me_link']}' ";
 
@@ -998,7 +1095,7 @@ class theme extends qfile
             }
         } else if ($gr_id) {
             // Group 페이지 정보
-            $sql = "select gr_subject from {$this->g5['group_table']} where gr_id='{$gr_id}'";
+            $sql = "select gr_subject from {$this->g5['group_table']} where gr_id='" . sql_real_escape_string($gr_id) . "'";
             $group = sql_fetch($sql, false);
 
             if ($group['gr_subject']) {
@@ -1077,7 +1174,8 @@ class theme extends qfile
             case 'brand': $title = '브랜드'; $cate_name = '쇼핑몰'; break;
             case 'group':
                 if ($gr_id) {
-                    $gr = sql_fetch("select * from {$this->g5['group_table']} where gr_id = '{$gr_id}' ");
+                    $gr_id = preg_replace('/[^a-z0-9_]/i', '', $gr_id);
+                    $gr = sql_fetch("select * from {$this->g5['group_table']} where gr_id = '" . sql_real_escape_string($gr_id) . "' ");
                     $title = $gr['gr_subject'];
                 }
                 break;
@@ -1193,7 +1291,7 @@ class theme extends qfile
          */
         $link_path = G5_DATA_URL.'/ebslider';
 
-        $sql = "select * from {$this->g5['eyoom_slider_item']} where es_code = '{$code}' and ei_theme = '{$theme}' and ei_state = '1' order by ei_sort asc ";
+        $sql = "select * from {$this->g5['eyoom_slider_item']} where es_code = '{$code}' and ei_theme = '" . sql_real_escape_string($theme) . "' and ei_state = '1' order by ei_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
         $es_item = array();
@@ -1232,7 +1330,7 @@ class theme extends qfile
          */
         $this->make_directory($link_path);
 
-        $sql = "select * from {$this->g5['eyoom_contents_item']} where ec_code = '{$code}' and ci_theme = '{$theme}' and ci_state = '1' order by ci_sort asc ";
+        $sql = "select * from {$this->g5['eyoom_contents_item']} where ec_code = '{$code}' and ci_theme = '" . sql_real_escape_string($theme) . "' and ci_state = '1' order by ci_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
         $ec_item = array();
@@ -1273,7 +1371,7 @@ class theme extends qfile
          */
         $this->make_directory($link_path);
 
-        $sql = "select * from {$this->g5['eyoom_goods_item']} where eg_code = '{$code}' and gi_theme = '{$theme}' and gi_state = '1' order by gi_sort asc ";
+        $sql = "select * from {$this->g5['eyoom_goods_item']} where eg_code = '{$code}' and gi_theme = '" . sql_real_escape_string($theme) . "' and gi_state = '1' order by gi_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
         $eg_item = array();
@@ -1305,7 +1403,7 @@ class theme extends qfile
          */
         $link_path = G5_DATA_URL.'/ebbanner';
 
-        $sql = "select * from {$this->g5['eyoom_banner_item']} where bn_code = '{$code}' and bi_theme = '{$theme}' and bi_state = '1' order by bi_sort asc ";
+        $sql = "select * from {$this->g5['eyoom_banner_item']} where bn_code = '{$code}' and bi_theme = '" . sql_real_escape_string($theme) . "' and bi_state = '1' order by bi_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
         $bn_item = array();

@@ -17,9 +17,10 @@ $g5['title'] = $group['gr_subject'];
 include_once(G5_PATH . '/_head.php');
 
 //  최신글
+$gr_id = preg_replace('/[^a-z0-9_]/i', '', $gr_id);
 $sql = " select bo_table, bo_subject
             from {$g5['board_table']}
-            where gr_id = '{$gr_id}'
+            where gr_id = '" . sql_real_escape_string($gr_id) . "'
               and bo_list_level <= '{$member['mb_level']}'
               and bo_device <> 'mobile'
 ";

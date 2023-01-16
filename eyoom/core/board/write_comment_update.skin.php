@@ -283,7 +283,7 @@ if (count((array)$up_set) > 0 && is_array($up_set) ) {
 /**
  * 최신글 캐시 스위치온
  */
-$sql = "select * from {$g5['eyoom_latest_item']} where (1) and find_in_set('{$bo_table}', li_tables) and li_theme = '{$theme}' ";
+$sql = "select * from {$g5['eyoom_latest_item']} where (1) and find_in_set('{$bo_table}', li_tables) and li_theme = '" . sql_real_escape_string($theme) . "' ";
 $res = sql_query($sql, false);
 for ($i=0; $row=sql_fetch_array($res); $i++) {
     /**

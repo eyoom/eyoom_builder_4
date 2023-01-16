@@ -9,7 +9,7 @@ if (!defined('_TAG_')) exit;
  * 기본쿼리
  */
 $sql_common = " from {$g5['eyoom_tag']} ";
-$sql_search = " where (1) and tg_theme = '{$theme}' ";
+$sql_search = " where (1) and tg_theme = '" . sql_real_escape_string($theme) . "' ";
 
 if ($stx) {
     $sql_search .= " and tg_word like '%{$stx}%' ";

@@ -175,6 +175,8 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-info-box #sc_coupon_frm table tbody td {font-size: 12px;text-align: center;}
 .shop-order-form .payment-info-box #sc_coupon_frm a.btn_frmline,
 .shop-order-form .payment-info-box #sc_coupon_frm button.btn_frmline {width:auto;height:inherit;padding:4px 10px;font-size: 12px;}
+/* KG이니시스 팝업창과 부트스트랩 모달과의 충돌로 팝업 출력 버그 해결 소스 */
+#inicisModalDiv {opacity:1 !important}
 </style>
 
 <div class="shop-steps">

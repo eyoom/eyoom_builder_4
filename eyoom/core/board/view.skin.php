@@ -81,7 +81,7 @@ if (!get_session($spv_name)) {
     $where = "wr_id = '{$wr_id}' ";
     $parent = sql_fetch("select wr_hit, wr_comment from {$write_table} where $where");
     sql_query("update {$g5['board_new_table']} set wr_hit = '{$parent['wr_hit']}', wr_comment = '{$parent['wr_comment']}' where $where and bo_table='{$bo_table}'");
-    sql_query("update {$g5['eyoom_tag_write']} set wr_hit = '{$parent['wr_hit']}' where $where and bo_table='{$bo_table}' and tw_theme='{$theme}'");
+    sql_query("update {$g5['eyoom_tag_write']} set wr_hit = '{$parent['wr_hit']}' where $where and bo_table='{$bo_table}' and tw_theme='" . sql_real_escape_string($theme) . "'");
 }
 
 /**

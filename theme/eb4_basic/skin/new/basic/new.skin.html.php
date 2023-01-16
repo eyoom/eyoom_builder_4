@@ -19,7 +19,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .nl-head .nl-num {width:90px}
 .new-list .nl-head .nl-num-short {width:80px}
 .new-list .nl-head .nl-num-checkbox {width:110px}
-.new-list .nl-head .nl-author {width:150px;padding:0 10}
+.new-list .nl-head .nl-author {display:table-cell;vertical-align:middle;width:150px;text-align:center;padding: 0 5px;}
 .new-list .nl-head .nl-subj {display:table-cell;vertical-align:middle;text-align:center}
 .new-list .nl-list {position:relative;display:table;table-layout:fixed;;width:100%;height:46px;border-bottom:1px solid #eaeaea;padding:8px 0}
 .new-list .nl-list .checkbox i {top:5px}
@@ -28,6 +28,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .nl-list > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#dadada;transform:translateY(-50%)}
 .new-list .nl-list > div:last-child:before {display:none}
 .new-list .nl-list .nl-item {display:table-cell;vertical-align:middle;width:120px;text-align:center}
+.new-list .nl-list .nl-author {display:table-cell;vertical-align:middle;width:120px;padding-left:10px;}
 .new-list .nl-list .nl-num {width:90px}
 .new-list .nl-list .nl-num-short {width:80px}
 .new-list .nl-list .nl-num-checkbox {width:110px}
@@ -159,7 +160,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <div class="nl-subj">제목</div>
             <div class="nl-item">그룹</div>
             <div class="nl-item">게시판</div>
-            <div class="nl-item">이름</div>
+            <div class="nl-author">이름</div>
             <div class="nl-item">일시</div>
         </div>
         <?php for ($i=0; $i<count((array)$newlist); $i++) { ?>
@@ -184,7 +185,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <div class="nl-item">
                 <a href="<?php echo get_eyoom_pretty_url($newlist[$i]['bo_table']); ?>"><?php echo $newlist[$i]['bo_subject']; ?></a>
             </div>
-            <div class="nl-item">
+            <div class="nl-author">
                 <?php echo $newlist[$i]['name']; ?>
             </div>
             <div class="nl-item">

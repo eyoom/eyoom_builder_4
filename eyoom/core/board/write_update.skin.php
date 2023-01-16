@@ -206,7 +206,7 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
 
             $tag_score = $w == 'u' ? 5: 20;
             foreach ($tag_array as $key => $_tag) {
-                $info = sql_fetch("select tg_id, tg_regcnt, tg_score from {$g5['eyoom_tag']} where tg_theme = '{$theme}' and tg_word = '{$_tag}' ", false);
+                $info = sql_fetch("select tg_id, tg_regcnt, tg_score from {$g5['eyoom_tag']} where tg_theme = '" . sql_real_escape_string($theme) . "' and tg_word = '{$_tag}' ", false);
                 $regcnt = $info['tg_regcnt'] + 1;
                 if ($info['tg_id']) {
                     if ($w == 'u') $regcnt--;
@@ -214,7 +214,7 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1') {
                     $tag_sql = "update {$g5['eyoom_tag']} set tg_score = '{$score}', tg_regcnt = '{$regcnt}' where tg_id = '{$info['tg_id']}'";
                 } else {
                     $score = $tag_score + 10;
-                    $tag_sql = "insert into {$g5['eyoom_tag']} set tg_theme = '{$theme}', tg_word = '{$_tag}', tg_regcnt = '1', tg_score = '{$score}', tg_regdt='".G5_TIME_YMDHIS."'";
+                    $tag_sql = "insert into {$g5['eyoom_tag']} set tg_theme = '" . sql_real_escape_string($theme) . "', tg_word = '{$_tag}', tg_regcnt = '1', tg_score = '{$score}', tg_regdt='".G5_TIME_YMDHIS."'";
                 }
                 sql_query($tag_sql, false);
             }
@@ -279,7 +279,7 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && isset($wr_t
 
     $uptagset = $eb->make_sql_set($up_tag_set);
 
-    $update_tag = "update {$g5['eyoom_tag_write']} set {$cmset},{$uptagset} where {$where} and tw_theme='{$theme}' ";
+    $update_tag = "update {$g5['eyoom_tag_write']} set {$cmset},{$uptagset} where {$where} and tw_theme='" . sql_real_escape_string($theme) . "' ";
     sql_query($update_tag, false);
     unset($up_tag_set, $uptagset);
 }
@@ -307,7 +307,7 @@ if ($w == '' || $w == 'r') {
 
     // 태그 정보가 이미 있다면 업데이트
     if (isset($wr_tag)) {
-        $tag_post = sql_fetch("select tw_id from {$g5['eyoom_tag_write']} where {$where} and tw_theme='{$theme}'");
+        $tag_post = sql_fetch("select tw_id from {$g5['eyoom_tag_write']} where {$where} and tw_theme='" . sql_real_escape_string($theme) . "'");
 
         // 태그 작성 테이블에 글이 있다면 업데이트
         if ($tag_post['tw_id']) {
@@ -318,7 +318,7 @@ if ($w == '' || $w == 'r') {
         }
     } else {
         // 태그 정보가 없다면 태그 포스트는 삭제
-        $tag_query = "delete from {$g5['eyoom_tag_write']} where {$where} and tw_theme='{$theme}' ";
+        $tag_query = "delete from {$g5['eyoom_tag_write']} where {$where} and tw_theme='" . sql_real_escape_string($theme) . "' ";
     }
 }
 if (isset($tag_query)) sql_query($tag_query, false);

@@ -15,7 +15,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/skin/shop/'.$ey
     <?php if ($cate_skin) include $cate_skin; ?>
 
     <?php /* 상단 HTML */ ?>
-    <div id="sit_hhtml" class="m-b-20"><?php echo conv_content($it['it_head_html'], 1); ?></div>
+    <div id="sit_hhtml" class="m-b-20"><?php echo run_replace('shop_it_head_html', conv_content($it['it_head_html'], 1), $it); ?></div>
 
     <?php include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php'); ?>
 
@@ -30,5 +30,5 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/skin/shop/'.$ey
     <?php include_once($info_skin); ?>
 
     <?php /* 하단 HTML */ ?>
-    <div id="sit_thtml"><?php echo conv_content($it['it_tail_html'], 1); ?></div>
+    <div id="sit_thtml"><?php echo run_replace('shop_it_tail_html', conv_content($it['it_tail_html'], 1), $it); ?></div>
 </div>

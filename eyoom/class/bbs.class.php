@@ -95,7 +95,7 @@ class bbs extends eyoom
      * 이윰보드 설정정보
      */
     public function board_info($bo_table, $theme) {
-        $sql = "select a.*,b.bo_subject,c.gr_subject from {$this->g5['eyoom_board']} as a left join {$this->g5['board_table']} as b on a.bo_table = b.bo_table left join {$this->g5['group_table']} as c on b.gr_id = c.gr_id where a.bo_table='{$bo_table}' and a.bo_theme='{$theme}'";
+        $sql = "select a.*,b.bo_subject,c.gr_subject from {$this->g5['eyoom_board']} as a left join {$this->g5['board_table']} as b on a.bo_table = b.bo_table left join {$this->g5['group_table']} as c on b.gr_id = c.gr_id where a.bo_table='{$bo_table}' and a.bo_theme='" . sql_real_escape_string($theme) . "'";
         $board_info = sql_fetch($sql,false);
         return sql_fetch($sql);
     }
@@ -104,7 +104,8 @@ class bbs extends eyoom
      * 특정 그룹에 소속된 게시판
      */
     public function group_bo_table($gr_id) {
-        $result = sql_query("select bo_table from {$this->g5['board_table']} where (1) and gr_id = '{$gr_id}' ");
+        $gr_id = preg_replace('/[^a-z0-9_]/i', '', $gr_id);
+        $result = sql_query("select bo_table from {$this->g5['board_table']} where (1) and gr_id = '" . sql_real_escape_string($gr_id) . "' ");
         $bo_table = array();
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $bo_table[$i] = $row['bo_table'];
@@ -1518,6 +1519,11 @@ class bbs extends eyoom
          */
         $where .= " and find_in_set(bo_table,'".implode(',',$bo_possible)."') ";
 
+        /**
+         * 익명게시물은 제외
+         */
+        $where .= " and wr_anonymous <> '1' and wr_bo_anonymous <> '1' ";
+
         $sql = "select * from {$this->g5['board_new_table']} where {$where} and mb_id = '{$mb_id}' order by bn_datetime desc limit $count ";
         $result = sql_query($sql, false);
         $k=0;
@@ -1693,13 +1699,23 @@ class bbs extends eyoom
         if (is_array($bo_info)) {
             $i=0;
             foreach ($bo_info as $bo_table => $info) {
+                /**
+                 * 리스트 보기 권한 체크
+                 */
                 if ($info['bo_list_level'] > $mb_level) {
                     continue;
-                } else {
-                    $data['bo_possible'][$i] = $bo_table;
-                    $data['board_info'][$bo_table] = $bo_info[$bo_table];
-                    $i++;
                 }
+                
+                /**
+                 * 통합 검색 사용여부 체크
+                 */
+                if ($info['bo_use_search'] != 1) {
+                    continue;
+                }
+
+                $data['bo_possible'][$i] = $bo_table;
+                $data['board_info'][$bo_table] = $bo_info[$bo_table];
+                $i++;
             }
         }
         return $data;

@@ -33,7 +33,7 @@ else
 if ($w == "")
 {
     $sql = "insert {$g5['g5_shop_item_qa_table']}
-               set it_id = '$it_id',
+               set it_id = '" . sql_real_escape_string($it_id) . "',
                    mb_id = '{$member['mb_id']}',
                    iq_secret = '$iq_secret',
                    iq_name  = '$iq_name',

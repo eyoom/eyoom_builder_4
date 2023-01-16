@@ -1314,7 +1314,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                             <td>
                                 <label class="select form-width-250px">
                                     <select id="bo_sort_field" name="bo_sort_field">
-                                        <?php foreach( get_board_sort_fields($board) as $v ){
+                                        <?php foreach( $bo_sort_fields as $v ){
                                             $option_value = $order_by_str = $v[0];
                                             if( $v[0] === 'wr_num, wr_reply' ){
                                                 $selected = (! $board['bo_sort_field']) ? 'selected="selected"' : '';

@@ -62,7 +62,7 @@ if($_POST['js'] == "on") {
                     and mb_id = '{$member['mb_id']}'
                     and bg_flag in ('good', 'nogood') ";
         $row = sql_fetch($sql);
-        if ($row['bg_flag'])
+        if (isset($row['bg_flag']) && $row['bg_flag'])
         {
             if ($row['bg_flag'] == 'good')
                 $status = '추천';
@@ -125,7 +125,7 @@ if($_POST['js'] == "on") {
                     and mb_id = '{$member['mb_id']}'
                     and bg_flag in ('good', 'nogood') ";
         $row = sql_fetch($sql);
-        if ($row['bg_flag'])
+        if (isset($row['bg_flag']) && $row['bg_flag'])
         {
             if ($row['bg_flag'] == 'good')
                 $status = '추천';

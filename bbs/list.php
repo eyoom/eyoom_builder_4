@@ -39,6 +39,9 @@ $is_search_bbs = false;
 if ($sca || $stx || $stx === '0') {     //검색이면
     $is_search_bbs = true;      //검색구분변수 true 지정
     $sql_search = get_sql_search($sca, $sfl, $stx, $sop);
+    
+    // 익명게시물 제외
+    $sql_search .= " and wr_anonymous <> '1' ";
 
     // 가장 작은 번호를 얻어서 변수에 저장 (하단의 페이징에서 사용)
     $sql = " select MIN(wr_num) as min_wr_num from {$write_table} ";

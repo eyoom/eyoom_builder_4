@@ -151,6 +151,8 @@ set_session('ss_personalpay_hash', '');
     .shop-order-form .order-table th {width:70px !important;text-align:left;padding:5px 0;display:none}
     .shop-order-form .order-table td {padding:5px 0}
 }
+/* KG이니시스 팝업창과 부트스트랩 모달과의 충돌로 팝업 출력 버그 해결 소스 */
+#inicisModalDiv {opacity:1 !important}
 </style>
 
 <div class="shop-steps">

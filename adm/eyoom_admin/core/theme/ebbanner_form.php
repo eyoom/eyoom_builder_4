@@ -121,10 +121,14 @@ $result = sql_query($sql);
 $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i] = $row;
-    $bi_file = G5_DATA_PATH.'/ebbanner/'.$row['bi_theme'].'/img/'.$row['bi_img'];
-    if (file_exists($bi_file)) {
-        $bi_url = G5_DATA_URL.'/ebbanner/'.$row['bi_theme'].'/img/'.$row['bi_img'];
+
+    $bi_img = isset($row['bi_img']) ? $eb->mb_unserialize($row['bi_img']): array();
+    $bi_file = G5_DATA_PATH.'/ebbanner/'.$row['bi_theme'].'/img/'.$bi_img[0];
+    if (file_exists($bi_file) && !is_dir($bi_file) && $bi_img[0]) {
+        $bi_url = G5_DATA_URL.'/ebbanner/'.$row['bi_theme'].'/img/'.$bi_img[0];
         $list[$i]['bi_image'] = "<img src='".$bi_url."' class='img-responsive'> ";
+    } else {
+        $list[$i]['bi_image'] = '-';
     }
 
     $view_level = get_member_level_select("bi_view_level[$i]", 1, $member['mb_level'], $row['bi_view_level']);

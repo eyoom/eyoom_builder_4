@@ -35,7 +35,7 @@ if ($stx != "") {
         $sql_search .= " $where $sfl like '%$stx%' ";
         $where = " and ";
     }
-    if ($save_stx != $stx)
+    if (isset($save_stx) && $save_stx && ($save_stx != $stx))
         $page = 1;
 }
 

@@ -19,10 +19,6 @@ $newlist = array();
 for ($i=0; $i<count((array)$list); $i++) {
     $tmp_write_table = $g5['write_prefix'].$list[$i]['bo_table'];
 
-    // 익명글 제외
-    $level = $list[$i]['wr_1'] ? $eb->level_info($list[$i]['wr_1']):'';
-    if (is_array($level) && $level['anonymous']) continue;
-
     $num = $total_count - ($page - 1) * $config['cf_page_rows'] - $i;
     $gr_subject = cut_str($list[$i]['gr_subject'], 20);
     $bo_subject = cut_str($list[$i]['bo_subject'], 20);
@@ -41,8 +37,24 @@ for ($i=0; $i<count((array)$list); $i++) {
     $data['href']       = $list[$i]['href'];
     $data['datetime2']  = $list[$i]['datetime2'];
 
-    $row = sql_fetch(" select * from {$tmp_write_table} where wr_id = '{$data['wr_id']}' ");
-    $data['name'] = eb_nameview($row['mb_id'], $row['wr_name'], $row['wr_email'], $row['wr_homepage']);
+    /**
+     * 익명글 예외처리 - 댓글은 별도로 최신글에서 추출
+     */
+    if ($list[$i]['wr_id'] != $list[$i]['wr_parent']) {
+        $row2 = sql_fetch(" select wr_anonymous, wr_bo_anonymous from {$g5['board_new_table']} where wr_id = '{$list[$i]['wr_id']}' and wr_parent = '{$list[$i]['wr_parent']}' ");
+        $list[$i]['wr_anonymous'] = $row2['wr_anonymous'];
+        $list[$i]['wr_bo_anonymous'] = $row2['wr_bo_anonymous'];
+    }
+
+    /**
+     * 익명글 작성자
+     */
+    if ($list[$i]['wr_anonymous'] === '1' || $list[$i]['wr_bo_anonymous'] === '1') {
+        $data['name'] = $eyoom['anonymous_title'];
+    } else {
+        $row = sql_fetch(" select * from {$tmp_write_table} where wr_id = '{$data['wr_id']}' ");
+        $data['name'] = eb_nameview($row['mb_id'], $row['wr_name'], $row['wr_email'], $row['wr_homepage']);
+    }
 
     $newlist[$i] = $data;
 }

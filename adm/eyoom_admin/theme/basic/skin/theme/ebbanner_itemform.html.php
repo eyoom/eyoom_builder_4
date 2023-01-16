@@ -87,7 +87,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                         </th>
                         <td colspan="3">
                             <label for="bi_title" class="input">
-                                <input type="text" name="bi_title" id="bi_title" value="<?php echo $bn_item['bi_title']; ?>" required>
+                                <input type="text" name="bi_title" id="bi_title" value="<?php echo $bn_item['bi_title']; ?>">
                             </label>
                         </td>
                     </tr>
@@ -161,24 +161,25 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <div class="note"><strong>Note:</strong> EB배너 아이템에 사용할 링크주소를 입력해 주세요.</div>
                         </td>
                     </tr>
-                    <tr class="in_banner">
+                    <?php for($i=0; $i<2; $i++) { ?>
+                    <tr>
                         <th class="table-form-th">
-                            <label class="label">이미지</label>
+                            <label class="label"><?php echo $i==0 ? 'PC용 ': '모바일용 '; ?>이미지</label>
                         </th>
                         <td colspan="3">
                             <span class="input input-file form-width-350px">
-                                <div class="button"><input type="file" name="bi_img" id="bi_img" onchange="this.parentNode.nextSibling.value = this.value">이미지파일 찾기</div><input type="text" readonly="">
+                                <div class="button"><input type="file" name="bi_img[<?php echo $i; ?>]" id="bi_img_<?php echo $i; ?>" onchange="this.parentNode.nextSibling.value = this.value">이미지파일 찾기</div><input type="text" readonly="">
                             </span>
-                            <?php if ($bn_item['bi_img']) { ?>
+                            <?php if ($bi_img[$i]) { ?>
                             <div class="bi_img_info">
-                                <label for="bi_img_del" class="checkbox"><input type="checkbox" id="bi_img_del" name="bi_img_del" value="1"><i></i><?php echo $bi_img; ?> 파일삭제</label>
-                                <input type="hidden" name="del_img_name" value="<?php echo $bn_item['bi_img']; ?>">
+                                <label for="bi_img_del_<?php echo $i; ?>" class="checkbox"><input type="checkbox" id="bi_img_del_<?php echo $i; ?>" name="bi_img_del[<?php echo $i; ?>]" value="1"><i></i><?php echo $bi_img[$i]; ?> 파일삭제</label>
+                                <input type="hidden" name="del_img_name[<?php echo $i; ?>]" value="<?php echo $bi_img[$i]; ?>">
                                 <div class="thumbnail ebbanner-image">
                                     <div class="thumb">
-                                        <img src="<?php echo $bi_url; ?>">
+                                        <img src="<?php echo $bi_url[$i]; ?>">
                                         <div class="caption-overflow">
                                             <span>
-                                                <a href="<?php echo $bi_url; ?>" class="btn-e btn-e-default btn-e-lg btn-e-brd"><i class="fas fa-plus color-white"></i></a>
+                                                <a href="<?php echo $bi_url[$i]; ?>" class="btn-e btn-e-default btn-e-lg btn-e-brd"><i class="fas fa-plus color-white"></i></a>
                                             </span>
                                         </div>
                                     </div>
@@ -188,6 +189,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                             <div class="note"><strong>Note:</strong> EB배너 아이템에 이미지를 업로드해 주세요.</div>
                         </td>
                     </tr>
+                    <?php } ?>
+
                     <tr class="ex_banner">
                         <th class="table-form-th">
                             <label class="label">배너 스크립트 소스</label>

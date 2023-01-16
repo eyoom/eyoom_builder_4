@@ -18,7 +18,6 @@ $bi_title       = isset($_POST['bi_title']) ? clean_xss_tags(trim($_POST['bi_tit
 $bi_subtitle    = isset($_POST['bi_subtitle']) ? clean_xss_tags(trim($_POST['bi_subtitle'])) : '';
 $bi_link        = isset($_POST['bi_link']) ? clean_xss_tags(trim($_POST['bi_link'])) : '';
 $bi_target      = isset($_POST['bi_target']) ? clean_xss_tags(trim($_POST['bi_target'])) : '';
-$bi_script      = isset($_POST['bi_script']) ? clean_xss_tags(trim($_POST['bi_script'])) : '';
 $bi_theme       = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
 $bi_period      = isset($_POST['bi_period']) ? clean_xss_tags(trim($_POST['bi_period'])) : '';
 $bi_start       = isset($_POST['bi_start']) ? clean_xss_tags(trim($_POST['bi_start'])) : '';
@@ -29,6 +28,12 @@ if ($bi_link) {
     $bi_link = substr($bi_link,0,1000);
     $bi_link = trim(strip_tags($bi_link));
     $bi_link = preg_replace("#[\\\]+$#", "", $bi_link);
+}
+
+$bi_script = '';
+if (isset($_POST['bi_script'])) {
+    $bi_script = substr(trim($_POST['bi_script']),0,65536);
+    $bi_script = preg_replace("#[\\\]+$#", "", $bi_script);
 }
 
 /**
@@ -69,11 +74,22 @@ if (empty($_POST)) {
 }
 
 /**
+ * 파일개수 체크
+ */
+$file_count   = 0;
+$upload_count = count($_FILES['bi_img']['name']);
+
+for ($i=0; $i<$upload_count; $i++) {
+    if($_FILES['bi_img']['name'][$i] && is_uploaded_file($_FILES['bi_img']['tmp_name'][$i]))
+        $file_count++;
+}
+
+/**
  * 기존 파일정보
  */
 if ($iw == 'u') {
-    $ei = sql_fetch("select bi_img from {$g5['eyoom_banner_item']} where bi_no = '{$bi_no}' ");
-    $bi_img = $ei['bi_img'];
+    $bi = sql_fetch("select bi_img from {$g5['eyoom_banner_item']} where bi_no = '{$bi_no}' ");
+    $bi_img = isset($bi['bi_img']) ? $eb->mb_unserialize($bi['bi_img']): array();
 }
 
 /**
@@ -88,11 +104,13 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  * 이미지 삭제
  */
 if ($iw == 'u') {
-    if(isset($_POST['bi_img_del']) && $_POST['bi_img_del'] && $_POST['del_img_name']) {
-        $ebbanner_file = G5_DATA_PATH.'/ebbanner/'.$bi_theme.'/img/'.$_POST['del_img_name'];
-        if (file_exists($ebbanner_file)) {
-            @unlink($ebbanner_file);
-            $bi_img = '';
+    if(is_array($bi_img_del)) {
+        foreach ($bi_img_del as $i => $chk) {
+            $ebbammer_file = G5_DATA_PATH.'/ebbanner/'.$bi_theme.'/img/'.$del_img_name[$i];
+            if ($chk && file_exists($ebbammer_file)) {
+                @unlink($ebbammer_file);
+                $bi_img[$i] = '';
+            }
         }
     }
 }
@@ -102,26 +120,28 @@ if ($iw == 'u') {
  */
 $file_upload_msg = '';
 $upload = array();
-if (is_uploaded_file($_FILES['bi_img']['tmp_name'])) {
-    $ext = $qfile->get_file_ext($_FILES['bi_img']['name']);
-    $file_name = md5(time().$_FILES['bi_img']['name']).".".$ext;
-    if (!preg_match("/(jpg|jpeg|gif|png|webp)$/i", $_FILES['bi_img']['name'])) {
-        $file_upload_msg .= $_FILES['bi_img']['name'] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
-    } else {
-        $dest_path = G5_DATA_PATH.'/ebbanner/'.$bi_theme.'/img/'.$file_name;
+for ($i=0; $i<count((array)$_FILES['bi_img']['name']); $i++) {
+    if (is_uploaded_file($_FILES['bi_img']['tmp_name'][$i])) {
+        $ext = $qfile->get_file_ext($_FILES['bi_img']['name'][$i]);
+        $file_name = md5(time().$_FILES['bi_img']['name'][$i]).".".$ext;
+        if (!preg_match("/(jpg|jpeg|gif|png|webp)$/i", $_FILES['bi_img']['name'][$i])) {
+            $file_upload_msg .= $_FILES['bi_img']['name'][$i] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
+        } else {
+            $dest_path = G5_DATA_PATH.'/ebbanner/'.$bi_theme.'/img/'.$file_name;
 
-        move_uploaded_file($_FILES['bi_img']['tmp_name'], $dest_path);
-        chmod($dest_path, G5_FILE_PERMISSION);
+            move_uploaded_file($_FILES['bi_img']['tmp_name'][$i], $dest_path);
+            chmod($dest_path, G5_FILE_PERMISSION);
 
-        if (file_exists($dest_path)) {
-            $size = getimagesize($dest_path);
-            $bi_img = $file_name;
+            if (file_exists($dest_path)) {
+                $size = getimagesize($dest_path);
+                $bi_img[$i] = $file_name;
+            }
         }
     }
 }
 
-if ($bi_img) {
-    $sql_common .= " bi_img = '" . $bi_img . "', ";
+if (is_array($bi_img)) {
+    $sql_common .= " bi_img = '" . serialize($bi_img) . "', ";
 }
 
 if ($iw == '') {

@@ -75,9 +75,9 @@ if(!sql_query(" select bo_use_good_member from {$g5['eyoom_board']} limit 1 ", f
 /**
  * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
  */
-$tmp = sql_fetch("select bo_table from {$g5['eyoom_board']} where bo_table='{$bo_table}' and bo_theme='{$theme}'",false);
+$tmp = sql_fetch("select bo_table from {$g5['eyoom_board']} where bo_table='{$bo_table}' and bo_theme='" . sql_real_escape_string($theme) . "'",false);
 if(!$tmp['bo_table']) {
-    sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bo_table}', gr_id='{$board['gr_id']}', bo_theme='{$theme}', bo_skin='basic', use_gnu_skin='n'");
+    sql_query("insert into {$g5['eyoom_board']} set bo_table='{$bo_table}', gr_id='{$board['gr_id']}', bo_theme='" . sql_real_escape_string($theme) . "', bo_skin='basic', use_gnu_skin='n'");
 }
 
 $sql = "update {$g5['eyoom_board']} set bo_skin = '{$skin}' where bo_table = '{$bo_table}' ";

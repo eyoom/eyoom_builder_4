@@ -31,7 +31,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
     <?php if ($is_admin) { //#1 ?>
     <h5 class="board-write-title"><strong>답변등록</strong></h5>
 
-    <form name="fanswer" method="post" action="<?php echo G5_BBS_URL; ?>/qawrite_update.php" onsubmit="return fwrite_submit(this);" autocomplete="off" class="eyoom-form">
+    <form name="fanswer" method="post" action="<?php echo G5_BBS_URL; ?>/qawrite_update.php" onsubmit="return fwrite_submit(this);" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="qa_id" value="<?php echo $view['qa_id']; ?>">
     <input type="hidden" name="w" value="a">
     <input type="hidden" name="sca" value="<?php echo $sca; ?>">
@@ -62,6 +62,28 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
             <?php echo $editor_html; ?>
         </div>
     </section>
+
+    <section>
+        <div class="row">
+            <div class="col col-12">
+                <label class="input">
+                    <input type="file" class="form-control" name="bf_file[1]" id="bf_file_1">
+                    <b class="tooltip tooltip-top-right">파일첨부 1 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능</b>
+                </label>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col col-12">
+                <label class="input">
+                    <input type="file" class="form-control" name="bf_file[2]" id="bf_file_2">
+                    <b class="tooltip tooltip-top-right">파일첨부 2 :  용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능</b>
+                </label>
+            </div>
+        </div>
+    </section>
+
     <section class="text-center m-t-30">
         <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-crimson btn-e-xl">
     </section>

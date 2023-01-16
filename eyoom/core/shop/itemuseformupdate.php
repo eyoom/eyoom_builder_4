@@ -48,7 +48,7 @@ if ($w == "")
     */
 
     $sql = "insert {$g5['g5_shop_item_use_table']}
-               set it_id = '$it_id',
+               set it_id = '" . sql_real_escape_string($it_id) . "',
                    mb_id = '{$member['mb_id']}',
                    is_score = '$is_score',
                    is_name = '$is_name',

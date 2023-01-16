@@ -63,7 +63,7 @@ if ($eyoom_board['bo_use_rating'] == '1') {
          * 태그기능을 사용하는 게시판
          */
         if ($eyoom_board['bo_use_tag'] == '1') {
-            sql_query("update {$g5['eyoom_tag_write']} set eb_7 = '{$eb_7}' where tw_theme = '{$theme}' and bo_table = '{$bo_table}' and {$wrid} ");
+            sql_query("update {$g5['eyoom_tag_write']} set eb_7 = '{$eb_7}' where tw_theme = '" . sql_real_escape_string($theme) . "' and bo_table = '{$bo_table}' and {$wrid} ");
         }
     }
 }

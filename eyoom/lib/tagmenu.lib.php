@@ -36,7 +36,7 @@ function eb_tagmenu($skin_dir='basic') {
         case 'random'   : $sql_order = 'rand()'; break;
     }
 
-    $sql = " select * from {$g5['eyoom_tag']} where (1) and tg_theme = '{$theme}' and tg_dpmenu = 'y' order by {$sql_order} limit {$limit} ";
+    $sql = " select * from {$g5['eyoom_tag']} where (1) and tg_theme = '" . sql_real_escape_string($theme) . "' and tg_dpmenu = 'y' order by {$sql_order} limit {$limit} ";
     $result = sql_query($sql);
     $list = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {

@@ -16,6 +16,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
 
     <form name="fpasswordlost" action="<?php echo $action_url; ?>" onsubmit="return fpasswordlost_submit(this);" method="post" autocomplete="off" class="eyoom-form">
+    <input type="hidden" name="cert_no" value="">
     <div id="info_fs">
         <section>
             <label for="mb_email" class="label">E-mail 주소<strong class="sound_only">필수</strong></label>

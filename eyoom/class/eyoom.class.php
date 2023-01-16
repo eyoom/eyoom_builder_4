@@ -26,6 +26,17 @@ class eyoom extends qfile
     }
 
     /**
+     * 특정위치에 배열값 추가
+     * insert_array($src_array, $index, $add_array)
+     */
+    function insert_array($src_array, $idx, $add_array) {        
+        $arr_front = array_slice($src_array, 0, $idx);
+        $arr_end = array_slice($src_array, $idx);
+        $arr_front[] = $add_array;
+        return array_merge($arr_front, $arr_end);
+    }
+
+    /**
      * 브라우저 캐시 방지
      */
     public function eyoom_no_cache() {
@@ -343,7 +354,7 @@ class eyoom extends qfile
      * 전체 게시판 정보
      */
     public function get_bo_subject() {
-        $fields = 'a.bo_table, a.bo_subject, a.bo_list_level, a.bo_use_secret, b.gr_subject, b.gr_id';
+        $fields = 'a.bo_table, a.bo_subject, a.bo_list_level, a.bo_use_secret, a.bo_use_search, b.gr_subject, b.gr_id';
         $sql = "select {$fields} from {$this->g5['board_table']} as a left join {$this->g5['group_table']} as b on a.gr_id = b.gr_id where 1 order by b.gr_subject asc, a.bo_subject asc";
         $res = sql_query($sql, false);
         $bo_name = array();
@@ -353,6 +364,7 @@ class eyoom extends qfile
             $bo_name[$row['bo_table']]['bo_name'] = $row['bo_subject'];
             $bo_name[$row['bo_table']]['bo_list_level'] = $row['bo_list_level'];
             $bo_name[$row['bo_table']]['bo_use_secret'] = $row['bo_use_secret'];
+            $bo_name[$row['bo_table']]['bo_use_search'] = $row['bo_use_search'];
         }
         return $bo_name;
     }
@@ -1289,9 +1301,6 @@ class eyoom extends qfile
                         $url = G5_BBS_URL.'/memo.php?kind='.$no.$qstr.'&amp;page=';
                         break;
                     case 'respond':
-                    case 'theme':
-                    case 'skins':
-                    case 'webpage':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr.'&amp;page=';
                         break;
                     case 'taglist':
@@ -1352,11 +1361,11 @@ class eyoom extends qfile
         $org_tag = str_replace('^','&',$tag);
         $tags = explode('*', $org_tag);
         if (is_array($tags)) {
-            $tag_query = " and tw_theme = '{$theme}' ";
+            $tag_query = " and tw_theme = '" . sql_real_escape_string($theme) . "' ";
             $i=0;
             foreach ($tags as $_tag) {
                 $sch_tag[$i] = " ( INSTR(wr_tag, '".$_tag."') > 0 ) ";
-                @sql_query("update {$this->g5['eyoom_tag']} set tg_scnt = tg_scnt+1, tg_score = tg_score+1 where tg_theme='{$theme}' and tg_word = '{$_tag}'");
+                @sql_query("update {$this->g5['eyoom_tag']} set tg_scnt = tg_scnt+1, tg_score = tg_score+1 where tg_theme='" . sql_real_escape_string($theme) . "' and tg_word = '{$_tag}'");
                 $i++;
             }
             $tag_query .= ' and ' . implode(' and ', (array)$sch_tag);
@@ -1426,7 +1435,7 @@ class eyoom extends qfile
      */
     public function get_tag_info($bo_table, $wr_id) {
         global $theme;
-        $sql = " select * from {$this->g5['eyoom_tag_write']} where tw_theme='{$theme}' and bo_table='{$bo_table}' and wr_id='{$wr_id}' ";
+        $sql = " select * from {$this->g5['eyoom_tag_write']} where tw_theme='" . sql_real_escape_string($theme) . "' and bo_table='{$bo_table}' and wr_id='{$wr_id}' ";
         return sql_fetch($sql, false);
     }
 
@@ -1471,7 +1480,7 @@ class eyoom extends qfile
         global $config, $write, $board, $bo_table, $wr_id, $it_id;
 
         if ($it_id && !is_array($it_id)) {
-            $it = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '".$it_id."'");
+            $it = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '" . sql_real_escape_string($it_id) . "'");
             $head_title = strip_tags(conv_subject($it['it_name'], 255)) . ' - ' . $config['cf_title'];
             $sns_image = $it['it_img1'] ? G5_DATA_URL . '/item/'.$it['it_img1']: '';
             $target_url = shop_item_url($it_id);

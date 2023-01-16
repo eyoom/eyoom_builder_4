@@ -50,7 +50,7 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
      * $html_file 이 없을 경우
      * 메뉴정보 가져오기
      */
-    $sql = "select * from {$g5['eyoom_menu']} where me_theme='{$theme}' and me_type='pid' and me_pid='{$_pid}' order by me_code desc limit 1";
+    $sql = "select * from {$g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($theme) . "' and me_type='pid' and me_pid='" . sql_real_escape_string($_pid) . "' order by me_code desc limit 1";
     $meinfo = sql_fetch($sql);
     
     /**
@@ -58,7 +58,7 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
      */
     $ec_master = array();
     if ($meinfo) {
-        $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='{$theme}' and me_code='{$meinfo['me_code']}' order by ec_sort asc";
+        $sql = "select ec_code from {$g5['eyoom_contents']} where ec_theme='" . sql_real_escape_string($theme) . "' and me_code='{$meinfo['me_code']}' order by ec_sort asc";
         $result = sql_query($sql);
         for ($i=0; $row=sql_fetch_array($result); $i++) {
             $ec_master[$i] = $row;

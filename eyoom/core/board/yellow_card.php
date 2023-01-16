@@ -92,6 +92,6 @@ if ($eyoom_board['bo_use_yellow_card'] != '1') {
          * 원본 게시물에 적용하기
          */
         sql_query("update {$write_table} set eb_5 = '{$eb_5}' where {$wrid} ");
-        sql_query("update {$g5['eyoom_tag_write']} set eb_5 = '{$eb_5}' where  bo_table = '{$bo_table}' and {$wrid} and tw_theme='{$theme}' ");
+        sql_query("update {$g5['eyoom_tag_write']} set eb_5 = '{$eb_5}' where  bo_table = '{$bo_table}' and {$wrid} and tw_theme='" . sql_real_escape_string($theme) . "' ");
     }
 }

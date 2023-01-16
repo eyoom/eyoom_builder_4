@@ -15,7 +15,7 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
     /**
      * 사이드뷰 사용 체크
      */
-    if ($mb_id == 'anonymous' || $eyoom['use_sideview'] == 'n' || !$board['bo_use_sideview']) {
+    if ($mb_id == 'anonymous' || $eyoom['use_sideview'] == 'n' || (isset($board['bo_use_sideview']) && !$board['bo_use_sideview'])) {
         $is_anonymous = $mb_id == 'anonymous' ? true: false;
         $name = $is_anonymous ? $eyoom['anonymous_title']: $name;
         return get_text($name);

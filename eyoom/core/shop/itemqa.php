@@ -70,7 +70,7 @@ $itemqa_list = G5_SHOP_URL."/itemqalist.php";
 $itemqa_form = G5_SHOP_URL."/itemqaform.php?it_id=".$it_id;
 $itemqa_formupdate = G5_SHOP_URL."/itemqaformupdate.php?it_id=".$it_id;
 
-$sql_common = " from `{$g5['g5_shop_item_qa_table']}` where it_id = '{$it_id}' ";
+$sql_common = " from `{$g5['g5_shop_item_qa_table']}` where it_id = '" . sql_real_escape_string($it_id) . "' ";
 
 // 테이블의 전체 레코드수만 얻음
 $sql = " select COUNT(*) as cnt " . $sql_common;

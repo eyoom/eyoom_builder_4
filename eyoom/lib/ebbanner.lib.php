@@ -108,11 +108,18 @@ function eb_banner ($bn_code) {
 
                     if ($row['bi_type'] == 'intra') {
                         // 이미지 정보
-                        $bi_img_path = G5_DATA_PATH.'/ebbanner/'.$row['bi_theme'].'/img/'.$row['bi_img'];
-                        if (file_exists($bi_img_path) && !is_dir($bi_img_path)) {
-                            $bi_img_url = G5_DATA_URL.'/ebbanner/' . $row['bi_theme'] . '/img/' . $row['bi_img'];
+                        $image  = &$banner[$i]['image'];
+                        $image  = $eb->mb_unserialize($row['bi_img']);
+                        if (is_array($image)) {
+                            foreach ($image as $k => $filename) {
+                                $img_var = 'img_' . ($k+1);
+                                $src_var = 'src_' . ($k+1);
+                                $img_url = G5_DATA_URL.'/ebbanner/' . $row['bi_theme'] . '/img/' . $filename;
+                                $banner[$i][$img_var] = $filename;
+                                $banner[$i][$src_var] = $img_url;
+                            }
                         }
-                        $banner[$i]['bi_img_url'] = $bi_img_url;
+
                         $bi_query = $eb->encrypt_md5("{$bn_code}|{$row['bi_no']}|{$_SERVER['REMOTE_ADDR']}|{$row['bi_link']}", SALT_KEY);
                         $banner[$i]['bi_href'] = G5_URL.'/page/ebbanner.php?biq='.$bi_query;
                     } else {

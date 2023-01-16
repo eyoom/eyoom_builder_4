@@ -400,7 +400,7 @@ class shop extends eyoom
     public function get_item_options($it_id, $subject) {
         if(!$it_id || !$subject) return '';
 
-        $sql = " select * from {$this->g5['g5_shop_item_option_table']} where io_type = '0' and it_id = '$it_id' and io_use = '1' order by io_no asc ";
+        $sql = " select * from {$this->g5['g5_shop_item_option_table']} where io_type = '0' and it_id = '" . sql_real_escape_string($it_id) . "' and io_use = '1' order by io_no asc ";
         $result = sql_query($sql);
         if(!sql_num_rows($result)) return '';
 
@@ -480,7 +480,7 @@ class shop extends eyoom
     public function get_item_supply($it_id, $subject) {
         if(!$it_id || !$subject) return '';
 
-        $sql = " select * from {$this->g5['g5_shop_item_option_table']} where io_type = '1' and it_id = '$it_id' and io_use = '1' order by io_no asc ";
+        $sql = " select * from {$this->g5['g5_shop_item_option_table']} where io_type = '1' and it_id = '" . sql_real_escape_string($it_id) . "' and io_use = '1' order by io_no asc ";
         $result = sql_query($sql);
         if(!sql_num_rows($result)) return '';
 
