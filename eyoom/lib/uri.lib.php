@@ -131,7 +131,11 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
     if($config['cf_bbs_rewrite']) {
         switch ($me_type) {
             case 'board':
-                return get_eyoom_pretty_url($me_pid);
+                if (stripos($me_link, 'write')) {
+                    return G5_URL.'/'.$me_pid.'/write';
+                } else {
+                    return get_eyoom_pretty_url($me_pid);
+                }
             break;
 
             case 'group':
@@ -248,7 +252,11 @@ function get_query_url ($info) {
             $url = G5_URL."/shop/item.php?it_id={$tmp[1]}";
         }
     } else {
-        $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
+        if ($info[2] == 'write') {
+            $url = G5_BBS_URL."/write.php?bo_table={$info[1]}";
+        } else {
+            $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
+        }
     }
 
     return $url;

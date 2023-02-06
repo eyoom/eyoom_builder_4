@@ -7,6 +7,19 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit; // 개별 페이지 접근 불가
 $g5_debug['php']['begin_time'] = $begin_time = get_microtime();
 
 /**
+ * 다중관리자인지 체크 
+ * $manager : /eyoom/config.php 파일에서 정의
+ */
+if ($manager) {
+    $mg_menu = $eb->mb_unserialize($manager['mg_menu']);
+    $i=0;
+    foreach ($mg_menu as $k => $v) {
+        $mg_auth[$i] = $k;
+        $i++;
+    }
+}
+
+/**
  * 폼전송 모드일 때 헤더 출력 방지
  */
 if ($smode) return;
@@ -17,7 +30,7 @@ else {
 /**
  * 그누 헤더정보 출력
  */
-@include_once(G5_PATH.'/head.sub.php');
+@include_once(EYOOM_ADMIN_PATH.'/head.sub.php');
 
 /**
  * 최고관리자 정보

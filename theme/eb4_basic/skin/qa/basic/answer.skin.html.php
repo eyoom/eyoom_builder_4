@@ -10,6 +10,12 @@ if (!defined('_EYOOM_')) exit;
 .board-view-ans h4 {font-size:1.25rem}
 .board-view-ans .ans-datetime {margin:15px 0 0;padding:8px 0;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;color:#757575}
 .board-view-ans .ans-con {position:relative;margin:20px 0}
+.board-view-ans #bo_v_file {margin-top: 15px;padding: 10px;background-color: #f8f8f8;border-top:1px solid #999;border-bottom:1px solid #999;}
+.board-view-ans #bo_v_file h2 {margin: 0 0 10px;padding: 5px 0 10px;font-size: 14px;font-weight: 700;border-bottom:1px solid #ddd;}
+.board-view-ans #bo_v_file ul {list-style:none;margin: 0;padding: 0;}
+.board-view-ans #bo_v_file ul li {margin-bottom: 5px;font-size: 13px;}
+.board-view-ans #bo_v_file ul li i {margin-right: 5px;color: #999;}
+.board-view-ans #bo_v_file ul li a:hover {text-decoration:underline;}
 </style>
 
 <div class="board-view-ans">

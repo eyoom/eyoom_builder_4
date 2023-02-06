@@ -4,7 +4,7 @@
 
 /*---------- Reset Styles ----------*/
 * {border-radius:0 !important}
-body {color:#353535;font-size:13px;line-height:1.6;font-family:"Roboto",Dotum,Arial,sans-serif}
+body {color:#353535;font-size:13px;line-height:1.6;font-family:'s-core-dream', sans-serif}
 p,li,li a {color:#252525;word-break:keep-all}
 a {color:#000;text-decoration:none}
 a,a:focus,a:hover,a:active {outline:0 !important}
@@ -22,7 +22,7 @@ h3 {font-size:22px}
 h4 {font-size:18px}
 h5 {font-size:15px}
 h6 {font-size:13px}
-h1,h2,h3,h4,h5,h6 {color:#252525;line-height:1.2;text-shadow:none;font-weight:normal;font-family:"Roboto",Dotum,Arial,sans-serif}
+h1,h2,h3,h4,h5,h6 {color:#252525;line-height:1.2;text-shadow:none;font-weight:normal;font-family:'s-core-dream', sans-serif}
 .h-hidden {position:absolute;font-size:0;line-height:0;content:""}
 
 /*Font Size*/

@@ -32,7 +32,18 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <div class="inline-group">
                                 <label for="levelset_use_eyoom_level1" class="radio"><input type="radio" name="levelset[use_eyoom_level]" id="levelset_use_eyoom_level1" value="y" <?php echo $levelset['use_eyoom_level'] == 'y' || !$levelset['use_eyoom_level'] ? 'checked':''; ?>><i></i> 사용</label>
                                 <label for="levelset_use_eyoom_level2" class="radio"><input type="radio" name="levelset[use_eyoom_level]" id="levelset_use_eyoom_level2" value="n" <?php echo $levelset['use_eyoom_level'] == 'n' ? 'checked':''; ?>><i></i>사용 안함</label>
-                            </label>
+                            </div>
+                            <div class="note margin-bottom-10"><strong>Note:</strong> 이윰 레벨을 사용할지를 설정합니다.</div>
+                        </section>
+                    </div>
+                    <div class="col col-6">
+                        <section>
+                            <label class="label">그누레벨 자동 레벨업/다운 사용</label>
+                            <div class="inline-group">
+                                <label for="levelset_use_auto_levelup1" class="radio"><input type="radio" name="levelset[use_auto_levelup]" id="levelset_use_auto_levelup1" value="y" <?php echo $levelset['use_auto_levelup'] == 'y' || !$levelset['use_auto_levelup'] ? 'checked':''; ?>><i></i> 사용</label>
+                                <label for="levelset_use_auto_levelup2" class="radio"><input type="radio" name="levelset[use_auto_levelup]" id="levelset_use_auto_levelup2" value="n" <?php echo $levelset['use_auto_levelup'] == 'n' ? 'checked':''; ?>><i></i>사용 안함</label>
+                            </div>
+                            <div class="note margin-bottom-10"><strong>Note:</strong> 회원의 이윰레벨이 설정한 레벨을 달성할 경우, 그누레벨은 자동으로 레벨업됩니다.</div>
                         </section>
                     </div>
                 </div>

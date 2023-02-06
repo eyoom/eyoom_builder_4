@@ -13,6 +13,14 @@ if($_REQUEST['dir']) {
 }
 
 /**
+ * 다중관리자 권한 체크
+ */
+if ($member['mb_id'] != $config['cf_admin'] && !in_array($dir, $mg_auth)) {
+    alert("접근권한이 없습니다.");
+    exit;
+}
+
+/**
  * $pid 변수 정의
  */
 if($_REQUEST['pid']) {
@@ -25,6 +33,9 @@ $act_file = EYOOM_ADMIN_CORE_PATH . "/{$dir}/{$pid}.php";
 
 if (file_exists($act_file)) {
     include_once($act_file);
+} else {
+    $act_file = EYOOM_ADMIN_THEME_PATH . "/core/{$dir}/{$pid}.php";
+    @include_once($act_file);
 }
 
 /**

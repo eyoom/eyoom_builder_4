@@ -148,7 +148,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 .secret-qa-wrap .main-latest-link .main-latest-cont p {line-height:1.4}
 </style>
 
-<?php if ($is_youngcart) { ?>
+<?php if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) { ?>
 
 <?php /* ------------- 처리할 주문 시작 ------------- */?>
 <div class="main-headline">
@@ -300,7 +300,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 </div>
 <div class="margin-bottom-30"></div>
 
-<?php if ($is_youngcart) { ?>
+<?php if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) { ?>
 
 <div class="row">
     <div class="col-md-6 md-margin-bottom-30">
@@ -882,7 +882,7 @@ setTimeout(function () {
     });
 }, 1500);
 
-<?php if ($is_youngcart) { ?>
+<?php if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) { ?>
 // ----- 쇼핑몰 주간 일-매출 현황 ----- //
 var chartSalesWeek = c3.generate({
     bindto: '#chartSalesWeek',

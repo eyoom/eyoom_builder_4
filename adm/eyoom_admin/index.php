@@ -15,21 +15,28 @@ if ($config['cf_eyoom_admin'] == 'n' || $use_eyoom_builder === false) return;
 define('_EYOOM_IS_ADMIN_', true);
 
 /**
+ * 관리자 메인인지 체크
+ */
+if (!$pid) {
+    define('IS_ADMIN_INDEX', true);
+}
+
+/**
  * 중요 라이브러리 파일
  */
 @include_once(EYOOM_ADMIN_PATH.'/admin.common.php');
 
 /**
- * 영카트5 인가?
- */
-if ($is_youngcart) {
-    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
-}
-
-/**
  * 관리자모드 헤더 디자인 출력
  */
 @include_once(EYOOM_ADMIN_PATH.'/admin.head.php');
+
+/**
+ * 영카트5 인가?
+ */
+if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) {
+    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
+}
 
 /**
  * check pid

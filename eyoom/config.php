@@ -24,11 +24,6 @@ define('SALT_KEY', 'svjRGP7M2$F6!VzF=yzvJc5@77+uCy5G!5#F*dGM');
 define('EYOOM_EXBOARD_PREFIX', 'ex_');
 
 /**
- * 관리자모드 테마명 설정
- */
-if (!$config['cf_eyoom_admin_theme']) $config['cf_eyoom_admin_theme'] = 'basic';
-
-/**
  * 코어 경로 정의
  */
 define('EYOOM_CORE_PATH', EYOOM_PATH . '/core');
@@ -134,16 +129,6 @@ define('EYOOM_ADMIN_LIB_PATH', EYOOM_ADMIN_PATH . '/lib');
 define('EYOOM_ADMIN_USER_PATH', EYOOM_ADMIN_PATH . '/user');
 
 /**
- * 이윰관리자 테마 경로
- */
-define('EYOOM_ADMIN_THEME_PATH', EYOOM_ADMIN_PATH . '/theme/' . $config['cf_eyoom_admin_theme']);
-
-/**
- * 이윰관리자 테마 경로
- */
-define('EYOOM_ADMIN_THEME_URL', EYOOM_ADMIN_URL . '/theme/' . $config['cf_eyoom_admin_theme']);
-
-/**
  * Eyoom DB tables
  */
 
@@ -151,6 +136,11 @@ define('EYOOM_ADMIN_THEME_URL', EYOOM_ADMIN_URL . '/theme/' . $config['cf_eyoom_
  * 회원 확장 기능
  */
 $g5['eyoom_member'] = G5_TABLE_PREFIX . 'eyoom_member';
+
+/**
+ * 다중관리자 설정 기능
+ */
+$g5['eyoom_manager'] = G5_TABLE_PREFIX . 'eyoom_manager';
 
 /**
  * 활동내역
@@ -301,3 +291,25 @@ $g5['eyoom_wrfixed'] = G5_TABLE_PREFIX . 'eyoom_wrfixed';
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;
+
+/**
+ * 다중관리자 체크
+ */
+$eyoom_admin_theme = $config['cf_eyoom_admin_theme'];
+if ($is_member && !$is_admin) {
+    $manager = sql_fetch("select * from {$g5['eyoom_manager']} where mb_id = '{$member['mb_id']}' ");
+    if ($manager['mb_id']) {
+        $is_admin = 'super';
+        $eyoom_admin_theme = $manager['mg_theme'];
+    }
+}
+
+/**
+ * 이윰관리자 테마 경로
+ */
+define('EYOOM_ADMIN_THEME_PATH', EYOOM_ADMIN_PATH . '/theme/' . $eyoom_admin_theme);
+
+/**
+ * 이윰관리자 테마 경로
+ */
+define('EYOOM_ADMIN_THEME_URL', EYOOM_ADMIN_URL . '/theme/' . $eyoom_admin_theme);

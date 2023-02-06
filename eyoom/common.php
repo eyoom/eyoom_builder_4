@@ -124,6 +124,19 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
         $respond_not_read = $eyoomer['respond'];
 
         /**
+         * 그누레벨 자동적용
+         */
+        if ($levelset['use_eyoom_level'] == 'y') {
+            /**
+             * 관리자는 제외
+             * 그누레벨 사용범위내에서 적용
+             */
+            if(!$is_admin && $levelset['use_auto_levelup'] == 'y' && $member['mb_level'] <= $levelset['max_use_gnu_level']) {
+                $eb->set_gnu_level($eyoomer['level']);
+            }
+        }
+
+        /**
          * 첫 로그인 포인트 로그인시 바로 적용하기 - 마젠토님이 제안해 주셨습니다.
          */
         if (substr($member['mb_today_login'], 0, 10) != G5_TIME_YMD) {

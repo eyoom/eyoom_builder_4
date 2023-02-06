@@ -4,16 +4,6 @@
  * @file    ~/theme/basic/head.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/waves/waves.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/common.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/style.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/custom.css" type="text/css" media="screen">',0);
-
 $mb_photo = $eb->mb_photo($member['mb_id'], 'img');
 ?>
 
@@ -100,7 +90,9 @@ var g5_admin_csrf_token_key = "<?php echo (function_exists('admin_csrf_token_key
             <div class="eb-site-info-box">
                 <div class="site-info-title">
                     <h6>사업자 정보</h6>
+                    <?php if ($member['mb_id'] == $config['cf_admin'] || in_array('theme', $mg_auth)) { ?>
                     <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=biz_info" class="site-info-btn btn-e btn-e-xs btn-e-dark">수정하기</a>
+                    <?php } ?>
                 </div>
                 <div class="site-info-cont">
                     <div class="site-info-item">
@@ -160,15 +152,17 @@ var g5_admin_csrf_token_key = "<?php echo (function_exists('admin_csrf_token_key
             <ul class="list-unstyled list-inline">
                 <li><a href="<?php echo G5_BBS_URL; ?>/logout.php">로그아웃</a></li>
                 <li class="hidden-xs"><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>">관리자메인</a></li>
+                <?php if ($member['mb_id'] == $config['cf_admin'] || in_array('config', $mg_auth)) { ?>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&pid=config_form">기본환경설정</a></li>
-                <?php if ($is_youngcart) { ?>
+                <?php } ?>
+                <?php if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) { ?>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=configform">쇼핑몰환경설정</a></li>
                 <?php } ?>
                 <li><a href="<?php echo G5_URL; ?>/?theme=<?php echo $eyoom_default['theme']; ?>">홈페이지</a></li>
                 <?php if ($is_youngcart) { ?>
                 <li><a href="<?php echo G5_SHOP_URL; ?>/?shop_theme=<?php echo $eyoom_default['shop_theme']; ?>">쇼핑몰</a></li>
                 <?php } ?>
-                <?php if ($is_admin == 'super') { ?>
+                <?php if ($is_admin == 'super' && $member['mb_id'] == $config['cf_admin']) { ?>
                 <li class="hidden-xs"><a href="<?php echo G5_ADMIN_URL; ?>/admin.mode.php?to=gnu">그누관리자</a></li>
                 <?php } ?>
             </ul>

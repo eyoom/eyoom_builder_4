@@ -102,6 +102,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="note"><strong>Note:</strong> 관리자가 보내고 받는 용도로 사용하는 메일의 발송이름을 입력합니다. (회원가입, 인증메일, 테스트, 회원메일발송 등에서 사용)</div>
                             </td>
                         </tr>
+                        <?php if ($member['mb_id'] == $config['cf_admin']) { ?>
                         <tr>
                             <th class="table-form-th">
                                 <label for="cf_eyoom_admin_theme" class="label">이윰관리자 테마설정<strong class="sound_only">필수</strong></label>
@@ -129,6 +130,18 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                                 <div class="note"><strong>Note:</strong> 회원제 사이트를 운영하고자 할 경우, 홈페이지에 접근 가능한 최소 레벨을 설정합니다.</div>
                             </td>
                         </tr>
+                        <?php } else { ?>
+                        <input type="hidden" name="cf_eyoom_admin_theme" id="cf_eyoom_admin_theme" value="<?php echo $config['cf_eyoom_admin_theme']; ?>">
+                        <tr>
+                            <th class="table-form-th border-left-th">
+                                <label for="cf_permit_level" class="label">사이트 접속 최소 레벨</label>
+                            </th>
+                            <td colspan="3">
+                                <label class="select form-width-250px"><?php echo get_member_level_select('cf_permit_level', 1, 10, $config['cf_permit_level']) ?><i></i></label>
+                                <div class="note"><strong>Note:</strong> 회원제 사이트를 운영하고자 할 경우, 홈페이지에 접근 가능한 최소 레벨을 설정합니다.</div>
+                            </td>
+                        </tr>
+                        <?php } ?>
                         <tr>
                             <th class="table-form-th">
                                 <label for="cf_use_point" class="label">포인트 사용</label>

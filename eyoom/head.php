@@ -29,7 +29,7 @@ if ((defined('G5_COMMUNITY_USE') && G5_COMMUNITY_USE === false) || (isset($eyoom
 /**
  * 커뮤니티 메인에서 쇼핑몰 아이템 사용하기
  */
-if ($eyoom['use_shop_itemtype'] == 'y') {
+if ($eyoom['use_shop_itemtype'] == 'y' || $eyoom['use_layout_community'] == 'y') {
     /**
      * 쇼핑몰 코어 스킨경로
      */

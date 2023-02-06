@@ -27,6 +27,11 @@ $dir_icon = array(
 );
 
 /**
+ * 테마별 관리자 메뉴 설정
+ */
+@include_once(EYOOM_ADMIN_THEME_PATH.'/admin.menu.theme.php');
+
+/**
  * 관리자 메뉴 확장
  */
 @include_once(EYOOM_ADMIN_INC_PATH.'/admin.menu.extend.php');
@@ -69,6 +74,8 @@ foreach ($amenu as $key => $value) {
             ) continue;
 
             if (in_array($menu[$subkey][$j][3], $except_menu)) continue;
+
+            if ($member['mb_id'] != $config['cf_admin'] && $menu[$subkey][$j][3] == 'cf_manager') continue;
 
             $subtmp  = explode('/',$menu[$subkey][$j][2]);
             $subfile = $subtmp[count($subtmp)-1];

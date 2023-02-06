@@ -797,6 +797,40 @@ class eyoom extends qfile
         } else return false;
     }
 
+	/**
+     * 그누레벨 자동업/다운
+     */
+	public function set_gnu_level($level) {
+		global $g5, $member;
+		$mb_level = $this->get_gnulevel_from_eyoomlevel($level);
+		if($mb_level != $member['mb_level']) {
+			sql_query("update {$g5['member_table']} set mb_level = '{$mb_level}' where mb_id='{$member['mb_id']}'");
+		} else return false;
+	}
+
+	/** 
+     * 이윰레벨에서 그누레벨 가져오기
+     */
+	private function get_gnulevel_from_eyoomlevel($level) {
+		global $levelset;
+		$gnulevel = array();
+		for($i=2;$i<=$levelset['max_use_gnu_level'];$i++) {
+			$lv_key = 'cnt_gnu_level_'.$i;
+			$max = $levelset[$lv_key] + $gnulevel[$i-1];
+			$gnulevel[$i] = $max;
+		}
+		foreach($gnulevel as $gnu_lv => $max_level) {
+			if($level > $max_level) {
+				if($gnu_lv == $levelset['max_use_gnu_level']) $mb_level = $gnu_lv;
+				else $mb_level = $gnu_lv + 1;
+			} else {
+				$mb_level = $gnu_lv;
+				break;
+			}
+		}
+		return $mb_level;
+	}
+
     /**
      * 포인트를 통한 레벨 가져오기
      */
@@ -1236,7 +1270,7 @@ class eyoom extends qfile
      * 리스트용 페이징 설정정보
      */
     public function set_paging($folder, $no='', $id='', $qstr='') {
-        global $config;
+        global $config, $pid;
 
         if ($folder == 'admin') {
             $qstr = '&amp;'.$qstr;
@@ -1252,10 +1286,6 @@ class eyoom extends qfile
                         break;
                     case 'respond':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr;
-                        break;
-                    case 'taglist':
-                    case 'tagview':
-                        $url = G5_URL.'/page/?pid='.$folder.$qstr;
                         break;
                     case 'tag':
                         $url = G5_URL.'/tag/?'.$qstr;
@@ -1287,7 +1317,11 @@ class eyoom extends qfile
                         $url = G5_SHOP_URL.'/brand.php?'.$qstr;
                         break;
                     default:
-                        $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr;
+                        if ($pid) {
+                            $url = G5_URL.'/page/'.$folder.'?'.$qstr;
+                        } else {
+                            $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr;
+                        }
                         break;
                 }
             }
@@ -1302,10 +1336,6 @@ class eyoom extends qfile
                         break;
                     case 'respond':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr.'&amp;page=';
-                        break;
-                    case 'taglist':
-                    case 'tagview':
-                        $url = G5_URL.'/page/?pid='.$folder.$qstr.'&amp;page=';
                         break;
                     case 'tag':
                         $url = G5_URL.'/tag/?'.$qstr.'&amp;page=';
@@ -1337,7 +1367,11 @@ class eyoom extends qfile
                         $url = G5_SHOP_URL.'/brand.php?'.$qstr.'&amp;page=';
                         break;
                     default:
-                        $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr.'&amp;page=';
+                        if ($pid) {
+                            $url = G5_URL.'/page/?pid='.$folder.$qstr.'&amp;page=';
+                        } else {
+                            $url = G5_BBS_URL.'/'.$folder.'.php?'.$qstr.'&amp;page=';
+                        }
                         break;
                 }
             }

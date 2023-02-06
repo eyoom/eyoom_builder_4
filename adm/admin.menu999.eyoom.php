@@ -66,8 +66,17 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
     }
 
 } else {
-    $menu['menu999'] = array (
-        array('999000', '이윰관리자모드', G5_ADMIN_URL.'/admin.mode.php?to=eyoom', 'eyoom_admin'),
-        array('999100', '이윰관리자 바로가기', G5_ADMIN_URL.'/admin.mode.php?to=eyoom', 'eyoom_admin')
-    );
+    /**
+     * 최고관리자가 아니라면 이윰관리자로 자동전환
+     */
+    if ($member['mb_id'] != $config['cf_admin'] && $is_admin == 'super') {
+        $sql = "update `{$g5['config_table']}` set cf_eyoom_admin = 'y' ";
+        sql_query($sql, false);
+        goto_url(G5_ADMIN_URL, false);
+    } else {
+        $menu['menu999'] = array (
+            array('999000', '이윰관리자모드', G5_ADMIN_URL.'/admin.mode.php?to=eyoom', 'eyoom_admin'),
+            array('999100', '이윰관리자 바로가기', G5_ADMIN_URL.'/admin.mode.php?to=eyoom', 'eyoom_admin')
+        );
+    }
 }
