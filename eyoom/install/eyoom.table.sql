@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_manager` (
   `mb_id` varchar(20) NOT NULL DEFAULT '',
   `mg_theme` varchar(255) NOT NULL DEFAULT '',
   `mg_menu` varchar(255) NOT NULL,
-  PRIMARY KEY (`mb_id`,`mg_theme`),
+  PRIMARY KEY (`mb_id`,`mg_theme`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

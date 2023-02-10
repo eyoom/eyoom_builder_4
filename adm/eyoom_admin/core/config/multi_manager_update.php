@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "100250";
 
+check_demo();
+
 if ($is_admin != 'super' || $member['mb_id'] != $config['cf_admin']) {
     alert('최고관리자만 접근 가능합니다.');
 }

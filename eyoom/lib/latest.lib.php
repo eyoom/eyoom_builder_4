@@ -189,7 +189,7 @@ function eb_latest ($el_code) {
                      * 내용 출력
                      */
                     if ($el_item[$i]['li_content'] == 'y') {
-                        $loop[$k]['wr_content'] = nl2br($row['wr_content']);
+                        $loop[$k]['wr_content'] = htmlspecialchars_decode(nl2br($row['wr_content']));
                     }
 
                     /**

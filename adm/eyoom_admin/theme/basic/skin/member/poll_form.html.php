@@ -111,6 +111,12 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <?php if ($w == 'u') { ?>
                     <tr>
                         <th class="table-form-th">
+                            <label class="label">투표사용</label>
+                        </th>
+                        <td><label class="checkbox red-checkbox"><input type="checkbox" name="po_use" id="po_use" value="1" <?php if ($po['po_use']) { echo 'checked="checked"'; } ?>><i></i>사용</label></td>
+                    </tr>
+                    <tr>
+                        <th class="table-form-th">
                             <label class="label">투표등록일</label>
                         </th>
                         <td>

@@ -1695,7 +1695,7 @@ class bbs extends eyoom
         /**
          * 목록보기 권한이 있는 게시물만 리스트에 보이도록 처리
          */
-        $data = array();
+        $data = array('bo_possible' => array(), 'board_info' => array());
         if (is_array($bo_info)) {
             $i=0;
             foreach ($bo_info as $bo_table => $info) {
