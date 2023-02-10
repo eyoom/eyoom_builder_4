@@ -93,9 +93,16 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $j=0;
     unset($manager_menu);
     foreach ($mg_menu as $k => $v) {
-        $manager_menu[$j] = $dir_menu[$k];
+        switch($k) {
+            case 'config': $manager_menu[$j] = '환경설정'; break;
+            case 'member': $manager_menu[$j] = '회원관리'; break;
+            case 'board' : $manager_menu[$j] = '게시판관리'; break;
+            case 'shop'  : $manager_menu[$j] = '쇼핑몰관리'; break;
+            case 'sms'   : $manager_menu[$j] = 'SMS관리'; break;
+            case 'theme' : $manager_menu[$j] = '테마설정관리'; break;
+        }
         $j++;
-    }
+    }   
 
     $list[$i] = $row;
     $list[$i]['mg_menu'] = implode(', ', $manager_menu);

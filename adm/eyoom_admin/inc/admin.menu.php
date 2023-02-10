@@ -8,7 +8,6 @@ $_dirname = array(
     '100' => 'config',
     '200' => 'member',
     '300' => 'board',
-    '350' => 'somoim',
     '400' => 'shop',
     '500' => 'shopetc',
     '600' => '',
@@ -21,7 +20,6 @@ $dir_icon = array(
     'config'    => 'fa-sliders-h',
     'member'    => 'fa-user',
     'board'     => 'fa-list-alt',
-    'somoim'    => 'fa-users',
     'shop'      => 'fa-shopping-cart',
     'shopetc'   => 'fa-chart-pie',
     'sms'       => 'fa-mobile',
@@ -37,16 +35,6 @@ $dir_icon = array(
  * 관리자 메뉴 확장
  */
 @include_once(EYOOM_ADMIN_INC_PATH.'/admin.menu.extend.php');
-
-/**
- * 메뉴명 자동 매칭
- */
-$dir_menu = array();
-foreach ($_dirname as $k => $dirname) {
-    $dmkey = 'menu'.$k;
-    if (!$dirname || !$menu[$dmkey][0][1]) continue;
-    $dir_menu[$dirname] = $menu[$dmkey][0][1];
-}
 
 /**
  * 메뉴 예외처리

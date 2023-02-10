@@ -221,16 +221,6 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 </div>
 <?php } ?>
 
-<script>var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";</script>
-<script src="<?php echo G5_ADMIN_URL; ?>/admin.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/screenfull/screenfull.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/waves/waves.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/moment/moment.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/eyoom-form/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/app.js"></script>
 <script>
 $(document).ready(function() {
     App.init();

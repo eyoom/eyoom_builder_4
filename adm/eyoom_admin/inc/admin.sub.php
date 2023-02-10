@@ -15,7 +15,7 @@ if($_REQUEST['dir']) {
 /**
  * 다중관리자 권한 체크
  */
-if (isset($mg_auth) && $mg_auth && !in_array($dir, $mg_auth) && $member['mb_id'] != $config['cf_admin']) {
+if ($member['mb_id'] != $config['cf_admin'] && !in_array($dir, $mg_auth)) {
     alert("접근권한이 없습니다.");
     exit;
 }

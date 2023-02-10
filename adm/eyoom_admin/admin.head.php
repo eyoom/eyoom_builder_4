@@ -10,15 +10,12 @@ $g5_debug['php']['begin_time'] = $begin_time = get_microtime();
  * 다중관리자인지 체크 
  * $manager : /eyoom/config.php 파일에서 정의
  */
-$mg_auth = array();
 if ($manager) {
     $mg_menu = $eb->mb_unserialize($manager['mg_menu']);
     $i=0;
     foreach ($mg_menu as $k => $v) {
-        $mg_auth[$i++] = $k;
-        if ($k == 'shop') {
-            $mg_auth[$i++] = 'shopetc';
-        }
+        $mg_auth[$i] = $k;
+        $i++;
     }
 }
 

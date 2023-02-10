@@ -295,7 +295,7 @@ $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;
 /**
  * 다중관리자 체크
  */
-$eyoom_admin_theme = $config['cf_eyoom_admin_theme'] ? $config['cf_eyoom_admin_theme']: 'basic';
+$eyoom_admin_theme = $config['cf_eyoom_admin_theme'];
 if ($is_member && !$is_admin) {
     $manager = sql_fetch("select * from {$g5['eyoom_manager']} where mb_id = '{$member['mb_id']}' ");
     if ($manager['mb_id']) {

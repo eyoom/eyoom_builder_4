@@ -115,22 +115,51 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                 </div>
             </fieldset>
 
-            <?php $i=0; foreach ($dir_menu as $dirname => $menuname) { ?>
-            <?php if ($i%4==0) { ?>
             <fieldset>
                 <div class="row">
-            <?php } ?>
-                    <div class="col col-3">
+                    <div class="col col-4">
                         <section>
-                            <label for="me_<?php echo $dirname; ?>" class="label"><?php echo $menuname; ?></label>
-                            <label for="me_<?php echo $dirname; ?>" class="checkbox"><input type="checkbox" name="mg_menu[<?php echo $dirname; ?>]" value="1" id="me_<?php echo $dirname; ?>" checked><i></i> 보이기</label>
+                            <label for="me_config" class="label">환경설정</label>
+                            <label for="me_config" class="checkbox"><input type="checkbox" name="mg_menu[config]" value="1" id="me_config" checked><i></i> 보이기</label>
                         </section>
                     </div>
-            <?php if ($i%4==3 || count($dir_menu)-1 == $i) { ?>
+                    <div class="col col-4">
+                    <section>
+                            <label for="me_member" class="label">회원관리</label>
+                            <label for="me_member" class="checkbox"><input type="checkbox" name="mg_menu[member]" value="1" id="me_member" checked><i></i> 보이기</label>
+                        </section>
+                    </div>
+                    <div class="col col-4">
+                    <section>
+                            <label for="me_board" class="label">게시판관리</label>
+                            <label for="me_board" class="checkbox"><input type="checkbox" name="mg_menu[board]" value="1" id="me_board" checked><i></i> 보이기</label>
+                        </section>
+                    </div>
                 </div>
             </fieldset>
-            <?php } ?>
-            <?php $i++; } ?>
+
+            <fieldset>
+                <div class="row">
+                    <div class="col col-4">
+                        <section>
+                            <label for="me_shop" class="label">쇼핑몰관리</label>
+                            <label for="me_shop" class="checkbox"><input type="checkbox" name="mg_menu[shop]" value="1" id="me_shop" checked><i></i> 보이기</label>
+                        </section>
+                    </div>
+                    <div class="col col-4">
+                    <section>
+                            <label for="me_sms" class="label">SMS관리</label>
+                            <label for="me_sms" class="checkbox"><input type="checkbox" name="mg_menu[sms]" value="1" id="me_sms" checked><i></i> 보이기</label>
+                        </section>
+                    </div>
+                    <div class="col col-4">
+                    <section>
+                            <label for="me_theme" class="label">테마설정관리</label>
+                            <label for="me_theme" class="checkbox"><input type="checkbox" name="mg_menu[theme]" value="1" id="me_theme" checked><i></i> 보이기</label>
+                        </section>
+                    </div>
+                </div>
+            </fieldset>
 
             <fieldset>
                 <div class="row">

@@ -60,6 +60,14 @@ add_javascript('<script src="'.G5_JS_URL.'/placeholders.min.js"></script>', 0);
 if (G5_IS_MOBILE) { 
     add_javascript('<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>', 1); // overflow scroll 감지
 }
+add_javascript('<script src="'.G5_ADMIN_URL.'/admin.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/bootstrap/js/bootstrap.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/screenfull/screenfull.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/waves/waves.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/moment/moment.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/eyoom-form/plugins/jquery-ui/jquery-ui.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/js/app.js"></script>', 0);
 if (!defined('G5_IS_ADMIN')) echo $config['cf_add_script'];
 ?>
 </head>
