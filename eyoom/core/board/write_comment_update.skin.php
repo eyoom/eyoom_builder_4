@@ -239,7 +239,16 @@ if ($w == 'c') {
     $act_contents['wr_parent'] = $wr_id;
     $act_contents['content'] = $wr_content;
     $bbs->insert_activity($mb_id,$type,$act_contents);
-    $eb->level_point($levelset['cmt']);
+
+    if ($board['bo_point_target'] == 'eyoom' || $board['bo_point_target'] == 'all') {
+        $comment_point = $board['bo_comment_point'];
+    } else {
+        $comment_point = $levelset['cmt'];
+    }
+
+    if ($comment_point) {
+        $eb->level_point($comment_point);
+    }
 
     /**
      * 댓글 포인트

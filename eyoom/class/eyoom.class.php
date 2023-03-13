@@ -416,8 +416,6 @@ class eyoom extends qfile
         if ($single) {
             $user = sql_fetch($sql, false);
             if ($user['mb_id']) {
-                $user['mb_photo'] = $this->mb_photo($user['mb_id']);
-                $user['wallpaper'] = $this->myhome_cover($user['mb_id'],$user['myhome_cover']);
                 return $user;
             } else {
                 /**
@@ -567,8 +565,14 @@ class eyoom extends qfile
 
         if (!$type) $type = 'img';
         if ($type == 'icon' && $config['cf_use_member_icon']) {
+            $member_dir = G5_DATA_PATH.'/member/';
             $mb_dir = substr($mb_id,0,2);
-            $icon_file = G5_DATA_PATH.'/member/'.$mb_dir.'/'.get_mb_icon_name($mb_id).'.gif';
+            $mb_icon_dir = $member_dir.$mb_dir;
+            if (!is_dir($mb_icon_dir)) {
+                @mkdir($mb_icon_dir, G5_DIR_PERMISSION);
+                @chmod($mb_icon_dir, G5_DIR_PERMISSION);
+            }
+            $icon_file = $mb_icon_dir.'/'.get_mb_icon_name($mb_id).'.gif';
             if (file_exists($icon_file)) {
                 $icon_filemtile = (defined('G5_USE_MEMBER_IMAGE_FILETIME') && G5_USE_MEMBER_IMAGE_FILETIME) ? '?'.filemtime($icon_file) : '';
                 $width = $config['cf_member_icon_width'];
@@ -687,45 +691,6 @@ class eyoom extends qfile
                         $size = @getimagesize($dest_img_path);
                         if (!($size[2] === 1 || $size[2] === 2 || $size[2] === 3)) {
                             @unlink($dest_img_path);
-                        } else {
-                            $thumb_img = null;
-                            if($size[2] === 2 || $size[2] === 3) {
-                                //jpg 또는 png 파일 적용
-                                $thumb_img = thumbnail($mb_photo_img, $mb_img_dir, $mb_img_dir, $config['cf_member_img_width'], $config['cf_member_img_height'], true, true);
-                                if($thumb_img) {
-                                    @unlink($dest_img_path);
-                                    rename($mb_img_dir.'/'.$thumb_img, $dest_img_path);
-                                }
-
-                                // 회원아이콘 만들기
-                                if (!file_exists($dest_icon_path)) {
-                                    @copy($src_path.$src_name, $dest_icon_path);
-                                    @chmod($dest_icon_path, G5_FILE_PERMISSION);
-
-                                    $size2 = @getimagesize($dest_icon_path);
-                                    if (!($size2[2] === 1 || $size2[2] === 2 || $size2[2] === 3)) {
-                                        @unlink($dest_icon_path);
-                                    } else if ($size2[0] > $config['cf_member_icon_width'] || $size2[1] > $config['cf_member_icon_height']) {
-                                        $thumb_icon = null;
-                                        if($size2[2] === 2 || $size2[2] === 3) {
-                                            //jpg 또는 png 파일 적용
-                                            $thumb_icon = thumbnail($mb_photo_img, $mb_icon_dir, $mb_icon_dir, $config['cf_member_icon_width'], $config['cf_member_icon_height'], true, true);
-                                            if($thumb_icon) {
-                                                @unlink($dest_icon_path);
-                                                rename($mb_icon_dir.'/'.$thumb_icon, $dest_icon_path);
-                                            }
-                                        }
-                                        if( !$thumb_icon ){
-                                            // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
-                                            @unlink($dest_icon_path);
-                                        }
-                                    }
-                                }
-                            }
-                            if( !$thumb_img ){
-                                // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
-                                @unlink($dest_img_path);
-                            }
                         }
 
                         sql_query("update {$this->g5['eyoom_member']} set photo = '".$mb_photo_img."' where mb_id='".$mb_id."'");
@@ -1029,6 +994,47 @@ class eyoom extends qfile
             }
         }
         if(is_array($point)) return $point;
+    }
+
+    /**
+     * 전화번호 추출기
+     * 전화번호를 읽기 좋은 형식으로 리턴
+     */
+    public function get_phone_number($str) {
+        $phone_prefix = array('010','011','016','017','019','070','031','032','033','041','042','043','044','051','052','053','054','055','061','062','063','064');
+
+        /**
+         * 문자열의 공백 제거
+         */
+        $str = str_replace(" ", "", $str);
+        $str = preg_replace("/(\(|\)|-|\.|_|,)/", "", $str);
+
+        if(substr($str,0,1) != '0') {
+            return $str;
+        } else {
+            $number[0] = substr($str,0,3);
+            if (in_array($number[0], $phone_prefix)) {
+                $string = substr($str,3);
+                if(strlen($string) == 7) {
+                    $number[1] = substr($string,0,3);
+                    $number[2] = substr($string,3);
+                } else if (strlen($string) == 8) {
+                    $number[1] = substr($string,0,4);
+                    $number[2] = substr($string,4);
+                }
+            } else {
+                $number[0] = substr($str,0,2);
+                $string = substr($str,2);
+                if(strlen($string) == 7) {
+                    $number[1] = substr($string,0,3);
+                    $number[2] = substr($string,3);
+                } else if (strlen($string) == 8) {
+                    $number[1] = substr($string,0,4);
+                    $number[2] = substr($string,4);
+                }
+            }
+            return implode("-", $number);
+        }
     }
 
     /**

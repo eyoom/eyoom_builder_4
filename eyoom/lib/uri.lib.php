@@ -154,28 +154,36 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
                 return get_eyoom_pretty_url('mypage', $me_pid);
             break;
 
-            case 'shop':
-                return shop_category_url($me_pid);
-            break;
-
-            case 'item':
-                return shop_item_url($me_pid);
-            break;
-
-            case 'type':
-                return shop_type_url($me_pid);
-            break;
-
-            case 'brand':
-                return shop_brand_url($me_pid);
-            break;
-
             case 'userpage':
                 if(!preg_match('/(http|https):/i',$me_link)) {
                     $me_link = G5_URL.$me_link;
                 }
                 return $me_link;
             break;
+        }
+
+        /**
+         * G5_USE_SHOP : false 대응 코드
+         * 마젠토님이 제보해 주셨습니다.
+         */
+        if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+            switch ($me_type) {
+                case 'shop':
+                    return shop_category_url($me_pid);
+                break;
+    
+                case 'item':
+                    return shop_item_url($me_pid);
+                break;
+    
+                case 'type':
+                    return shop_type_url($me_pid);
+                break;
+    
+                case 'brand':
+                    return shop_brand_url($me_pid);
+                break;
+            }
         }
     } else {
         return $me_link;
@@ -186,7 +194,14 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
  * 짧은 주소를 이전 방식으로 되돌려 줌
  */
 function get_query_url_from_pretty_url($short_url) {
+    global $thema;
+    
     $purl = parse_url($short_url);
+    if ($purl['host']) {
+        if(!$thema->compare_host($purl)) {
+            return false;
+        }
+    }
 
     $get_path_url = parse_url(G5_URL);
     $base_path = isset($get_path_url['path']) ? $get_path_url['path'] : '';
@@ -291,7 +306,10 @@ function get_eyoom_nginx_conf_rules($return_string=false){
     $rules[] = '#### '.G5_VERSION.' nginx rules BEGIN #####';
     $rules[] = 'if (!-e $request_filename){';
 
-    $rules[] = "rewrite ^{$base_path}shop/brand-([0-9a-zA-Z_]+)$ {$base_path}".G5_SHOP_DIR."/brand.php?br_cd=$1&rewrite=1 break;";
+    if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+        $rules[] = "rewrite ^{$base_path}shop/brand-([0-9a-zA-Z_]+)$ {$base_path}".G5_SHOP_DIR."/brand.php?br_cd=$1&rewrite=1 break;";
+    }
+
     if( $add_rules = run_replace('add_nginx_conf_rules', '', $get_path_url, $base_path, $return_string) ){
         $rules[] = $add_rules;
     }
@@ -331,7 +349,10 @@ function get_eyoom_mod_rewrite_rules($return_string=false){
     $rules[] = 'RewriteCond %{REQUEST_FILENAME} -d';
     $rules[] = 'RewriteRule ^ - [L]';
 
-    $rules[] = 'RewriteRule ^shop/brand-([0-9a-z]+)$  '.G5_SHOP_DIR.'/brand.php?br_cd=$1&rewrite=1  [QSA,L]';
+    if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+        $rules[] = 'RewriteRule ^shop/brand-([0-9a-z]+)$  '.G5_SHOP_DIR.'/brand.php?br_cd=$1&rewrite=1  [QSA,L]';
+    }
+    
     if( $add_rules = run_replace('add_mod_rewrite_rules', '', $get_path_url, $base_path, $return_string) ){
         $rules[] = $add_rules;
     }

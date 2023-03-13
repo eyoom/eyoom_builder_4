@@ -53,9 +53,11 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
         /**
          * 쇼핑몰 브랜드관리
          */
-        array_push ($menu['menu400'], 
-            array('400350', '브랜드관리', G5_ADMIN_URL.'/brandlist.php', 'brandlist')
-        );
+        if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+            array_push ($menu['menu400'], 
+                array('400350', '브랜드관리', G5_ADMIN_URL.'/brandlist.php', 'brandlist')
+            );
+        }
 
     } else {
         /**

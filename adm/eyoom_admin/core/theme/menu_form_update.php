@@ -26,6 +26,7 @@ switch($mode) {
         $me_icon = isset($_POST['me_icon']) ? clean_xss_tags($_POST['me_icon']): '';
         $me_path = isset($_POST['me_path']) ? clean_xss_tags($_POST['me_path']): '';
         $me_target = isset($_POST['me_target']) ? clean_xss_tags($_POST['me_target']): '';
+        $apply_permit_level_submenu = isset($_POST['apply_permit_level_submenu']) ? clean_xss_tags($_POST['apply_permit_level_submenu']): '';
         $me_permit_level = isset($_POST['me_permit_level']) ? clean_xss_tags($_POST['me_permit_level']): '';
         $me_side = isset($_POST['me_side']) ? clean_xss_tags($_POST['me_side']): '';
         $me_use = isset($_POST['me_use']) ? clean_xss_tags($_POST['me_use']): '';
@@ -135,6 +136,14 @@ switch($mode) {
                 $me_use_nav = $me_use_nav;
                 $sql = "update {$g5['eyoom_menu']} set me_use_nav='{$me_use_nav}' where me_theme='{$theme}' and me_code like '{$me_code}%' and me_shop='{$me_shop}'";
                 sql_query($sql,false);
+            }
+
+            /**
+             * 메뉴 접근권한 서브메뉴에 적용
+             */
+            if (isset($_POST['apply_permit_level_submenu']) && $apply_permit_level_submenu) {
+                $sql = "update {$g5['eyoom_menu']} set me_permit_level='{$me_permit_level}' where me_theme='{$theme}' and me_code like '{$me_code}%' ";
+                sql_query($sql, false);
             }
 
             $set = "

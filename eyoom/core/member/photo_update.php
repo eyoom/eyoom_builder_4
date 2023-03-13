@@ -5,12 +5,24 @@
 $g5_path = '../../..';
 include_once ($g5_path.'/common.php');
 
+/**
+ * 썸네일 라이브러리
+ */
+@include_once(G5_LIB_PATH.'/thumbnail.lib.php');
+
 if (!$is_member) exit;
 
 // 아이콘 업로드
 $mb_icon = '';
 $image_regex = "/(\.(gif|jpe?g|png))$/i";
 $mb_photo_img = get_mb_icon_name($member['mb_id']).'.gif';
+
+if ($config['cf_member_img_width'] < 100) {
+    $config['cf_member_img_width'] = 100;
+}
+if ($config['cf_member_img_height'] < 100) {
+    $config['cf_member_img_height'] = 100;
+}
 
 if( $config['cf_member_img_size'] && $config['cf_member_img_width'] && $config['cf_member_img_height'] ){
     $mb_img_tmp_dir = G5_DATA_PATH.'/member_image/';

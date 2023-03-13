@@ -39,11 +39,6 @@ define('EYOOM_CORE_MOBILE_PATH', EYOOM_PATH . '/mobile/core');
 define('EYOOM_CLASS_PATH', EYOOM_PATH . '/class');
 
 /**
- * 쇼핑몰 경로정의
- */
-define('EYOOM_SHOP_PATH', EYOOM_PATH . '/' . G5_SHOP_DIR);
-
-/**
  * 인크루드 경로 정의
  */
 define('EYOOM_INC_PATH', EYOOM_PATH . '/inc');
@@ -69,19 +64,9 @@ define('EYOOM_INSTALL_PATH', EYOOM_PATH . '/install');
 define('EYOOM_USER_PATH', EYOOM_PATH . '/user');
 
 /**
- * 쇼핑몰 사용자 경로 정의
- */
-define('EYOOM_USER_SHOP_PATH', EYOOM_USER_PATH . '/' . G5_SHOP_DIR);
-
-/**
  * 코어 URL
  */
 define('EYOOM_CORE_URL', EYOOM_URL . '/core');
-
-/**
- * 쇼핑몰 URL
- */
-define('EYOOM_SHOP_URL', EYOOM_URL . '/' . G5_SHOP_DIR);
 
 /**
  * 이윰빌더 확장하기 경로 정의
@@ -127,6 +112,27 @@ define('EYOOM_ADMIN_LIB_PATH', EYOOM_ADMIN_PATH . '/lib');
  * 이윰관리자 개발자 코드
  */
 define('EYOOM_ADMIN_USER_PATH', EYOOM_ADMIN_PATH . '/user');
+
+/**
+ * 쇼핑몰 관련 상수 정의
+ */
+if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+    /**
+     * 쇼핑몰 경로정의
+     */
+    define('EYOOM_SHOP_PATH', EYOOM_PATH . '/' . G5_SHOP_DIR);
+
+    /**
+     * 쇼핑몰 사용자 경로 정의
+     */
+    define('EYOOM_USER_SHOP_PATH', EYOOM_USER_PATH . '/' . G5_SHOP_DIR);
+
+    /**
+     * 쇼핑몰 URL
+     */
+    define('EYOOM_SHOP_URL', EYOOM_URL . '/' . G5_SHOP_DIR);
+}
+
 
 /**
  * Eyoom DB tables

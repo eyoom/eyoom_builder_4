@@ -167,13 +167,6 @@ var g5_admin_csrf_token_key = "<?php echo (function_exists('admin_csrf_token_key
                 <?php } ?>
             </ul>
         </div>
-        <div class="eb-header-right">
-            <a id="eb_sidebar_btn_right" href="" class="pos-relative">
-                <div class="eb-icon-btn-right waves-effect waves-light">
-                    <i class="fas fa-outdent"></i>
-                </div>
-            </a>
-        </div>
     </div>
 
     <div class="eb-mainarea">

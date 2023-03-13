@@ -108,6 +108,9 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                     <?php } ?>
                                 </select><i></i>
                             </label>
+                            <label class="checkbox" for="apply_permit_level_submenu">
+                                <input type="checkbox" name="apply_permit_level_submenu" id="apply_permit_level_submenu" value="1"><i></i> 하위메뉴에도 동일하게 적용하기
+                            </label>
                             <div class="note"><strong>Note : </strong> 설정한 레벨 이상 회원에게만 메뉴가 노출됩니다.</div>
                         </td>
                     </tr>

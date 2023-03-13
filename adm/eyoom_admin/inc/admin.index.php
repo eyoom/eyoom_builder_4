@@ -33,6 +33,13 @@ for ($i=0; $row=sql_fetch_array($res); $i++) {
 }
 
 /**
+ * 영카트5 인가?
+ */
+if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) {
+    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
+}
+
+/**
  * 그누보드5/영카트5 공통
  */
 include_once(EYOOM_ADMIN_INC_PATH. '/common.index.php');

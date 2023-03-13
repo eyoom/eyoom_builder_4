@@ -20,9 +20,6 @@
 	.eb-header {left:250px}
 }
 .eb-header-left {position:absolute;top:0;left:0;z-index:1}
-.eb-header-right {position:absolute;top:0;right:0;z-index:1}
-.eb-header-right a {color:#868e96}
-.eb-header-right a:focus,.eb-header-right a:hover {color:#343a40}
 .eb-icon-btn-left, .eb-icon-btn-right {width:50px;height:50px;line-height:50px;display:inline-block;text-align:center}
 .eb-icon-btn-left {background:#000;color:#959595;font-size:16px}
 .eb-icon-btn-left:focus, .eb-icon-btn-left:hover {color:#fff}
@@ -35,7 +32,7 @@
 .eb-header-date-time .eb-header-date #eb_date {font-size:13px;color:#fff}
 .eb-header-date-time .eb-header-date #eb_week {font-size:11px;font-weight:200;margin-left:5px}
 .eb-header-date-time .eb-header-time {margin:0;font-size:11px;color:#b8b8c3;font-weight:200;background:#1a1a26;text-align:center;padding:1px 0}
-.eb-header-nav {position:relative;text-align:right;margin-right:60px;height:50px;line-height:50px;color:#868696;font-size:12px}
+.eb-header-nav {position:relative;text-align:right;margin-right:20px;height:50px;line-height:50px;color:#868696;font-size:12px}
 .eb-header-nav a {color:#abafb3}
 .eb-header-nav a:hover {text-decoration:underline}
 

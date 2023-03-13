@@ -11,6 +11,11 @@ foreach($od_status as $status) {
 }
 
 /**
+ * 개인결제
+ */
+$pp_info = get_personalpay_sum();
+
+/**
  * 상품문의
  */
 $sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 5 ";
@@ -78,7 +83,7 @@ foreach($this_ord_info as $key => $od_info) {
 /**
  * 결제수단별 주문현황
  */
-$term = 3;
+$term = 7;
 $info = array();
 $info_key = array();
 $od_pg_thead = array();

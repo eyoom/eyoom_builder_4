@@ -43,6 +43,6 @@ unset($lib_target);
 /**
  * 쇼핑몰 이윰 라이브러리 함수
  */
-if (defined('G5_USE_SHOP') && G5_USE_SHOP && defined('G5_SHOP_DIR')) {
+if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
     @include_once(EYOOM_LIB_PATH . '/mainbanner.lib.php');
 }

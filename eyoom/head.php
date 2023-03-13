@@ -22,14 +22,16 @@ if (isset($qaconfig) && $eyoom['use_gnu_qa'] == 'n') {
  * 게시판의 설정이 쇼핑몰 레이아웃 적용일때
  */
 if ((defined('G5_COMMUNITY_USE') && G5_COMMUNITY_USE === false) || (isset($eyoom_board['use_shop_skin']) && $eyoom_board['use_shop_skin'] == 'y' && $eyoom['use_layout_community'] == 'n')) {
-    @include_once(G5_THEME_SHOP_PATH . '/shop.head.php');
-    return;
+    if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+        @include_once(G5_THEME_SHOP_PATH . '/shop.head.php');
+        return;
+    }
 }
 
 /**
  * 커뮤니티 메인에서 쇼핑몰 아이템 사용하기
  */
-if ($eyoom['use_shop_itemtype'] == 'y' || $eyoom['use_layout_community'] == 'y') {
+if (defined('G5_USE_SHOP') && G5_USE_SHOP && $eyoom['use_shop_itemtype'] == 'y' || $eyoom['use_layout_community'] == 'y') {
     /**
      * 쇼핑몰 코어 스킨경로
      */

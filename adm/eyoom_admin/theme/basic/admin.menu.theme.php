@@ -77,16 +77,16 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('board', $mg_auth)) {
     if (isset($menu['menu300'])) {
         unset($menu['menu300']);
         $menu['menu300'] = array(
-            array('300000', '게시판관리', '' . G5_ADMIN_URL . '/board_list.php', 'board'),
-            array('300100', '게시판관리', '' . G5_ADMIN_URL . '/board_list.php', 'bbs_board'),
-            array('300200', '게시판그룹관리', '' . G5_ADMIN_URL . '/boardgroup_list.php', 'bbs_group'),
-            array('300900', '상단고정 게시물 관리', G5_ADMIN_URL.'/wrfixed_list.php', 'wrfixed_list'),
-            array('300300', '인기검색어관리', '' . G5_ADMIN_URL . '/popular_list.php', 'bbs_poplist', 1),
-            array('300400', '인기검색어순위', '' . G5_ADMIN_URL . '/popular_rank.php', 'bbs_poprank', 1),
-            array('300500', '1:1문의설정', '' . G5_ADMIN_URL . '/qa_config.php', 'qa'),
+            array('300000', '게시판관리', G5_ADMIN_URL . '/board_list.php', 'board'),
+            array('300100', '게시판관리', G5_ADMIN_URL . '/board_list.php', 'bbs_board'),
+            array('300200', '게시판그룹관리', G5_ADMIN_URL . '/boardgroup_list.php', 'bbs_group'),
+            array('300900', '상단고정게시물관리', G5_ADMIN_URL.'/wrfixed_list.php', 'wrfixed_list'),
+            array('300300', '인기검색어관리', G5_ADMIN_URL . '/popular_list.php', 'bbs_poplist', 1),
+            array('300400', '인기검색어순위', G5_ADMIN_URL . '/popular_rank.php', 'bbs_poprank', 1),
+            array('300500', '1:1문의설정', G5_ADMIN_URL . '/qa_config.php', 'qa'),
             array('300600', '내용관리', G5_ADMIN_URL . '/contentlist.php', 'scf_contents', 1),
             array('300700', 'FAQ관리', G5_ADMIN_URL . '/faqmasterlist.php', 'scf_faq', 1),
-            array('300820', '글,댓글 현황', G5_ADMIN_URL . '/write_count.php', 'scf_write_count'),
+            array('300820', '글,댓글 현황', G5_ADMIN_URL . '/write_count.php', 'scf_write_count')
         );
     }
 } else {
@@ -170,17 +170,17 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('sms', $mg_auth)) {
     if (isset($menu['menu900'])) {
         unset($menu['menu900']);
         $menu["menu900"] = array(
-            array('900000', 'SMS 관리', '' . G5_SMS5_ADMIN_URL . '/config.php', 'sms5'),
-            array('900100', 'SMS 기본설정', '' . G5_SMS5_ADMIN_URL . '/config.php', 'sms5_config'),
-            array('900200', '회원정보업데이트', '' . G5_SMS5_ADMIN_URL . '/member_update.php', 'sms5_mb_update'),
-            array('900300', '문자 보내기', '' . G5_SMS5_ADMIN_URL . '/sms_write.php', 'sms_write'),
-            array('900400', '전송내역-건별', '' . G5_SMS5_ADMIN_URL . '/history_list.php', 'sms_history', 1),
-            array('900410', '전송내역-번호별', '' . G5_SMS5_ADMIN_URL . '/history_num.php', 'sms_history_num', 1),
-            array('900500', '이모티콘 그룹', '' . G5_SMS5_ADMIN_URL . '/form_group.php', 'emoticon_group'),
-            array('900600', '이모티콘 관리', '' . G5_SMS5_ADMIN_URL . '/form_list.php', 'emoticon_list'),
-            array('900700', '휴대폰번호 그룹', '' . G5_SMS5_ADMIN_URL . '/num_group.php', 'hp_group', 1),
-            array('900800', '휴대폰번호 관리', '' . G5_SMS5_ADMIN_URL . '/num_book.php', 'hp_manage', 1),
-            array('900900', '휴대폰번호 파일', '' . G5_SMS5_ADMIN_URL . '/num_book_file.php', 'hp_file', 1)
+            array('900000', 'SMS 관리', G5_SMS5_ADMIN_URL . '/config.php', 'sms5'),
+            array('900100', 'SMS 기본설정', G5_SMS5_ADMIN_URL . '/config.php', 'sms5_config'),
+            array('900200', '회원정보업데이트', G5_SMS5_ADMIN_URL . '/member_update.php', 'sms5_mb_update'),
+            array('900300', '문자 보내기', G5_SMS5_ADMIN_URL . '/sms_write.php', 'sms_write'),
+            array('900400', '전송내역-건별', G5_SMS5_ADMIN_URL . '/history_list.php', 'sms_history', 1),
+            array('900410', '전송내역-번호별', G5_SMS5_ADMIN_URL . '/history_num.php', 'sms_history_num', 1),
+            array('900500', '이모티콘 그룹', G5_SMS5_ADMIN_URL . '/form_group.php', 'emoticon_group'),
+            array('900600', '이모티콘 관리', G5_SMS5_ADMIN_URL . '/form_list.php', 'emoticon_list'),
+            array('900700', '휴대폰번호 그룹', G5_SMS5_ADMIN_URL . '/num_group.php', 'hp_group', 1),
+            array('900800', '휴대폰번호 관리', G5_SMS5_ADMIN_URL . '/num_book.php', 'hp_manage', 1),
+            array('900900', '휴대폰번호 파일', G5_SMS5_ADMIN_URL . '/num_book_file.php', 'hp_file', 1)
         );
     }
 } else {

@@ -41,11 +41,9 @@ $is_megamenu = 'yes';
                             <?php if (defined('_SHOP_') && $eyoom['use_layout_community'] == 'y') { ?>
                             <li class="cs-nav c-nav"><a href="<?php echo G5_URL; ?>"><span class="deactivate">커뮤니티</span></a></li>
                             <li class="cs-nav s-nav"><a href="<?php echo G5_SHOP_URL; ?>" class="disabled"><span class="activate">쇼핑몰</span></a></li>
-                            <?php } else { ?>
+                            <?php } else if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
                             <li class="cs-nav c-nav"><a href="<?php echo G5_URL; ?>" class="disabled"><span class="activate">커뮤니티</span></a></li>
-                            <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
                             <li class="cs-nav s-nav"><a href="<?php echo G5_SHOP_URL; ?>"><span class="deactivate">쇼핑몰</span></a></li>
-                            <?php } ?>
                             <?php } ?>
                         <?php } ?>
                             <li>
@@ -151,7 +149,7 @@ $is_megamenu = 'yes';
                             <?php /* ---------- 모바일용 컨텐츠 시작 // 991픽셀 이하에서만 출력 ---------- */ ?>
                             <?php if ($eyoom['is_shop_theme'] == 'y' || $is_member) { ?>
                             <div class="sidebar-member-menu">
-                                <?php if ($eyoom['is_shop_theme'] == 'y') { ?>
+                                <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP && $eyoom['is_shop_theme'] == 'y') { ?>
                                 <a href="<?php echo G5_SHOP_URL; ?>" class="btn-e btn-e-md btn-e-crimson btn-e-block m-t-10 m-b-10">
                                     쇼핑몰<i class="far fa-caret-square-right m-l-5"></i>
                                 </a>

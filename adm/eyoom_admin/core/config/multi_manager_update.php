@@ -39,7 +39,7 @@ if (!chk_captcha()) {
     alert('자동등록방지 숫자가 틀렸습니다.');
 }
 
-$row = sql_fetch("select count(*) as cnt from {$g5['eyoom_manager']} where mb_id = '{$mb_id}' and mg_theme = '{$mg_theme}' ");
+$row = sql_fetch("select count(*) as cnt from {$g5['eyoom_manager']} where mb_id = '{$mb_id}' ");
 if ($row['cnt'] > 0) {
     $sql = " update {$g5['eyoom_manager']} set mg_theme = '{$mg_theme}', mg_menu = '{$mg_menu}' where mb_id = '{$mb_id}' ";
     sql_query($sql, false);

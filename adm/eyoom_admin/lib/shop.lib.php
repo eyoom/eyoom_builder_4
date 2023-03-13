@@ -20,18 +20,38 @@ function get_order_status_sum($status) {
     return $info;
 }
 
+// 개인결제 미수금 합계 금액
+function get_personalpay_sum () {
+    global $g5;
+
+    $sql = "
+        SELECT count(*) as cnt, sum(pp_price-pp_receipt_price) as price
+        FROM {$g5['g5_shop_personalpay_table']}
+        WHERE pp_price <> pp_receipt_price
+    ";
+    $row = sql_fetch($sql);
+
+    $info = array();
+    $info['count'] = (int)$row['cnt'];
+    $info['price'] = (int)$row['price'];
+    $info['href'] = G5_ADMIN_URL.'/?dir=shop&pid=personalpaylist';
+
+    return $info;
+}
+
 // 일자별 주문 합계 금액
 function get_order_date_sum($date) {
     global $g5;
 
     $sql = "
-        SELECT sum(od_cart_price + od_send_cost + od_send_cost2) as orderprice, sum(od_cancel_price) as cancelprice
+        SELECT count(*) as cnt, sum(od_cart_price + od_send_cost + od_send_cost2) as orderprice, sum(od_cancel_price) as cancelprice
         FROM {$g5['g5_shop_order_table']}
-        WHERE SUBSTRING(od_time, 1, 10) = '{$date}'
+        WHERE SUBSTRING(od_time, 1, 10) = '{$date}' and od_cart_price <> 0
     ";
     $row = sql_fetch($sql);
 
     $info = array();
+    $info['count'] = (int)$row['cnt'];
     $info['order'] = (int)$row['orderprice'];
     $info['cancel'] = (int)$row['cancelprice'];
 
@@ -183,6 +203,7 @@ function get_year_order_info($year) {
     $output['receipteasy']  = $receipteasy;
     $output['receiptkakao'] = $receiptkakao;
     $output['receiptpoint'] = $receiptpoint;
+    $output['sale_month']   = $sale_month;
 
     return $output;
 }

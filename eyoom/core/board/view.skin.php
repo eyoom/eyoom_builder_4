@@ -74,7 +74,17 @@ if (preg_match('/adopt/i',$eyoom_board['bo_skin'])) {
  */
 $spv_name = 'spv_board_'.$bo_table.'_'.$wr_id;
 if (!get_session($spv_name)) {
-    if ($is_member) $eb->level_point($levelset['read']);
+    if ($is_member) {
+        if ($board['bo_point_target'] == 'eyoom' || $board['bo_point_target'] == 'all') {
+            $read_point = $board['bo_read_point'];
+        } else {
+            $read_point = $levelset['read'];
+        }
+
+        if ($read_point) {
+            $eb->level_point($read_point);
+        }
+    }
     set_session($spv_name, TRUE);
 
     // 이윰뉴 테이블에 wr_hit 적용

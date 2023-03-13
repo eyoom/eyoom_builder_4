@@ -138,6 +138,7 @@ $bo_count_modify = isset($_POST['bo_count_modify']) ? (int) $_POST['bo_count_mod
 $bo_count_delete = isset($_POST['bo_count_delete']) ? (int) $_POST['bo_count_delete'] : 0;
 $bo_upload_level = isset($_POST['bo_upload_level']) ? (int) $_POST['bo_upload_level'] : 0;
 $bo_download_level = isset($_POST['bo_download_level']) ? (int) $_POST['bo_download_level'] : 0;
+$bo_point_target = isset($_POST['bo_point_target']) ? clean_xss_tags($_POST['bo_point_target']) : 'gnu';
 $bo_read_point = isset($_POST['bo_read_point']) ? (int) $_POST['bo_read_point'] : 0;
 $bo_write_point = isset($_POST['bo_write_point']) ? (int) $_POST['bo_write_point'] : 0;
 $bo_comment_point = isset($_POST['bo_comment_point']) ? (int) $_POST['bo_comment_point'] : 0;
@@ -188,6 +189,7 @@ $sql_common = " gr_id               = '{$gr_id}',
                 bo_count_delete     = '{$bo_count_delete}',
                 bo_upload_level     = '{$bo_upload_level}',
                 bo_download_level   = '{$bo_download_level}',
+                bo_point_target     = '{$bo_point_target}',
                 bo_read_point       = '{$bo_read_point}',
                 bo_write_point      = '{$bo_write_point}',
                 bo_comment_point    = '{$bo_comment_point}',
@@ -379,6 +381,7 @@ if (is_checked('chk_grp_download_level'))       $grp_fields .= " , bo_download_l
 if (is_checked('chk_grp_html_level'))           $grp_fields .= " , bo_html_level = '{$bo_html_level}' ";
 if (is_checked('chk_grp_count_modify'))         $grp_fields .= " , bo_count_modify = '{$bo_count_modify}' ";
 if (is_checked('chk_grp_count_delete'))         $grp_fields .= " , bo_count_delete = '{$bo_count_delete}' ";
+if (is_checked('chk_grp_point_target'))         $grp_fields .= " , bo_point_target = '{$bo_point_target}' ";
 if (is_checked('chk_grp_read_point'))           $grp_fields .= " , bo_read_point = '{$bo_read_point}' ";
 if (is_checked('chk_grp_write_point'))          $grp_fields .= " , bo_write_point = '{$bo_write_point}' ";
 if (is_checked('chk_grp_comment_point'))        $grp_fields .= " , bo_comment_point = '{$bo_comment_point}' ";
@@ -469,6 +472,7 @@ if (is_checked('chk_all_download_level'))       $all_fields .= " , bo_download_l
 if (is_checked('chk_all_html_level'))           $all_fields .= " , bo_html_level = '{$bo_html_level}' ";
 if (is_checked('chk_all_count_modify'))         $all_fields .= " , bo_count_modify = '{$bo_count_modify}' ";
 if (is_checked('chk_all_count_delete'))         $all_fields .= " , bo_count_delete = '{$bo_count_delete}' ";
+if (is_checked('chk_all_point_target'))         $all_fields .= " , bo_point_target = '{$bo_point_target}' ";
 if (is_checked('chk_all_read_point'))           $all_fields .= " , bo_read_point = '{$bo_read_point}' ";
 if (is_checked('chk_all_write_point'))          $all_fields .= " , bo_write_point = '{$bo_write_point}' ";
 if (is_checked('chk_all_comment_point'))        $all_fields .= " , bo_comment_point = '{$bo_comment_point}' ";

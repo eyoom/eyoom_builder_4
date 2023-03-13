@@ -40,7 +40,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/p
 <code class="language-markup">&lt;label class="label"><?php echo $exinfo['ex_subject']; ?>&lt;/label>
 &lt;div class="inline-group">
     <?php for ($i=0; $i<count((array)$exitem); $i++) { ?>
-    &lt;label for="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" class="radio">&lt;input type="radio" name="<?php echo $exinfo['ex_fname']; ?>" id="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" value="<?php echo $exitem[$i]; ?>" &lt;?php echo $ex_value['<?php echo $exinfo['ex_fname']; ?>'] == '<?php echo $exinfo[$i]; ?>'<?php if ($i == 0) { ?> || !$ex_value['<?php echo $exinfo['ex_fname']; ?>']<?php } ?> ? 'checked':''; ?&gt;>&lt;i>&lt;/i><?php echo $exitem[$i]; ?>&lt;/label>
+    &lt;label for="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" class="radio">&lt;input type="radio" name="<?php echo $exinfo['ex_fname']; ?>" id="<?php echo $exinfo['ex_fname']; ?>_<?php echo $i+1; ?>" value="<?php echo $exitem[$i]; ?>" &lt;?php echo $ex_value['<?php echo $exinfo['ex_fname']; ?>'] == '<?php echo $exitem[$i]; ?>'<?php if ($i == 0) { ?> || !$ex_value['<?php echo $exinfo['ex_fname']; ?>']<?php } ?> ? 'checked':''; ?&gt;>&lt;i>&lt;/i><?php echo $exitem[$i]; ?>&lt;/label>
     <?php } ?>
 &lt;/div></code>
 <?php } else if ($exinfo['ex_form'] == 'checkbox') { ?>

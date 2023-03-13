@@ -12,7 +12,7 @@ $depth      = strlen($me_code)/3;
  * 영카트5 인가?
  */
 $is_youngcart = false;
-if (defined('G5_YOUNGCART_VER')) {
+if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
     $is_youngcart = true;
 }
 

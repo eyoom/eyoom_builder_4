@@ -1890,15 +1890,15 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                             </tr>
                             <tr>
                                 <th class="table-form-th">
-                                    <label for="cf_map_daum_id" class="label">다음지도 APP KEY</label>
+                                    <label for="cf_map_daum_id" class="label">카카오지도 APP KEY</label>
                                 </th>
                                 <td>
                                     <div class="inline-group inline-mobile-block">
                                         <span>
                                             <label class="input form-width-350px"><input type="text" name="cf_map_daum_id" id="cf_map_daum_id" value="<?php echo get_sanitize_input($config['cf_map_daum_id']); ?>"> </label>
                                         </span>
-                                        <span><a href="https://developers.kakao.com" target="_blank" class="btn-e btn-e-md btn-e-dark">다음지도 APP KEY 신청하기</a></span>
-                                        <span><a href="http://apis.map.daum.net/web/guide/" target="_blank" class="btn-e btn-e-md btn-e-yellow">다음지도 API 개발 가이드</a></span>
+                                        <span><a href="https://developers.kakao.com" target="_blank" class="btn-e btn-e-md btn-e-dark">카카오지도 APP KEY 신청하기</a></span>
+                                        <span><a href="http://apis.map.daum.net/web/guide/" target="_blank" class="btn-e btn-e-md btn-e-yellow">카카오지도 API 개발 가이드</a></span>
                                     </div>
                                     <div class="note margin-bottom-10"><strong>Note:</strong> 앱을 만든 후, 내 애플리케이션에서 등록한 앱의 일반 메뉴의 JavaScript키를 입력해 주세요.</div>
                                 </td>

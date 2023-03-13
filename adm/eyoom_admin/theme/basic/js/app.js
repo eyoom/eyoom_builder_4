@@ -86,6 +86,7 @@ var App = function () {
 		            $('.eb-sidebar-left').one('transitionend', function (e) {
 		                sidebarMenuText.addClass('eb-lg-display-none');
 		            });
+
 		        }
 		        return false;
 		    });
@@ -141,11 +142,6 @@ var App = function () {
 
 		    $('#eb_sidebar_btn_left_mobile').on('click', function () {
 		        $('.wrapper').addClass('eb-cover-left');
-		        return false;
-		    });
-
-		    $('#eb_sidebar_btn_right').on('click', function () {
-		        $('.wrapper').addClass('eb-cover-right');
 		        return false;
 		    });
 

@@ -32,13 +32,6 @@ if (!$pid) {
 @include_once(EYOOM_ADMIN_PATH.'/admin.head.php');
 
 /**
- * 영카트5 인가?
- */
-if ($is_youngcart && ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth))) {
-    include_once(EYOOM_ADMIN_INC_PATH.'/shop.index.php');
-}
-
-/**
  * check pid
  */
 if ($pid) {

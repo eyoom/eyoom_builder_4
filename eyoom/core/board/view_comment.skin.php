@@ -65,6 +65,11 @@ for ($i=0; $i<$cmt_amt; $i++) {
         $cimg_loop = &$cmt[$i]['cmtimg'];
         $cmt_attach = array();
         foreach ($cmt_file as $k => $_file) {
+            if($_file['href']) {
+                unset($dn_href);
+                $dn_href = parse_url($_file['href']);
+                $_file['href'] = G5_URL.$dn_href['path'].'?'.$dn_href['query'];
+            }
             $cfile_loop[$k] = $_file;
             $cmt_attach[$k] = $_file['source'];
             if (preg_match('/(gif|jpg|jpeg|png|webp)/',strtolower($_file['source']))) {

@@ -661,6 +661,12 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_latest_item` (
   PRIMARY KEY  (`li_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_brand`
+--
+
 DROP TABLE IF EXISTS `g5_eyoom_brand`;
 CREATE TABLE IF NOT EXISTS `g5_eyoom_brand` (
   `br_no` int(10) unsigned NOT NULL auto_increment,
@@ -673,3 +679,104 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_brand` (
   `br_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`br_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_banner`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_banner`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_banner` (
+  `bn_no` int(10) unsigned NOT NULL auto_increment,
+  `bn_code` varchar(20) NOT NULL,
+  `bn_subject` varchar(255) NOT NULL DEFAULT '0',
+  `bn_theme` varchar(30) NOT NULL default 'eb4_basic',
+  `bn_skin` varchar(50) NOT NULL default 'basic',
+  `bn_state` smallint(1) NOT NULL DEFAULT '0',
+  `bn_image` varchar(255) NOT NULL,
+  `bn_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bn_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_banner_item`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_banner_item`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_banner_item` (
+  `bi_no` int(10) unsigned NOT NULL auto_increment,
+  `bn_code` varchar(20) NOT NULL,
+  `bi_theme` varchar(30) NOT NULL default 'eb4_basic',
+  `bi_type` enum('intra','extra') NOT NULL DEFAULT 'intra',
+  `bi_state` char(1) NOT NULL default '2',
+  `bi_sort` int(10) default '0',
+  `bi_title` varchar(255) NOT NULL,
+  `bi_subtitle` varchar(255) NOT NULL,
+  `bi_script` text NOT NULL,
+  `bi_link` varchar(255) NOT NULL DEFAULT '',
+  `bi_img` varchar(255) NOT NULL DEFAULT '',
+  `bi_period` char(1) NOT NULL default '1',
+  `bi_start` varchar(10) NOT NULL,
+  `bi_end` varchar(10) NOT NULL,
+  `bi_exposed` mediumint(10) NOT NULL DEFAULT '0',
+  `bi_clicked` mediumint(10) NOT NULL DEFAULT '0',
+  `bi_view_level` tinyint(4) NOT NULL default '1',
+  `bi_regdt` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bi_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_banner_hit`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_banner_hit`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_banner_hit` (
+    `bh_id` int(11) unsigned NOT NULL auto_increment,
+    `bn_code` varchar(20) NOT NULL,
+    `bi_no` int(11) NOT NULL,
+    `bh_ip` varchar(100) NOT NULL DEFAULT '',
+    `bh_date` date NOT NULL DEFAULT '0000-00-00',
+    `bh_time` time NOT NULL DEFAULT '00:00:00',
+    `bh_referer` text NOT NULL,
+    `bh_agent` varchar(200) NOT NULL,
+    PRIMARY KEY  (`bh_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_wrfixed`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_wrfixed`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_wrfixed` (
+    `bo_table` varchar(20) NOT NULL DEFAULT '',
+    `wr_id` int(11) NOT NULL DEFAULT '0',
+    `mb_id` varchar(30) NOT NULL,
+    `bf_wrfixed_point` int(11) NOT NULL DEFAULT '0',
+    `bf_wrfixed_date` smallint(3) NOT NULL DEFAULT '1',
+    `bf_open` enum('y','n') NOT NULL DEFAULT 'n',
+    `po_datetime` datetime NOT NULL,
+    `ex_datetime` datetime NOT NULL,
+    `bf_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_favorite_adm`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_favorite_adm`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_favorite_adm` (
+  `mb_id` varchar(30) NOT NULL,
+  `dir` varchar(20) NOT NULL,
+  `pid` varchar(40) NOT NULL,
+  `fm_code` char(6) NOT NULL,
+  `me_name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8

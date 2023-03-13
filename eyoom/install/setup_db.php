@@ -1,21 +1,27 @@
 <?php
 @set_time_limit(0);
+$gmnow = gmdate('D, d M Y H:i:s').' GMT';
+header('Expires: 0');
+header('Last-Modified: ' . $gmnow);
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: pre-check=0, post-check=0, max-age=0');
+header('Pragma: no-cache');
 @header('Content-Type: text/html; charset=utf-8');
 @header('X-Robots-Tag: noindex');
 
 $g5_path['path'] = '../..';
 include_once('../../config.php');
 include_once('../../lib/common.lib.php');
-
-$title = G5_VERSION." &amp; 이윰빌더 설치 완료";
-include_once('./setup.head.php');
-include_once('../class/qfile.class.php');
 include_once('../../install/install.function.php');    // 인스톨 과정 함수 모음
 
 include_once('../../lib/hook.lib.php');    // hook 함수 파일
 include_once('../../lib/get_data.lib.php');    
 include_once('../../lib/uri.lib.php');    // URL 함수 파일
 include_once('../../lib/cache.lib.php');
+
+$title = G5_VERSION." &amp; 이윰빌더 설치 완료";
+include_once('./setup.head.php');
+include_once('../class/qfile.class.php');
 
 if (!$exists_db_config || !$exists_eyoom_config) {
     include_once('./setup.tail.php');
@@ -24,15 +30,15 @@ if (!$exists_db_config || !$exists_eyoom_config) {
 
 $tmp_bo_table   = array ("notice", "qa", "free", "gallery");
 
-$mysql_host         = defined('G5_MYSQL_HOST')      ? G5_MYSQL_HOST     : safe_install_string_check($_POST['mysql_host']);
-$mysql_user         = defined('G5_MYSQL_USER')      ? G5_MYSQL_USER     : safe_install_string_check($_POST['mysql_user']);
-$mysql_pass         = defined('G5_MYSQL_PASSWORD')  ? G5_MYSQL_PASSWORD : safe_install_string_check($_POST['mysql_pass']);
-$mysql_db           = defined('G5_MYSQL_DB')        ? G5_MYSQL_DB       : safe_install_string_check($_POST['mysql_db']);
-$table_prefix       = defined('G5_TABLE_PREFIX')    ? G5_TABLE_PREFIX   : safe_install_string_check($_POST['table_prefix']);
-$admin_id           = isset($_POST['admin_id']) ? $_POST['admin_id'] : '';
-$admin_pass         = isset($_POST['admin_pass']) ? $_POST['admin_pass'] : '';
-$admin_name         = isset($_POST['admin_name']) ? $_POST['admin_name'] : '';
-$admin_email        = isset($_POST['admin_email']) ? $_POST['admin_email'] : '';
+$mysql_host         = defined('G5_MYSQL_HOST')      ? G5_MYSQL_HOST: safe_install_string_check($_POST['mysql_host']);
+$mysql_user         = defined('G5_MYSQL_USER')      ? G5_MYSQL_USER: safe_install_string_check($_POST['mysql_user']);
+$mysql_pass         = defined('G5_MYSQL_PASSWORD')  ? G5_MYSQL_PASSWORD: safe_install_string_check($_POST['mysql_pass']);
+$mysql_db           = defined('G5_MYSQL_DB')        ? G5_MYSQL_DB: safe_install_string_check($_POST['mysql_db']);
+$table_prefix       = defined('G5_TABLE_PREFIX')    ? G5_TABLE_PREFIX: safe_install_string_check($_POST['table_prefix']);
+$admin_id           = isset($_POST['admin_id'])     ? $_POST['admin_id'] : '';
+$admin_pass         = isset($_POST['admin_pass'])   ? $_POST['admin_pass'] : '';
+$admin_name         = isset($_POST['admin_name'])   ? $_POST['admin_name'] : '';
+$admin_email        = isset($_POST['admin_email'])  ? $_POST['admin_email'] : '';
 
 $tm_key             = time();
 $cm_key             = '';
@@ -59,23 +65,17 @@ $tm_shopsubside = ($tm_shopsubside == '' || $tm_shopsubside == 'n') ? 'n': 'y';
 $tm_shopmainpos = ($tm_shopmainpos == '' || $tm_shopmainpos == 'n') ? 'left': 'right';
 $tm_shopsubpos = ($tm_shopsubpos == '' || $tm_shopsubpos == 'n') ? 'left': 'right';
 
-if ($tm_shop == 'y' && defined('G5_YOUNGCART_VER')) {
-    $g5_install = 0;
-    if (isset($_POST['g5_install']))
-        $g5_install  = $_POST['g5_install'];
-    $g5_shop_prefix = safe_install_string_check($_POST['g5_shop_prefix']);
-    $g5_shop_install= $_POST['g5_shop_install'];
-} else {
-    $g5_shop_install = false;
-}
-
-if (preg_match("/[^0-9a-z_]+/i", $table_prefix) || preg_match("/[^0-9a-z_]+/i", $g5_shop_prefix)) {
-    die('<div class="ins_inner"><p>TABLE명 접두사는 영문자, 숫자, _ 만 입력하세요.</p><div class="inner_btn"><a href="./setup.config.php">뒤로가기</a></div></div>');
+if (preg_match("/[^0-9a-z_]+/i", $table_prefix) ) {
+    die('<div class="ins_inner"><p>TABLE명 접두사는 영문자, 숫자, _ 만 입력하세요.</p><div class="inner_btn"><a href="./install_config.php">뒤로가기</a></div></div>');
 }
 
 if (preg_match("/[^0-9a-z_]+/i", $admin_id)) {
-    die('<div class="ins_inner"><p>관리자 아이디는 영문자, 숫자, _ 만 입력하세요.</p><div class="inner_btn"><a href="./setup.config.php">뒤로가기</a></div></div>');
+    die('<div class="ins_inner"><p>관리자 아이디는 영문자, 숫자, _ 만 입력하세요.</p><div class="inner_btn"><a href="./install_config.php">뒤로가기</a></div></div>');
 }
+
+$g5_install = isset($_POST['g5_install']) ? (int) $_POST['g5_install'] : 0;
+$g5_shop_prefix = isset($_POST['g5_shop_prefix']) ? safe_install_string_check($_POST['g5_shop_prefix']) : 'yc5_';
+$g5_shop_install = isset($_POST['g5_shop_install']) ? (int) $_POST['g5_shop_install'] : 0;
 
 /*************************************
  * DB 접속 및 실패시 예외처리
@@ -83,10 +83,12 @@ if (preg_match("/[^0-9a-z_]+/i", $admin_id)) {
 $dblink = sql_connect($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
 if (!$dblink) {
 ?>
+
 <div class="ins_inner">
     <p>MySQL Host, User, Password 를 확인해 주십시오.</p>
     <div class="inner_btn"><a href="./setup.config.php">뒤로가기</a></div>
 </div>
+
 <?php
     include_once ('./setup.tail.php');
     exit;
@@ -99,10 +101,12 @@ $g5['connect_db'] = $dblink;
 $select_db = sql_select_db($mysql_db, $dblink);
 if (!$select_db) {
 ?>
+
 <div class="ins_inner">
     <p>MySQL DB 를 확인해 주십시오.</p>
     <div class="inner_btn"><a href="./setup.config.php">뒤로가기</a></div>
 </div>
+
 <?php
     include_once ('./setup.tail.php');
     exit;
@@ -136,11 +140,11 @@ unset($row);
     <ol>
 <?php
 if (!$install_eb4) {
-$sql = " desc {$table_prefix}config";
-$result = @sql_query($sql, false, $dblink);
+$sql = "SHOW TABLES LIKE '{$table_prefix}config'";
+$is_install = sql_query($sql, false, $dblink)->num_rows > 0;
 
 // 그누보드5 재설치에 체크하였거나 그누보드5가 설치되어 있지 않다면
-if($g5_install || !$result) {
+if ($g5_install || $is_install === false) {
     // 테이블 생성 ------------------------------------
     $file = implode('', file('../../install/gnuboard5.sql'));
     eval("\$file = \"$file\";");
@@ -186,7 +190,7 @@ $download_point = 0;
 
 //-------------------------------------------------------------------------------------------------
 // config 테이블 설정
-if($g5_install || !$result) {
+if ($g5_install || $is_install === false) {
     // 기본 이미지 확장자를 설정하고
     $image_extension = "gif|jpg|jpeg|png";
     // 서버에서 webp 를 지원하면 확장자를 추가한다.
@@ -300,7 +304,6 @@ if($g5_install || !$result) {
     $tmp_gr_id = 'community';
     $tmp_gr_subject = '커뮤니티';
 
-
     // 게시판 그룹 생성
     sql_query(" insert into `{$table_prefix}group` set gr_id = '$tmp_gr_id', gr_subject = '$tmp_gr_subject' ", true, $dblink);
 
@@ -380,7 +383,6 @@ if($g5_install || !$result) {
         // 게시판 테이블 생성
         $file = file("../../".G5_ADMIN_DIR."/sql_write.sql");
         $file = get_db_create_replace($file);
-
         $sql = implode("\n", $file);
 
         $create_table = $table_prefix.'write_' . $tmp_bo_table[$i];
@@ -1012,7 +1014,10 @@ $qfile->save_file('levelinfo', $levelinfo_config, $levelinfo, true);
 $sql = " desc `{$table_prefix}eyoom_member`";
 $result = @sql_query($sql, false, $dblink);
 
-if(!$result) {
+$sql = "SHOW TABLES LIKE '{$table_prefix}eyoom_member'";
+$eyoom_install = sql_query($sql, false, $dblink)->num_rows > 0;
+
+if($eyoom_install == false) {
 
     // 테이블 생성 ------------------------------------
     $file = implode('', file('./eyoom.table.sql'));
@@ -1059,28 +1064,28 @@ if(!$result) {
     // EB최신글 마스터 - 기본값
     $sql = "INSERT INTO `g5_eyoom_latest` (`el_no`, `el_code`, `el_subject`, `el_theme`, `el_skin`, `el_state`, `el_cache`, `el_new`, `el_regdt`) VALUES (1, '1517122147', '인기게시물', '".$tm_name."', 'bestset', 1, 0, 24, '".G5_TIME_YMDHIS."'), (2, '1518393947', '베이직 그룹', '".$tm_name."', 'basic', 1, 120, 24, '".G5_TIME_YMDHIS."'), (3, '1518503581', '갤러리 그룹', '".$tm_name."', 'gallery', 1, 0, 24, '".G5_TIME_YMDHIS."'), (4, '1519114252', '웹진 그룹', '".$tm_name."', 'webzine', 1, 0, 24, '".G5_TIME_YMDHIS."'), (5, '1519177106', '새글', '".$tm_name."', 'newpost', 1, 0, 24, '".G5_TIME_YMDHIS."'), (6, '1520320186', '공지사항 사이드', '".$tm_name."', 'notice_roll_side', 1, 0, 24, '".G5_TIME_YMDHIS."'), (7, '1520321978', '공지사항 헤더', '".$tm_name."', 'notice_roll_header', 1, 0, 24, '".G5_TIME_YMDHIS."'), (8, '1526255599', '공지사항 쇼핑몰', '".$tm_name."', 'notice_roll_shop', 1, 0, 24, '".G5_TIME_YMDHIS."')";
     sql_query($sql, false, $dblink);
+
+    // 테마 테이블에 테마정보 입력
+    $info = sql_fetch("select * from `{$table_prefix}eyoom_theme` where tm_name = '{$tm_name}' ", false, $dblink);
+    $tm_set = "
+        tm_key = '{$tm_key}',
+        cm_key = '{$cm_key}',
+        cm_salt = '{$cm_salt}'
+    ";
+
+    unset($update, $insert, $sql);
+    if (isset($info['tm_name']) && $info['tm_name'] != null) {
+        $update = "update `{$table_prefix}eyoom_theme` set {$tm_set}, tm_last = '".G5_TIME_YMDHIS."' where tm_name = '{$tm_name}' ";
+        sql_query($update, false, $dblink);
+    } else {
+        $insert = "insert into `{$table_prefix}eyoom_theme` set tm_name = '{$tm_name}', {$tm_set}, tm_time = '".G5_TIME_YMDHIS."' ";
+        sql_query($insert, false, $dblink);
+    }
+
+    // 홈페이지 제목 - 기본값
+    $sql = "update `{$table_prefix}config` set cf_title = '이윰빌더', cf_admin_email_name = '메일발송 담당자' ";
+    sql_query($sql, false, $dblink);
 }
-
-// 테마 테이블에 테마정보 입력
-$info = sql_fetch("select * from `{$table_prefix}eyoom_theme` where tm_name = '{$tm_name}' ", false, $dblink);
-$tm_set = "
-    tm_key = '{$tm_key}',
-    cm_key = '{$cm_key}',
-    cm_salt = '{$cm_salt}'
-";
-
-unset($update, $insert, $sql);
-if (isset($info['tm_name']) && $info['tm_name'] != null) {
-    $update = "update `{$table_prefix}eyoom_theme` set {$tm_set}, tm_last = '".G5_TIME_YMDHIS."' where tm_name = '{$tm_name}' ";
-    sql_query($update, false, $dblink);
-} else {
-    $insert = "insert into `{$table_prefix}eyoom_theme` set tm_name = '{$tm_name}', {$tm_set}, tm_time = '".G5_TIME_YMDHIS."' ";
-    sql_query($insert, false, $dblink);
-}
-
-// 홈페이지 제목 - 기본값
-$sql = "update `{$table_prefix}config` set cf_title = '이윰빌더', cf_admin_email_name = '메일발송 담당자' ";
-sql_query($sql, false, $dblink);
 ?>
         <li>이윰빌더 DB 테이블 생성 완료</li>
 

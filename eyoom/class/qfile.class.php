@@ -6,18 +6,18 @@
 class qfile
 {
     public function __construct() {
-        $this->tmp_path = G5_DATA_PATH.'/tmp';
-        
         /**
          * 그누보드5 사용자의 경우, 로고파일 저장 폴더 자동으로 생성하기
          */
         $data_common_path = G5_DATA_PATH.'/common';
         if (!is_dir($data_common_path)) {
             $this->make_directory($data_common_path);
-            
-            /**
-             * EB슬라이더, EB콘텐츠, EB상품추출 관련 폴더 생성
-             */
+        }
+
+        /**
+         * EB시리즈 관련 폴더 생성
+         */
+        if (!is_dir(G5_DATA_PATH.'/ebslider')) {
             $this->make_directory(G5_DATA_PATH.'/ebslider');
             $this->make_directory(G5_DATA_PATH.'/ebcontents');
             $this->make_directory(G5_DATA_PATH.'/eblatest');

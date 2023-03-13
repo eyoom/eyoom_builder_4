@@ -2,13 +2,6 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 if (!isset($title)) $title = G5_VERSION." &amp; 이윰빌더 시즌4 설치";
-
-$gmnow = gmdate('D, d M Y H:i:s').' GMT';
-@header('Expires: 0');
-@header('Last-Modified: ' . $gmnow);
-@header('Cache-Control: no-store, no-cache, must-revalidate');
-@header('Cache-Control: pre-check=0, post-check=0, max-age=0');
-@header('Pragma: no-cache');
 ?>
 <!doctype html>
 <html lang="ko">

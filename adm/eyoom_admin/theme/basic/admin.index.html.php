@@ -463,12 +463,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($pg_info as $key => $pgifno) { ?>
+                <?php foreach ($pg_info as $key => $pginfo) { ?>
                 <tr>
-                    <th><strong><?php echo $pgifno['method']; ?></strong></th>
-                    <?php foreach ($pgifno['info'] as $k => $ifno) { ?>
-                    <td class="text-right"><?php echo number_format($ifno['count']); ?></td>
-                    <td class="text-right"><?php echo number_format($ifno['price']); ?></td>
+                    <th><strong><?php echo $pginfo['method']; ?></strong></th>
+                    <?php foreach ($pginfo['info'] as $k => $info) { ?>
+                    <td class="text-right"><?php echo number_format($info['count']); ?></td>
+                    <td class="text-right"><?php echo number_format($info['price']); ?></td>
                     <?php } ?>
                 </tr>
                 <?php } ?>

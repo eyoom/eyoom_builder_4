@@ -430,6 +430,7 @@ function itemqa_modal(href) {
     return false;
 }
 
+<?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
 function coupon_modal(href) {
     $('.coupon-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#coupon-iframe").attr("src", "");
@@ -442,6 +443,7 @@ function coupon_modal(href) {
     });
     return false;
 }
+<?php } ?>
 
 // 모달창을 닫은 후 리로드
 function close_modal_and_reload() {

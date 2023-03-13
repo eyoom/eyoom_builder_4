@@ -96,6 +96,10 @@ if (!isset($board['bo_select_editor'])) {
     sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_select_editor` VARCHAR(50) NOT NULL DEFAULT '' AFTER `bo_use_dhtml_editor` ", false);
 }
 
+if (!isset($board['bo_point_target'])) {
+    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_point_target` VARCHAR(10) NOT NULL DEFAULT 'gnu' AFTER `bo_count_modify` ", false);
+}
+
 $board_default = array(
 'bo_mobile_subject'=>'',
 'bo_device'=>'',

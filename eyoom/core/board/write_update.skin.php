@@ -290,10 +290,20 @@ if ($eyoom['use_tag'] == 'y' && $eyoom_board['bo_use_tag'] == '1' && isset($wr_t
 if ($w == '' || $w == 'r') {
     if (isset($wr_tag)) $tag_query = $insert_tag;
 
-    // 나의활동
-    switch($w) {
-        default  : $act_type = 'new'; $eb->level_point($levelset['write']); break;
-        case 'r' : $act_type = 'reply'; $eb->level_point($levelset['reply']); break;
+    // 나의활동 포인트
+    if ($board['bo_point_target'] == 'eyoom' || $board['bo_point_target'] == 'all') {
+        $write_point = $board['bo_write_point'];
+        $reply_point = $board['bo_write_point'];
+    } else {
+        $write_point = $levelset['write'];
+        $reply_point = $levelset['reply'];
+    }
+
+    if ($write_point || $reply_point) {
+        switch($w) {
+            default  : $act_type = 'new'; $eb->level_point($write_point); break;
+            case 'r' : $act_type = 'reply'; $eb->level_point($reply_point); break;
+        }
     }
     $act_contents = array();
     $act_contents['bo_table'] = $bo_table;

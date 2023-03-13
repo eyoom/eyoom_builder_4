@@ -27,42 +27,6 @@ function get_path_info() {
     return $path;
 }
 
-// 전화번호 추출기
-function get_phone_number($str) {
-    $phone_prefix = array('010','011','016','017','019','070','031','032','033','041','042','043','044','051','052','053','054','055','061','062','063','064');
-
-    // 문자열의 공백 제거
-    $str = str_replace(" ", "", $str);
-    $str = preg_replace("/(\(|\)|-|\.|_|,)/", "", $str);
-
-    if(substr($str,0,1) != '0') {
-        return $str;
-    } else {
-        $number[0] = substr($str,0,3);
-        if (in_array($number[0], $phone_prefix)) {
-            $string = substr($str,3);
-            if(strlen($string) == 7) {
-                $number[1] = substr($string,0,3);
-                $number[2] = substr($string,3);
-            } else if (strlen($string) == 8) {
-                $number[1] = substr($string,0,4);
-                $number[2] = substr($string,4);
-            }
-        } else {
-            $number[0] = substr($str,0,2);
-            $string = substr($str,2);
-            if(strlen($string) == 7) {
-                $number[1] = substr($string,0,3);
-                $number[2] = substr($string,3);
-            } else if (strlen($string) == 8) {
-                $number[1] = substr($string,0,4);
-                $number[2] = substr($string,4);
-            }
-        }
-        return implode("-", $number);
-    }
-}
-
 // 기간별 통계
 function get_visit_info($fr_date, $to_date='') {
     global $g5;
@@ -71,7 +35,7 @@ function get_visit_info($fr_date, $to_date='') {
     if (!$fr_date) $fr_date = date('Y-m-d');
     if (!$to_date) $to_date = $fr_date;
 
-    $sql = " select *, SUBSTRING(vi_time,1,2) as hour from {$g5['visit_table']} where vi_date between '{$fr_date}' and '{$to_date}'order by vi_id desc ";
+    $sql = " select *, SUBSTRING(vi_time,1,2) as hour from {$g5['visit_table']} where vi_date between '{$fr_date}' and '{$to_date}' order by vi_id desc ";
     $result = sql_query($sql);
     $vi_cnt = $vi_br = $vi_os = $vi_dev = $vi_regist = $vi_domain = array();
     for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -107,7 +71,7 @@ function get_visit_info($fr_date, $to_date='') {
     @array_splice($vi_os, 6);
     @array_splice($vi_dev, 6);
 
-    $sql = " select mb_id, SUBSTRING(mb_datetime,12,2) as hour from {$g5['member_table']} where mb_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59'order by mb_datetime desc ";
+    $sql = " select mb_id, SUBSTRING(mb_datetime,12,2) as hour from {$g5['member_table']} where mb_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59' order by mb_datetime desc ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $hour = $row['hour'] * 1;
@@ -122,6 +86,51 @@ function get_visit_info($fr_date, $to_date='') {
     $output['vi_domain']    = $vi_domain;
 
     return $output;
+}
+
+// 하루 활동기록 통계
+function get_activity_info($fr_date, $to_date='') {
+    global $g5;
+
+    // 하루 일자 지정
+    if (!$fr_date) $fr_date = date('Y-m-d');
+    if (!$to_date) $to_date = $fr_date;
+
+    $sql = " select *, SUBSTRING(act_regdt,12,2) as hour from {$g5['eyoom_activity']} where act_regdt between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59' order by act_id desc ";
+    $result = sql_query($sql);
+    $act_login = $act_write = $act_cmt = array();
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        unset($hour);
+        $hour = $row['hour'] * 1;
+        switch ($row['act_type']) {
+            case 'login': $act_login[$hour]++; break;
+            case 'new'  : $act_write[$hour]++; break;
+            case 'cmt'  : $act_cmt[$hour]++; break;
+        }
+    }
+
+    $output['login']    = $act_login;
+    $output['write']    = $act_write;
+    $output['cmt']      = $act_cmt;
+
+    return $output;
+}
+
+// 일자별 활동기록 통계 - 하루 글쓰기, 댓글쓰기 총 갯수
+function get_activity_date_sum($date) {
+    global $g5;
+
+    $sql = " select count(*) as cnt from {$g5['eyoom_activity']} where SUBSTRING(act_regdt, 1, 10) = '{$date}' and act_type='new' ";
+    $write = sql_fetch($sql);
+
+    $sql = " select count(*) as cnt from {$g5['eyoom_activity']} where SUBSTRING(act_regdt, 1, 10) = '{$date}' and act_type='cmt' ";
+    $cmt = sql_fetch($sql);
+
+    $info = array();
+    $info['write'] = (int)$write['cnt'];
+    $info['cmt'] = (int)$cmt['cnt'];
+
+    return $info;
 }
 
 // pg_anchor

@@ -16,9 +16,6 @@ if ($manager) {
     $i=0;
     foreach ($mg_menu as $k => $v) {
         $mg_auth[$i++] = $k;
-        if ($k == 'shop') {
-            $mg_auth[$i++] = 'shopetc';
-        }
     }
 }
 
@@ -29,6 +26,15 @@ if ($smode) return;
 else {
     @include_once(EYOOM_ADMIN_INC_PATH.'/admin.menu.php');
 }
+
+/**
+ * 쇼핑몰 권한 체크
+ */
+if ($member['mb_id'] != $config['cf_admin'] && !in_array('shop', $mg_auth)) {
+    $is_youngcart = false;
+}
+
+$g5_sidebar = $_COOKIE['sidebar'] == 'close' ? 'close': '';
 
 /**
  * 그누 헤더정보 출력

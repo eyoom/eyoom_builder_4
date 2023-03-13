@@ -29,6 +29,20 @@ if ($pid == 'ebcontents') {
 if ($smode) return;
 
 /**
+ * 메뉴정보 가져오기
+ */
+$sql = "select * from {$g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($theme) . "' and me_type='pid' and me_pid='" . sql_real_escape_string($_pid) . "' order by me_code desc limit 1";
+$meinfo = sql_fetch($sql);
+
+/**
+ * 접근권한
+ */
+if ($member['mb_level'] < $meinfo['me_permit_level']) {
+    alert('접근권한이 없습니다.', G5_URL);
+    exit;
+}
+
+/**
  * 테마 경로 지정
  */
 $page_html_path = EYOOM_THEME_PATH.'/page/'.$html_file;
@@ -46,13 +60,6 @@ if (file_exists($page_html_path) && !is_dir($page_html_path)) {
      */
     @include_once($page_html_path);
 } else {
-    /**
-     * $html_file 이 없을 경우
-     * 메뉴정보 가져오기
-     */
-    $sql = "select * from {$g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($theme) . "' and me_type='pid' and me_pid='" . sql_real_escape_string($_pid) . "' order by me_code desc limit 1";
-    $meinfo = sql_fetch($sql);
-    
     /**
      * EB컨텐츠 마스터 정보
      */

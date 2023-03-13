@@ -1378,6 +1378,28 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                         </tr>
                         <tr>
                             <th class="table-form-th">
+                                <label for="bo_point_target" class="label">포인트 적용 대상<strong class="sound_only">필수</strong></label>
+                            </th>
+                            <td>
+                                <label class="select form-width-250px">
+                                    <select name="bo_point_target" id="bo_point_target">
+                                        <option value="gnu" <?php echo $board['bo_point_target']=='' || $board['bo_point_target']=='gnu' ? 'selected': ''; ?>>그누포인트</option>
+                                        <option value="eyoom" <?php echo $board['bo_point_target']=='eyoom' ? 'selected': ''; ?>>이윰경험치</option>
+                                        <option value="all" <?php echo $board['bo_point_target']=='all' ? 'selected': ''; ?>>그누포인트 & 이윰경험치</option>
+                                    </select><i></i>
+                                </label>
+                                <div class="note"><strong>Note:</strong> 이윰경험치를 적용할 경우, 이윰레벨 포인트 설정은 무시되며 아래의 게시판별 포인트 설정이 우선 적용됩니다.</div>
+                                <div class="note"><strong>Note:</strong> 다운로드 포인트는 절대값으로 이윰경험치에 적용이 됩니다.</div>
+                            </td>
+                            <td class="table-chk-td">
+                                <div class="inline-group">
+                                    <label for="chk_grp_point_target" class="checkbox"><input type="checkbox" name="chk_grp_point_target" value="1" id="chk_grp_point_target"><i></i>그룹적용</label>
+                                    <label for="chk_all_point_target" class="checkbox"><input type="checkbox" name="chk_all_point_target" value="1" id="chk_all_point_target"><i></i>전체적용</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-form-th">
                                 <label for="bo_read_point" class="label">글읽기 포인트<strong class="sound_only">필수</strong></label>
                             </th>
                             <td>
