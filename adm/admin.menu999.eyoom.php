@@ -64,7 +64,6 @@ if ((!isset($config['cf_eyoom_admin']) || $config['cf_eyoom_admin'] == 'y')) {
          * 그외 고객관리자 메뉴
          */
         unset($menu); // 메뉴재설정을 위해 기존 메뉴 리셋
-        include_once(EYOOM_ADMIN_INC_PATH .'/admin.menu.client.php');
     }
 
 } else {

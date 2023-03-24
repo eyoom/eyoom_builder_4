@@ -170,7 +170,7 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
             /**
              * 회원게시물 일괄삭제
              */
-            $str2 .= "<li><a href=\"".G5_ADMIN_URL."/?dir=member&amp;pid=delete_spam_posts&amp;mb_id=".$mb_id."&amp;smode=1\" onclick=\"return confirm('해당 회원이 최근 2일전에 작성한 모든 글을 삭제하고 회원을 탈퇴처리합니다.\\n삭제한 글들은 복구할 수 없습니다.\\n정말로 삭제를 진행하시겠습니까?');\" target=\"_blank\">스팸글 일괄삭제</a></li>\n";
+            $str2 .= "<li><a href=\"".G5_ADMIN_URL."/?dir=member&amp;pid=delete_spam_posts&amp;mb_id=".$mb_id."&amp;smode=1\" onclick=\"return confirm('해당 회원이 최근 2일전에 작성한 모든 글을 삭제하고 회원을 탈퇴처리합니다.\\n삭제한 글들은 복구할 수 없습니다.\\n정말로 삭제를 진행하시겠습니까?');\">스팸글 일괄삭제</a></li>\n";
         }
     }
 

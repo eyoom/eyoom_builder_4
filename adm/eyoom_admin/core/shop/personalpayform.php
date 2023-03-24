@@ -140,5 +140,5 @@ if (!$wmode) {
 $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-lg btn-e-red" accesskey="s">';
 $frm_submit .= !$wmode ? ' <a href="' . G5_ADMIN_URL . '/?dir=shop&amp;pid=personalpaylist&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ':'';
-$frm_submit .= $w == 'u' ? ' <a href="' . G5_ADMIN_URL . '/?dir=shop&amp;pid=personalpayformupdate&amp;w=d&amp;pp_id='.$pp['pp_id'].'" class="btn-e btn-e-lg btn-e-dark">삭제</a> ':'';
+$frm_submit .= $w == 'u' ? ' <a href="' . G5_ADMIN_URL . '/?dir=shop&amp;pid=personalpayformupdate&amp;w=d&amp;pp_id='.$pp['pp_id'].'&amp;smode=1" onclick="delete_confirm(this);" class="btn-e btn-e-lg btn-e-dark">삭제</a> ':'';
 $frm_submit .= '</div>';

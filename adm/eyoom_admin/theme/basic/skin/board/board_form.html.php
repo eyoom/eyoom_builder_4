@@ -83,7 +83,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
                                     <?php if ($w == '') { ?>
                                     <span>영문자, 숫자, _ 만 가능 (공백없이 20자 이내)</span>
                                     <?php } else if (!$wmode) { ?>
-                                    <span> <a href="<?php echo get_eyoom_pretty_url($board['bo_table']) ?>" class="btn-e btn-e-yellow">게시판 바로가기</a></span>
+                                    <span> <a href="<?php echo get_eyoom_pretty_url($board['bo_table']) ?>" class="btn-e btn-e-yellow" target="_blank">게시판 바로가기</a></span>
                                     <?php } ?>
                                 </div>
                             </td>

@@ -26,7 +26,7 @@ check_log_folder(G5_SHOP_PATH.'/inicis/key', false);
  * 탭메뉴
  */
 $pg_anchor = array(
-    'anc_scf_info' => '사업자정보',
+    //'anc_scf_info' => '사업자정보',
     'anc_scf_skin' => '스킨설정',
     'anc_scf_index' => '쇼핑몰 초기화면',
     //'anc_mscf_index' => '모바일 초기화면',
@@ -232,9 +232,9 @@ if (strstr($default['de_taxsave_types'], 'transfer')) {
 /**
  * 버튼
  */
-$frm_submit_fixed = ' <input type="submit" value="확인" class="admin-fixed-submit-btn btn-e btn-e-red" accesskey="s">' ;
+$frm_submit_fixed = ' <input type="submit" value="적용하기" class="admin-fixed-submit-btn btn-e btn-e-red" accesskey="s">' ;
 
 $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
-$frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
-$frm_submit .= !$wmode ? ' <a href="' . G5_SHOP_URL . '" class="btn-e btn-e-lg btn-e-dark"><i class="fa fa-shopping-bag"></i> 쇼핑몰</a> ': '';
+$frm_submit .= ' <input type="submit" value="적용하기" class="btn-e btn-e-lg btn-e-crimson" accesskey="s">' ;
+$frm_submit .= !$wmode ? ' <a href="' . G5_SHOP_URL . '" class="btn-e btn-e-lg btn-e-dark">쇼핑몰</a> ': '';
 $frm_submit .= '</div>';

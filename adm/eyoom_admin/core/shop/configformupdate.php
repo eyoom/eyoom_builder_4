@@ -462,7 +462,7 @@ if ($_POST['amode'] == 'ittype') {
                     de_naverpay_test              = '{$de_naverpay_test}',
                     de_naverpay_mb_id             = '{$de_naverpay_mb_id}',
                     de_naverpay_sendcost          = '{$de_naverpay_sendcost}' ";
-    }              
+    }           
     sql_query($sql);
     
     // 환경설정 > 포인트 사용

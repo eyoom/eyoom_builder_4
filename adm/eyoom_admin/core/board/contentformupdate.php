@@ -168,5 +168,5 @@ if ($w == "" || $w == "u") {
 }
 else
 {
-    alert($msg, G5_ADMIN_URL . "/?dir=board&amp;contentlist");
+    alert($msg, G5_ADMIN_URL . "/?dir=board&amp;pid=contentlist");
 }

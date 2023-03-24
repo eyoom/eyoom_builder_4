@@ -251,6 +251,14 @@ $sql = " select * {$sql_common} {$sql_search} {$sql_order} limit {$from_record},
 $result = sql_query($sql);
 $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
+    /**
+     * 이윰 게시판 테이블에 게시판 정보가 있는지 체크
+     */
+    $tmp = sql_fetch("select bo_table, bo_skin, use_gnu_skin, bo_write_limit from {$g5['eyoom_board']} where bo_table='{$row['bo_table']}' limit 1",false);
+    if(! (isset($tmp) && $tmp['bo_table'])) {
+        sql_query("insert into {$g5['eyoom_board']} set bo_table='{$row['bo_table']}', gr_id='{$row['gr_id']}', bo_skin='basic', use_gnu_skin='n'");
+    }
+
     $list[$i] = $row;
     $gr_select = str_replace('"', "'", get_group_select("gr_id[$i]", $row['gr_id']));
     $list[$i]['gr_select'] = preg_replace("/\\n/", "", $gr_select);
@@ -260,6 +268,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $mobile_skin_select = str_replace('"', "'", get_mobile_skin_select('board', 'bo_mobile_skin_'.$i, "bo_mobile_skin[$i]", $row['bo_mobile_skin']));
     $list[$i]['mobile_skin_select'] = preg_replace("/\\n/", "", $mobile_skin_select);
+
+    $row2 = sql_fetch("select use_gnu_skin from {$g5['eyoom_board']} where bo_table='{$row['bo_table']}' ");
+    $list[$i]['use_gnu_skin'] = $row2['use_gnu_skin'];
 }
 $bo_cnt = count($list);
 

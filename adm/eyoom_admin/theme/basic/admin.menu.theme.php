@@ -94,9 +94,14 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('board', $mg_auth)) {
 }
 
 /**
+ * 관리자모드 basic 테마에서는 검색엔진최적화 메뉴를 지원하지 않음
+ */
+unset($menu['menu330']);
+
+/**
  * menu350 : 소모임관리
  */
-if ($member['mb_id'] == $config['cf_admin'] || in_array('somoim', $mg_auth)) {
+if (isset($somo) && ($member['mb_id'] == $config['cf_admin'] || in_array('somoim', $mg_auth))) {
     if ($menu['menu350']) {
         unset($menu['menu350']);
         $menu['menu350'] = array(

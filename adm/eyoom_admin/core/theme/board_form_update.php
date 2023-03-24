@@ -177,6 +177,12 @@ $bo_tag_limit = isset($_POST['bo_tag_limit']) ? (int) $_POST['bo_tag_limit'] : 1
 $bo_blind_limit = isset($_POST['bo_blind_limit']) ? (int) $_POST['bo_blind_limit'] : 5;
 $bo_blind_view = isset($_POST['bo_blind_view']) ? (int) $_POST['bo_blind_view'] : 10;
 $bo_blind_direct = isset($_POST['bo_blind_direct']) ? (int) $_POST['bo_blind_direct'] : 10;
+$bo_goto_url = isset($_POST['bo_goto_url']) ? $_POST['bo_goto_url'] : '';
+if ($bo_goto_url) {
+    $bo_goto_url = substr($bo_goto_url,0,1000);
+    $bo_goto_url = trim(strip_tags($bo_goto_url));
+    $bo_goto_url = preg_replace("#[\\\]+$#", "", $bo_goto_url);
+}
 
 $where = "bo_table='{$bo_table}' and bo_theme='{$theme}'";
 
@@ -184,6 +190,7 @@ $set = "
     use_shop_skin           = '{$use_shop_skin}',
     use_gnu_skin            = '{$use_gnu_skin}',
     bo_skin                 = '{$bo_skin}',
+    bo_goto_url             = '{$bo_goto_url}',
     bo_use_point_explain    = '{$bo_use_point_explain}',
     bo_cmtpoint_target      = '{$bo_cmtpoint_target}',
     bo_firstcmt_point       = '{$bo_firstcmt_point}',

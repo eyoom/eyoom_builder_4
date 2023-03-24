@@ -37,6 +37,11 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     $eyoom_default = $eyoom;
 
     /**
+     * 메타태그 정보
+     */
+    @include_once(G5_DATA_PATH.'/eyoom.seocfg.php');
+
+    /**
      * 클래스 초기화
      */
     include_once(EYOOM_INC_PATH . '/class.init.php');
@@ -112,6 +117,11 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
          * 추가 회원 정보
          */
         $eyoomer = $eb->get_user_info($member['mb_id']);
+
+        /**
+         * 회원 이미지
+         */
+        $eyoomer['mb_photo'] = $eb->mb_photo($member['mb_id']);
 
         /**
          * 읽지 않은 메모 및 관리권한 체크

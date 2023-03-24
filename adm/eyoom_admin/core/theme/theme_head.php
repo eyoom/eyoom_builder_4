@@ -54,7 +54,7 @@ if($bo_table) {
 /**
  * 게시판 전체정보
  */
-if ($pid == 'board_form') {
+if ($pid == 'board_form' || $pid == 'board_addon') {
     $bo_list = $bbs->get_all_board_info();
     if (!$bo_list) $bo_list = array();
 }

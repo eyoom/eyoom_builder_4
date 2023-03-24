@@ -115,6 +115,37 @@ class bbs extends eyoom
     }
 
     /**
+     * 게시판 관리자 설정 URL
+     */
+    public function board_config_url($pid_handle='') {
+        global $eyoom_board;
+
+        if (!$pid_handle) return;
+
+        $config_url = G5_ADMIN_URL;
+        if ($eyoom_board['cf_eyoom_admin_theme'] == 'basic') {
+            switch ($pid_handle) {
+                case 'copy'     : $dir = 'board'; $pid = 'board_copy'; break;
+                case 'basic'    : $dir = 'board'; $pid = 'board_form'; break;
+                case 'addon'    : $dir = 'theme'; $pid = 'board_form'; break;; break;
+                case 'extend'   : $dir = 'board'; $pid = 'board_extend'; break;
+            }
+        } else {
+            switch ($pid_handle) {
+                case 'copy'     : $dir = 'board'; $pid = 'board_copy'; break;
+                case 'basic'    : $dir = 'board'; $pid = 'board_form'; break;
+                case 'addon'    : $dir = 'board'; $pid = 'board_addon'; break;
+                case 'extend'   : $dir = 'board'; $pid = 'board_extend'; break;
+            }
+        }
+        $config_url .= "/?dir={$dir}&amp;pid={$pid}&amp;bo_table={$eyoom_board['bo_table']}";
+        $config_url .= $pid_handle == 'basic' ? "&amp;w=u": "";
+        $config_url .= "&amp;wmode=1";
+
+        return $config_url;
+    }
+
+    /**
      * 이윰 게시판 최초 설정으로 이윰빌더용 확장필드 추가
      */
     public function make_eb_fields($bo_table) {

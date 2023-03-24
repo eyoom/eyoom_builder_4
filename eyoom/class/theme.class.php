@@ -812,6 +812,8 @@ class theme extends qfile
     public function eyoom_submenu($data) {
         if (!$data) $data = $this->eyoom_pagemenu_info();
         if (!$admin_mode) $addwhere = " and me_use = 'y' "; // 감추기 기능 연동 - fm25님이 제보해 주셨습니다.
+        if (defined('_SHOP_')) $me_shop='1'; else $me_shop='2'; 
+        $addwhere .= " and me_shop='{$me_shop}' ";
         $me_code = str_split($data['me_code'],3);
         $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($this->theme) . "' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere} order by me_code asc, me_order asc";
         $res = sql_query($sql, false);

@@ -50,9 +50,19 @@ for($i=0; $i<24; $i++) {
  * 이번주 활동기록 - 글쓰기수, 댓글수
  */
 $arr_activity = array();
+$x_val = array();
 for($i=6; $i>=0; $i--) {
     $date = date('Y-m-d', strtotime('-'.$i.' days', G5_SERVER_TIME));
-    $arr_activity[] = get_activity_date_sum($date);
+    $last_date = date('Y-m-d', strtotime('-'.($i+7).' days', G5_SERVER_TIME));
+
+    $x_val[] = $date;
+    $last_x_val[] = $last_date;
+    //$arr_activity[] = get_activity_date_sum($date);
+}
+$act_info = get_activity_date_sum($x_val);
+for($i=6; $i>=0; $i--) {
+    $date = date('Y-m-d', strtotime('-'.$i.' days', G5_SERVER_TIME));
+    $arr_activity[] = $act_info[$date];
 }
 
 /**
@@ -92,19 +102,17 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
  */
 $new_write_rows = 5;
 
-$sql_common = " from {$g5['board_new_table']} a, {$g5['board_table']} b, {$g5['group_table']} c where a.bo_table = b.bo_table and b.gr_id = c.gr_id ";
+$sql_common = " from {$g5['board_new_table']} where (1) ";
 
-if ($gr_id)
-    $sql_common .= " and b.gr_id = '$gr_id' ";
 if ($view) {
     if ($view == 'w')
-        $sql_common .= " and a.wr_id = a.wr_parent ";
+        $sql_common .= " and wr_id = wr_parent ";
     else if ($view == 'c')
-        $sql_common .= " and a.wr_id <> a.wr_parent ";
+        $sql_common .= " and wr_id <> wr_parent ";
 }
-$sql_order = " order by a.bn_id desc ";
+$sql_order = " order by bn_id desc ";
 
-$sql = " select a.*, b.bo_subject, c.gr_subject, c.gr_id {$sql_common} {$sql_order} limit {$new_write_rows} ";
+$sql = " select * {$sql_common} {$sql_order} limit {$new_write_rows} ";
 $result = sql_query($sql);
 $new_post = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -140,10 +148,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
             $datetime2 = substr($datetime2,5,5);
     }
 
-    $new_post[$i]['gr_href']    = get_eyoom_pretty_url(G5_GROUP_DIR,$row['gr_id']);
-    $new_post[$i]['group']      = cut_str($row['gr_subject'], 10);
-    $new_post[$i]['bo_href']    = get_eyoom_pretty_url($row['bo_table']);
-    $new_post[$i]['board']      = cut_str($row['bo_subject'], 20);
     $new_post[$i]['view_url']   = get_eyoom_pretty_url($row['bo_table'],$row2['wr_id'], $comment_link);
     $new_post[$i]['subject']    = $comment . conv_subject($row2['wr_subject'], 100);
     $new_post[$i]['name']       = $name;
@@ -183,9 +187,6 @@ $sql = " select * from {$g5['qa_content_table']} where (1) and qa_type = '0' ord
 $result = sql_query($sql);
 $qa_conts = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
-    $row1 = sql_fetch($sql1);
-
     $qa_conts[$i] = $row;
     $qa_conts[$i]['name'] = get_text($row['qa_name']);
     $qa_conts[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);

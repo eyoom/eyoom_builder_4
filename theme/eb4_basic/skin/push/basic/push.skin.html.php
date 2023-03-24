@@ -119,7 +119,7 @@ function open_push(respond,memo,follow,unfollow,subscribe,unsubscribe,likes,gues
         var cmt_id = val[2];
         var nick = adopt['nick'];
         var alarm = adopt['alarm'];
-        msg = "<div class='push-message'><b>"+nick+"</b>님이 내가 작성한 댓글을 책택하였습니다.</div><div><a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table="+bo_table+"&wr_id="+wr_id+"#c_"+cmt_id+"' onclick='close_push();'>[채택글 보러가기]</a></div>";
+        msg = "<div class='push-message'><b>"+nick+"</b>님이 내가 작성한 댓글을 채택하였습니다.</div><div><a href='<?php echo G5_BBS_URL; ?>/board.php?bo_table="+bo_table+"&wr_id="+wr_id+"#c_"+cmt_id+"' onclick='close_push();'>[채택글 보러가기]</a></div>";
     }
 
     $("#eyoom-push").removeClass('blind');

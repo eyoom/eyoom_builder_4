@@ -100,6 +100,11 @@ if (!isset($board['bo_point_target'])) {
     sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_point_target` VARCHAR(10) NOT NULL DEFAULT 'gnu' AFTER `bo_count_modify` ", false);
 }
 
+if (isset($eyoom_board['bo_use_summernote_mo'])) {
+    sql_query(" ALTER TABLE `{$g5['eyoom_board']}` CHANGE `bo_use_summernote_mo` `bo_goto_url` VARCHAR(255) NULL", false);
+    sql_query(" UPDATE `{$g5['eyoom_board']}` SET `bo_goto_url` = '' ", false);
+}
+
 $board_default = array(
 'bo_mobile_subject'=>'',
 'bo_device'=>'',
@@ -281,7 +286,7 @@ $frm_submit_fixed = ' <input type="submit" value="확인" class="admin-fixed-sub
 $frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
 $frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
 if ($bo_table && $w && !$wmode) {
-    $frm_submit .= ' <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_copy&amp;bo_table='.$board['bo_table'].'&amp;wmode=1" onclick="eb_modal(this.href); return false;" class="btn-e btn-e-lg btn-e-dark">게시판복사</a> <a href="'.get_eyoom_pretty_url($board['bo_table']).'" class="btn-e btn-e-lg btn-e-dark">게시판 바로가기</a> <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_thumbnail_delete&amp;bo_table='.$board['bo_table'].'&amp;'.$qstr.'" onclick="return delete_confirm2(\"게시판 썸네일 파일을 삭제하시겠습니까?\");"  class="btn-e btn-e-lg btn-e-dark">게시판 썸네일 삭제</a>';
+    $frm_submit .= ' <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_copy&amp;bo_table='.$board['bo_table'].'&amp;wmode=1" onclick="eb_modal(this.href); return false;" class="btn-e btn-e-lg btn-e-dark">게시판복사</a> <a href="'.get_eyoom_pretty_url($board['bo_table']).'" class="btn-e btn-e-lg btn-e-dark" target="_blank">게시판 바로가기</a> <a href="'.G5_ADMIN_URL.'/?dir=board&amp;pid=board_thumbnail_delete&amp;bo_table='.$board['bo_table'].'&amp;'.$qstr.'" onclick="return delete_confirm2(\"게시판 썸네일 파일을 삭제하시겠습니까?\");"  class="btn-e btn-e-lg btn-e-dark">게시판 썸네일 삭제</a>';
 }
 if (!$wmode) {
     $frm_submit .= ' <a href="' . G5_ADMIN_URL . '/?dir=board&amp;pid=board_list&amp;'.$qstr.'" class="btn-e btn-e-lg btn-e-dark">목록</a> ';

@@ -26,7 +26,7 @@ $sql = " select od_id,
             (od_cart_price + od_send_cost + od_send_cost2) as orderprice,
             (od_cart_coupon + od_coupon + od_send_coupon) as couponprice
        from {$g5['g5_shop_order_table']}
-      where SUBSTRING(od_time,1,7) between '$fr_month' and '$to_month'
+      where SUBSTRING(od_time,1,7) between '$fr_month' and '$to_month' and od_cart_price <> '0'
       order by od_time desc ";
 $result = sql_query($sql);
 

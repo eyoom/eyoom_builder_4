@@ -127,6 +127,20 @@ if ($fr_date && $to_date) {
     $where[] = " od_time between '$fr_date 00:00:00' and '$to_date 23:59:59' ";
 }
 
+// 무료상품
+$od_free = $_GET['od_free'] ? (int) $_GET['od_free']: 1;
+if ($od_free) {
+    $od_free_val = $od_free-1;
+    if ($od_free_val == 0) {
+        $where[] = " od_cart_price <> 0 ";
+    }
+    if ($od_free == '1') {
+        $od_free_chk_1 = 'checked';
+    } else if ($od_free == '2') {
+        $od_free_chk_2 = 'checked';
+    }
+}
+
 if ($where) {
     $sql_search = ' where '.implode(' and ', $where);
 }
@@ -205,7 +219,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $od_cnt = 0;
     if ($row['mb_id'])
     {
-        $sql2 = " select count(*) as cnt from {$g5['g5_shop_order_table']} where mb_id = '{$row['mb_id']}' ";
+        $sql2 = " select count(*) as cnt from {$g5['g5_shop_order_table']} where mb_id = '{$row['mb_id']}' and od_cart_price <> '0' ";
         $row2 = sql_fetch($sql2);
         $od_cnt = $row2['cnt'];
     }

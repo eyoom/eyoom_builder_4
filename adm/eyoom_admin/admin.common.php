@@ -40,3 +40,19 @@ if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
  * 이윰 관리자모드 라이브러리 파일
  */
 @include_once(EYOOM_ADMIN_LIB_PATH.'/admin.lib.php');
+
+/**
+ * $dir 변수 정의
+ */
+if($_REQUEST['dir']) {
+    $dir = preg_replace('/[^a-z0-9_]/i', '', trim($_REQUEST['dir']));
+    $dir = substr($dir, 0, 20);
+}
+
+/**
+ * $pid 변수 정의
+ */
+if($_REQUEST['pid']) {
+    $pid = preg_replace('/[^a-z0-9_|]/i', '', trim($_REQUEST['pid']));
+    $pid = substr($pid, 0, 50);
+}

@@ -25,6 +25,55 @@ $g5['title'] = strip_tags($g5['title']);
 $g5_head_title = strip_tags($g5_head_title);
 
 /**
+ * 메타태그 설정
+ */
+$seo_meta_tag = '';
+if ($seocfg['mt_verification']) {
+    $seo_meta_tag .= htmlspecialchars_decode(stripslashes($seocfg['mt_verification']))."\n";
+}
+
+if ($seocfg['mt_title']) {
+    $seo_meta_tag .= '<meta name="title" content="'.get_text($seocfg['mt_title']).'" />'."\n";
+}
+
+if ($seocfg['mt_keywords']) {
+    $seo_meta_tag .= '<meta name="keywords" content="'.get_text($seocfg['mt_keywords']).'" />'."\n";
+}
+
+if ($seocfg['mt_description']) {
+    $seo_meta_tag .= '<meta name="description" content="'.get_text($seocfg['mt_description']).'" />'."\n";
+}
+
+if ($seocfg['mt_robots']) {
+    $seo_meta_tag .= '<meta name="robots" content="'.get_text($seocfg['mt_robots']).'" />'."\n";
+}
+
+if ($seocfg['mt_author']) {
+    $seo_meta_tag .= '<meta name="author" content="'.get_text($seocfg['mt_author']).'" />'."\n";
+}
+
+if ($seocfg['mt_publisher']) {
+    $seo_meta_tag .= '<meta name="publisher" content="'.get_text($seocfg['mt_publisher']).'" />'."\n";
+}
+
+/**
+ * 기본 메타태그
+ */
+if (!$seo_meta_tag) {
+    $seo_meta_tag .= '<meta name="title" content="'.get_text($config['cf_title']).'" />'."\n";
+    $seo_meta_tag .= '<meta name="description" content="'.get_text($config['cf_title']).'" />'."\n";
+}
+
+/**
+ * Open Graph 메타태그 적용
+ */
+if (!$msg) {
+    $og_meta = $eb->sns_open_graph();
+    $config['cf_add_meta'] = $seo_meta_tag.$og_meta.$config['cf_add_meta'];
+    unset($og_meta);
+}
+
+/**
  * 현재 접속자
  * 게시판 제목에 ' 포함되면 오류 발생
  */

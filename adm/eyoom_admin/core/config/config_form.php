@@ -541,9 +541,8 @@ if (stripos($config['cf_image_extension'], "webp") !== false) {
 /**
  * 버튼
  */
-$frm_submit_fixed = ' <input type="submit" value="확인" class="admin-fixed-submit-btn btn-e btn-e-red" accesskey="s">' ;
+$frm_submit_fixed = ' <input type="submit" value="적용하기" class="admin-fixed-submit-btn btn-e btn-e-red" accesskey="s">' ;
 
-$frm_submit  = ' <div class="text-center margin-top-30 margin-bottom-30"> ';
-$frm_submit .= ' <input type="submit" value="확인" class="btn-e btn-e-lg btn-e-red" accesskey="s">' ;
-$frm_submit .= ' <a href="' . G5_URL . '" class="btn-e btn-e-lg btn-e-dark">메인으로</a> ';
+$frm_submit  = ' <div class="confirm-bottom-btn text-center margin-top-30 margin-bottom-30 m-t-0 m-b-0"> ';
+$frm_submit .= ' <input type="submit" value="적용하기" class="btn-e btn-e-lg btn-e-crimson" accesskey="s">' ;
 $frm_submit .= '</div>';

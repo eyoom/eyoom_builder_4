@@ -12,8 +12,24 @@ if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
 if (!$board) alert("잘못된 접근입니다.");
 
+if ($eyoom_board['use_gnu_skin'] == 'y') {
+    alert("게시판 확장필드 기능은 그누보드스킨에서는 사용하실 수 없습니다.");
+}
+
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_extend_update&amp;smode=1';
 $action_url2 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_exlist_update&amp;smode=1';
+
+/**
+ * 탭메뉴
+ */
+$pg_anchor = array(
+    'anc_bo_basic' => '기본 설정',
+    'anc_bo_auth' => '권한 설정',
+    'anc_bo_function' => '기능 설정',
+    'anc_bo_design' => '디자인/양식',
+    'anc_bo_point' => '포인트 설정',
+    'anc_bo_exfields' => '여분필드'
+);
 
 /**
  * 게시판 확장필드 테이블 생성

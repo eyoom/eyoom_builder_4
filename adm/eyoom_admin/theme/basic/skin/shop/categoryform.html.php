@@ -405,7 +405,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td>
                             <label class="select form-width-250px">
                                 <select name="subca_skin" id="subca_skin">
-                                <?php echo get_list_skin_options("^list.[0-9]+\.skin\.php", G5_SHOP_SKIN_PATH, ''); ?>
+                                <?php echo get_list_skin_options("^list.[0-9]+\.skin\.php", G5_SHOP_SKIN_PATH, 'list.10.skin.php'); ?>
                                 </select>
                                 <i></i>
                             </label>
@@ -420,7 +420,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <td>
                             <label class="select form-width-250px">
                                 <select name="subca_mobile_skin" id="subca_mobile_skin">
-                                <?php echo get_list_skin_options("^list.[0-9]+\.skin\.php", G5_SHOP_SKIN_PATH, ''); ?>
+                                <?php echo get_list_skin_options("^list.[0-9]+\.skin\.php", G5_SHOP_SKIN_PATH, 'list.10.skin.php'); ?>
                                 </select>
                                 <i></i>
                             </label>

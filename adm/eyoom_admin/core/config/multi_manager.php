@@ -18,22 +18,24 @@ $cf_eyoom_admin_theme = get_skin_dir('theme', EYOOM_ADMIN_PATH);
 /**
  * form action
  */
-$action_url1    = G5_ADMIN_URL . '/?dir=config&amp;pid=multi_manager_delete&amp;smode=1';
-$action_url2    = G5_ADMIN_URL . '/?dir=config&amp;pid=multi_manager_update&amp;smode=1';
+$action_url1 = G5_ADMIN_URL . '/?dir=config&amp;pid=multi_manager_delete&amp;smode=1';
+$action_url2 = G5_ADMIN_URL . '/?dir=config&amp;pid=multi_manager_update&amp;smode=1';
 
 /**
  * 다중관리자 테이블 생성
  */
-$sql = "
-    CREATE TABLE IF NOT EXISTS `g5_eyoom_manager` (
-      `mb_id` varchar(20) NOT NULL DEFAULT '',
-      `mg_theme` varchar(255) NOT NULL DEFAULT '',
-      `mg_menu` varchar(255) NOT NULL,
-      PRIMARY KEY (`mb_id`,`mg_theme`)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-";
-$sql = get_db_create_replace($sql);
-sql_query($sql, false);
+if (!sql_query(" DESC {$g5['eyoom_manager']} ", false)) {
+    $sql = "
+        CREATE TABLE IF NOT EXISTS `{$g5['eyoom_manager']}` (
+          `mb_id` varchar(20) NOT NULL DEFAULT '',
+          `mg_theme` varchar(255) NOT NULL DEFAULT '',
+          `mg_menu` varchar(255) NOT NULL,
+          PRIMARY KEY (`mb_id`,`mg_theme`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ";
+    $sql = get_db_create_replace($sql);
+    sql_query($sql, false);
+}
 
 $sql_common = " from {$g5['eyoom_manager']} a left join {$g5['member_table']} b on (a.mb_id=b.mb_id) ";
 

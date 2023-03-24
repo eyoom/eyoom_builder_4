@@ -39,6 +39,22 @@ if (!chk_captcha()) {
     alert('자동등록방지 숫자가 틀렸습니다.');
 }
 
+/**
+ * 즐겨찾기 메뉴 제거
+ */
+if (is_array($_POST['mg_menu'])) {
+    $i=0;
+    foreach ($_POST['mg_menu'] as $key => $val) {
+        if ($val) {
+            $_mg_menu[$i++] = $key;
+        }
+    }
+    $_mg_menu = implode(',', $_mg_menu);
+    $_mg_menu = clean_xss_tags($_mg_menu);
+    $sql = "delete from {$g5['eyoom_favorite_adm']} where (1) and mb_id='{$mb_id}' and find_in_set(dir, '{$_mg_menu}')=0 ";
+    sql_query($sql, false);
+}
+
 $row = sql_fetch("select count(*) as cnt from {$g5['eyoom_manager']} where mb_id = '{$mb_id}' ");
 if ($row['cnt'] > 0) {
     $sql = " update {$g5['eyoom_manager']} set mg_theme = '{$mg_theme}', mg_menu = '{$mg_menu}' where mb_id = '{$mb_id}' ";

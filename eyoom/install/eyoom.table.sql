@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_rating_point` int(11) NOT NULL default '0',
   `bo_use_tag` char(1) NOT NULL default '0',
   `bo_use_automove` char(1) NOT NULL default '0',
-  `bo_use_summernote_mo` char(1) NOT NULL default '1',
+  `bo_goto_url` varchar(255) NULL default '',
   `bo_use_addon_emoticon` char(1) NOT NULL default '1',
   `bo_use_addon_video` char(1) NOT NULL default '1',
   `bo_use_addon_coding` char(1) NOT NULL default '0',

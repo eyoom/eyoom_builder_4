@@ -195,7 +195,7 @@ $is_megamenu = 'yes';
                                         <?php echo $menu_1['me_name']?>
                                     </a>
                                     <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
-                                    <a href="#" class="cate-dropdown-open dorpdown-toggle <?php if (isset($menu_1['active']) && $menu_1['active']) echo 'show'; ?>" data-bs-toggle="dropdown"></a>
+                                    <a href="#" class="cate-dropdown-open <?php if (isset($menu_1['active']) && $menu_1['active']) echo 'show'; ?>" data-bs-toggle="dropdown"></a>
                                     <?php } ?>
                                     <?php $index2 = $size2 = 0; ?>
                                     <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { $size2 = count($menu_1['submenu']); ?>

@@ -12,6 +12,10 @@ if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
 if (!$board) alert("잘못된 접근입니다.");
 
+if ($eyoom_board['use_gnu_skin'] == 'y') {
+    alert("게시판 확장필드 기능은 그누보드스킨에서는 사용하실 수 없습니다.");
+}
+
 $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_exform_update&amp;smode=1';
 
 if ($w == '') {

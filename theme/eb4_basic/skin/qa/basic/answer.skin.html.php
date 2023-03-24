@@ -20,9 +20,36 @@ if (!defined('_EYOOM_')) exit;
 
 <div class="board-view-ans">
     <h4><strong><span class="text-crimson">답변</span> : <?php echo get_text($answer['qa_subject']); ?></strong></h4>
+
+    <?php if ($is_admin == 'super') { ?>
+    <div class="board-view-info">
+        <?php if ($config['cf_use_member_icon']) { ?>
+        <div class="view-photo-box">
+            <?php if ($answer['mb_photo']) { ?>
+            <span class="view-photo m-r-5"><?php echo $answer['mb_photo'] ?></span>
+            <?php } else { ?>
+            <span class="view-photo m-r-5"><span class="view-user-icon"><i class="fas fa-user-circle"></i></span></span>
+            <?php } ?>
+        </div>
+        <?php } ?>
+
+        <div class="view-info-box">
+            <div class="info-box-top">
+                <span class="view-nick">
+                    <?php echo eb_nameview($answer['mb_id'], $answer['qa_name'], $answer['qa_email'], $answer['wr_homepage']); ?>
+                </span>
+            </div>
+            <div class="info-box-bottom">
+                <span><?php echo $answer['qa_datetime']; ?></span>
+            </div>
+        </div>
+    </div>
+    <?php } else { ?>
     <div class="ans-datetime">
         <i class="far fa-clock"></i> <?php echo $answer['qa_datetime']; ?>
     </div>
+    <?php } ?>
+
     <div id="ans_con" class="ans-con">
         <?php
         // 파일 출력

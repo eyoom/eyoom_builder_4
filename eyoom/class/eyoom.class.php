@@ -691,6 +691,50 @@ class eyoom extends qfile
                         $size = @getimagesize($dest_img_path);
                         if (!($size[2] === 1 || $size[2] === 2 || $size[2] === 3)) {
                             @unlink($dest_img_path);
+                        } else {
+                            /**
+                             * 썸네일 라이브러리
+                             */
+                            @include_once(G5_LIB_PATH . '/thumbnail.lib.php');
+
+                            $thumb_img = null;
+                            if($size[2] === 2 || $size[2] === 3) {
+                                //jpg 또는 png 파일 적용
+                                $thumb_img = thumbnail($mb_photo_img, $mb_img_dir, $mb_img_dir, $config['cf_member_img_width'], $config['cf_member_img_height'], true, true);
+                                if($thumb_img) {
+                                    @unlink($dest_img_path);
+                                    rename($mb_img_dir.'/'.$thumb_img, $dest_img_path);
+                                }
+
+                                // 회원아이콘 만들기
+                                if (!file_exists($dest_icon_path)) {
+                                    @copy($src_path.$src_name, $dest_icon_path);
+                                    @chmod($dest_icon_path, G5_FILE_PERMISSION);
+
+                                    $size2 = @getimagesize($dest_icon_path);
+                                    if (!($size2[2] === 1 || $size2[2] === 2 || $size2[2] === 3)) {
+                                        @unlink($dest_icon_path);
+                                    } else if ($size2[0] > $config['cf_member_icon_width'] || $size2[1] > $config['cf_member_icon_height']) {
+                                        $thumb_icon = null;
+                                        if($size2[2] === 2 || $size2[2] === 3) {
+                                            //jpg 또는 png 파일 적용
+                                            $thumb_icon = thumbnail($mb_photo_img, $mb_icon_dir, $mb_icon_dir, $config['cf_member_icon_width'], $config['cf_member_icon_height'], true, true);
+                                            if($thumb_icon) {
+                                                @unlink($dest_icon_path);
+                                                rename($mb_icon_dir.'/'.$thumb_icon, $dest_icon_path);
+                                            }
+                                        }
+                                        if( !$thumb_icon ){
+                                            // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
+                                            @unlink($dest_icon_path);
+                                        }
+                                    }
+                                }
+                            }
+                            if( !$thumb_img ){
+                                // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
+                                @unlink($dest_img_path);
+                            }
                         }
 
                         sql_query("update {$this->g5['eyoom_member']} set photo = '".$mb_photo_img."' where mb_id='".$mb_id."'");
@@ -1517,7 +1561,7 @@ class eyoom extends qfile
      * 소셜 정보 가져오기
      */
     public function sns_open_graph () {
-        global $config, $write, $board, $bo_table, $wr_id, $it_id;
+        global $config, $write, $board, $bo_table, $wr_id, $it_id, $ca_id, $gr_id, $seocfg;
 
         if ($it_id && !is_array($it_id)) {
             $it = sql_fetch("select * from {$this->g5['g5_shop_item_table']} where it_id = '" . sql_real_escape_string($it_id) . "'");
@@ -1525,22 +1569,47 @@ class eyoom extends qfile
             $sns_image = $it['it_img1'] ? G5_DATA_URL . '/item/'.$it['it_img1']: '';
             $target_url = shop_item_url($it_id);
             $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$it['it_explan'])))),200, '…');
-        } else {
+        } else if ($ca_id) {
+            $ca = sql_fetch("select * from {$this->g5['g5_shop_category_table']} where ca_id = '" . sql_real_escape_string($ca_id) . "' ");
+            $head_title = strip_tags(conv_subject($ca['ca_name'], 255)) . ' - ' . $config['cf_title'];
+            $target_url = shop_category_url($ca_id);
+            $contents = $seocfg['mt_description'] ? $seocfg['mt_description']: $config['cf_title'];
+        } else if ($bo_table) {
             /**
              * 게시판 썸네일 라이브러리
              */
             @include_once(G5_LIB_PATH.'/thumbnail.lib.php');
-
-            $head_title = strip_tags(conv_subject($write['wr_subject'], 255)) . ' > ' . $board['bo_subject'] . ' - ' . $config['cf_title'];
-            $first_image = get_list_thumbnail($bo_table, $wr_id, 600, 0);
-            $sns_image = $first_image['src'] ? $first_image['src']: '';
-            $target_url = get_eyoom_pretty_url($bo_table,$wr_id);
-            $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$write['wr_content'])))),200, '…');
+            if ($wr_id) {
+                $og_title = strip_tags(conv_subject($write['wr_subject'], 255));
+                $first_image = get_list_thumbnail($bo_table, $wr_id, 600, 0);
+                $sns_image = $first_image['src'] ? $first_image['src']: '';
+                $target_url = get_eyoom_pretty_url($bo_table,$wr_id);
+                $contents = cut_str(trim(str_replace(array("\r\n","\r","\n"),'',strip_tags(preg_replace("/\?/","",$write['wr_content'])))),200, '…');
+            } else {
+                $og_title = $seocfg['mt_title'];
+                $target_url = get_eyoom_pretty_url($bo_table);
+                $contents = $seocfg['mt_description'] ? $seocfg['mt_description']: $config['cf_title'];
+                $sns_image = $seocfg['mt_img_url'];
+            }
+            $head_title = $og_title . ' > ' . $board['bo_subject'] . ' - ' . $config['cf_title'];
+        } else if ($gr_id) {
+            $gr = sql_fetch("select * from {$this->g5['group_table']} where gr_id = '" . sql_real_escape_string($gr_id) . "' ");
+            $head_title = strip_tags(conv_subject($gr['gr_subject'], 255)) . ' - ' . $config['cf_title'];
+            $target_url = get_eyoom_pretty_url('group', $gr_id);
+            $contents = $seocfg['mt_description'] ? $seocfg['mt_description']: $config['cf_title'];
+        } else {
+            $head_title = $seocfg['mt_title'] ? $seocfg['mt_title']: $config['cf_title'];
+            $target_url = G5_URL.$_SERVER['REQUEST_URI'];
+            $contents = $seocfg['mt_description'] ? $seocfg['mt_description']: $config['cf_title'];
+            $sns_image = $seocfg['mt_img_url'];
         }
 
         if (!$sns_image) {
-            $sns_image = EYOOM_THEME_URL.'/image/site_logo.png';
-            $sns_image_path = G5_PATH.'/theme/'.$theme.'/image/site_logo.png';
+            if ($seocfg['mt_img_url']) {
+                $sns_image = $seocfg['mt_img_url'];
+            } else {
+                $sns_image = EYOOM_THEME_URL.'/image/site_logo.png';
+            }
         }
 
         if ($sns_image) {
@@ -1555,7 +1624,7 @@ class eyoom extends qfile
             }
         }
 
-        $meta_tag = '
+        $open_graph = '
 <meta property="og:id" content="'.G5_URL.'" />
 <meta property="og:url" content="'.$target_url.'" />
 <meta property="og:type" content="website" />
@@ -1567,6 +1636,23 @@ class eyoom extends qfile
 <meta property="og:image:width" content="'.$sns_image_width.'" />
 <meta property="og:image:height" content="'.$sns_image_height.'" />
         ';
+
+        $twitter_meta_tag = '
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="'.preg_replace('/"/','',$head_title).'">
+<meta name="twitter:site" content="'.$config['cf_title'].'">
+<meta name="twitter:creator" content="'.$seocfg['mt_img_url'].'">
+<meta name="twitter:image" content="'.$sns_image.'">
+<meta name="twitter:description" content="'.$contents.'">
+        ';
+
+        $google_meta_tag = '
+<meta itemprop="name" content="'.$config['cf_title'].'">
+<meta itemprop="description" content="'.$contents.'">
+<meta itemprop="image" content="'.$sns_image.'">
+        ';
+
+        $meta_tag = $open_graph . $twitter_meta_tag . $google_meta_tag;
 
         return $meta_tag;
     }

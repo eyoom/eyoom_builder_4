@@ -23,7 +23,7 @@ $pg_mode = array(
     'visit_date'    => '일',
     'visit_month'   => '월',
     'visit_year'    => '년',
-    'visit_graph'   => '그래프보기'
+    //'visit_graph'   => '그래프보기'
 );
 
 $visit_link = array();

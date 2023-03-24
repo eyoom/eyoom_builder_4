@@ -4,11 +4,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 /**
  * 처리할 주문
  */
-$od_status = array('주문', '입금', '준비', '배송');
-foreach($od_status as $status) {
-    $order_status[$status] = get_order_status_sum($status);
-    $order_status[$status]['href'] = G5_ADMIN_URL . "/?dir=shop&amp;pid=orderlist&amp;od_status={$status}";
-}
+$order_status = get_order_status_sum();
 
 /**
  * 개인결제
@@ -18,16 +14,13 @@ $pp_info = get_personalpay_sum();
 /**
  * 상품문의
  */
-$sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 5 ";
+$sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 5";
 $result = sql_query($sql);
 $item_qa = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
-    $row1 = sql_fetch($sql1);
-
     $item_qa[$i] = $row;
-    $item_qa[$i]['mb_photo'] = $eb->mb_photo($row1['mb_id']);
-    $item_qa[$i]['name'] = get_text($row1['mb_name']);
+    $item_qa[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
+    $item_qa[$i]['name'] = get_text($row['iq_name']);
     $item_qa[$i]['is_answer'] = $row['iq_answer'] ? true: false;
 }
 
@@ -38,12 +31,9 @@ $sql = " select * from {$g5['g5_shop_item_use_table']} where (1) order by is_id 
 $result = sql_query($sql);
 $item_use = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $sql1 = " select * from {$g5['member_table']} where mb_id = '{$row['mb_id']}' ";
-    $row1 = sql_fetch($sql1);
-
     $item_use[$i] = $row;
-    $item_use[$i]['mb_photo'] = $eb->mb_photo($row1['mb_id']);
-    $item_use[$i]['name'] = get_text($row1['mb_name']);
+    $item_use[$i]['mb_photo'] = $eb->mb_photo($row['mb_id']);
+    $item_use[$i]['name'] = get_text($row['is_name']);
     $item_use[$i]['is_answer'] = $row['is_confirm'] == '1' ? true: false;
 }
 
@@ -58,7 +48,12 @@ for($i=6; $i>=0; $i--) {
 
     $x_val[] = $date;
     $last_x_val[] = $last_date;
-    $arr_order[] = get_order_date_sum($date);
+}
+
+$week_order = get_order_week_sum($x_val);
+for($i=6; $i>=0; $i--) {
+    $date = date('Ymd', strtotime('-'.$i.' days', G5_SERVER_TIME));
+    $arr_order[] = $week_order[$date];
 }
 
 /**
@@ -84,20 +79,20 @@ foreach($this_ord_info as $key => $od_info) {
  * 결제수단별 주문현황
  */
 $term = 7;
-$info = array();
 $info_key = array();
 $od_pg_thead = array();
 $j = 0;
 for($i=($term - 1); $i>=0; $i--) {
     $date = date("Y-m-d", strtotime('-'.$i.' days', G5_SERVER_TIME));
-    $info[$date] = get_order_settle_sum($date);
+    $date_array[] = $date;
 
     $day = substr($date, 5, 5).' ('.get_yoil($date).')';
     $info_key[] = $date;
     $od_pg_thead[$j]['day'] = $day;
     $j++;
 }
-$pg_case = array('신용카드', '계좌이체', '가상계좌', '무통장', '휴대폰', '포인트', '쿠폰', '간편결제', 'KAKAOPAY');
+$info = get_week_settle_sum($date_array);
+$pg_case = array('무통장', '가상계좌', '계좌이체', '신용카드', '간편결제', 'KAKAOPAY', '휴대폰', '쿠폰', '포인트');
 
 $k =0;
 $pg_info = array();

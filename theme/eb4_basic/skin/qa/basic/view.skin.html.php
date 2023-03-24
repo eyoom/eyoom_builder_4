@@ -56,13 +56,20 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
         <strong><?php echo $view['subject']; ?></strong>
     </h3>
     <div class="board-view-info">
+        <?php if ($config['cf_use_member_icon']) { ?>
         <div class="view-photo-box">
+            <?php if ($view['mb_photo']) { ?>
+            <span class="view-photo m-r-5"><?php echo $view['mb_photo'] ?></span>
+            <?php } else { ?>
             <span class="view-photo m-r-5"><span class="view-user-icon"><i class="fas fa-user-circle"></i></span></span>
+            <?php } ?>
         </div>
+        <?php } ?>
+
         <div class="view-info-box">
             <div class="info-box-top">
                 <span class="view-nick">
-                    <?php echo $view['name']; ?>
+                    <?php echo eb_nameview($view['mb_id'], $view['qa_name'], $view['qa_email'], $view['wr_homepage']); ?>
                 </span>
             </div>
             <div class="info-box-bottom">

@@ -1078,7 +1078,8 @@ ul.de_pg_tab li.tab-current a {background:#FF0035;color:#fff}
                                 <label class="checkbox" for="de_easy_nhnkcp_payco" disabled><input type="checkbox" id="de_easy_nhnkcp_payco" name="de_easy_pays[]" value="nhnkcp_payco" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_payco') !== false){ echo 'checked="checked"'; } ?> ><i></i> PAYCO (페이코)</label>
                                 <label class="checkbox" for="de_easy_nhnkcp_naverpay"><input type="checkbox" id="de_easy_nhnkcp_naverpay" name="de_easy_pays[]" value="nhnkcp_naverpay" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_naverpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY (네이버페이)</label>
                                 <label class="checkbox" for="de_easy_nhnkcp_kakaopay"><input type="checkbox" id="de_easy_nhnkcp_kakaopay" name="de_easy_pays[]" value="nhnkcp_kakaopay" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_kakaopay') !== false){ echo 'checked="checked"'; } ?> ><i></i> KAKAOPAY (카카오페이)</label>
-                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 NHN KCP 간편결제들을 활성화 합니다.<br>NHN_KCP > 네이버페이, 카카오페이는 테스트결제가 되지 않습니다.</div>
+                                <label class="checkbox" for="de_easy_nhnkcp_applepay"><input type="checkbox" id="de_easy_nhnkcp_applepay" name="de_easy_pays[]" value="nhnkcp_applepay" <?php if(stripos($default['de_easy_pay_services'], 'nhnkcp_applepay') !== false){ echo 'checked="checked"'; } ?> ><i></i> APPLEPAY (애플페이)</label>
+                                <div class="note margin-bottom-10"><strong>Note:</strong> 체크시 NHN KCP 간편결제들을 활성화 합니다.<br>NHN_KCP > 네이버페이, 카카오페이는 테스트결제가 되지 않습니다.<br>애플페이는 IOS 기기에 모바일결제만 가능합니다.</div>
                             </td>
                         </tr>
                         <tr class="pg_info_fld kcp_info_fld">

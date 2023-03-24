@@ -310,6 +310,18 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <th class="table-form-th">
+                                <label for="proc_count" class="label">글작성 후 이동 URL</label>
+                            </th>
+                            <td colspan="2">
+                                <label class="input">
+                                    <i class="icon-prepend fas fa-link"></i>
+                                    <input type="text" name="bo_goto_url" id="bo_goto_url" value="<?php echo $eyoom_board['bo_goto_url']; ?>">
+                                </label>
+                                <div class="note"><strong>Note:</strong> 글작성 후 이동 할 리턴 URL를 입력해 주세요. 예) <?php echo G5_URL; ?>/page/?aboutus</div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <?php if (!G5_IS_MOBILE) { ?>

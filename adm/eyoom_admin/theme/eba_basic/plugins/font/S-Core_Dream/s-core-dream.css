@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 's-core-dream';
+    font-weight: 700;
+    font-style: normal;
+    src: url('./scdream7-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 's-core-dream';
+    font-weight: 600;
+    font-style: normal;
+    src: url('./scdream6-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 's-core-dream';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./scdream5-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 's-core-dream';
+    font-weight: 300;
+    font-style: normal;
+    src: url('./scdream3-webfont.woff') format('woff');
+}

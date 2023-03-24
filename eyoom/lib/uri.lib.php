@@ -89,7 +89,7 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
 
 	} else { // don't use shortten url
 		if(in_array($folder, $boards)) {
-			$url = G5_BBS_URL. '/board.php?bo_table='. $folder;
+			$url = G5_BBS_URL . '/board.php?bo_table='. $folder;
 			if($no) {
 				$url .= '&amp;wr_id='. $no;
 			}
@@ -101,13 +101,13 @@ function get_eyoom_pretty_url($folder, $no='', $query_string='', $action='')
 				$url .= $query_string;
 			}
 		} else if ($folder === 'group') {
-            $url = G5_BBS_URL.'/group.php?gr_id='.$no;
+            $url = G5_BBS_URL . '/group.php?gr_id=' . $no;
         } else if ($folder === 'page') {
-            $url = G5_URL.'/page/?pid='.$no;
+            $url = G5_URL . '/page/?pid=' . $no;
         } else if ($folder === 'mypage') {
-            $url = G5_URL.'/mypage/?t='.$no;
+            $url = G5_URL . '/mypage/?t=' . $no;
         } else {
-			$url = G5_BBS_URL. '/'.$folder.'.php';
+			$url = G5_BBS_URL . '/' . $folder.'.php';
             if($no) {
 				$url .= ($folder === 'content') ? '?co_id='. $no : '?'. $no;
 			}
@@ -132,7 +132,7 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
         switch ($me_type) {
             case 'board':
                 if (stripos($me_link, 'write')) {
-                    return G5_URL.'/'.$me_pid.'/write';
+                    return G5_URL . '/' . $me_pid . '/write';
                 } else {
                     return get_eyoom_pretty_url($me_pid);
                 }
@@ -156,7 +156,7 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
 
             case 'userpage':
                 if(!preg_match('/(http|https):/i',$me_link)) {
-                    $me_link = G5_URL.$me_link;
+                    $me_link = G5_URL . $me_link;
                 }
                 return $me_link;
             break;
@@ -229,19 +229,19 @@ function get_query_url_from_pretty_url($short_url) {
  */
 function get_query_url ($info) {
     if ($info[1] == 'content' && $info[2]) {
-        $url = G5_BBS_URL."/content.php?co_id={$info[2]}";
+        $url = G5_BBS_URL . "/content.php?co_id={$info[2]}";
     }
     else if ($info[1] == 'group' && $info[2]) {
-        $url = G5_BBS_URL."/group.php?gr_id={$info[2]}";
+        $url = G5_BBS_URL . "/group.php?gr_id={$info[2]}";
     }
     else if ($info[1] == 'page' && $info[2]) {
-        $url = G5_URL."/page/?pid={$info[2]}";
+        $url = G5_URL . "/page/?pid={$info[2]}";
     }
     else if ($info[1] == 'bbs' && $info[2]) {
-        $url = G5_URL."/bbs/{$info[2]}";
+        $url = G5_URL . "/bbs/{$info[2]}";
     }
     else if ($info[1] == 'mypage') {
-        $url = G5_URL."/mypage/";
+        $url = G5_URL . "/mypage/";
         switch ($info[2]) {
             default: $url .= $info[2]; break;
             case 'favorite':
@@ -258,19 +258,19 @@ function get_query_url ($info) {
     else if ($info[1] == 'shop') {
         $tmp = explode('-', $info[2]);
         if ($tmp[0] == 'list') {
-            $url = G5_URL."/shop/list.php?ca_id={$tmp[1]}";
+            $url = G5_URL . "/shop/list.php?ca_id={$tmp[1]}";
         } else if ($tmp[0] == 'type') {
-            $url = G5_URL."/shop/listtype.php?type={$tmp[1]}";
+            $url = G5_URL . "/shop/listtype.php?type={$tmp[1]}";
         } else if ($tmp[0] == 'brand') {
-            $url = G5_URL."/shop/brand.php?br_cd={$tmp[1]}";
+            $url = G5_URL . "/shop/brand.php?br_cd={$tmp[1]}";
         } else {
-            $url = G5_URL."/shop/item.php?it_id={$tmp[1]}";
+            $url = G5_URL . "/shop/item.php?it_id={$tmp[1]}";
         }
     } else {
         if ($info[2] == 'write') {
-            $url = G5_BBS_URL."/write.php?bo_table={$info[1]}";
+            $url = G5_BBS_URL . "/write.php?bo_table={$info[1]}";
         } else {
-            $url = G5_BBS_URL."/board.php?bo_table={$info[1]}";
+            $url = G5_BBS_URL . "/board.php?bo_table={$info[1]}";
         }
     }
 
@@ -280,52 +280,57 @@ function get_query_url ($info) {
 /**
  * 쇼핑몰 브랜드 URL
  */
-function shop_brand_url($br_cd, $add_param=''){
+function shop_brand_url($br_cd, $add_param='') {
     global $config;
 
     $add_params = $add_param ? '&'.$add_param : '';
 
     if( $config['cf_bbs_rewrite'] ) {
-        return G5_SHOP_URL.'/brand-'.$br_cd.$add_params;
+        return G5_SHOP_URL . '/brand-'.$br_cd.$add_params;
     } else {
-        return G5_SHOP_URL.'/brand.php?br_cd='.urlencode($br_cd).$add_params;
+        return G5_SHOP_URL . '/brand.php?br_cd='.urlencode($br_cd).$add_params;
     }
 }
 
 /**
  * NGINX Rewrite Module
  */
-function get_eyoom_nginx_conf_rules($return_string=false){
+function get_eyoom_nginx_conf_rules($return_string=false) {
 
     $get_path_url = parse_url(G5_URL);
 
-    $base_path = isset($get_path_url['path']) ? $get_path_url['path'].'/' : '/';
+    $base_path = isset($get_path_url['path']) ? $get_path_url['path'] . '/' : '/';
 
     $rules = array();
     
-    $rules[] = '#### '.G5_VERSION.' nginx rules BEGIN #####';
-    $rules[] = 'if (!-e $request_filename){';
+    $rules[] = '#### ' . G5_VERSION . ' nginx rules BEGIN #####';
 
-    if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
-        $rules[] = "rewrite ^{$base_path}shop/brand-([0-9a-zA-Z_]+)$ {$base_path}".G5_SHOP_DIR."/brand.php?br_cd=$1&rewrite=1 break;";
-    }
-
-    if( $add_rules = run_replace('add_nginx_conf_rules', '', $get_path_url, $base_path, $return_string) ){
+    if ($add_rules = run_replace('add_nginx_conf_pre_rules', '', $get_path_url, $base_path, $return_string)) {
         $rules[] = $add_rules;
     }
 
-    $rules[] = "rewrite ^{$base_path}group/([0-9a-zA-Z_]+)$ {$base_path}".G5_BBS_DIR."/group.php?gr_id=$1&rewrite=1 break;";
+    $rules[] = 'if (!-e $request_filename) {';
+
+    if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
+        $rules[] = "rewrite ^{$base_path}shop/brand-([0-9a-zA-Z_]+)$ {$base_path}" . G5_SHOP_DIR . "/brand.php?br_cd=$1&rewrite=1 break;";
+    }
+
+    if ($add_rules = run_replace('add_nginx_conf_rules', '', $get_path_url, $base_path, $return_string)) {
+        $rules[] = $add_rules;
+    }
+
+    $rules[] = "rewrite ^{$base_path}group/([0-9a-zA-Z_]+)$ {$base_path}" . G5_BBS_DIR . "/group.php?gr_id=$1&rewrite=1 break;";
     $rules[] = "rewrite ^{$base_path}page/([0-9a-zA-Z_]+)$ {$base_path}page/?pid=$1&rewrite=1 break;";
     $rules[] = "rewrite ^{$base_path}mypage/([0-9a-zA-Z_]+)$ {$base_path}mypage/?t=$1&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}content/([0-9a-zA-Z_]+)$ {$base_path}".G5_BBS_DIR."/content.php?co_id=$1&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}content/([^/]+)/$ {$base_path}".G5_BBS_DIR."/content.php?co_seo_title=$1&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}rss/([0-9a-zA-Z_]+)$ {$base_path}".G5_BBS_DIR."/rss.php?bo_table=$1 break;";
-    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)$ {$base_path}".G5_BBS_DIR."/board.php?bo_table=$1&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/write$ {$base_path}".G5_BBS_DIR."/write.php?bo_table=$1&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/([^/]+)/$ {$base_path}".G5_BBS_DIR."/board.php?bo_table=$1&wr_seo_title=$2&rewrite=1 break;";
-    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/([0-9]+)$ {$base_path}".G5_BBS_DIR."/board.php?bo_table=$1&wr_id=$2&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}content/([0-9a-zA-Z_]+)$ {$base_path}" . G5_BBS_DIR . "/content.php?co_id=$1&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}content/([^/]+)/$ {$base_path}" . G5_BBS_DIR . "/content.php?co_seo_title=$1&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}rss/([0-9a-zA-Z_]+)$ {$base_path}" . G5_BBS_DIR . "/rss.php?bo_table=$1 break;";
+    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)$ {$base_path}" . G5_BBS_DIR . "/board.php?bo_table=$1&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/write$ {$base_path}" . G5_BBS_DIR . "/write.php?bo_table=$1&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/([^/]+)/$ {$base_path}" . G5_BBS_DIR . "/board.php?bo_table=$1&wr_seo_title=$2&rewrite=1 break;";
+    $rules[] = "rewrite ^{$base_path}([0-9a-zA-Z_]+)/([0-9]+)$ {$base_path}" . G5_BBS_DIR . "/board.php?bo_table=$1&wr_id=$2&rewrite=1 break;";
     $rules[] = '}';
-    $rules[] = '#### '.G5_VERSION.' nginx rules END #####';
+    $rules[] = '#### ' . G5_VERSION . ' nginx rules END #####';
 
     return $return_string ? implode("\n", $rules) : $rules;
 }
@@ -333,42 +338,47 @@ function get_eyoom_nginx_conf_rules($return_string=false){
 /**
  * APACHE Rewrite Module
  */
-function get_eyoom_mod_rewrite_rules($return_string=false){
+function get_eyoom_mod_rewrite_rules($return_string=false) {
 
     $get_path_url = parse_url(G5_URL);
 
-    $base_path = isset($get_path_url['path']) ? $get_path_url['path'].'/' : '/';
+    $base_path = isset($get_path_url['path']) ? $get_path_url['path'] . '/' : '/';
 
     $rules = array();
     
-    $rules[] = '#### '.G5_VERSION.' rewrite BEGIN #####';
+    $rules[] = '#### ' . G5_VERSION . ' rewrite BEGIN #####';
     $rules[] = '<IfModule mod_rewrite.c>';
     $rules[] = 'RewriteEngine On';
-    $rules[] = 'RewriteBase '.$base_path;
+    $rules[] = 'RewriteBase ' . $base_path;
+
+    if ($add_rules = run_replace('add_mod_rewrite_pre_rules', '', $get_path_url, $base_path, $return_string)) {
+        $rules[] = $add_rules;
+    }
+
     $rules[] = 'RewriteCond %{REQUEST_FILENAME} -f [OR]';
     $rules[] = 'RewriteCond %{REQUEST_FILENAME} -d';
     $rules[] = 'RewriteRule ^ - [L]';
 
     if (defined('G5_USE_SHOP') && G5_USE_SHOP) {
-        $rules[] = 'RewriteRule ^shop/brand-([0-9a-z]+)$  '.G5_SHOP_DIR.'/brand.php?br_cd=$1&rewrite=1  [QSA,L]';
+        $rules[] = 'RewriteRule ^shop/brand-([0-9a-z]+)$  ' . G5_SHOP_DIR . '/brand.php?br_cd=$1&rewrite=1  [QSA,L]';
     }
     
-    if( $add_rules = run_replace('add_mod_rewrite_rules', '', $get_path_url, $base_path, $return_string) ){
+    if ($add_rules = run_replace('add_mod_rewrite_rules', '', $get_path_url, $base_path, $return_string)) {
         $rules[] = $add_rules;
     }
 
-    $rules[] = 'RewriteRule ^group/([0-9a-zA-Z_]+)$  '.G5_BBS_DIR.'/group.php?gr_id=$1&rewrite=1  [QSA,L]';
+    $rules[] = 'RewriteRule ^group/([0-9a-zA-Z_]+)$  ' . G5_BBS_DIR . '/group.php?gr_id=$1&rewrite=1  [QSA,L]';
     $rules[] = 'RewriteRule ^page/([0-9a-zA-Z_]+)$  page/?pid=$1&rewrite=1  [QSA,L]';
     $rules[] = 'RewriteRule ^mypage/([0-9a-zA-Z_]+)$  mypage/?t=$1&rewrite=1  [QSA,L]';
-    $rules[] = 'RewriteRule ^content/([0-9a-zA-Z_]+)$  '.G5_BBS_DIR.'/content.php?co_id=$1&rewrite=1  [QSA,L]';
-    $rules[] = 'RewriteRule ^content/([^/]+)/$  '.G5_BBS_DIR.'/content.php?co_seo_title=$1&rewrite=1      [QSA,L]';
-    $rules[] = 'RewriteRule ^rss/([0-9a-zA-Z_]+)$  '.G5_BBS_DIR.'/rss.php?bo_table=$1        [QSA,L]';
-    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)$  '.G5_BBS_DIR.'/board.php?bo_table=$1&rewrite=1      [QSA,L]';
-    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/([^/]+)/$ '.G5_BBS_DIR.'/board.php?bo_table=$1&wr_seo_title=$2&rewrite=1      [QSA,L]';
-    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/write$  '.G5_BBS_DIR.'/write.php?bo_table=$1&rewrite=1    [QSA,L]';
-    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/([0-9]+)$  '.G5_BBS_DIR.'/board.php?bo_table=$1&wr_id=$2&rewrite=1  [QSA,L]';
+    $rules[] = 'RewriteRule ^content/([0-9a-zA-Z_]+)$ ' . G5_BBS_DIR . '/content.php?co_id=$1&rewrite=1 [QSA,L]';
+    $rules[] = 'RewriteRule ^content/([^/]+)/$ ' . G5_BBS_DIR . '/content.php?co_seo_title=$1&rewrite=1 [QSA,L]';
+    $rules[] = 'RewriteRule ^rss/([0-9a-zA-Z_]+)$ ' . G5_BBS_DIR . '/rss.php?bo_table=$1 [QSA,L]';
+    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)$ ' . G5_BBS_DIR . '/board.php?bo_table=$1&rewrite=1 [QSA,L]';
+    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/([^/]+)/$ ' . G5_BBS_DIR . '/board.php?bo_table=$1&wr_seo_title=$2&rewrite=1 [QSA,L]';
+    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/write$ ' . G5_BBS_DIR . '/write.php?bo_table=$1&rewrite=1 [QSA,L]';
+    $rules[] = 'RewriteRule ^([0-9a-zA-Z_]+)/([0-9]+)$ ' . G5_BBS_DIR . '/board.php?bo_table=$1&wr_id=$2&rewrite=1 [QSA,L]';
     $rules[] = '</IfModule>';
-    $rules[] = '#### '.G5_VERSION.' rewrite END #####';
+    $rules[] = '#### ' . G5_VERSION . ' rewrite END #####';
 
     return $return_string ? implode("\n", $rules) : $rules;
 }
@@ -378,7 +388,7 @@ function update_eyoom_rewrite_rules(){
     $is_apache = (stripos($_SERVER['SERVER_SOFTWARE'], 'apache') !== false);
 
     if($is_apache){
-        $save_path = G5_PATH.'/.htaccess';
+        $save_path = G5_PATH . '/.htaccess';
 
         if( (!file_exists($save_path) && is_writable(G5_PATH)) || is_writable($save_path) ){
 

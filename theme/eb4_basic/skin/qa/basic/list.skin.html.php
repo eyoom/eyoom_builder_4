@@ -164,7 +164,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </a>
             </div>
             <div class="ql-item ql-author">
-                <span class="ql-name-in"><?php echo $list[$i]['name']; ?></span>
+                <span class="ql-name-in">
+                    <?php if ($is_admin == 'super') { ?>
+                    <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['qa_name'], $list[$i]['qa_email'], $list[$i]['wr_homepage']); ?>
+                    <?php } else { ?>
+                    <?php echo $list[$i]['name']; ?>
+                    <?php } ?>
+                </span>
             </div>
             <div class="ql-item">
                 <span class="<?php if ($list[$i]['qa_status']) { ?>text-teal<?php } else { ?>text-crimson<?php } ?> text-center hidden-xs"><?php if ($list[$i]['qa_status']) { ?>답변완료<?php } else { ?>답변대기<?php } ?></span>
@@ -174,7 +180,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
         <div class="ql-mobile"><?php /* 991px 이하에서만 보임 */ ?>
-            <span class="ql-name-in"><i class="far fa-user-circle"></i> <?php echo $list[$i]['name']; ?></span>
+            <span class="ql-name-in">
+                <?php if ($is_admin == 'super') { ?>
+                <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['qa_name'], $list[$i]['qa_email'], $list[$i]['wr_homepage']); ?>
+                <?php } else { ?>
+                <i class="far fa-user-circle"></i> <?php echo $list[$i]['name']; ?>
+                <?php } ?>
+            </span>
             <div class="ql-mobile-right">
                 <span class="<?php if ($list[$i]['qa_status']) { ?>text-teal<?php } else { ?>text-crimson<?php } ?>"><?php if ($list[$i]['qa_status']) { ?>답변완료<?php } else { ?>답변대기<?php } ?></span>
                 <span class="m-l-5"><i class="far fa-clock"></i> <?php echo $list[$i]['date']; ?></span>

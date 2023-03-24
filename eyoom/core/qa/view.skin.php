@@ -25,6 +25,12 @@ if ($view['img_count']) {
     }
 }
 
+/**
+ * 회원 이미지 / 답변자 이미지
+ */
+$view['mb_photo'] = $eb->mb_photo($view['mb_id'], 'img');
+$answer['mb_photo'] = $eb->mb_photo($answer['mb_id'], 'img');
+
 $option = '';
 $option_hidden = '';
 

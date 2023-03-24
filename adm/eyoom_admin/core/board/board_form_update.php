@@ -166,6 +166,29 @@ $bo_comment_min = isset($_POST['bo_comment_min']) ? (int) $_POST['bo_comment_min
 $bo_comment_max = isset($_POST['bo_comment_max']) ? (int) $_POST['bo_comment_max'] : 0;
 $bo_sort_field = isset($_POST['bo_sort_field']) ? clean_xss_tags($_POST['bo_sort_field'], 1, 1) : '';
 
+$use_gnu_skin = isset($_POST['use_gnu_skin']) && $_POST['use_gnu_skin'] ? $_POST['use_gnu_skin']: 'n';
+if ($use_gnu_skin != 'n') $use_gnu_skin = 'y';
+if ($use_gnu_skin == 'n') {
+    $bo_use_anonymous = isset($_POST['bo_use_anonymous']) ? (int) $_POST['bo_use_anonymous'] : '';
+    $bo_use_good_member = isset($_POST['bo_use_good_member']) ? (int) $_POST['bo_use_good_member'] : '';
+    $bo_use_nogood_member = isset($_POST['bo_use_nogood_member']) ? (int) $_POST['bo_use_nogood_member'] : '';
+    $bo_use_list_image = isset($_POST['bo_use_list_image']) ? (int) $_POST['bo_use_list_image'] : '';
+    $bo_use_video_photo = isset($_POST['bo_use_video_photo']) ? (int) $_POST['bo_use_video_photo'] : '';
+    $bo_use_infinite_scroll = isset($_POST['bo_use_infinite_scroll']) ? (int) $_POST['bo_use_infinite_scroll'] : '';
+    $bo_use_extimg = isset($_POST['bo_use_extimg']) ? (int) $_POST['bo_use_extimg'] : '';
+    $bo_write_limit = isset($_POST['bo_write_limit']) ? (int) $_POST['bo_write_limit'] : 0;
+    $download_fee_ratio = isset($_POST['download_fee_ratio']) ? (int) $_POST['download_fee_ratio'] : 0;
+    $use_shop_skin = isset($_POST['use_shop_skin']) ? $_POST['use_shop_skin'] : 'n';
+    $bo_eyoom_skin = isset($_POST['bo_eyoom_skin']) ? $_POST['bo_eyoom_skin'] : 'basic';
+    $bo_sel_date_type = isset($_POST['bo_sel_date_type']) ? (int) $_POST['bo_sel_date_type'] : 1;
+    $bo_goto_url = isset($_POST['bo_goto_url']) ? $_POST['bo_goto_url'] : '';
+    if ($bo_goto_url) {
+        $bo_goto_url = substr($bo_goto_url,0,1000);
+        $bo_goto_url = trim(strip_tags($bo_goto_url));
+        $bo_goto_url = preg_replace("#[\\\]+$#", "", $bo_goto_url);
+    }
+}
+
 $etcs = array();
 
 for ($i = 1; $i <= 10; $i++) {
@@ -274,6 +297,24 @@ $sql_common .= " bo_insert_content   = '{$bo_insert_content}',
                 bo_9                = '{$bo_9}',
                 bo_10               = '{$bo_10}' ";
 
+
+// 이윰게시판 스킨 사용
+$sql_common2 = "
+            bo_use_anonymous = '".$bo_use_anonymous."',
+            bo_use_good_member = '".$bo_use_good_member."',
+            bo_use_nogood_member = '".$bo_use_nogood_member."',
+            bo_use_list_image = '".$bo_use_list_image."',
+            bo_use_video_photo = '".$bo_use_video_photo."',
+            bo_use_infinite_scroll = '".$bo_use_infinite_scroll."',
+            bo_use_extimg = '".$bo_use_extimg."',
+            bo_write_limit = '".$bo_write_limit."',
+            download_fee_ratio = '".$download_fee_ratio."',
+            use_shop_skin = '".$use_shop_skin."',
+            bo_skin = '".$bo_eyoom_skin."',
+            bo_goto_url = '".$bo_goto_url."',
+            bo_sel_date_type = '".$bo_sel_date_type."'
+            ";
+
 if ($w == '') {
     $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where bo_table = '{$bo_table}' ");
     if ($row['cnt']) {
@@ -288,7 +329,7 @@ if ($w == '') {
     sql_query($sql);
 
     // 게시판 테이블 생성
-    $file = file('./sql_write.sql');
+    $file = file(G5_ADMIN_PATH . '/sql_write.sql');
     $file = get_db_create_replace($file);
 
     $sql = implode("\n", $file);
@@ -300,6 +341,14 @@ if ($w == '') {
     $target = array($create_table, '');
     $sql = preg_replace($source, $target, $sql);
     sql_query($sql, false);
+
+    // eyoom_board 테이블에 추가
+    $sql = "insert into {$g5['eyoom_board']}
+                set bo_table='{$bo_table}', 
+                    gr_id='{$gr_id}', 
+                    use_gnu_skin='{$use_gnu_skin}',
+                    $sql_common2 ";
+    sql_query($sql);
 
     $msg = "게시판 정상적으로 생성하였습니다.";
 } elseif ($w == 'u') {
@@ -356,6 +405,18 @@ if ($w == '') {
                     {$sql_common}
                 where bo_table = '{$bo_table}' ";
     sql_query($sql);
+
+    // eyoom_board 테이블 업데이트
+    if ($use_gnu_skin == 'n') {
+        $sql = " update {$g5['eyoom_board']}
+                    set use_gnu_skin='{$use_gnu_skin}',
+                    {$sql_common2}
+                    where bo_table = '{$bo_table}' ";
+        sql_query($sql);
+    } else {
+        $sql = " update {$g5['eyoom_board']} set use_gnu_skin='{$use_gnu_skin}' where bo_table = '{$bo_table}' ";
+        sql_query($sql);
+    }
 
     /**
      * 최신글 캐시 스위치온
@@ -456,6 +517,34 @@ if ($grp_fields) {
     sql_query(" update {$g5['board_table']} set bo_table = bo_table {$grp_fields} where gr_id = '$gr_id' ");
 }
 
+// 이윰게시판 스킨 사용
+if ($use_gnu_skin == 'n') {
+    $grp_fields = '';
+    if (is_checked('chk_grp_use_gnu_skin'))     $grp_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
+    if (is_checked('chk_grp_anonymous'))        $grp_fields .= " , bo_use_anonymous = '{$bo_use_anonymous}' ";
+    if (is_checked('chk_grp_good_member'))      $grp_fields .= " , bo_use_good_member = '{$bo_use_good_member}' ";
+    if (is_checked('chk_grp_nogood_member'))    $grp_fields .= " , bo_use_nogood_member = '{$bo_use_nogood_member}' ";
+    if (is_checked('chk_grp_list_image'))       $all_fields .= " , bo_use_list_image = '{$bo_use_list_image}' ";
+    if (is_checked('chk_grp_video_photo'))      $grp_fields .= " , bo_use_video_photo = '{$bo_use_video_photo}' ";
+    if (is_checked('chk_grp_infinite_scroll'))  $all_fields .= " , bo_use_infinite_scroll = '{$bo_use_infinite_scroll}' ";
+    if (is_checked('chk_grp_extimg'))           $grp_fields .= " , bo_use_extimg = '{$bo_use_extimg}' ";
+    if (is_checked('chk_grp_write_limit'))      $grp_fields .= " , bo_write_limit = '{$bo_write_limit}' ";
+    if (is_checked('chk_grp_download_ratio'))   $grp_fields .= " , download_fee_ratio = '{$download_fee_ratio}' ";
+    if (is_checked('chk_grp_shop_skin'))        $grp_fields .= " , use_shop_skin = '{$use_shop_skin}' ";
+    if (is_checked('chk_grp_eyoom_skin'))       $grp_fields .= " , bo_skin = '{$bo_eyoom_skin}' ";
+    if (is_checked('chk_grp_date_type'))        $grp_fields .= " , bo_sel_date_type = '{$bo_sel_date_type}' ";
+
+    if ($grp_fields) {
+        sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$grp_fields} where gr_id = '{$gr_id}' ");
+    }
+} else if ($use_gnu_skin == 'y') {
+    $grp_fields = '';
+    if (is_checked('chk_grp_use_gnu_skin'))     $grp_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
+
+    if ($grp_fields) {
+        sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$grp_fields} where gr_id = '{$gr_id}' ");
+    }
+}
 
 // 모든 게시판 동일 옵션 적용
 $all_fields = '';
@@ -545,6 +634,35 @@ for ($i=1; $i<=10; $i++) {
 
 if ($all_fields) {
     sql_query(" update {$g5['board_table']} set bo_table = bo_table {$all_fields} ");
+}
+
+// 이윰게시판 스킨 사용
+if ($use_gnu_skin == 'n') {
+    $all_fields = '';
+    if (is_checked('chk_all_use_gnu_skin'))     $all_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
+    if (is_checked('chk_all_anonymous'))        $all_fields .= " , bo_use_anonymous = '{$bo_use_anonymous}' ";
+    if (is_checked('chk_all_good_member'))      $all_fields .= " , bo_use_good_member = '{$bo_use_good_member}' ";
+    if (is_checked('chk_all_nogood_member'))    $all_fields .= " , bo_use_nogood_member = '{$bo_use_nogood_member}' ";
+    if (is_checked('chk_all_list_image'))       $all_fields .= " , bo_use_list_image = '{$bo_use_list_image}' ";
+    if (is_checked('chk_all_video_photo'))      $all_fields .= " , bo_use_video_photo = '{$bo_use_video_photo}' ";
+    if (is_checked('chk_all_infinite_scroll'))  $all_fields .= " , bo_use_infinite_scroll = '{$bo_use_infinite_scroll}' ";
+    if (is_checked('chk_all_extimg'))           $all_fields .= " , bo_use_extimg = '{$bo_use_extimg}' ";
+    if (is_checked('chk_all_write_limit'))      $all_fields .= " , bo_write_limit = '{$bo_write_limit}' ";
+    if (is_checked('chk_all_download_ratio'))   $all_fields .= " , download_fee_ratio = '{$download_fee_ratio}' ";
+    if (is_checked('chk_all_shop_skin'))        $all_fields .= " , use_shop_skin = '{$use_shop_skin}' ";
+    if (is_checked('chk_all_eyoom_skin'))       $all_fields .= " , bo_skin = '{$bo_eyoom_skin}' ";
+    if (is_checked('chk_all_date_type'))        $all_fields .= " , bo_sel_date_type = '{$bo_sel_date_type}' ";
+
+    if ($all_fields) {
+        sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$all_fields} ");
+    }
+} else if ($use_gnu_skin == 'y') {
+    $all_fields = '';
+    if (is_checked('chk_all_use_gnu_skin'))     $all_fields .= " , use_gnu_skin = '{$use_gnu_skin}' ";
+
+    if ($all_fields) {
+        sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$all_fields} ");
+    }
 }
 
 delete_cache_latest($bo_table);

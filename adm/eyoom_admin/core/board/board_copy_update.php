@@ -231,54 +231,56 @@ if (count($file_copy)) {
 /**
  * 이윰게시판설정 복사
  */
-if ($copy_config == '1') {
-    $res = sql_query("SHOW COLUMNS FROM {$g5['eyoom_board']}");
-    $k=0;
-    $eb_fields = array();
-    for ($i=0; $row=sql_fetch_array($res); $i++) {
-        if ($row['Field'] == 'bo_id' || $row['Field'] == 'bo_table') continue;
-        $eb_fields[$k] = $row['Field'];
-        $k++;
-    }
-
-    $fields = implode(',', $eb_fields);
-    $sql = "select {$fields} from {$g5['eyoom_board']} where bo_table = '{$bo_table}' ";
-    $result = sql_query($sql);
-    $insert = array();
-    for ($i=0; $row=sql_fetch_array($result); $i++) {
-        $eb_values = array();
-        foreach($eb_fields as $k => $field) {
-            $eb_values[$k] = "'{$row[$field]}'";
+if (isset($_POST['copy_config'])) {
+    if ($copy_config == '1') {
+        $res = sql_query("SHOW COLUMNS FROM {$g5['eyoom_board']}");
+        $k=0;
+        $eb_fields = array();
+        for ($i=0; $row=sql_fetch_array($res); $i++) {
+            if ($row['Field'] == 'bo_id' || $row['Field'] == 'bo_table') continue;
+            $eb_fields[$k] = $row['Field'];
+            $k++;
         }
-        $values = implode(',', $eb_values);
-        $insert[$i] = "insert into {$g5['eyoom_board']} (bo_table, {$fields}) values ('{$target_table}',{$values})";
+    
+        $fields = implode(',', $eb_fields);
+        $sql = "select {$fields} from {$g5['eyoom_board']} where bo_table = '{$bo_table}' ";
+        $result = sql_query($sql);
+        $insert = array();
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $eb_values = array();
+            foreach($eb_fields as $k => $field) {
+                $eb_values[$k] = "'{$row[$field]}'";
+            }
+            $values = implode(',', $eb_values);
+            $insert[$i] = "insert into {$g5['eyoom_board']} (bo_table, {$fields}) values ('{$target_table}',{$values})";
+        }
+        if (isset($insert)) {
+            $sql = implode(';', $insert);
+            sql_query($sql, false);
+        }
+        unset($insert);
     }
-    if (isset($insert)) {
-        $sql = implode(';', $insert);
-        sql_query($sql, false);
-    }
-    unset($insert);
-}
-
-/**
- * 확장필드 정보 복사
- */
-if ($board['bo_ex_cnt'] > 0) {
-    sql_query("delete from {$g5['eyoom_exboard']} where bo_table = '{$target_table}' ");
-    $result = sql_query("select * from {$g5['eyoom_exboard']} where (1) and bo_table = '{$bo_table}' order by ex_no asc ");
-    for($i=0; $row=sql_fetch_array($result); $i++) {
-        $insert = "insert into {$g5['eyoom_exboard']}
-                    set bo_table = '$target_table',
-                         ex_fname = '{$row['ex_fname']}',
-                         ex_subject = '{$row['ex_subject']}',
-                         ex_use_search = '{$row['ex_use_search']}',
-                         ex_required = '{$row['ex_required']}',
-                         ex_form = '{$row['ex_form']}',
-                         ex_type = '{$row['ex_type']}',
-                         ex_length = '{$row['ex_length']}',
-                         ex_default = '{$row['ex_default']}',
-                         ex_item_value = '{$row['ex_item_value']}' ";
-        sql_query($insert, false);
+    
+    /**
+     * 확장필드 정보 복사
+     */
+    if ($board['bo_ex_cnt'] > 0) {
+        sql_query("delete from {$g5['eyoom_exboard']} where bo_table = '{$target_table}' ");
+        $result = sql_query("select * from {$g5['eyoom_exboard']} where (1) and bo_table = '{$bo_table}' order by ex_no asc ");
+        for($i=0; $row=sql_fetch_array($result); $i++) {
+            $insert = "insert into {$g5['eyoom_exboard']}
+                        set bo_table = '$target_table',
+                             ex_fname = '{$row['ex_fname']}',
+                             ex_subject = '{$row['ex_subject']}',
+                             ex_use_search = '{$row['ex_use_search']}',
+                             ex_required = '{$row['ex_required']}',
+                             ex_form = '{$row['ex_form']}',
+                             ex_type = '{$row['ex_type']}',
+                             ex_length = '{$row['ex_length']}',
+                             ex_default = '{$row['ex_default']}',
+                             ex_item_value = '{$row['ex_item_value']}' ";
+            sql_query($insert, false);
+        }
     }
 }
 

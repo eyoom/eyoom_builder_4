@@ -2,22 +2,31 @@
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 // 주문상태에 따른 합계 금액
-function get_order_status_sum($status) {
+function get_order_status_sum() {
     global $g5;
 
+    $od_status = array('주문', '입금', '준비', '배송');
+    $od_status_set = implode(',', $od_status);
+
     $sql = "
-        SELECT count(*) as cnt, sum(od_cart_price + od_send_cost + od_send_cost2 - od_cancel_price) as price
+        SELECT od_status, od_cart_price, od_send_cost, od_send_cost2, od_cancel_price
         FROM {$g5['g5_shop_order_table']}
-        WHERE od_status = '{$status}'
+        WHERE find_in_set(od_status,'{$od_status_set}') and od_cart_price <> 0
     ";
-    $row = sql_fetch($sql);
+    $result = sql_query($sql);
+    $order_status = array('주문'=>array(), '입금'=>array(), '준비'=>array(), '배송'=>array());
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        unset($od_price);
+        $order_status[$row['od_status']]['count']++;
+        $od_price = $row['od_cart_price']+$row['od_send_cost']+$row['od_send_cost2']-$row['od_cancel_price'];
+        $order_status[$row['od_status']]['price'] += $od_price;
+    }
 
-    $info = array();
-    $info['count'] = (int)$row['cnt'];
-    $info['price'] = (int)$row['price'];
-    $info['href'] = './orderlist.php?od_status='.urlencode($status);
+    foreach($od_status as $status) {
+        $order_status[$status]['href'] = G5_ADMIN_URL . "/?dir=shop&amp;pid=orderlist&amp;od_status={$status}";
+    }
 
-    return $info;
+    return $order_status;
 }
 
 // 개인결제 미수금 합계 금액
@@ -39,76 +48,70 @@ function get_personalpay_sum () {
     return $info;
 }
 
-// 일자별 주문 합계 금액
-function get_order_date_sum($date) {
+// 주간별 주문 합계 금액
+function get_order_week_sum($date) {
     global $g5;
 
+    $date_set = implode(',', $date);
     $sql = "
-        SELECT count(*) as cnt, sum(od_cart_price + od_send_cost + od_send_cost2) as orderprice, sum(od_cancel_price) as cancelprice
+        SELECT od_time, od_cart_price, od_send_cost, od_send_cost2, od_cancel_price
         FROM {$g5['g5_shop_order_table']}
-        WHERE SUBSTRING(od_time, 1, 10) = '{$date}' and od_cart_price <> 0
+        WHERE find_in_set(SUBSTRING(od_time, 1, 10),'{$date_set}') and od_cart_price <> 0
     ";
-    $row = sql_fetch($sql);
+    $result = sql_query($sql);
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $od_time = date('Ymd', strtotime($row['od_time']));
+        $order_date[$od_time]['count']++;
+        $order_date[$od_time]['order'] += $row['od_cart_price'] + $row['od_send_cost'] + $row['od_send_cost2'];
+        $order_date[$od_time]['cancel'] += $row['od_cancel_price'];
+    }
 
-    $info = array();
-    $info['count'] = (int)$row['cnt'];
-    $info['order'] = (int)$row['orderprice'];
-    $info['cancel'] = (int)$row['cancelprice'];
-
-    return $info;
+    return $order_date;
 }
 
-// 일자별 결제수단 주문 합계 금액
-function get_order_settle_sum($date) {
-    global $g5, $default;
+function get_week_settle_sum($date) {
+    global $g5;
 
-    $case = array('신용카드', '계좌이체', '가상계좌', '무통장', '휴대폰', '간편결제', 'KAKAOPAY');
-    $info = array();
+    $date_set = implode(',', $date);
 
-    // 결제수단별 합계
-    foreach($case as $val) {
-        $sql = "
-            SELECT sum(od_cart_price + od_send_cost + od_send_cost2 - od_receipt_point - od_cart_coupon - od_coupon - od_send_coupon) as price, count(*) as cnt
-            FROM {$g5['g5_shop_order_table']}
-            WHERE SUBSTRING(od_time, 1, 10) = '{$date}' and od_settle_case = '{$val}'
-        ";
-        $row = sql_fetch($sql);
-
-        $info[$val]['price'] = (int)$row['price'];
-        $info[$val]['count'] = (int)$row['cnt'];
+    $sql = "
+        SELECT od_time, od_settle_case, od_cart_price, od_send_cost, od_send_cost2, od_receipt_point, od_cart_coupon, od_coupon, od_send_coupon
+        FROM {$g5['g5_shop_order_table']}
+        WHERE find_in_set(SUBSTRING(od_time, 1, 10),'{$date_set}') and od_cart_price <> 0
+    ";
+    $result = sql_query($sql);
+    $info = array('무통장'=>array(), '가상계좌'=>array(), '계좌이체'=>array(), '신용카드'=>array(), '간편결제'=>array(), 'KAKAOPAY'=>array(), '휴대폰'=>array(), '쿠폰'=>array(), '포인트'=>array());
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $od_time = date('Y-m-d', strtotime($row['od_time']));
+        $info[$od_time][$row['od_settle_case']]['price'] += $row['od_cart_price'] + $row['od_send_cost'] + $row['od_send_cost2'] - $row['od_receipt_point'] - $row['od_cart_coupon'] - $row['od_coupon'] - $row['od_send_coupon'];
+        $info[$od_time][$row['od_settle_case']]['count']++;
     }
 
     // 포인트 합계
     $sql = "
-        SELECT sum(od_receipt_point) as price, count(*) as cnt
+        SELECT od_time, od_receipt_point
         FROM {$g5['g5_shop_order_table']}
-        WHERE SUBSTRING(od_time, 1, 10) = '{$date}' and od_receipt_point > 0
+        WHERE find_in_set(SUBSTRING(od_time, 1, 10),'{$date_set}') and od_receipt_point > 0 and od_cart_price <> 0
     ";
-    $row = sql_fetch($sql);
-    $info['포인트']['price'] = (int)$row['price'];
-    $info['포인트']['count'] = (int)$row['cnt'];
+    $result = sql_query($sql);
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $od_time = date('Y-m-d', strtotime($row['od_time']));
+        $info[$od_time]['포인트']['price'] += $row['od_receipt_point'];
+        $info[$od_time]['포인트']['count']++;
+    }
 
     // 쿠폰 합계
     $sql = "
-        SELECT sum(od_cart_coupon + od_coupon + od_send_coupon) as price, count(*) as cnt
+        SELECT od_time, od_cart_coupon, od_coupon, od_send_coupon
         FROM {$g5['g5_shop_order_table']}
-        WHERE SUBSTRING(od_time, 1, 10) = '{$date}' and ( od_cart_coupon > 0 or od_coupon > 0 or od_send_coupon > 0 )
+        WHERE find_in_set(SUBSTRING(od_time, 1, 10),'{$date_set}') and ( od_cart_coupon > 0 or od_coupon > 0 or od_send_coupon > 0 ) and od_cart_price <> 0
     ";
-    $row = sql_fetch($sql);
-    $info['쿠폰']['price'] = (int)$row['price'];
-    $info['쿠폰']['count'] = (int)$row['cnt'];
-
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $od_time = date('Y-m-d', strtotime($row['od_time']));
+        $info[$od_time]['쿠폰']['price'] += $row['od_cart_coupon'] + $row['od_coupon'] + $row['od_send_coupon'];
+        $info[$od_time]['쿠폰']['count']++;
+    }
     return $info;
-}
-
-function get_max_value($arr) {
-    foreach($arr as $key => $val)
-        if(is_array($val))
-            $arr[$key] = get_max_value($val);
-
-    @sort($arr);
-
-    return array_pop($arr);
 }
 
 // 해당년도의 모든 주문 추출
@@ -123,7 +126,7 @@ function get_year_order_info($year) {
     $sql = "
         SELECT od_id, SUBSTRING(od_time,1,7) as od_date, od_send_cost, od_settle_case, od_receipt_price, od_receipt_point, od_cart_price, od_cancel_price, od_misu, (od_cart_price + od_send_cost + od_send_cost2) as orderprice, (od_cart_coupon + od_coupon + od_send_coupon) as couponprice
         FROM {$g5['g5_shop_order_table']}
-        WHERE od_time between '{$fr_month}' and '{$to_month}'
+        WHERE od_time between '{$fr_month}' and '{$to_month}' and od_cart_price <> '0' and od_status<>'취소' and od_status<>'주문' and od_status<>'반품' and od_status<>'품절'
         ORDER BY od_time desc
     ";
 

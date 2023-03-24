@@ -10,6 +10,11 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 if ($is_admin != 'super') alert('최고관리자만 접근 가능합니다.');
 
+if (isset($eyoom_board['bo_use_summernote_mo'])) {
+    sql_query(" ALTER TABLE `{$g5['eyoom_board']}` CHANGE `bo_use_summernote_mo` `bo_goto_url` VARCHAR(255) NULL", false);
+    sql_query(" UPDATE `{$g5['eyoom_board']}` SET `bo_goto_url` = '' ", false);
+}
+
 /**
  * 테마 환경설정 파일
  */

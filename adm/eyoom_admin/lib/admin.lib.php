@@ -120,18 +120,20 @@ function get_activity_info($fr_date, $to_date='') {
 function get_activity_date_sum($date) {
     global $g5;
 
-    $sql = " select count(*) as cnt from {$g5['eyoom_activity']} where SUBSTRING(act_regdt, 1, 10) = '{$date}' and act_type='new' ";
-    $write = sql_fetch($sql);
+    $date_set = implode(',', $date);
 
-    $sql = " select count(*) as cnt from {$g5['eyoom_activity']} where SUBSTRING(act_regdt, 1, 10) = '{$date}' and act_type='cmt' ";
-    $cmt = sql_fetch($sql);
-
+    $sql = " select * from {$g5['eyoom_activity']} where find_in_set(SUBSTRING(act_regdt, 1, 10), '{$date_set}') and (act_type='new' || act_type='cmt') ";
+    $result = sql_query($sql);
     $info = array();
-    $info['write'] = (int)$write['cnt'];
-    $info['cmt'] = (int)$cmt['cnt'];
+    for ($i=0; $row=sql_fetch_array($result); $i++) {
+        $act_regdt = date('Y-m-d', strtotime($row['act_regdt']));
+        $act_type = $row['act_type'] == 'new' ? 'write': $row['act_type'];
+        $info[$act_regdt][$act_type]++;
+    }
 
     return $info;
 }
+
 
 // pg_anchor
 function adm_pg_anchor($anc_id) {

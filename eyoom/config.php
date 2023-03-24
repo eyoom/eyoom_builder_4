@@ -294,6 +294,11 @@ $g5['eyoom_brand'] = G5_TABLE_PREFIX . 'eyoom_brand';
 $g5['eyoom_wrfixed'] = G5_TABLE_PREFIX . 'eyoom_wrfixed';
 
 /**
+ * 관리자 즐겨찾기 메뉴 관리
+ */
+$g5['eyoom_favorite_adm'] = G5_TABLE_PREFIX . 'eyoom_favorite_adm';
+
+/**
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;
@@ -301,7 +306,7 @@ $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;
 /**
  * 다중관리자 체크
  */
-$eyoom_admin_theme = $config['cf_eyoom_admin_theme'] ? $config['cf_eyoom_admin_theme']: 'basic';
+$eyoom_admin_theme = $config['cf_eyoom_admin_theme'] ? $config['cf_eyoom_admin_theme']: 'eba_basic';
 if ($is_member && !$is_admin) {
     $manager = sql_fetch("select * from {$g5['eyoom_manager']} where mb_id = '{$member['mb_id']}' ");
     if ($manager['mb_id']) {

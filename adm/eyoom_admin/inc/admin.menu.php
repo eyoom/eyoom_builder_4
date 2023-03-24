@@ -8,6 +8,7 @@ $_dirname = array(
     '100' => 'config',
     '200' => 'member',
     '300' => 'board',
+    '330' => 'seo',
     '350' => 'somoim',
     '400' => 'shop',
     '500' => 'shopetc',
@@ -21,12 +22,30 @@ $dir_icon = array(
     'config'    => 'fa-sliders-h',
     'member'    => 'fa-user',
     'board'     => 'fa-list-alt',
+    'seo'       => 'fa-search',
     'somoim'    => 'fa-users',
     'shop'      => 'fa-shopping-cart',
     'shopetc'   => 'fa-chart-pie',
     'sms'       => 'fa-mobile',
     'theme'     => 'fa-puzzle-piece',
 );
+
+/**
+ * 즐겨찾기 메뉴 테이블이 없을 경우 생성
+ */
+if (!sql_query(" DESC {$g5['eyoom_favorite_adm']} ", false)) {
+    $sql = "
+        CREATE TABLE IF NOT EXISTS `{$g5['eyoom_favorite_adm']}` (
+          `mb_id` varchar(30) NOT NULL,
+          `dir` varchar(20) NOT NULL,
+          `pid` varchar(40) NOT NULL,
+          `fm_code` char(6) NOT NULL,
+          `me_name` varchar(255) NOT NULL
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    ";
+    $sql = get_db_create_replace($sql);
+    sql_query($sql, false);
+}
 
 /**
  * 테마별 관리자 메뉴 설정
@@ -62,6 +81,7 @@ $extra_url = array(
 );
 
 $i = 0;
+$fm_code = '';
 foreach ($amenu as $key => $value) {
     if (!$is_youngcart && ($key == 400 || $key == 500)) continue;
 

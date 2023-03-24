@@ -104,6 +104,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
                                     <option value="KAKAOPAY" <?php echo get_selected($od_settle_case, 'KAKAOPAY'); ?>>KAKAOPAY</option>
                                 </select><i></i>
                             </label>
+                            <div class="note"><strong>Note:</strong> PG간편결제 종류 - NHN_KCP 간편결제 : PAYCO, 네이버페이, 카카오페이(NHN_KCP), 애플페이(NHN_KCP) &#xa;LG유플러스 간편결제 : PAYNOW &#xa;KG 이니시스 간편결제 : KPAY, 삼성페이, LPAY, 카카오페이(KG이니시스)</div>
                         </td>
                     </tr>
                     <?php if (!($wmode || G5_IS_MOBILE)) { ?>

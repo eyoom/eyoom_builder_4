@@ -5,27 +5,11 @@
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 /**
- * $pid 변수 정의
- */
-if($_REQUEST['dir']) {
-    $dir = preg_replace('/[^a-z0-9_]/i', '', trim($_REQUEST['dir']));
-    $dir = substr($dir, 0, 20);
-}
-
-/**
  * 다중관리자 권한 체크
  */
 if (isset($mg_auth) && $mg_auth && !in_array($dir, $mg_auth) && $member['mb_id'] != $config['cf_admin']) {
     alert("접근권한이 없습니다.");
     exit;
-}
-
-/**
- * $pid 변수 정의
- */
-if($_REQUEST['pid']) {
-    $pid = preg_replace('/[^a-z0-9_|]/i', '', trim($_REQUEST['pid']));
-    $pid = substr($pid, 0, 50);
 }
 
 $is_subpage = true;

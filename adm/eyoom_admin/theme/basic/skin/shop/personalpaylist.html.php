@@ -131,6 +131,13 @@ function eb_modal(href) {
     return false;
 }
 
+function close_modal_and_reload() {
+	window.closeModal = function(){
+		$('.personalpay-iframe-modal').modal('hide');
+	};
+	document.location.href = '<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=personalpaylist';
+}
+
 !function () {
     var db = {
         deleteItem: function (deletingClient) {

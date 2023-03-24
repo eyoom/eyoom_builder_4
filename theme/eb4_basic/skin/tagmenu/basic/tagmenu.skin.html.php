@@ -3,6 +3,11 @@
  * skin file : /theme/THEME_NAME/skin/tagmenu/basic/tagmenu.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
+
+/**
+ * 관리자모드 테마에 따라 태그관리 경로 차별 지정
+ */
+$dir_name = $config['cf_eyoom_admin_theme'] == 'basic' ? 'theme': 'board';
 ?>
 
 <style>
@@ -40,8 +45,8 @@ if (!defined('_EYOOM_')) exit;
     <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
     <div class="adm-edit-btn btn-edit-mode" style="bottom:0;text-align:right">
         <div class="btn-group">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=tag_list&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-item-btn"><i class="far fa-edit"></i> 태그관리</a>
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=tag_list" target="_blank" class="ae-btn-r" title="새창 열기">
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir_name; ?>&amp;pid=tag_list&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-item-btn"><i class="far fa-edit"></i> 태그관리</a>
+            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir_name; ?>&amp;pid=tag_list" target="_blank" class="ae-btn-r" title="새창 열기">
                 <i class="fas fa-external-link-alt"></i>
             </a>
         </div>

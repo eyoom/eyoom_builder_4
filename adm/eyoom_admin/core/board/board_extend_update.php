@@ -22,6 +22,10 @@ if ($bo_ex_cnt != $board['bo_ex_cnt']) {
     $write_table = $g5['write_prefix'] . $board['bo_table'];
 }
 
+if ($eyoom_board['use_gnu_skin'] == 'y') {
+    alert("게시판 확장필드 기능은 그누보드스킨에서는 사용하실 수 없습니다.");
+}
+
 // 확장필드를 게시판 테이블에 추가하기
 $add_set = array();
 $k = $bo_ex_cnt + 1;
@@ -82,5 +86,6 @@ $qstr .= $bo_file ? '&amp;bo_file='.$bo_file: '';
 $qstr .= $bo_cont ? '&amp;bo_cont='.$bo_cont: '';
 $qstr .= $bo_list ? '&amp;bo_list='.$bo_list: '';
 $qstr .= $bo_sns ? '&amp;bo_sns='.$bo_sns: '';
+$qstr .= $wmode ? '&amp;wmode=1': '';
 
 alert("정상적으로 확장필드를 일괄 추가하였습니다. 세부 설정을 해주세요.", G5_ADMIN_URL . "/?dir=board&amp;pid=board_extend&amp;bo_table={$board['bo_table']}&amp{$qstr}");

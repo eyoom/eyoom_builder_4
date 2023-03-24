@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    /adm/eyoom_admin/core/member/level_config.php
+ * @file    /adm/eyoom_admin/core/theme/level_config.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 

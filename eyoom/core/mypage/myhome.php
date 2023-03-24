@@ -29,6 +29,11 @@ $my_follower = $eb->follower_member($user['mb_id'], 12);
 $my_friends = $eb->friends_member($user['mb_id'], 12);
 
 /**
+ * 회원 이미지
+ */
+$user['mb_photo'] = $eb->mb_photo($user['mb_id']);
+
+/**
  * 배경이미지
  */
 $user['wallpaper'] = $eb->myhome_cover($user['mb_id'], $user['myhome_cover']);

@@ -40,6 +40,18 @@ if ($act_button == "선택수정") {
         $post_bo_order = isset($_POST['bo_order'][$k]) ? clean_xss_tags($_POST['bo_order'][$k], 1, 1) : '';
         $post_board_table = isset($_POST['board_table'][$k]) ? clean_xss_tags($_POST['board_table'][$k], 1, 1) : '';
 
+        $bo_skin_set = '';
+        if ($post_bo_skin && $post_bo_mobile_skin) {
+            $bo_skin_set = " bo_skin = '" . sql_real_escape_string($post_bo_skin) . "',
+                          bo_mobile_skin = '" . sql_real_escape_string($post_bo_mobile_skin) . "',
+            ";
+        }
+
+        unset($post_use_gnu_skin);
+        if (isset($_POST['use_gnu_skin'][$k])) {
+            $post_use_gnu_skin = $_POST['use_gnu_skin'][$k] == 'y' ? 'y': 'n';
+        }
+
         if ($is_admin != 'super') {
             $sql = " select count(*) as cnt from {$g5['board_table']} a, {$g5['group_table']} b
                       where a.gr_id = '" . sql_real_escape_string($post_gr_id) . "'
@@ -57,8 +69,7 @@ if ($act_button == "선택수정") {
                     set gr_id               = '" . sql_real_escape_string($post_gr_id) . "',
                         bo_subject          = '" . $p_bo_subject . "',
                         bo_device           = '" . sql_real_escape_string($post_bo_device) . "',
-                        bo_skin             = '" . sql_real_escape_string($post_bo_skin) . "',
-                        bo_mobile_skin      = '" . sql_real_escape_string($post_bo_mobile_skin) . "',
+                        {$bo_skin_set}
                         bo_read_point       = '" . sql_real_escape_string($post_bo_read_point) . "',
                         bo_write_point      = '" . sql_real_escape_string($post_bo_write_point) . "',
                         bo_comment_point    = '" . sql_real_escape_string($post_bo_comment_point) . "',
@@ -69,6 +80,11 @@ if ($act_button == "선택수정") {
                   where bo_table            = '" . sql_real_escape_string($post_board_table) . "' ";
 
         sql_query($sql);
+
+        if ($post_use_gnu_skin) {
+            $sql = " update {$g5['eyoom_board']} set use_gnu_skin = '{$post_use_gnu_skin}' where bo_table = '" . sql_real_escape_string($post_board_table) . "' ";
+            sql_query($sql);
+        }
     }
     $msg = "정상적으로 수정하였습니다.";
 
@@ -96,10 +112,10 @@ if ($act_button == "선택수정") {
             include (G5_ADMIN_PATH . '/board_delete.inc.php');
 
             // 확장필드 정보 삭제
-            sql_query("delete from {$g5['eyoom_exboard']} where bo_table = '{$tmp_bo_table}' ");
+            sql_query("delete from {$g5['eyoom_exboard']} where bo_table = '" . sql_real_escape_string($tmp_bo_table) . "' ");
 
             // 이윰게시판 확장 정보 삭제
-            sql_query("delete from {$g5['eyoom_board']} where bo_table = '{$tmp_bo_table}' ");
+            sql_query("delete from {$g5['eyoom_board']} where bo_table = '" . sql_real_escape_string($tmp_bo_table) . "' ");
         }
     }
     $msg = "선택한 게시판을 삭제하였습니다.";

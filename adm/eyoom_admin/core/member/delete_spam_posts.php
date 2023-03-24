@@ -25,10 +25,7 @@ if (!$mb_id) {
     // 2일전 포스팅 기간 설정
     $fr_date = date('Y-m-d', strtotime("-2 days"));
     $to_date = date('Y-m-d');
-    $sql_wehre .= " and wr_datetime between '$fr_date 00:00:00' and '$to_date 23:59:59' ";
-
-    // 최고관리자 계정 예외처리
-    $sql_where .= " and mb_id <> '".$config['cf_admin']."' ";
+    $sql_period = " and (wr_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59') ";
 
     // 다중관리자 계정 예외처리
     $sql = "select mb_id from {$g5['eyoom_manager']} where 1 order by mb_id asc";
@@ -37,7 +34,10 @@ if (!$mb_id) {
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         $_manager[$i] = $row['mb_id'];
     }
-    $sql_where .= " and mb_id find_in_set(mb_id, '".implode(',', $_manager)."') ";
+
+    if ($mb_id == $config['cf_admin'] || in_array($mb_id, $_manager)) {
+        alert("관리자 계정으로 작성된 글은 삭제하실 수 없습니다.");
+    }
 }
 
 /**
@@ -48,7 +48,7 @@ if (!$bo_info) $bo_info = array();
 $bo_count = count($bo_info);
 for ($i=0; $i<$bo_count; $i++) {
     $write_table = $g5['write_prefix'] . $bo_info[$i]['bo_table'];
-    $sql = "select * from {$write_table} where {$sql_wehre}";
+    $sql = "select * from {$write_table} where {$sql_where} {$sql_period}";
     $result = sql_query($sql);
     for ($j=0; $row=sql_fetch_array($result); $j++) {
         // 원글이라면
@@ -88,31 +88,32 @@ for ($i=0; $i<$bo_count; $i++) {
     }
 
     // 게시글 삭제
-    sql_query(" delete from {$write_table} where {$sql_wehre} ");
+    $sql = " delete from {$write_table} where {$sql_where} {$sql_period} ";
+    sql_query($sql);
 }
 
 /**
  * 포인트 삭제
  */
-$sql = " delete from {$g5['point_table']} where {$sql_wehre} ";
+$sql = " delete from {$g5['point_table']} where {$sql_where} and (po_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59')  ";
 sql_query($sql, false);
 
 /**
  * 최신글에서 삭제
  */
-$sql = " delete from {$g5['board_new_table']} where {$sql_wehre} ";
+$sql = " delete from {$g5['board_new_table']} where {$sql_where} and (bn_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59')  ";
 sql_query($sql, false);
 
 /**
  * 스크랩에서 삭제
  */
-$sql = " delete from {$g5['scrap_table']} where {$sql_wehre} ";
+$sql = " delete from {$g5['scrap_table']} where {$sql_where} and (ms_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59')  ";
 sql_query($sql, false);
 
 /**
  * 회원 탈퇴 및 접근차단
  */
-$sql = "update {$g5['member_table']} set mb_leave_date='".date('Ymd')."', mb_intercept_date='".date('Ymd')."' where {$sql_wehre} ";
+$sql = "update {$g5['member_table']} set mb_leave_date='".date('Ymd')."', mb_intercept_date='".date('Ymd')."' where {$sql_where} ";
 sql_query($sql, false);
 
 alert("정상적으로 해당 회원의 스팸글을 모두 삭제처리하였습니다.");
