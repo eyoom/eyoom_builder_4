@@ -355,6 +355,7 @@ window.closeModal = function(url){
 </script>
 <?php } ?>
 
+<?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
 <?php /* 상품 사용후기 모달 시작 */ ?>
 <div class="modal fade itemuse-iframe-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -430,7 +431,6 @@ function itemqa_modal(href) {
     return false;
 }
 
-<?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
 function coupon_modal(href) {
     $('.coupon-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#coupon-iframe").attr("src", "");

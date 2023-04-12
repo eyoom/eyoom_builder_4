@@ -81,7 +81,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
             </div>
             <div class="adm-form-td td-r">
                 <label class="input">
-                    <input type="text" name="bi_title" id="bi_title" value="<?php echo $bn_item['bi_title']; ?>" required>
+                    <input type="text" name="bi_title" id="bi_title" value="<?php echo $bn_item['bi_title']; ?>">
                 </label>
             </div>
         </div>

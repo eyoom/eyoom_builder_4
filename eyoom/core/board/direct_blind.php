@@ -19,7 +19,7 @@ $error = false;
 /**
  * 게시판 정보 가져오기
  */
-$eyoom_board = $bbs->board_info($bo_table, $theme);
+$eyoom_board = $bbs->board_info($bo_table);
 
 /**
  * 신고/블라인드 기능 사용 체크

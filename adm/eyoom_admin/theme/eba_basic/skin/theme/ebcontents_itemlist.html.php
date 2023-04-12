@@ -6,6 +6,10 @@
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 ?>
 
+<style>
+.admin-ebcontents-itemlist .ebcontents-itemlist-image {width:150px;margin:0 auto}
+</style>
+
 <div class="admin-ebcontents-itemlist">
     <div class="adm-headline">
         <h3>EB콘텐츠 아이템 목록</h3>
@@ -41,7 +45,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         <th>보기권한</th>
                         <th>시작일</th>
                         <th>종료일</th>
-                        <th>종료일</th>
+                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,7 +57,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             </label>
                             <input type="hidden" name="ci_no[<?php echo $i; ?>]" value="<?php echo $list[$i]['ci_no']; ?>">
                         </th>
-                        <td>
+                        <td class="text-center">
                             <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebcontents_itemform&amp;thema=<?php echo $this_theme; ?>&amp;ec_code=<?php echo $list[$i]['ec_code']; ?>&amp;ci_no=<?php echo $list[$i]['ci_no']; ?>&amp;w=u&amp;iw=u&amp;page=<?php echo $page; ?>&amp;wmode=1" onclick="eb_modal(this.href, 'EB콘텐츠 아이템관리'); return false;""><u>수정</u></a>
                         </td>
                         <td><div class="ebcontents-itemlist-image"><?php echo $list[$i]['ci_image']; ?></div></td>

@@ -581,7 +581,7 @@ $frm_submit .= $frm_eba_submit;
                         <div class="inline-group">
                             <span>
                                 <label for="bo_firstcmt_point" class="input width-150px">
-                                    <i class="icon-append width-60px"><?php echo $levelset['gnu_name']; ?>를</i>
+                                    <i class="icon-append width-70px"><?php echo $levelset['gnu_name']; ?>를</i>
                                     <input type="text" name="bo_firstcmt_point" id="bo_firstcmt_point" value="<?php echo $eyoom_board['bo_firstcmt_point']; ?>">
                                 </label>
                             </span>
@@ -611,7 +611,7 @@ $frm_submit .= $frm_eba_submit;
                         <div class="inline-group">
                             <span>
                                 <label for="bo_bomb_point" class="input width-150px">
-                                    <i class="icon-append width-60px"><?php echo $levelset['gnu_name']; ?>를 </i>
+                                    <i class="icon-append width-70px"><?php echo $levelset['gnu_name']; ?>를 </i>
                                     <input type="text" name="bo_bomb_point" id="bo_bomb_point" value="<?php echo $eyoom_board['bo_bomb_point']; ?>">
                                 </label>
                             </span>
@@ -647,7 +647,7 @@ $frm_submit .= $frm_eba_submit;
                         <div class="inline-group">
                             <span>
                                 <label for="bo_lucky_point" class="input width-150px">
-                                    <i class="icon-append width-60px"><?php echo $levelset['gnu_name']; ?>를 </i>
+                                    <i class="icon-append width-70px"><?php echo $levelset['gnu_name']; ?>를 </i>
                                     <input type="text" name="bo_lucky_point" id="bo_lucky_point" value="<?php echo $eyoom_board['bo_lucky_point']; ?>">
                                 </label>
                             </span>

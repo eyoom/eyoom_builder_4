@@ -32,7 +32,7 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
     </h4>
     <div class="table-list-eb">
-        <div class="board-list-body">
+        <div class="board-list-body table-responsive">
             <table class="table">
                 <thead>
                     <tr>

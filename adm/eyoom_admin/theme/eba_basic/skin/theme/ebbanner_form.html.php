@@ -174,9 +174,7 @@ new Clipboard('.eb-clipboard-box-btn');
 
 	<div class="adm-headline adm-headline-btn">
         <h3>EB배너 - 아이템 관리</h3>
-        <?php if (!$wmode) { ?>
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebbanner_itemform&amp;bn_code=<?php echo $es['bn_code']; ?>&amp;thema=<?php echo $this_theme; ?>&amp;wmode=1" onclick="eb_modal(this.href, 'EB배너 아이템'); return false;" class="btn-e btn-e-md btn-e-crimson adm-headline-btn"><i class="las la-plus m-r-7"></i><span>EB배너 아이템 추가</span></a>
-        <?php } ?>
     </div>
 
     <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="las la-arrows-alt-h"></i>)</p>

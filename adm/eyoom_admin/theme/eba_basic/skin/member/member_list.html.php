@@ -17,16 +17,22 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <div class="adm-headline">
         <h3>회원 리스트</h3>
         <?php if (!$wmode) { ?>
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=member_form" class="btn-e btn-e-md btn-e-crimson adm-headline-btn"><i class="las la-plus m-r-7"></i><span>회원 추가</span></a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=member_form" class="btn-e btn-e-md btn-e-crimson adm-headline-btn m-l-5"><i class="las la-plus m-r-7"></i><span>회원 추가</span></a>
+        <?php } ?>
+        <?php if ($config['cf_admin'] == $member['mb_id']) { ?>
+        <div class="excel-download">
+            <a href="javascript:void(0);" onclick="member_excel_download();" class="btn-e btn-e-md btn-e-indigo adm-headline-btn">엑셀다운로드</a>
+        </div>
         <?php } ?>
     </div>
 
-    <form id="fsearch" name="fsearch" method="get" class="eyoom-form">
+    <form id="fsearch" name="fsearch" method="get" class="eyoom-form" onsubmit="fsearch_submit(this);">
     <input type="hidden" name="dir" value="<?php echo $dir; ?>" id="dir">
     <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
     <input type="hidden" name="sst" id="sst" value="<?php echo $sst; ?>">
     <input type="hidden" name="sod" id="sod" value="<?php echo $sod; ?>">
     <input type="hidden" name="wmode" value="<?php echo $wmode; ?>">
+    <input type="hidden" name="smode" value="">
     
     <?php if (G5_IS_MOBILE) { ?>
     <a class="collapse-search-btn btn-e btn-e-sm btn-e-dark m-b-20" data-bs-toggle="collapse" href="#collapse-search-box"><i class="fas fa-search m-r-7"></i><span>검색 조건 열기</span></a>
@@ -503,4 +509,21 @@ function set_date(today) {
         document.getElementById("to_date").value = "";
     }
 }
+
+function fsearch_submit (f) {
+    f.dir.value = '<?php echo $dir; ?>';
+    f.pid.value = '<?php echo $pid; ?>';
+    f.smode.value = '';
+    f.submit();
+}
+
+<?php if ($config['cf_admin'] == $member['mb_id']) { ?>
+function member_excel_download() {
+    f = document.fsearch;
+    f.dir.value = 'member';
+    f.pid.value = 'member_excel_download';
+    f.smode.value = 1;
+    f.submit();
+}
+<?php } ?>
 </script>

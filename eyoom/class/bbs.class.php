@@ -94,9 +94,8 @@ class bbs extends eyoom
     /**
      * 이윰보드 설정정보
      */
-    public function board_info($bo_table, $theme) {
-        $sql = "select a.*,b.bo_subject,c.gr_subject from {$this->g5['eyoom_board']} as a left join {$this->g5['board_table']} as b on a.bo_table = b.bo_table left join {$this->g5['group_table']} as c on b.gr_id = c.gr_id where a.bo_table='{$bo_table}' and a.bo_theme='" . sql_real_escape_string($theme) . "'";
-        $board_info = sql_fetch($sql,false);
+    public function board_info($bo_table, $theme='') {
+        $sql = "select a.*,b.bo_subject,c.gr_subject from {$this->g5['eyoom_board']} as a left join {$this->g5['board_table']} as b on a.bo_table = b.bo_table left join {$this->g5['group_table']} as c on b.gr_id = c.gr_id where a.bo_table='{$bo_table}' limit 1";
         return sql_fetch($sql);
     }
 
@@ -1826,7 +1825,7 @@ class bbs extends eyoom
         /**
          * 게시판 정보 가져오기
          */
-        $eyoom_board = $this->board_info($bo_table, $theme);
+        $eyoom_board = $this->board_info($bo_table);
         
         /**
          * 게시물 상위노출에 이미 있는지 체크

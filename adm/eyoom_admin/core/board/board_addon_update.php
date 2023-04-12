@@ -170,7 +170,7 @@ $bo_blind_limit = isset($_POST['bo_blind_limit']) ? (int) $_POST['bo_blind_limit
 $bo_blind_view = isset($_POST['bo_blind_view']) ? (int) $_POST['bo_blind_view'] : 10;
 $bo_blind_direct = isset($_POST['bo_blind_direct']) ? (int) $_POST['bo_blind_direct'] : 10;
 
-$where = "bo_table='{$bo_table}' and bo_theme='{$theme}'";
+$where = " bo_table='{$bo_table}' ";
 
 $set = "
     bo_use_point_explain    = '{$bo_use_point_explain}',

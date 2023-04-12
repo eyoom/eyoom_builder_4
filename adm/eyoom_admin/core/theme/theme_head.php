@@ -45,7 +45,7 @@ $_eyoom = $eyoom;
  * 게시판 설정 가져오기
  */
 if($bo_table) {
-    $eyoom_board = $bbs->board_info($bo_table, $this_theme);
+    $eyoom_board = $bbs->board_info($bo_table);
     if(!$eyoom_board) {
         $eyoom_board = $bbs->board_default($bo_table);
     }

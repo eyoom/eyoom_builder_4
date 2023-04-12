@@ -15,7 +15,7 @@ if (!$wr_id) exit;
 /**
  * 게시판 정보 가져오기
  */
-$eyoom_board = $bbs->board_info($bo_table, $theme);
+$eyoom_board = $bbs->board_info($bo_table);
 
 /**
  * 별점 기능을 사용하는지 체크

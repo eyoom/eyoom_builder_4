@@ -106,6 +106,14 @@ $frm_submit .= $frm_eba_submit;
         <?php if ($w == 'u') { ?>
         <div class="adm-form-tr">
             <div class="adm-form-td td-l">
+                <label class="label">투표사용</label>
+            </div>
+            <div class="adm-form-td td-r">
+                <label class="checkbox"><input type="checkbox" name="po_use" id="po_use" value="1" <?php if ($po['po_use']) { echo 'checked="checked"'; } ?>><i></i>사용</label>
+            </div>
+        </div>
+        <div class="adm-form-tr">
+            <div class="adm-form-td td-l">
                 <label class="label">투표등록일</label>
             </div>
             <div class="adm-form-td td-r">

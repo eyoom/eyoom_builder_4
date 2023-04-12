@@ -46,7 +46,6 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                         <th>쇼핑몰테마적용</th>
                         <?php } ?>
                         <th>기본설정</th>
-                        <th>게시판설정</th>
                         <th>홈페이지메뉴</th>
                         <?php if ($is_youngcart) { ?>
                         <th>쇼핑몰메뉴</th>
@@ -56,7 +55,6 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                         <?php if ($is_youngcart) { ?>
                         <th>EB상품추출</th>
                         <?php } ?>
-                        <th>태그설정</th>
                         <th>홈페이지</th>
                         <?php if ($is_youngcart) { ?>
                         <th>쇼핑몰</th>
@@ -81,9 +79,6 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <?php if ($li['is_setup']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=config_form&amp;thema=<?php echo $li['theme_name']; ?>'><?php if ($li['theme_name'] == $this_theme && $sub_key == '110') { ?><i class='fas fa-check m-r-7'></i><strong class='text-crimson'>설정중</strong><?php } else { ?><u>설정하기</u><?php } ?></a><?php } ?>
                         </td>
                         <td class="text-center">
-                            <?php if ($li['is_setup']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=board_list&amp;thema=<?php echo $li['theme_name']; ?>'><?php if ($li['theme_name'] == $this_theme && $sub_key == '200') { ?><i class='fas fa-check m-r-7'></i><strong class='text-crimson'>설정중</strong><?php } else { ?><u>설정하기</u><?php } ?></a><?php } ?>
-                        </td>
-                        <td class="text-center">
                             <?php if ($li['is_setup']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=menu_list&amp;thema=<?php echo $li['theme_name']; ?>'><?php if ($li['theme_name'] == $this_theme && $sub_key == '300') { ?><i class='fas fa-check m-r-7'></i><strong class='text-crimson'>설정중</strong><?php } else { ?><u>설정하기</u><?php } ?></a><?php } ?>
                         </td>
                         <?php if ($is_youngcart) { ?>
@@ -102,9 +97,6 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <?php if ($li['is_setup']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=ebgoods_list&amp;thema=<?php echo $li['theme_name']; ?>'><?php if ($li['theme_name'] == $this_theme && $sub_key == '500') { ?><i class='fas fa-check m-r-7'></i><strong class='text-crimson'>설정중</strong><?php } else { ?><u>설정하기</u><?php } ?></a><?php } ?>
                         </td>
                         <?php } ?>
-                        <td class="text-center">
-                            <?php if ($li['is_setup']) { ?><a href='<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=tag_list&amp;thema=<?php echo $li['theme_name']; ?>'><?php if ($li['theme_name'] == $this_theme && $sub_key == '700') { ?><i class='fas fa-check m-r-7'></i><strong class='text-crimson'>설정중</strong><?php } else { ?><u>설정하기</u><?php } ?></a><?php } ?>
-                        </td>
                         <td class="text-center">
                             <?php if ($li['is_setup']) { ?><a href='<?php echo G5_URL; ?>/?theme=<?php if ($li['theme_alias']) { ?><?php echo $li['theme_alias']; ?><?php } else { ?><?php echo $li['theme_name']; ?><?php } ?>' target='_blank'><u>미리보기</u></a><?php } ?>
                         </td>

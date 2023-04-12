@@ -163,7 +163,7 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
      * 게시판이라면 이윰게시판 설정정보 가져오기
      */
     if ($bo_table) {
-        $eyoom_board = $bbs->board_info($bo_table, $theme);
+        $eyoom_board = $bbs->board_info($bo_table);
 
         /**
          * 이윰게시판 설정정보

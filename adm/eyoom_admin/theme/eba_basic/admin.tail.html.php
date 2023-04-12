@@ -70,14 +70,18 @@ darkModeBtn.addEventListener("click", function() {
 	let cssLink = document.getElementById("mode_css");
     <?php if(defined('IS_ADMIN_INDEX')) { ?>
     let jsLink = document.getElementById("mode_js");
+    <?php if ($is_youngcart) { ?>
     let jsShopLink = document.getElementById("mode_shop_js");
+    <?php } ?>
     <?php } ?>
 	if (document.body.classList.contains("dark-mode")) {
 		mode = "dark";
 		cssLink.href = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/css/dark_mode.css?ver=<?php echo G5_CSS_VER; ?>";
         <?php if(defined('IS_ADMIN_INDEX')) { ?>
         jsLink.src = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/admin-main-dark.js?ver=<?php echo G5_JS_VER; ?>";
+        <?php if ($is_youngcart) { ?>
         jsShopLink.src = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/admin-main-shop-dark.js?ver=<?php echo G5_JS_VER; ?>";
+        <?php } ?>
         <?php } ?>
         document.documentElement.setAttribute('data-bs-theme', 'dark')
 		darkModeBtn.innerHTML = "<i class='fas fa-sun text-amber'></i><span>라이트모드</span>";
@@ -85,7 +89,9 @@ darkModeBtn.addEventListener("click", function() {
 		cssLink.href = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/css/light_mode.css?ver=<?php echo G5_CSS_VER; ?>";
         <?php if(defined('IS_ADMIN_INDEX')) { ?>
         jsLink.src = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/admin-main-light.js?ver=<?php echo G5_JS_VER; ?>";
+        <?php if ($is_youngcart) { ?>
         jsShopLink.src = "<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/admin-main-shop-light.js?ver=<?php echo G5_JS_VER; ?>";
+        <?php } ?>
         <?php } ?>
         document.documentElement.setAttribute('data-bs-theme', 'light')
 		darkModeBtn.innerHTML = "<i class='fas fa-moon'></i><span>다크모드</span>";
