@@ -166,6 +166,7 @@ if(is_array($category)) {
         $ca_order = $val['ca_order'].$i;
         if ($val['ca_id'] != '0' && !$val['ca_id']) continue;
         $cate_sel_option[$ca_order]['ca_id'] = $val['ca_id'];
+        $cate_sel_option[$ca_order]['ca_use'] = $val['ca_use'];
         $cate_sel_option[$ca_order]['ca_name'] = trim($val['ca_name']);
         $cate_sel_option[$ca_order]['ca_stock_qty'] = $val['ca_stock_qty'];
         $cate_sel_option[$ca_order]['ca_sell_email'] = $val['ca_sell_email'];

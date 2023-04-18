@@ -20,8 +20,6 @@ if ($config['cf_sms_use'] && $config['cf_icode_id'] && $config['cf_icode_pw']) {
     $userinfo = get_icode_userinfo($config['cf_icode_id'], $config['cf_icode_pw']);
 }
 
-check_log_folder(G5_SHOP_PATH.'/inicis/key', false);
-
 /**
  * 탭메뉴
  */
@@ -75,8 +73,7 @@ if(!isset($default['de_pg_service'])) {
 // inicis 필드 추가
 if(!isset($default['de_inicis_mid'])) {
     sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
-                    ADD `de_inicis_mid` varchar(255) NOT NULL DEFAULT '' AFTER `de_kcp_site_key`,
-                    ADD `de_inicis_admin_key` varchar(255) NOT NULL DEFAULT '' AFTER `de_inicis_mid` ", true);
+                    ADD `de_inicis_mid` varchar(255) NOT NULL DEFAULT '' AFTER `de_kcp_site_key` ", true);
 }
 
 // 모바일 초기화면 이미지 줄 수 필드 추가
@@ -144,7 +141,7 @@ if(!isset($default['de_kakaopay_mid'])) {
 // 이니시스 웹결제 사인키 필드 추가
 if(!isset($default['de_inicis_sign_key'])) {
     sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
-                    ADD `de_inicis_sign_key` varchar(255) NOT NULL DEFAULT '' AFTER `de_inicis_admin_key` ", true);
+                    ADD `de_inicis_sign_key` varchar(255) NOT NULL DEFAULT '' ", true);
 }
 
 // 네이버페이 필드추가
@@ -206,6 +203,14 @@ if( ! isset($config['cf_icode_token_key']) ){
 if( ! isset($default['de_easy_pay_services']) ){
     $sql = "ALTER TABLE `{$g5['g5_shop_default_table']}` 
             ADD COLUMN `de_easy_pay_services` VARCHAR(255) NOT NULL DEFAULT '' AFTER `de_easy_pay_use`; ";
+    sql_query($sql, false);
+}
+
+// KG 이니시스 iniapi_key 추가
+if( ! isset($default['de_inicis_iniapi_key']) ){
+    $sql = "ALTER TABLE `{$g5['g5_shop_default_table']}` 
+            ADD COLUMN `de_inicis_iniapi_key` VARCHAR(30) NOT NULL DEFAULT '' AFTER `de_inicis_sign_key`,
+            ADD COLUMN `de_inicis_iniapi_iv` VARCHAR(30) NOT NULL DEFAULT '' AFTER `de_inicis_iniapi_key`; ";
     sql_query($sql, false);
 }
 

@@ -135,6 +135,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                 <label for="bi_link" class="label">연결주소 [링크]</label>
             </div>
             <div class="adm-form-td td-r">
+                <label class="select width-150px m-b-10">
+                    <select name="bi_target" id="bi_target">
+                        <option value="">타겟을 선택하세요.</option>
+                        <option value="_blank" <?php echo $bn_item['bi_target'] == '_blank' ? 'selected':''; ?>>새창</option>
+                        <option value="_self" <?php echo $bn_item['bi_target'] == '_self' ? 'selected':''; ?>>현재창</option>
+                    </select><i></i>
+                </label>
                 <label class="input">
                     <i class="icon-append fas fa-link"></i>
                     <input type="text" name="bi_link" id="bi_link" value="<?php echo $bn_item['bi_link']; ?>">

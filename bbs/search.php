@@ -24,8 +24,8 @@ if ($stx) {
     $g5_search['read_level'] = Array();
     $sql = " select gr_id, bo_table, bo_read_level from {$g5['board_table']} where bo_use_search = 1 and bo_list_level <= '{$member['mb_level']}' ";
     if ($gr_id)
-        $sql .= " and gr_id = '" . sql_real_escape_string($gr_id) . "' ";
-    $onetable = isset($onetable) ? $onetable : "";
+        $sql .= " and gr_id = '{$gr_id}' ";
+    $onetable = isset($onetable) ? preg_replace('/[^a-z0-9_]/i', '', $onetable) : '';
     if ($onetable) // 하나의 게시판만 검색한다면
         $sql .= " and bo_table = '{$onetable}' ";
     $sql .= " order by bo_order, gr_id, bo_table ";
@@ -70,17 +70,6 @@ if ($stx) {
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     $field = explode('||', trim($sfl));
-    $permit_field = array('mb_id','wr_name','wr_subject','wr_content');
-    if (is_array($field)) {
-        $i=0;
-        $sch_field = array();
-        foreach ($field as $k => $v) {
-            if (!in_array(trim($v), $permit_field)) continue;
-            $sch_field[$i] = trim($v);
-            $i++;
-        }
-        $field = $sch_field;
-    }
 
     $str = '(';
     for ($i=0; $i<count($s); $i++) {

@@ -79,8 +79,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 }
 </style>
 
-<script src="<?php echo G5_JS_URL; ?>/shop.js"></script>
-<script src="<?php echo G5_JS_URL; ?>/shop.override.js"></script>
+<script src="<?php echo G5_JS_URL; ?>/shop.js?ver=<?php echo G5_JS_VER; ?>"></script>
+<script src="<?php echo G5_JS_URL; ?>/shop.override.js?ver=<?php echo G5_JS_VER; ?>"></script>
 
 <div class="shop-steps">
     <ol class="list-inline text-center step-indicator">

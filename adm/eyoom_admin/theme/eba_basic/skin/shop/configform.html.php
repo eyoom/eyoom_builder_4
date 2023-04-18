@@ -704,24 +704,35 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr pg_info_fld inicis_info_fld">
                     <div class="adm-form-td td-l">
-                        <label for="de_inicis_admin_key" class="label">KG이니시스 키패스워드</label>
+                        <label for="de_inicis_sign_key" class="label">KG이니시스 웹결제 사인키</label>
                     </div>
                     <div class="adm-form-td td-r">
-                        <label for="de_inicis_admin_key" class="input max-width-250px">
-                            <input type="text" name="de_inicis_admin_key" value="<?php echo get_sanitize_input($default['de_inicis_admin_key']); ?>" id="de_inicis_admin_key">
+                        <label for="de_inicis_sign_key" class="input max-width-250px">
+                            <input type="text" name="de_inicis_sign_key" value="<?php echo get_sanitize_input($default['de_inicis_sign_key']); ?>" id="de_inicis_sign_key">
                         </label>
-                        <div class="note"><strong>Note:</strong> KG이니시스에서 발급받은 4자리 상점 키패스워드를 입력합니다.<br>KG이니시스 상점관리자 패스워드와 관련이 없습니다.<br>키패스워드 값을 확인하시려면 상점측에 발급된 키파일 안의 readme.txt 파일을 참조해 주십시오.</div>
+                        <div class="note"><strong>Note:</strong> KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.<br><a href='https://iniweb.inicis.com/' target='_blank'>KG이니시스 가맹점관리자</a> > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr pg_info_fld inicis_info_fld">
                     <div class="adm-form-td td-l">
-                        <label for="de_inicis_sign_key" class="label">KG이니시스 웹결제 사인키</label>
+                        <label for="de_inicis_iniapi_key" class="label">KG이니시스 INIAPI KEY</label>
                     </div>
                     <div class="adm-form-td td-r">
-                        <label for="de_inicis_sign_key" class="input">
-                            <input type="text" name="de_inicis_sign_key" value="<?php echo get_sanitize_input($default['de_inicis_sign_key']); ?>" id="de_inicis_sign_key">
+                        <label for="de_inicis_iniapi_key" class="input">
+                            <input type="text" name="de_inicis_iniapi_key" value="<?php echo get_sanitize_input($default['de_inicis_iniapi_key']); ?>" id="de_inicis_iniapi_key">
                         </label>
-                        <div class="note"><strong>Note:</strong> KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.\nKG이니시스 상점관리자 > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
+                        <div class="note"><strong>Note:</strong> <a href='https://iniweb.inicis.com/' target='_blank'>KG이니시스 가맹점관리자</a> > 상점정보 > 계약정보 > 부가정보 > INIAPI key 생성 조회 하여 KEY를 여기에 입력합니다.<br>이 항목은 영카트 주문에서 kg이니시스 PG 결제 취소, 부분취소, 에스크로 배송등록, 현금영수증 발급에 필요합니다.</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr pg_info_fld inicis_info_fld">
+                    <div class="adm-form-td td-l">
+                        <label for="de_inicis_iniapi_iv" class="label">KG이니시스 INIAPI IV</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label for="de_inicis_iniapi_iv" class="input">
+                            <input type="text" name="de_inicis_iniapi_iv" value="<?php echo get_sanitize_input($default['de_inicis_iniapi_iv']); ?>" id="de_inicis_iniapi_iv">
+                        </label>
+                        <div class="note"><strong>Note:</strong> <a href='https://iniweb.inicis.com/' target='_blank'>KG이니시스 가맹점관리자</a> > 상점정보 > 계약정보 > 부가정보 > INIAPI IV 생성 조회 하여 KEY를 여기에 입력합니다.<br>이 항목은 영카트 주문에서 kg이니시스 현금영수증 발급에 필요합니다.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr adm-sm-100 pg_info_fld inicis_info_fld">
@@ -733,7 +744,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="de_samsung_pay_use" class="checkbox">
                             <input type="checkbox" name="de_samsung_pay_use" value="1" id="de_samsung_pay_use"<?php echo $default['de_samsung_pay_use']?' checked':''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> KG이니시스와 별도로 <strong>삼성페이 사용 계약을 하신 경우</strong>에만 체크해주세요. (모바일 주문서 결제수단에 삼성페이가 노출됩니다.) <br >실결제시 반드시 결제대행사 KG이니시스 항목에 상점 아이디와 키패스워드를 입력해 주세요.</div>
+                        <div class="note"><strong>Note:</strong> KG이니시스와 별도로 <strong>삼성페이 사용 계약을 하신 경우</strong>에만 체크해주세요. (모바일 주문서 결제수단에 삼성페이가 노출됩니다.) <br >실결제시 반드시 결제대행사 KG이니시스 항목에 상점 아이디와 웹결제 사인키를 입력해 주세요.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr pg_info_fld inicis_info_fld">
@@ -744,7 +755,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="de_inicis_lpay_use" class="checkbox">
                             <input type="checkbox" name="de_inicis_lpay_use" value="1" id="de_inicis_lpay_use"<?php echo $default['de_inicis_lpay_use']?' checked':''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> 체크시 KG이니시스 L.pay를 사용합니다. <br >실결제시 반드시 결제대행사 KG이니시스 항목의 상점 정보( 아이디, 키패스워드, 웹결제 사인키 )를 입력해 주세요.</div>
+                        <div class="note"><strong>Note:</strong> 체크시 KG이니시스 L.pay를 사용합니다. <br >실결제시 반드시 결제대행사 KG이니시스 항목의 상점 정보( 아이디, 웹결제 사인키 )를 입력해 주세요.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr pg_info_fld inicis_info_fld">
@@ -755,7 +766,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="de_inicis_kakaopay_use" class="checkbox">
                             <input type="checkbox" name="de_inicis_kakaopay_use" value="1" id="de_inicis_kakaopay_use"<?php echo $default['de_inicis_kakaopay_use']?' checked':''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> 체크시 KG이니시스 결제의 카카오페이를 사용합니다. 주문서 결제수단에 카카오페이가 노출됩니다. <br>실결제시 반드시 결제대행사 KG이니시스 항목의 상점 정보( 아이디, 키패스워드, 웹결제 사인키 )를 입력해 주세요.</div>
+                        <div class="note"><strong>Note:</strong> 체크시 KG이니시스 결제의 카카오페이를 사용합니다. 주문서 결제수단에 카카오페이가 노출됩니다. <br>실결제시 반드시 결제대행사 KG이니시스 항목의 상점 정보( 아이디, 웹결제 사인키 )를 입력해 주세요.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr pg_info_fld inicis_info_fld">
@@ -2039,6 +2050,14 @@ if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] 
     if($default['de_pg_service'] == 'lg') {
         $log_path = G5_LGXPAY_PATH.'/lgdacom/log';
 
+        try {
+            if( ! is_dir($log_path) && is_writable(G5_LGXPAY_PATH.'/lgdacom/') ){
+                @mkdir($log_path, G5_DIR_PERMISSION);
+                @chmod($log_path, G5_DIR_PERMISSION);
+            }
+        } catch(Exception $e) {
+        }
+
         if(!is_dir($log_path)) {
 
             if( is_writable(G5_LGXPAY_PATH.'/lgdacom/') ){
@@ -2086,21 +2105,17 @@ if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] 
         }
 
         $log_path = G5_SHOP_PATH.'/inicis/log';
-
-        if(!is_dir($log_path)) {
-            echo '<script>'.PHP_EOL;
-            echo 'alert("'.str_replace(G5_PATH.'/', '', G5_SHOP_PATH).'/inicis 폴더 안에 log 폴더를 생성하신 후 쓰기권한을 부여해 주십시오.\n> mkdir log\n> chmod 707 log");'.PHP_EOL;
-            echo '</script>'.PHP_EOL;
-        } else {
-            if(!is_writable($log_path)) {
-                echo '<script>'.PHP_EOL;
-                echo 'alert("'.str_replace(G5_PATH.'/', '',$log_path).' 폴더에 쓰기권한을 부여해 주십시오.\n> chmod 707 log");'.PHP_EOL;
-                echo '</script>'.PHP_EOL;
-            } else {
-                if( function_exists('check_log_folder') && is_writable($log_path) ){
-                    check_log_folder($log_path);
-                }
+        
+        try {
+            if( ! is_dir($log_path) && is_writable(G5_SHOP_PATH.'/inicis/') ){
+                @mkdir($log_path, G5_DIR_PERMISSION);
+                @chmod($log_path, G5_DIR_PERMISSION);
             }
+        } catch(Exception $e) {
+        }
+
+        if( function_exists('check_log_folder') && is_writable($log_path) ){
+            check_log_folder($log_path);
         }
     }
 
