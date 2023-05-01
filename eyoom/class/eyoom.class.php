@@ -1334,6 +1334,7 @@ class eyoom extends qfile
                     case 'board':
                         $url = get_eyoom_pretty_url($no, '', $qstr);
                         break;
+                    case 'mbmemo':
                     case 'respond':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr;
                         break;

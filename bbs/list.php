@@ -41,7 +41,9 @@ if ($sca || $stx || $stx === '0') {     //검색이면
     $sql_search = get_sql_search($sca, $sfl, $stx, $sop);
     
     // 익명게시물 제외
-    $sql_search .= " and wr_anonymous <> '1' ";
+    if (!$sca) {
+        $sql_search .= " and wr_anonymous <> '1' ";
+    }
 
     // 가장 작은 번호를 얻어서 변수에 저장 (하단의 페이징에서 사용)
     $sql = " select MIN(wr_num) as min_wr_num from {$write_table} ";
@@ -66,6 +68,26 @@ if ($sca || $stx || $stx === '0') {     //검색이면
     $sql_search = "";
 
     $total_count = $board['bo_count_write'];
+}
+
+// 승인 게시물 사용시 관리자가 아닐 경우
+$sql_approval = $sql_member = '';
+if ($board['bo_use_approval'] && !$is_admin) {
+    if ($is_member) {
+        $sql_member = " or (wr_approval='0' && mb_id='{$member['mb_id']}') ";
+    }
+    $sql = "select count(*) as cnt from {$write_table} where wr_approval <> '1' and wr_id = wr_parent ";
+    $row = sql_fetch($sql);
+    if ($row['cnt']>0) {
+        $total_count = $total_count - $row['cnt'];
+    }
+
+    $sql = "select count(*) as cnt from {$write_table} where wr_approval='0' && mb_id='{$member['mb_id']}' and wr_id = wr_parent ";
+    $row = sql_fetch($sql);
+    if ($row['cnt']>0) {
+        $total_count = $total_count + $row['cnt'];
+    }
+    $sql_approval = " and (wr_approval = '1' {$sql_member}) ";
 }
 
 if(G5_IS_MOBILE) {
@@ -202,9 +224,9 @@ if ($sst) {
 }
 
 if ($is_search_bbs) {
-    $sql = " select distinct wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows ";
+    $sql = " select distinct wr_parent from {$write_table} where {$sql_search} {$sql_approval} {$sql_order} limit {$from_record}, $page_rows ";
 } else {
-    $sql = " select * from {$write_table} where wr_is_comment = 0 ";
+    $sql = " select * from {$write_table} where wr_is_comment = 0 {$sql_approval}";
     if(!empty($notice_array))
         $sql .= " and wr_id not in (".implode(', ', $notice_array).") ";
     $sql .= " {$sql_order} limit {$from_record}, $page_rows ";

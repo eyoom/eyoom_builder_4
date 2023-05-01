@@ -227,7 +227,7 @@ if ($board['bo_use_category']) {
     /**
      * 카테고리별 게시글수 출력 표시 - 비즈팔님이 아이디어를 제공해 주셨습니다.
      */
-    $res = sql_query("select distinct ca_name, count(*) as cnt from {$write_table} where wr_id = wr_parent group by ca_name",false);
+    $res = sql_query("select distinct ca_name, count(*) as cnt from {$write_table} where wr_id = wr_parent {$sql_approval} group by ca_name",false);
     $ca_total=0;
     for ($i=0;$row=sql_fetch_array($res);$i++) {
         $ca_name = $row['ca_name'] ? $row['ca_name'] : '미분류';
@@ -258,6 +258,11 @@ if (is_array($bo_favorite)) {
  * 페이징
  */
 $paging = $eb->set_paging('board', $bo_table, $qstr);
+
+/**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/list.skin.php');
 
 /**
  * 사용자 프로그램

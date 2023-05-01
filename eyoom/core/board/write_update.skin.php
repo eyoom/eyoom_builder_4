@@ -349,6 +349,14 @@ if ($w == '' || $w == 'r') {
 }
 
 /**
+ * 승인게시판 상태변경 - 관리자일경우만 가능
+ */
+if ($board['bo_use_approval'] && $is_admin) {
+    $wr_approval = (int) clean_xss_tags(trim($_POST['wr_approval']));
+    $up_set['wr_approval'] = $wr_approval;
+}
+
+/**
  * $up_set 대상이 있다면 원본 테이블에 적용
  */
 if (count((array)$up_set) > 0 && is_array($up_set) ) {
@@ -406,6 +414,11 @@ if ($bo_extend) {
  * 최신글 캐시 스위치온
  */
 $latest->make_switch_on($bo_table, $theme);
+
+/**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/write_update.skin.php');
 
 /**
  * 사용자 프로그램

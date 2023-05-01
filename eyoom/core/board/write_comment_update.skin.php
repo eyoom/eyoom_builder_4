@@ -302,6 +302,11 @@ for ($i=0; $row=sql_fetch_array($res); $i++) {
 }
 
 /**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/write_comment_update.skin.php');
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/write_comment_update.skin.php');

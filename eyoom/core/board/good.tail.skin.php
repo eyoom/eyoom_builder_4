@@ -79,6 +79,11 @@ if (($write['mb_id'] && $write['mb_id']!=$config['cf_admin'] && $write['mb_id']!
 }
 
 /**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/good.tail.skin.php');
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/good.tail.skin.php');

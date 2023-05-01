@@ -20,7 +20,7 @@ $is_megamenu = 'yes';
 /**
  * 상품 이미지 미리보기 종류 : 'zoom' || 'slider'
  */
-$item_view = 'slider';
+$item_view = 'zoom';
 ?>
 
 <?php if (!$wmode) { ?>

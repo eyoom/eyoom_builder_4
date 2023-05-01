@@ -5,6 +5,13 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 승인게시판 승인게시물 수정 불가
+ */
+if ($board['bo_use_approval'] && (!$is_admin && $w=='u' && $write['wr_approval'] == '1')) {
+    alert("이미 승인된 게시물은 수정하실 수 없습니다.");
+}
+
+/**
  * 이윰빌더용 여분필드
  */
 if ($w == 'u' || $w == 'r') {
@@ -259,6 +266,11 @@ $eb_7 = $eb_7 ? $eb->encrypt_aes($eb_7): '';
 $eb_8 = $eb_8 ? $eb->encrypt_aes($eb_8): '';
 $eb_9 = $eb_9 ? $eb->encrypt_aes($eb_9): '';
 $eb_10 = $eb_10 ? $eb->encrypt_aes($eb_10): '';
+
+/**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/write.skin.php');
 
 /**
  * 사용자 프로그램

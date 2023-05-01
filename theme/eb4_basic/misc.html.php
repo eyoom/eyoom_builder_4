@@ -199,6 +199,24 @@ function set_member_icon (icon) {
 </div>
 <?php /* 쪽지 보기 모달 끝 */ ?>
 
+<?php /* 회원메모 모달 시작 */ ?>
+<?php if ($config['cf_use_mbmemo'] == '1' && $is_member) { ?>
+<div class="modal fade mbmemo-iframe-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title f-s-20r"><i class="far fa-sticky-note text-gray m-r-7"></i><strong>회원메모</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="mbmemo-iframe" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<?php /* 회원메모 모달 끝 */ ?>
+
 <?php /* 관리자 iframe 설정 모달 시작 */ ?>
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 <div class="modal fade admset-iframe-modal" tabindex="-1" aria-hidden="true">
@@ -332,6 +350,21 @@ function memo_view_modal(href) {
     });
     return false;
 }
+
+<?php if ($config['cf_use_mbmemo'] == '1' && $is_member) { ?>
+function mbmemo_modal(href) {
+    $('.mbmemo-iframe-modal').modal('show').on('hidden.bs.modal', function() {
+        $("#mbmemo-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.mbmemo-iframe-modal').modal('show').on('shown.bs.modal', function() {
+        $("#mbmemo-iframe").attr("src", href);
+        $('#mbmemo-iframe').height(550);
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
+}
+<?php } ?>
 
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 function eb_admset_modal(href) {

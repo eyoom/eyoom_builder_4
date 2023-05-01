@@ -395,16 +395,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/fotorama/fotorama.js"></script>
 <?php if ($item_view == 'zoom') { // 상품이미지 미리보기 종류 - zoom ?>
 <?php if (!G5_IS_MOBILE) { // PC버전의 경우에만 줌적용 ?>
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/jquery-elevateZoom/jquery.elevateZoom.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/elevatezoom-plus/jquery.ez-plus.js"></script>
 <?php } ?>
 <script>
 $(document).ready(function(){
     <?php if (!G5_IS_MOBILE) { // PC버전의 경우에만 줌적용 ?>
-    $('.elevaterzoom_item img').elevateZoom({
+    $('.elevaterzoom_item img').ezPlus({
         zoomWindowWidth: 526,
         zoomWindowHeight: 526,
-        borderSize: 0,
-        borderColour: "#000"
+        easing: true
     });
     <?php } ?>
     $(function(){

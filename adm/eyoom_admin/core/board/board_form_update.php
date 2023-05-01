@@ -119,6 +119,7 @@ $bo_mobile_subject_len = isset($_POST['bo_mobile_subject_len']) ? (int) $_POST['
 $bo_page_rows = isset($_POST['bo_page_rows']) ? (int) $_POST['bo_page_rows'] : 0;
 $bo_mobile_page_rows = isset($_POST['bo_mobile_page_rows']) ? (int) $_POST['bo_mobile_page_rows'] : 0;
 $bo_use_rss_view = isset($_POST['bo_use_rss_view']) ? (int) $_POST['bo_use_rss_view'] : 0;
+$bo_use_approval = isset($_POST['bo_use_approval']) ? (int) $_POST['bo_use_approval'] : 0;
 $bo_use_secret = isset($_POST['bo_use_secret']) ? (int) $_POST['bo_use_secret'] : 0;
 $bo_use_file_content = isset($_POST['bo_use_file_content']) ? (int) $_POST['bo_use_file_content'] : 0;
 $bo_new = isset($_POST['bo_new']) ? (int) $_POST['bo_new'] : 0;
@@ -225,6 +226,7 @@ $sql_common = " gr_id               = '{$gr_id}',
                 bo_use_dhtml_editor = '{$bo_use_dhtml_editor}',
                 bo_select_editor    = '{$bo_select_editor}',
                 bo_use_rss_view     = '{$bo_use_rss_view}',
+                bo_use_approval     = '{$bo_use_approval}',
                 bo_use_good         = '{$bo_use_good}',
                 bo_use_nogood       = '{$bo_use_nogood}',
                 bo_use_name         = '{$bo_use_name}',
@@ -457,6 +459,7 @@ if (is_checked('chk_grp_use_secret'))           $grp_fields .= " , bo_use_secret
 if (is_checked('chk_grp_use_dhtml_editor'))     $grp_fields .= " , bo_use_dhtml_editor = '{$bo_use_dhtml_editor}' ";
 if (is_checked('chk_grp_select_editor'))        $grp_fields .= " , bo_select_editor = '{$bo_select_editor}' ";
 if (is_checked('chk_grp_use_rss_view'))         $grp_fields .= " , bo_use_rss_view = '{$bo_use_rss_view}' ";
+if (is_checked('chk_grp_use_approval'))         $grp_fields .= " , bo_use_approval = '{$bo_use_approval}' ";
 if (is_checked('chk_grp_use_good'))             $grp_fields .= " , bo_use_good = '{$bo_use_good}' ";
 if (is_checked('chk_grp_use_nogood'))           $grp_fields .= " , bo_use_nogood = '{$bo_use_nogood}' ";
 if (is_checked('chk_grp_use_name'))             $grp_fields .= " , bo_use_name = '{$bo_use_name}' ";
@@ -576,6 +579,7 @@ if (is_checked('chk_all_use_secret'))           $all_fields .= " , bo_use_secret
 if (is_checked('chk_all_use_dhtml_editor'))     $all_fields .= " , bo_use_dhtml_editor = '{$bo_use_dhtml_editor}' ";
 if (is_checked('chk_all_select_editor'))        $all_fields .= " , bo_select_editor = '{$bo_select_editor}' ";
 if (is_checked('chk_all_use_rss_view'))         $all_fields .= " , bo_use_rss_view = '{$bo_use_rss_view}' ";
+if (is_checked('chk_all_use_approval'))         $all_fields .= " , bo_use_approval = '{$bo_use_approval}' ";
 if (is_checked('chk_all_use_good'))             $all_fields .= " , bo_use_good = '{$bo_use_good}' ";
 if (is_checked('chk_all_use_nogood'))           $all_fields .= " , bo_use_nogood = '{$bo_use_nogood}' ";
 if (is_checked('chk_all_use_name'))             $all_fields .= " , bo_use_name = '{$bo_use_name}' ";

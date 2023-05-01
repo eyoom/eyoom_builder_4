@@ -22,6 +22,11 @@ while ($row = sql_fetch_array($res)) {
 $latest->make_switch_on($bo_table, $theme);
 
 /**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/delete.skin.php');
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/delete.skin.php');

@@ -29,6 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-webzine .webzine-item .webzine-img-box-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;width:50px;height:50px;line-height:50px;text-align:center;color:#fff;font-size:40px;transform:translate(-50%,-50%);z-index:1}
 .board-webzine .webzine-item:hover .webzine-img-box-in:after {opacity:1}
 .board-webzine .webzine-item .webzine-desc h4 {font-size:1.125rem;color:#252525;margin-top:0;margin-bottom:15px;line-height:1.4;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.board-webzine .webzine-item .webzine-desc h4 .wl-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
@@ -133,7 +134,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <div id="tab-category">
             <div class="category-list">
-                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($board['bo_count_write']); ?>)</a></span>
+                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($ca_total); ?>)</a></span>
                 <?php for ($i=0; $i<count((array)$bocate); $i++) { ?>
                 <span <?php if ($decode_sca == $bocate[$i]['ca_name']) { ?>class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url($bo_table, '', 'sca='.$bocate[$i]['ca_sca']); ?>"><?php echo $bocate[$i]['ca_name']; ?> (<?php echo $bocate[$i]['ca_count']; ?>)</a></span>
                 <?php } ?>
@@ -207,6 +208,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <div class="webzine-desc">
                 <h4>
                     <a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode ? 'onclick="eb_modal(this.href); return false;"': ''; ?>>
+                        <?php if ($board['bo_use_approval'] && ($is_admin || ($is_member && $list[$i]['mb_id'] == $member['mb_id']))) { ?>
+                        <span class="wl-label bg-<?php echo $list[$i]['wr_approval'] ? 'dark': 'light-gray'; ?>"><?php echo $list[$i]['wr_approval'] ? '승인': '미승인'; ?></span>
+                        <?php } ?>
                         <?php if ($list[$i]['icon_new']) { ?>
                         <span class="webzine-new-icon"><b></b></span>
                         <?php } ?>

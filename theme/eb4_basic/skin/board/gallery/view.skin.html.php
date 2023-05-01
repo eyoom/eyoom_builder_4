@@ -31,6 +31,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
 .board-view .board-view-info .info-box-bottom span {margin-right:8px;white-space:nowrap}
 .board-view .board-view-info .info-box-bottom strong {font-weight:400}
 .board-view .board-view-info .info-box-bottom i {color:#a5a5a5;margin-right:5px}
+.board-view .board-view-info .status-label {position:absolute;top:20px;right:0}
+.board-view .board-view-info .status-label .bl-label {display:inline-block;width:100px;height:30px;line-height:30px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5}
 .board-view .board-view-file ul {margin-bottom:0}
 .board-view .board-view-file li {padding:8px 0;border-bottom:1px solid #eaeaea}
 .board-view .board-view-file a:hover {text-decoration:underline}
@@ -116,6 +118,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
 button.mfp-close {position:fixed;color:#fff !important}
 .mfp-figure .mfp-close {position:absolute}
 @media (max-width:576px) {
+    .board-view .board-view-info .status-label {position:relative;top:inherit;right:inherit;margin-top:10px}
     .board-view .board-view-btn {padding:0 10px}
 }
 </style>
@@ -181,6 +184,11 @@ button.mfp-close {position:fixed;color:#fff !important}
                 <?php if ($lv['eyoom_icon']) { ?>
                 <span class="view-lv-icon"><img src="<?php echo $lv['eyoom_icon']; ?>" align="absmiddle" alt="레벨"></span>
                 <?php } ?>
+                <?php if ($config['cf_use_mbmemo'] && $view['mb_id'] && $is_member && $view['mb_id'] != $member['mb_id'] && !$is_anonymous) { // 회원메모 ?>
+                <a href="<?php echo G5_URL; ?>/page/?pid=mbmemo&amp;mb_id=<?php echo $view['mb_id']; ?>&amp;wmode=1" data-bs-toggle="tooltip" data-bs-placement="top" title="회원메모" class="btn-mbmemo" onclick="mbmemo_modal(this.href); return false;">
+                    <span class="label label-dark"><i class="fas fa-user-edit"></i></span>
+                </a>
+                <?php } ?>
                 <?php if ($is_ip_view) { ?>
                 <span class="m-l-5 text-gray f-s-12r"><?php echo $ip; ?></span>
                 <?php } ?>
@@ -201,6 +209,11 @@ button.mfp-close {position:fixed;color:#fff !important}
                 <?php } ?>
             </div>
         </div>
+        <?php if ($board['bo_use_approval'] && ($is_admin || ($is_member && $view['mb_id'] == $member['mb_id']))) { ?>
+        <div class="status-label">
+            <span class="bl-label bg-<?php echo $view['wr_approval'] ? 'dark': 'light-gray'; ?>"><?php echo $view['wr_approval'] ? '승인': '미승인'; ?></span>
+        </div>
+        <?php } ?>
     </div>
 
     <?php if ($cnt > 0) { ?>
@@ -510,8 +523,8 @@ button.mfp-close {position:fixed;color:#fff !important}
             $wr_fixed = sql_fetch($sql);
         ?>
         <?php if ($eyoom_board['bo_use_wrfixed'] == '1' && (isset($member['mb_id']) && $member['mb_id'] == $view['mb_id'] || $is_admin) && !in_array($wr_id, $bo_notice) && $wr_fixed['cnt']==0) { ?>
-        <div id="wrfixed" class="text-center">
-            <a href="javascript:;" id="bo_wrfixed" class="btn-e btn-e-purple btn-e-md">게시물 <?php echo $eyoom_board['bo_wrfixed_date']; ?>일간 상단노출 (<?php echo number_format($eyoom_board['bo_wrfixed_point']); ?>포인트 소모)</a>
+        <div id="wrfixed" class="text-center m-b-10">
+            <a href="javascript:void(0);" id="bo_wrfixed" class="btn-e btn-e-deep-purple btn-e-md">게시물 <?php echo $eyoom_board['bo_wrfixed_date']; ?>일간 상단노출 (<?php echo number_format($eyoom_board['bo_wrfixed_point']); ?>포인트 소모)</a>
         </div>
         <script>
         $(function() {
@@ -610,7 +623,7 @@ button.mfp-close {position:fixed;color:#fff !important}
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config['cf_map_google_id']; ?>" async defer></script>
 <?php } ?>
 <?php if ($config['cf_map_naver_id']) { ?>
-<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=<?php echo $config['cf_map_naver_id']; ?>&submodules=geocoder"></script>
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=<?php echo $config['cf_map_naver_id']; ?>&submodules=geocoder"></script>
 <?php } ?>
 <?php if ($config['cf_map_daum_id']) { ?>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<?php echo $config['cf_map_daum_id']; ?>&libraries=services"></script>

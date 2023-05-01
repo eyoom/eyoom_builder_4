@@ -780,3 +780,18 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_favorite_adm` (
   `fm_code` char(6) NOT NULL,
   `me_name` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_mbmemo`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_mbmemo`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_mbmemo` (
+    `mm_no` int(11) unsigned NOT NULL auto_increment,
+    `mm_my_id` varchar(30) NOT NULL,
+    `mm_mb_id` varchar(30) NOT NULL,
+    `mm_memo` text NOT NULL,
+    PRIMARY KEY  (`mm_no`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

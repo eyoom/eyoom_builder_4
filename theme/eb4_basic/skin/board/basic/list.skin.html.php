@@ -46,6 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .bl-list .bl-subj a {position:relative;display:inline-block;padding:0 10px}
 .board-list .bl-list .bl-subj a:hover {color:#000;text-decoration:underline}
 .board-list .bl-list .bl-subj .reply-indication {display:inline-block;width:7px;height:10px;border-left:1px dotted #b5b5b5;border-bottom:1px dotted #b5b5b5}
+.board-list .bl-list .bl-subj .bl-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5;margin-left:10px;margin-top:3px;margin-bottom:3px}
 .board-list .bl-list .bl-subj .bl-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .board-list .bl-list .bl-subj .bl-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .board-list .bl-list .bl-subj .bl-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
@@ -160,7 +161,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <div id="tab-category">
             <div class="category-list">
-                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($board['bo_count_write']); ?>)</a></span>
+                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($ca_total); ?>)</a></span>
                 <?php for ($i=0; $i<count((array)$bocate); $i++) { ?>
                 <span <?php if ($decode_sca == $bocate[$i]['ca_name']) { ?>class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url($bo_table, '', 'sca='.$bocate[$i]['ca_sca']); ?>"><?php echo $bocate[$i]['ca_name']; ?> (<?php echo $bocate[$i]['ca_count']; ?>)</a></span>
                 <?php } ?>
@@ -234,6 +235,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 <span class="reply-indication" style="margin-left:<?php echo $list[$i]['reply']; ?>px;"></span>
                 <?php } ?>
                 <a href="<?php echo $list[$i]['href']; ?>">
+                    <?php if ($board['bo_use_approval'] && ($is_admin || ($is_member && $list[$i]['mb_id'] == $member['mb_id']))) { ?>
+                    <span class="bl-label bg-<?php echo $list[$i]['wr_approval'] ? 'dark': 'light-gray'; ?>"><?php echo $list[$i]['wr_approval'] ? '승인': '미승인'; ?></span>
+                    <?php } ?>
                     <?php if ($list[$i]['icon_new']) { ?>
                     <span class="bl-new-icon"><b></b></span>
                     <?php } ?>

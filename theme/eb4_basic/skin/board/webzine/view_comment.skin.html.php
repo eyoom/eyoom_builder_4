@@ -148,6 +148,11 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                             <?php if ($cmt[$i]['eyoom_icon']) { ?>
                             <span class="comment-lv-icon"><img src="<?php echo $cmt[$i]['eyoom_icon']; ?>" align="absmiddle" alt="레벨"></span>
                             <?php } ?>
+                            <?php if ($config['cf_use_mbmemo'] && $cmt[$i]['mb_id'] && $is_member && $cmt[$i]['mb_id'] != $member['mb_id'] && $cmt[$i]['is_anonymous'] !='y') { // 회원메모 ?>
+                            <a href="<?php echo G5_URL; ?>/page/?pid=mbmemo&amp;mb_id=<?php echo $cmt[$i]['mb_id']; ?>&amp;wmode=1" data-bs-toggle="tooltip" data-bs-placement="top" title="회원메모" class="btn-mbmemo" onclick="mbmemo_modal(this.href); return false;">
+                                <span class="label label-dark"><i class="fas fa-user-edit"></i></span>
+                            </a>
+                            <?php } ?>
                             <?php if ($is_ip_view) { ?>
                             <span class="comment-ip"><?php echo $cmt[$i]['ip']; ?></span>
                             <?php } ?>

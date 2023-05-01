@@ -122,13 +122,26 @@ $frm_submit .= $frm_eba_submit;
                 <?php } else { ?>
                 <input type="hidden" name="cf_eyoom_admin_theme" value="<?php echo $config['cf_eyoom_admin_theme']; ?>">
                 <?php } ?>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label for="cf_permit_level" class="label">사이트 접속 최소 레벨</label>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_permit_level" class="label">사이트 접속 최소 레벨</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="select max-width-250px"><?php echo get_member_level_select('cf_permit_level', 1, 10, $config['cf_permit_level']) ?><i></i></label>
+                            <div class="note"><strong>Note:</strong> 회원제 사이트를 운영하고자 할 경우, 홈페이지에 접근 가능한 최소 레벨을 설정합니다.</div>
+                        </div>
                     </div>
-                    <div class="adm-form-td td-r">
-                        <label class="select max-width-250px"><?php echo get_member_level_select('cf_permit_level', 1, 10, $config['cf_permit_level']) ?><i></i></label>
-                        <div class="note"><strong>Note:</strong> 회원제 사이트를 운영하고자 할 경우, 홈페이지에 접근 가능한 최소 레벨을 설정합니다.</div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_use_mbmemo" class="label">회원메모 사용</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="checkbox">
+                                <input type="checkbox" name="cf_use_mbmemo" value="1" id="cf_use_mbmemo" <?php echo $config['cf_use_mbmemo']?'checked':''; ?>><i></i> 사용
+                            </label>
+                            <div class="note"><strong>Note:</strong> 사용체크하시면 회원메모기능이 활성화 됩니다.</div>
+                        </div>
                     </div>
                 </div>
                 <div class="adm-form-tr-wrap">

@@ -1,12 +1,9 @@
 <?php
 /**
  * Eyoom Admin Skin File
- * @file    ~/theme/basic/skin/theme/ebbanner_itemhit.html.php
+ * @file    ~/theme/THEME_NAME/skin/theme/ebbanner_itemhit.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
-
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/jsgrid/jsgrid.min.css" type="text/css" media="screen">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/jsgrid/jsgrid-theme.min.css" type="text/css" media="screen">',0);
 ?>
 
 <div class="admin-bannerhit-list">
@@ -16,72 +13,40 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/j
 
     <?php include_once(EYOOM_ADMIN_THEME_PATH . '/skin/theme/ebbanner_itemhit.sub.html.php'); ?>
 
-    <div class="padding-top-5">
-        <span class="font-size-12 color-grey">
-            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a> 총조회수 <?php echo number_format($total_count); ?>건
-        </span>
+    <div class="f-s-13r m-b-5">
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a><span class="m-l-10 m-r-10 text-light-gray">|</span>총조회수 <?php echo number_format($total_count); ?>건
     </div>
 
+    <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="las la-arrows-alt-h"></i>)</p>
 
-    <?php if (G5_IS_MOBILE) { ?>
-    <p class="font-size-11 color-grey text-right margin-bottom-5"><i class="fas fa-info-circle"></i> Note! 좌우스크롤 가능 (<i class="fas fa-arrows-alt-h"></i>)</p>
-    <?php } ?>
+    <div class="table-list-eb">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>IP</th>
+                        <th>접속경로</th>
+                        <th>일시</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php for ($i=0; $i<$cnt; $i++) { ?>
+                    <tr>
+                        <th class="text-center"><?php echo $list[$i]['bh_ip']; ?></th>
+                        <td><?php echo $list[$i]['link']; ?><?php echo $list[$i]['title']; ?><?php echo $list[$i]['link2']; ?></td>
+                        <td class="text-center"><?php echo $list[$i]['bh_date'] . ' ' . $list[$i]['bh_time']; ?></td>
+                    </tr>
+                    <?php } ?>
+                    <?php if($cnt == 0) { ?>
+                    <tr>
+                        <td colspan="11" class="text-center text-light-gray"><i class="fas fa-exclamation-circle"></i> 출력할 내용이 없습니다.</td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <div id="bannerhit-list"></div>
+    <?php /* 페이지 */ ?>
+    <?php echo eb_paging($eyoom['paging_skin']);?>
 </div>
-
-<?php /* 페이지 */ ?>
-<?php echo eb_paging($eyoom['paging_skin']);?>
-
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/jsgrid/jsgrid.min.js"></script>
-<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/js/jsgrid.js"></script>
-<script>
-!function () {
-    var db = {
-        deleteItem: function (deletingClient) {
-            var clientIndex = $.inArray(deletingClient, this.clients);
-            this.clients.splice(clientIndex, 1)
-        },
-        insertItem: function (insertingClient) {
-            this.clients.push(insertingClient)
-        },
-        loadData  : function (filter) {
-            return $.grep(this.clients, function (client) {
-                return !(filter.IP && !(client.IP.indexOf(filter.IP) > -1) || filter.접속경로 && !(client.접속경로.indexOf(filter.접속경로) > -1))
-            })
-        },
-        updateItem: function (updatingClient) {}
-    };
-    window.db    = db,
-    db.clients   = [
-        <?php for ($i=0; $i<$cnt; $i++) { ?>
-        {
-            IP: "<?php echo $list[$i]['bh_ip']; ?>",
-            접속경로: "<?php echo $list[$i]['link']; ?><?php echo $list[$i]['title']; ?><?php echo $list[$i]['link2']; ?>",
-            일시: "<?php echo $list[$i]['bh_date'] . ' ' . $list[$i]['bh_time']; ?>"
-        },
-        <?php } ?>
-    ]
-}();
-
-$(document).ready(function() {
-    $("#bannerhit-list").jsGrid({
-        filtering      : false,
-        editing        : false,
-        sorting        : false,
-        paging         : true,
-        autoload       : true,
-        controller     : db,
-        deleteConfirm  : "정말로 삭제하시겠습니까?\n한번 삭제된 데이터는 복구할수 없습니다.",
-        pageButtonCount: 5,
-        pageSize       : <?php echo $config['cf_page_rows']; ?>,
-        width          : "100%",
-        height         : "auto",
-        fields         : [
-            { name: "IP", type: "text", width: 130 },
-            { name: "접속경로", type: "text", width: 300 },
-            { name: "일시", type: "text", width: 130 },
-        ]
-    })
-});
-</script>

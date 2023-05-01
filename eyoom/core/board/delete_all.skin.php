@@ -58,5 +58,12 @@ for ($i=count((array)$tmp_array)-1; $i>=0; $i--) {
     }
 }
 
-// 사용자 프로그램
-@include_once(EYOOM_USER_PATH.'/board/delete.skin.php');
+/**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/delete_all.skin.php');
+
+/**
+ * 사용자 프로그램
+ */
+@include_once(EYOOM_USER_PATH.'/board/delete_all.skin.php');

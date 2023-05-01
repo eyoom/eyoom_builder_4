@@ -213,6 +213,21 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
         </div>
     </section>
+    <?php if ($is_admin && $w == 'u') { ?>
+    <section>
+        <div class="row">
+            <div class="col col-4">
+                <label class="label">상태설정</label>
+                <label class="select">
+                    <select name="wr_approval" id="wr_approval">
+                        <option value="0" <?php echo $write['wr_approval'] == '0' || !$write['wr_approval'] ? 'selected': ''; ?>>미승인</option>
+                        <option value="1" <?php echo $write['wr_approval'] == '1' ? 'selected': ''; ?>>승인</option>
+                    </select><i></i>
+                </label>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
     <section>
         <div class="row">
             <div class="col col-12 md-m-b-10">
@@ -497,7 +512,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config['cf_map_google_id']; ?>" async defer></script>
 <?php } ?>
 <?php if ($config['cf_map_naver_id']) { ?>
-<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=<?php echo $config['cf_map_naver_id']; ?>&submodules=geocoder"></script>
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=<?php echo $config['cf_map_naver_id']; ?>&submodules=geocoder"></script>
 <?php } ?>
 <?php if ($config['cf_map_daum_id']) { ?>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<?php echo $config['cf_map_daum_id']; ?>&libraries=services"></script>

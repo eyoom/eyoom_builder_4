@@ -11,6 +11,11 @@ if (!defined('_EYOOM_')) exit;
 sql_query(" delete from {$g5['eyoom_tag_write']} where tw_theme = '" . sql_real_escape_string($theme) . "' and bo_table = '{$bo_table}' and wr_id = '{$write['wr_id']}' ", false);
 
 /**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/delete.tail.skin.php');
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/delete.tail.skin.php');

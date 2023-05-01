@@ -125,6 +125,13 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
                         $str2 .= "<li><a href=\"".G5_BBS_URL."/formmail.php?mb_id=".$mb_id."&amp;name=".urlencode($name)."&amp;email=".$email."\" target=\"_blank\">메일보내기</a></li>\n";
                     }
                 }
+
+                /**
+                 * 회원메모
+                 */
+                if ($config['cf_use_mbmemo'] && $member['mb_id'] && $mb_id != $member['mb_id']) {
+                    $str2 .= "<li><a href=\"".G5_URL."/page/?pid=mbmemo&amp;mb_id=".$mb_id."&amp;wmode=1\" onclick=\"mbmemo_modal(this.href);return false;\">회원메모</a></li>\n";
+                }
             }
 
             /**

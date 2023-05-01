@@ -18,6 +18,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
         <div class="category-list">
             <span<?php if ($mpid == 'mypage' && !$tg) { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/">마이페이지</a></span>
             <span<?php if ($mpid == 'respond') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/respond.php">내글반응</a></span>
+            <?php if ($config['cf_use_mbmemo']) { ?>
+            <span<?php if ($mpid == 'mbmemo') { ?> class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/mypage/mbmemo.php">회원메모</a></span>
+            <?php } ?>
             <span<?php if ($tg == 'timeline') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'timeline'); ?>">타임라인</a></span>
             <span<?php if ($tg == 'favorite') { ?> class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url('mypage', 'favorite'); ?>">관심게시판</a></span>
             <?php if ($eyoom['is_community_theme'] == 'y') { ?>

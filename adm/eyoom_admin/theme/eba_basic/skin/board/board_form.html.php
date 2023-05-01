@@ -60,7 +60,7 @@ $frm_submit .= $frm_eba_submit;
                     <a href="javasecipt:void(0);" class="anchor-menu <?php echo $ac_id; ?>" id="<?php echo $ac_id; ?>_tab" data-bs-toggle="tab" data-bs-target="#<?php echo $ac_id; ?>"><?php echo $ac_name; ?></a>
                 </li>
                 <?php } ?>
-                <?php if (!$wmode) { ?>
+                <?php if (!$wmode && $w=='u') { ?>
                 <li role="presentation">
                     <a href="<?php echo G5_ADMIN_URL."?dir=board&amp;pid=board_extend&amp;bo_table={$bo_table}"; ?>" class="anchor-menu" id="eyoom_extend_tab">확장필드</a>
                 </li>
@@ -106,7 +106,7 @@ $frm_submit .= $frm_eba_submit;
                             </span>
                             <?php if ($w=='u' && !$wmode) { ?>
                             <span>
-                                <a href="javascript:document.location.href='<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_list&amp;grid=<?php echo $board['gr_id']; ?>'" class="btn-e btn-e-lg btn-e-dark">동일그룹 게시판목록</a>
+                                <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=board_list&amp;grid=<?php echo $board['gr_id']; ?>" class="btn-e btn-e-lg btn-e-dark">동일그룹 게시판목록</a>
                             </span>
                             <?php } ?>
                         </div>
@@ -546,6 +546,23 @@ $frm_submit .= $frm_eba_submit;
                             <div class="inline-group">
                                 <label for="chk_grp_select_editor" class="checkbox"><input type="checkbox" name="chk_grp_select_editor" value="1" id="chk_grp_select_editor"><i></i>그룹적용</label>
                                 <label for="chk_all_select_editor" class="checkbox"><input type="checkbox" name="chk_all_select_editor" value="1" id="chk_all_select_editor"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_approval" class="label">게시물 승인기능 사용</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label class="checkbox">
+                            <input type="checkbox" name="bo_use_approval" value="1" <?php echo $board['bo_use_approval']?'checked':''; ?> id="bo_use_approval"><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 승인기능을 사용으로 설정하면 승인된 게시물만 출력되는 기능입니다.</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_use_approval" class="checkbox"><input type="checkbox" name="chk_grp_use_approval" value="1" id="chk_grp_use_approval"><i></i>그룹적용</label>
+                                <label for="chk_all_use_approval" class="checkbox"><input type="checkbox" name="chk_all_use_approval" value="1" id="chk_all_use_approval"><i></i>전체적용</label>
                             </div>
                         </div>
                     </div>

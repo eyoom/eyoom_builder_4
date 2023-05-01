@@ -266,6 +266,11 @@ $cmt_eb_9 = $cmt_eb_9 ? $eb->encrypt_aes($cmt_eb_9): '';
 $cmt_eb_10 = $cmt_eb_10 ? $eb->encrypt_aes($cmt_eb_10): '';
 
 /**
+ * 게시판 스킨파일
+ */
+@include_once($eyoom_skin_path['board'].'/view_comment.skin.php');
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_USER_PATH.'/board/view_comment.skin.php');

@@ -18,6 +18,14 @@ if(!sql_query(" select bo_ex_cnt from {$g5['board_table']} limit 1 ", false)) {
     sql_query($sql, true);
 }
 
+/**
+ * 승인게시판 사용여부 필드 추가
+ */
+if(!sql_query(" select bo_use_approval from {$g5['board_table']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['board_table']}` add `bo_use_approval` tinyint(4) NOT NULL default '0' after `bo_ex_cnt` ";
+    sql_query($sql, true);
+}
+
 $sql_common = " from {$g5['board_table']} a ";
 $sql_search = " where (1) ";
 

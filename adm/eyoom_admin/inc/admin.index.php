@@ -15,6 +15,29 @@ if (!isset($config['cf_eyoom_admin'])) {
 }
 
 /**
+ * 회원메모 사용여부 설정 및 테이블 생성
+ */
+if (!isset($config['cf_use_mbmemo'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_use_mbmemo` tinyint(4) NOT NULL DEFAULT '1' AFTER `cf_permit_level` ", true);
+
+    if(!sql_query(" DESCRIBE {$g5['eyoom_mbmemo']} ", false)) {
+        $sql = "
+            CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_mbmemo'] . "` (
+                `mm_no` int(11) unsigned NOT NULL auto_increment,
+                `mm_my_id` varchar(30) NOT NULL,
+                `mm_mb_id` varchar(30) NOT NULL,
+                `mm_memo` text NOT NULL,
+                PRIMARY KEY (`mm_no`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 
+        ";
+
+        $sql = get_db_create_replace($sql, false);
+        sql_query($sql, false);
+    }
+}
+
+/**
  * 소셜로그인 디버그 파일 24시간 지난것은 삭제
  */
 @include_once('./safe_check.php');

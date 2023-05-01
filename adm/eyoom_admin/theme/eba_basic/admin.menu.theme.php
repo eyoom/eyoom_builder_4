@@ -58,6 +58,7 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('member', $mg_auth)) {
             array('200000', '회원관리', G5_ADMIN_URL . '/member_list.php', 'member'),
             array('200100', '회원관리', G5_ADMIN_URL . '/member_list.php', 'mb_list'),
             array('200300', '회원메일발송', G5_ADMIN_URL . '/mail_list.php', 'mb_mail'),
+            array('200400', '회원로그인기록', G5_ADMIN_URL.'/login_history.php', 'mb_login'),
             array('200800', '접속자집계', G5_ADMIN_URL . '/visit_list.php', 'mb_visit', 1),
             array('200810', '접속자검색', G5_ADMIN_URL . '/visit_search.php', 'mb_search', 1),
             array('200820', '접속자로그삭제', G5_ADMIN_URL . '/visit_delete.php', 'mb_delete', 1),

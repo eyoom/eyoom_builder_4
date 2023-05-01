@@ -24,7 +24,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-gallery .gallery-item-pd {padding:10px}
 .board-gallery .gallery-item-in {position:relative;background:#fff;border:1px solid #e5e5e5;-webkit-transition:all 0.2s ease-in-out;transition:all .2s ease-in-out}
 .board-gallery .gallery-item-in:hover {border-color:#959595}
-.board-gallery .gallery-item-in .gallery-item-category {position:relative;background:#fff;padding:15px;color:#959595;font-weight:bold;border-bottom:1px solid #e5e5e5}
+.board-gallery .gallery-item-in .gallery-item-category {position:relative;background:#fff;padding:10px 15px;color:#959595;font-weight:bold;border-bottom:1px solid #e5e5e5}
+.board-gallery .gallery-item-in .gallery-item-category:after {content:"";display:block;clear:both}
+.board-gallery .gallery-item-in .gallery-item-category .gl-label {float:right;display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;font-weight:400;text-align:center;color:#fff;background-color:#a5a5a5}
 .board-gallery .gallery-item .gallery-item-image {position:relative;overflow:hidden;padding:15px 15px 0}
 .board-gallery .gallery-item .gallery-item-image-in {position:relative;overflow:hidden;max-height:500px}
 .board-gallery .gallery-item .gallery-item-image-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.3)}
@@ -167,7 +169,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <div id="tab-category">
             <div class="category-list">
-                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($board['bo_count_write']); ?>)</a></span>
+                <span <?php if (!$decode_sca) { ?>class="active"<?php } ?>><a href="<?php echo $category_href; ?>">전체분류 (<?php echo number_format($ca_total); ?>)</a></span>
                 <?php for ($i=0; $i<count((array)$bocate); $i++) { ?>
                 <span <?php if ($decode_sca == $bocate[$i]['ca_name']) { ?>class="active"<?php } ?>><a href="<?php echo get_eyoom_pretty_url($bo_table, '', 'sca='.$bocate[$i]['ca_sca']); ?>"><?php echo $bocate[$i]['ca_name']; ?> (<?php echo $bocate[$i]['ca_count']; ?>)</a></span>
                 <?php } ?>
@@ -227,9 +229,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php } else { ?>
             <div class="gallery-item-pd">
                 <div class="gallery-item-in">
-                    <?php if ($is_category && $list[$i]['ca_name']) { ?>
+                    <?php if (($is_category && $list[$i]['ca_name']) || $board['bo_use_approval'] && ($is_admin || ($is_member && $list[$i]['mb_id'] == $member['mb_id']))) { ?>
                     <div class="gallery-item-category">
                         <?php echo $list[$i]['ca_name']; ?>
+                        <?php if ($board['bo_use_approval'] && ($is_admin || ($is_member && $list[$i]['mb_id'] == $member['mb_id']))) { ?>
+                        <span class="gl-label bg-<?php echo $list[$i]['wr_approval'] ? 'dark': 'light-gray'; ?>"><?php echo $list[$i]['wr_approval'] ? '승인': '미승인'; ?></span>
+                        <?php } ?>
                     </div>
                     <?php } ?>
                     <?php if ($list[$i]['img_content'] && !preg_match('/no image/',$list[$i]['img_content'])) { ?>
