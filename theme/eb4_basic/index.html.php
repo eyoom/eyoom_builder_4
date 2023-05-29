@@ -19,6 +19,10 @@ if (!defined('_EYOOM_')) exit;
     </div>
 
     <div class="m-b-30">
+        <?php echo eb_banner('1669280887'); ?>
+    </div>
+
+    <div class="m-b-30">
         <?php echo eb_latest('1517122147'); ?>
     </div>
 

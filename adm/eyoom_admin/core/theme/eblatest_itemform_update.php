@@ -20,6 +20,7 @@ $li_title       = isset($_POST['li_title']) ? clean_xss_tags(trim($_POST['li_tit
 $li_link        = isset($_POST['li_link']) ? $eb->filter_url($_POST['li_link']) : '';
 $li_target      = isset($_POST['li_target']) ? clean_xss_tags(trim($_POST['li_target'])) : '';
 $li_bo_table    = isset($_POST['li_bo_table']) ? clean_xss_tags(trim($_POST['li_bo_table'])) : '';
+$li_ca_name     = isset($_POST['li_ca_name']) ? clean_xss_tags(trim($_POST['li_ca_name'])) : '';
 $li_gr_id       = isset($_POST['li_gr_id']) ? clean_xss_tags(trim($_POST['li_gr_id'])) : '';
 $li_include     = isset($_POST['li_include']) ? clean_xss_tags(trim($_POST['li_include'])) : '';
 $li_exclude     = isset($_POST['li_exclude']) ? clean_xss_tags(trim($_POST['li_exclude'])) : '';
@@ -102,6 +103,13 @@ if (is_array($bo_exclude)) {
 $li_table = array_filter(array_diff($li_table, $ex_tables));
 
 /**
+ * 여러 게시판에서 추출한다면 분류 추출은 무시
+ */
+if (is_array($li_table) && count($li_table) > 1) {
+    $li_ca_name = '';
+}
+
+/**
  * 최신글 대상 게시판 테이블
  */
 $li_tables = implode(',', $li_table);
@@ -110,7 +118,7 @@ $li_tables = implode(',', $li_table);
  * 최신게시물 삭제일 조정 및 적용하기
  */
 if ($li_renew == 'y' && is_array($li_table)) {
-    $li_fields = "wr_id, wr_parent, wr_datetime, mb_id, wr_hit, wr_comment";
+    $li_fields = "wr_id, wr_parent, wr_datetime, mb_id, ca_name, wr_approval, wr_hit, wr_comment";
     
     foreach ($li_table as $k => $_bo_table) {
         unset($wr_new);
@@ -133,6 +141,8 @@ if ($li_renew == 'y' && is_array($li_table)) {
                 wr_parent = '{$row2['wr_parent']}',
                 bn_datetime = '{$row2['wr_datetime']}',
                 mb_id = '{$row2['mb_id']}',
+                ca_name = '{$row2['ca_name']}',
+                wr_approval = '{$row2['wr_approval']}',
                 wr_hit = '{$row2['wr_hit']}',
                 wr_comment = '{$row2['wr_comment']}'
             ";
@@ -151,6 +161,7 @@ $sql_common = "
     li_link = '{$li_link}',
     li_target = '{$li_target}',
     li_bo_table = '{$li_bo_table}',
+    li_ca_name = '{$li_ca_name}',
     li_gr_id = '{$li_gr_id}',
     li_include = '{$li_include}',
     li_exclude = '{$li_exclude}',

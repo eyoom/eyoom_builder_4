@@ -5,10 +5,10 @@
 if (!defined('_EYOOM_')) exit;
 
 $slType = 'gallery';
-if (!empty($_COOKIE[shop_search])) {
-    if ($_COOKIE[shop_search] == 'list') {
+if (!empty($_COOKIE['shop_search'])) {
+    if ($_COOKIE['shop_search'] == 'list') {
         $slType = 'list';
-    } else if ($_COOKIE[shop_search] == 'gallery') {
+    } else if ($_COOKIE['shop_search'] == 'gallery') {
         $slType = 'gallery';
     }
 }

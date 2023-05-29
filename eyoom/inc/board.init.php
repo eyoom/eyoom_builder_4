@@ -29,9 +29,15 @@ if (!$eyoom_board) $eyoom_board = $bbs->board_default($bo_table);
 if ($is_admin && !$board['bo_wr_eb']) $bbs->make_eb_fields($bo_table);
 
 /**
- * 게시판 익명필드 추가
+ * 게시판 익명필드 추가외
  */
-if ($is_admin && $board['bo_table'] == $bo_table) $bbs->make_anonymous_fields($bo_table);
+if ($is_admin && $board['bo_table'] == $bo_table) {
+	// 익명필드 추가
+	$bbs->make_anonymous_fields($bo_table);
+
+	// 최신글 추출 테이블에 카테고리 분류 필드 추가
+	$bbs->add_ca_name_fields();
+}
 
 /**
  * 게시판 스킨

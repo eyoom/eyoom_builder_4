@@ -292,13 +292,20 @@ class latest extends qfile
         /**
          * 추출 조건
          */
-        $sql_where = " a.bo_table = b.bo_table "; //and b.bo_use_search = 1 ";
+        $sql_where = " a.bo_table = b.bo_table and a.wr_approval = '1' "; //and b.bo_use_search = 1 ";
 
         /**
          * 추출 대상 게시판
          */
         if ($el_item['li_tables']) {
             $sql_where .= " and find_in_set(a.bo_table, '".$el_item['li_tables']."') ";
+        }
+
+        /**
+         * 카테고리 분류 추출
+         */
+        if (!strpos($el_item['li_tables'], ',') && $el_item['li_ca_name']) {
+            $sql_where .= " and a.ca_name = '{$el_item['li_ca_name']}' ";
         }
 
         /**

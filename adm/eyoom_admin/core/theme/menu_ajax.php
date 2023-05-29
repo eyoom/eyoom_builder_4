@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    /adm/eyoom_admin/core/theme/menu_json.php
+ * @file    /adm/eyoom_admin/core/theme/menu_ajax.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 

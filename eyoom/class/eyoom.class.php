@@ -1385,6 +1385,7 @@ class eyoom extends qfile
                     case 'memo':
                         $url = G5_BBS_URL.'/memo.php?kind='.$no.$qstr.'&amp;page=';
                         break;
+                    case 'mbmemo':
                     case 'respond':
                         $url = G5_URL.'/mypage/'.$folder.'.php?'.$qstr.'&amp;page=';
                         break;

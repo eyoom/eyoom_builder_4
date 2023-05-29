@@ -177,7 +177,7 @@ function eb_latest ($el_code) {
                      */
                     $loop[$k]['is_cmt'] = false;
                     if ($row['wr_id'] != $row['wr_parent']) {
-                        $loop[$k]['wr_subject'] = cut_str(preg_replace("/(\\n|\\r)/",'',htmlspecialchars_decode($row['wr_content'])), $cut_subject, '…');
+                        $loop[$k]['wr_subject'] = cut_str(preg_replace("/(\\n|\\r)/",'',stripslashes(htmlspecialchars_decode($row['wr_content']))), $cut_subject, '…');
                         $loop[$k]['href'] = get_eyoom_pretty_url($row['bo_table'],$row['wr_id'],'#c_'.$row['wr_id']);
                         $loop[$k]['is_cmt'] = true;
                     } else {
@@ -189,7 +189,7 @@ function eb_latest ($el_code) {
                      * 내용 출력
                      */
                     if ($el_item[$i]['li_content'] == 'y') {
-                        $loop[$k]['wr_content'] = htmlspecialchars_decode(nl2br($row['wr_content']));
+                        $loop[$k]['wr_content'] = preg_replace("/(\\n|\\r)/",'',stripslashes(htmlspecialchars_decode($row['wr_content'])));
                     }
 
                     /**

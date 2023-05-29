@@ -1461,13 +1461,7 @@ class theme extends qfile
         $this_date = date('Ymd');
         $bn_item = array();
         for($i=0; $row=sql_fetch_array($result); $i++) {
-            if($row['bi_period'] == '2') {
-                if($this_date >= $row['bi_start'] && $this_date <= $row['bi_end']) {
-                    $bn_item[$i] = $row;
-                } else continue;
-            } else {
-                $bn_item[$i] = $row;
-            }
+            $bn_item[$i] = $row;
         }
 
         /**

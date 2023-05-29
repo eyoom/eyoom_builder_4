@@ -118,6 +118,19 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
                 <div class="note"><strong>Note:</strong> 추출하고자 하는 게시판을 선택해 주세요.</div>
             </div>
         </div>
+        <div id="bo_cate" class="adm-form-tr">
+            <div class="adm-form-td td-l">
+                <label for="li_ca_name" class="label">게시판 분류 선택 (bo_cate)</label>
+            </div>
+            <div class="adm-form-td td-r">
+                <label class="select max-width-250px" id="bo_cate_select">
+                    <select name="li_ca_name" id="li_ca_name">
+                        <option value="">::전체::</option>
+                    </select><i></i>
+                </label>
+                <div class="note"><strong>Note:</strong> 추출 게시판이 단일 게시판일 경우만 분류를 선택하여 추출하실 수 있습니다.</div>
+            </div>
+        </div>
         <div class="adm-form-tr">
             <div class="adm-form-td td-l">
                 <label for="li_gr_id" class="label">게시판 그룹 (gr_id)</label>
@@ -405,6 +418,71 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/m
 
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/magnific-popup/magnific-popup.min.js"></script>
 <script>
+$(function() {
+    $("#bo_cate").hide();
+    var li_bo_table = $("#li_bo_table option:selected").val();
+    var li_ca_name = $("#li_ca_name option:selected").val();
+    var li_gr_id = $("#li_gr_id option:selected").val();
+    var li_include = $("#li_include").val();
+    var li_exclude = $("#li_exclude").val();
+
+    if (li_gr_id || li_include || li_exclude) {
+        ;
+    } else if (li_bo_table) {
+        bo_cate_select(li_bo_table);
+    }
+
+    $("#li_bo_table").on("change", function() {
+        var bo_table = $("#li_bo_table option:selected").val();
+        bo_cate_select(bo_table);
+    });
+
+    $("#li_gr_id").on("change", function() {
+        check_bo_cate();
+    });
+
+    $("#li_include, #li_exclude").on("blur", function() {
+        check_bo_cate();
+    });
+});
+
+function bo_cate_select(bo_table) {
+    var url = "<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=board_cate_ajax&smode=1";
+    $.post(url, {bo_table:bo_table}, function(data) {
+        if(data.cate) {
+            var selected = '';
+            var li_ca_name = '<?php echo $li['li_ca_name']; ?>';
+            var cate_str = data.cate;
+            var cate = cate_str.split("|");
+            if(cate.length>0) {
+                var select = "<select name='li_ca_name' id='li_ca_name'><option value=''>::전체::</option>";
+                for(var i=0; i<cate.length;i++) {
+                    selected = '';
+                    if (li_ca_name == cate[i]) selected = ' selected';
+                    select += "<option value=\""+cate[i]+"\""+selected+">"+cate[i]+"</option>";
+                }
+                select += "</select><i></i>";
+            }
+            $("#bo_cate_select").html(select);
+            $("#bo_cate").show();
+        } else {
+            $("#bo_cate").hide();
+        }
+    },"json");
+}
+
+function check_bo_cate() {
+    var gr_id = $("#li_gr_id option:selected").val();
+    var li_include = $("#li_include").val();
+    var li_exclude = $("#li_exclude").val();
+    if (gr_id || li_include || li_exclude) {
+        $("#bo_cate").hide();
+    } else {
+        var bo_table = $("#li_bo_table option:selected").val();
+        bo_cate_select(bo_table);
+    }
+}
+
 function feblatestform_submit(f) {
     return true;
 }

@@ -35,6 +35,7 @@ $sql = "
       `li_link` varchar(255) NOT NULL,
       `li_target` varchar(10) NOT NULL,
       `li_bo_table` varchar(20) NOT NULL default '',
+      `li_ca_name` varchar(50) NOT NULL default '',
       `li_gr_id` varchar(20) NOT NULL default '',
       `li_exclude` varchar(255) NOT NULL default '',
       `li_include` varchar(255) NOT NULL default '',
@@ -66,6 +67,14 @@ $sql = "
 ";
 $sql = get_db_create_replace($sql);
 sql_query($sql, false);
+
+/**
+ * 게시판 분류(카테고리) 설정 필드 추가
+ */
+if (!sql_query(" select li_ca_name from {$g5['eyoom_latest_item']} limit 1", false)) {
+    $sql = " ALTER TABLE `{$g5['eyoom_latest_item']}` ADD `li_ca_name` varchar(50) NOT NULL DEFAULT '' AFTER `li_bo_table`";
+    sql_query($sql, false);
+}
 
 /**
  * 스킨 디렉토리 읽어오기

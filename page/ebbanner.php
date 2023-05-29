@@ -63,6 +63,28 @@ if (!get_session($ss_banner_item_name)) {
     ";
     $sql = "insert into {$g5['eyoom_banner_hit']} set {$hit_set}";
     sql_query($sql, false);
+
+    /**
+     * 날짜별 클릭수
+     */
+    $bs = sql_fetch("select * from {$g5['eyoom_banner_date']} where bs_date='".G5_TIME_YMD."' ");
+    if (!$bs['bs_date']) {
+        $sql = "insert into {$g5['eyoom_banner_date']} set bs_date = '".G5_TIME_YMD."' ";
+        $result = sql_query($sql, FALSE);
+        $bs_clicked = array();
+    } else {
+        $bs_clicked = unserialize($bs['bs_clicked']);
+    }
+    $bs_clicked[$bi_no]++;
+
+    /**
+     * 클릭수 날짜별 업데이트
+     */
+    if (is_array($bs_clicked)) {
+        $_bs_clicked = serialize($bs_clicked);
+        $sql = "update {$g5['eyoom_banner_date']} set bs_clicked = '{$_bs_clicked}' where bs_date = '".G5_TIME_YMD."'";
+        sql_query($sql);
+    }
 }
 
 header("location:".$bi_link);

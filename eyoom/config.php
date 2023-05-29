@@ -279,6 +279,11 @@ $g5['eyoom_banner_item'] = G5_TABLE_PREFIX . 'eyoom_banner_item';
 $g5['eyoom_banner_hit'] = G5_TABLE_PREFIX . 'eyoom_banner_hit';
 
 /**
+ * EB배너 날짜별 노출/클릭수
+ */
+$g5['eyoom_banner_date'] = G5_TABLE_PREFIX . 'eyoom_banner_date';
+
+/**
  * 이윰 게시판 확장필드 관리
  */
 $g5['eyoom_exboard'] = G5_TABLE_PREFIX . 'eyoom_exboard';

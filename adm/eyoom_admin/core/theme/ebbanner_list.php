@@ -35,6 +35,20 @@ $sql = get_db_create_replace($sql);
 sql_query($sql, false);
 
 /**
+ * EB banner 노출수 테이블 생성
+ */
+$sql = "
+    CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_banner_date'] . "` (
+        `bs_date` date NOT NULL DEFAULT '0000-00-00',
+        `bs_expose` text NOT NULL,
+        `bs_clicked` text NOT NULL,
+        PRIMARY KEY  (`bs_date`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+";
+$sql = get_db_create_replace($sql);
+sql_query($sql, false);
+
+/**
  * EB배너 아이템 파일 저장 경로
  */
 $ebbanner_folder = G5_DATA_PATH.'/ebbanner/';

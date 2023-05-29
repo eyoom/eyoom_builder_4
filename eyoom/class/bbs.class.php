@@ -222,6 +222,19 @@ class bbs extends eyoom
     }
 
     /**
+     * 최신글 테이블에 카테고리 분류 필드 및 미승인 여부 필드 추가
+     */
+    public function add_ca_name_fields() {
+        if(!sql_query(" select ca_name from {$this->g5['board_new_table']} limit 1 ", false)) {
+            $sql = " alter table `{$this->g5['board_new_table']}`
+                add `ca_name` varchar(255) NOT NULL default '' after `mb_id`,
+                add `wr_approval` tinyint(4) NOT NULL default '1' after `ca_name`
+            ";
+            sql_query($sql, true);
+        } 
+    }
+
+    /**
      * 익명 게시판 배열로 가져오기
      */
     public function anonymous_table() {

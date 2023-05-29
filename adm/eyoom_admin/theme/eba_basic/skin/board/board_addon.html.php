@@ -478,7 +478,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="bo_wrfixed_type" class="select max-width-250px">
                             <select name="bo_wrfixed_type" id="bo_wrfixed_type">
                                 <option value="1" <?php echo $eyoom_board['bo_wrfixed_type']=='1' ? 'selected': ''; ?>>관지라 승인 후 적용하기</option>
-                                <option value="1" <?php echo $eyoom_board['bo_wrfixed_type']=='2' ? 'selected': ''; ?>>상단노출 신청시 바로 적용하기</option>
+                                <option value="2" <?php echo $eyoom_board['bo_wrfixed_type']=='2' ? 'selected': ''; ?>>상단노출 신청시 바로 적용하기</option>
                             </select><i></i>
                         </label>
                         <div class="adm-form-td-rs">

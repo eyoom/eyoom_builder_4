@@ -118,11 +118,6 @@ if (!defined('_EYOOM_')) exit;
                     </a>
                 </div>
                 <div class="gl-item gl-author">
-                    <span class="gl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="gl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="gl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </div>
                 <div class="gl-item text-gray">

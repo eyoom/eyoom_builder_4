@@ -196,7 +196,7 @@ while ($row = sql_fetch_array($result)) {
                     if ($row4['cnt']) {
                         sql_query(" update {$g5['board_new_table']} set bo_table = '$move_bo_table', wr_id = '$save_parent', wr_parent = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
                     } else {
-                        sql_query(" insert into {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id, wr_hit ) values ( '{$move_bo_table}', '{$save_parent}', '{$save_parent}', '{$row2['wr_datetime']}', '{$row2['mb_id']}', '{$row2['wr_hit']}' ) ");
+                        sql_query(" insert into {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id, ca_name, wr_hit ) values ( '{$move_bo_table}', '{$save_parent}', '{$save_parent}', '{$row2['wr_datetime']}', '{$row2['mb_id']}', '{$row2['ca_name']}', '{$row2['wr_hit']}' ) ");
                     }
 
                     // 추천데이터 이동
@@ -216,7 +216,7 @@ while ($row = sql_fetch_array($result)) {
                 // 이윰 태그 복사
                 if ($sw == 'copy') {
                     // 최신글 복사
-                    sql_query(" insert into {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id, wr_hit ) values ( '{$move_bo_table}', '{$save_parent}', '{$save_parent}', '{$row2['wr_datetime']}', '{$row2['mb_id']}', '{$row2['wr_hit']}' ) ");
+                    sql_query(" insert into {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id, ca_name, wr_hit ) values ( '{$move_bo_table}', '{$save_parent}', '{$save_parent}', '{$row2['wr_datetime']}', '{$row2['mb_id']}', '{$row2['ca_name']}', '{$row2['wr_hit']}' ) ");
 
                     if ($eyoom_tag['wr_tag']) {
                         unset($copy_set);

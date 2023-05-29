@@ -476,8 +476,9 @@ function coupon_modal(href) {
     });
     return false;
 }
+</script>
 <?php } ?>
-
+<script>
 // 모달창을 닫은 후 리로드
 function close_modal_and_reload() {
     close_modal();

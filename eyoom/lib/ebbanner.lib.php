@@ -84,6 +84,18 @@ function eb_banner ($bn_code) {
             if (is_array($bn_item)) {
                 $sql_where1 = " bn_code='{$bn_code}' and bi_state = '1' ";
 
+                /**
+                 * 날짜별 노출수
+                 */
+                $bs = sql_fetch("select * from {$g5['eyoom_banner_date']} where bs_date='".G5_TIME_YMD."' ");
+                if (!$bs['bs_date']) {
+                    $sql = "insert into {$g5['eyoom_banner_date']} set bs_date = '".G5_TIME_YMD."' ";
+                    $result = sql_query($sql, FALSE);
+                    $bs_expose = array();
+                } else {
+                    $bs_expose = unserialize($bs['bs_expose']);
+                }
+
                 foreach ($bn_item as $i => $row) {
                     unset($bi_img_path, $bi_img_url, $bi_query, $sql_where2, $sql_where3);
 
@@ -134,6 +146,20 @@ function eb_banner ($bn_code) {
                      */
                     $sql2 = "update {$g5['eyoom_banner_item']} set bi_exposed=bi_exposed+1 where {$sql_where1} {$sql_where2} {$sql_where3} ";
                     sql_query($sql2);
+
+                    /**
+                     * 노출수 증가
+                     */
+                    $bs_expose[$row['bi_no']]++;
+                }
+
+                /**
+                 * 노출수 날짜별 업데이트
+                 */
+                if (is_array($bs_expose)) {
+                    $_bs_expose = serialize($bs_expose);
+                    $sql = "update {$g5['eyoom_banner_date']} set bs_expose = '{$_bs_expose}' where bs_date = '".G5_TIME_YMD."'";
+                    sql_query($sql);
                 }
             } else $bn_default = true;
         } else $bn_default = true;

@@ -150,11 +150,6 @@ if (!defined('_EYOOM_')) exit;
                     </a>
                 </div>
                 <div class="sl-item sl-author">
-                    <span class="sl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="sl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="sl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </div>
                 <div class="sl-item text-gray">

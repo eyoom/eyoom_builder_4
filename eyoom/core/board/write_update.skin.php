@@ -31,6 +31,20 @@ $up_set['eb_9'] = $eb_9 ? $eb->decrypt_aes($eb_9): '';
 $up_set['eb_10'] = $eb_10 ? $eb->decrypt_aes($eb_10): '';
 
 /**
+ * 승인게시판 상태변경 - 관리자일경우만 가능
+ */
+$sql_approval = '';
+if ($board['bo_use_approval']) {
+    $wr_approval = '0';
+    if ($w=='u' && $is_admin) {
+        $wr_approval = (int) clean_xss_tags(trim($_POST['wr_approval']));
+    }
+
+    $up_set['wr_approval'] = $wr_approval;
+    $sql_approval = " wr_approval='{$wr_approval}', ";
+}
+
+/**
  * 게시물에 익명글 적용
  */
 $bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
@@ -43,7 +57,12 @@ if ($bo_use_anonymous == '1') {
     $up_set['wr_anonymous'] = '';
     $wr_bo_anonymous = '';
 }
-sql_query("update {$g5['board_new_table']} set wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' where wr_id='{$wr_id}' ");
+
+/**
+ * 분류 및 익명글 최신글 적용하기
+ */
+$sql = "update {$g5['board_new_table']} set ca_name='{$ca_name}', {$sql_approval} wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' where wr_id='{$wr_id}' ";
+sql_query($sql);
 
 /**
  * 답변글에 대한 내글반응 적용하기
@@ -346,14 +365,6 @@ if ($w == '' || $w == 'r') {
             $up_set['eb_2'] = serialize($bomb);
         }
     }
-}
-
-/**
- * 승인게시판 상태변경 - 관리자일경우만 가능
- */
-if ($board['bo_use_approval'] && $is_admin) {
-    $wr_approval = (int) clean_xss_tags(trim($_POST['wr_approval']));
-    $up_set['wr_approval'] = $wr_approval;
 }
 
 /**

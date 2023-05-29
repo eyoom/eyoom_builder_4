@@ -159,11 +159,6 @@ if (!defined('_EYOOM_')) exit;
                 </div>
                 <?php } ?>
                 <div class="fl-item fl-author">
-                    <span class="fl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="fl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="fl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </div>
                 <div class="fl-item text-gray">

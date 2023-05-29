@@ -750,6 +750,20 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_banner_hit` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `g5_eyoom_banner_date`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_banner_date`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_banner_date` (
+    `bs_date` date NOT NULL DEFAULT '0000-00-00',
+    `bs_expose` text NOT NULL,
+    `bs_clicked` text NOT NULL,
+    PRIMARY KEY  (`bs_date`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `g5_eyoom_wrfixed`
 --
 
@@ -779,7 +793,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_favorite_adm` (
   `pid` varchar(40) NOT NULL,
   `fm_code` char(6) NOT NULL,
   `me_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

@@ -143,11 +143,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
             <div class="pl-mobile"><?php /* 991px 이하에서만 보임 */ ?>
                 <span class="m-r-5">
-                    <span class="pl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="pl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="pl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </span>
                 <span class="m-r-5">
