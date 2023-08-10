@@ -36,8 +36,9 @@ $frm_submit .= $frm_eba_submit;
     <input type="hidden" name="theme" id="theme" value="<?php echo $this_theme; ?>">
     <input type="hidden" name="wmode" id="wmode" value="<?php echo $wmode; ?>">
     <input type="hidden" name="amode" id="amode" value="<?php echo $amode; ?>">
-    <input type="hidden" name="de_admin_company_tel" id="de_admin_company_tel" value="02-123-4567">
-    <input type="hidden" name="de_admin_company_owner" id="de_admin_company_owner" value="대표자명">
+    <input type="hidden" name="de_admin_company_tel" id="de_admin_company_tel" value="<?php echo $bizinfo['bi_company_tel']; ?>">
+    <input type="hidden" name="de_admin_company_name" id="de_admin_company_name" value="<?php echo $bizinfo['bi_company_name']; ?>">
+    <input type="hidden" name="de_admin_company_owner" id="de_admin_company_owner" value="<?php echo $bizinfo['bi_company_ceo']; ?>">
     <input type="hidden" name="token" value="">
 
     <div class="pg-anchor">

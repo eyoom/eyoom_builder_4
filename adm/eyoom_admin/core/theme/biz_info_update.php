@@ -143,6 +143,45 @@ if ($bottom_mobile_shoplogo) $bizinfo['bi_bottom_mobile_shoplogo'] = $bottom_mob
  */
 $qfile->save_file('bizinfo', $bizinfo_config_file, $bizinfo);
 
+/**
+ * 영카트 쇼핑몰 사용시
+ * 쇼핑몰 사업자정보 동시 저장
+ */
+if ($is_youngcart) {
+    $check_sanitize_keys = array(
+        'bi_company_name',      //회사명
+        'bi_company_bizno',     //사업자등록번호
+        'bi_company_ceo',       //대표자명
+        'bi_company_tel',       //대표전화번호
+        'bi_company_fax',       //팩스번호
+        'bi_company_sellno',    //통신판매업 신고번호
+        'bi_company_zip',       //사업자우편번호
+        'bi_company_addr1',     //사업장주소
+        'bi_company_addr2',     //사업장주소
+        'bi_company_addr3',     //사업장주소
+        'bi_company_infoman',   //정보관리책임자명
+        'bi_company_infomail',  //정보관리책임자명
+    );
+
+    foreach( $check_sanitize_keys as $key ){
+        $$key = isset($_POST[$key]) ? clean_xss_tags($_POST[$key], 1, 1) : '';
+    }
+
+    $sql = " update {$g5['g5_shop_default_table']}
+    set de_admin_company_owner        = '{$bi_company_ceo}',
+        de_admin_company_name         = '{$bi_company_name}',
+        de_admin_company_saupja_no    = '{$bi_company_bizno}',
+        de_admin_company_tel          = '{$bi_company_tel}',
+        de_admin_company_fax          = '{$bi_company_fax}',
+        de_admin_tongsin_no           = '{$bi_company_sellno}',
+        de_admin_company_zip          = '{$bi_company_zip}',
+        de_admin_company_addr         = '{$bi_company_addr1} {$bi_company_addr2} {$bi_company_addr3}',
+        de_admin_info_name            = '{$bi_company_infoman}',
+        de_admin_info_email           = '{$bi_company_infomail}' ";
+
+    sql_query($sql);
+}
+
 $qstr = '';
 $qstr .= $amode ? "&amp;amode={$amode}": '';
 $qstr .= $wmode ? "&amp;wmode={$wmode}": '';

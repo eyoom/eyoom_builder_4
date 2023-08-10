@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    /adm/eyoom_admin/core/somoim/make_somoim_board.php
+ * @file    /adm/eyoom_admin/core/somoim/create_somoim.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
@@ -9,7 +9,10 @@ $sub_menu = "350100";
 /**
  * 소모임 신청 게시판 생성
  */
-$bo_table = 'free';
+$sql = "select bo_table from {$g5['board_table']} where (1) order by bo_table limit 1 ";
+$row = sql_fetch($sql);
+$bo_table = $row['bo_table'];
+
 $board = sql_fetch("select * from {$g5['board_table']} where bo_table = '{$bo_table}' ");
 $target_table   = $sm_id;
 $target_subject = $sm_subject;

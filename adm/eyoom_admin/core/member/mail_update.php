@@ -24,6 +24,8 @@ if ($w == '') {
                      ma_time = '" . G5_TIME_YMDHIS . "',
                      ma_ip = '{$_SERVER['REMOTE_ADDR']}' ";
     sql_query($sql);
+    $ma_id = sql_insert_id();
+    run_event('admin_mail_created', $ma_id);
     $msg = "정상적으로 메일을 등록하였습니다.";
 } elseif ($w == 'u') {
     $sql = " update {$g5['mail_table']}
@@ -33,11 +35,13 @@ if ($w == '') {
                      ma_ip = '{$_SERVER['REMOTE_ADDR']}'
                 where ma_id = '{$ma_id}' ";
     sql_query($sql);
+    run_event('admin_mail_updated', $ma_id);
     $msg = "메일정보를 수정하였습니다.";
 } elseif ($w == 'd') {
     $sql = " delete from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
     sql_query($sql);
     $msg = "선택한 회원메일을 삭제하였습니다.";
+    run_event('admin_mail_deleted', $ma_id);
 }
 
 alert($msg, G5_ADMIN_URL."/?dir=member&pid=mail_list");

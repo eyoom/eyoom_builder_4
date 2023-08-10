@@ -1930,6 +1930,19 @@ function fboardform_submit(f)
         return false;
     }
 
+    // 게시판명 유효성 검사
+    var pattern = /^[A-Za-z0-9_]+$/;
+    if (!pattern.test(f.bo_table.value)) {
+        alert('복사할 테이블명 입력값이 유효하지 않습니다. 영문 대소문자, 숫자, 언더스코어(_)만 입력할 수 있습니다.');
+        return false;
+    }
+
+    // 게시판명의 길이는 20자 이내로 제한
+    if (f.bo_table.value.length > 20) {
+        alert('복사할 테이블명의 입력값은 20자 이내로 제한됩니다.');
+        return false;
+    }
+
     <?php echo get_editor_js("bo_content_head"); ?>
     <?php echo get_editor_js("bo_content_tail"); ?>
     <?php echo get_editor_js("bo_mobile_content_head"); ?>

@@ -28,7 +28,7 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('config', $mg_auth)) {
             array('100290', '메뉴설정', G5_ADMIN_URL . '/menu_list.php', 'cf_menu', 1),
             array('100300', '메일 테스트', G5_ADMIN_URL . '/sendmail_test.php', 'cf_mailtest'),
             array('100310', '팝업레이어관리', G5_ADMIN_URL . '/newwinlist.php', 'scf_poplayer'),
-            array('100990', '공사중 설정', G5_ADMIN_URL.'/countdown.php', 'cf_countdown'),
+            array('100990', '공사중 설정', G5_ADMIN_URL . '/countdown.php', 'cf_countdown'),
             array('100800', '세션파일 일괄삭제', G5_ADMIN_URL . '/session_file_delete.php', 'cf_session', 1),
             array('100900', '캐시파일 일괄삭제', G5_ADMIN_URL . '/cache_file_delete.php', 'cf_cache', 1),
             array('100910', '캡챠파일 일괄삭제', G5_ADMIN_URL . '/captcha_file_delete.php', 'cf_captcha', 1),
@@ -58,13 +58,13 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('member', $mg_auth)) {
             array('200000', '회원관리', G5_ADMIN_URL . '/member_list.php', 'member'),
             array('200100', '회원관리', G5_ADMIN_URL . '/member_list.php', 'mb_list'),
             array('200300', '회원메일발송', G5_ADMIN_URL . '/mail_list.php', 'mb_mail'),
-            array('200400', '회원로그인기록', G5_ADMIN_URL.'/login_history.php', 'mb_login'),
+            array('200400', '회원로그인기록', G5_ADMIN_URL . '/login_history.php', 'mb_login'),
             array('200800', '접속자집계', G5_ADMIN_URL . '/visit_list.php', 'mb_visit', 1),
             array('200810', '접속자검색', G5_ADMIN_URL . '/visit_search.php', 'mb_search', 1),
             array('200820', '접속자로그삭제', G5_ADMIN_URL . '/visit_delete.php', 'mb_delete', 1),
-            array('200710', '이윰레벨설정', G5_ADMIN_URL.'/level_config.php', 'eyb_level'),
+            array('200710', '이윰레벨설정', G5_ADMIN_URL . '/level_config.php', 'eyb_level'),
             array('200200', '포인트관리', G5_ADMIN_URL . '/point_list.php', 'mb_point'),
-            array('200990', '포인트 압축하기', G5_ADMIN_URL.'/point_compress.php', 'mb_point_compress'),
+            array('200990', '포인트 압축하기', G5_ADMIN_URL . '/point_compress.php', 'mb_point_compress'),
             array('200900', '투표관리', G5_ADMIN_URL . '/poll_list.php', 'mb_poll')
         );
     }
@@ -82,14 +82,15 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('board', $mg_auth)) {
             array('300000', '게시판관리', G5_ADMIN_URL . '/board_list.php', 'board'),
             array('300100', '게시판관리', G5_ADMIN_URL . '/board_list.php', 'bbs_board'),
             array('300200', '게시판그룹관리', G5_ADMIN_URL . '/boardgroup_list.php', 'bbs_group'),
-            array('300900', '상단고정게시물관리', G5_ADMIN_URL.'/wrfixed_list.php', 'wrfixed_list'),
+            array('300120', '게시물통합관리', G5_ADMIN_URL . '/bbs_list.php', 'bbs_list'),
+            array('300900', '상단고정게시물관리', G5_ADMIN_URL . '/wrfixed_list.php', 'wrfixed_list'),
             array('300300', '인기검색어관리', G5_ADMIN_URL . '/popular_list.php', 'bbs_poplist', 1),
             array('300400', '인기검색어순위', G5_ADMIN_URL . '/popular_rank.php', 'bbs_poprank', 1),
             array('300500', '1:1문의설정', G5_ADMIN_URL . '/qa_config.php', 'qa'),
             array('300600', '내용관리', G5_ADMIN_URL . '/contentlist.php', 'scf_contents', 1),
             array('300700', 'FAQ관리', G5_ADMIN_URL . '/faqmasterlist.php', 'scf_faq', 1),
             array('300820', '글,댓글 현황', G5_ADMIN_URL . '/write_count.php', 'scf_write_count'),
-            array('300710', '태그관리', G5_ADMIN_URL.'/tag_list.php', 'bbs_tag')
+            array('300710', '태그관리', G5_ADMIN_URL . '/tag_list.php', 'bbs_tag')
         );
     }
 } else {
@@ -105,7 +106,7 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('seo', $mg_auth)) {
         $menu['menu330'] = array(
             array('330000', '검색엔진최적화', G5_ADMIN_URL . '/meta_seo.php', 'seo_meta'),
             array('330100', '메타태그관리', G5_ADMIN_URL . '/meta_seo.php', 'seo_meta'),
-            // array('330200', 'Sitemap.xml', G5_ADMIN_URL.'/sitemap.php', 'seo_sitemap'),
+            // array('330200', 'Sitemap.xml', G5_ADMIN_URL . '/sitemap.php', 'seo_sitemap'),
             // array('330300', 'RSS피드', G5_ADMIN_URL . '/rss_feed.php', 'seo_ress'),
         );
     }
@@ -120,10 +121,10 @@ if (isset($somo) && ($member['mb_id'] == $config['cf_admin'] || in_array('somoim
     if ($menu['menu350']) {
         unset($menu['menu350']);
         $menu['menu350'] = array(
-            array('350000', '소모임 관리', ''.G5_ADMIN_URL.'/config_form.php', 'somoim'),
-            array('350100', '소모임 기본설정', ''.G5_ADMIN_URL.'/config_form.php', 'somo_config'),
-            array('350200', '정식 소모임 리스트', ''.G5_ADMIN_URL.'/somo_list.php', 'somo_list'),
-            array('350300', '미개설 신청 리스트', ''.G5_ADMIN_URL.'/somo_apply.php', 'somo_apply'),
+            array('350000', '소모임 관리', G5_ADMIN_URL . '/config_form.php', 'somoim'),
+            array('350100', '소모임 기본설정', G5_ADMIN_URL . '/config_form.php', 'somo_config'),
+            array('350200', '정식 소모임 리스트', G5_ADMIN_URL . '/somo_list.php', 'somo_list'),
+            array('350300', '미개설 신청 리스트', G5_ADMIN_URL . '/somo_apply.php', 'somo_apply'),
         );
     }
 } else {
@@ -144,7 +145,7 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('shop', $mg_auth)) {
             array('400440', '개인결제관리', G5_ADMIN_URL . '/shop_admin/personalpaylist.php', 'scf_personalpay', 1),
             array('400200', '분류관리', G5_ADMIN_URL . '/shop_admin/categorylist.php', 'scf_cate'),
             array('400300', '상품관리', G5_ADMIN_URL . '/shop_admin/itemlist.php', 'scf_item'),
-            array('400350', '브랜드관리', G5_ADMIN_URL.'/brandlist.php', 'brandlist'),
+            array('400350', '브랜드관리', G5_ADMIN_URL . '/brandlist.php', 'brandlist'),
             array('400660', '상품문의', G5_ADMIN_URL . '/shop_admin/itemqalist.php', 'scf_item_qna'),
             array('400650', '사용후기', G5_ADMIN_URL . '/shop_admin/itemuselist.php', 'scf_ps'),
             array('400620', '상품재고관리', G5_ADMIN_URL . '/shop_admin/itemstocklist.php', 'scf_item_stock'),
@@ -214,17 +215,17 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('theme', $mg_auth)) {
     if (isset($menu['menu999'])) {
         unset($menu['menu999']);
         $menu['menu999'] = array (
-            array('999000', '테마설정관리', G5_ADMIN_URL.'/eyoom_admin/theme_list.php', 'eyoom_theme'),
-            array('999100', '테마관리', G5_ADMIN_URL.'/eyoom_admin/theme_list.php', 'eyb_theme'),
-            array('999110', '기본정보', G5_ADMIN_URL.'/eyoom_admin/biz_info.php', 'eyb_bizinfo'),
-            array('999120', '테마환경설정', G5_ADMIN_URL.'/eyoom_admin/config_form.php', 'eyb_config'),
-            array('999300', '홈페이지메뉴설정', G5_ADMIN_URL.'/eyoom_admin/menu_list.php', 'eyb_menu'),
-            array('999400', '쇼핑몰메뉴설정', G5_ADMIN_URL.'/eyoom_admin/shopmenu_list.php', 'eyb_shopmenu'),
-            array('999500', 'EB상품추출관리', G5_ADMIN_URL.'/eyoom_admin/ebgoods_list.php', 'eyb_ebgoods'),
-            array('999600', 'EB슬라이더관리', G5_ADMIN_URL.'/eyoom_admin/ebslider_list.php', 'eyb_ebslider'),
-            array('999610', 'EB콘텐츠관리', G5_ADMIN_URL.'/eyoom_admin/ebcontents.php', 'eyb_ebcontents'),
-            array('999620', 'EB최신글관리', G5_ADMIN_URL.'/eyoom_admin/eblatest_list.php', 'eyb_eblatest'),
-            array('999630', 'EB배너관리', G5_ADMIN_URL.'/eyoom_admin/ebbanner_list.php', 'eyb_ebbanner')
+            array('999000', '테마설정관리', G5_ADMIN_URL . '/eyoom_admin/theme_list.php', 'eyoom_theme'),
+            array('999100', '테마관리', G5_ADMIN_URL . '/eyoom_admin/theme_list.php', 'eyb_theme'),
+            array('999110', '기본정보', G5_ADMIN_URL . '/eyoom_admin/biz_info.php', 'eyb_bizinfo'),
+            array('999120', '테마환경설정', G5_ADMIN_URL . '/eyoom_admin/config_form.php', 'eyb_config'),
+            array('999300', '홈페이지메뉴설정', G5_ADMIN_URL . '/eyoom_admin/menu_list.php', 'eyb_menu'),
+            array('999400', '쇼핑몰메뉴설정', G5_ADMIN_URL . '/eyoom_admin/shopmenu_list.php', 'eyb_shopmenu'),
+            array('999500', 'EB상품추출관리', G5_ADMIN_URL . '/eyoom_admin/ebgoods_list.php', 'eyb_ebgoods'),
+            array('999600', 'EB슬라이더관리', G5_ADMIN_URL . '/eyoom_admin/ebslider_list.php', 'eyb_ebslider'),
+            array('999610', 'EB콘텐츠관리', G5_ADMIN_URL . '/eyoom_admin/ebcontents.php', 'eyb_ebcontents'),
+            array('999620', 'EB최신글관리', G5_ADMIN_URL . '/eyoom_admin/eblatest_list.php', 'eyb_eblatest'),
+            array('999630', 'EB배너관리', G5_ADMIN_URL . '/eyoom_admin/ebbanner_list.php', 'eyb_ebbanner')
         );
     }
 } else {

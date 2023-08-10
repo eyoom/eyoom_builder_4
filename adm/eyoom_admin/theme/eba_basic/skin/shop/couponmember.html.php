@@ -19,7 +19,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
                 <input type="hidden" name="wmode" value="1">
                 <label class="input max-width-250px">
-                    <input type="text" name="mb_name" value="<?php echo get_text($mb_name); ?>" id="mb_name" required placeholder="회원이름">
+                    <input type="text" name="mb_name" value="<?php echo get_text($mb_name); ?>" id="mb_name" placeholder="회원이름">
                 </label>
             </div>
         </div>

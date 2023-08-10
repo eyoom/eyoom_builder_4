@@ -37,6 +37,7 @@ if ($sort != '')
 else
     $order_by = 'it_order, it_id desc';
 
+$skin = isset($skin) ? strip_tags($skin) : '';
 if (!$skin || preg_match('#\.+[\\\/]#', $skin))
     $skin = $default['de_listtype_list_skin'];
 else
@@ -96,14 +97,16 @@ if (file_exists($list_file)) {
      * 전체 페이지 계산
      */
     $total_page  = ceil($total_count / $items);
+
+    $qstr .= '&amp;sort='.$sort;
+    $paging = $eb->set_paging('itemtype', $type, $qstr);
+    
+    /**
+     * 이윰 테마파일 출력
+     */
+    include_once(EYOOM_THEME_SHOP_SKIN_PATH.'/listtype.skin.html.php');
+} else {
+    echo '<div align="center">'.get_text($skin).' 파일을 찾을 수 없습니다.<br>관리자에게 알려주시면 감사하겠습니다.</div>';
 }
-
-$qstr .= '&amp;sort='.$sort;
-$paging = $eb->set_paging('itemtype', $type, $qstr);
-
-/**
- * 이윰 테마파일 출력
- */
-include_once(EYOOM_THEME_SHOP_SKIN_PATH.'/listtype.skin.html.php');
 
 include_once('./_tail.php');

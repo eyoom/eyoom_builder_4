@@ -19,7 +19,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <div class="adm-headline">
         <h3>EB슬라이더 - 마스터관리</h3>
         <?php if (!$wmode) { ?>
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_form&amp;thema=<?php echo $this_theme; ?>" class="btn-e btn-e-md btn-e-crimson adm-headline-btn"><i class="las la-plus m-r-7"></i><span>EB상품 마스터추가</span></a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&pid=ebslider_form&amp;thema=<?php echo $this_theme; ?>" class="btn-e btn-e-md btn-e-crimson adm-headline-btn"><i class="las la-plus m-r-7"></i><span>EB슬라이더 마스터추가</span></a>
         <?php } ?>
     </div>
 

@@ -50,8 +50,6 @@ if (!defined('_EYOOM_')) exit;
 .newpost-latest .tab-content .newpost-nick {color:#959595}
 .newpost-latest .tab-content a:hover .newpost-subj {color:#000;text-decoration:underline}
 .newpost-latest .tab-content a:hover .newpost-nick {color:#000}
-.newpost-latest .tab-content li a[href*="#"] {cursor:not-allowed}
-.newpost-latest .tab-content li a[href*="#"]:hover .newpost-subj {text-decoration:none}
 .newpost-latest .tab-content li .blind-subj {color:#a5a5a5}
 </style>
 

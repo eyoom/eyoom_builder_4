@@ -155,7 +155,7 @@ switch($_POST['mode']) {
             ";
             $insert = "insert into {$g5['g5_shop_category_table']} set $set";
             sql_query($insert,false);
-
+            run_event('shop_admin_category_updated', $ca_id);
         } else if ($_POST['act_button'] == '분류수정') {
 
             if (!$_POST['ca_name']) {
@@ -216,6 +216,7 @@ switch($_POST['mode']) {
 
             $update = "update {$g5['g5_shop_category_table']} set $set where ca_id='{$_POST['ca_id']}' ";
             sql_query($update,false);
+            run_event('shop_admin_category_updated', $ca_id);
 
             // 보이기, 감추기 서브에도 일괄적용
             if($_POST['ca_use'] == '0') {
@@ -231,6 +232,7 @@ switch($_POST['mode']) {
         if(!$ca_id) alert("잘못된 접근입니다.");
         $sql = "delete from {$g5['g5_shop_category_table']} where ca_id like '{$ca_id}%' ";
         sql_query($sql,false);
+        run_event('shop_admin_category_deleted', $ca_id);
 
         $msg = "선택한 카테고리 및 하위 카테고리를 삭제하였습니다.";
         break;

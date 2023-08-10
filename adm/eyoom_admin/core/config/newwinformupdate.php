@@ -67,12 +67,15 @@ if ($w == "") {
     sql_query($sql);
 
     $nw_id = sql_insert_id();
+    run_event('admin_newwin_created', $nw_id);
 } elseif ($w == "u") {
     $sql = " update {$g5['new_win_table']} set $sql_common where nw_id = '$nw_id' ";
     sql_query($sql);
+    run_event('admin_newwin_updated', $nw_id);
 } elseif ($w == "d") {
     $sql = " delete from {$g5['new_win_table']} where nw_id = '$nw_id' ";
     sql_query($sql);
+    run_event('admin_newwin_deleted', $nw_id);
 }
 
 $qstr .= $device ? '&amp;device='.$device: '';

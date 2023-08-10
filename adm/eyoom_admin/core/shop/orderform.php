@@ -328,7 +328,6 @@ if ($od['od_settle_case'] == '무통장' || $od['od_settle_case'] == '가상계�
         $str = explode("\n", $default['de_bank_account']);
         $bank_account .= '<label class="select"><select name="od_bank_account" id="od_bank_account">'.PHP_EOL;
         $bank_account .= '<option value="">선택하십시오</option>'.PHP_EOL;
-        $str = array();
         for ($i=0; $i<count($str); $i++) {
             $str[$i] = str_replace("\r", "", $str[$i]);
             $bank_account .= '<option value="'.$str[$i].'" '.get_selected($od['od_bank_account'], $str[$i]).'>'.$str[$i].'</option>'.PHP_EOL;

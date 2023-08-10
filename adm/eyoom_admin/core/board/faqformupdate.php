@@ -34,7 +34,7 @@ if ($w == "")
     sql_query($sql);
 
     $fa_id = sql_insert_id();
-
+    run_event('admin_faq_item_created', $fa_id, $fm_id);
     $msg = "FAQ 상세내용을 추가하였습니다.";
 }
 else if ($w == "u")
@@ -43,14 +43,14 @@ else if ($w == "u")
                 set $sql_common
               where fa_id = '$fa_id' ";
     sql_query($sql);
-
+    run_event('admin_faq_item_updated', $fa_id, $fm_id);
     $msg = "FAQ 상세내용을 수정하였습니다.";
 }
 else if ($w == "d")
 {
 	$sql = " delete from {$g5['faq_table']} where fa_id = '$fa_id' ";
     sql_query($sql);
-
+    run_event('admin_faq_item_deleted', $fa_id, $fm_id);
     $msg = "FAQ 상세내용을 삭제하였습니다.";
 }
 

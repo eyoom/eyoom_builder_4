@@ -23,6 +23,7 @@ for ($i = 0; $i < $post_count_chk; $i++) {
 
     $sql = " delete from {$g5['mail_table']} where ma_id = '$ma_id' ";
     sql_query($sql);
+    run_event('admin_faq_master_deleted', $fm_id);
 }
 
 alert('선택한 회원용 발송 메일을 삭제하였습니다.', G5_ADMIN_URL.'/?dir=member&pid=mail_list');

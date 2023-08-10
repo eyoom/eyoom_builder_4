@@ -4,6 +4,13 @@
  */
 if (!defined('_EYOOM_')) exit;
 
+/**
+ * sfl변수를 통한 SQL Injection 취약점 패치
+ */
+if (isset($_REQUEST['sfl'])) {
+    alert("잘못된 접근입니다.");
+}
+
 $sql_common = " from {$g5['g5_shop_coupon_zone_table']}
                 where cz_start <= '".G5_TIME_YMD."'
                   and cz_end >= '".G5_TIME_YMD."' ";

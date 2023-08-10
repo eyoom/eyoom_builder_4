@@ -330,7 +330,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     <?php /* 댓글 쓰기 시작 */ ?>
     <?php if ($is_comment_write) { ?>
     <div id="view-comment-write" class="view-comment-write">
-        <form name="fviewcomment" action="<?php echo G5_BBS_URL; ?>/write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off" class="eyoom-form view-comment-write-box" enctype="multipart/form-data">
+        <form name="fviewcomment" id="fviewcomment" action="<?php echo G5_BBS_URL; ?>/write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off" class="eyoom-form view-comment-write-box" enctype="multipart/form-data">
             <input type="hidden" name="w" value="<?php echo !$w ? 'c': $w; ?>" id="w">
             <input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
             <input type="hidden" name="wr_id" value="<?php echo $wr_id; ?>">
