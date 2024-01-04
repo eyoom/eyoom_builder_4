@@ -928,9 +928,10 @@ $(window).load(function() {
             if (result.isConfirmed) {
                 var bo_table = '<?php echo $bo_table; ?>';
                 var wr_id = '<?php echo $wr_id; ?>';
+                var wmode = '<?php echo $wmode ? "?wmode=1": ''; ?>';
                 var url = '<?php echo EYOOM_CORE_URL; ?>/board/star_rating.php';
                 $.post(url, { bo_table: bo_table, wr_id: wr_id, score: score }, function() {
-                    document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
+                    document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>'+wmode;
                 });
             }
         });

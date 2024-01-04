@@ -11,8 +11,18 @@ check_demo();
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
 $me_id = isset($_POST['me_id']) ? clean_xss_tags(trim($_POST['me_id'])) : '';
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_chk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
@@ -30,10 +40,10 @@ if ($act_button == "선택수정") {
 
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $ec_state = isset($_POST['ec_state'][$k]) ? clean_xss_tags($_POST['ec_state'][$k]): '';
-        $ec_sort = isset($_POST['ec_sort'][$k]) ? clean_xss_tags($_POST['ec_sort'][$k]): '';
-        $ec_no = isset($_POST['ec_no'][$k]) ? clean_xss_tags($_POST['ec_no'][$k]): '';
-        $ec_code = isset($_POST['ec_code'][$k]) ? clean_xss_tags($_POST['ec_code'][$k]): '';
+        $ec_state = isset($_POST['ec_state'][$k]) ? (int) clean_xss_tags($_POST['ec_state'][$k]): '';
+        $ec_sort = isset($_POST['ec_sort'][$k]) ? (int) clean_xss_tags($_POST['ec_sort'][$k]): '';
+        $ec_no = isset($_POST['ec_no'][$k]) ? (int) clean_xss_tags($_POST['ec_no'][$k]): '';
+        $ec_code = isset($_POST['ec_code'][$k]) ? (int) clean_xss_tags($_POST['ec_code'][$k]): '';
         
         $upset = " ec_state = '{$ec_state}' ";
         if (isset($meinfo) && $meinfo) $upset .= ", ec_sort = '{$ec_sort}' ";
@@ -63,8 +73,8 @@ if ($act_button == "선택수정") {
     for ($i=0; $i<$post_count_chk; $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $ec_no = isset($_POST['ec_no'][$k]) ? clean_xss_tags($_POST['ec_no'][$k]): '';
-        $ec_code = isset($_POST['ec_code'][$k]) ? clean_xss_tags($_POST['ec_code'][$k]): '';
+        $ec_no = isset($_POST['ec_no'][$k]) ? (int) clean_xss_tags($_POST['ec_no'][$k]): '';
+        $ec_code = isset($_POST['ec_code'][$k]) ? (int) clean_xss_tags($_POST['ec_code'][$k]): '';
 
         $del_ec_no[$i] = $ec_no;
         $del_ec_code[$i] = $ec_code;

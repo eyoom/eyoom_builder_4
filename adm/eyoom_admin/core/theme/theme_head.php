@@ -23,8 +23,14 @@ $shop_theme = $eyoom_default['shop_theme'];
 /**
  * 현재 작업중인 테마
  */
-$this_theme = isset($_GET['thema']) ? clean_xss_tags($_GET['thema']): '';
-if (!$this_theme) $this_theme = isset($_POST['thema']) ? clean_xss_tags($_POST['thema']): '';
+if (isset($_REQUEST['thema'])) {
+    if (!is_array($_REQUEST['thema'])) {
+        $this_theme = filter_var($_REQUEST['thema'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $this_theme = preg_replace('/[^a-z0-9_]/i', '', trim($this_theme));
+    }
+}
 if ($this_theme) set_session('work_theme', $this_theme);
 if (!$this_theme) $this_theme = get_session('work_theme');
 if (!$this_theme) $this_theme = $theme;

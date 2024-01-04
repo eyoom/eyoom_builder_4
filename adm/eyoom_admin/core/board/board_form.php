@@ -10,6 +10,11 @@ $action_url1 = G5_ADMIN_URL . '/?dir=board&amp;pid=board_form_update&amp;smode=1
 
 require_once G5_EDITOR_LIB;
 
+/**
+ * 테마 환경설정 파일
+ */
+include_once(EYOOM_ADMIN_CORE_PATH . "/theme/theme_head.php");
+
 auth_check_menu($auth, $sub_menu, 'w');
 
 $sql = " select count(*) as cnt from {$g5['group_table']} ";
@@ -165,6 +170,10 @@ $required_valid = "";
 if ($w == '') {
     $html_title .= ' 생성';
 
+    unset($eyoom_board);
+    $eyoom_board['use_gnu_skin'] = 'n';
+    $eyoom_board['bo_skin'] = 'basic';
+
     $required = 'required';
     $required_valid = 'alnum_';
     $sound_only = '<strong class="sound_only">필수</strong>';
@@ -253,6 +262,11 @@ foreach($board_auth as $key => $val) {
     $bo_auth[$i]['level'] = $board["bo_{$key}_level"];
     $i++;
 }
+
+/**
+ * 이윰 게시판 스킨
+ */
+$bo_eyoom_skin = get_skin_dir('board',G5_PATH.'/theme/'.$this_theme.'/skin');
 
 /**
  * 게시물 랜덤노출 기능 추가

@@ -222,14 +222,7 @@ if (!isset($_POST['wr_subject']) || !trim($_POST['wr_subject']))
 $wr_seo_title = exist_seo_title_recursive('bbs', generate_seo_title($wr_subject), $write_table, $wr_id);
 
 $options = array($html,$secret,$mail);
-// php 5.3버전 이상부터 익명함수가 가능합니다.
-// $wr_option = implode(',', array_filter($options, function($v) { return trim($v); }));
-if(! function_exists('wr_option_filter_trim')) {
-    function wr_option_filter_trim($v){
-        return trim($v);
-    }
-}
-$wr_option = implode(',', array_filter($options, 'wr_option_filter_trim'));
+$wr_option = implode(',', array_filter(array_map('trim', $options)));
 
 if ($w == '' || $w == 'r') {
 
@@ -259,12 +252,14 @@ if ($w == '' || $w == 'r') {
         $wr_num = $write['wr_num'];
         $wr_reply = $reply;
     } else {
-        $wr_num = get_next_num($write_table);
+        // get_next_num 함수는 mysql 지연시 중복이 될수 있는 문제로 더 이상 사용하지 않습니다.
+        // $wr_num = get_next_num($write_table);
+        $wr_num = 0;
         $wr_reply = '';
     }
-
+    
     $sql = " insert into $write_table
-                set wr_num = '$wr_num',
+                set wr_num = " . ($w == 'r' ? "'$wr_num'" : "(SELECT IFNULL(MIN(wr_num) - 1, -1) FROM $write_table sq) ") . ",
                      wr_reply = '$wr_reply',
                      wr_comment = 0,
                      ca_name = '$ca_name',
@@ -687,8 +682,14 @@ sql_query(" delete from {$g5['autosave_table']} where as_uid = '{$uid}' ");
 //------------------------------------------------------------------------------
 
 // 비밀글이라면 세션에 비밀글의 아이디를 저장한다. 자신의 글은 다시 비밀번호를 묻지 않기 위함
-if ($secret)
+if ($secret) {
+    if (! $wr_num) {
+        $write = get_write($write_table, $wr_id, true);
+        $wr_num = $write['wr_num'];
+    }
+
     set_session("ss_secret_{$bo_table}_{$wr_num}", TRUE);
+}
 
 // 메일발송 사용 (수정글은 발송하지 않음)
 if (!($w == 'u' || $w == 'cu') && $config['cf_email_use'] && $board['bo_use_email']) {

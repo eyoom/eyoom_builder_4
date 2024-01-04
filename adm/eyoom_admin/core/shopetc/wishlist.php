@@ -8,12 +8,15 @@ $sub_menu = "500140";
 
 auth_check_menu($auth, $sub_menu, "r");
 
-$fr_date = (isset($_GET['fr_date']) && preg_match("/[0-9]/", $_GET['fr_date'])) ? $_GET['fr_date'] : '';
-$to_date = (isset($_GET['to_date']) && preg_match("/[0-9]/", $_GET['to_date'])) ? $_GET['to_date'] : '';
+// 기간검색이 있다면
+$fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
+$to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
 
-$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
-$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
-$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
+$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags(trim($_GET['cate_c'])) : '';
 
 /**
  * 1차 상품 분류 가져오기

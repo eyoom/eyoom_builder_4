@@ -51,24 +51,20 @@ if ($stx) {
 }
 
 // 그룹검색
-$grid = isset($_GET['grid']) ? clean_xss_tags($_GET['grid']): '';
+if (isset($_REQUEST['grid'])) {
+    if (!is_array($_REQUEST['grid'])) {
+        $grid = filter_var($_REQUEST['grid'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $grid = preg_replace('/[^a-z0-9_]/i', '', trim($grid));
+    }
+} else {
+    $grid = '';
+}
+
 if ($grid) {
     $sql_search .= " and a.gr_id = '{$grid}' ";
     $qstr .= "&amp;grid={$grid}";
-}
-
-// PC 스킨
-$boskin = isset($_GET['boskin']) ? clean_xss_tags($_GET['boskin']): '';
-if ($boskin) {
-    $sql_search .= " and a.bo_skin = '{$boskin}' ";
-    $qstr .= "&amp;boskin={$boskin}";
-}
-
-// 모바일 스킨
-$bomobileskin = isset($_GET['bomobileskin']) ? clean_xss_tags($_GET['bomobileskin']): '';
-if ($bomobileskin) {
-    $sql_search .= " and a.bo_mobile_skin = '{$bomobileskin}' ";
-    $qstr .= "&amp;bomobileskin={$bomobileskin}";
 }
 
 // 확장필드

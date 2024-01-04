@@ -14,6 +14,8 @@ if( isset($row['it_seo_title']) && ! $row['it_seo_title'] ){
     shop_seo_title_update($row['it_id']);
 }
 
+if (function_exists('check_case_exist_title')) check_case_exist_title($it, G5_SHOP_DIR, true);
+
 /**
  * 분류사용, 상품사용하는 상품의 정보를 얻음
  */

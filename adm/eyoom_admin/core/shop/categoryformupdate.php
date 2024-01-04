@@ -44,10 +44,9 @@ if(!is_include_path_check($_POST['ca_include_tail'], 1)) {
     alert('하단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
 }
 
-$check_keys = array('ca_skin_dir', 'ca_mobile_skin_dir', 'ca_skin', 'ca_mobile_skin'); 
-
+$check_keys = array('ca_skin_dir', 'ca_mobile_skin_dir', 'ca_skin', 'ca_mobile_skin', 'subca_skin', 'subca_mobile_skin'); 
 foreach( $check_keys as $key ){
-    if( isset($$key) && preg_match('#\.+(\/|\\\)#', $$key) ){
+    if( isset($_POST[$key]) && (preg_match('#\.+(\/|\\\)#', $_POST[$key]) || preg_match('#\/data\/#i', $_POST[$key])) ){
         alert('스킨명 또는 경로에 포함시킬수 없는 문자열이 있습니다.');
     }
 }
@@ -57,12 +56,64 @@ foreach( $check_str_keys as $key ){
     $$key = $_POST[$key] = strip_tags(clean_xss_attributes($_POST[$key]));
 }
 
-$ca_include_head = $_POST['ca_include_head'];
-$ca_include_tail = $_POST['ca_include_tail'];
+$ca_include_head = isset($_POST['ca_include_head']) ? preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($_POST['ca_include_head'], 0, 255)) : '';
+$ca_include_tail = isset($_POST['ca_include_tail']) ? preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($_POST['ca_include_tail'], 0, 255)) : '';
+$subca_include_head = isset($_POST['subca_include_head']) ? preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($_POST['subca_include_head'], 0, 255)) : '';
+$subca_include_tail = isset($_POST['subca_include_tail']) ? preg_replace(array("#[\\\]+$#", "#(<\?php|<\?)#i"), "", substr($_POST['subca_include_tail'], 0, 255)) : '';
+
+if ($file = $ca_include_head) {
+    $file_ext = pathinfo($file, PATHINFO_EXTENSION);
+
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
+        alert('상단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
+    }
+}
+
+if ($file = $ca_include_tail) {
+    $file_ext = pathinfo($file, PATHINFO_EXTENSION);
+
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
+        alert('하단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
+    }
+}
+
+if ($file = $subca_include_head) {
+    $file_ext = pathinfo($file, PATHINFO_EXTENSION);
+
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
+        alert('상단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
+    }
+}
+
+if ($file = $subca_include_tail) {
+    $file_ext = pathinfo($file, PATHINFO_EXTENSION);
+
+    if (!$file_ext || !in_array($file_ext, array('php', 'htm', 'html')) || !preg_match('/^.*\.(php|htm|html)$/i', $file)) {
+        alert('하단 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
+    }
+}
+
+if (!is_include_path_check($ca_include_head, 1)) {
+    alert('상단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
+}
+
+if (!is_include_path_check($ca_include_tail, 1)) {
+    alert('하단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
+}
+
+if (!is_include_path_check($subca_include_head, 1)) {
+    alert('상단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
+}
+
+if (!is_include_path_check($subca_include_tail, 1)) {
+    alert('하단 파일 경로에 포함시킬수 없는 문자열이 있습니다.');
+}
 
 if( function_exists('filter_input_include_path') ){
     $ca_include_head = filter_input_include_path($ca_include_head);
     $ca_include_tail = filter_input_include_path($ca_include_tail);
+    $subca_include_head = filter_input_include_path($subca_include_head);
+    $subca_include_tail = filter_input_include_path($subca_include_tail);
 }
 
 if ($w == "u" || $w == "d")
@@ -147,8 +198,8 @@ switch($_POST['mode']) {
                 ca_tail_html            = '".sql_real_escape_string(strip_tags($_POST['subca_tail_html']))."',
                 ca_mobile_head_html     = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_head_html']))."',
                 ca_mobile_tail_html     = '".sql_real_escape_string(strip_tags($_POST['subca_mobile_tail_html']))."',
-                ca_include_head         = '".sql_real_escape_string(strip_tags($_POST['subca_include_head']))."',
-                ca_include_tail         = '".sql_real_escape_string(strip_tags($_POST['subca_include_tail']))."',
+                ca_include_head         = '".sql_real_escape_string(strip_tags($subca_include_head))."',
+                ca_include_tail         = '".sql_real_escape_string(strip_tags($subca_include_tail))."',
                 ca_cert_use             = '".sql_real_escape_string(strip_tags($_POST['subca_cert_use']))."',
                 ca_adult_use            = '".sql_real_escape_string(strip_tags($_POST['subca_adult_use']))."',
                 ca_nocoupon             = '".sql_real_escape_string(strip_tags($_POST['subca_nocoupon']))."'
@@ -207,8 +258,8 @@ switch($_POST['mode']) {
                 ca_tail_html            = '".sql_real_escape_string(strip_tags($_POST['ca_tail_html']))."',
                 ca_mobile_head_html     = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_head_html']))."',
                 ca_mobile_tail_html     = '".sql_real_escape_string(strip_tags($_POST['ca_mobile_tail_html']))."',
-                ca_include_head         = '".sql_real_escape_string(strip_tags($_POST['ca_include_head']))."',
-                ca_include_tail         = '".sql_real_escape_string(strip_tags($_POST['ca_include_tail']))."',
+                ca_include_head         = '".sql_real_escape_string(strip_tags($ca_include_head))."',
+                ca_include_tail         = '".sql_real_escape_string(strip_tags($ca_include_tail))."',
                 ca_cert_use             = '".sql_real_escape_string(strip_tags($_POST['ca_cert_use']))."',
                 ca_adult_use            = '".sql_real_escape_string(strip_tags($_POST['ca_adult_use']))."',
                 ca_nocoupon             = '".sql_real_escape_string(strip_tags($_POST['ca_nocoupon']))."'

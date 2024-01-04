@@ -101,7 +101,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
 
             <?php /* 쇼핑몰 비회원 구매 시작 */ ?>
-            <?php if ($default['de_level_sell'] == 1) { ///#1) ?>
+            <?php if (isset($default['de_level_sell']) && $default['de_level_sell'] == 1) { ///#1) ?>
 
             <?php if (preg_match('/orderform.php/',$url)) { ///#2) ?>
             <div class="m-b-30"></div>

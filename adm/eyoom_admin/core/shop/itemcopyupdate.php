@@ -33,7 +33,6 @@ if (isset($row['cnt']) && $row['cnt'])
 $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' limit 1 ";
 $cp = sql_fetch($sql);
 
-
 // 상품테이블의 필드가 추가되어도 수정하지 않도록 필드명을 추출하여 insert 퀴리를 생성한다. (상품코드만 새로운것으로 대체)
 $sql_common = "";
 $fields = sql_field_names($g5['g5_shop_item_table']);
@@ -58,6 +57,7 @@ $opt_sql = " insert ignore into {$g5['g5_shop_item_option_table']} ( io_id, io_t
 sql_query($opt_sql);
 
 // html 에디터로 첨부된 이미지 파일 복사
+$copied_editor_images = array();
 if($cp['it_explan']) {
     $matchs = get_editor_image($cp['it_explan'], false);
     $count_matchs = (isset($matchs[1]) && is_array($matchs[1])) ? count($matchs[1]) : 0;
@@ -78,6 +78,11 @@ if($cp['it_explan']) {
 
             $newfile = preg_replace("/\.([^\.]+)$/", "_".$new_it_id.".\\1", $matchs[1][$i]);
             $cp['it_explan'] = str_replace($matchs[1][$i], $newfile, $cp['it_explan']);
+
+            $copied_editor_images[] = array(
+                'original' => $srcfile,
+                'new' => $dstfile
+            );
         }
     }
 
@@ -104,6 +109,11 @@ if($cp['it_mobile_explan']) {
 
             $newfile = preg_replace("/\.([^\.]+)$/", "_".$new_it_id.".\\1", $matchs[1][$i]);
             $cp['it_mobile_explan'] = str_replace($matchs[1][$i], $newfile, $cp['it_mobile_explan']);
+
+            $copied_editor_images[] = array(
+                'original' => $srcfile,
+                'new' => $dstfile
+            );
         }
     }
 
@@ -144,6 +154,7 @@ function copy_directory($src_dir, $dest_dir)
 }
 
 // 파일복사
+$copied_item_files = array();
 $dest_path = G5_DATA_PATH.'/item/'.$new_it_id;
 @mkdir($dest_path, G5_DIR_PERMISSION);
 @chmod($dest_path, G5_DIR_PERMISSION);
@@ -159,6 +170,11 @@ for($i=1; $i<=10; $i++) {
         copy($file, $dstfile);
         @chmod($dstfile, G5_FILE_PERMISSION);
         $new_img = $new_it_id.'/'.basename($file);
+
+        $copied_item_files[] = array(
+            'original' => $file,
+            'new' => $dstfile,
+        );
     }
 
     $sql_img .= $comma." it_img{$i} = '$new_img' ";
@@ -169,6 +185,24 @@ $sql = " update {$g5['g5_shop_item_table']}
             set $sql_img
             where it_id = '$new_it_id' ";
 sql_query($sql);
+
+if( function_exists('shop_seo_title_update') ) shop_seo_title_update($new_it_id, true);
+
+/**
+ * 아이템 복사 처리 후 Event Hook
+ * @var string $it_id 원본 아이템 ID
+ * @var string $new_it_id 복사한 새로운 아이템 ID
+ * @var array $cp 복사한 아이템 정보
+ * @var array $copied_item_files 복사한 파일 목록
+ * @var array $copied_editor_images 복사한 에디터 이미지 목록
+ */
+run_event('shop_admin_itemcopy', array(
+    'it_id' => (string) $it_id,
+    'new_it_id' => (string) $new_it_id,
+    'cp' => $cp,
+    'copied_item_files' => $copied_item_files,
+    'copied_editor_images' => $copied_editor_images
+));
 
 $qstr = "ca_id=$ca_id&amp;sfl=$sfl&amp;sca=$sca&amp;page=$page&amp;stx=".urlencode($stx);
 

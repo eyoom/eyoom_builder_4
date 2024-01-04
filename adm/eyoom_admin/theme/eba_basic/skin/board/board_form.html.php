@@ -36,8 +36,8 @@ $frm_submit .= $frm_eba_submit;
     <input type="hidden" name="sod" value="<?php echo $sod; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
     <input type="hidden" name="gr_id" value="<?php echo $gr_id; ?>">
-    <input type="hidden" name="bo_skin" value="<?php echo $bo_skin; ?>">
-    <input type="hidden" name="bo_mobile_skin" value="<?php echo $bo_mobile_skin; ?>">
+    <input type="hidden" name="bo_skin" value="<?php echo $board['bo_skin']; ?>">
+    <input type="hidden" name="bo_mobile_skin" value="<?php echo $board['bo_mobile_skin']; ?>">
     <input type="hidden" name="bo_ex" value="<?php echo $bo_ex; ?>">
     <input type="hidden" name="bo_cate" value="<?php echo $bo_cate; ?>">
     <input type="hidden" name="bo_sideview" value="<?php echo $bo_sideview; ?>">
@@ -1107,11 +1107,11 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>게시판 디자인/양식</strong></div>
                 <div class="adm-form-tr adm-sm-100 gnu-board">
                     <div class="adm-form-td td-l">
-                        <label for="bo_skin" class="label">스킨 디렉토리<strong class="sound_only">필수</strong></label>
+                        <label for="bo_skin" class="label">스킨 디렉토리</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">
                         <label class="select max-width-250px">
-                            <?php echo get_skin_select('board', 'bo_skin', 'bo_skin', $board['bo_skin'], 'required'); ?><i></i>
+                            <?php echo get_skin_select('board', 'bo_skin', 'bo_skin', $board['bo_skin'], ''); ?><i></i>
                         </label>
                         <div class="note"><strong>Note:</strong> 게시판에 적용할 스킨을 선택합니다.<br>테마관리 > 게시판관리에서 그누보드 스킨에 사용 설정이 된 경우, 적용이 됩니다.</div>
                         <div class="adm-form-td-rs">
@@ -1124,11 +1124,11 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr adm-sm-100 gnu-board">
                     <div class="adm-form-td td-l">
-                        <label for="bo_mobile_skin" class="label">모바일 스킨 디렉토리<strong class="sound_only">필수</strong></label>
+                        <label for="bo_mobile_skin" class="label">모바일 스킨 디렉토리</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">
                         <label class="select max-width-250px">
-                            <?php echo get_mobile_skin_select('board', 'bo_mobile_skin', 'bo_mobile_skin', $board['bo_mobile_skin'], 'required'); ?><i></i>
+                            <?php echo get_mobile_skin_select('board', 'bo_mobile_skin', 'bo_mobile_skin', $board['bo_mobile_skin'], ''); ?><i></i>
                         </label>
                         <div class="note"><strong>Note:</strong> 게시판에 적용할 스킨을 선택합니다.</div>
                         <div class="adm-form-td-rs">
@@ -1141,7 +1141,7 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr adm-sm-100 eyoom-board">
                     <div class="adm-form-td td-l">
-                        <label for="use_shop_skin" class="label">레이아웃 디자인<strong class="sound_only">필수</strong></label>
+                        <label for="use_shop_skin" class="label">레이아웃 디자인</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">
                         <label class="select max-width-250px">
@@ -1161,13 +1161,13 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr adm-sm-100 eyoom-board">
                     <div class="adm-form-td td-l">
-                        <label for="bo_eyoom_skin" class="label">이윰 게시판 스킨<strong class="sound_only">필수</strong></label>
+                        <label for="bo_eyoom_skin" class="label">이윰 게시판 스킨</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">
                         <label class="select max-width-250px">
                             <select name="bo_eyoom_skin" id="bo_eyoom_skin">
                                 <option value="">선택</option>
-                                <?php foreach ($bo_skin as $skin) { ?>
+                                <?php foreach ($bo_eyoom_skin as $skin) { ?>
                                 <option value="<?php echo $skin; ?>" <?php echo $eyoom_board['bo_skin'] == $skin ? 'selected': ''; ?>><?php echo $skin; ?></option>
                                 <?php } ?>
                             </select><i></i>

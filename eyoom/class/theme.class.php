@@ -1033,18 +1033,28 @@ class theme extends qfile
 
     // eyoom메뉴 서브페이지 정보 가져오기
     private function eyoom_subpage_info($theme) {
-        global $g5, $it_id, $is_admin, $ca_id, $sca, $board, $member;
+        global $g5, $it_id, $is_admin, $ca_id, $board, $member;
 
         /**
          * URL에서 메뉴정보 추출
          */
         $url = $this->compare_host_from_link($_SERVER['REQUEST_URI']);
         $info = $this->get_meinfo_link($url);
+        foreach ($info as &$value) {
+            $value = filter_var($value, FILTER_SANITIZE_STRING);
+        }
 
         /**
          * 분류명 체크
          */
         $_sca = $this->get_sca_from_link($info['me_link']);
+        if ($_sca) {
+            $_sca = filter_var($_sca, FILTER_VALIDATE_REGEXP, array(
+                "options" => array("regexp" => "/^[^<>'\"%=\(\)\/\^\*]+$/")
+            ));
+            $_sca = preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\/\^\*]/", "", clean_xss_tags(trim($_sca)));
+        }
+
         if ($_sca) {
             $where = " me_theme='" . sql_real_escape_string($theme) . "' and me_type='{$info['me_type']}' and me_pid='{$info['me_pid']}' and me_sca='{$_sca}' ";
         } else {
@@ -1456,7 +1466,9 @@ class theme extends qfile
          */
         $link_path = G5_DATA_URL.'/ebbanner';
 
-        $sql = "select * from {$this->g5['eyoom_banner_item']} where bn_code = '{$code}' and bi_theme = '" . sql_real_escape_string($theme) . "' and bi_state = '1' order by bi_sort asc ";
+        $bn_code = (int) $code;
+
+        $sql = "select * from {$this->g5['eyoom_banner_item']} where bn_code = '{$bn_code}' and bi_theme = '" . sql_real_escape_string($theme) . "' and bi_state = '1' order by bi_sort asc ";
         $result = sql_query($sql, false);
         $this_date = date('Ymd');
         $bn_item = array();

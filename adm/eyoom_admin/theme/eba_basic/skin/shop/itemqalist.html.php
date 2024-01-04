@@ -179,8 +179,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <input type="hidden" name="to_date" value="<?php echo $to_date; ?>">
     <input type="hidden" name="cate_a" value="<?php echo $cate_a; ?>">
     <input type="hidden" name="cate_b" value="<?php echo $cate_b; ?>">
-    <input type="hidden" name="cate_c" value="<?php echo $$cate_c; ?>">
-    <input type="hidden" name="cate_d" value="<?php echo $cate_d; ?>">
+    <input type="hidden" name="cate_c" value="<?php echo $cate_c; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
 
     <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="las la-arrows-alt-h"></i>)</p>

@@ -14,7 +14,9 @@ function eb_visit($skin_dir='basic', $return=true)
     /**
      * 숨기기 처리
      */
-    if ($eyoom['use_visit_skin'] == 'n' || $member['mb_level'] < $eyoom['view_level_visit']) return;
+    if (!defined('G5_IS_ADMIN')) {
+        if ($eyoom['use_visit_skin'] == 'n' || $member['mb_level'] < $eyoom['view_level_visit']) return;   
+    }
 
     if (!$skin_dir) $skin_dir = 'basic';
 

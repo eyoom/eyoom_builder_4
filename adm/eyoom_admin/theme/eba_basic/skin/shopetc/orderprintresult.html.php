@@ -47,7 +47,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td><?php echo get_text($ordinfo[$i]['od_tel)']); ?></td>
+                        <td><?php echo get_text($ordinfo[$i]['od_tel']); ?></td>
                     </tr>
                     <tr>
                         <th>요청사항</th>

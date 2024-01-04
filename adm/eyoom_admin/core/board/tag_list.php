@@ -30,14 +30,19 @@ if ($stx) {
     $sql_search .= " ) ";
 }
 
-if ($tg_dpmenu) {
-    $sql_search .= $tg_dpmenu == 'y' ? " and tg_dpmenu = 'y'" : '';
-    $sql_search .= $tg_dpmenu == 'n' ? " and tg_dpmenu = 'n'" : '';
-
-    $tg_dpmenu_yes = $tg_dpmenu == 'y' ? 'checked' : '';
-    $tg_dpmenu_no = $tg_dpmenu == 'n' ? 'checked' : '';
-
-    $qstr .= "&amp;tg_dpmenu={$tg_dpmenu}";
+if (isset($_REQUEST['tg_dpmenu']))  {
+    $tg_dpmenu = preg_match("/^(y|n)$/i", $tg_dpmenu) ? $tg_dpmenu : '';
+    if ($tg_dpmenu) {
+        $sql_search .= $tg_dpmenu == 'y' ? " and tg_dpmenu = 'y'" : '';
+        $sql_search .= $tg_dpmenu == 'n' ? " and tg_dpmenu = 'n'" : '';
+    
+        $tg_dpmenu_yes = $tg_dpmenu == 'y' ? 'checked' : '';
+        $tg_dpmenu_no = $tg_dpmenu == 'n' ? 'checked' : '';
+    
+        $qstr .= "&amp;tg_dpmenu={$tg_dpmenu}";
+    } else {
+        $tg_dpmenu_all = 'checked';
+    }
 } else {
     $tg_dpmenu_all = 'checked';
 }

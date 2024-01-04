@@ -10,6 +10,8 @@ $sub_menu = "350300";
 
 auth_check($auth[$sub_menu], 'r');
 
+if (!isset($sm_bo_table)) exit;
+
 $write_table = $g5['write_prefix'] . $sm_bo_table;
 $sql_common = " from {$write_table} ";
 

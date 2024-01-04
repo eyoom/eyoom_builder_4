@@ -17,7 +17,9 @@ if ($is_admin != 'super') {
     alert('최고관리자만 접근 가능합니다.');
 }
 
-$copy_config = get_config(true);
+// https://github.com/gnuboard/gnuboard5/issues/296 이슈처리
+$sql = " select * from {$g5['config_table']} limit 1";
+$config = sql_fetch($sql);
 
 if (!isset($config['cf_add_script'])) {
     sql_query(

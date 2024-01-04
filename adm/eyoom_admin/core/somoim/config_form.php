@@ -11,6 +11,8 @@ auth_check($auth[$sub_menu], 'r');
 if ($is_admin != 'super')
     alert('최고관리자만 접근 가능합니다.');
 
+if (!isset($sm_bo_table)) exit;
+
 /**
  * 소모임 테이블 생성
  */

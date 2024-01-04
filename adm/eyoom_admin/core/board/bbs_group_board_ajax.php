@@ -8,11 +8,8 @@ $sub_menu = '300120';
 
 auth_check_menu($auth, $sub_menu, 'r');
 
-$gr_id = isset($_POST['gr_id']) ? $_POST['gr_id'] : '';
 $gr_sql = '';
 if ($gr_id) {
-    $gr_id = clean_xss_tags(trim($gr_id));
-    $gr_id = preg_replace('/[^a-z0-9_]/i', '', $gr_id);
     $gr_sql = " and gr_id = '" . sql_real_escape_string($gr_id) . "' ";
 }
 

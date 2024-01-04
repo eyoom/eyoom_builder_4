@@ -10,8 +10,18 @@ check_demo();
 
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_chk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");

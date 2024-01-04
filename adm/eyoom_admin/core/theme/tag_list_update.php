@@ -12,8 +12,18 @@ check_demo();
 
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_chk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
@@ -27,11 +37,11 @@ if ($act_button == "선택수정") {
 
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $tg_word = isset($_POST['tg_word'][$k]) ? clean_xss_tags($_POST['tg_word'][$k]): '';
-        $tg_regcnt = isset($_POST['tg_regcnt'][$k]) ? clean_xss_tags($_POST['tg_regcnt'][$k]): '';
-        $tg_scnt = isset($_POST['tg_scnt'][$k]) ? clean_xss_tags($_POST['tg_scnt'][$k]): '';
-        $tg_score = isset($_POST['tg_score'][$k]) ? clean_xss_tags($_POST['tg_score'][$k]): '';
-        $tg_id = isset($_POST['tg_id'][$k]) ? clean_xss_tags($_POST['tg_id'][$k]): '';
+        $tg_word = isset($_POST['tg_word'][$k]) && is_array($_POST['tg_word']) ? clean_xss_tags($_POST['tg_word'][$k]): '';
+        $tg_regcnt = isset($_POST['tg_regcnt'][$k]) ? (int) clean_xss_tags($_POST['tg_regcnt'][$k]): '';
+        $tg_scnt = isset($_POST['tg_scnt'][$k]) ? (int) clean_xss_tags($_POST['tg_scnt'][$k]): '';
+        $tg_score = isset($_POST['tg_score'][$k]) ? (int) clean_xss_tags($_POST['tg_score'][$k]): '';
+        $tg_id = isset($_POST['tg_id'][$k]) ? (int) clean_xss_tags($_POST['tg_id'][$k]): '';
 
         $sql = " update {$g5['eyoom_tag']}
                     set tg_word = '{$tg_word}',
@@ -50,7 +60,7 @@ if ($act_button == "선택수정") {
     for ($i=0; $i<$post_count_chk; $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $tg_id = isset($_POST['tg_id'][$k]) ? clean_xss_tags($_POST['tg_id'][$k]): '';
+        $tg_id = isset($_POST['tg_id'][$k]) ? (int) clean_xss_tags($_POST['tg_id'][$k]): '';
         $del_tg_id[$i] = $tg_id;
     }
 

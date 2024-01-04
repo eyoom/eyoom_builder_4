@@ -15,6 +15,8 @@ check_admin_token();
 
 unset($_POST['token']);
 
+if (!isset($sm_bo_table)) exit;
+
 /**
  * POST 변수 필터
  */

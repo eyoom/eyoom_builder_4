@@ -12,10 +12,29 @@ auth_check_menu($auth, $sub_menu, "w");
 
 check_admin_token();
 
-unset($post_theme);
-$post_theme         = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
-$post_tm_alias      = isset($_POST['tm_alias']) && $_POST['tm_alias'] ? clean_xss_tags(trim($_POST['tm_alias'])) : '';
-$post_is_shop_theme = isset($_POST['is_shop_theme']) && $_POST['is_shop_theme'] ? clean_xss_tags(trim($_POST['is_shop_theme'])) : '';
+$post_is_shop_theme = preg_match("/^(y|n)$/i", $_POST['is_shop_theme']) ? $_POST['is_shop_theme'] : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
+
+if (isset($_REQUEST['tm_alias'])) {
+    if (!is_array($_REQUEST['tm_alias'])) {
+        $post_tm_alias = filter_var($_REQUEST['tm_alias'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_tm_alias = preg_replace('/[^a-z0-9_]/i', '', trim($post_tm_alias));
+    }
+} else {
+    $post_tm_alias = '';
+}
 
 /**
  * 테마 별칭 중복 체크

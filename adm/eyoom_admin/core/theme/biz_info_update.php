@@ -15,7 +15,16 @@ check_admin_token();
 /**
  * 작업테마
  */
-$this_theme = isset($_POST['theme']) ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $this_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $this_theme = preg_replace('/[^a-z0-9_]/i', '', trim($this_theme));
+    }
+} else {
+    $this_theme = 'eb4_basic';
+}
 
 /**
  * 이미지 파일 업로드

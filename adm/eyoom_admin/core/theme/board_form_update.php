@@ -12,8 +12,16 @@ check_demo();
 
 check_admin_token();
 
-$bo_table = isset($_POST['bo_table']) ? trim($_POST['bo_table']) : '';
-$theme = isset($_POST['theme']) ? trim($_POST['theme']) : '';
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $theme = preg_replace('/[^a-z0-9_]/i', '', trim($theme));
+    }
+} else {
+    alert("잘못된 접근입니다.");
+}
 
 /**
  * 이윰게시판 설정에서 쇼핑몰 스킨사용체크 필드 추가

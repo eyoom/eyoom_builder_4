@@ -6,6 +6,8 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "350200";
 
+if (!isset($sm_bo_table)) exit;
+
 $action_url1 = G5_ADMIN_URL . '/?dir=somoim&amp;pid=somo_list_update&amp;smode=1';
 
 auth_check($auth[$sub_menu], 'r');

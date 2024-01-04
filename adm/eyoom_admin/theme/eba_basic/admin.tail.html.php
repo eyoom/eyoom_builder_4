@@ -10,7 +10,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         </div><?php /* End .content-wrapper */ ?>
         <footer>
             <div class="footer-left">
-                Copyright &copy; <?php echo $config['cf_title']; ?>. All rights reserved.
+                Copyright &copy; <?php echo $config['cf_title']; ?>. All rights reserved. <?php echo $print_version; ?>
             </div>
             <div class="footer-right">
                 

@@ -16,8 +16,18 @@ $g5['title'] = $group['gr_subject'];
  */
 include_once(G5_PATH . '/_head.php');
 
-//  최신글
+// gr_id필터
+$gr_id = filter_var($gr_id, FILTER_VALIDATE_REGEXP, array(
+    "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+));
 $gr_id = preg_replace('/[^a-z0-9_]/i', '', $gr_id);
+
+// 모든 그룹정보를 가져온다.
+$gr_ids = $bbs->get_group();
+if (!$gr_id || !in_array($gr_id, $gr_ids)) {
+    alert("잘못된 접근입니다.");
+}
+
 $sql = " select bo_table, bo_subject
             from {$g5['board_table']}
             where gr_id = '" . sql_real_escape_string($gr_id) . "'

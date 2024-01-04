@@ -8,11 +8,21 @@ $sub_menu = "999600";
 
 check_demo();
 
-$es_code = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
+$es_code = isset($_POST['es_code']) ? (int) clean_xss_tags(trim($_POST['es_code'])) : '';
 $post_count_ytchk = (isset($_POST['ytchk']) && is_array($_POST['ytchk'])) ? count($_POST['ytchk']) : 0;
 $ytchk = (isset($_POST['ytchk']) && is_array($_POST['ytchk'])) ? $_POST['ytchk'] : array();
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_ytchk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
@@ -29,15 +39,15 @@ if ($act_button === "선택수정") {
         // 실제 번호를 넘김
         $k = isset($_POST['ytchk'][$i]) ? (int) $_POST['ytchk'][$i] : 0;
 
-        $post_ei_autoplay = isset($_POST['ei_autoplay'][$k]) ? clean_xss_tags($_POST['ei_autoplay'][$k], 1, 1) : '';
-        $post_ei_control = isset($_POST['ei_control'][$k]) ? clean_xss_tags($_POST['ei_control'][$k], 1, 1) : '';
-        $post_ei_loop = isset($_POST['ei_loop'][$k]) ? clean_xss_tags($_POST['ei_loop'][$k], 1, 1) : '';
-        $post_ei_mute = isset($_POST['ei_mute'][$k]) ? clean_xss_tags($_POST['ei_mute'][$k], 1, 1) : '';
-        $post_ei_raster = isset($_POST['ei_raster'][$k]) ? clean_xss_tags($_POST['ei_raster'][$k], 1, 1) : '';
-        $post_ei_sort = isset($_POST['ei_sort'][$k]) ? clean_xss_tags($_POST['ei_sort'][$k], 1, 1) : '';
-        $post_ei_state = isset($_POST['ei_state'][$k]) ? clean_xss_tags($_POST['ei_state'][$k], 1, 1) : '';
-        $ei_view_level = isset($_POST['ei_view_level'][$k]) ? clean_xss_tags($_POST['ei_view_level'][$k], 1, 1) : 1;
-        $ei_no = isset($_POST['ei_no'][$k]) ? clean_xss_tags($_POST['ei_no'][$k], 1, 1) : '';
+        $post_ei_autoplay = isset($_POST['ei_autoplay'][$k]) ? (int) clean_xss_tags($_POST['ei_autoplay'][$k], 1, 1) : '';
+        $post_ei_control = isset($_POST['ei_control'][$k]) ? (int) clean_xss_tags($_POST['ei_control'][$k], 1, 1) : '';
+        $post_ei_loop = isset($_POST['ei_loop'][$k]) ? (int) clean_xss_tags($_POST['ei_loop'][$k], 1, 1) : '';
+        $post_ei_mute = isset($_POST['ei_mute'][$k]) ? (int) clean_xss_tags($_POST['ei_mute'][$k], 1, 1) : '';
+        $post_ei_raster = isset($_POST['ei_raster'][$k]) ? (int) clean_xss_tags($_POST['ei_raster'][$k], 1, 1) : '';
+        $post_ei_sort = isset($_POST['ei_sort'][$k]) ? (int) clean_xss_tags($_POST['ei_sort'][$k], 1, 1) : '';
+        $post_ei_state = isset($_POST['ei_state'][$k]) ? (int) clean_xss_tags($_POST['ei_state'][$k], 1, 1) : '';
+        $ei_view_level = isset($_POST['ei_view_level'][$k]) ? (int) clean_xss_tags($_POST['ei_view_level'][$k], 1, 1) : 1;
+        $ei_no = isset($_POST['ei_no'][$k]) ? (int) clean_xss_tags($_POST['ei_no'][$k], 1, 1) : '';
 
         $sql = " update {$g5['eyoom_slider_ytitem']}
                     set ei_autoplay = '{$post_ei_autoplay}',

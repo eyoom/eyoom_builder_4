@@ -279,7 +279,7 @@ if (is_checked('chk_grp_lucky_point')) {
 }
 
 if ($grp_fields) {
-    sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$grp_fields} where gr_id = '{$gr_id}' and bo_theme='{$theme}' ");
+    sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$grp_fields} where gr_id = '{$gr_id}' ");
 }
 
 // 모든 게시판 동일 옵션 적용
@@ -334,7 +334,7 @@ if (is_checked('chk_all_lucky_point')) {
 }
 
 if ($all_fields) {
-    sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$all_fields} where bo_theme='{$theme}' ");
+    sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$all_fields} where 1 ");
 }
 
 $qstr = $wmode ? '&amp;wmode=1':'';

@@ -68,21 +68,21 @@ class qfile
                     // 키값으로 정수를 허용하지 않는다면
                     if (!$int) {
                         if (!is_int($key)) {
-                            $contents .= "\t\"" . $key . "\" => \"" . addslashes($value) . "\",\n";
+                            $contents .= "\t\"" . addslashes($key) . "\" => \"" . addslashes($value) . "\",\n";
                         }
-                    } else $contents .= "\t\"" . $key . "\" => \"" . addslashes($value) . "\",\n";
+                    } else $contents .= "\t\"" . addslashes($key) . "\" => \"" . addslashes($value) . "\",\n";
                 } else {
                     $arr = '';
                     foreach ($value as $k => $v) {
                         if (!$int) {
                             if (!is_int($key)) {
-                                $arr .= "\"" . $k . "\" => \"" . addslashes($v) . "\",";
+                                $arr .= "\"" . addslashes($k) . "\" => \"" . addslashes($v) . "\",";
                             }
-                        } else $arr .= "\"" . $k . "\" => \"" . addslashes($v) . "\",";
+                        } else $arr .= "\"" . addslashes($k) . "\" => \"" . addslashes($v) . "\",";
                     }
                     if ($arr) {
                         $arr = substr($arr,0,-1);
-                        $contents .= "\t\"" . $key . "\" => array(" . $arr . "),\n";
+                        $contents .= "\t\"" . addslashes($key) . "\" => array(" . $arr . "),\n";
                     }
                 }
             }

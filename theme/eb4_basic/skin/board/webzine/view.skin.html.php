@@ -404,10 +404,22 @@ button.mfp-close {position:fixed;color:#fff !important}
             <li><a href="<?php echo $search_href; ?>" class="btn-e btn-e-dark" type="button">검색</a></li>
             <?php } ?>
             <?php if ($update_href) { ?>
-            <li><a href="<?php echo $update_href; ?>" class="btn-e btn-e-dark" type="button">수정</a></li>
+            <li>
+                <?php if (!$wmode) { ?>
+                <a href="<?php echo $update_href; ?>" class="btn-e btn-e-dark" type="button">수정</a>
+                <?php } else { ?>
+                <a href="#" data-link="<?php echo $update_href; ?>&wmode=0" id="view_mod_btn" class="btn-e btn-e-dark" type="button">수정</a>
+                <?php } ?>
+            </li>
             <?php } ?>
             <?php if ($delete_href) { ?>
-            <li><a href="<?php echo $delete_href; ?>" class="btn-e btn-e-dark" type="button" onclick="del(this.href); return false;">삭제</a></li>
+            <li>
+                <?php if (!$wmode) { ?>
+                <a href="<?php echo $delete_href; ?>" class="btn-e btn-e-dark" type="button" onclick="del(this.href); return false;">삭제</a>
+                <?php } else { ?>
+                <a href="#" data-link="<?php echo $delete_href; ?>&wmode=0" id="view_del_btn" class="btn-e btn-e-dark" type="button" onclick="del(this.href); return false;">삭제</a>
+                <?php } ?>
+            </li>
             <?php } ?>
             <?php if (!$wmode) { ?>
             <li><a href="<?php echo $list_href; ?>" class="btn-e btn-e-dark" type="button">목록</a></li>
@@ -928,9 +940,10 @@ $(window).load(function() {
             if (result.isConfirmed) {
                 var bo_table = '<?php echo $bo_table; ?>';
                 var wr_id = '<?php echo $wr_id; ?>';
+                var wmode = '<?php echo $wmode ? "?wmode=1": ''; ?>';
                 var url = '<?php echo EYOOM_CORE_URL; ?>/board/star_rating.php';
                 $.post(url, { bo_table: bo_table, wr_id: wr_id, score: score }, function() {
-                    document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>';
+                    document.location.href = '<?php echo str_replace('&amp;','&',get_pretty_url($bo_table, $wr_id)); ?>'+wmode;
                 });
             }
         });

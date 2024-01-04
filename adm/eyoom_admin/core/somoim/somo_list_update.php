@@ -8,6 +8,8 @@ $sub_menu = "350200";
 
 check_demo();
 
+if (!isset($sm_bo_table)) exit;
+
 if (!count($_POST['chk'])) {
     alert($_POST['act_button']." 하실 항목을 하나 이상 체크하세요.");
 }

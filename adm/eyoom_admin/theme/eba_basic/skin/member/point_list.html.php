@@ -23,28 +23,43 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <?php } ?>
     <div id="collapse-search-box" class="<?php if (G5_IS_MOBILE) { ?>panel-collapse collapse<?php } ?> m-b-20">
         <div class="adm-form-table adm-search-box m-b-20">
-            <div class="adm-form-tr">
-                <div class="adm-form-td td-l">
-                    <label class="label">검색어</label>
+            <div class="adm-form-tr-wrap">
+                <div class="adm-form-tr tr-l">
+                    <div class="adm-form-td td-l">
+                        <label class="label">검색어</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <div class="inline-group">
+                            <span>
+                                <label class="select width-100px">
+                                    <select name="sfl" id="sfl">
+                                        <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>아이디</option>
+                                        <option value="po_content"<?php echo get_selected($sfl, 'po_content'); ?>>내용</option>
+                                    </select><i></i>
+                                </label>
+                            </span>
+                            <span>
+                                <label class="input max-width-250px">
+                                    <input type="text" name="stx" value="<?php echo $stx; ?>" id="stx" autocomplete="off">
+                                </label>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="adm-form-td td-r">
-                    <div class="inline-group">
-                        <span>
-                            <label class="select width-100px">
-                                <select name="sfl" id="sfl">
-                                    <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>아이디</option>
-                                    <option value="po_content"<?php echo get_selected($sfl, 'po_content'); ?>>내용</option>
-                                </select><i></i>
-                            </label>
-                        </span>
-                        <span>
-                            <label class="input max-width-250px">
-                                <input type="text" name="stx" value="<?php echo $stx; ?>" id="stx" autocomplete="off">
-                            </label>
-                        </span>
+                <div class="adm-form-tr tr-r">
+                    <div class="adm-form-td td-l">
+                        <label class="label">포인트 검색대상</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <div class="inline-group">
+                            <label for="po_type_all" class="radio"><input type="radio" name="po_type" id="po_type_all" value="all" <?php echo $po_type_all; ?>><i></i> 전체</label>
+                            <label for="po_type_in" class="radio"><input type="radio" name="po_type" id="po_type_in" value="in" <?php echo $po_type_in; ?>><i></i> 지급내역</label>
+                            <label for="po_type_out" class="radio"><input type="radio" name="po_type" id="po_type_out" value="out" <?php echo $po_type_out; ?>><i></i> 사용내역</label>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="adm-form-tr">
                 <div class="adm-form-td td-l">
                     <label class="label">기간별 검색</label>

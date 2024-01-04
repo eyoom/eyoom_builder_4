@@ -24,12 +24,27 @@ if ($eb->user_agent() != 'ios') $query_wmode = "&amp;wmode=1";
  */
 $tg = clean_xss_tags(trim($_GET['t']));
 $permit_tg = array('timeline', 'favorite', 'followinggul', 'subscribe', 'pinboard', 'goodpost', 'starpost');
-if (!in_array($tg, $permit_tg)) {
+if (isset($_GET['t']) && !in_array($tg, $permit_tg)) {
     alert("잘못된 접근입니다.");
 }
 
 if (!$eyoomer['mypage_main']) $eyoomer['mypage_main'] = 'respond_new';
 $mymain = $tg ? $tg : $eyoomer['mypage_main'];
+
+/**
+ * 팔로윙 회원수
+ */
+$eyoomer['cnt_following'] = $eb->count_following($eyoomer['mb_id']);
+
+/**
+ * 팔로워 회원수
+ */
+$eyoomer['cnt_follower'] = $eb->count_follower($eyoomer['mb_id']);
+
+/**
+ * 맞팔친구 회원수
+ */
+$eyoomer['cnt_friends'] = $eb->count_friends($eyoomer['mb_id']);
 
 /**
  * 사용자 프로그램

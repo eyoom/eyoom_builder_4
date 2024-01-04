@@ -369,21 +369,21 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_new_skin" class="label">최근게시물 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_new_skin" class="label">최근게시물 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_skin_select('new', 'cf_new_skin', 'cf_new_skin', $config['cf_new_skin'], 'required'); ?><i></i>
+                                <?php echo get_skin_select('new', 'cf_new_skin', 'cf_new_skin', $config['cf_new_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_mobile_new_skin" class="label">모바일 최근게시물 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_mobile_new_skin" class="label">모바일 최근게시물 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_mobile_skin_select('new', 'cf_mobile_new_skin', 'cf_mobile_new_skin', $config['cf_mobile_new_skin'], 'required'); ?><i></i>
+                                <?php echo get_mobile_skin_select('new', 'cf_mobile_new_skin', 'cf_mobile_new_skin', $config['cf_mobile_new_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
@@ -391,21 +391,21 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_search_skin" class="label">검색 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_search_skin" class="label">검색 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_skin_select('search', 'cf_search_skin', 'cf_search_skin', $config['cf_search_skin'], 'required'); ?><i></i>
+                                <?php echo get_skin_select('search', 'cf_search_skin', 'cf_search_skin', $config['cf_search_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_mobile_search_skin" class="label">모바일 검색 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_mobile_search_skin" class="label">모바일 검색 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_mobile_skin_select('search', 'cf_mobile_search_skin', 'cf_mobile_search_skin', $config['cf_mobile_search_skin'], 'required'); ?><i></i>
+                                <?php echo get_mobile_skin_select('search', 'cf_mobile_search_skin', 'cf_mobile_search_skin', $config['cf_mobile_search_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
@@ -413,21 +413,21 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_connect_skin" class="label">접속자 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_connect_skin" class="label">접속자 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_skin_select('connect', 'cf_connect_skin', 'cf_connect_skin', $config['cf_connect_skin'], 'required'); ?><i></i>
+                                <?php echo get_skin_select('connect', 'cf_connect_skin', 'cf_connect_skin', $config['cf_connect_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_mobile_connect_skin" class="label">모바일 접속자 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_mobile_connect_skin" class="label">모바일 접속자 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_mobile_skin_select('connect', 'cf_mobile_connect_skin', 'cf_mobile_connect_skin', $config['cf_mobile_connect_skin'], 'required'); ?><i></i>
+                                <?php echo get_mobile_skin_select('connect', 'cf_mobile_connect_skin', 'cf_mobile_connect_skin', $config['cf_mobile_connect_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
@@ -435,21 +435,21 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_faq_skin" class="label">FAQ 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_faq_skin" class="label">FAQ 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_skin_select('faq', 'cf_faq_skin', 'cf_faq_skin', $config['cf_faq_skin'], 'required'); ?><i></i>
+                                <?php echo get_skin_select('faq', 'cf_faq_skin', 'cf_faq_skin', $config['cf_faq_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_mobile_faq_skin" class="label">모바일 FAQ 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_mobile_faq_skin" class="label">모바일 FAQ 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_mobile_skin_select('faq', 'cf_mobile_faq_skin', 'cf_mobile_faq_skin', $config['cf_mobile_faq_skin'], 'required'); ?><i></i>
+                                <?php echo get_mobile_skin_select('faq', 'cf_mobile_faq_skin', 'cf_mobile_faq_skin', $config['cf_mobile_faq_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
@@ -558,7 +558,7 @@ $frm_submit .= $frm_eba_submit;
                     </div>
                     <div class="adm-form-td td-r">
                         <label class="textarea">
-                            <textarea name="cf_analytics" id="cf_analytics" rows="8"><?php echo get_text($copy_config['cf_analytics']); ?></textarea>
+                            <textarea name="cf_analytics" id="cf_analytics" rows="8"><?php echo get_text($config['cf_analytics']); ?></textarea>
                         </label>
                         <div class="note"><strong>Note:</strong> 방문자분석 스크립트 코드를 입력합니다. 예) 구글 애널리틱스<br>관리자 페이지에서는 이 코드를 사용하지 않습니다.</div>
                     </div>
@@ -569,7 +569,7 @@ $frm_submit .= $frm_eba_submit;
                     </div>
                     <div class="adm-form-td td-r">
                         <label class="textarea">
-                            <textarea name="cf_add_meta" id="cf_add_meta" rows="8"><?php echo get_text($copy_config['cf_add_meta']); ?></textarea>
+                            <textarea name="cf_add_meta" id="cf_add_meta" rows="8"><?php echo get_text($config['cf_add_meta']); ?></textarea>
                         </label>
                         <div class="note"><strong>Note:</strong> 추가로 사용하실 meta 태그를 입력합니다.<br>관리자 페이지에서는 이 코드를 사용하지 않습니다.</div>
                     </div>
@@ -777,21 +777,21 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_member_skin" class="label">회원 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_member_skin" class="label">회원 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_skin_select('member', 'cf_member_skin', 'cf_member_skin', $config['cf_member_skin'], 'required'); ?><i></i>
+                                <?php echo get_skin_select('member', 'cf_member_skin', 'cf_member_skin', $config['cf_member_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_mobile_member_skin" class="label">모바일 회원 스킨<strong class="sound_only">필수</strong></label>
+                            <label for="cf_mobile_member_skin" class="label">모바일 회원 스킨</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="select max-width-250px">
-                                <?php echo get_mobile_skin_select('member', 'cf_mobile_member_skin', 'cf_mobile_member_skin', $config['cf_mobile_member_skin'], 'required'); ?><i></i>
+                                <?php echo get_mobile_skin_select('member', 'cf_mobile_member_skin', 'cf_mobile_member_skin', $config['cf_mobile_member_skin'], ''); ?><i></i>
                             </label>
                         </div>
                     </div>
@@ -1787,7 +1787,7 @@ $frm_submit .= $frm_eba_submit;
                     </div>
                     <div class="adm-form-td td-r">
                         <label class="textarea">
-                            <textarea name="cf_add_script" id="cf_add_script" rows="8"><?php echo get_text($copy_config['cf_add_script']); ?></textarea>
+                            <textarea name="cf_add_script" id="cf_add_script" rows="8"><?php echo get_text($config['cf_add_script']); ?></textarea>
                         </label>
                         <div class="note"><strong>Note:</strong> HTML의 &lt;/HEAD&gt; 태그위로 추가될 JavaScript와 css 코드를 설정합니다.<br>관리자 페이지에서는 이 코드를 사용하지 않습니다.</div>
                     </div>

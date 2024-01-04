@@ -17,9 +17,9 @@ $sfl = (isset($_GET['sfl']) && in_array($_GET['sfl'], array('a.it_id', 'it_name'
 $stx = isset($_GET['stx']) ? get_search_string($_GET['stx']) : '';
 $ev_title = isset($ev_title) ? clean_xss_tags($ev_title, 1, 1) : '';
 
-$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
-$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
-$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
+$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags($_GET['cate_c']) : '';
 /**
  * 1차 상품 분류 가져오기
  */

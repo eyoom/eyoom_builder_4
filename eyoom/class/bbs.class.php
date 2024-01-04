@@ -114,6 +114,20 @@ class bbs extends eyoom
     }
 
     /**
+     * 모든 그룹정보를 gr_id 값으로 추출
+     */
+    public function get_group() {
+        $sql = "select * from {$this->g5['group_table']}  where (1) order by gr_id asc";
+        $result = sql_query($sql);
+        $group = array();
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $group[$i] = $row['gr_id'];
+        }
+
+        return $group;
+    }
+
+    /**
      * 게시판 관리자 설정 URL
      */
     public function board_config_url($pid_handle='') {
@@ -537,6 +551,8 @@ class bbs extends eyoom
                 } else {
                     $video['key1'] = str_replace('/embed/', '', $info['path']);
                 }
+                $video['key1'] = str_replace('/live/', '', $video['key1']);
+                $video['key1'] = str_replace('/shorts/', '', $video['key1']);
                 break;
 
             /**
@@ -1894,13 +1910,9 @@ class bbs extends eyoom
                 bf_datetime = '" . G5_TIME_YMDHIS . "'
             ";
             $sql = "insert into {$g5['eyoom_wrfixed']} set {$set} ";
+            sql_query($sql);
         }
-        
-        if (sql_query($sql)) {
-            return $msg;
-        } else {
-            return false;
-        }
+        return $msg;
     }
 
     /**

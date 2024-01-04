@@ -10,11 +10,21 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 check_demo();
 
-$bn_master['bn_code'] = $bn_code = isset($_POST['bn_code']) ? clean_xss_tags(trim($_POST['bn_code'])) : '';
-$bn_master['bn_theme']      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
-$bn_master['bn_state']      = isset($_POST['bn_state']) ? clean_xss_tags(trim($_POST['bn_state'])) : '';
+$bn_master['bn_code'] = $bn_code = isset($_POST['bn_code']) ? (int) clean_xss_tags(trim($_POST['bn_code'])) : '';
+$bn_master['bn_state']      = isset($_POST['bn_state']) ? (int) clean_xss_tags(trim($_POST['bn_state'])) : '';
 $bn_master['bn_subject']    = isset($_POST['bn_subject']) ? clean_xss_tags(trim($_POST['bn_subject'])) : '';
 $bn_master['bn_skin']       = isset($_POST['bn_skin']) ? clean_xss_tags(trim($_POST['bn_skin'])) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $bn_master['bn_theme'] = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $bn_master['bn_theme'] = preg_replace('/[^a-z0-9_]/i', '', trim($bn_master['bn_theme']));
+    }
+} else {
+    $bn_master['bn_theme'] = 'eb4_basic';
+}
 
 $sql_common = "
     bn_code = '{$bn_master['bn_code']}',

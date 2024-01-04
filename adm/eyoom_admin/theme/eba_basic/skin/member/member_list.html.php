@@ -19,7 +19,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         <?php if (!$wmode) { ?>
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=member_form" class="btn-e btn-e-md btn-e-crimson adm-headline-btn m-l-5"><i class="las la-plus m-r-7"></i><span>회원 추가</span></a>
         <?php } ?>
-        <?php if ($config['cf_admin'] == $member['mb_id']) { ?>
+        <?php if ($config['cf_admin'] == $member['mb_id'] && !$wmode) { ?>
         <div class="excel-download">
             <a href="javascript:void(0);" onclick="member_excel_download();" class="btn-e btn-e-md btn-e-indigo adm-headline-btn">엑셀다운로드</a>
         </div>

@@ -231,7 +231,7 @@ $frm_submit .= $frm_eba_submit;
         <?php /* 기본정보 : 시작 */ ?>
         <div class="<?php echo $w=='u' ? 'tab-pane ': ''; ?>" id="anc_sitfrm_ini" role="tabpanel" aria-labelledby="anc_sitfrm_ini_tab">
             <div class="adm-form-table m-b-20">
-                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>게시판 포인트 설정</strong></div>
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>기본정보 입력</strong></div>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
                         <label for="it_skin" class="label">상품코드</label>
@@ -281,7 +281,7 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
-                        <label for="it_basic" class="label">출력순서</label>
+                        <label for="it_order" class="label">출력순서</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">
                         <label class="input max-width-250px">

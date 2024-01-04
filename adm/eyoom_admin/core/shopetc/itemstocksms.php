@@ -32,6 +32,8 @@ if(!sql_query(" select ss_id from {$g5['g5_shop_item_stocksms_table']} limit 1",
 
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
 $sst = (isset($_GET['sst']) && in_array($_GET['sst'], array('it_id', 'ss_hp', 'ss_send', 'ss_send_time', 'ss_datetime'))) ? $_GET['sort1'] : 'ss_send';
 $sod = (isset($_GET['sod']) && in_array($_GET['sod'], array('desc', 'asc'))) ? $_GET['sod'] : 'asc';
 $sfl = (isset($_GET['sfl']) && in_array($_GET['sfl'], array('it_id', 'ss_hp', 'ss_send')) ) ? $_GET['sfl'] : 'it_id';

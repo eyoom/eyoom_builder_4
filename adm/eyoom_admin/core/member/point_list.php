@@ -37,6 +37,21 @@ if ($fr_date && $to_date) {
     $qstr .= "&amp;fr_date={$fr_date}&amp;to_date={$to_date}";
 }
 
+$po_type = clean_xss_tags($_GET['po_type']);
+if (!$po_type || $po_type == 'all') {
+    $po_type = 'all';
+    $po_type_all = 'checked';
+} else {
+    if ($po_type == 'in') {
+        $po_type_in = 'checked';
+        $sql_search .= " and po_point > '0' ";
+    } else if ($po_type == 'out') {
+        $po_type_out = 'checked';
+        $sql_search .= " and po_point < '0' ";
+    }
+    $qstr .= "&amp;po_type={$po_type}";
+}
+
 if (!$sst) {
     $sst  = "po_id";
     $sod = "desc";

@@ -177,7 +177,6 @@ foreach ($list as $i => $val) {
     $eb_5 = $eb->mb_unserialize($list[$i]['eb_5']);
     if (isset($eb_5['yc_blind']) && $eb_5['yc_blind'] == 'y') {
         $yc_data = sql_fetch("select mb_id from {$g5['emp_yellowcard']} where bo_table = '{$bo_table}' and wr_id = '{$list[$i]['wr_id']}' and mb_id = '{$member['mb_id']}' ");
-        if (!$is_admin && $member['mb_level'] < $eyoom_board['bo_blind_view'] && !$yc_data['mb_id']) $list[$i]['href'] = 'javascript:;';
         $list[$i]['subject'] = '<span class="blind-subject">이 게시물은 블라인드 처리된 글입니다.</span>';
         $list[$i]['content'] = '<span class="blind-content">이 게시물은 블라인드 처리된 글입니다.</span>';
     }

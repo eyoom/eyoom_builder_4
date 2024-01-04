@@ -13,9 +13,10 @@ auth_check_menu($auth, $sub_menu, "r");
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
 
-$cate_a = isset($_GET['cate_a']) ? clean_xss_tags($_GET['cate_a']) : '';
-$cate_b = isset($_GET['cate_b']) ? clean_xss_tags($_GET['cate_b']) : '';
-$cate_c = isset($_GET['cate_c']) ? clean_xss_tags($_GET['cate_c']) : '';
+$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags($_GET['cate_a']) : '';
+$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags($_GET['cate_b']) : '';
+$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags($_GET['cate_c']) : '';
+$cate_d = isset($_GET['cate_d']) ? (int) clean_xss_tags($_GET['cate_d']) : '';
 
 /**
  * 1차 상품 분류 가져오기

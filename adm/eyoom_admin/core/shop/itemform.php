@@ -123,6 +123,8 @@ else if ($w == "u")
     if(!$it)
         alert('상품정보가 존재하지 않습니다.');
 
+    if (function_exists('check_case_exist_title')) check_case_exist_title($it, G5_SHOP_DIR, false);
+
     if (! (isset($ca_id) && $ca_id))
         $ca_id = $it['ca_id'];
 
@@ -134,17 +136,18 @@ else
     alert();
 }
 
-$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
-$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
-$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
+$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags(trim($_GET['cate_c'])) : '';
+
 $sdt = isset($_GET['sdt']) ? clean_xss_tags(trim($_GET['sdt'])) : '';
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
 if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
 if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
-$ituse = isset($_GET['ituse']) ? clean_xss_tags(trim($_GET['ituse'])) : '';
-$itsoldout = isset($_GET['itsoldout']) ? clean_xss_tags(trim($_GET['itsoldout'])) : '';
-$itype = isset($_GET['itype']) ? clean_xss_tags(trim($_GET['itype'])) : '';
+$ituse = isset($_GET['ituse']) ? (int) clean_xss_tags(trim($_GET['ituse'])) : '';
+$itsoldout = isset($_GET['itsoldout']) ? (int) clean_xss_tags(trim($_GET['itsoldout'])) : '';
+$itype = isset($_GET['itype']) ? (int) clean_xss_tags(trim($_GET['itype'])) : '';
 
 $qstr  = $qstr.'&amp;sca='.$sca.'&amp;page='.$page;
 if ($cate_a) $qstr .= "&amp;cate_a={$cate_a}";

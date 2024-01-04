@@ -8,11 +8,21 @@ $sub_menu = "999630";
 
 check_demo();
 
-$bn_code = isset($_POST['bn_code']) ? clean_xss_tags(trim($_POST['bn_code'])) : '';
+$bn_code = isset($_POST['bn_code']) ? (int) clean_xss_tags(trim($_POST['bn_code'])) : '';
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags($_POST['theme']) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_chk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
@@ -29,12 +39,11 @@ if ($act_button === "선택수정") {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
 
-        $post_bi_sort = isset($_POST['bi_sort'][$k]) ? clean_xss_tags($_POST['bi_sort'][$k], 1, 1) : '';
-        $post_bi_state = isset($_POST['bi_state'][$k]) ? clean_xss_tags($_POST['bi_state'][$k], 1, 1) : '';
-        $bi_view_level = isset($_POST['bi_view_level'][$k]) ? clean_xss_tags($_POST['bi_view_level'][$k], 1, 1) : 1;
+        $post_bi_sort = isset($_POST['bi_sort'][$k]) ? (int) clean_xss_tags($_POST['bi_sort'][$k], 1, 1) : '';
+        $post_bi_state = isset($_POST['bi_state'][$k]) ? (int) clean_xss_tags($_POST['bi_state'][$k], 1, 1) : '';
+        $bi_view_level = isset($_POST['bi_view_level'][$k]) ? (int) clean_xss_tags($_POST['bi_view_level'][$k], 1, 1) : 1;
         $bi_link = isset($_POST['bi_link'][$k]) ? clean_xss_tags($_POST['bi_link'][$k], 1, 1) : '';
-        $bi_target = isset($_POST['bi_target'][$k]) ? clean_xss_tags($_POST['bi_target'][$k], 1, '_blank') : '';
-        $bi_no = isset($_POST['bi_no'][$k]) ? clean_xss_tags($_POST['bi_no'][$k], 1, 1) : '';
+        $bi_no = isset($_POST['bi_no'][$k]) ? (int) clean_xss_tags($_POST['bi_no'][$k], 1, 1) : '';
 
         if ($bi_link) {
             $bi_link = substr($bi_link,0,1000);
@@ -42,12 +51,13 @@ if ($act_button === "선택수정") {
             $bi_link = preg_replace("#[\\\]+$#", "", $bi_link);
         }
 
+
+
         $sql = " update {$g5['eyoom_banner_item']}
                     set bi_sort = '{$post_bi_sort}',
                         bi_state = '{$post_bi_state}',
                         bi_view_level = '{$bi_view_level}',
-                        bi_link = '{$bi_link}',
-                        bi_target = '{$bi_target}'
+                        bi_link = '{$bi_link}'
                  where bi_no = '{$bi_no}' and bi_theme = '{$post_theme}' ";
         sql_query($sql);
     }
@@ -63,7 +73,7 @@ if ($act_button === "선택수정") {
     for ($i=0; $i<count((array)$_POST['chk']); $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $bi_no = isset($_POST['bi_no'][$k]) ? clean_xss_tags($_POST['bi_no'][$k], 1, 1) : '';
+        $bi_no = isset($_POST['bi_no'][$k]) ? (int) clean_xss_tags($_POST['bi_no'][$k], 1, 1) : '';
         $del_bi_no[$i] = $bi_no;
     }
 

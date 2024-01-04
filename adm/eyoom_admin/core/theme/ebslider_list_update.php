@@ -10,8 +10,18 @@ check_demo();
 
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
-$post_theme = isset($_POST['theme']) && $_POST['theme'] ? clean_xss_tags(trim($_POST['theme'])) : 'eb4_basic';
 $act_button = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['theme'])) {
+    if (!is_array($_REQUEST['theme'])) {
+        $post_theme = filter_var($_REQUEST['theme'], FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+        ));
+        $post_theme = preg_replace('/[^a-z0-9_]/i', '', trim($post_theme));
+    }
+} else {
+    $post_theme = 'eb4_basic';
+}
 
 if (! $post_count_chk) {
     alert($act_button." 하실 항목을 하나 이상 체크하세요.");
@@ -25,9 +35,9 @@ if ($act_button == "선택수정") {
 
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $es_state = isset($_POST['es_state'][$k]) ? clean_xss_tags($_POST['es_state'][$k]): '';
-        $es_no = isset($_POST['es_no'][$k]) ? clean_xss_tags($_POST['es_no'][$k]): '';
-        $es_code = isset($_POST['es_code'][$k]) ? clean_xss_tags($_POST['es_code'][$k]): '';
+        $es_state = isset($_POST['es_state'][$k]) ? (int) clean_xss_tags($_POST['es_state'][$k]): '';
+        $es_no = isset($_POST['es_no'][$k]) ? (int) clean_xss_tags($_POST['es_no'][$k]): '';
+        $es_code = isset($_POST['es_code'][$k]) ? (int) clean_xss_tags($_POST['es_code'][$k]): '';
 
         $sql = " update {$g5['eyoom_slider']}
                     set es_state = '{$es_state}'
@@ -59,8 +69,8 @@ if ($act_button == "선택수정") {
     for ($i=0; $i<count((array)$_POST['chk']); $i++) {
         // 실제 번호를 넘김
         $k = isset($_POST['chk'][$i]) ? (int) $_POST['chk'][$i] : 0;
-        $es_no = isset($_POST['es_no'][$k]) ? clean_xss_tags($_POST['es_no'][$k]): '';
-        $es_code = isset($_POST['es_code'][$k]) ? clean_xss_tags($_POST['es_code'][$k]): '';
+        $es_no = isset($_POST['es_no'][$k]) ? (int) clean_xss_tags($_POST['es_no'][$k]): '';
+        $es_code = isset($_POST['es_code'][$k]) ? (int) clean_xss_tags($_POST['es_code'][$k]): '';
 
         $del_es_no[$i] = $es_no;
         $del_es_code[$i] = $es_code;

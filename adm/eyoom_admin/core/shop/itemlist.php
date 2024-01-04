@@ -10,8 +10,11 @@ $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemlistupdate&amp;smode=1';
 
 auth_check_menu($auth, $sub_menu, "r");
 
+// 기간검색이 있다면
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
+if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
 
 /**
  * 1차 상품 분류 가져오기
@@ -31,10 +34,6 @@ if ($stx != "") {
         $page = 1;
 }
 
-// 기간검색이 있다면
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';
-if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $to_date) ) $to_date = '';
-
 if ($sdt == 'it_time') {
     $sdt_target = 'it_time';
 } else if ($sdt == 'it_update_time') {
@@ -50,12 +49,12 @@ if ($sdt_target && $fr_date && $to_date) {
  * 서브 카테고리
  */
 $cate2 = $cate3 = $cate4 = array();
-$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
-$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
-$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
-$ituse = isset($_GET['ituse']) ? clean_xss_tags(trim($_GET['ituse'])) : '';
-$itsoldout = isset($_GET['itsoldout']) ? clean_xss_tags(trim($_GET['itsoldout'])) : '';
-$itype = isset($_GET['itype']) ? clean_xss_tags(trim($_GET['itype'])) : '';
+$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags(trim($_GET['cate_c'])) : '';
+$ituse = isset($_GET['ituse']) ? (int) clean_xss_tags(trim($_GET['ituse'])) : '';
+$itsoldout = isset($_GET['itsoldout']) ? (int) clean_xss_tags(trim($_GET['itsoldout'])) : '';
+$itype = isset($_GET['itype']) ? (int) clean_xss_tags(trim($_GET['itype'])) : '';
 
 if ($cate_a) {
     $sql_cate = " and (a.ca_id like '{$cate_a}%' or a.ca_id2 like '{$cate_a}%' or a.ca_id3 like '{$cate_a}%') ";

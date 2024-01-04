@@ -12,7 +12,7 @@ if ($smode) return;
 /**
  * 버전 표기
  */
-$print_version = defined('G5_YOUNGCART_VER') ? 'YoungCart Version '.G5_YOUNGCART_VER : 'Version '.G5_GNUBOARD_VER;
+$print_version = ($is_admin == 'super') ? 'Version ' . G5_GNUBOARD_VER : '';
 
 /**
  * 사용자 프로그램

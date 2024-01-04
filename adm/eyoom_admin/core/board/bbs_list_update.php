@@ -8,11 +8,17 @@ $sub_menu = "300120";
 
 check_demo();
 
-$gr_id          = (isset($_POST['gr_id']) && $_POST['gr_id']) ? clean_xss_tags($_POST['gr_id']) : '';
-$view           = (isset($_POST['view']) && $_POST['view']) ? clean_xss_tags($_POST['view']) : '';
 $post_count_chk = (isset($_POST['chk']) && is_array($_POST['chk'])) ? count($_POST['chk']) : 0;
 $chk            = (isset($_POST['chk']) && is_array($_POST['chk'])) ? $_POST['chk'] : array();
 $act_button     = isset($_POST['act_button']) ? strip_tags($_POST['act_button']) : '';
+
+if (isset($_REQUEST['view']))  { // search order (검색 오름, 내림차순)
+    $view = preg_match("/^(w|c)$/i", $sod) ? $sod : '';
+    if ($view)
+        $qstr .= '&amp;view=' . urlencode($view);
+} else {
+    $view = '';
+}
 
 if (!$post_count_chk) {
     alert($act_button . " 하실 항목을 하나 이상 체크하세요.");

@@ -15,19 +15,26 @@ if ($is_admin != 'super' && $w == '') alert('최고관리자만 접근 가능합
 
 check_admin_token();
 
+if (!isset($sm_bo_table)) exit;
+
 if (!preg_match("/^([A-Za-z0-9_]{1,15})$/", $_POST['sm_id']))
     alert('소모임 ID는 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (15자 이내)');
 
 if (!$sm_subject) alert('소모임 제목을 입력하세요.');
 
 $sm_id = isset($_POST['sm_id']) ? strip_tags(clean_xss_tags($_POST['sm_id'])) : '';
-$sm_subject = isset($_POST['sm_subject']) ? strip_tags($_POST['sm_subject']) : '';
 $wr_id = clean_xss_tags(trim($_POST['wr_id']));
 $sm_admin = clean_xss_tags(trim($_POST['mb_id']));
 $sm_admin_old = clean_xss_tags(trim($_POST['sm_admin']));
 $sm_category = clean_xss_tags(trim($_POST['sm_category']));
 $sm_introduce = clean_xss_tags(trim($_POST['sm_introduce']));
 $sm_open = clean_xss_tags(trim($_POST['sm_open']));
+
+$sm_subject = '';
+if (isset($_POST['sm_subject'])) {
+    $sm_subject = substr(trim($_POST['sm_subject']),0,255);
+    $sm_subject = preg_replace("#[\\\]+$#", "", $sm_subject);
+}
 
 if ($sm_id == $somo['sm_prepned']) {
     alert("소모임 ID를 정확하게 입력해 주세요.");

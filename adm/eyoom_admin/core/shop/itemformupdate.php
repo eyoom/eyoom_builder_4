@@ -1,6 +1,6 @@
 <?php
 /**
- * @file    /adm/eyoom_admin/core/member/itemformupdate.php
+ * @file    /adm/eyoom_admin/core/shop/itemformupdate.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 

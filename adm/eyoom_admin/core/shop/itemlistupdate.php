@@ -95,7 +95,7 @@ $qstr .= $fr_date ? '&amp;fr_date='.$fr_date: '';
 $qstr .= $to_date ? '&amp;to_date='.$to_date: '';
 $qstr .= $cate_a ? '&amp;cate_a='.$cate_a: '';
 $qstr .= $cate_b ? '&amp;cate_b='.$cate_b: '';
-$qstr .= $cate_c ? '&amp;cate_c='.$$cate_c: '';
+$qstr .= $cate_c ? '&amp;cate_c='.$cate_c: '';
 $qstr .= $cate_d ? '&amp;cate_d='.$cate_d: '';
 
 alert($msg, G5_ADMIN_URL . "/?dir=shop&amp;pid=itemlist&amp;{$qstr}");
