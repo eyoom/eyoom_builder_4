@@ -422,6 +422,18 @@ if ($bo_extend) {
 }
 
 /**
+ * 포인트게시글 : 유료스킨 전용
+ */
+if (preg_match("/pointpost/i", $eyoom_board['bo_skin']) && $eyoom_board['bo_use_pointpost'] && $eyoom_board['bo_pointpost_point']) {
+    if (isset($_REQUEST['wr_point']) && $_REQUEST['wr_point']) {
+        $wr_point = is_numeric($_REQUEST['wr_point']) ? (int) $_REQUEST['wr_point']: 0;
+    } else {
+        $wr_point = 0;
+    }
+    sql_query("update {$write_table} set wr_point = '{$wr_point}' where wr_id='{$wr_id}'");
+}
+
+/**
  * 최신글 캐시 스위치온
  */
 $latest->make_switch_on($bo_table, $theme);

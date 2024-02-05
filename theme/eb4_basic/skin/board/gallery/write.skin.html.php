@@ -213,7 +213,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
             </div>
         </div>
     </section>
-    <?php if ($is_admin && $w == 'u') { ?>
+    <?php if ($board['bo_use_approval'] && $is_admin && $w == 'u') { ?>
     <section>
         <div class="row">
             <div class="col col-4">

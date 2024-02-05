@@ -17,18 +17,17 @@ if(is_array($category)) {
     $_output = array();
     foreach($category as $key => $val) {
         unset($blind);
-        $ca_order = $val['ca_order'].$i;
+        $ca_order = $val['ca_order'];
         if ($val['ca_id'] != '0' && !$val['ca_id']) continue;
         if($val['ca_use'] != '1') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-        $_output[$ca_order] .= '{';
-        $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
-        $_output[$ca_order] .= '"order":"'.$ca_order.'",';
-        $_output[$ca_order] .= '"text":"'.trim($val['ca_name']).$blind.'"';
-        if(is_array($val) && count((array)$val)>3) $_output[$ca_order] .= $shop->category_json($val);
-        $_output[$ca_order] .= '}';
+        $_output[$key] .= '{';
+        $_output[$key] .= '"id":"'.$val['ca_id'].'",';
+        $_output[$key] .= '"order":"'.$ca_order.'",';
+        $_output[$key] .= '"text":"'.trim($val['ca_name']).$blind.'"';
+        if(is_array($val) && count((array)$val)>3) $_output[$key] .= $shop->category_json($val);
+        $_output[$key] .= '}';
         $i++;
     }
-    ksort($_output);
     $output .= implode(',',$_output);
 }
 $output .= '

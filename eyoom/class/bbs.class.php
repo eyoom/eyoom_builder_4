@@ -1884,7 +1884,20 @@ class bbs extends eyoom
                 bf_datetime = '" . G5_TIME_YMDHIS . "'
             ";
             $sql = "update {$g5['eyoom_wrfixed']} set {$set} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='y' ";
+            sql_query($sql);
             $msg = "게시물의 상단고정을 연장처리하였습니다.";
+            return $msg;
+        }
+
+        /**
+         * 게시물 상위노출 미승인 신청이 이미 있는지 체크
+         */
+        $sql = "select * from {$g5['eyoom_wrfixed']} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='n' order by bf_datetime desc limit 1";
+        $row2 = sql_fetch($sql);
+           
+        if ($row2) {
+            $msg = "이미 신청 진행중인 건이 존재합니다.";
+            return $msg;
         } else {
             if ($eyoom_board['bo_wrfixed_type'] == '2' || $is_admin == 'super') {
                 $bf_open = 'y';
@@ -1911,8 +1924,8 @@ class bbs extends eyoom
             ";
             $sql = "insert into {$g5['eyoom_wrfixed']} set {$set} ";
             sql_query($sql);
+            return $msg;
         }
-        return $msg;
     }
 
     /**

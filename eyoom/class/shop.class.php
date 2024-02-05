@@ -237,7 +237,19 @@ class shop extends eyoom
                 $addwhere .= " and ca_id like '{$pr_code}%' ";
             }
         }
-        $sql = "select ca_id, ca_use, ca_order, ca_name, ca_stock_qty, ca_sell_email from {$this->g5['g5_shop_category_table']} where (1) {$addwhere} order by ca_id asc, ca_order asc";
+        $sql = " select ca_id, ca_name, ca_order, ca_use, ca_stock_qty, ca_sell_email
+                    from {$this->g5['g5_shop_category_table']}
+                    where (1) {$addwhere}
+                    order by
+                    case
+                        when length(ca_id) = 2 then cast(ca_order as signed)
+                        when length(ca_id) = 4 then cast(concat(left(ca_id, 2), lpad('', 2, '0'), ca_order) as signed)
+                        when length(ca_id) = 6 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), lpad('', 2, '0'), ca_order) as signed)
+                        when length(ca_id) = 8 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), lpad('', 2, '0'), ca_order) as signed)
+                        when length(ca_id) = 10 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), substring(ca_id, 7, 2), lpad('', 2, '0'), ca_order) as signed)
+                        else cast(ca_order as signed)
+                    end
+        ";
         $res = sql_query($sql, false);
         $category = array();
         for($i=0;$row=sql_fetch_array($res);$i++) {
@@ -264,18 +276,17 @@ class shop extends eyoom
                 if(is_array($val)) {
                     if(strlen($val['ca_id'])<2) continue;
                     unset($blind);
-                    $ca_order = $val['ca_order'].$i;
+                    $ca_order = $val['ca_order'];
                     if($val['ca_use'] != '1') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-                    $_output[$ca_order] .= '{';
-                    $_output[$ca_order] .= '"id":"'.$val['ca_id'].'",';
-                    $_output[$ca_order] .= '"order":"'.$ca_order.'",';
-                    $_output[$ca_order] .= '"text":"'.trim($val['ca_name']).$blind.'"';
-                    if(is_array($val) && count((array)$val)>3) $_output[$ca_order] .= $this->category_json($val);
-                    $_output[$ca_order] .= '}';
+                    $_output[$key] .= '{';
+                    $_output[$key] .= '"id":"'.$val['ca_id'].'",';
+                    $_output[$key] .= '"order":"'.$ca_order.'",';
+                    $_output[$key] .= '"text":"'.trim($val['ca_name']).$blind.'"';
+                    if(is_array($val) && count((array)$val)>3) $_output[$key] .= $this->category_json($val);
+                    $_output[$key] .= '}';
                 }
                 $i++;
             }
-            @ksort($_output);
             $output .= @implode(',',$_output);
             $output .= ']';
         }

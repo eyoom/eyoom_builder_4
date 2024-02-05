@@ -25,17 +25,16 @@ if(is_array($eyoom_menu)) {
     $_output = array();
     foreach($eyoom_menu as $key => $val) {
         unset($blind);
-        $me_order = $val['me_order'].$i;
+        $me_order = $val['me_order'];
         if($val['me_use'] == 'n') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-        $_output[$me_order] .= '{';
-        $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
-        $_output[$me_order] .= '"order":"'.$me_order.'",';
-        $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
-        if(is_array($val) && count((array)$val)>3) $_output[$me_order] .= $thema->eyoom_menu_json($val);
-        $_output[$me_order] .= '}';
+        $_output[$key] .= '{';
+        $_output[$key] .= '"id":"'.$val['me_code'].'",';
+        $_output[$key] .= '"order":"'.$me_order.'",';
+        $_output[$key] .= '"text":"'.trim($val['me_name']).$blind.'"';
+        if(is_array($val) && count((array)$val)>3) $_output[$key] .= $thema->eyoom_menu_json($val);
+        $_output[$key] .= '}';
         $i++;
     }
-    ksort($_output);
     $output .= implode(',',$_output);
 }
 $output .= '

@@ -54,9 +54,9 @@ if ($stx) {
 if (isset($_REQUEST['grid'])) {
     if (!is_array($_REQUEST['grid'])) {
         $grid = filter_var($_REQUEST['grid'], FILTER_VALIDATE_REGEXP, array(
-            "options" => array("regexp" => "/^[a-z0-9_]+$/i")
+            "options" => array("regexp" => "/^[a-z0-9_\.]+$/i")
         ));
-        $grid = preg_replace('/[^a-z0-9_]/i', '', trim($grid));
+        $grid = preg_replace('/[^a-z0-9_\.]/i', '', trim($grid));
     }
 } else {
     $grid = '';

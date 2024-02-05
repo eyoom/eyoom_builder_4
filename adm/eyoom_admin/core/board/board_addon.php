@@ -32,6 +32,7 @@ $pg_anchor = array(
     'anc_bo_tag'        => '태그',
     'anc_bo_automove'   => '자동이동',
     'anc_bo_wrfixed'    => '상단고정',
+    'anc_bo_pointpost'  => '포인트게시글',
     'anc_bo_cmtpoint'   => '댓글포인트',
     'anc_bo_cmtbest'    => '댓글베스트',
     'anc_bo_addon'      => '애드온',

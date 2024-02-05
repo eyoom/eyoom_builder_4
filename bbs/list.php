@@ -169,7 +169,7 @@ if (!$is_search_bbs) {
 }
 
 // 게시물 상단고정 날짜 지난 레코드 삭제
-$sql = "delete from {$g5['eyoom_wrfixed']} where ex_datetime < '" . G5_TIME_YMDHIS . "'";
+$sql = "delete from {$g5['eyoom_wrfixed']} where ex_datetime < '" . G5_TIME_YMDHIS . "' and bf_open = 'y' ";
 sql_query($sql);
 
 $total_page  = ceil($total_count / $page_rows);  // 전체 페이지 계산

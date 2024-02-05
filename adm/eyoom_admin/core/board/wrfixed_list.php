@@ -70,6 +70,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $list[$i]['wr_name'] = $row1['wr_name'];
     $list[$i]['wr_mb_id'] = $row1['mb_id'];
     $list[$i]['mb_point'] = $row2['mb_point'];
+    $list[$i]['bf_open'] = $row['bf_open'];
     
     $list_num = $total_count - ($page - 1) * $rows;
     $list[$i]['num'] = $list_num - $k;

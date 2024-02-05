@@ -106,6 +106,17 @@ if (!sql_query(" DESC {$g5['eyoom_wrfixed']} ", false)) {
 }
 
 /**
+ * 포인트게시물 설정 필드 추가
+ */
+if(!sql_query(" select bo_use_pointpost from {$g5['eyoom_board']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['eyoom_board']}`
+        add `bo_use_pointpost` char(1) NOT NULL default '' after `bo_wrfixed_date`,
+        add `bo_pointpost_point` varchar(255) NOT NULL default '' after `bo_use_pointpost`
+    ";
+    sql_query($sql, true);
+}
+
+/**
  * 게시물 자동 이동/복사
  */
 $bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
@@ -145,6 +156,8 @@ $bo_use_wrfixed = isset($_POST['bo_use_wrfixed']) ? (int) $_POST['bo_use_wrfixed
 $bo_wrfixed_type = isset($_POST['bo_wrfixed_type']) ? (int) $_POST['bo_wrfixed_type'] : 1;
 $bo_wrfixed_point = isset($_POST['bo_wrfixed_point']) ? (int) $_POST['bo_wrfixed_point'] : 1000;
 $bo_wrfixed_date = isset($_POST['bo_wrfixed_date']) ? (int) $_POST['bo_wrfixed_date'] : 5;
+$bo_use_pointpost = isset($_POST['bo_use_pointpost']) ? (int) $_POST['bo_use_pointpost'] : 0;
+$bo_pointpost_point = isset($_POST['bo_pointpost_point']) ? $_POST['bo_pointpost_point'] : 1;
 $bo_use_hotgul = isset($_POST['bo_use_hotgul']) ? (int) $_POST['bo_use_hotgul'] : 1;
 $bo_use_cmt_best = isset($_POST['bo_use_cmt_best']) ? (int) $_POST['bo_use_cmt_best'] : 0;
 $bo_use_yellow_card = isset($_POST['bo_use_yellow_card']) ? (int) $_POST['bo_use_yellow_card'] : 0;
@@ -172,6 +185,17 @@ $bo_blind_direct = isset($_POST['bo_blind_direct']) ? (int) $_POST['bo_blind_dir
 
 $where = " bo_table='{$bo_table}' ";
 
+/**
+ * 포인트게시글 필터링
+ */
+$bo_pointpost_point = clean_xss_tags($bo_pointpost_point);
+if ($bo_pointpost_point && !preg_match('/^[0-9|]+$/', $bo_pointpost_point)) {
+    alert('게시물포인트 설정이 잘못되었습니다.');
+}
+if (!$bo_use_pointpost) {
+    $bo_pointpost_point = '';
+}
+
 $set = "
     bo_use_point_explain    = '{$bo_use_point_explain}',
     bo_cmtpoint_target      = '{$bo_cmtpoint_target}',
@@ -194,6 +218,8 @@ $set = "
     bo_wrfixed_type         = '{$bo_wrfixed_type}',
     bo_wrfixed_point        = '{$bo_wrfixed_point}',
     bo_wrfixed_date         = '{$bo_wrfixed_date}',
+    bo_use_pointpost        = '{$bo_use_pointpost}',
+    bo_pointpost_point      = '{$bo_pointpost_point}',
     bo_use_hotgul           = '{$bo_use_hotgul}',
     bo_use_cmt_best         = '{$bo_use_cmt_best}',
     bo_use_yellow_card      = '{$bo_use_yellow_card}',
@@ -245,6 +271,8 @@ if (is_checked('chk_grp_use_wrfixed'))      $grp_fields .= " , bo_use_wrfixed = 
 if (is_checked('chk_grp_wrfixed_type'))     $grp_fields .= " , bo_wrfixed_type = '{$bo_wrfixed_type}' ";
 if (is_checked('chk_grp_wrfixed_point'))    $grp_fields .= " , bo_wrfixed_point = '{$bo_wrfixed_point}' ";
 if (is_checked('chk_grp_wrfixed_date'))     $grp_fields .= " , bo_wrfixed_date = '{$bo_wrfixed_date}' ";
+if (is_checked('chk_grp_use_pointpost'))    $grp_fields .= " , bo_use_pointpost = '{$bo_use_pointpost}' ";
+if (is_checked('chk_grp_pointpost_point'))  $grp_fields .= " , bo_pointpost_point = '{$bo_pointpost_point}' ";
 if (is_checked('chk_grp_use_automove'))     $grp_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
 if (is_checked('chk_grp_addon_emoticon'))   $grp_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_grp_addon_video'))      $grp_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";
@@ -300,6 +328,8 @@ if (is_checked('chk_all_use_wrfixed'))      $all_fields .= " , bo_use_wrfixed = 
 if (is_checked('chk_all_wrfixed_type'))     $all_fields .= " , bo_wrfixed_type = '{$bo_wrfixed_type}' ";
 if (is_checked('chk_all_wrfixed_point'))    $all_fields .= " , bo_wrfixed_point = '{$bo_wrfixed_point}' ";
 if (is_checked('chk_all_wrfixed_date'))     $all_fields .= " , bo_wrfixed_date = '{$bo_wrfixed_date}' ";
+if (is_checked('chk_all_use_pointpost'))    $all_fields .= " , bo_use_pointpost = '{$bo_use_pointpost}' ";
+if (is_checked('chk_all_pointpost_point'))  $all_fields .= " , bo_pointpost_point = '{$bo_pointpost_point}' ";
 if (is_checked('chk_all_use_automove'))     $all_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
 if (is_checked('chk_all_addon_emoticon'))   $all_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_all_addon_video'))      $all_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";

@@ -743,7 +743,19 @@ class theme extends qfile
         $theme_name = $me_shop == 1 || defined('_SHOP_') ? $this->shop_theme: $this->theme;
         if ($admin_mode) $theme_name = $theme ? $theme: $this->theme;
         $addwhere .= " and me_shop = '".$me_shop."' ";
-        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($theme_name) . "' {$addwhere} order by me_code asc, me_order asc";
+        $sql = " select *
+                    from {$this->g5['eyoom_menu']}
+                    where me_theme='" . sql_real_escape_string($this->theme) . "' {$addwhere}
+                    order by
+                    case
+                        when length(me_code) = 3 then cast(me_order as signed)
+                        when length(me_code) = 6 then cast(concat(left(me_code, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 9 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 12 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), substring(me_code, 7, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 15 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), substring(me_code, 7, 3), substring(me_code, 10, 3), lpad('', 3, '0'), me_order) as signed)
+                        else cast(me_order as signed)
+                    end
+        ";
         $res = sql_query($sql, false);
         $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
@@ -815,7 +827,19 @@ class theme extends qfile
         if (defined('_SHOP_')) $me_shop='1'; else $me_shop='2'; 
         $addwhere .= " and me_shop='{$me_shop}' ";
         $me_code = str_split($data['me_code'],3);
-        $sql = "select * from {$this->g5['eyoom_menu']} where me_theme='" . sql_real_escape_string($this->theme) . "' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere} order by me_code asc, me_order asc";
+        $sql = " select *
+                    from {$this->g5['eyoom_menu']}
+                    where me_theme='" . sql_real_escape_string($this->theme) . "' and me_code like '{$me_code[0]}%' and length(me_code) > 3 {$addwhere}
+                    order by
+                    case
+                        when length(me_code) = 3 then cast(me_order as signed)
+                        when length(me_code) = 6 then cast(concat(left(me_code, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 9 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 12 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), substring(me_code, 7, 3), lpad('', 3, '0'), me_order) as signed)
+                        when length(me_code) = 15 then cast(concat(left(me_code, 3), substring(me_code, 4, 3), substring(me_code, 7, 3), substring(me_code, 10, 3), lpad('', 3, '0'), me_order) as signed)
+                        else cast(me_order as signed)
+                    end
+        ";
         $res = sql_query($sql, false);
         $menu = array();
         for ($i=0;$row=sql_fetch_array($res);$i++) {
@@ -843,18 +867,17 @@ class theme extends qfile
                 if (is_array($val)) {
                     if (strlen($val['me_code'])<2) continue;
                     unset($blind);
-                    $me_order = $val['me_order'].$i;
+                    $me_order = $val['me_order'];
                     if ($val['me_use'] == 'n') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-                    $_output[$me_order] .= '{';
-                    $_output[$me_order] .= '"id":"'.$val['me_code'].'",';
-                    $_output[$me_order] .= '"order":"'.$me_order.'",';
-                    $_output[$me_order] .= '"text":"'.trim($val['me_name']).$blind.'"';
-                    if (is_array($val) && count((array)$val)>3) $_output[$me_order] .= $this->eyoom_menu_json($val);
-                    $_output[$me_order] .= '}';
+                    $_output[$key] .= '{';
+                    $_output[$key] .= '"id":"'.$val['me_code'].'",';
+                    $_output[$key] .= '"order":"'.$me_order.'",';
+                    $_output[$key] .= '"text":"'.trim($val['me_name']).$blind.'"';
+                    if (is_array($val) && count((array)$val)>3) $_output[$key] .= $this->eyoom_menu_json($val);
+                    $_output[$key] .= '}';
                 }
                 $i++;
             }
-            @ksort($_output);
             $output .= @implode(',',$_output);
             $output .= ']';
         }
@@ -900,7 +923,7 @@ class theme extends qfile
     public function get_meinfo_link($url) {
         global $bo_table;
 
-        if (preg_match('/(qa|respond|memo)/i', $url['path'])) {
+        if (preg_match('/\b(qa|respond|memo)\b/i', $url['path'])) {
             unset($url['query']);
         }
 
@@ -949,11 +972,11 @@ class theme extends qfile
                 $info['me_link'] .= $url['fragment']?'#'.$url['fragment']:'';
             }
         } else if ($url['path']) {
-            if (preg_match('/qa/i', $url['path'])) {
+            if (preg_match('/\bqa\b/i', $url['path'])) {
                 $url['path'] = 'qalist.php';
-            } else if (preg_match('/respond/i', $url['path'])) {
+            } else if (preg_match('/\brespond\b/i', $url['path'])) {
                 $url['path'] = 'respond.php';
-            } else if (preg_match('/memo/i', $url['path'])) {
+            } else if (preg_match('/\bmemo\b/i', $url['path'])) {
                 $url['path'] = 'memo.php';
             }
             $info['me_pid'] = basename($url['path']);
@@ -975,7 +998,7 @@ class theme extends qfile
         $url = $this->compare_host_from_link($link);
         if ($url) {
             $info = $this->get_meinfo_link($url);
-            if (preg_match('/qa/i', $info['me_pid']) && $info['me_pid'] != 'qa' || preg_match('/(respond|memo)/i', $info['me_pid']) ) {
+            if (preg_match('/\bqa\b/i', $info['me_pid']) && $info['me_pid'] != 'qa' || preg_match('/\b(respond|memo)\b/i', $info['me_pid']) ) {
                 $info['me_link'] = $url['path'];
             }
         } else {

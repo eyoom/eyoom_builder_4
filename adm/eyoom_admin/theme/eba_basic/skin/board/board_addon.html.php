@@ -529,6 +529,57 @@ $frm_submit .= $frm_eba_submit;
         </div>
         <?php /* 상단고정 : 끝 */ ?>
 
+        <?php /* 포인트게시글 : 시작 */ ?>
+        <div class="tab-pane" id="anc_bo_pointpost" role="tabpanel" aria-labelledby="anc_bo_pointpost_tab">
+            <div class="adm-form-table m-b-20">
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>포인트게시물 설정</strong></div>
+                <div class="adm-form-info">
+                    <div class="cont-text-bg">
+                        <p class="bg-info">
+                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 게시물 작성자가 읽기 포인트를 설정하면 설정한 포인트를 작성자에게 지불하고 게시물을 읽을 수 있습니다.<br>
+                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 최고관리자의 경우 설정한 포인트와 상관없이 게시물을 읽을 수 있습니다.<br>
+                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 이윰넷에서 판매하는 유료 게시판 스킨인 포인트게시물 스킨에서 작동되며 다른 스킨에서는 작동하지 않습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_pointpost" class="label">포인트게시글 사용여부</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label for="bo_use_pointpost" class="checkbox">
+                            <input type="checkbox" name="bo_use_pointpost" id="bo_use_pointpost" value="1" <?php echo $eyoom_board['bo_use_pointpost'] == '1' ? 'checked': ''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 사용 체크시 포인트게시물 기능이 활성화 됩니다.</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_use_pointpost" class="checkbox"><input type="checkbox" name="chk_grp_use_pointpost" value="1" id="chk_grp_use_pointpost"><i></i>그룹적용</label>
+                                <label for="chk_all_use_pointpost" class="checkbox"><input type="checkbox" name="chk_all_use_pointpost" value="1" id="chk_all_use_pointpost"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_pointpost_point" class="label">포인트 구간 설정</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label for="bo_pointpost_point" class="input">
+                            <input type="text" name="bo_pointpost_point" id="bo_pointpost_point" value="<?php echo $eyoom_board['bo_pointpost_point'] ? $eyoom_board['bo_pointpost_point']: ''; ?>">
+                        </label>
+                        <div class="note"><strong>Note: </strong>포인트와 포인트 사이는 | 로 구분하세요. (예: 0|100|200|300)</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_pointpost_point" class="checkbox"><input type="checkbox" name="chk_grp_pointpost_point" value="1" id="chk_grp_pointpost_point"><i></i>그룹적용</label>
+                                <label for="chk_all_pointpost_point" class="checkbox"><input type="checkbox" name="chk_all_pointpost_point" value="1" id="chk_all_pointpost_point"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php /* 포인트게시글 : 끝 */ ?>
+
         <?php /* 댓글포인트 : 시작 */ ?>
         <div class="tab-pane" id="anc_bo_cmtpoint" role="tabpanel" aria-labelledby="anc_bo_cmtpoint_tab">
             <div class="adm-form-table m-b-20">

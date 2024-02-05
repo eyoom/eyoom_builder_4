@@ -1041,43 +1041,25 @@ class eyoom extends qfile
     }
 
     /**
-     * 전화번호 추출기
+     * 전화번호 하이픈 자동생성
      * 전화번호를 읽기 좋은 형식으로 리턴
      */
     public function get_phone_number($str) {
-        $phone_prefix = array('010','011','016','017','019','070','031','032','033','041','042','043','044','051','052','053','054','055','061','062','063','064');
-
         /**
-         * 문자열의 공백 제거
+         * 숫자이외 제거 
          */
-        $str = str_replace(" ", "", $str);
-        $str = preg_replace("/(\(|\)|-|\.|_|,)/", "", $str);
+        $tel = preg_replace("/[^0-9]*/s", "", $str);
 
-        if(substr($str,0,1) != '0') {
-            return $str;
-        } else {
-            $number[0] = substr($str,0,3);
-            if (in_array($number[0], $phone_prefix)) {
-                $string = substr($str,3);
-                if(strlen($string) == 7) {
-                    $number[1] = substr($string,0,3);
-                    $number[2] = substr($string,3);
-                } else if (strlen($string) == 8) {
-                    $number[1] = substr($string,0,4);
-                    $number[2] = substr($string,4);
-                }
-            } else {
-                $number[0] = substr($str,0,2);
-                $string = substr($str,2);
-                if(strlen($string) == 7) {
-                    $number[1] = substr($string,0,3);
-                    $number[2] = substr($string,3);
-                } else if (strlen($string) == 8) {
-                    $number[1] = substr($string,0,4);
-                    $number[2] = substr($string,4);
-                }
-            }
-            return implode("-", $number);
+        if (substr($tel,0,2) =='02') { // 서울전화번호 체크
+            return preg_replace("/([0-9]{2})([0-9]{3,4})([0-9]{4})$/","\\1-\\2-\\3", $tel);
+        } else if (
+            substr($tel,0,2) =='15' || 
+            substr($tel,0,2) =='16'|| 
+            substr($tel,0,2) =='18'
+        ) { // 지능망 정보 체크
+            return preg_replace("/([0-9]{4})([0-9]{4})$/","\\1-\\2", $tel);  
+        } else { // 휴대폰번호
+            return preg_replace("/([0-9]{3})([0-9]{3,4})([0-9]{4})$/","\\1-\\2-\\3" ,$tel);
         }
     }
 

@@ -299,6 +299,11 @@ $g5['eyoom_brand'] = G5_TABLE_PREFIX . 'eyoom_brand';
 $g5['eyoom_wrfixed'] = G5_TABLE_PREFIX . 'eyoom_wrfixed';
 
 /**
+ * 포인트게시글 관리
+ */
+$g5['eyoom_pointpost'] = G5_TABLE_PREFIX . 'eyoom_pointpost';
+
+/**
  * 회원메모 관리
  */
 $g5['eyoom_mbmemo'] = G5_TABLE_PREFIX . 'eyoom_mbmemo';
