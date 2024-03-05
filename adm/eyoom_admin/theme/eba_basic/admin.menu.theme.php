@@ -171,6 +171,7 @@ if ($member['mb_id'] == $config['cf_admin'] || in_array('shopetc', $mg_auth)) {
             array('500000', '쇼핑몰현황/기타', G5_ADMIN_URL . '/shop_admin/itemsellrank.php', 'shop_stats'),
             array('500110', '매출현황', G5_ADMIN_URL . '/shop_admin/sale1.php', 'sst_order_stats'),
             array('500100', '상품판매순위', G5_ADMIN_URL . '/shop_admin/itemsellrank.php', 'sst_rank'),
+            array('500200', '구매랭킹', G5_ADMIN_URL . '/shop_admin/orderrank.php', 'ord_rank'),
             array('500120', '주문내역출력', G5_ADMIN_URL . '/shop_admin/orderprint.php', 'sst_print_order', 1),
             array('500400', '재입고SMS알림', G5_ADMIN_URL . '/shop_admin/itemstocksms.php', 'sst_stock_sms', 1),
             array('500300', '이벤트관리', G5_ADMIN_URL . '/shop_admin/itemevent.php', 'scf_event'),

@@ -38,6 +38,24 @@ if (!isset($config['cf_use_mbmemo'])) {
 }
 
 /**
+ * 관리자모드 즐겨찾기 테이블 생성
+ */
+if(!sql_query(" DESCRIBE {$g5['eyoom_favorite_adm']} ", false)) {
+    $sql = "
+        CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_favorite_adm'] . "` (
+            `mb_id` varchar(30) NOT NULL,
+            `dir` varchar(20) NOT NULL,
+            `pid` varchar(40) NOT NULL,
+            `fm_code` char(6) NOT NULL,
+            `me_name` varchar(255) NOT NULL
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 
+    ";
+
+    $sql = get_db_create_replace($sql, false);
+    sql_query($sql, false);
+}
+
+/**
  * 소셜로그인 디버그 파일 24시간 지난것은 삭제
  */
 @include_once('./safe_check.php');

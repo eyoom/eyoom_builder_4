@@ -1139,11 +1139,24 @@ class eyoom extends qfile
     /**
      * unserialize : return false 오류 처리
      */
-    public function mb_unserialize($serial_str) {  
-        $serial_str = preg_replace_callback('/s:(\d+):"([\s\S]*?)";/', function($matches) {
-            return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
-        }, $serial_str);
-        return unserialize($serial_str);  
+    public function mb_unserialize($serial_str) {
+        $unserialize_arr = unserialize($serial_str);
+        if ($unserialize_arr && is_array($unserialize_arr)) {
+            return $unserialize_arr;
+        } else {
+            $serial_str = preg_replace_callback(
+                '/s:(\d+):"([\s\S]*?)";/',
+                array($this, 'replace_serial_callback'),
+                $serial_str
+            );
+        }
+    }
+    
+    /**
+     * php 5.3 이하버전을 위한 시리얼 콜백 함수
+     */
+    private function replace_serial_callback($matches) {
+        return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
     }
 
     /**

@@ -33,6 +33,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <input type="hidden" name="save_search" value="<?php echo $search; ?>">
     <input type="hidden" name="dir" value="<?php echo $dir; ?>" id="dir">
     <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
+    <input type="hidden" name="smode" value="">
 
     <?php if (G5_IS_MOBILE) { ?>
     <a class="collapse-search-btn btn-e btn-e-sm btn-e-dark m-b-20" data-bs-toggle="collapse" href="#collapse-search-box"><i class="fas fa-search m-r-7"></i><span>검색 조건 열기</span></a>
@@ -188,6 +189,12 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         </div>
     </div>
 
+    <?php if ($_GET['fr_date'] && $_GET['to_date'] && $_GET['sdt'] == 'od_time') { ?>
+    <div class="excel-download text-end">
+        <a href="javascript:void(0);" onclick="order_excel_download();" class="btn-e btn-e-md btn-e-indigo adm-headline-btn">엑셀다운로드</a>
+    </div>
+    <?php } ?>
+
     </form>
 
     <form name="forderlist" id="forderlist" onsubmit="return forderlist_submit(this);" method="post" autocomplete="off" class="eyoom-form">
@@ -269,8 +276,8 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <?php } ?>
                         </td>
                         <td>
-                            <p class="li-p-sq"><a href="<?php echo G5_BBS_URL; ?>/profile.php?mb_id=<?php echo $list[$i]['mb_id']; ?>" onclick="win_profile(this.href); return false;"><?php echo $list[$i]['od_name']; ?><?php if ($list[$i]['mb_id']) { ?>[<?php echo $list[$i]['mb_id']; ?>]<?php } ?></a></p>
-                            <p class="li-p-sq"><a href="<?php echo G5_BBS_URL; ?>/profile.php?mb_id=<?php echo $list[$i]['mb_id']; ?>" onclick="win_profile(this.href); return false;"><span class="text-gray"><?php echo $list[$i]['mbinfo']['mb_nick']; ?></span></a></p>
+                            <p class="li-p-sq"><?php if ($list[$i]['mb_id']) { ?><a href="<?php echo G5_BBS_URL; ?>/profile.php?mb_id=<?php echo $list[$i]['mb_id']; ?>" onclick="win_profile(this.href); return false;"><?php echo $list[$i]['od_name']; ?>[<?php echo $list[$i]['mb_id']; ?>]</a><?php } else { ?><?php echo $list[$i]['od_name']; ?><?php } ?></p>
+                            <p class="li-p-sq"><?php if ($list[$i]['mb_id']) { ?><a href="<?php echo G5_BBS_URL; ?>/profile.php?mb_id=<?php echo $list[$i]['mb_id']; ?>" onclick="win_profile(this.href); return false;"><span class="text-gray"><?php echo $list[$i]['mbinfo']['mb_nick']; ?></span></a><?php } ?></p>
                             <p class="li-p-sq"><a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=orderlist&sort1=<?php echo $sort1; ?>&sort2=<?php echo $sort2; ?>&sel_field=mb_id&search=<?php echo $list[$i]['mb_id']; ?>"><u class="text-gray">누적 <?php echo number_format($list[$i]['od_cnt']); ?> 건</u></a></p>
                         </td>
                         <td class="text-end">
@@ -617,5 +624,13 @@ function set_date(today) {
         document.getElementById("fr_date").value = "";
         document.getElementById("to_date").value = "";
     }
+}
+
+function order_excel_download() {
+    f = document.frmorderlist;
+    f.dir.value = 'shop';
+    f.pid.value = 'orderexceldownload';
+    f.smode.value = 1;
+    f.submit();
 }
 </script>

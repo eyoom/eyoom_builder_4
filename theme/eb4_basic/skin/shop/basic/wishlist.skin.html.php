@@ -69,7 +69,7 @@ if (!defined('_EYOOM_')) exit;
                                 <?php } else { //품절이 아니면 체크할수 있도록한다 ?>
                                 <label for="chk_it_id_<?php echo $i; ?>" class="sound_only"><?php echo $list[$i]['it_name']; ?></label>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="chk_it_id[<?php echo $i; ?>]" value="1" id="chk_it_id_<?php echo $i; ?>" onclick="out_cd_check(this, '<?php echo $out_cd; ?>');"><i></i>
+                                    <input type="checkbox" name="chk_it_id[<?php echo $i; ?>]" value="1" id="chk_it_id_<?php echo $i; ?>" onclick="out_cd_check(this, '<?php echo $list[$i]['out_cd']; ?>');"><i></i>
                                 </label>
                                 <?php } ?>
                                 <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $list[$i]['it_id']; ?>">

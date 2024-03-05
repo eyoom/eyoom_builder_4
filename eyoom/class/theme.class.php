@@ -923,7 +923,7 @@ class theme extends qfile
     public function get_meinfo_link($url) {
         global $bo_table;
 
-        if (preg_match('/\b(qa|respond|memo)\b/i', $url['path'])) {
+        if (preg_match('/\b(qa|respond|memo|memo_form)\b/i', $url['path'])) {
             unset($url['query']);
         }
 
@@ -976,7 +976,7 @@ class theme extends qfile
                 $url['path'] = 'qalist.php';
             } else if (preg_match('/\brespond\b/i', $url['path'])) {
                 $url['path'] = 'respond.php';
-            } else if (preg_match('/\bmemo\b/i', $url['path'])) {
+            } else if (preg_match('/\b(memo|memo_form)\b/i', $url['path'])) {
                 $url['path'] = 'memo.php';
             }
             $info['me_pid'] = basename($url['path']);
@@ -998,7 +998,7 @@ class theme extends qfile
         $url = $this->compare_host_from_link($link);
         if ($url) {
             $info = $this->get_meinfo_link($url);
-            if (preg_match('/\bqa\b/i', $info['me_pid']) && $info['me_pid'] != 'qa' || preg_match('/\b(respond|memo)\b/i', $info['me_pid']) ) {
+            if (preg_match('/\bqa\b/i', $info['me_pid']) && $info['me_pid'] != 'qa' || preg_match('/\b(respond|memo|memo_form)\b/i', $info['me_pid']) ) {
                 $info['me_link'] = $url['path'];
             }
         } else {

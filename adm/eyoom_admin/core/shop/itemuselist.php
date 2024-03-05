@@ -10,6 +10,10 @@ $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemuselistupdate&amp;smode=1'
 
 auth_check_menu($auth, $sub_menu, "r");
 
+if (isset($sfl) && $sfl && !in_array($sfl, array('it_name','a.it_id','is_name'))) {
+    $sfl = '';
+}
+
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';
 if(! preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date) ) $fr_date = '';

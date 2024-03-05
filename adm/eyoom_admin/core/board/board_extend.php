@@ -34,7 +34,7 @@ $pg_anchor = array(
 /**
  * 게시판 확장필드 테이블 생성
  */
-$exboard_sql = "
+$sql = "
     CREATE TABLE IF NOT EXISTS `" . $g5['eyoom_exboard'] . "` (
       `ex_no` int(11) unsigned NOT NULL auto_increment,
       `bo_table` varchar(20) NOT NULL,
@@ -51,7 +51,7 @@ $exboard_sql = "
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 $sql = get_db_create_replace($sql);
-sql_query($exboard_sql, true);
+sql_query($sql, true);
 
 /**
  * 배너 테이블에서 작업테마의 배너/광고 레코드 정보 가져오기

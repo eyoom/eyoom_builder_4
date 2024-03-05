@@ -10,6 +10,10 @@ $action_url1 = G5_ADMIN_URL . '/?dir=shop&amp;pid=itemlistupdate&amp;smode=1';
 
 auth_check_menu($auth, $sub_menu, "r");
 
+if (isset($sfl) && $sfl && !in_array($sfl, array('it_name','it_id','it_maker','it_brand','it_model','it_origin','it_sell_email'))) {
+    $sfl = '';
+}
+
 // 기간검색이 있다면
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
 $to_date = isset($_GET['to_date']) ? trim($_GET['to_date']) : '';

@@ -51,6 +51,7 @@ if (is_array($_POST['bo_favorite'])) {
     /**
      * off된 게시판은 제외
      */
+    $_bo_favorite = array();
     if (is_array($favorite) && is_array($except)) {
         foreach ($favorite as $bo_table) {
             if (in_array($bo_table, $except)) continue;

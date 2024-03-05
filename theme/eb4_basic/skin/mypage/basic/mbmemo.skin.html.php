@@ -53,8 +53,8 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
                 <tr>
                     <td><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_name'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?></td>
                     <td>
-                        <?php if (is_array($list[$i]['mb_memo'])) { ?>
-                        <?php foreach ($list[$i]['mb_memo'] as $k => $mm) { ?>
+                        <?php if (is_array($list[$i]['mm_memo'])) { ?>
+                        <?php foreach ($list[$i]['mm_memo'] as $k => $mm) { ?>
                         <div><?php echo $mm; ?></div>
                         <?php } ?>
                         <?php } ?>

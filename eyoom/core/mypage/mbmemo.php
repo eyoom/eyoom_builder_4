@@ -48,16 +48,8 @@ $sql = " select * {$sql_common} {$sql_where} {$sql_order} limit {$from_record}, 
 $result = sql_query($sql, false);
 $list = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    unset($mm_memo, $loop, $memo);
     $list[$i] = $row;
-
-    $mm_memo = $eb->mb_unserialize($row['mm_memo']);
-    $loop = &$list[$i]['mb_memo'];
-    if ($mm_memo && is_array($mm_memo)) {
-        foreach ($mm_memo as $k => $memo) {
-            $loop[$k] = $memo;
-        }
-    }
+    $list[$i]['mm_memo'] = $row['mm_memo'] ? $eb->mb_unserialize($row['mm_memo']): '';
 }
 $count = count($list);
 
