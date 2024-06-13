@@ -34,6 +34,11 @@ class qfile
          * 테마체크 URL 정의
          */
         define('EYOOM_AJAX_URL', EYOOM_SITE.'/eyoom4.php');
+
+        /**
+         * 테마정보 체크 URL 정의
+         */
+        define('CHECK_THEME_URL', EYOOM_SITE.'/theme4.php');
     }
 
     /**
@@ -50,8 +55,7 @@ class qfile
      * 파일 확장자 가져오기
      */
     public function get_file_ext($filename) {
-        $temp = explode('.',$filename);
-        return $temp[count($temp) - 1];
+        return strtolower(pathinfo($filename, PATHINFO_EXTENSION));
     }
 
     /**

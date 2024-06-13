@@ -271,7 +271,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                             <?php } ?>
                         </h4>
                         <div class="gallery-desc">
-                            <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
+                            <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage'], $list[$i]['mb_id2']); ?></span>
                             <?php if ($eyoom_board['bo_use_rating'] == '1' && $eyoom_board['bo_use_rating_list'] == '1') { ?>
                             <div class="gallery-ratings hidden-xs">
                                 <ul class="list-unstyled star-ratings-list">

@@ -204,10 +204,12 @@ function set_item_value(str) {
             var url = '<?php echo G5_BBS_URL; ?>/content.php?co_id='+data[0];
             var name = data[1];
             break;
+        <?php if (defined('G5_USE_SHOP')) { ?>
         case 'shop':
             var url = '<?php echo G5_SHOP_URL; ?>/list.php?ca_id='+data[0];
             var name = data[1];
             break;
+        <?php } ?>
     }
     $("#subme_link").val(url);
     $("#subme_name").val(name);

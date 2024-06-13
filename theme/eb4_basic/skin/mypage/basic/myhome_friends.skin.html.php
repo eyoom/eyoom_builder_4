@@ -115,6 +115,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/infinite-scroll/jquery.infinitescroll.min.js"></script>
 <script>
 $(function(){

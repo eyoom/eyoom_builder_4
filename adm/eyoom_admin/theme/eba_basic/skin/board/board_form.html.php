@@ -1383,6 +1383,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php if(0) { // 숨김처리 시작, 불필요 ?>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="bo_gallery_cols" class="label">갤러리 이미지 수<strong class="sound_only">필수</strong></label>
@@ -1401,6 +1402,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php } // 숨김처리 끝 ?>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="bo_gallery_width" class="label">갤러리 이미지 폭<strong class="sound_only">필수</strong></label>
@@ -1473,6 +1475,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php if(0) { // 숨김처리 시작, 불필요 ?>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="bo_table_width" class="label">게시판 폭<strong class="sound_only">필수</strong></label>
@@ -1491,6 +1494,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php } // 숨김처리 끝 ?>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="bo_image_width" class="label">이미지 폭 크기<strong class="sound_only">필수</strong></label>

@@ -141,7 +141,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <?php } ?>
                     <div class="comment-item-info">
                         <div class="m-t-3">
-                            <span class="comment-name"><?php echo eb_nameview($cmt[$i]['mb_id'], $cmt[$i]['wr_name'], $cmt[$i]['wr_email'], $cmt[$i]['wr_homepage']); ?></span>
+                            <span class="comment-name"><?php echo eb_nameview($cmt[$i]['mb_id'], $cmt[$i]['wr_name'], $cmt[$i]['wr_email'], $cmt[$i]['wr_homepage'], $cmt[$i]['mb_id2']); ?></span>
                             <?php if ($cmt[$i]['gnu_icon']) { ?>
                             <span class="comment-lv-icon"><img src="<?php echo $cmt[$i]['gnu_icon']; ?>" align="absmiddle" alt="레벨"></span>
                             <?php } ?>
@@ -672,6 +672,12 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
 <?php } ?>
 <script>
 $(function() {
+    <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
+    $(".emoticon").venobox({
+        framewidth : '800px',
+        frameheight: '500px'
+    });
+    <?php } ?>
     <?php for ($i=0; $i<$cmt_amt; $i++) { ?>
     <?php if ($cmt[$i]['is_cmt_best']) { ?>
     $('.view-cmtgo-btn.cmtgo-btn-<?php echo $i+1; ?>, .view-comment-best-label.best-label-<?php echo $i+1; ?>').on('click', function(e) {
@@ -686,7 +692,6 @@ $(function() {
     <?php } ?>
     <?php } ?>
 });
-
 
 var save_before = '';
 var save_html = <?php if (($is_member && $board['bo_comment_level'] <= $member['mb_level']) || ($is_guest && $board['bo_comment_level'] == 1)) { ?>document.getElementById('view-comment-write').innerHTML<?php } else { ?>''<?php }  ?>;
@@ -944,25 +949,35 @@ function fviewcomment_submit(f) {
 }
 
 function comment_box(comment_id, work) {
-    var el_id;
+    var el_id,
+        form_el = 'fviewcomment',
+        respond = document.getElementById(form_el);
+
     // 댓글 아이디가 넘어오면 답변, 수정
     if (comment_id) {
         if (work == 'c')
             el_id = 'reply_' + comment_id;
         else
             el_id = 'edit_' + comment_id;
-    }
-    else
-        el_id = 'view-comment-write';
+    } else
+        el_id = 'bo_vc_w';
 
     if (save_before != el_id) {
         if (save_before) {
-            document.getElementById(save_before).style.display = 'none';
-            document.getElementById(save_before).innerHTML = '';
+            var prevElement = document.getElementById(save_before);
+            if (prevElement) {
+                prevElement.style.display = 'none';
+            }
         }
 
-        document.getElementById(el_id).style.display = '';
-        document.getElementById(el_id).innerHTML = save_html;
+        var currentElement = document.getElementById(el_id);
+        if (currentElement) {
+            currentElement.style.display = '';
+            currentElement.appendChild(respond);
+            // 입력값 초기화
+            document.getElementById('wr_content').value = '';
+        }
+
         // 댓글 수정
         if (work == 'cu') {
             document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
@@ -993,13 +1008,6 @@ function comment_box(comment_id, work) {
 
         document.getElementById('comment_id').value = comment_id;
         document.getElementById('w').value = work;
-
-        <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
-        $(".emoticon").venobox({
-            framewidth : '800px',
-            frameheight: '500px'
-        });
-        <?php } ?>
 
         <?php if ($eyoom_board['bo_use_addon_video'] == '1') { ?>
         //동영상 추가

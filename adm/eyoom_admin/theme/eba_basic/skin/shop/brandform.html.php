@@ -27,7 +27,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     <input type="hidden" name="uploading" id="uploading" value="">
 
     <div class="adm-form-table m-b-20">
-        <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>브랜드 <?php echo $html_title; ?></strong></div>
+        <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i><?php echo $html_title; ?></strong></div>
         <div class="adm-form-tr">
             <div class="adm-form-td td-l">
                 <label for="br_code" class="label">브랜드코드</label>

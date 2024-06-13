@@ -87,7 +87,7 @@ while ($row = sql_fetch_array($result)) {
             }
 
             $sql = " insert into $move_write_table
-                        set wr_num = " . ($next_wr_num ? "'$next_wr_num'" : "(SELECT IFNULL(MIN(wr_num) - 1, -1) FROM $move_write_table sq) ") . ",
+                        set wr_num = " . ($next_wr_num ? "'$next_wr_num'" : "(SELECT IFNULL(MIN(wr_num) - 1, -1) FROM $move_write_table as sq) ") . ",
                              wr_reply = '{$row2['wr_reply']}',
                              wr_is_comment = '{$row2['wr_is_comment']}',
                              wr_comment = '{$row2['wr_comment']}',
@@ -144,6 +144,8 @@ while ($row = sql_fetch_array($result)) {
                 $sql3 = " select * from {$g5['board_file_table']} where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' order by bf_no ";
                 $result3 = sql_query($sql3);
                 for ($k=0; $row3 = sql_fetch_array($result3); $k++) {
+                    $copy_file_name = '';
+                    
                     if ($row3['bf_file']) {
                         // 원본파일을 복사하고 퍼미션을 변경
                         // 제이프로님 코드제안 적용

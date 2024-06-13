@@ -31,6 +31,7 @@ $pg_anchor = array(
     'anc_bo_rating'     => '별점',
     'anc_bo_tag'        => '태그',
     'anc_bo_automove'   => '자동이동',
+    'anc_bo_best'       => '인기게시물',
     'anc_bo_wrfixed'    => '상단고정',
     'anc_bo_pointpost'  => '포인트게시글',
     'anc_bo_cmtpoint'   => '댓글포인트',

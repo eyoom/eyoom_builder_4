@@ -1120,6 +1120,20 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr cf_cert_service">
                     <div class="adm-form-td td-l">
+                        <label for="cf_cert_use_seed" class="label">통합인증 암호화 적용</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="select max-width-250px">
+                            <select name="cf_cert_use_seed" id="cf_cert_use_seed">
+                                <?php echo option_selected("0", $config['cf_cert_use_seed'], "사용안함"); ?>
+                                <?php echo option_selected("1", $config['cf_cert_use_seed'], "사용함"); ?>
+                            </select><i></i>
+                        </label>
+                        <div class="note"><strong>Note:</strong> KG이니시스 통합인증서비스에 암호화를 적용합니다. 만일 글자가 깨지는 문제가 발생하면 사용안함으로 적용해 주세요.</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr cf_cert_service">
+                    <div class="adm-form-td td-l">
                         <label for="cf_cert_hp" class="label">휴대폰 본인확인</label>
                     </div>
                     <div class="adm-form-td td-r">

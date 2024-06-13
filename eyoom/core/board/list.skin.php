@@ -27,7 +27,7 @@ if ($eyoom_board['bo_use_rating']) $colspan++;
 /**
  * 제목에서 구분자로 회원정보 추출
  */
-$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$bo_use_anonymous = !$is_admin ? $eyoom_board['bo_use_anonymous']: false;
 $is_anonymous = false;
 foreach ($list as $i => $val) {
     $level = $list[$i]['eb_1'] ? $eb->level_info($list[$i]['eb_1']):'';
@@ -45,6 +45,7 @@ foreach ($list as $i => $val) {
 
     if ($is_anonymous) {
         $list[$i]['mb_photo'] = '';
+        $list[$i]['mb_id2'] = $list[$i]['mb_id'];;
         $list[$i]['mb_id'] = 'anonymous';
         $list[$i]['wr_name'] = $eyoom['anonymous_title'];
         $list[$i]['email'] = '';

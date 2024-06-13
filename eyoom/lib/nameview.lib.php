@@ -7,7 +7,7 @@ if (!defined('_EYOOM_')) exit;
 /**
  * 회원 레이어
  */
-function eb_nameview($mb_id, $name='', $email='', $homepage='') {
+function eb_nameview($mb_id, $name='', $email='', $homepage='', $mb_id2='') {
     global $config;
     global $g5, $eb, $eyoom, $board;
     global $bo_table, $sca, $is_admin, $member, $eyoomer, $wmode, $levelset;
@@ -17,8 +17,28 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
      */
     if ($mb_id == 'anonymous' || $eyoom['use_sideview'] == 'n' || (isset($board['bo_use_sideview']) && !$board['bo_use_sideview'])) {
         $is_anonymous = $mb_id == 'anonymous' ? true: false;
-        $name = $is_anonymous ? $eyoom['anonymous_title']: $name;
-        return get_text($name);
+
+        if ($config['cf_use_member_icon'] && $member['mb_id'] == $mb_id2) {
+            $mb_photo = $eb->mb_photo($mb_id, 'icon');
+        } else {
+            $mb_photo = '';
+        }
+        
+        if ($mb_photo) {
+            if (G5_IS_MOBILE) {
+                $tmp_name .= '<span class="bl-photo" style="margin-left:-7px">'.$mb_photo.'</span>';
+            } else {
+                $tmp_name .= '<span class="bl-photo">'.$mb_photo.'</span>';
+            }
+
+            if ($config['cf_use_member_icon'] == 2) // 회원아이콘+이름
+                $tmp_name = $tmp_name.' '.get_text($name);
+            else
+                $tmp_name = get_text($name);
+        } else {
+            $tmp_name = get_text($name);
+        }
+        return $tmp_name;
     } else {
         $email_enc = new str_encrypt();
         $email = $email_enc->encrypt($email);
@@ -104,11 +124,7 @@ function eb_nameview($mb_id, $name='', $email='', $homepage='') {
                 /**
                  * 쪽지보내기
                  */
-                if (!G5_IS_MOBILE) {
-                    $str2 .= "<li><a href=\"javascript:void(0);\" onclick=\"memo_send_modal(this.title);\" title=\"".$mb_id."\" id=\"ol_after_memo\">쪽지보내기</a></li>\n";
-                } else {
-                    $str2 .= "<li><a href=\"".G5_BBS_URL."/memo_form.php?me_recv_mb_id=".$mb_id."\" target=\"_blank\" title=\"".$mb_id."\" id=\"ol_after_memo\">쪽지보내기</a></li>\n";
-                }
+                $str2 .= "<li><a href=\"".G5_BBS_URL."/memo_form.php?me_recv_mb_id=".$mb_id."\" onclick=\"memo_send_modal(this.href); return false;\">쪽지보내기</a></li>\n";
 
                 /**
                  * 자기소개정보

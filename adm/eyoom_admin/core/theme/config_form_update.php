@@ -50,7 +50,7 @@ if ($post_tm_alias) {
 /**
  * 테마 별칭 업데이트
  */
-$sql = "update {$g5['eyoom_theme']} set tm_alias = '{$post_tm_alias}', tm_last = '".G5_TIME_YMDHIS."' where tm_name = '{$post_theme}'";
+$sql = "update {$g5['eyoom_theme']} set tm_alias = '{$post_tm_alias}' where tm_name = '{$post_theme}'";
 sql_query($sql);   
 
 /**

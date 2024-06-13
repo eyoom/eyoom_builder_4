@@ -288,6 +288,33 @@ class theme extends qfile
     }
 
     /**
+     * 테마정보 체크
+     */
+    public function check_theme_info($tminfo) {
+        $hostname = $this->eb->eyoom_host();
+        $info = $this->eb->decrypt_md5($tminfo['cm_key'], $tminfo['cm_salt']);
+        if ($info) {
+            $cminfo = explode('|', $info);
+            if ($cminfo[0] != $hostname['host']) {
+                $data = array(
+                    'theme_name'  => $tminfo['tm_name'],
+                    'theme_key'   => $tminfo['tm_key'],
+                    'domain_name' => $hostname['host']
+                );
+
+                $ch = curl_init(CHECK_THEME_URL);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
+                $result = curl_exec($ch);
+                return $result;
+            }
+        }
+    }
+
+    /**
      * 기능별 스킨 경로
      */
     public function get_skin_path($dir, $skin) {
@@ -1218,6 +1245,7 @@ class theme extends qfile
 
         switch($key) {
             case 'new'              : $title = '새글모음'; break;
+            case 'best'             : $title = '인기게시물'; break;
             case 'respond'          : $title = '내글반응'; break;
             case 'search'           : $title = '전체검색'; break;
             case 'bo_search'        : $title = '검색결과'; $cate_name = $board['bo_subject']; break;

@@ -8,7 +8,7 @@ if (!defined('_EYOOM_')) exit;
 <style>
 .follow-panel {position:relative;border:1px solid #d5d5d5;margin-bottom:30px}
 .follow-panel .nav-tabs {border-bottom:0;margin-bottom:0}
-.follow-panel .nav-tabs li {width:33.33333%}
+.follow-panel .nav-tabs li {width:25%}
 .follow-panel .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #d5d5d5;padding:10px 5px;font-size:.9375rem;border-top:0}
 .follow-panel .nav-tabs li:first-child a {margin-left:0;border-left:0}
 .follow-panel .nav-tabs li:last-child a {border-right:0}
@@ -39,6 +39,11 @@ if (!defined('_EYOOM_')) exit;
         <li>
             <a href="#myfollowing" data-bs-toggle="tab">
                 팔로잉 (<?php if ($user['cnt_following']) { echo number_format($user['cnt_following']); } else { ?>0<?php } ?>)
+            </a>
+        </li>
+        <li>
+            <a href="#subscriber" data-bs-toggle="tab">
+                구독회원 (<?php if ($user['cnt_subscriber']) { echo number_format($user['cnt_subscriber']); } else { ?>0<?php } ?>)
             </a>
         </li>
     </ul>
@@ -97,6 +102,25 @@ if (!defined('_EYOOM_')) exit;
                 <?php } ?>
                 <?php if (count((array)$my_following) == 0) { ?>
                 <div class="text-center text-gray m-t-15 m-b-30"><i class="fa fa-exclamation-circle"></i> 팔로잉이 없습니다.</div>
+                <?php } ?>
+            </ul>
+        </div>
+        <div class="tab-pane in" id="subscriber">
+            <a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&subscriber" class="float-end">
+                <u>구독회원 전체보기</u>
+            </a>
+            <div class="clearfix"></div>
+            <ul class="follow-list clearfix">
+                <?php for ($i=0; $i<count((array)$my_subscriber); $i++) { ?>
+                <li class="tooltips" type="button" data-bs-placement="top" data-bs-toggle="tooltip" title="<?php echo $my_subscriber[$i]['mb_nick']; ?>">
+                    <a href="<?php echo G5_URL; ?>/?<?php echo $my_subscriber[$i]['mb_id']; ?>">
+                        <?php if ($my_subscriber[$i]['mb_photo']) { echo $my_subscriber[$i]['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
+                    </a>
+                    <span class="ellipsis"><?php echo $my_subscriber[$i]['mb_nick']; ?></span>
+                </li>
+                <?php } ?>
+                <?php if (count((array)$my_subscriber) == 0) { ?>
+                <div class="text-center text-gray m-t-15 m-b-30"><i class="fa fa-exclamation-circle"></i> 구독회원이 없습니다.</div>
                 <?php } ?>
             </ul>
         </div>

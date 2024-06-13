@@ -16,6 +16,7 @@ auth_check_menu($auth, $sub_menu, 'r');
 if (!sql_query(" DESCRIBE `{$g5['qa_config_table']}` ", false)) {
   sql_query(
       " CREATE TABLE IF NOT EXISTS `{$g5['qa_config_table']}` (
+                `qa_id` int(11) NOT NULL auto_increment,
                 `qa_title` varchar(255) NOT NULL DEFAULT'',
                 `qa_category` varchar(255) NOT NULL DEFAULT'',
                 `qa_skin` varchar(255) NOT NULL DEFAULT '',
@@ -50,7 +51,8 @@ if (!sql_query(" DESCRIBE `{$g5['qa_config_table']}` ", false)) {
                 `qa_2` varchar(255) NOT NULL DEFAULT '',
                 `qa_3` varchar(255) NOT NULL DEFAULT '',
                 `qa_4` varchar(255) NOT NULL DEFAULT '',
-                `qa_5` varchar(255) NOT NULL DEFAULT ''
+                `qa_5` varchar(255) NOT NULL DEFAULT '',
+                PRIMARY KEY (`qa_id`)
               )",
       true
   );

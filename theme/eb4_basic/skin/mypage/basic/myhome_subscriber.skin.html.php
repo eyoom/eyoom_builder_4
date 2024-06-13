@@ -1,29 +1,29 @@
 <?php
 /**
- * skin file : /theme/THEME_NAME/skin/mypage/basic/myhome_follower.skin.html.php
+ * skin file : /theme/THEME_NAME/skin/mypage/basic/myhome_subscriber.skin.html.php
  */
 if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.myhome-follow .follow-heading {position:relative;height:60px;line-height:60px;background:#454545;color:#fff;font-size:1.125rem;padding:0 0 0 20px;margin-bottom:20px;margin-top:40px}
+.myhome-follow .follow-heading {position:relative;height:50px;line-height:50px;background:#959595;color:#fff;font-size:1.125rem;padding:0 0 0 20px;margin-bottom:10px;margin-top:40px}
 .myhome-follow .follow-heading .owner-photo {position:absolute;top:-30px;right:20px;overflow:hidden;width:60px;height:60px;border:4px solid #fff;border-radius:50%}
 .myhome-follow .follow-heading .owner-photo img {display:block;max-width:100%;height:auto}
 .myhome-follow .infinite-container {position:relative;overflow:hidden;padding-bottom:50px;margin-left:-10px;margin-right:-10px}
 .myhome-follow .follow-item {position:relative;float:left;width:50%;padding-top:40px;padding-left:10px;padding-right:10px}
 .myhome-follow .follow-item-box {position:relative;height:auto;padding:15px;background:#fff;border:1px solid #d5d5d5;margin-bottom:20px}
-.myhome-follow .follow-photo {position:absolute;top:-40px;left:15px;overflow:hidden;width:80px;height:80px;border:5px solid #fff;border-radius:50%;box-shadow:0 0 1px rgba(0, 0, 0, 0.7);z-index:1}
+.myhome-follow .follow-photo {position:absolute;top:-30px;left:15px;overflow:hidden;width:60px;height:60px;border:5px solid #fff;border-radius:50%;box-shadow:0 0 1px rgba(0, 0, 0, 0.7);z-index:1}
 .myhome-follow .follow-photo img {display:block;max-width:100%;height:auto}
 .myhome-follow .follow-info {position:relative}
 .myhome-follow .follow-info-heading {margin-left:90px;margin-bottom:15px}
 .myhome-follow .follow-info-content {position:relative}
-.myhome-follow .follow-info-content .margin-hr-15 {border-top:1px dotted #f2f2f2}
-.myhome-follow .follow-name {line-height:20px}
+.myhome-follow .follow-info-content .margin-hr-10 {border-top:1px dotted #f2f2f2}
+.myhome-follow .follow-name {fline-height:20px}
 .myhome-follow .follow-name a {color:#252525}
 .myhome-follow .follow-lp {line-height:20px}
-.myhome-follow .follow-sign {position:relative;color:#757575}
+.myhome-follow .follow-sign {position:relative;color:#959595}
 .myhome-follow .follow-sign strong {color:#252525}
-.myhome-follow .follow-introduce {position:relative;color:#757575}
+.myhome-follow .follow-introduce {position:relative;color:#959595}
 .myhome-follow .follow-introduce strong {color:#252525}
 .myhome-follow .profile-btns {position:absolute;top:0;right:0}
 .myhome-follow .follow-item-box:hover .follow-name a {text-decoration:underline}
@@ -36,11 +36,11 @@ if (!defined('_EYOOM_')) exit;
 <div class="myhome-follow">
     <div class="follow-heading">
         <div class="owner-photo">
-            <?php if ($user['mb_photo']) { echo $user['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
+            <?php if ($user['mb_photo']) {  echo $user['mb_photo']; } else { ?><img src="<?php echo $eyoom_skin_url['mypage']; ?>/img/user.jpg" alt="회원사진"><?php } ?>
         </div>
         <strong>
-            <?php if ($user['mb_id'] == $member['mb_id']) { ?>나의 팔로워<?php } else { ?><?php echo $user['mb_nick']; ?> 님의 팔로워<?php } ?>
-            <span class="m-l-5">[ <span class="text-blue"><?php if ($user['cnt_follower']) { ?><?php echo number_format($user['cnt_follower']); ?><?php } else { ?>0<?php } ?>명</span> ]</span>
+            구독회원
+            <span class="m-l-5">[ <span class="text-dark"><?php if ($user['cnt_subscriber']) { ?><?php echo number_format($user['cnt_subscriber']); ?><?php } else { ?>0<?php } ?>명</span> ]</span>
         </strong>
     </div>
     <div class="infinite-container">
@@ -55,31 +55,29 @@ if (!defined('_EYOOM_')) exit;
                 <div class="follow-info">
                     <div class="follow-info-heading">
                         <span class="follow-name float-start">
-                            <a href="<?php echo G5_URL; ?>/?<?php echo $list[$i]['mb_id']; ?>" target="_blank">
                                 <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?>
-                            </a>
                         </span>
-                        <span class="follow-lp float-end">
-                            레벨 : <span class="m-r-10"><?php echo $list[$i]['level']; ?></span>
-                            포인트 : <span><?php echo number_format($list[$i]['mb_point']); ?></span>
+                        <span class="follow-lp float-end" style="font-size:.875rem">
+                            레벨: <span class="m-r-5"><?php echo $list[$i]['level']; ?></span>
+                            포인트: <span><?php echo number_format($list[$i]['mb_point']); ?></span>
                         </span>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="margin-hr-15"></div>
+                    <div class="margin-hr-10"></div>
                     <div class="follow-info-content">
                         <span class="display-block m-b-5">가입일 : <?php echo $eb->date_format('Y.m.d',$list[$i]['mb_datetime']); ?></span>
                         <span>
-                            팔로워 : <span class="m-r-10"><?php echo number_format($list[$i]['cnt_follower']); ?></span>
-                            팔로윙 : <span><?php echo number_format($list[$i]['cnt_following']); ?></span>
+                            팔로워 : <span class="m-r-10"><?php echo number_format($list[$i]['follower']); ?></span>
+                            팔로윙 : <span><?php echo number_format($list[$i]['subscriber']); ?></span>
                         </span>
 
                         <?php if ($config['cf_use_signature'] == '1') { ?>
-                        <div class="margin-hr-15"></div>
-                        <div class="follow-sign">서명 : <?php echo stripslashes($list[$i]['mb_signature']); ?></div>
+                        <div class="margin-hr-10"></div>
+                        <div class="follow-sign ellipsis">서명 : <?php echo stripslashes($list[$i]['mb_signature']); ?></div>
                         <?php } ?>
                         <?php if ($config['cf_use_profile'] == '1') { ?>
-                        <div class="margin-hr-15"></div>
-                        <div class="follow-introduce">소개 : <?php echo stripslashes($list[$i]['mb_profile']); ?></div>
+                        <div class="margin-hr-10"></div>
+                        <div class="follow-introduce ellipsis">소개 : <?php echo stripslashes($list[$i]['mb_profile']); ?></div>
                         <?php } ?>
 
                         <?php if ($is_member) { ?>
@@ -106,12 +104,12 @@ if (!defined('_EYOOM_')) exit;
         <?php } ?>
         <?php if (count((array)$list) == 0) { ?>
         <div class="text-center text-gray m-t-30">
-            <i class="fa fa-exclamation-circle"></i> 팔로워한 회원이 없습니다.
+            <i class="fas fa-exclamation-circle"></i> 구독회원이 없습니다.
         </div>
         <?php } ?>
     </div>
     <div id="infinite_pagination">
-        <a class="next" href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&follower&page=<?php echo ($page+1); ?>"></a>
+        <a class="next" href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&subscriber&page=<?php echo ($page+1); ?>"></a>
     </div>
 </div>
 

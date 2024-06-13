@@ -44,7 +44,9 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                     <tr>
                         <th class="text-center"><?php echo $list[$i]['ev_id']; ?></th>
                         <td class="text-center">
-                            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=itemeventform&amp;w=u&amp;ev_id=<?php echo $list[$i]['ev_id']; ?>"><u>수정</u></a><a href="<?php echo G5_SHOP_URL; ?>/event.php?ev_id=<?php echo $list[$i]['ev_id']; ?>" target="_blank" class='m-l-10'><u>보기</u></a><a href="<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=itemeventformupdate&amp;w=d&amp;ev_id=<?php echo $list[$i]['ev_id']; ?>" onclick="return delete_confirm(this);" class="m-l-10"><u>삭제</u></a>
+                            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=itemeventform&amp;w=u&amp;ev_id=<?php echo $list[$i]['ev_id']; ?>"><u>수정</u></a>
+                            <a href="<?php echo G5_SHOP_URL; ?>/event.php?ev_id=<?php echo $list[$i]['ev_id']; ?>" target="_blank" class='m-l-10'><u>보기</u></a>
+                            <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&amp;pid=itemeventformupdate&amp;w=d&amp;ev_id=<?php echo $list[$i]['ev_id']; ?>&amp;smode=1" onclick="delete_confirm(this.href); return false;" class="m-l-10"><u>삭제</u></a>
                         </td>
                         <td><?php echo $list[$i]['subject']; ?></td>
                         <td class="text-center"><?php echo $list[$i]['cnt'] ? $list[$i]['href']: 0; ?></td>
@@ -67,9 +69,15 @@ function itemeventwin(ev_id) {
     window.open("<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&pid=itemeventwin&wmode=1&ev_id="+ev_id, "itemeventwin", "left=10,top=10,width=500,height=600,scrollbars=1");
 }
 
-function delete_confirm() {
-    if(confirm('정말로 선택한 이벤트를 삭제하시겠습니까?')) {
-        return true;
+function delete_confirm(href) {
+    if (confirm("정말로 해당 이벤트를 삭제하시겠습니까??")) {
+        var token = get_ajax_token(href);
+        if(!token) {
+            alert("토큰 정보가 올바르지 않습니다.");
+            return false;
+        }
+        href += '&token='+token;
+        document.location.href = href;
     } else {
         return false;
     }

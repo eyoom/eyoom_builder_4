@@ -23,7 +23,7 @@ if ($eyoom_board['bo_use_addon_map'] == '1') {
 /**
  * 익명글 설정값
  */
-$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$bo_use_anonymous = !$is_admin ? $eyoom_board['bo_use_anonymous']: false;
 $is_anonymous = false;
 
 unset($cmt);
@@ -55,11 +55,19 @@ for ($i=0; $i<$cmt_amt; $i++) {
         $cmt[$i]['bomb_point'] = is_array($point['bomb']) ? array_sum($point['bomb']):0;
         $cmt[$i]['lucky_point'] = $point['lucky'] ? $point['lucky']:0;
     }
+    
+    /**
+     * 비밀댓글 체크
+     */
+    $is_secret_cmt = false;
+    if (strstr($cmt[$i]['wr_option'], 'secret') && !$is_admin && $cmt[$i]['mb_id'] && $cmt[$i]['mb_id'] != $member['mb_id']) {
+        $is_secret_cmt = true;
+    }
 
     /**
      * wr_link2를 활용하여 댓글에 이미지표현
      */
-    $cmt_file = $eb->mb_unserialize($list[$i]['wr_link2']);
+    $cmt_file = !$is_secret_cmt ? $eb->mb_unserialize($list[$i]['wr_link2']): '';
     if (is_array($cmt_file)) {
         $cfile_loop = &$cmt[$i]['cmtfile'];
         $cimg_loop = &$cmt[$i]['cmtimg'];
@@ -96,10 +104,36 @@ for ($i=0; $i<$cmt_amt; $i++) {
     }
 
     if ($is_anonymous) {
+        $anonymous_title = '';
+        if ($cmt[$i]['mb_id'] == $write['mb_id']) {
+            $anonymous_title = $eyoom['anonymous_title'] . '(글쓴이)';
+        } else {
+            if (!$cmt[$i]['wr_hit']) {
+                $sql1 = "select wr_hit from {$write_table} where wr_parent = '{$wr_id}' and mb_id = '{$cmt[$i]['mb_id']}' ";
+                $row1 = sql_fetch($sql1);
+                if ($row1['wr_hit']) {
+                    $anum = (int) $row1['wr_hit'];
+                } else {
+                    $sql2 = "select max(wr_hit) as max from {$write_table} where wr_parent = '{$wr_id}' and wr_id <> wr_parent ";
+                    $row2 = sql_fetch($sql2);
+                    if (!$row2) {
+                        $row2['max'] = 0;
+                    }
+                    $anum = (int) $row2['max'] + 1;
+                }
+                $sql3 = "update {$write_table} set wr_hit = '{$anum}' where wr_parent = '{$wr_id}' and mb_id = '{$cmt[$i]['mb_id']}' ";
+                sql_query($sql3);
+            } else {
+                $anum = $cmt[$i]['wr_hit'];
+            }
+            $anonymous_title = $eyoom['anonymous_title'] . $anum;
+        }
+
         $cmt[$i]['mb_photo'] = '';
         $cmt[$i]['is_anonymous'] = 'y';
+        $cmt[$i]['mb_id2'] = $cmt[$i]['mb_id'];
         $cmt[$i]['mb_id'] = 'anonymous';
-        $cmt[$i]['wr_name'] = $eyoom['anonymous_title'];
+        $cmt[$i]['wr_name'] = $anonymous_title;
         $cmt[$i]['email'] = '';
         $cmt[$i]['homepage'] = '';
         $cmt[$i]['gnu_level'] = '';

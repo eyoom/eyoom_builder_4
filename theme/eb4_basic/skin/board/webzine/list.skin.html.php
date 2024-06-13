@@ -240,7 +240,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <?php } ?>
                 </p>
                 <div class="webzine-info">
-                    <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
+                    <span><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage'], $list[$i]['mb_id2']); ?></span>
                     <?php if ($list[$i]['gnu_icon']) { ?>
                     <span class="webzine-lv-icon"><img src="<?php echo $list[$i]['gnu_icon']; ?>" alt="레벨"></span>
                     <?php } ?>

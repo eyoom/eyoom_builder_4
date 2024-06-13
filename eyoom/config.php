@@ -219,6 +219,11 @@ $g5['eyoom_subscribe'] = G5_TABLE_PREFIX . 'eyoom_subscribe';
 $g5['eyoom_pin'] = G5_TABLE_PREFIX . 'eyoom_pin';
 
 /**
+ * 인기게시물 기능
+ */
+$g5['eyoom_best'] = G5_TABLE_PREFIX . 'eyoom_best';
+
+/**
  * EB상품 마스터
  */
 $g5['eyoom_goods'] = G5_TABLE_PREFIX . 'eyoom_goods';

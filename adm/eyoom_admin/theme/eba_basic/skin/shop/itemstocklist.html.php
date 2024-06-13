@@ -227,7 +227,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <div class="itemstocklist-image"><a href='<?php echo $list[$i]['href']; ?>' target='_blank'><?php echo $list[$i]['image']; ?></a></div>
                         </td>
                         <td><?php echo get_text($list[$i]['it_name']); ?></td>
-                        <td class="text-end"><?php echo $list[$i]['it_stock_qty_str']; ?></td>
+                        <td class="text-end"><?php echo get_text($list[$i]['it_stock_qty_str']); ?></td>
                         <td class="text-end"><?php echo number_format($list[$i]['wait_qty']); ?></td>
                         <td class="text-end"><?php echo number_format($list[$i]['temporary_qty']); ?></td>
                         <td>

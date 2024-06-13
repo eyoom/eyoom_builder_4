@@ -111,11 +111,11 @@ if (isset($_FILES['bottom_mobile_shoplogo']['name']) && $_FILES['bottom_mobile_s
 if ((isset($_POST['top_logo_del']) && $_POST['top_logo_del']) || $top_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_logo_del']}");
 if ((isset($_POST['bottom_logo_del']) && $_POST['bottom_logo_del']) || $bottom_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_logo_del']}");
 if ((isset($_POST['top_mobile_logo_del']) && $_POST['top_mobile_logo_del']) || $top_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_logo_del']}");
-if ((isset($_POST['bottom_mobile_logo_del']) && $_POST['bottom_mobile_logo_del']) || $bottom_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_logo_del']}");
+if ((isset($_POST['bottom_mobile_logo_del']) && $_POST['bottom_mobile_logo_del']) || $bottom_mobile_logo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_mobile_logo_del']}");
 if ((isset($_POST['top_shoplogo_del']) && $_POST['top_shoplogo_del']) || $top_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_shoplogo_del']}");
 if ((isset($_POST['bottom_shoplogo_del']) && $_POST['bottom_shoplogo_del']) || $bottom_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_shoplogo_del']}");
 if ((isset($_POST['top_mobile_shoplogo_del']) && $_POST['top_mobile_shoplogo_del']) || $top_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['top_mobile_shoplogo_del']}");
-if ((isset($_POST['bottom_mobile_shoplogo_del']) && $_POST['bottom_mobile_shoplogo_del']) || $bottom_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_lmobile_shoplogo_del']}");
+if ((isset($_POST['bottom_mobile_shoplogo_del']) && $_POST['bottom_mobile_shoplogo_del']) || $bottom_mobile_shoplogo)  @unlink(G5_DATA_PATH."/common/{$_POST['bottom_mobile_shoplogo_del']}");
 
 /**
  * 테마의 기업정보 설정 파일

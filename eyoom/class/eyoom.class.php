@@ -64,7 +64,7 @@ class eyoom extends qfile
          */
         if (count($_GET) > 0 && !$_GET['theme']) {
             // 마이홈 주소 체계 - /?user_id&permit_string
-            $permit = array('page','following','follower','friends','guest');
+            $permit = array('page','following','follower','friends','guest','subscriber');
             $index = false; $i=0;
             foreach ($_GET as $k => $v) {
                 if ($i==0) { $dummy_id = $k; $i++; continue; } // 첫번째 변수는 dummy_id
@@ -500,6 +500,22 @@ class eyoom extends qfile
     }
 
     /**
+     * 나를 구독한 회원
+     */
+    public function subscriber_member($mb_id, $cnt = '') {
+        $limit = $cnt ? " limit {$cnt} ": '';
+        $sql = "select b.mb_id, b.mb_name, b.mb_nick, b.mb_email, b.mb_homepage from {$this->g5['eyoom_subscribe']} as a left join {$this->g5['member_table']} as b on a.sb_my_id = b.mb_id where a.sb_mb_id = '{$mb_id}' {$limit} ";
+        $result = sql_query($sql);
+
+        $my_subscriber = array();
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $my_subscriber[$i] = $row;
+            $my_subscriber[$i]['mb_photo'] = $this->mb_photo($row['mb_id']);
+        }
+        return $my_subscriber;
+    }
+
+    /**
      * 내가 팔로우한 회원수 - 팔로윙
      */
     public function count_following($mb_id) {
@@ -520,6 +536,14 @@ class eyoom extends qfile
      */
     public function count_friends($mb_id) {
         $info = sql_fetch("select count(*) as cnt from {$this->g5['eyoom_follow']} where fo_my_id = '{$mb_id}' and fo_friends = 'y' ", false);
+        return $info['cnt'];
+    }
+
+    /**
+     * 나를 구독한 회원수
+     */
+    public function count_subscriber($mb_id) {
+        $info = sql_fetch("select count(*) as cnt from {$this->g5['eyoom_subscribe']} where sb_mb_id = '{$mb_id}' ", false);
         return $info['cnt'];
     }
 
@@ -1140,15 +1164,22 @@ class eyoom extends qfile
      * unserialize : return false 오류 처리
      */
     public function mb_unserialize($serial_str) {
-        $unserialize_arr = unserialize($serial_str);
-        if ($unserialize_arr && is_array($unserialize_arr)) {
-            return $unserialize_arr;
+        if( version_compare( PHP_VERSION, '5.3' , '<' ) ){
+            $unserialize_arr = unserialize($serial_str);
+            if ($unserialize_arr && is_array($unserialize_arr)) {
+                return $unserialize_arr;
+            } else {
+                $serial_str = preg_replace_callback(
+                    '/s:(\d+):"([\s\S]*?)";/',
+                    array($this, 'replace_serial_callback'),
+                    $serial_str
+                );
+            }
         } else {
-            $serial_str = preg_replace_callback(
-                '/s:(\d+):"([\s\S]*?)";/',
-                array($this, 'replace_serial_callback'),
-                $serial_str
-            );
+            $serial_str = preg_replace_callback('/s:(\d+):"([\s\S]*?)";/', function($matches) {
+                return 's:'.strlen($matches[2]).':"'.$matches[2].'";';
+            }, $serial_str);
+            return unserialize($serial_str);  
         }
     }
     

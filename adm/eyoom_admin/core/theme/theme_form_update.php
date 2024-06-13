@@ -44,6 +44,7 @@ $set = "
 	tm_key = '{$tm_key}',
 	cm_key = '{$cm_key}',
 	cm_salt = '{$cm_salt}',
+	tm_last = '".G5_TIME_YMDHIS."',
 	tm_time = '".G5_TIME_YMDHIS."'
 ";
 

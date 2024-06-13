@@ -191,9 +191,9 @@ $frm_submit .= $frm_eba_submit;
             </div>
             <div class="adm-form-td td-r">
                 <div class="inline-group">
-                    <label for="mb_certify_sa" class="radio"><input type="radio" name="mb_certify_case" value="simple" id="mb_certify_sa" <?php if($mb['mb_certify_case'] == 'simple') echo 'checked="checked"'; ?>><i></i> 간편인증</label>
-                    <label for="mb_certify_hp" class="radio"><input type="radio" name="mb_certify_case" value="hp" id="mb_certify_hp" <?php if($mb['mb_certify_case'] == 'hp') echo 'checked="checked"'; ?>><i></i> 휴대폰</label>
-                    <label for="mb_certify_ipin" class="radio"><input type="radio" name="mb_certify_case" value="ipin" id="mb_certify_ipin" <?php if($mb['mb_certify_case'] == 'ipin') echo 'checked="checked"'; ?>><i></i> 아이핀</label>
+                    <label for="mb_certify_sa" class="radio"><input type="radio" name="mb_certify_case" value="simple" id="mb_certify_sa" <?php if($mb['mb_certify'] == 'simple') echo 'checked="checked"'; ?>><i></i> 간편인증</label>
+                    <label for="mb_certify_hp" class="radio"><input type="radio" name="mb_certify_case" value="hp" id="mb_certify_hp" <?php if($mb['mb_certify'] == 'hp') echo 'checked="checked"'; ?>><i></i> 휴대폰</label>
+                    <label for="mb_certify_ipin" class="radio"><input type="radio" name="mb_certify_case" value="ipin" id="mb_certify_ipin" <?php if($mb['mb_certify'] == 'ipin') echo 'checked="checked"'; ?>><i></i> 아이핀</label>
                 </div>
             </div>
         </div>
@@ -283,7 +283,7 @@ $frm_submit .= $frm_eba_submit;
                     <img src="<?php echo $icon_url.$icon_filemtile; ?>" alt="">
                     <label for="del_mb_icon" class="checkbox"><input type="checkbox" id="del_mb_icon" name="del_mb_icon" value="1"><i></i> 삭제</label>
                     <?php } ?>
-                    <div class="note"><strong>Note:</strong> 아이콘 크기는 <strong>넓이 <?php echo $config['cf_member_icon_width']; ?>픽셀 높이 <?php echo $config['cf_member_icon_height']; ?>픽셀</strong>로 해주세요.</div>
+                    <div class="note"><strong>Note:</strong> 아이콘 크기는 <strong>너비 <?php echo $config['cf_member_icon_width']; ?>픽셀 높이 <?php echo $config['cf_member_icon_height']; ?>픽셀</strong>로 해주세요.</div>
                 </div>
             </div>
             <div class="adm-form-tr tr-r">
@@ -298,7 +298,7 @@ $frm_submit .= $frm_eba_submit;
                     <?php echo get_member_profile_img($mb['mb_id']); ?>
                     <label for="del_mb_img" class="checkbox"><input type="checkbox" id="del_mb_img" name="del_mb_img" value="1"><i></i> 삭제</label>
                     <?php } ?>
-                    <div class="note"><strong>Note:</strong> 이미지 크기는 <strong>넓이 <?php echo $config['cf_member_img_width']; ?>픽셀 높이 <?php echo $config['cf_member_img_height']; ?>픽셀</strong>로 해주세요.</div>
+                    <div class="note"><strong>Note:</strong> 이미지 크기는 <strong>너비 <?php echo $config['cf_member_img_width']; ?>픽셀 높이 <?php echo $config['cf_member_img_height']; ?>픽셀</strong>로 해주세요.</div>
                 </div>
             </div>
         </div>

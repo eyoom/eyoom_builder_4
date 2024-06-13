@@ -121,7 +121,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="bo_blind_direct" class="select max-width-250px">
                             <?php echo get_member_level_select('bo_blind_direct', 1, 10, $eyoom_board['bo_blind_direct']); ?><i></i>
                         </label>
-                        <div class="note"><strong>Note:</strong> 선택한 그누레벨 이상의 회원은 블라인드된 게시물을 볼 수 있습니다.</div>
+                        <div class="note"><strong>Note:</strong> 선택한 그누레벨 이상의 회원은 블라인드된 설정 권한이 있습니다.</div>
                         <div class="adm-form-td-rs">
                             <div class="inline-group">
                                 <label for="chk_grp_blind_direct" class="checkbox"><input type="checkbox" name="chk_grp_blind_direct" value="1" id="chk_grp_blind_direct"><i></i>그룹적용</label>
@@ -146,7 +146,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="bo_use_rating" class="checkbox" style="width:80px;">
                             <input type="checkbox" name="bo_use_rating" id="bo_use_rating" value="1" <?php echo $eyoom_board['bo_use_rating']=='1' ? 'checked': ''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> 체크를 해제하시면 목록에서 별점 표시 사용이 체크되어 있어도 목록에 별점 기능이 출력되지 않습니다.</div>
+                        <div class="note"><strong>Note:</strong> 사용 체크가 되어 있지 않으면 아래 '목록에서 별점 표시 사용'이 체크되어 있어도 목록에 별점이 출력되지 않습니다.</div>
                         <div class="adm-form-td-rs">
                             <div class="inline-group">
                                 <label for="chk_grp_rating" class="checkbox"><input type="checkbox" name="chk_grp_rating" value="1" id="chk_grp_rating"><i></i>그룹적용</label>
@@ -181,7 +181,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="bo_use_rating_list" class="checkbox" style="width:80px;">
                             <input type="checkbox" name="bo_use_rating_list" id="bo_use_rating_list" value="1" <?php echo $eyoom_board['bo_use_rating_list']=='1' ? 'checked': ''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> 게시판 리스트 페이지에서 별점 평점내역을 출력할지 설정합니다.</div>
+                        <div class="note"><strong>Note:</strong> 게시판 목록에서 별점 평점내역을 출력할지 설정합니다.</div>
                         <div class="adm-form-td-rs">
                             <div class="inline-group">
                                 <label for="chk_grp_rating_list" class="checkbox"><input type="checkbox" name="chk_grp_rating_list" value="1" id="chk_grp_rating_list"><i></i>그룹적용</label>
@@ -442,17 +442,95 @@ $frm_submit .= $frm_eba_submit;
         </div>
         <?php /* 자동이동/복사 : 끝 */ ?>
 
+        <?php /* 인기게시물 : 시작 */ ?>
+        <div class="tab-pane" id="anc_bo_best" role="tabpanel" aria-labelledby="anc_bo_best_tab">
+            <div class="adm-form-table m-b-20">
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>인기게시물</strong></div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_best" class="label">인기게시물 기능 사용</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label for="bo_use_best" class="checkbox" style="width:80px;">
+                            <input type="checkbox" name="bo_use_best" id="bo_use_best" value="1" <?php echo $eyoom_board['bo_use_best']=='1' ? 'checked': ''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 사용 체크시 인기게시물 기능을 활성화하며 사용시점부터 추천 및 조회한 게시글에 적용됩니다.</div>
+                        <div class="note"><strong>Note:</strong> 익명게시물은 인기게시물에서 제외됩니다.</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_use_best" class="checkbox"><input type="checkbox" name="chk_grp_use_best" value="1" id="chk_grp_use_best"><i></i>그룹적용</label>
+                                <label for="chk_all_use_best" class="checkbox"><input type="checkbox" name="chk_all_use_best" value="1" id="chk_all_use_best"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_best" class="label">인기게시물 조건</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <div class="inline-group m-b-20">
+                            <span>
+                                <label for="bo_best_use1" class="checkbox" style="width:80px;">
+                                    <input type="checkbox" name="bo_best_use1" id="bo_best_use1" value="1" <?php echo $bo_best['use1']=='1' ? 'checked': ''; ?>><i></i> 사용
+                                </label>
+                            </span>
+                            <span>
+                                <label for="bo_best_type1" class="select width-200px">
+                                    <select name="bo_best_type1" id="bo_best_type1">
+                                        <option value="hit" <?php echo $bo_best['type1']=='hit' ? 'selected': ''; ?>>[규칙1] 조회수가</option>
+                                    </select><i></i>
+                                </label>
+                            </span>
+                            <span>
+                                <label for="bo_best_count1" class="input width-200px">
+                                    <i class="icon-append width-80px">이상이면</i>
+                                    <input type="text" name="bo_best_count1" id="bo_best_count1" value="<?php echo $bo_best['count1'] ? $bo_best['count1']: '100'; ?>">
+                                </label>
+                            </span>
+                            <span>
+                                인기게시물로 지정합니다.
+                            </span>
+                        </div>
+                        <div class="inline-group m-b-20">
+                            <span>
+                                <label for="bo_best_use2" class="checkbox" style="width:80px;">
+                                    <input type="checkbox" name="bo_best_use2" id="bo_best_use2" value="1" <?php echo $bo_best['use2']=='1' ? 'checked': ''; ?>><i></i> 사용
+                                </label>
+                            </span>
+                            <span>
+                                <label for="bo_best_type2" class="select width-200px">
+                                    <select name="bo_best_type2" id="bo_best_type2">
+                                        <option value="good" <?php echo $bo_best['type2']=='good' ? 'selected': ''; ?>>[규칙2] 추천수가</option>
+                                    </select><i></i>
+                                </label>
+                            </span>
+                            <span>
+                                <label for="bo_best_count2" class="input width-200px">
+                                    <i class="icon-append width-80px">이상이면</i>
+                                    <input type="text" name="bo_best_count2" id="bo_best_count2" value="<?php echo $bo_best['count2'] ? $bo_best['count2']: '10'; ?>">
+                                </label>
+                            </span>
+                            <span>
+                                인기게시물로 지정합니다.
+                            </span>
+                        </div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_best" class="checkbox"><input type="checkbox" name="chk_grp_best" value="1" id="chk_grp_best"><i></i>그룹적용</label>
+                                <label for="chk_all_best" class="checkbox"><input type="checkbox" name="chk_all_best" value="1" id="chk_all_best"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php /* 인기게시물 : 끝 */ ?>
+
         <?php /* 상단고정 : 시작 */ ?>
         <div class="tab-pane" id="anc_bo_wrfixed" role="tabpanel" aria-labelledby="anc_bo_wrfixed_tab">
             <div class="adm-form-table m-b-20">
                 <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>게시물 상단고정 설정</strong></div>
-                <div class="adm-form-info">
-                    <div class="cont-text-bg">
-                        <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> 게시판별로 게시물의 상단고정 기능의 조건을 설정하실 수 있습니다.
-                        </p>
-                    </div>
-                </div>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="bo_use_wrfixed" class="label">게시물 상단고정 사용여부</label>
@@ -536,9 +614,9 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-info">
                     <div class="cont-text-bg">
                         <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 게시물 작성자가 읽기 포인트를 설정하면 설정한 포인트를 작성자에게 지불하고 게시물을 읽을 수 있습니다.<br>
-                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 최고관리자의 경우 설정한 포인트와 상관없이 게시물을 읽을 수 있습니다.<br>
-                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 이윰넷에서 판매하는 유료 게시판 스킨인 포인트게시물 스킨에서 작동되며 다른 스킨에서는 작동하지 않습니다.
+                            <i class="fas fa-info-circle"></i> 게시물 작성자가 읽기 포인트를 설정하면 설정한 포인트를 작성자에게 지불하고 게시물을 읽을 수 있습니다.<br>
+                            <i class="fas fa-info-circle"></i> 최고관리자의 경우 설정한 포인트와 상관없이 게시물을 읽을 수 있습니다.<br>
+                            <i class="fas fa-info-circle"></i> 이윰넷에서 판매하는 유료 게시판 스킨인 포인트게시물 스킨에서 작동되며 다른 스킨에서는 작동하지 않습니다.
                         </p>
                     </div>
                 </div>
@@ -584,13 +662,6 @@ $frm_submit .= $frm_eba_submit;
         <div class="tab-pane" id="anc_bo_cmtpoint" role="tabpanel" aria-labelledby="anc_bo_cmtpoint_tab">
             <div class="adm-form-table m-b-20">
                 <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>댓글 <?php echo $levelset['gnu_name']; ?> 설정</strong></div>
-                <div class="adm-form-info">
-                    <div class="cont-text-bg">
-                        <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> <strong>중요</strong> : 영카트5를 이용하시고 <a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&pid=config_form"><u><strong class="text-black">포인트 사용</strong></u></a> 설정이 <strong>[사용]</strong>으로 체크되어 있을 경우, 상품구매를 위해 결제 수단으로 사용될 수 있는 포인트입니다.
-                        </p>
-                    </div>
-                </div>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label class="label">댓글<?php echo $levelset['gnu_name']; ?> 설명</label>
@@ -968,8 +1039,7 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-info">
                     <div class="cont-text-bg">
                         <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 채택 게시판을 사용하실 경우, 사이트 성격에 맞게 조건을 설정하실 수 있습니다.<br>
-                            <i class="fas fa-info-circle"></i> <strong>알림</strong> : 이윰넷에서 판매하는 유료 게시판 스킨인 채택게시판 스킨에서 작동되며 다른 스킨에서는 작동하지 않습니다.
+                            <i class="fas fa-info-circle"></i> 이윰넷에서 판매하는 유료 게시판 스킨인 채택게시판 스킨에서 작동되며 다른 스킨에서는 작동하지 않습니다.
                         </p>
                     </div>
                 </div>

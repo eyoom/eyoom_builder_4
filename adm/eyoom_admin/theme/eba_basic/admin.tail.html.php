@@ -30,11 +30,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 <iframe src="about:blank" name="blank_iframe" id="blank_iframe" style="display:none;"></iframe>
 
-<?php if ($config['cf_editor'] == 'smarteditor2') { ?>
+<?php if ($config['cf_editor'] == 'smarteditor2' || 'smarteditor2_eyoom') { ?>
 <script>
 $(document).ready(function() {
     // 만일 smarteditor를 사용할 경우, 단축키 버튼 숨기기
     $('.cke_sc').hide();
+
+    // 부트스트랩의 tab active 시 tabpanel내 스마트에디터 작동 안되는 버그 해결
+    $('.smarteditor2').next().attr('class', 'se2_iframe');
+    $(".se2_iframe").on("load", function() {
+        var iframeBody = $('.se2_iframe').contents().find('body');
+        $('.se2_iframe').css('min-height', '361px');
+        iframeBody.find('#se2_iframe').css('min-height', '300px');
+        iframeBody.find('.husky_seditor_ui_fontName').css('display', 'none');
+    });
 });
 </script>
 <?php } ?>
@@ -62,6 +71,18 @@ if (currentMode == "dark") {
             e.editor.document.getBody().setStyle('color', '#858585');
         });
     }
+    // smarteditor2_eyoom 사용시 다크모드 적용
+    <?php if ($config['cf_editor'] == 'smarteditor2_eyoom') { ?>
+	$(document).ready(function() {
+		$(".se2_iframe").on("load", function() {
+			var iframeHead = $('.se2_iframe').contents().find('head');
+            var iframeHtml = $('.se2_iframe').contents().find('html');
+			iframeHead.find('#se2_eyoom_css').attr('href', 'css/smart_editor2_eyoom_dark.css');
+			iframeHead.find('#se2_eyoom_css').attr('class', 'se2_eyoom_dark_css');
+            iframeHtml.css('background', '#070a11');
+		});
+	});
+	<?php } ?>
 }
 
 darkModeBtn.addEventListener("click", function() {

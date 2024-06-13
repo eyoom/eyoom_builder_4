@@ -41,9 +41,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .nl-list .nl-comment {color:#959595}
 .new-list .nl-list .nl-comment strong {color:#f4511e}
 .new-list .nl-list .blind-subject {color:#b5b5b5;cursor:not-allowed}
-.new-list .nl-photo {display:inline-block;margin-right:2px}
-.new-list .nl-photo img {width:17px;height:17px;border-radius:50%}
-.new-list .nl-photo .nl-user-icon {font-size:.9375rem}
+.new-list .nl-photo, .new-list .bl-photo {display:inline-block;margin-right:2px}
+.new-list .nl-photo img, .new-list .bl-photo img {width:17px;height:17px;border-radius:50%}
+.new-list .nl-photo .nl-user-icon, .new-list .bl-photo .bl-user-icon {font-size:.9375rem}
 .new-list .nl-mobile {display:none}
 .new-list .nl-mobile.nl-notice {background-color:#FFF8EC}
 .new-list .star-ratings-list {width:75px;margin:0 auto}
@@ -59,7 +59,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     .new-list .eyoom-form label {margin-bottom:0}
     .new-list .nl-head {display:none}
     .new-list .nl-head-checkbox {display:table}
-    .new-list .nl-head > div:before, .new-list .nl-list > div:before, .new-list .nl-head .nl-item, .new-list .nl-list .nl-item {display:none}
+    .new-list .nl-head > div:before, .new-list .nl-list > div:before, .new-list .nl-head .nl-item, .new-list .nl-list .nl-item, .new-list .nl-list .nl-author {display:none}
     .new-list .nl-head .nl-num-checkbox, .new-list .nl-list .nl-num-checkbox {display:table-cell;width:20px}
     .new-list .nl-head .nl-num-checkbox .nl-txt, .new-list .nl-list .nl-num-checkbox .nl-txt {visibility:visible;opacity:0}
     .new-list .nl-head .checkbox, .new-list .nl-list .checkbox {z-index:1}
@@ -75,7 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 @media (max-width:1199px) {
     .new-list .nl-head {display:none}
     .new-list .nl-head-checkbox {display:table}
-    .new-list .nl-head > div:before, .new-list .nl-list > div:before, .new-list .nl-head .nl-item, .new-list .nl-list .nl-item {display:none}
+    .new-list .nl-head > div:before, .new-list .nl-list > div:before, .new-list .nl-head .nl-item, .new-list .nl-list .nl-item, .new-list .nl-list .nl-author {display:none}
     .new-list .nl-head .nl-num-checkbox, .new-list .nl-list .nl-num-checkbox {display:table-cell;width:20px}
     .new-list .nl-head .nl-num-checkbox .nl-txt, .new-list .nl-list .nl-num-checkbox .nl-txt {visibility:visible;opacity:0}
     .new-list .nl-head .checkbox, .new-list .nl-list .checkbox {z-index:1}
@@ -193,9 +193,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             </div>
         </div>
         <div class="nl-mobile"><?php /* 991px 이하에서만 보임 */ ?>
-            <span class="nl-photo">
-                <span class="nl-user-icon"><i class="far fa-user-circle"></i></span>
-            </span>
             <span class="nl-name-in"><?php echo $newlist[$i]['name']; ?></span>
             <div class="nl-mobile-right">
                 <span><a href="<?php echo G5_BBS_URL; ?>/new.php?gr_id=<?php echo $newlist[$i]['gr_id']; ?>">[<?php echo $newlist[$i]['gr_subject']; ?>]</a></span>

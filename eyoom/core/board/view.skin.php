@@ -155,7 +155,7 @@ $view_content = $bbs->board_content($view['content'], $bo_table, $wr_id);
 /**
  * 익명글 기능
  */
-$bo_use_anonymous = $eyoom_board['bo_use_anonymous'];
+$bo_use_anonymous = !$is_admin ? $eyoom_board['bo_use_anonymous']: false;
 $is_anonymous = false;
 if ($bo_use_anonymous == '1') {
     if ($view['wr_anonymous'] == '1') {
@@ -328,6 +328,34 @@ if (($write['mb_id'] && $write['mb_id']!=$config['cf_admin'] && $write['mb_id']!
             case 'move': $act = '이동'; break;
         }
         @include_once(EYOOM_CORE_PATH . "/board/move_update.php");
+    }
+}
+
+/**
+ * 인기게시물 등록
+ * 조회수 조건을 사용하고 원글일 경우만 적용
+ * 익명글은 제외
+ */
+if ($eyoom_board['bo_use_best']=='1' && $bo_best['use1'] == '1' && $bo_best['count1'] > 0 && $bo_best['count1'] <= $view['wr_hit'] && $wr_id == $view['wr_parent'] && !$view['wr_anonymous']) {
+    $row = sql_fetch("select count(*) as cnt from {$g5['eyoom_best']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
+    $chk_cnt = (int) $row['cnt'];
+    if (!$chk_cnt) {
+        $sql = "insert into {$g5['eyoom_best']} set 
+                    bo_table='{$bo_table}',
+                    wr_id='{$wr_id}',
+                    wr_good='{$view['wr_good']}',
+                    wr_hit='{$view['wr_hit']}',
+                    mb_id='{$view['mb_id']}',
+                    wr_datetime='{$view['wr_datetime']}',
+                    bb_datetime='" . G5_TIME_YMDHIS . "'
+                ";
+        sql_query($sql);
+    } else {
+        /**
+         * 인기게시글 조회수, 추천수 업데이트
+         */
+        $sql = "update {$g5['eyoom_best']} set wr_hit = '{$view['wr_hit']}', wr_good = '{$view['wr_good']}' where bo_table='{$bo_table}' and wr_id = '{$wr_id}'";
+        sql_query($sql);
     }
 }
 

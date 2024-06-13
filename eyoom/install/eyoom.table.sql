@@ -125,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_rating_point` int(11) NOT NULL default '0',
   `bo_use_tag` char(1) NOT NULL default '0',
   `bo_use_automove` char(1) NOT NULL default '0',
+  `bo_use_best` char(1) NOT NULL default '0',
   `bo_goto_url` varchar(255) NULL default '',
   `bo_use_addon_emoticon` char(1) NOT NULL default '1',
   `bo_use_addon_video` char(1) NOT NULL default '1',
@@ -144,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_tag_level` tinyint(4) NOT NULL default '2',
   `bo_tag_limit` tinyint(4) NOT NULL default '10',
   `bo_automove` varchar(255) NOT NULL,
+  `bo_best` varchar(255) NOT NULL,
   `bo_exif_detail` text NOT NULL,
   `bo_blind_limit` tinyint(2) NOT NULL default '5',
   `bo_blind_view` tinyint(2) NOT NULL default '10',
@@ -305,6 +307,26 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_tag_write` (
   PRIMARY KEY  (`tw_id`),
   KEY `mb_id` (`mb_id`),
   KEY `wr_hit` (`wr_hit`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_best`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_best`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_best` (
+  `bb_id` int(11) unsigned NOT NULL auto_increment,
+  `bo_table` varchar(20) NOT NULL,
+  `wr_id` int(11) NOT NULL,
+  `mb_id` varchar(20) NOT NULL,
+  `wr_good` int(11) NOT NULL default '0',
+  `wr_hit` int(11) NOT NULL default '0',
+  `wr_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  `bb_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bb_id`),
+  KEY `mb_id` (`mb_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

@@ -63,10 +63,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
             <div id="tab-category">
                 <div class="category-list">
-                    <span <?php if (!($userpage == 'following') && !($userpage == 'follower') && !($userpage == 'friends') && !($userpage == 'guest')) { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>"><?php if ($user['mb_id'] != $member['mb_id']) { ?>[ <strong class="color-indigo"><?php echo $user['mb_nick']; ?></strong> ] 님의 홈<?php } else { ?>마이홈<?php } ?></a></span>
+                    <span <?php if (!($userpage == 'following') && !($userpage == 'follower') && !($userpage == 'friends') && !($userpage == 'guest') && !($userpage == 'subscriber')) { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>"><?php if ($user['mb_id'] != $member['mb_id']) { ?>[ <strong class="color-indigo"><?php echo $user['mb_nick']; ?></strong> ] 님의 홈<?php } else { ?>마이홈<?php } ?></a></span>
                     <span <?php if ($userpage == 'friends') { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&friends">맞팔친구</a></span>
                     <span <?php if ($userpage == 'follower') { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&follower">팔로워</a></span>
                     <span <?php if ($userpage == 'following') { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&following">팔로잉</a></span>
+                    <span <?php if ($userpage == 'subscriber') { ?>class="active"<?php } ?>><a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&subscriber">구독회원</a></span>
                     <?php if ($is_member) { ?>
                         <?php if ($user['mb_id'] != $member['mb_id']) { ?>
                     <span><a href="<?php echo G5_URL; ?>/?<?php echo $member['mb_id']; ?>">마이홈 바로가기</a></span>
@@ -82,7 +83,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <div class="tab-category-divider"></div>
         </div>
 
-        <?php if (!($userpage == 'following') && !($userpage == 'follower') && !($userpage == 'friends') && !($userpage == 'guest')) { ?>
+        <?php if (!($userpage == 'following') && !($userpage == 'follower') && !($userpage == 'friends') && !($userpage == 'guest') && !($userpage == 'subscriber')) { ?>
         <?php /* 프로필 박스 시작 */ ?>
         <div class="my-profile-box">
             <div class="my-wallpaper">
@@ -122,6 +123,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 <a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&following" <?php if ($userpage == 'following') { ?>class="active"<?php } ?>>
                     팔로잉 <?php if ($user['cnt_following']) { ?><?php echo number_format($user['cnt_following']); ?><?php } else { ?>0<?php } ?>
                 </a>
+                <a href="<?php echo G5_URL; ?>/?<?php echo $user['mb_id']; ?>&subscriber" <?php if ($userpage == 'subscriber') { ?>class="active"<?php } ?>>
+                    구독회원 <?php if ($user['cnt_subscriber']) { ?><?php echo number_format($user['cnt_subscriber']); ?><?php } else { ?>0<?php } ?>
+                </a>
             </div>
             <div class="my-photo">
                 <div class="photo">
@@ -156,6 +160,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     break;
                 case "friends":
                     include_once(EYOOM_CORE_PATH.'/mypage/myhome_friends.php');
+                    break;
+                case "subscriber":
+                    include_once(EYOOM_CORE_PATH.'/mypage/myhome_subscriber.php');
                     break;
             }
             ?>

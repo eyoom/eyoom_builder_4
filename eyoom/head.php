@@ -83,22 +83,6 @@ if ($eyoom['use_eyoom_menu'] == 'y') $menu_flag = 'eyoom';
 $menu = $thema->menu_create($menu_flag);
 
 /**
- * 서브페이지 메뉴정보, 타이틀 및 Path 정보
- */
-if (!defined('_INDEX_')) {
-    $sidemenu = '';
-    $subinfo = $thema->subpage_info($menu);
-    if ($subinfo['registed'] == 'y') $sidemenu = $thema->submenu_create($menu_flag);
-} else {
-    /**
-     * 팝업창
-     */
-    if ($eyoom['use_gnu_newwin'] == 'n') {
-        @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
-    }
-}
-
-/**
  * 메인인지 마이홈인지 GET변수의 초기key 값으로 구분하기
  */
 $is_myhome = false;
@@ -112,6 +96,22 @@ if (isset($_GET) && is_array($_GET)) {
                 $is_myhome = true;
             }
         }
+    }
+}
+
+/**
+ * 서브페이지 메뉴정보, 타이틀 및 Path 정보
+ */
+if (!defined('_INDEX_')) {
+    $sidemenu = '';
+    $subinfo = $thema->subpage_info($menu);
+    if ($subinfo['registed'] == 'y') $sidemenu = $thema->submenu_create($menu_flag);
+} else {
+    /**
+     * 팝업창
+     */
+    if ($eyoom['use_gnu_newwin'] == 'n' && !$is_myhome) {
+        @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
     }
 }
 

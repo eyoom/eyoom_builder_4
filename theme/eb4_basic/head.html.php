@@ -79,6 +79,7 @@ $is_megamenu = 'yes';
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a href="<?php echo G5_BBS_URL ?>/new.php">새글</a>
+                                    <a href="<?php echo G5_BBS_URL ?>/best.php">인기게시물</a>
                                     <a href="<?php echo G5_BBS_URL ?>/faq.php">자주묻는 질문</a>
                                     <a href="<?php echo G5_BBS_URL ?>/qalist.php">1:1문의</a>
                                     <?php if ($is_member) { // 회원일 경우 ?>

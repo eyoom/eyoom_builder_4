@@ -266,7 +266,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 <?php if ($list[$i]['eyoom_icon']) { ?>
                 <span class="bl-lv-icon"><img src="<?php echo $list[$i]['eyoom_icon']; ?>" align="absmiddle" alt="레벨"></span>
                 <?php } ?>
-                <span class="bl-name-in"><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
+                <span class="bl-name-in"><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage'], $list[$i]['mb_id2']); ?></span>
             </div>
             <div class="bl-item text-gray">
                 <?php if ($eyoom_board['bo_sel_date_type'] == '1') { ?>
@@ -301,7 +301,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <?php if ($list[$i]['eyoom_icon']) { ?>
             <span class="bl-lv-icon"><img src="<?php echo $list[$i]['eyoom_icon']; ?>" align="absmiddle" alt="레벨"></span>
             <?php } ?>
-            <span class="bl-name-in"><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage']); ?></span>
+            <span class="bl-name-in"><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['wr_name'], $list[$i]['wr_email'], $list[$i]['homepage'], $list[$i]['mb_id2']); ?></span>
             <div class="bl-mobile-right">
                 <?php if(0) { // 숨김처리 시작 (조회수, 추천수, 비추천수 모바일에서는 숨김처리) ?>
                 <span class="m-l-5"><i class="far fa-eye"></i> <?php echo number_format($list[$i]['wr_hit']); ?></span>

@@ -29,6 +29,11 @@ $my_follower = $eb->follower_member($user['mb_id'], 12);
 $my_friends = $eb->friends_member($user['mb_id'], 12);
 
 /**
+ * 나를 구독한 회원
+ */
+$my_subscriber = $eb->subscriber_member($user['mb_id'], 12);
+
+/**
  * 회원 이미지
  */
 $user['mb_photo'] = $eb->mb_photo($user['mb_id']);
@@ -52,6 +57,11 @@ $user['cnt_follower'] = $eb->count_follower($user['mb_id']);
  * 맞팔친구 회원수
  */
 $user['cnt_friends'] = $eb->count_friends($user['mb_id']);
+
+/**
+ * 나를 구독한 회원수
+ */
+$user['cnt_subscriber'] = $eb->count_subscriber($user['mb_id']);
 
 /**
  * 해당 user가 나의 팔로우인지 체크

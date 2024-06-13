@@ -57,7 +57,7 @@ function open_push(respond,memo,follow,unfollow,subscribe,unsubscribe,likes,gues
     var msg, str;
     if (respond) {
         var rid = respond['val'];
-        var nick = respond['nick'];
+        var nick = respond['nick'] ? respond['nick']: '익명';
         var type = respond['type'];
         var alarm = respond['alarm'];
         switch(type) {

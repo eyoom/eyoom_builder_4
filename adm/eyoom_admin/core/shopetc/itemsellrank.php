@@ -9,7 +9,7 @@ $sub_menu = "500100";
 auth_check_menu($auth, $sub_menu, "r");
 
 $fr_date = isset($_REQUEST['fr_date']) ? $_REQUEST['fr_date'] : '';
-$to_date = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : date("Ymd", time());
+$to_date = isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : date("Y-m-d", time());
 
 if (!empty($fr_date) && !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $fr_date)) {
     $fr_date = '';

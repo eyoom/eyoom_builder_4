@@ -116,8 +116,8 @@ if ($iw == 'u') {
             $ebcontents_file = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$del_img_name[$i];
             if ($chk && file_exists($ebcontents_file) && !is_dir($ebcontents_file)) {
                 @unlink($ebcontents_file);
-                $ci_img[$i] = '';
             }
+            $ci_img[$i] = '';
         }
     }
 }
@@ -126,21 +126,22 @@ if ($iw == 'u') {
  * 이미지 업로드
  */
 $file_upload_msg = '';
-$upload = array();
 for ($i=0; $i<count((array)$_FILES['ci_img']['name']); $i++) {
-    if (is_uploaded_file($_FILES['ci_img']['tmp_name'][$i])) {
-        $ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
-        $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$ext;
-        if (!preg_match("/(jpg|jpeg|gif|png|webp)$/i", $_FILES['ci_img']['name'][$i])) {
-            $file_upload_msg .= $_FILES['ci_img']['name'][$i] . '은(는) jpg/gif/png/webp 파일이 아닙니다.\\n';
-        } else {
+    $allowed_mimetype = ['image/jpeg', 'image/png', 'image/gif'];
+    $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
+
+    $uploaded_file = $_FILES['ci_img']['tmp_name'][$i];
+    $file_mimetype = mime_content_type($uploaded_file);
+    $file_ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
+    if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+        if (is_uploaded_file($uploaded_file)) {
+            $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$file_ext;
             $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$file_name;
 
-            move_uploaded_file($_FILES['ci_img']['tmp_name'][$i], $dest_path);
-            chmod($dest_path, G5_FILE_PERMISSION);
-
+            move_uploaded_file($uploaded_file, $dest_path);
+            
             if (file_exists($dest_path)) {
-                $size = getimagesize($dest_path);
+                chmod($dest_path, G5_FILE_PERMISSION);
                 $ci_img[$i] = $file_name;
             }
         }

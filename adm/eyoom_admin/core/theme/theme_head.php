@@ -110,3 +110,25 @@ for ($i=0; $i<count((array)$arr); $i++) {
 }
 $eyoom = $_eyoom;
 unset($arr);
+
+/**
+ * 테마정보 체크
+ */
+foreach ($loaded_theme as $key => $tm_name) {
+    if ($tm_name == 'eb4_basic') continue;
+
+    $info     = $tminfo[$tm_name];
+    $last     = new DateTime($info['tm_last']);
+    $current  = new DateTime();
+    $interval = $current->diff($last);
+    
+    if ($interval->days > $config['cf_page_rows']) {
+        $result = $thema->check_theme_info($info);
+        $sql = "update {$g5['eyoom_theme']} set tm_last='".G5_TIME_YMDHIS."' where tm_name='{$tm_name}' ";
+        sql_query($sql);
+    }
+
+    if ($theme == $shop_theme) {
+        break;
+    }
+}

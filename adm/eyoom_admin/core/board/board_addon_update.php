@@ -87,7 +87,9 @@ if(!sql_query(" select bo_use_wrfixed from {$g5['eyoom_board']} limit 1 ", false
     sql_query($sql, true);
 }
 
-// 게시물 상단고정 관리 테이블 없을 경우 생성
+/*
+ * 게시물 상단고정 관리 테이블 없을 경우 생성
+ */
 if (!sql_query(" DESC {$g5['eyoom_wrfixed']} ", false)) {
     sql_query(
         " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_wrfixed']}` (
@@ -116,23 +118,69 @@ if(!sql_query(" select bo_use_pointpost from {$g5['eyoom_board']} limit 1 ", fal
     sql_query($sql, true);
 }
 
+/*
+ * 인기게시물 관리 테이블 없을 경우 생성
+ */
+if (!sql_query(" DESC {$g5['eyoom_best']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_best']}` (
+                    `bb_id` int(11) unsigned NOT NULL auto_increment,
+                    `bo_table` varchar(20) NOT NULL,
+                    `wr_id` int(11) NOT NULL,
+                    `mb_id` varchar(20) NOT NULL,
+                    `wr_good` int(11) NOT NULL default '0',
+                    `wr_hit` int(11) NOT NULL default '0',
+                    `wr_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+                    `bb_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+                    PRIMARY KEY  (`bb_id`),
+                    KEY `mb_id` (`mb_id`)
+                ) ",
+        true
+    );
+}
+
+/**
+ * 인기게시물 설정 필드 추가
+ */
+if(!sql_query(" select bo_use_best from {$g5['eyoom_board']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['eyoom_board']}`
+        add `bo_use_best` char(1) NOT NULL default '' after `bo_use_automove`,
+        add `bo_best` varchar(255) NOT NULL default '' after `bo_automove`
+    ";
+    sql_query($sql, true);
+}
+
 /**
  * 게시물 자동 이동/복사
  */
 $bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
 if ($bo_use_automove) {
-    $post_bo_automove['count1'] = isset($_POST['bo_automove_count1']) ? clean_xss_tags(trim($_POST['bo_automove_count1'])) : '';
+    $post_bo_automove['count1'] = isset($_POST['bo_automove_count1']) ? (int) clean_xss_tags(trim($_POST['bo_automove_count1'])) : '';
     $post_bo_automove['target1'] = isset($_POST['bo_automove_target1']) ? clean_xss_tags(trim($_POST['bo_automove_target1'])) : '';
     $post_bo_automove['action1'] = isset($_POST['bo_automove_action1']) ? clean_xss_tags(trim($_POST['bo_automove_action1'])) : '';
-    $post_bo_automove['count2'] = isset($_POST['bo_automove_count2']) ? clean_xss_tags(trim($_POST['bo_automove_count2'])) : '';
+    $post_bo_automove['count2'] = isset($_POST['bo_automove_count2']) ? (int) clean_xss_tags(trim($_POST['bo_automove_count2'])) : '';
     $post_bo_automove['target2'] = isset($_POST['bo_automove_target2']) ? clean_xss_tags(trim($_POST['bo_automove_target2'])) : '';
     $post_bo_automove['action2'] = isset($_POST['bo_automove_action2']) ? clean_xss_tags(trim($_POST['bo_automove_action2'])) : '';
-    $post_bo_automove['count3'] = isset($_POST['bo_automove_count3']) ? clean_xss_tags(trim($_POST['bo_automove_count3'])) : '';
+    $post_bo_automove['count3'] = isset($_POST['bo_automove_count3']) ? (int) clean_xss_tags(trim($_POST['bo_automove_count3'])) : '';
     $post_bo_automove['target3'] = isset($_POST['bo_automove_target3']) ? clean_xss_tags(trim($_POST['bo_automove_target3'])) : '';
     $post_bo_automove['action3'] = isset($_POST['bo_automove_action3']) ? clean_xss_tags(trim($_POST['bo_automove_action3'])) : '';
     $bo_automove = serialize($post_bo_automove);
 } else {
     $bo_automove = '';
+}
+
+/**
+ * 인기게시물 
+ */
+$bo_use_best = isset($_POST['bo_use_best']) ? (int) $_POST['bo_use_best'] : 0;
+if ($bo_use_best) {
+    $post_bo_best['use1'] = isset($_POST['bo_best_use1']) ? (int) clean_xss_tags(trim($_POST['bo_best_use1'])) : '';
+    $post_bo_best['count1'] = isset($_POST['bo_best_count1']) ? (int) clean_xss_tags(trim($_POST['bo_best_count1'])) : '';
+    $post_bo_best['use2'] = isset($_POST['bo_best_use2']) ? (int) clean_xss_tags(trim($_POST['bo_best_use2'])) : '';
+    $post_bo_best['count2'] = isset($_POST['bo_best_count2']) ? (int) clean_xss_tags(trim($_POST['bo_best_count2'])) : '';
+    $bo_best = serialize($post_bo_best);
+} else {
+    $bo_best = '';
 }
 
 $bo_use_point_explain = isset($_POST['bo_use_point_explain']) ? (int) $_POST['bo_use_point_explain'] : 0;
@@ -231,6 +279,7 @@ $set = "
     bo_rating_point         = '{$bo_rating_point}',
     bo_use_tag              = '{$bo_use_tag}',
     bo_use_automove         = '{$bo_use_automove}',
+    bo_use_best             = '{$bo_use_best}',
     bo_use_addon_emoticon   = '{$bo_use_addon_emoticon}',
     bo_use_addon_video      = '{$bo_use_addon_video}',
     bo_use_addon_coding     = '{$bo_use_addon_coding}',
@@ -243,6 +292,7 @@ $set = "
     bo_tag_level            = '{$bo_tag_level}',
     bo_tag_limit            = '{$bo_tag_limit}',
     bo_automove             = '{$bo_automove}',
+    bo_best                 = '{$bo_best}',
     bo_blind_limit          = '{$bo_blind_limit}',
     bo_blind_view           = '{$bo_blind_view}',
     bo_blind_direct         = '{$bo_blind_direct}'
@@ -274,6 +324,7 @@ if (is_checked('chk_grp_wrfixed_date'))     $grp_fields .= " , bo_wrfixed_date =
 if (is_checked('chk_grp_use_pointpost'))    $grp_fields .= " , bo_use_pointpost = '{$bo_use_pointpost}' ";
 if (is_checked('chk_grp_pointpost_point'))  $grp_fields .= " , bo_pointpost_point = '{$bo_pointpost_point}' ";
 if (is_checked('chk_grp_use_automove'))     $grp_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
+if (is_checked('chk_grp_use_best'))         $grp_fields .= " , bo_use_best = '{$bo_use_best}' ";
 if (is_checked('chk_grp_addon_emoticon'))   $grp_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_grp_addon_video'))      $grp_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";
 if (is_checked('chk_grp_addon_coding'))     $grp_fields .= " , bo_use_addon_coding = '{$bo_use_addon_coding}' ";
@@ -285,6 +336,7 @@ if (is_checked('chk_grp_cmtbest_limit'))    $grp_fields .= " , bo_cmt_best_limit
 if (is_checked('chk_grp_tag_level'))        $grp_fields .= " , bo_tag_level = '{$bo_tag_level}' ";
 if (is_checked('chk_grp_tag_limit'))        $grp_fields .= " , bo_tag_limit = '{$bo_tag_limit}' ";
 if (is_checked('chk_grp_automove'))         $grp_fields .= " , bo_automove = '{$bo_automove}' ";
+if (is_checked('chk_grp_best'))             $grp_fields .= " , bo_best = '{$bo_best}' ";
 if (is_checked('chk_grp_exif_detail'))      $grp_fields .= " , bo_exif_detail = '{$bo_exif_detail}' ";
 if (is_checked('chk_grp_blind_limit'))      $grp_fields .= " , bo_blind_limit = '{$bo_blind_limit}' ";
 if (is_checked('chk_grp_blind_view'))       $grp_fields .= " , bo_blind_view = '{$bo_blind_view}' ";
@@ -331,6 +383,7 @@ if (is_checked('chk_all_wrfixed_date'))     $all_fields .= " , bo_wrfixed_date =
 if (is_checked('chk_all_use_pointpost'))    $all_fields .= " , bo_use_pointpost = '{$bo_use_pointpost}' ";
 if (is_checked('chk_all_pointpost_point'))  $all_fields .= " , bo_pointpost_point = '{$bo_pointpost_point}' ";
 if (is_checked('chk_all_use_automove'))     $all_fields .= " , bo_use_automove = '{$bo_use_automove}' ";
+if (is_checked('chk_all_use_best'))         $all_fields .= " , bo_use_best = '{$bo_use_best}' ";
 if (is_checked('chk_all_addon_emoticon'))   $all_fields .= " , bo_use_addon_emoticon = '{$bo_use_addon_emoticon}' ";
 if (is_checked('chk_all_addon_video'))      $all_fields .= " , bo_use_addon_video = '{$bo_use_addon_video}' ";
 if (is_checked('chk_all_addon_coding'))     $all_fields .= " , bo_use_addon_coding = '{$bo_use_addon_coding}' ";
@@ -342,6 +395,7 @@ if (is_checked('chk_all_cmtbest_limit'))    $all_fields .= " , bo_cmt_best_limit
 if (is_checked('chk_all_tag_level'))        $all_fields .= " , bo_tag_level = '{$bo_tag_level}' ";
 if (is_checked('chk_all_tag_limit'))        $all_fields .= " , bo_tag_limit = '{$bo_tag_limit}' ";
 if (is_checked('chk_all_automove'))         $all_fields .= " , bo_automove = '{$bo_automove}' ";
+if (is_checked('chk_all_best'))             $all_fields .= " , bo_best = '{$bo_best}' ";
 if (is_checked('chk_all_exif_detail'))      $all_fields .= " , bo_exif_detail = '{$bo_exif_detail}' ";
 if (is_checked('chk_all_blind_limit'))      $all_fields .= " , bo_blind_limit = '{$bo_blind_limit}' ";
 if (is_checked('chk_all_blind_view'))       $all_fields .= " , bo_blind_view = '{$bo_blind_view}' ";

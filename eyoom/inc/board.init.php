@@ -38,7 +38,12 @@ $bo_skin = $eb->get_skin_dir('board', G5_PATH.'/theme/'.$theme.'/skin/');
 /**
  * 게시물 자동 이동/복사를 위한 변수
  */
-(array)$bo_automove = $eb->mb_unserialize($eyoom_board['bo_automove']);
+$bo_automove = $eyoom_board['bo_automove'] ? $eb->mb_unserialize($eyoom_board['bo_automove']): array();
+
+/**
+ * 인기게시물을 위한 변수
+ */
+$bo_best = $eyoom_board['bo_best'] ? $eb->mb_unserialize($eyoom_board['bo_best']): array();
 
 /**
  * EXIF정보보기 사용시

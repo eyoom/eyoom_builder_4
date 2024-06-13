@@ -10,6 +10,7 @@ if (!defined('_EYOOM_')) exit;
 $board_skin_path    = EYOOM_CORE_PATH.'/board';
 $member_skin_path   = EYOOM_CORE_PATH.'/member';
 $new_skin_path      = EYOOM_CORE_PATH.'/new';
+$best_skin_path     = EYOOM_CORE_PATH.'/best';
 $search_skin_path   = EYOOM_CORE_PATH.'/search';
 $connect_skin_path  = EYOOM_CORE_PATH.'/connect';
 $faq_skin_path      = EYOOM_CORE_PATH.'/faq';
@@ -32,6 +33,8 @@ if (G5_IS_MOBILE) {
     $eyoom_skin_url['mypage']    = $thema->get_skin_url('mypage',  $eyoom['mobile_mypage_skin']);
     $eyoom_skin_path['new']      = $thema->get_skin_path('new', $eyoom['mobile_new_skin']);
     $eyoom_skin_url['new']       = $thema->get_skin_url('new', $eyoom['mobile_new_skin']);
+    $eyoom_skin_path['best']     = $thema->get_skin_path('best', $eyoom['mobile_best_skin']);
+    $eyoom_skin_url['best']      = $thema->get_skin_url('best', $eyoom['mobile_best_skin']);
     $eyoom_skin_path['search']   = $thema->get_skin_path('search', $eyoom['mobile_search_skin']);
     $eyoom_skin_url['search']    = $thema->get_skin_url('search', $eyoom['mobile_search_skin']);
     $eyoom_skin_path['connect']  = $thema->get_skin_path('connect', $eyoom['mobile_connect_skin']);
@@ -55,6 +58,8 @@ if (G5_IS_MOBILE) {
     $eyoom_skin_url['mypage']    = $thema->get_skin_url('mypage', $eyoom['mypage_skin']);
     $eyoom_skin_path['new']      = $thema->get_skin_path('new', $eyoom['new_skin']);
     $eyoom_skin_url['new']       = $thema->get_skin_url('new', $eyoom['new_skin']);
+    $eyoom_skin_path['best']     = $thema->get_skin_path('best', $eyoom['best_skin']);
+    $eyoom_skin_url['best']      = $thema->get_skin_url('best', $eyoom['best_skin']);
     $eyoom_skin_path['search']   = $thema->get_skin_path('search', $eyoom['search_skin']);
     $eyoom_skin_url['search']    = $thema->get_skin_url('search', $eyoom['search_skin']);
     $eyoom_skin_path['connect']  = $thema->get_skin_path('connect', $eyoom['connect_skin']);

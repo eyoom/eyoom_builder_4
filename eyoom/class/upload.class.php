@@ -113,6 +113,8 @@ class upload extends qfile
     public function upload_file($source, $dir, $chkimg='') {
         if (!$source) return false;
 
+        $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
+
         /**
          * 업로드 소스 파일명
          */
@@ -132,20 +134,23 @@ class upload extends qfile
          * 이미지 파일이라면 체크
          */
         if ($chkimg && !preg_match('/(gif|jpe?g|png)$/i', $ext)) return false;
+        else {
+            $filename = get_safe_filename($src_name);
+            $destfile = preg_replace("/\.(php|pht|phtm|htm|cgi|pl|exe|jsp|asp|inc|phar)/i", "$0-x", $src_name);
 
-        /**
-         * 파일명
-         */
-        $num = $this->eb->random_num(10000);
-        $destfile = $this->eb->encrypt_aes(time().$num) . '.' . $ext;
+            shuffle($chars_array);
+            $shuffle = implode('', $chars_array);
 
-        /**
-         * 업로드 한후 , 퍼미션을 변경함
-         */
-        @move_uploaded_file($srcfile, $dir.'/'.$destfile);
-        @chmod($dir.'/'.$destfile, G5_FILE_PERMISSION);
+            $destfile = md5(sha1($_SERVER['REMOTE_ADDR'])).'_'.substr($shuffle,0,8).'_'.replace_filename($destfile);
+
+            /**
+             * 업로드 한후 , 퍼미션을 변경함
+             */
+            @move_uploaded_file($srcfile, $dir.'/'.$destfile);
+            @chmod($dir.'/'.$destfile, G5_FILE_PERMISSION);
+        }
         
-        $upfile['filename'] = $src_name;
+        $upfile['filename'] = $filename;
         $upfile['destfile'] = $destfile;
 
         return $upfile;

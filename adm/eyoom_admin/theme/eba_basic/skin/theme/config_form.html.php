@@ -56,7 +56,7 @@ $frm_submit .= $frm_eba_submit;
                                 <label for="is_responsive1" class="radio"><input type="radio" name="is_responsive" id="is_responsive1" value="1" <?php echo $eyoom['is_responsive'] == '1' ? 'checked': '';?>><i></i> 반응형</label>
                                 <label for="is_responsive2" class="radio"><input type="radio" name="is_responsive" id="is_responsive2" value="0" <?php echo $eyoom['is_responsive'] == '0' ? 'checked': '';?>><i></i> 비반응형</label>
                             </div>
-                            <div class="note"><strong>Note:</strong> 테마를 반응형으로 할지 비반응형으로 할지 설정합니다.</div>
+                            <div class="note"><strong>Note:</strong> 이윰빌더 시즌4의 테마는 반응형으로 작업이 되며, 비반응형은 현재 지원하지 않습니다.</div>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
@@ -68,7 +68,7 @@ $frm_submit .= $frm_eba_submit;
                                 <label for="use_mobile_default_1" class="radio"><input type="radio" name="use_mobile_default" id="use_mobile_default_1" value="pc" <?php echo $eyoom['use_mobile_default'] == 'pc' || !$eyoom['use_mobile_default'] ? 'checked': '';?>><i></i> PC모드</label>
                                 <label for="use_mobile_default_2" class="radio"><input type="radio" name="use_mobile_default" id="use_mobile_default_2" value="mobile" <?php echo $eyoom['use_mobile_default'] == 'mobile' ? 'checked': '';?>><i></i> 모바일모드</label>
                             </div>
-                            <div class="note"><strong>Note:</strong> 테마유형이 비반응형욿 설정되어 있을 경우, 모바일 기본 모드를 설정하실 수 있습니다.</div>
+                            <div class="note"><strong>Note:</strong> 테마유형이 비반응형으로 설정되어 있을 경우에만, 모바일 기본 모드를 설정하실 수 있습니다.</div>
                         </div>
                     </div>
                 </div>
@@ -130,9 +130,9 @@ $frm_submit .= $frm_eba_submit;
                         <div class="adm-form-td td-r">
                             <div class="inline-group">
                                 <label for="use_eyoom_shopmenu1" class="radio"><input type="radio" name="use_eyoom_shopmenu" id="use_eyoom_shopmenu1" value="y" <?php echo $eyoom['use_eyoom_shopmenu'] == 'y' ? 'checked': '';?>><i></i> 이윰메뉴 사용</label>
-                                <label for="use_eyoom_shopmenu2" class="radio"><input type="radio" name="use_eyoom_shopmenu" id="use_eyoom_shopmenu2" value="n" <?php echo $eyoom['use_eyoom_shopmenu'] == 'n' ? 'checked': '';?>><i></i> 그누메뉴 사용</label>
+                                <label for="use_eyoom_shopmenu2" class="radio"><input type="radio" name="use_eyoom_shopmenu" id="use_eyoom_shopmenu2" value="n" <?php echo $eyoom['use_eyoom_shopmenu'] == 'n' ? 'checked': '';?>><i></i> 쇼핑몰 분류 사용</label>
                             </div>
-                            <div class="note"><strong>Note:</strong> 쇼핑몰의 상단메뉴를 그누메뉴로 사용시, 쇼핑몰 카테고리분류를 메뉴로 사용하게 됩니다.</div>
+                            <div class="note"><strong>Note:</strong> 쇼핑몰의 상단메뉴를 쇼핑몰관리 - 분류관리에서 설정한 쇼핑몰 분류 그대로 사용하게 됩니다.</div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-info">
                     <div class="cont-text-bg">
                         <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> 테마에 다른 별칭을 만들 수 있습니다. 웹사이트를 다국어 버전으로 제작할 경우 유용하며 1차메뉴들을 각각 다른 테마로 구성할 수도 있습니다.
+                            <i class="fas fa-info-circle"></i> 테마에 다른 별칭을 만들 수 있습니다. 웹사이트를 다국어 버전으로 제작할 경우 유용하며, 테마별로 메뉴를 각각 설정 할 수도 있습니다.
                         </p>
                     </div>
                 </div>
@@ -309,31 +309,6 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label class="label">프로필 이미지 사이즈</label>
-                        </div>
-                        <div class="adm-form-td td-r">
-                            <div class="inline-group">
-                                <span>
-                                    <label class="input width-200px">
-                                        <i class="icon-prepend">폭</i>
-                                        <i class="icon-append">px</i>
-                                        <input type="text" name="photo_width" id="photo_width" value="<?php echo $eyoom['photo_width']; ?>" class="text-end">
-                                    </label>
-                                </span>
-                                <span>X</span>
-                                <span>
-                                    <label class="input width-200px">
-                                        <i class="icon-prepend">높이</i>
-                                        <i class="icon-append">px</i>
-                                        <input type="text" name="photo_height" id="photo_height" value="<?php echo $eyoom['photo_height']; ?>" class="text-end">
-                                    </label>
-                                </span>
-                            </div>
-                            <div class="note"><strong>Note:</strong> 회원의 프로필 이미지의 사이즈를 설정합니다.</div>
-                        </div>
-                    </div>
-                    <div class="adm-form-tr tr-r">
-                        <div class="adm-form-td td-l">
                             <label for="cover_width" class="label">마이홈 커버사진 가로사이즈</label>
                         </div>
                         <div class="adm-form-td td-r">
@@ -344,9 +319,7 @@ $frm_submit .= $frm_eba_submit;
                             <div class="note"><strong>Note:</strong> 회원의 마이폼페이지의 상단 이미지의 가로 사이즈를 설정합니다.</div>
                         </div>
                     </div>
-                </div>
-                <div class="adm-form-tr-wrap">
-                    <div class="adm-form-tr tr-l">
+                    <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
                             <label for="group_latest_cnt" class="label">그룹 게시판 최신글 추출 갯수</label>
                         </div>
@@ -358,7 +331,9 @@ $frm_submit .= $frm_eba_submit;
                             <div class="note"><strong>Note:</strong> <?php echo G5_BBS_URL; ?>/group.php?gr_id=xxx 그룹페이지의 최신글의 출력 갯수를 설정합니다.</div>
                         </div>
                     </div>
-                    <div class="adm-form-tr tr-r">
+                </div>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
                             <label class="label">전체검색 출력 페이지 이미지</label>
                         </div>
@@ -370,32 +345,59 @@ $frm_submit .= $frm_eba_submit;
                             <div class="note"><strong>Note:</strong> 전체검색 결과 페이지에서 목록에 이미지를 출력할 것인지 여부를 설정합니다.</div>
                         </div>
                     </div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label class="label">검색결과 이미지 사이즈</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <div class="inline-group">
+                                <span>
+                                    <label for="search_image_width" class="input width-200px">
+                                        <i class="icon-prepend">폭</i>
+                                        <i class="icon-append">px</i>
+                                        <input type="text" name="search_image_width" id="search_image_width" value="<?php echo $eyoom['search_image_width']; ?>" class="text-end">
+                                    </label>
+                                </span>
+                                <span>X</span>
+                                <span>
+                                    <label for="search_image_height" class="input width-200px">
+                                        <i class="icon-prepend">높이</i>
+                                        <i class="icon-append">px</i>
+                                        <input type="text" name="search_image_height" id="search_image_height" value="<?php echo $eyoom['search_image_height']; ?>" class="text-end">
+                                    </label>
+                                </span>
+                            </div>
+                            <div class="note"><strong>Note:</strong> 검색결과 페이지에서 이미지를 사용할 경우, 출력 이미지의 사이즈를 설정합니다.</div>
+                        </div>
+                    </div>
                 </div>
+                <?php if(0) { // 숨김처리 시작 ?>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
-                        <label class="label">검색결과 이미지 사이즈</label>
+                        <label class="label">프로필 이미지 사이즈</label>
                     </div>
                     <div class="adm-form-td td-r">
                         <div class="inline-group">
                             <span>
-                                <label for="search_image_width" class="input width-200px">
+                                <label class="input width-200px">
                                     <i class="icon-prepend">폭</i>
                                     <i class="icon-append">px</i>
-                                    <input type="text" name="search_image_width" id="search_image_width" value="<?php echo $eyoom['search_image_width']; ?>" class="text-end">
+                                    <input type="text" name="photo_width" id="photo_width" value="<?php echo $eyoom['photo_width']; ?>" class="text-end">
                                 </label>
                             </span>
                             <span>X</span>
                             <span>
-                                <label for="search_image_height" class="input width-200px">
+                                <label class="input width-200px">
                                     <i class="icon-prepend">높이</i>
                                     <i class="icon-append">px</i>
-                                    <input type="text" name="search_image_height" id="search_image_height" value="<?php echo $eyoom['search_image_height']; ?>" class="text-end">
+                                    <input type="text" name="photo_height" id="photo_height" value="<?php echo $eyoom['photo_height']; ?>" class="text-end">
                                 </label>
                             </span>
                         </div>
-                        <div class="note"><strong>Note:</strong> 검색결과 페이지에서 이미지를 사용할 경우, 출력 이미지의 사이즈를 설정합니다.</div>
+                        <div class="note"><strong>Note:</strong> 회원의 프로필 이미지의 사이즈를 설정합니다.</div>
                     </div>
                 </div>
+                <?php } // 숨김처리 끝 ?>
             </div>
         </div>
         <?php /* 기능설정 : 끝 */ ?>

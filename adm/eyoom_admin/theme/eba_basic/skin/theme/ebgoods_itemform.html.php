@@ -50,7 +50,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="input max-width-250px">
                     <input type="text" name="gi_title" id="gi_title" value="<?php echo $gi['gi_title']; ?>" required>
                 </label>
-                <div class="note"><strong>Note:</strong> 예) 자유게시판, 질문과 답변</div>
+                <div class="note"><strong>Note:</strong> EB상품 아이템의 타이틀을 입력합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -124,7 +124,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 <label class="input">
                     <input type="text" name="gi_exclude" id="gi_exclude" value="<?php echo $gi['gi_exclude']; ?>">
                 </label>
-                <div class="note"><strong>Note:</strong> 제외하고 싶은 게시판의 ca_id를 쉼표(,)로 구분하여 입력해 주세요.</div>
+                <div class="note"><strong>Note:</strong> 제외하고 싶은 카테고리의 ca_id를 쉼표(,)로 구분하여 입력해 주세요.</div>
             </div>
         </div>
     </div>
@@ -200,7 +200,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </label>
                     </span>
                 </div>
-                <div class="note"><strong>Note:</strong> 최신글 스킨이 갤러리 또는 웹진 타입일 경우, 출력 이미지의 사이즈를 설정합니다.</div>
+                <div class="note"><strong>Note:</strong> 상품 이미지 사이즈를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -212,7 +212,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_id_1" class="radio"><input type="radio" name="gi_view_it_id" id="gi_view_it_id_1" value="y" <?php echo $gi['gi_view_it_id'] == 'y' || !$gi['gi_view_it_id'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_id_2" class="radio"><input type="radio" name="gi_view_it_id" id="gi_view_it_id_2" value="n" <?php echo $gi['gi_view_it_id'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 상품아이디(it_id) 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 상품아이디(it_id) 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -224,7 +224,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_name_1" class="radio"><input type="radio" name="gi_view_it_name" id="gi_view_it_name_1" value="y" <?php echo $gi['gi_view_it_name'] == 'y' || !$gi['gi_view_it_name'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_name_2" class="radio"><input type="radio" name="gi_view_it_name" id="gi_view_it_name_2" value="n" <?php echo $gi['gi_view_it_name'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 상품명 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 상품명 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -236,7 +236,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_basic_1" class="radio"><input type="radio" name="gi_view_it_basic" id="gi_view_it_basic_1" value="y" <?php echo $gi['gi_view_it_basic'] == 'y' || !$gi['gi_view_it_basic'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_basic_2" class="radio"><input type="radio" name="gi_view_it_basic" id="gi_view_it_basic_2" value="n" <?php echo $gi['gi_view_it_basic'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 상품명 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 기본설명 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -248,7 +248,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_cust_price_1" class="radio"><input type="radio" name="gi_view_it_cust_price" id="gi_view_it_cust_price_1" value="y" <?php echo $gi['gi_view_it_cust_price'] == 'y' || !$gi['gi_view_it_cust_price'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_cust_price_2" class="radio"><input type="radio" name="gi_view_it_cust_price" id="gi_view_it_cust_price_2" value="n" <?php echo $gi['gi_view_it_cust_price'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 소비자가 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 소비자가 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -260,7 +260,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_price_1" class="radio"><input type="radio" name="gi_view_it_price" id="gi_view_it_price_1" value="y" <?php echo $gi['gi_view_it_price'] == 'y' || !$gi['gi_view_it_price'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_price_2" class="radio"><input type="radio" name="gi_view_it_price" id="gi_view_it_price_2" value="n" <?php echo $gi['gi_view_it_price'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 상품 판매가격 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 상품 판매가격 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -272,7 +272,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_it_icon_1" class="radio"><input type="radio" name="gi_view_it_icon" id="gi_view_it_icon_1" value="y" <?php echo $gi['gi_view_it_icon'] == 'y' || !$gi['gi_view_it_icon'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_it_icon_2" class="radio"><input type="radio" name="gi_view_it_icon" id="gi_view_it_icon_2" value="n" <?php echo $gi['gi_view_it_icon'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 인기상품, 신상품, 품절등을 알리는 아이콘의 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 히트상품, 추천상품, 최신상품, 인기상품, 할인상품, 품절 등을 알리는 아이콘의 출력 여부를 설정합니다.</div>
             </div>
         </div>
         <div class="adm-form-tr">
@@ -284,7 +284,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                     <label for="gi_view_sns_1" class="radio"><input type="radio" name="gi_view_sns" id="gi_view_sns_1" value="y" <?php echo $gi['gi_view_sns'] == 'y' || !$gi['gi_view_sns'] ? 'checked': ''; ?>><i></i> 사용</label>
                     <label for="gi_view_sns_2" class="radio"><input type="radio" name="gi_view_sns" id="gi_view_sns_2" value="n" <?php echo $gi['gi_view_sns'] == 'n' ? 'checked': ''; ?>><i></i> 사용하지 않음</label>
                 </div>
-                <div class="note"><strong>Note:</strong> 소셜사이트 연동 버튼의 출력 여부를 결정합니다.</div>
+                <div class="note"><strong>Note:</strong> 소셜사이트 연동 버튼의 출력 여부를 설정합니다.</div>
             </div>
         </div>
     </div>

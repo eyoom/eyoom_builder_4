@@ -325,13 +325,13 @@ function memo_modal() {
     return false;
 }
 
-function memo_send_modal(mb_id) {
+function memo_send_modal(href) {
     $('.memo-send-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#memo-send-iframe").attr("src", "");
         $('html').css({overflow: ''});
     });
     $('.memo-send-iframe-modal').modal('show').on('shown.bs.modal', function() {
-        $("#memo-send-iframe").attr("src", "<?php echo G5_BBS_URL; ?>/memo_form.php?me_recv_mb_id="+mb_id);
+        $("#memo-send-iframe").attr("src", href);
         $('#memo-send-iframe').height(parseInt($(window).height() * 0.8));
         $('html').css({overflow: 'hidden'});
     });

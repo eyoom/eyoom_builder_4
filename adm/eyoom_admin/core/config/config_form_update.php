@@ -16,7 +16,6 @@ if ($is_admin != 'super') {
 
 $cf_title = isset($_POST['cf_title']) ? strip_tags(clean_xss_attributes($_POST['cf_title'])) : '';
 $cf_admin = isset($_POST['cf_admin']) ? clean_xss_tags($_POST['cf_admin'], 1, 1) : '';
-$posts = array();
 
 $mb = get_member($cf_admin);
 
@@ -32,11 +31,11 @@ $check_keys = array('cf_cert_kcb_cd', 'cf_cert_kcp_cd', 'cf_editor', 'cf_recaptc
 
 foreach ($check_keys as $key) {
     if (isset($_POST[$key]) && $_POST[$key]) {
-        $posts[$key] = $_POST[$key] = preg_replace('/[^a-z0-9_\-\.]/i', '', $_POST[$key]);
+        $_POST[$key] = preg_replace('/[^a-z0-9_\-\.]/i', '', $_POST[$key]);
     }
 }
 
-$posts['cf_icode_server_port'] = $_POST['cf_icode_server_port'] = isset($_POST['cf_icode_server_port']) ? preg_replace('/[^0-9]/', '', $_POST['cf_icode_server_port']) : '7295';
+$_POST['cf_icode_server_port'] = isset($_POST['cf_icode_server_port']) ? preg_replace('/[^0-9]/', '', $_POST['cf_icode_server_port']) : '7295';
 
 if (isset($_POST['cf_intercept_ip']) && $_POST['cf_intercept_ip']) {
     $pattern = explode("\n", trim($_POST['cf_intercept_ip']));
@@ -109,6 +108,7 @@ $check_keys = array(
     'cf_cert_ipin' => 'char',
     'cf_cert_hp' => 'char',
     'cf_cert_simple' => 'char',
+    'cf_cert_use_seed' => 'int',
     'cf_admin_email' => 'char',
     'cf_admin_email_name' => 'char',
     'cf_add_script' => 'text',
@@ -174,12 +174,12 @@ for ($i = 1; $i <= 10; $i++) {
 
 foreach ($check_keys as $k => $v) {
     if ($v === 'int') {
-        $posts[$key] = $_POST[$k] = isset($_POST[$k]) ? (int) $_POST[$k] : 0;
+        $_POST[$k] = isset($_POST[$k]) ? (int) $_POST[$k] : 0;
     } else {
         if (in_array($k, array('cf_analytics', 'cf_add_meta', 'cf_add_script', 'cf_stipulation', 'cf_privacy'))) {
-            $posts[$key] = $_POST[$k] = isset($_POST[$k]) ? $_POST[$k] : '';
+            $_POST[$k] = isset($_POST[$k]) ? $_POST[$k] : '';
         } else {
-            $posts[$key] = $_POST[$k] = isset($_POST[$k]) ? strip_tags(clean_xss_attributes($_POST[$k])) : '';
+            $_POST[$k] = isset($_POST[$k]) ? strip_tags(clean_xss_attributes($_POST[$k])) : '';
         }
     }
 }
@@ -190,9 +190,9 @@ if ($_POST['cf_cert_use'] && !$_POST['cf_cert_ipin'] && !$_POST['cf_cert_hp'] &&
 }
 
 if (!$_POST['cf_cert_use']) {
-    $posts[$key] = $_POST['cf_cert_ipin'] = '';
-    $posts[$key] = $_POST['cf_cert_hp'] = '';
-    $posts[$key] = $_POST['cf_cert_simple'] = '';
+    $_POST['cf_cert_ipin'] = '';
+    $_POST['cf_cert_hp'] = '';
+    $_POST['cf_cert_simple'] = '';
 }
 
 $sql = " update {$g5['config_table']}
@@ -300,6 +300,7 @@ $sql = " update {$g5['config_table']}
                 cf_cert_ipin = '{$_POST['cf_cert_ipin']}',
                 cf_cert_hp = '{$_POST['cf_cert_hp']}',
                 cf_cert_simple = '{$_POST['cf_cert_simple']}',
+                cf_cert_use_seed = '".(int)$_POST['cf_cert_use_seed']."',
                 cf_cert_kg_cd = '{$_POST['cf_cert_kg_cd']}',
                 cf_cert_kg_mid = '".trim($_POST['cf_cert_kg_mid'])."',
                 cf_cert_kcb_cd = '{$_POST['cf_cert_kcb_cd']}',

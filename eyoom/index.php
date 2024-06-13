@@ -32,11 +32,13 @@ include_once(EYOOM_PATH . '/head.php');
 /**
  * 팝업창
  */
-if ($eyoom['use_gnu_newwin'] == 'n') {
-    @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
-}
-else {
-    @include_once(G5_BBS_PATH.'/newwin.inc.php');
+if (!$is_myhome) {
+    if ($eyoom['use_gnu_newwin'] == 'n') {
+        @include_once(EYOOM_CORE_PATH.'/newwin/newwin.inc.php');
+    }
+    else {
+        @include_once(G5_BBS_PATH.'/newwin.inc.php');
+    }
 }
 
 /**

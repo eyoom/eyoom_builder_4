@@ -37,7 +37,7 @@ $stx = trim($stx);
 $is_search_bbs = false;
 
 if ($sca || $stx || $stx === '0') {     //검색이면
-    $is_search_bbs = true;      //검색구분변수 true 지정
+    $is_search_bbs = $stx ? true: false;      //검색구분변수 true 지정
     $sql_search = get_sql_search($sca, $sfl, $stx, $sop);
 
     // 익명게시물 제외
@@ -108,6 +108,12 @@ $i = 0;
 $notice_count = 0;
 $notice_array = array();
 
+// 카테고리가 있을 경우
+$sql_sca = '';
+if ($sca) {
+    $sql_sca = " and ca_name = '{$sca}' ";
+}
+
 // 공지 처리
 if (!$is_search_bbs) {
     $arr_notice = explode(',', trim($board['bo_notice']));
@@ -119,7 +125,7 @@ if (!$is_search_bbs) {
     for ($k=0; $k<$board_notice_count; $k++) {
         if (trim($arr_notice[$k]) == '') continue;
 
-        $row = sql_fetch(" select * from {$write_table} where wr_id = '{$arr_notice[$k]}' ");
+        $row = sql_fetch(" select * from {$write_table} where wr_id = '{$arr_notice[$k]}' {$sql_sca} ");
 
         if (!isset($row['wr_id']) || !$row['wr_id']) continue;
 
@@ -155,7 +161,7 @@ if (!$is_search_bbs) {
             $sql = "select * from {$g5['eyoom_wrfixed']} where {$fixed_where} order by bf_datetime desc";
             $result = sql_query($sql);
             for ($k=0; $rows=sql_fetch_array($result); $k++) {
-                $row = sql_fetch(" select * from {$write_table} where wr_id = '{$rows['wr_id']}' ");
+                $row = sql_fetch(" select * from {$write_table} where wr_id = '{$rows['wr_id']}' {$sql_sca} ");
                 if (!isset($row['wr_id']) || !$row['wr_id']) continue;
                 
                 $list[$i] = get_list($row, $board, $board_skin_url, G5_IS_MOBILE ? $board['bo_mobile_subject_len'] : $board['bo_subject_len']);

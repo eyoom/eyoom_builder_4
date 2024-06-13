@@ -33,7 +33,7 @@ $frm_submit .= $frm_eba_submit;
         <div class="adm-form-info">
             <div class="cont-text-bg">
                 <p class="bg-info">
-                    <i class="fas fa-info-circle"></i> 사업자정보는 tail.php 와 content.php 에서 표시합니다.<br>
+                    <i class="fas fa-info-circle"></i> 사업자정보는 사이트 하단, 찾아오시는 길 페이지 등에서 출력됩니다. (테마에 따라 상이)<br>
                     <i class="fas fa-info-circle"></i> 대표전화번호는 SMS 발송번호로 사용되므로 사전등록된 발신번호와 일치해야 합니다.
                 </p>
             </div>
