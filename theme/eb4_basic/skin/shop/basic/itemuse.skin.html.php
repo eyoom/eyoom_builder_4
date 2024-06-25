@@ -17,7 +17,7 @@ if (!defined('_EYOOM_')) exit;
         총 <strong><?php echo $total_count; ?></strong> 건 사용후기
         <?php } ?>
         <div class="product-use-btn">
-            <a href="<?php echo $itemuse_form; ?>" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemuse_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?> class="btn-e btn-e-md btn-e-red bd-r-0">사용후기 쓰기</a>
+            <a href="<?php echo $itemuse_form; ?>" onclick="itemuse_modal(this.href); return false;" class="btn-e btn-e-md btn-e-indigo bd-r-0">사용후기 쓰기</a>
             <a href="<?php echo $itemuse_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
         </div>
         <div class="clearfix"></div>
@@ -49,7 +49,7 @@ if (!defined('_EYOOM_')) exit;
 
                 <?php if ($is_admin || $info['mb_id'] == $member['mb_id']) { ?>
                 <div class="product-use-cmd">
-                    <a href="<?php echo $info['link_edit']; ?>" class="btn-e btn-e-red" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemuse_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>수정</a>
+                    <a href="<?php echo $info['link_edit']; ?>" class="btn-e btn-e-indigo" onclick="itemuse_modal(this.href); return false;">수정</a>
                     <a href="<?php echo $info['link_del']; ?>" class="itemuse_delete btn-e btn-e-dark">삭제</a>
                 </div>
                 <?php } ?>

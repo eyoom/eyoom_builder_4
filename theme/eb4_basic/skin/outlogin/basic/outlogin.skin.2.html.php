@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
 .ol-after .profile .links,.ol-after .profile .links a,.ol-after .profile .toggle {bottom:-16px;z-index:8;right:15px;width:34px;height:34px;border-radius:50%;position:absolute}
 .ol-after .profile .links {bottom:-16px}
 .ol-after .profile .plus {display:none}
-.ol-after .profile .toggle {z-index:9;background:#cc2300;cursor:pointer;-webkit-transition:all 0.2s ease-in-out 0s;transition:all 0.2s ease-in-out 0s}
+.ol-after .profile .toggle {z-index:9;background:#3949ab;cursor:pointer;-webkit-transition:all 0.2s ease-in-out 0s;transition:all 0.2s ease-in-out 0s}
 .ol-after .profile .toggle:after,.ol-after .profile .toggle:before {top:50%;left:50%;content:'';background:#eee;position:inherit}
 .ol-after .profile .toggle:before {width:12px;height:1px;margin-top:-0.5px;margin-left:-6px}
 .ol-after .profile .toggle:after {width:1px;height:12px;margin-top:-6px;margin-left:-0.5px}
@@ -174,7 +174,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                 </div>
                 <div class="clearfix"></div>
                 <?php if ($is_admin == 'super' || $is_auth) { ?>
-                <a href="<?php echo G5_ADMIN_URL; ?>" class="btn-e btn-e-lg btn-e-crimson btn-e-block m-t-10">관리자</a>
+                <a href="<?php echo G5_ADMIN_URL; ?>" class="btn-e btn-e-lg btn-e-indigo btn-e-block m-t-10">관리자</a>
                 <?php } ?>
             </div>
             
@@ -182,12 +182,12 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
             <div class="member-point">
                 <div class="width-50 float-start">
                     <p class="m-b-0"><?php echo $levelset['gnu_name']; ?> - <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u>내역보기</u></a></p>
-                    <p class="text-crimson"><?php echo $point; ?></p>
+                    <p class="text-indigo"><?php echo $point; ?></p>
                 </div>
                 <?php if ($levelset['use_eyoom_level'] != 'n') { ?>
                 <div class="width-50 float-end text-end">
                     <p class="m-b-0"><?php echo $levelset['eyoom_name']; ?></p>
-                    <p class="text-crimson"><?php echo number_format($eyoomer['level_point']); ?></p>
+                    <p class="text-indigo"><?php echo number_format($eyoomer['level_point']); ?></p>
                 </div>
                 <?php } ?>
                 <div class="clearfix"></div>

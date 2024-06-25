@@ -5,6 +5,7 @@
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css" type="text/css" media="screen">',0);
 add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/apexcharts/apexcharts.min.js"></script>', 0);
 add_javascript('<script id="mode_js" src="'.EYOOM_ADMIN_THEME_URL.'/js/admin-main-'.$modeStyle.'.js"></script>', 0);
 
@@ -61,7 +62,7 @@ if ($max_regist_count > $max_login_count) {
 /*----- Card -----*/
 .card .card-title {position:relative}
 .card .card-title:after {content:"";display:block;clear:both}
-.card .card-title h5 {position:relative;float:left;color:var(--ttc-default)}
+.card .card-title h5 {position:relative;float:left;font-weight:600;font-size:1.0625rem;color:var(--ttc-default)}
 .card .card-title .card-title-btn {float:right}
 .card .card-title .card-title-btn a {font-size:.8125rem;color:var(--ttc-muted)}
 .card .card-title .card-title-btn a:hover {text-decoration:underline}
@@ -81,7 +82,7 @@ if ($max_regist_count > $max_login_count) {
 .order-box:nth-child(4) h3 {color:#00897b}
 .order-box-in > p {margin-bottom:10px}
 .order-box-in > p > span {color:var(--ttc-muted)}
-.order-box-in > span {color:var(--ttc-low)}
+.order-box-in > span {font-weight:600;font-size:1.0625rem;color:var(--ttc-low)}
 .order-box-in:hover > span {text-decoration:underline}
 .personal-order-wrap {position:relative;margin-bottom:20px;border:1px solid var(--tbc-primary)}
 .personal-order-box {position:relative;overflow:hidden;background-color:var(--tbg-default)}
@@ -90,7 +91,7 @@ if ($max_regist_count > $max_login_count) {
 .personal-order-box-in h3 i {margin-right:10px;color:var(--ttc-muteder)}
 .personal-order-box-in > p {margin-bottom:10px}
 .personal-order-box-in > p > span {color:var(--ttc-muted)}
-.personal-order-box-in > span {color:var(--ttc-low)}
+.personal-order-box-in > span {font-weight:600;font-size:1.0625rem;color:var(--ttc-low)}
 .personal-order-box-in:hover > span {text-decoration:underline}
 @media (max-width:1399px) {
     .personal-order-wrap {border-top:0}
@@ -107,7 +108,7 @@ if ($max_regist_count > $max_login_count) {
     .order-box .icon {display:none}
 }
 /*----- Latest -----*/
-.main-latest-wrap {position:relative;padding:10px;min-height:300px;border:1px solid var(--tbc-primary)}
+.main-latest-wrap {position:relative;overflow:hidden;padding:10px;height:300px;;border:1px solid var(--tbc-primary)}
 .main-latest .main-latest-none {display:block;text-align:center;font-size:.8125rem;padding:30px 5px;margin:0;color:var(--ttc-muted)}
 .main-latest-link {position:relative;overflow:hidden;display:block;font-size:.8125rem;height:55px;padding:5px;border-bottom:1px solid var(--tbc-primary);color:var(--ttc-default)}
 .main-latest-link:last-child {border-bottom:0}
@@ -115,7 +116,7 @@ if ($max_regist_count > $max_login_count) {
 .main-latest-link .main-latest-member-img img {display:block;max-width:100%;height:auto}
 .main-latest-link .main-latest-member-img i {font-size:30px;color:var(--ttc-muted)}
 .main-latest-link .main-latest-cont {position:relative;margin-left:42px}
-.main-latest-link .main-latest-cont p {margin-bottom:0;font-size:.9375rem;color:var(--ttc-default)}
+.main-latest-link .main-latest-cont p {margin-bottom:0;font-size:1rem;color:var(--ttc-default)}
 .main-latest-link:hover .main-latest-cont p {text-decoration:underline}
 .main-latest-link .main-latest-cont span {display:inline-block;font-size:.8125rem;margin-right:7px;color:var(--ttc-muted)}
 .main-latest-link .main-latest-cont .member-id-nick {position:relative;overflow:hidden;height:23px}
@@ -130,8 +131,8 @@ if ($max_regist_count > $max_login_count) {
 .site-chart-wrap .statistics-box-wrap {position:relative}
 .site-chart-wrap .statistics-box {float:left;width:50%;padding:20px 5px;text-align:center;border-bottom:1px solid var(--tbc-primary)}
 .site-chart-wrap .statistics-box:nth-child(1) {border-right:1px solid var(--tbc-primary)}
-.site-chart-wrap .statistics-box h6 {font-size:.9375rem;margin-bottom:10px;color:var(--ttc-lower)}
-.site-chart-wrap .statistics-box p {font-size:.9375rem;color:var(--ttc-heigher)}
+.site-chart-wrap .statistics-box h6 {font-size:1rem;margin-bottom:10px;color:var(--ttc-lower)}
+.site-chart-wrap .statistics-box p {font-size:1rem;color:var(--ttc-heigher)}
 .site-chart-wrap .statistics-box a:hover p {text-decoration:underline}
 .site-chart-wrap .statistics-list {padding:15px}
 .site-chart-wrap .statistics-list p {margin-bottom:3px}
@@ -241,7 +242,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_BBS_URL; ?>/qalist.php" target="_blank"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_1" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for ($i=0; $i<count((array)$qa_conts); $i++) { ?>
                         <a href="<?php echo G5_BBS_URL; ?>/qaview.php?qa_id=<?php echo $qa_conts[$i]['qa_id']; ?>" target="_blank" class="main-latest-link <?php if (!$qa_conts[$i]['qa_status']) { ?>main-latest-no-answer<?php } ?>">
@@ -280,7 +281,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=itemqalist"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_2" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for ($i=0; $i<count((array)$item_qa); $i++) { ?>
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemqaform&amp;iq_id=<?php echo $item_qa[$i]['iq_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_qa[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
@@ -315,7 +316,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=itemuselist"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_3" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for ($i=0; $i<count((array)$item_use); $i++) { ?>
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemuseform&amp;is_id=<?php echo $item_use[$i]['is_id']; ?>&amp;w=u" class="main-latest-link <?php if (!$item_use[$i]['is_answer']) { ?>main-latest-no-answer<?php } ?>">
@@ -444,7 +445,7 @@ if ($max_regist_count > $max_login_count) {
                 <a href="<?php echo G5_BBS_URL; ?>/qalist.php" target="_blank"><i class="las la-plus"></i> 전체보기</a>
             </div>
         </div>
-        <div class="main-latest-wrap">
+        <div id="main_latest_wrap_1" class="main-latest-wrap">
             <div class="main-latest">
                 <?php for ($i=0; $i<count((array)$qa_conts); $i++) { ?>
                 <a href="<?php echo G5_BBS_URL; ?>/qaview.php?qa_id=<?php echo $qa_conts[$i]['qa_id']; ?>" class="main-latest-link <?php if (!$qa_conts[$i]['qa_status']) { ?>main-latest-no-answer<?php } ?>">
@@ -530,7 +531,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=member_list"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_4" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for($i=0; $i<count((array)$new_member); $i++) { ?>
                         <div class="main-latest-link">
@@ -573,7 +574,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=point_list"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_5" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for($i=0; $i<count((array)$new_point); $i++) { ?>
                         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&amp;pid=point_list&amp;sfl=mb_id&amp;stx=<?php echo $new_point[$i]['mb_id']; ?>" title="ID: <?php echo $new_point[$i]['mb_id']; ?> 이름: <?php echo $new_point[$i]['mb_name']; ?> 포인트합: <?php echo number_format($new_point[$i]['po_mb_point']); ?>p" class="main-latest-link">
@@ -614,7 +615,7 @@ if ($max_regist_count > $max_login_count) {
                         <a href="<?php echo G5_BBS_URL; ?>/new.php" target="_blank"><i class="las la-plus"></i> 전체보기</a>
                     </div>
                 </div>
-                <div class="main-latest-wrap">
+                <div id="main_latest_wrap_6" class="main-latest-wrap">
                     <div class="main-latest">
                         <?php for($i=0; $i<count((array)$new_post); $i++) { ?>
                         <a href="<?php echo $new_post[$i]['view_url']; ?>" target="_blank" class="main-latest-link">
@@ -720,7 +721,19 @@ if ($max_regist_count > $max_login_count) {
     </div>
 </div>
 
+<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
 <script>
+$(document).ready(function(){
+    new PerfectScrollbar('#main_latest_wrap_1');
+    <?php if ($is_youngcart) { // 영카트 쇼핑몰 사용시 ?>
+    new PerfectScrollbar('#main_latest_wrap_2');
+    new PerfectScrollbar('#main_latest_wrap_3');
+    <?php } ?>
+    new PerfectScrollbar('#main_latest_wrap_4');
+    new PerfectScrollbar('#main_latest_wrap_5');
+    new PerfectScrollbar('#main_latest_wrap_6');
+});
+
 <?php if ($is_youngcart) { // 영카트 쇼핑몰 사용시 ?>
 // 쇼핑몰 주간 일-매출 주문 현황
 var main_chart1_series = [

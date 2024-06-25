@@ -20,9 +20,9 @@ button {cursor:pointer}
 [type=button], [type=reset], [type=submit], button {-webkit-appearance:none}
 p {margin:0;padding:0;word-break:keep-all}
 hr {display:block}
-pre {overflow-x:scroll;font-size:.9375rem}
+pre {overflow-x:scroll;font-size:.9375rem;box-shadow:none !important}
 a {color:#000;text-decoration:none;-webkit-transition:all .3s ease;transition:all .3s ease}
-a:hover {text-decoration:none;color:#cc2300}
+a:hover {text-decoration:none;color:#3949ab}
 a:focus {outline:0}
 a[type=button] {-webkit-appearance:inherit}
 a.btn, .btn {width:inherit;height:inherit}
@@ -1316,3 +1316,11 @@ pre[class*="language-"] {border-radius:0 !important}
 .selec_chk {visibility:hidden;opacity:0}
 .mbskin .toggle .toggle-title {line-height:25px !important}
 #fregisterform .btn_confirm .btn_cancel {vertical-align:inherit;border-radius:3px;color:#fff !important}
+/*Smart Editor*/
+.btn_cke_sc {height:25px;line-height:25px}
+.cke_sc {margin-bottom:10px}
+.btn_cke_sc {padding:0 10px}
+.cke_sc_def {padding:10px;margin-bottom:10px;margin-top:10px}
+.cke_sc_def button {padding:3px 15px;background:#555555;color:#fff;border:none}
+/*Tui Editor*/
+.toastui-editor-defaultUI-toolbar {background-color:transparent !important;padding:0 !important}

@@ -17,23 +17,9 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 .cke_sc_def {padding:10px;margin-bottom:10px;margin-top:10px;background:#fbfbfb}
 .cke_sc_def button {padding:3px 15px;background:#555555;color:#fff;border:none}
 </style>
-<?php if (G5_IS_MOBILE) { ?>
-<style>
-.shop-product-qa-write {padding:15px}
-.shop-product-qa-write .win-title {height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
-.shop-product-qa-write .btn-close {position:absolute;top:19px;right:10px}
-</style>
-<?php } ?>
 
 <?php /* ---------- 사용후기 쓰기 시작 ---------- */ ?>
 <div class="shop-product-qa-write">
-    <?php if (G5_IS_MOBILE) { ?>
-    <h4 class="win-title">
-        <strong>상품문의 쓰기</strong>
-        <button type="button" class="btn-close btn-close-white" onclick="self.close();" aria-label="Close"></button>
-    </h4>
-    <?php } ?>
-
     <form name="fitemqa" method="post" action="<?php echo G5_SHOP_URL; ?>/itemqaformupdate.php" onsubmit="return fitemqa_submit(this);" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
@@ -81,10 +67,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
         </div>
 
         <div class="text-center">
-            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-red">
-            <?php if (G5_IS_MOBILE) { ?>
-            <button type="button" onclick="self.close();" class="btn-e btn-e-xlg btn-e-dark">닫기</button>
-            <?php } ?>
+            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-indigo">
         </div>
     </div>
 
@@ -94,9 +77,26 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 <script>
 function fitemqa_submit(f) {
     <?php echo $editor_js; ?>
-
+    
     return true;
 }
+
+$(function(){
+    $("input, textarea, select, button, i, div.note-editing-area, span.select2-selection, .calendar-time, ul.tag-editor, div.asSpinner-control").on({ 'touchstart' : function() {
+        zoomDisable();
+    }});
+    $("input, textarea, select, button, i, div.note-editing-area, span.select2-selection, .calendar-time, ul.tag-editor, div.asSpinner-control").on({ 'touchend' : function() {
+        setTimeout(zoomEnable, 500);
+    }});
+    function zoomDisable() {
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
+    }
+    function zoomEnable() {
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
+    }
+});
 
 <?php /* 다크모드 JS 시작 */ ?>
 const currentMode = localStorage.getItem("mode");
@@ -107,6 +107,16 @@ if (currentMode == "dark") {
 	CKEDITOR.on('instanceReady', function(e) {
 		e.editor.document.getBody().setStyle('background-color', '#000');
 		e.editor.document.getBody().setStyle('color', '#858585');
+	});
+	<?php } ?>
+    <?php if($editor_html && preg_match('/smarteditor2/i', $config['cf_editor'])) { ?>
+	$(document).ready(function() {
+		$('.smarteditor2').next().attr('class', 'se2_iframe');
+		$(".se2_iframe").on("load", function() {
+			var iframeHead = $('.se2_iframe').contents().find('head');
+			iframeHead.find('#se2_eyoom_css').attr('href', 'css/smart_editor2_eyoom_dark.css');
+			iframeHead.find('#se2_eyoom_css').attr('class', 'se2_eyoom_dark_css');
+		});
 	});
 	<?php } ?>
 }

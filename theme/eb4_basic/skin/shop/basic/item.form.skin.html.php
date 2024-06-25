@@ -102,269 +102,279 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 
         <div class="col-md-7">
             <?php /* ---------- 상품 요약정보 및 구매 시작 ---------- */ ?>
-            <div class="shop-product-form 2017_renewal_itemform">
-                <h3 class="product-title">
-                    <strong><?php echo stripslashes($it['it_name']); ?></strong>
-                    <span class="sound_only">요약정보 및 구매</span>
-                </h3>
-                <p class="text-gray"><?php echo $it['it_basic']; ?></p>
-                <?php if ($is_orderable) { ?>
-                <p class="sound_only">
-                    상품 선택옵션 <?php echo $option_count; ?> 개, 추가옵션 <?php echo $supply_count; ?> 개
-                </p>
-                <?php } ?>
-                <div class="shop-description-box">
-                    <table class="table">
-                        <tbody>
-                            <?php if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>
-                            <tr>
-                                <th scope="row">판매가격</th>
-                                <td>판매중지</td>
-                            </tr>
-                            <?php } else if ($it['it_tel_inq']) { // 전화문의일 경우 ?>
-                            <tr>
-                                <th scope="row">판매가격</th>
-                                <td>전화문의</td>
-                            </tr>
-                            <?php } else { // 전화문의가 아닐 경우?>
-                            <tr>
-                                <th scope="row">판매가격</th>
-                                <td>
-                                    <strong class="shop-product-prices"><?php echo display_price(get_price($it)); ?></strong>
-                                    <input type="hidden" id="it_price" value="<?php echo get_price($it); ?>">
-                                    <?php if ($it['it_cust_price']) { ?>
-                                    <span class="line-through"><?php echo display_price($it['it_cust_price']); ?></span>
+            <div class="sit-ov-height">
+                <div id="sit_ov" class="shop-product-form 2017_renewal_itemform">
+                    <div id="btn_buy_back"></div>
+                    <div class="buy-btn-wr"><button type="button" class="buy-op-btn">구매하기 <i class="fas fa-credit-card"></i></button></div>
+                    <div class="scroll-no">
+                        <h3 class="product-title">
+                            <strong><?php echo stripslashes($it['it_name']); ?></strong>
+                            <span class="sound_only">요약정보 및 구매</span>
+                        </h3>
+                        <p class="text-gray"><?php echo $it['it_basic']; ?></p>
+                        <?php if ($is_orderable) { ?>
+                        <p class="sound_only">
+                            상품 선택옵션 <?php echo $option_count; ?> 개, 추가옵션 <?php echo $supply_count; ?> 개
+                        </p>
+                        <?php } ?>
+                        <div class="shop-description-box">
+                            <table class="table">
+                                <tbody>
+                                    <?php if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>
+                                    <tr>
+                                        <th scope="row">판매가격</th>
+                                        <td>판매중지</td>
+                                    </tr>
+                                    <?php } else if ($it['it_tel_inq']) { // 전화문의일 경우 ?>
+                                    <tr>
+                                        <th scope="row">판매가격</th>
+                                        <td>전화문의</td>
+                                    </tr>
+                                    <?php } else { // 전화문의가 아닐 경우?>
+                                    <tr>
+                                        <th scope="row">판매가격</th>
+                                        <td>
+                                            <strong class="shop-product-prices"><?php echo display_price(get_price($it)); ?></strong>
+                                            <input type="hidden" id="it_price" value="<?php echo get_price($it); ?>">
+                                            <?php if ($it['it_cust_price']) { ?>
+                                            <span class="line-through"><?php echo display_price($it['it_cust_price']); ?></span>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
                                     <?php } ?>
-                                </td>
-                            </tr>
-                            <?php } ?>
 
-                            <?php
-                            /* 재고 표시하는 경우 주석 해제
-                            <tr>
-                                <th scope="row">재고수량</th>
-                                <td><?php echo number_format(get_it_stock_qty($it_id)); ?> 개</td>
-                            </tr>
-                            */
-                            ?>
-
-                            <?php if ($config['cf_use_point']) { // 포인트 사용한다면 ?>
-                            <tr>
-                                <th scope="row">포인트</th>
-                                <td>
                                     <?php
-                                    if($it['it_point_type'] == 2) {
-                                        echo '구매금액(추가옵션 제외)의 '.$it['it_point'].'%';
-                                    } else {
-                                        $it_point = get_item_point($it);
-                                        echo number_format($it_point).'점';
-                                    }
+                                    /* 재고 표시하는 경우 주석 해제
+                                    <tr>
+                                        <th scope="row">재고수량</th>
+                                        <td><?php echo number_format(get_it_stock_qty($it_id)); ?> 개</td>
+                                    </tr>
+                                    */
                                     ?>
-                                </td>
-                            </tr>
-                            <?php } ?>
 
-                            <tr>
-                                <th><?php echo $ct_send_cost_label; ?></th>
-                                <td>
-                                    <?php if($it['it_sc_type'] != 1 && $it['it_sc_method'] == 2) { ?>
-                                    <select name="ct_send_cost" id="ct_send_cost">
-                                        <option value="0">주문시 결제</option>
-                                        <option value="1">수령후 지불</option>
-                                    </select>
-                                    <?php } else { ?>
-                                    <?php echo $sc_method; ?>
+                                    <?php if ($config['cf_use_point']) { // 포인트 사용한다면 ?>
+                                    <tr>
+                                        <th scope="row">포인트</th>
+                                        <td>
+                                            <?php
+                                            if($it['it_point_type'] == 2) {
+                                                echo '구매금액(추가옵션 제외)의 '.$it['it_point'].'%';
+                                            } else {
+                                                $it_point = get_item_point($it);
+                                                echo number_format($it_point).'점';
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
                                     <?php } ?>
-                                </td>
-                            </tr>
 
-                            <?php if($it['it_buy_min_qty']) { ?>
-                            <tr>
-                                <th>최소구매수량</th>
-                                <td><?php echo number_format($it['it_buy_min_qty']); ?> 개</td>
-                            </tr>
-                            <?php } ?>
-                            <?php if($it['it_buy_max_qty']) { ?>
-                            <tr>
-                                <th>최대구매수량</th>
-                                <td><?php echo number_format($it['it_buy_max_qty']); ?> 개</td>
-                            </tr>
-                            <?php } ?>
+                                    <tr>
+                                        <th><?php echo $ct_send_cost_label; ?></th>
+                                        <td>
+                                            <?php if($it['it_sc_type'] != 1 && $it['it_sc_method'] == 2) { ?>
+                                            <select name="ct_send_cost" id="ct_send_cost">
+                                                <option value="0">주문시 결제</option>
+                                                <option value="1">수령후 지불</option>
+                                            </select>
+                                            <?php } else { ?>
+                                            <?php echo $sc_method; ?>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
 
-                            <?php if ($it['it_maker']) { ?>
-                            <tr>
-                                <th scope="row">제조사</th>
-                                <td><?php echo $it['it_maker']; ?></td>
-                            </tr>
-                            <?php } ?>
+                                    <?php if($it['it_buy_min_qty']) { ?>
+                                    <tr>
+                                        <th>최소구매수량</th>
+                                        <td><?php echo number_format($it['it_buy_min_qty']); ?> 개</td>
+                                    </tr>
+                                    <?php } ?>
+                                    <?php if($it['it_buy_max_qty']) { ?>
+                                    <tr>
+                                        <th>최대구매수량</th>
+                                        <td><?php echo number_format($it['it_buy_max_qty']); ?> 개</td>
+                                    </tr>
+                                    <?php } ?>
 
-                            <?php if ($it['it_origin']) { ?>
-                            <tr>
-                                <th scope="row">원산지</th>
-                                <td><?php echo $it['it_origin']; ?></td>
-                            </tr>
-                            <?php } ?>
+                                    <?php if ($it['it_maker']) { ?>
+                                    <tr>
+                                        <th scope="row">제조사</th>
+                                        <td><?php echo $it['it_maker']; ?></td>
+                                    </tr>
+                                    <?php } ?>
 
-                            <?php if ($it['it_brand']) { ?>
-                            <tr>
-                                <th scope="row">브랜드</th>
-                                <td><?php echo $it['it_brand']; ?></td>
-                            </tr>
-                            <?php } ?>
+                                    <?php if ($it['it_origin']) { ?>
+                                    <tr>
+                                        <th scope="row">원산지</th>
+                                        <td><?php echo $it['it_origin']; ?></td>
+                                    </tr>
+                                    <?php } ?>
 
-                            <?php if ($it['it_model']) { ?>
-                            <tr>
-                                <th scope="row">모델</th>
-                                <td><?php echo $it['it_model']; ?></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                                    <?php if ($it['it_brand']) { ?>
+                                    <tr>
+                                        <th scope="row">브랜드</th>
+                                        <td><?php echo $it['it_brand']; ?></td>
+                                    </tr>
+                                    <?php } ?>
 
-                <?php /* 선택옵션 시작 */ ?>
-                <?php if ($optitem) { ?>
-                <div class="sit_option eyoom-form">
-                    <h3>선택옵션</h3>
-                    <?php if ($option_count > 1) { ?>
-                    <?php for($i=0; $i<$option_count; $i++) { ?>
-                    <div class="get_item_options">
-                        <label for="it_option_<?php echo $optitem[$i]['seq']; ?>"><?php echo $optitem[$i]['subject']; ?></label>
-                        <div class="select m-b-10">
-                            <select id="it_option_<?php echo $optitem[$i]['seq']; ?>" class="it_option" <?php echo $optitem[$i]['disabled']; ?>>
-                                <option value="">선택</option>
-                                <?php foreach ($optitem[$i]['select'] as $k => $select) { ?>
-                                <option value="<?php echo $select['opt_val']; ?>"><?php echo $select['opt_val']; ?></option>
-                                <?php } ?>
-                            </select><i></i>
+                                    <?php if ($it['it_model']) { ?>
+                                    <tr>
+                                        <th scope="row">모델</th>
+                                        <td><?php echo $it['it_model']; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <?php } ?>
-                    <?php } else { ?>
-                    <div class="get_item_options">
-                        <label for="it_option_1"><?php echo $optitem['subject']; ?></label>
-                        <div class="select m-b-10">
-                            <select id="it_option_1" class="it_option">
-                                <option value="">선택</option>
-                                <?php foreach ($optitem['select'] as $k => $select) { ?>
-                                <option value="<?php echo $select['io_id']; ?>,<?php echo $select['io_price']; ?>,<?php echo $select['io_stock_qty']; ?>"><?php echo $select['io_id']; ?><?php echo $select['price']; ?><?php echo $select['soldout']; ?></option>
-                                <?php } ?>
-                            </select><i></i>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-                <?php } ?>
-                <?php /* 선택옵션 끝 */ ?>
+                    
+                    <div class="scroll-show">
+                        <div id="scroll_show_close"><i class="fas fa-times"></i><span class="sound_only">창닫기</span></div>
 
-                <?php /* 추가옵션 시작 */ ?>
-                <?php if($supitem) { ?>
-                <div class="sit_option eyoom-form">
-                    <h3>추가옵션</h3>
-                    <?php for($i=0; $i<$supply_count; $i++) { ?>
-                    <div class="get_item_supply">
-                        <label for="it_supply_<?php echo $supitem[$i]['seq']; ?>"><?php echo $supitem[$i]['subject']; ?></label>
-                        <div class="select m-b-10">
-                            <select id="it_supply_<?php echo $supitem[$i]['seq']; ?>" class="it_supply">
-                                <option value="">선택</option>
-                                <?php foreach ($supitem[$i]['select'] as $k => $select) { ?>
-                                <?php echo $select['opt_val']; ?>
-                                <?php } ?>
-                            </select><i></i>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-                <?php } ?>
-                <?php /* 추가옵션 끝 */ ?>
-
-                <?php if ($is_orderable) { ?>
-                <?php /* 선택된 옵션 시작 */ ?>
-                <div id="sit_sel_option">
-                    <h3>선택된 옵션</h3>
-                    <?php
-                    if(!$optitem) {
-                        if(!$it['it_buy_min_qty'])
-                            $it['it_buy_min_qty'] = 1;
-                    ?>
-                    <ul id="sit_opt_added">
-                        <li class="sit_opt_list">
-                            <input type="hidden" name="io_type[<?php echo $it_id; ?>][]" value="0">
-                            <input type="hidden" name="io_id[<?php echo $it_id; ?>][]" value="">
-                            <input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $it['it_name']; ?>">
-                            <input type="hidden" class="io_price" value="0">
-                            <input type="hidden" class="io_stock" value="<?php echo $it['it_stock_qty']; ?>">
-                            <div class="opt_name">
-                                <span class="sit_opt_subj"><?php echo $it['it_name']; ?></span>
+                        <?php /* 선택옵션 시작 */ ?>
+                        <?php if ($optitem) { ?>
+                        <div class="sit_option eyoom-form">
+                            <h3>선택옵션</h3>
+                            <?php if ($option_count > 1) { ?>
+                            <?php for($i=0; $i<$option_count; $i++) { ?>
+                            <div class="get_item_options">
+                                <label for="it_option_<?php echo $optitem[$i]['seq']; ?>"><?php echo $optitem[$i]['subject']; ?></label>
+                                <div class="select m-b-10">
+                                    <select id="it_option_<?php echo $optitem[$i]['seq']; ?>" class="it_option" <?php echo $optitem[$i]['disabled']; ?>>
+                                        <option value="">선택</option>
+                                        <?php foreach ($optitem[$i]['select'] as $k => $select) { ?>
+                                        <option value="<?php echo $select['opt_val']; ?>"><?php echo $select['opt_val']; ?></option>
+                                        <?php } ?>
+                                    </select><i></i>
+                                </div>
                             </div>
-                            <div class="opt_count">
-                                <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
-                                <button type="button" class="sit_qty_minus"><i class="fas fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
-                                <input type="text" name="ct_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="num_input" size="5">
-                                <button type="button" class="sit_qty_plus"><i class="fas fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
-                                <span class="sit_opt_prc">+0원</span>
+                            <?php } ?>
+                            <?php } else { ?>
+                            <div class="get_item_options">
+                                <label for="it_option_1"><?php echo $optitem['subject']; ?></label>
+                                <div class="select m-b-10">
+                                    <select id="it_option_1" class="it_option">
+                                        <option value="">선택</option>
+                                        <?php foreach ($optitem['select'] as $k => $select) { ?>
+                                        <option value="<?php echo $select['io_id']; ?>,<?php echo $select['io_price']; ?>,<?php echo $select['io_stock_qty']; ?>"><?php echo $select['io_id']; ?><?php echo $select['price']; ?><?php echo $select['soldout']; ?></option>
+                                        <?php } ?>
+                                    </select><i></i>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                    <script>
-                    $(function() {
-                        price_calculate();
-                    });
-                    </script>
-                    <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+                        <?php /* 선택옵션 끝 */ ?>
+
+                        <?php /* 추가옵션 시작 */ ?>
+                        <?php if($supitem) { ?>
+                        <div class="sit_option eyoom-form">
+                            <h3>추가옵션</h3>
+                            <?php for($i=0; $i<$supply_count; $i++) { ?>
+                            <div class="get_item_supply">
+                                <label for="it_supply_<?php echo $supitem[$i]['seq']; ?>"><?php echo $supitem[$i]['subject']; ?></label>
+                                <div class="select m-b-10">
+                                    <select id="it_supply_<?php echo $supitem[$i]['seq']; ?>" class="it_supply">
+                                        <option value="">선택</option>
+                                        <?php foreach ($supitem[$i]['select'] as $k => $select) { ?>
+                                        <?php echo $select['opt_val']; ?>
+                                        <?php } ?>
+                                    </select><i></i>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+                        <?php /* 추가옵션 끝 */ ?>
+
+                        <?php if ($is_orderable) { ?>
+                        <?php /* 선택된 옵션 시작 */ ?>
+                        <div id="sit_sel_option">
+                            <h3>선택된 옵션</h3>
+                            <?php
+                            if(!$optitem) {
+                                if(!$it['it_buy_min_qty'])
+                                    $it['it_buy_min_qty'] = 1;
+                            ?>
+                            <ul id="sit_opt_added">
+                                <li class="sit_opt_list">
+                                    <input type="hidden" name="io_type[<?php echo $it_id; ?>][]" value="0">
+                                    <input type="hidden" name="io_id[<?php echo $it_id; ?>][]" value="">
+                                    <input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $it['it_name']; ?>">
+                                    <input type="hidden" class="io_price" value="0">
+                                    <input type="hidden" class="io_stock" value="<?php echo $it['it_stock_qty']; ?>">
+                                    <div class="opt_name">
+                                        <span class="sit_opt_subj"><?php echo $it['it_name']; ?></span>
+                                    </div>
+                                    <div class="opt_count">
+                                        <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
+                                        <button type="button" class="sit_qty_minus"><i class="fas fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
+                                        <input type="text" name="ct_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="num_input" size="5">
+                                        <button type="button" class="sit_qty_plus"><i class="fas fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
+                                        <span class="sit_opt_prc">+0원</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <script>
+                            $(function() {
+                                price_calculate();
+                            });
+                            </script>
+                            <?php } ?>
+                        </div>
+                        <?php /* 선택된 옵션 끝 */ ?>
+
+                        <?php /* 총 구매액 */ ?>
+                        <div id="sit_tot_price"></div>
+                        <?php } ?>
+
+                        <?php if($is_soldout) { ?>
+                        <p id="sit_ov_soldout">상품의 재고가 부족하여 구매할 수 없습니다.</p>
+                        <?php } ?>
+
+                        <div id="sit_ov_btn">
+                            <?php if ($is_orderable) { ?>
+                            <button type="submit" onclick="document.pressed=this.value;" value="바로구매" id="sit_btn_buy"><i class="fas fa-credit-card" aria-hidden="true"></i> 바로구매</button>
+                            <button type="submit" onclick="document.pressed=this.value;" value="장바구니" id="sit_btn_cart"><i class="fas fa-cart-arrow-down" aria-hidden="true"></i> 장바구니</button>
+                            <?php } ?>
+                            <?php if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
+                            <a href="javascript:popup_stocksms('<?php echo $it['it_id']; ?>');" id="sit_btn_alm"><i class="far fa-bell" aria-hidden="true"></i> 재입고알림</a>
+                            <?php } ?>
+                            <a href="javascript:item_wish(document.fitem, '<?php echo $it['it_id']; ?>');" id="sit_btn_wish"><i class="fas fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span></a>
+                            <?php if ($naverpay_button_js) { ?>
+                            <div class="itemform-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
+                            <?php } ?>
+                        </div>
+
+                        <script>
+                        // 상품보관
+                        function item_wish(f, it_id) {
+                            f.url.value = "<?php echo G5_SHOP_URL; ?>/wishupdate.php?it_id="+it_id;
+                            f.action = "<?php echo G5_SHOP_URL; ?>/wishupdate.php";
+                            f.submit();
+                        }
+
+                        // 추천메일
+                        function popup_item_recommend(it_id) {
+                            if (!g5_is_member)
+                            {
+                                if (confirm("회원만 추천하실 수 있습니다."))
+                                    document.location.href = "<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo urlencode(shop_item_url($it_id)); ?>";
+                            } else {
+                                url = "./itemrecommend.php?it_id=" + it_id;
+                                opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
+                                popup_window(url, "itemrecommend", opt);
+                            }
+                        }
+
+                        // 재입고SMS 알림
+                        function popup_stocksms(it_id) {
+                            url = "<?php echo G5_SHOP_URL; ?>/itemstocksms.php?it_id=" + it_id;
+                            opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
+                            popup_window(url, "itemstocksms", opt);
+                        }
+                        </script>
+                    </div>
                 </div>
-                <?php /* 선택된 옵션 끝 */ ?>
-
-                <?php /* 총 구매액 */ ?>
-                <div id="sit_tot_price"></div>
-                <?php } ?>
-
-                <?php if($is_soldout) { ?>
-                <p id="sit_ov_soldout">상품의 재고가 부족하여 구매할 수 없습니다.</p>
-                <?php } ?>
-
-                <div id="sit_ov_btn">
-                    <?php if ($is_orderable) { ?>
-                    <button type="submit" onclick="document.pressed=this.value;" value="바로구매" id="sit_btn_buy"><i class="fas fa-credit-card" aria-hidden="true"></i> 바로구매</button>
-                    <button type="submit" onclick="document.pressed=this.value;" value="장바구니" id="sit_btn_cart"><i class="fas fa-cart-arrow-down" aria-hidden="true"></i> 장바구니</button>
-                    <?php } ?>
-                    <?php if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
-                    <a href="javascript:popup_stocksms('<?php echo $it['it_id']; ?>');" id="sit_btn_alm"><i class="far fa-bell" aria-hidden="true"></i> 재입고알림</a>
-                    <?php } ?>
-                    <a href="javascript:item_wish(document.fitem, '<?php echo $it['it_id']; ?>');" id="sit_btn_wish"><i class="fas fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span></a>
-                    <?php if ($naverpay_button_js) { ?>
-                    <div class="itemform-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
-                    <?php } ?>
-                </div>
-
-                <script>
-                // 상품보관
-                function item_wish(f, it_id) {
-                    f.url.value = "<?php echo G5_SHOP_URL; ?>/wishupdate.php?it_id="+it_id;
-                    f.action = "<?php echo G5_SHOP_URL; ?>/wishupdate.php";
-                    f.submit();
-                }
-
-                // 추천메일
-                function popup_item_recommend(it_id) {
-                    if (!g5_is_member)
-                    {
-                        if (confirm("회원만 추천하실 수 있습니다."))
-                            document.location.href = "<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo urlencode(shop_item_url($it_id)); ?>";
-                    } else {
-                        url = "./itemrecommend.php?it_id=" + it_id;
-                        opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
-                        popup_window(url, "itemrecommend", opt);
-                    }
-                }
-
-                // 재입고SMS 알림
-                function popup_stocksms(it_id) {
-                    url = "<?php echo G5_SHOP_URL; ?>/itemstocksms.php?it_id=" + it_id;
-                    opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
-                    popup_window(url, "itemstocksms", opt);
-                }
-                </script>
             </div>
             <?php /* ---------- 상품 요약정보 및 구매 끝 ---------- */ ?>
         </div>
@@ -592,6 +602,34 @@ function fitem_submit(f)
 
     return true;
 }
+
+// 스크롤시 구매하기 버튼 항상 출력
+$(function(){
+    var sitOvHeight = $('#sit_ov').height();
+    var stickyHeaderTop = $('#sit_ov_btn').offset().top+$('#sit_ov').height()+50;
+    
+    $(window).scroll(function(){
+        if( $(window).scrollTop() > stickyHeaderTop ) {
+                $('#sit_ov').addClass("fixed");
+                $('#sit_ov').removeClass("static");
+                $('.sit-ov-height').height(sitOvHeight);
+        } else {
+                $('#sit_ov').removeClass("fixed");
+                $('#sit_ov').addClass("static");
+                $('.sit-ov-height').css('height','auto');
+        }
+    });
+    
+    $('.buy-op-btn').click(function() {
+        $('.scroll-show').toggleClass('scroll-show-popup');
+        $('#btn_buy_back').toggle();
+    });
+
+    $('#scroll_show_close, #btn_buy_back').click(function() {
+        $('.scroll-show').removeClass('scroll-show-popup');
+        $('#btn_buy_back').hide();
+    });
+});
 </script>
 <?php /* 2017 리뉴얼한 테마 적용 스크립트입니다. 기존 스크립트를 오버라이드 합니다. */ ?>
 <script src="<?php echo G5_JS_URL; ?>/shop.override.js"></script>

@@ -14,7 +14,7 @@ $pp_info = get_personalpay_sum();
 /**
  * 상품문의
  */
-$sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 5";
+$sql = " select * from {$g5['g5_shop_item_qa_table']} where (1) order by iq_id desc limit 15 ";
 $result = sql_query($sql);
 $item_qa = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -27,7 +27,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 사용후기
  */
-$sql = " select * from {$g5['g5_shop_item_use_table']} where (1) order by is_id desc limit 5 ";
+$sql = " select * from {$g5['g5_shop_item_use_table']} where (1) order by is_id desc limit 15 ";
 $result = sql_query($sql);
 $item_use = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {

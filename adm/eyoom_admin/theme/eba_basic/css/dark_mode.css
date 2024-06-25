@@ -256,6 +256,7 @@ img {filter:brightness(.8) contrast(1.2) !important}
 .btn-e-brd.btn-dark:hover, .btn-e-brd.btn-e-dark:hover {color:#d5d5d5 !important;border-color:#4a535e !important}
 .margin-hr-5, .margin-hr-10, .margin-hr-15, .margin-hr-20, .margin-hr-25, .margin-hr-30, .margin-hr-35, .margin-hr-40 {border-color:#23272c !important}
 .alert .text-black {color:#000 !important}
+.dropdown-menu {background-color:#161b22 !important;border-color:#30363d !important;color:#b5b5b5 !important}
 .alert-info {background:#5c6bbf;color:#08274b;border-color:#5c6bbf}
 .alert-success {background:#26a699;color:#102e12;border-color:#26a699}
 .alert-warning {background:#ffa72c;color:#6d220b;border-color:#ffa72c}
@@ -277,6 +278,15 @@ a.bg-danger:hover {background-color:#fa836b !important;color:#380b0b}
 .cont-text-bg .bg-info {background-color:#5c6bbf !important;color:#08274b}
 .cont-text-bg .bg-warning {background-color:#ffa72c !important;color:#6d220b}
 .cont-text-bg .bg-danger {background-color:#ff785d !important;color:#380b0b}
+.table-list-eb .table>:not(caption)>*>* {color:inherit;background-color:inherit}
+.table-list-eb .table tr.table-primary {background-color:#cfe2ff !important}
+.table-list-eb .table tr.table-secondary {background-color:#e2e3e5 !important}
+.table-list-eb .table tr.table-success {background-color:#d1e7dd !important}
+.table-list-eb .table tr.table-danger {background-color:#f8d7da !important}
+.table-list-eb .table tr.table-warning {background-color:#fff3cd !important}
+.table-list-eb .table tr.table-info {background-color:#cff4fc !important}
+.table-list-eb .table tr.table-light {background-color:#f8f9fa !important}
+.table-list-eb .table tr.table-dark {background-color:#212529 !important}
 .table-list-eb thead {background-color:#000 !important;border-color:#30363d !important}
 .table-list-eb tbody, .table-list-eb td, .table-list-eb tfoot, .table-list-eb th, .table-list-eb thead, .table-list-eb tr {border-color:#30363d !important}
 .table-list-eb .table-striped>tbody>tr:nth-of-type(odd)>* {background-color:#161b22 !important;color:#858585 !important}
@@ -351,7 +361,6 @@ blockquote.hero:hover {background-color:#353535 !important;border-color:#555555 
 .sidebar-nav-e1 li.active > a {color:#cc2300 !important}
 .profile-modal .profile-photo {box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) !important;background-color:#000 !important}
 .profile-modal .profile-photo img {background-color:#000 !important}
-.eb-hidden-space {background-color:#161b22 !important;border-color:#30363d !important}
 .sv_wrap .sv {background-color:#161b22 !important;border-color:#30363d !important}
 .sv_wrap .sv a {background-color:#161b22 !important}
 .exif_info {background-color:#000 !important;border-color:#30363d !important}
@@ -365,9 +374,8 @@ blockquote.hero:hover {background-color:#353535 !important;border-color:#555555 
 
 /*---------- Eyoom Form ----------*/
 .eyoom-form {color:#858585 !important}
-.eyoom-form a {color:#b5b5b5 !important}
 .eyoom-form.bd-1px {border-color:#30363d !important}
-.eyoom-form fieldset {background-color:transparent !important;border-color:transparent !important}
+.eyoom-form fieldset {background-color:#0d1116 !important;border-color:#30363d !important}
 .eyoom-form header {color:#b5b5b5 !important;background-color:#161b22 !important;border-color:#30363d !important}
 .eyoom-form .label {color:#858585 !important}
 .eyoom-form .input input, .eyoom-form .select select, .eyoom-form .textarea textarea {background-color:#000 !important;color:#858585 !important}
@@ -415,12 +423,12 @@ blockquote.hero:hover {background-color:#353535 !important;border-color:#555555 
 .card {background-color:#161b22;border-color:#30363d}
 .card-header {border-color:#30363d}
 .mark, mark {background-color:#25327c;color:#d5d5d5}
-.accordion-item {background-color:#0d1116 !important;border-color:#30363d !important}
+.accordion-item {background-color:#0d1116 !important;border-color:#30363d !important;color:#858585 !important}
 .accordion-button {background-color:#0d1116 !important;color:#858585 !important}
-.accordion-button:not(.collapsed) {background-color:#161b22 !important;color:#b5b5b5 !important;border-bottom:1px solid #30363d !important}
+.accordion-button:not(.collapsed) {background-color:#161b22 !important;color:#b5b5b5 !important;border-bottom:1px solid #30363d !important;box-shadow:none !important}
 .accordion-button::after {filter:brightness(2) !important}
 .nav-tabs {border-color:#30363d !important}
-.nav-tabs .nav-link.active {background-color:#0d1116 !important;border-color:#30363d !important}
+.nav-tabs .nav-link.active {background-color:#0d1116 !important;border-color:#30363d !important;color:#b5b5b5 !important}
 .nav-tabs .nav-link:hover {border-color:#30363d !important}
 /* Dropdown */
 .dropdown-menu {color:var(--ttc-high);background-color:var(--tbg-default);border-color:var(--tbc-default)}

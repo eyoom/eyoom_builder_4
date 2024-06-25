@@ -30,8 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .pinboard-list .pl-list .pl-num-short {width:80px}
 .pinboard-list .pl-list .pl-author {width:150px;padding:0 10px;text-align:left}
 .pinboard-list .pl-list .pl-subj {display:table-cell;vertical-align:middle}
-.pinboard-list .pl-list .pl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
--webkit-box-orient:vertical}
+.pinboard-list .pl-list .pl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pinboard-list .pl-list .pl-subj a:hover {color:#000;text-decoration:underline}
 .pinboard-list .pl-list .pl-subj .pl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
 .pinboard-list .pl-list .pl-subj .pl-img img {background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-position:50% 50%;height:100%}
@@ -121,11 +120,6 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     </a>
                 </div>
                 <div class="pl-item pl-author">
-                    <span class="pl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="pl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="pl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </div>
                 <div class="pl-item text-gray">

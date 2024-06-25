@@ -3,7 +3,7 @@
 --------------------------------------*/
 
 /*---------- Font ----------*/
-body, h1, h2, h3, h4, h5, h6, label, input, button, textarea, select, img {font-family:'s-core-dream', sans-serif}
+body, h1, h2, h3, h4, h5, h6, label, input, button, textarea, select, img {font-family:'Pretendard', sans-serif}
 
 /*---------- Reset ----------*/
 html {overflow-y:scroll;min-width:320px}
@@ -1335,3 +1335,5 @@ pre[class*="language-"] {border-radius:0 !important}
 .selec_chk {visibility:hidden;opacity:0}
 .mbskin .toggle .toggle-title {line-height:25px !important}
 #fregisterform .btn_confirm .btn_cancel {vertical-align:inherit;border-radius:3px;color:#fff !important}
+/*Tui Editor*/
+.toastui-editor-defaultUI-toolbar {background-color:transparent !important;padding:0 !important}

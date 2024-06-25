@@ -89,7 +89,7 @@ $this_vi_domain = $this_vi_info['vi_domain'];
  * 새로 가입한 회원
  */
 if ($is_admin != 'super') $add_where = " and mb_level <= '{$member['mb_level']}' ";
-$sql = " select * from {$g5['member_table']} where (1) and mb_id != '{$config['cf_admin']}' {$add_where} and mb_leave_date = '' order by mb_datetime desc limit 5 ";
+$sql = " select * from {$g5['member_table']} where (1) and mb_id != '{$config['cf_admin']}' {$add_where} and mb_leave_date = '' order by mb_datetime desc limit 15 ";
 $result = sql_query($sql);
 $new_member = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -100,7 +100,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 최근 게시물
  */
-$new_write_rows = 5;
+$new_write_rows = 15;
 
 $sql_common = " from {$g5['board_new_table']} where (1) ";
 
@@ -158,7 +158,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 최근 포인트 발생내역
  */
-$new_point_rows = 5;
+$new_point_rows = 15;
 
 $sql_common = " from {$g5['point_table']} ";
 $sql_search = " where (1) ";
@@ -183,7 +183,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 /**
  * 1:1문의
  */
-$sql = " select * from {$g5['qa_content_table']} where (1) and qa_type = '0' order by qa_num limit 5 ";
+$sql = " select * from {$g5['qa_content_table']} where (1) and qa_type = '0' order by qa_num limit 15 ";
 $result = sql_query($sql);
 $qa_conts = array();
 for ($i=0; $row=sql_fetch_array($result); $i++) {

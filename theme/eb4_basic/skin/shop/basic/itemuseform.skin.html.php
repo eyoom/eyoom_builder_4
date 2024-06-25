@@ -17,23 +17,9 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 .cke_sc_def {padding:10px;margin-bottom:10px;margin-top:10px;background:#fbfbfb}
 .cke_sc_def button {padding:3px 15px;background:#555555;color:#fff;border:none}
 </style>
-<?php if (G5_IS_MOBILE) { ?>
-<style>
-.shop-product-use-write {padding:15px}
-.shop-product-use-write .win-title {height:60px;line-height:30px;padding:15px 10px;background:#353535;color:#fff}
-.shop-product-use-write .btn-close {position:absolute;top:19px;right:10px}
-</style>
-<?php } ?>
 
 <?php /* ---------- 사용후기 쓰기 시작 ---------- */ ?>
 <div class="shop-product-use-write">
-    <?php if (G5_IS_MOBILE) { ?>
-    <h4 class="win-title">
-        <strong>사용후기 쓰기</strong>
-        <button type="button" class="btn-close btn-close-white" onclick="self.close();" aria-label="Close"></button>
-    </h4>
-    <?php } ?>
-
     <form name="fitemuse" method="post" action="<?php echo G5_SHOP_URL; ?>/itemuseformupdate.php" onsubmit="return fitemuse_submit(this);" autocomplete="off" class="eyoom-form">
     <input type="hidden" name="w" value="<?php echo $w; ?>">
     <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
@@ -105,10 +91,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
         </div>
         <div class="margin-hr-20"></div>
         <div class="text-center">
-            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-red">
-            <?php if (G5_IS_MOBILE) { ?>
-            <button type="button" onclick="self.close();" class="btn-e btn-e-xlg btn-e-dark">닫기</button>
-            <?php } ?>
+            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-indigo">
         </div>
     </div>
 
@@ -148,6 +131,16 @@ if (currentMode == "dark") {
 	CKEDITOR.on('instanceReady', function(e) {
 		e.editor.document.getBody().setStyle('background-color', '#000');
 		e.editor.document.getBody().setStyle('color', '#858585');
+	});
+	<?php } ?>
+    <?php if($editor_html && preg_match('/smarteditor2/i', $config['cf_editor'])) { ?>
+	$(document).ready(function() {
+		$('.smarteditor2').next().attr('class', 'se2_iframe');
+		$(".se2_iframe").on("load", function() {
+			var iframeHead = $('.se2_iframe').contents().find('head');
+			iframeHead.find('#se2_eyoom_css').attr('href', 'css/smart_editor2_eyoom_dark.css');
+			iframeHead.find('#se2_eyoom_css').attr('class', 'se2_eyoom_dark_css');
+		});
 	});
 	<?php } ?>
 }

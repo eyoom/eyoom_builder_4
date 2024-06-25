@@ -27,8 +27,7 @@ if (!defined('_EYOOM_')) exit;
 .goodpost-list .gl-list .gl-num-short {width:80px}
 .goodpost-list .gl-list .gl-author {width:150px;padding:0 10px;text-align:left}
 .goodpost-list .gl-list .gl-subj {display:table-cell;vertical-align:middle}
-.goodpost-list .gl-list .gl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
--webkit-box-orient:vertical}
+.goodpost-list .gl-list .gl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .goodpost-list .gl-list .gl-subj a:hover {color:#000;text-decoration:underline}
 .goodpost-list .gl-list .gl-subj .gl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
 .goodpost-list .gl-list .gl-subj .gl-img img {background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-position:50% 50%;height:100%}
@@ -135,11 +134,6 @@ if (!defined('_EYOOM_')) exit;
             </div>
             <div class="gl-mobile"><?php /* 991px 이하에서만 보임 */ ?>
                 <span class="m-r-5">
-                    <span class="gl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="gl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="gl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </span>
                 <span class="m-r-5">

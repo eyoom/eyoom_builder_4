@@ -28,8 +28,7 @@ if (!defined('_EYOOM_')) exit;
 .favorite-list .fl-list .fl-num-short {width:80px}
 .favorite-list .fl-list .fl-author {width:150px;padding:0 10px;text-align:left}
 .favorite-list .fl-list .fl-subj {display:table-cell;vertical-align:middle}
-.favorite-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
--webkit-box-orient:vertical}
+.favorite-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .favorite-list .fl-list .fl-subj a:hover {color:#000;text-decoration:underline}
 .favorite-list .fl-list .fl-subj .fl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
 .favorite-list .fl-list .fl-subj .fl-img img {background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-position:50% 50%;height:100%}
@@ -142,11 +141,6 @@ if (!defined('_EYOOM_')) exit;
                 </div>
                 <?php } ?>
                 <div class="fl-item fl-author">
-                    <span class="fl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="fl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="fl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </div>
                 <div class="fl-item text-gray">

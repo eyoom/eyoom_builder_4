@@ -99,7 +99,7 @@
 .sidebar-title i {width:18px;text-align:center;font-size:0.875rem;display:none}
 .sidebar-left-nav {padding:0;margin:0;transition:all 0.1s ease-in-out}
 .nav-item-icon {position:absolute;top:10px;left:0;width:18px;font-size:0.9375rem;text-align:center;transition:all 0.1s ease-in-out}
-.nav-item-text {display:block;white-space:nowrap;margin-left:30px;font-size:.9375rem;margin-right:auto;transition:all 0.1s ease-in-out}
+.nav-item-text {display:block;white-space:nowrap;margin-left:30px;font-size:1rem;font-weight:500;margin-right:auto;transition:all 0.1s ease-in-out}
 .nav-item {display:block;position:relative}
 .nav-item.active:before {content:"";position:absolute;top:16px;left:-25px;width:12px;height:2px}
 .nav-item.active .sub-nav {display:block}
@@ -109,7 +109,7 @@
 .sub-nav {margin-left:9px;padding-top:5px;padding-bottom:5px;padding-left:20px;border-left-width:1px;border-left-style:solid;display:none}
 .sub-nav .sub-nav-item,
 .sub-nav .sub-nav-link {display:block;position:relative}
-.sub-nav .sub-nav-link {font-size:.9375rem;padding:7px 0;white-space:nowrap;transition:all 0.1s ease-in-out}
+.sub-nav .sub-nav-link {font-size:1rem;padding:7px 0;white-space:nowrap;transition:all 0.1s ease-in-out}
 .sub-nav .sub-nav-link:before {content:"";position:absolute;top:50%;left:-21px;width:0;height:0;transition:all 0.3s ease-in-out}
 .sub-nav .sub-nav-link.active:before, .sub-nav .sub-nav-link:focus::before, .sub-nav .sub-nav-link:hover::before {width:1px;height:20px;top:5px}
 .sidebar-left-info .sidebar-left-info-box {position:relative;overflow:hidden;padding:10px 0;width:219px;height:245px;border-top-width:1px;border-top-style:solid;border-bottom-width:1px;border-bottom-style:solid}
@@ -379,3 +379,6 @@ footer {position:absolute;bottom:0;left:0;right:0;height:50px;padding:0 20px;bor
 .easyui-panel .tree-hit {background:none !important;margin:1px 5px 7px 0px;text-align:center}
 .easyui-panel .tree-hit.tree-expanded:after {content:"\f146";font-family:'Font Awesome\ 5 Free';font-weight:900;font-size:.75rem}
 .easyui-panel .tree-hit.tree-collapsed:after {content:"\f0fe";font-family:'Font Awesome\ 5 Free';font-weight:900;font-size:.75rem}
+
+/*----- SmartEditor2 -----*/
+.cke_sc, .btn_cke_sc {display:none}

@@ -30,8 +30,7 @@ if (!defined('_EYOOM_')) exit;
 .followinggul-list .fl-list .fl-num-short {width:80px}
 .followinggul-list .fl-list .fl-author {width:150px;padding:0 10px;text-align:left}
 .followinggul-list .fl-list .fl-subj {display:table-cell;vertical-align:middle}
-.followinggul-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
--webkit-box-orient:vertical}
+.followinggul-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .followinggul-list .fl-list .fl-subj a:hover {color:#000;text-decoration:underline}
 .followinggul-list .fl-list .fl-subj .fl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
 .followinggul-list .fl-list .fl-subj .fl-img img {background-repeat:no-repeat;background-size:cover;background-attachment:fixed;background-position:50% 50%;height:100%}
@@ -177,11 +176,6 @@ if (!defined('_EYOOM_')) exit;
             </div>
             <div class="fl-mobile"><?php /* 991px 이하에서만 보임 */ ?>
                 <span class="m-r-5">
-                    <span class="fl-photo">
-                        <?php if ($li['mb_photo']) { echo $li['mb_photo']; } else { ?>
-                        <span class="fl-user-icon"><i class="far fa-user-circle"></i></span>
-                        <?php } ?>
-                    </span>
                     <span class="fl-name-in"><?php echo eb_nameview($li['mb_id'], $li['wr_name'], $li['wr_email']); ?></span>
                 </span>
                 <span class="m-r-5">

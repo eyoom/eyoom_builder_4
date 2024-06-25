@@ -10,7 +10,7 @@ if (!defined('_EYOOM_')) exit;
     <h3 class="h-hidden">등록된 상품문의</h3>
 
     <div class="product-qa-btn">
-        <a href="<?php echo $itemqa_form; ?>" onclick="itemqa_modal(this.href); return false;" class="btn-e btn-e-md btn-e-red bd-r-0">상품문의 쓰기</a>
+        <a href="<?php echo $itemqa_form; ?>" onclick="itemqa_modal(this.href); return false;" class="btn-e btn-e-md btn-e-indigo bd-r-0">상품문의 쓰기</a>
         <a href="<?php echo $itemqa_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
     </div>
     <div class="clearfix"></div>
@@ -47,7 +47,7 @@ if (!defined('_EYOOM_')) exit;
 
                 <?php if ($is_admin || ($info['mb_id'] == $member['mb_id'] && !$info['is_answer'])) { ?>
                 <div class="product-qa-cmd">
-                    <a href="<?php echo $info['link_edit']; ?>" class="btn-e btn-e-red" <?php if ( !G5_IS_MOBILE ) { ?>onclick="itemqa_modal(this.href); return false;"<?php } else { ?>target="_blank"<?php } ?>>수정</a>
+                    <a href="<?php echo $info['link_edit']; ?>" class="btn-e btn-e-indigo" onclick="itemqa_modal(this.href); return false;">수정</a>
                     <a href="<?php echo $info['link_del']; ?>" class="itemqa_delete btn-e btn-e-dark">삭제</a>
                 </div>
                 <?php } ?>

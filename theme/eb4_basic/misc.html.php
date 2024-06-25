@@ -391,7 +391,7 @@ window.closeModal = function(url){
 <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
 <?php /* 상품 사용후기 모달 시작 */ ?>
 <div class="modal fade itemuse-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="fas fa-edit text-gray m-r-7"></i><strong>사용후기 작성하기</strong></h5>
@@ -400,6 +400,11 @@ window.closeModal = function(url){
             <div class="modal-body">
                 <iframe id="itemuse-iframe" width="100%" frameborder="0"></iframe>
             </div>
+            <?php if (G5_IS_MOBILE) { ?>
+            <div class="modal-footer">
+                <button type="button" class="btn-e btn-e-xl btn-e-dark btn-e-block" data-bs-dismiss="modal">닫기<i class="fas fa-times m-l-7"></i></button>
+            </div>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -407,7 +412,7 @@ window.closeModal = function(url){
 
 <?php /* 상품 문의하기 모달 시작 */ ?>
 <div class="modal fade itemqa-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="fas fa-question-circle text-gray m-r-7"></i><strong>상품문의 작성하기</strong></h5>
@@ -416,6 +421,11 @@ window.closeModal = function(url){
             <div class="modal-body">
                 <iframe id="itemqa-iframe" width="100%" frameborder="0"></iframe>
             </div>
+            <?php if (G5_IS_MOBILE) { ?>
+            <div class="modal-footer">
+                <button type="button" class="btn-e btn-e-xl btn-e-dark btn-e-block" data-bs-dismiss="modal">닫기<i class="fas fa-times m-l-7"></i></button>
+            </div>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -445,7 +455,11 @@ function itemuse_modal(href) {
     });
     $('.itemuse-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#itemuse-iframe").attr("src", href);
+        <?php if (!G5_IS_MOBILE) { ?>
         $('#itemuse-iframe').height(parseInt($(window).height() * 0.8));
+        <?php } else { ?>
+        $('#itemuse-iframe').height(parseInt($(window).height() * 0.95));
+        <?php } ?>
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -458,7 +472,11 @@ function itemqa_modal(href) {
     });
     $('.itemqa-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#itemqa-iframe").attr("src", href);
+        <?php if (!G5_IS_MOBILE) { ?>
         $('#itemqa-iframe').height(parseInt($(window).height() * 0.8));
+        <?php } else { ?>
+        $('#itemqa-iframe').height(parseInt($(window).height() * 0.95));
+        <?php } ?>
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -534,7 +552,7 @@ function poll_result(url) {
 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
 <style>
 .sidebar-right-wrap .sidebar-admset-trigger {z-index:1002;position:fixed;top:65px;right:0;display:inline-block;width:40px;height:40px;line-height:40px;background:#cc2300;color:#fff;text-align:center;font-size:15px;cursor:pointer;border-radius:2px 0 0 2px !important}
-.sidebar-right {position:fixed;bottom:0;z-index:1004;display:flex;flex-direction:column;max-width:100%;width:280px;visibility:hidden;background-color:#fff;background-clip:padding-box;outline:0;transition:transform .3s ease-in-out}
+.sidebar-right.offcanvas {position:fixed;bottom:0;z-index:1004;display:flex;flex-direction:column;max-width:100%;width:280px;background-color:#fff;background-clip:padding-box;outline:0;transition:transform .3s ease-in-out}
 .sidebar-right .sidebar-right-content {position:relative;height:100%;width:100%}
 .sidebar-right .sidebar-config-wrap {position:relative;overflow:hidden;min-height:400px;padding:0 0 20px 15px}
 .sidebar-right .sidebar-config-wrap label {font-size:12px}

@@ -9,7 +9,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 
 
 <style>
-.memo-list {position:relative;overflow:hidden}
+.memo-list {position:relative;overflow:hidden;min-height:500px}
 .memo-list .table-list-eb .tr-mobile td {font-size:.75rem;color:#959595;padding-top:0}
 .memo-list .table-list-eb .tr-mobile td span {margin-left:5px}
 @media (max-width:767px) {

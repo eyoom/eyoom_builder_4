@@ -278,7 +278,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                         <?php if ($cmt[$i]['is_reply'] || $cmt[$i]['is_edit'] || $cmt[$i]['is_del'] || $cmt[$i]['c_good_href'] || $cmt[$i]['c_nogood_href']) { ?>
                         <div class="comment-btn-right">
                             <?php if ($cmt[$i]['is_reply']) { ?>
-                            <a href="<?php echo $cmt[$i]['c_reply_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'c'); return false;" class="comment-btn bg-red">댓글쓰기</a>
+                            <a href="<?php echo $cmt[$i]['c_reply_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'c'); return false;" class="comment-btn bg-indigo">댓글쓰기</a>
                             <?php } ?>
                             <?php if ($cmt[$i]['is_edit']) { ?>
                             <a href="<?php echo $cmt[$i]['c_edit_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'cu'); return false;" class="comment-btn">수정</a>
@@ -603,7 +603,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <?php } ?>
             </div>
             <div class="comment-write-submit">
-                <button type="submit" id="btn_submit" class="btn-e btn-e-xlg btn-e-red" value="댓글등록">댓글등록</button>
+                <button type="submit" id="btn_submit" class="btn-e btn-e-xlg btn-e-indigo" value="댓글등록">댓글등록</button>
             </div>
         </form>
     </div>

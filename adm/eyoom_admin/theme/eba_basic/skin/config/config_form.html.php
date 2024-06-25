@@ -1752,8 +1752,9 @@ $frm_submit .= $frm_eba_submit;
                     <div class="adm-form-td td-r">
                         <div class="input input-button">
                             <input type="text" name="cf_map_google_id" id="cf_map_google_id" value="<?php echo get_sanitize_input($config['cf_map_google_id']); ?>">
-                            <a href="https://cloud.google.com/maps-platform/" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                            <a href="https://mapsplatform.google.com/" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
                         </div>
+                        <a href="https://eyoom.net/page/eb4_manual_09_4" target="_blank" class="btn-e btn-e-lg btn-e-crimson m-b-5"><span class="text-white">구글지도 API키 발급 가이드</span></a>
                         <div class="note"><strong>Note:</strong> 구글 계정으로 로그인 &gt; 키가져오기 버튼 클릭 후, API KEY를 발급받을 수 있습니다.</div>
                     </div>
                 </div>

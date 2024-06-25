@@ -427,7 +427,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             <li><a href="<?php echo $reply_href; ?>" class="btn-e btn-e-dark" type="button">답변</a></li>
                 <?php } ?>
                 <?php if ($write_href) { ?>
-            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-red" type="button">글쓰기</a></li>
+            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-indigo" type="button">글쓰기</a></li>
                 <?php } ?>
             <?php } ?>
         </ul>

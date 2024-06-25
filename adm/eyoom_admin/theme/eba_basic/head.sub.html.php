@@ -29,7 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/f
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/line-awesome/css/line-awesome.min.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css?ver='.G5_CSS_VER.'">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/font/S-Core_Dream/s-core-dream.css?ver='.G5_CSS_VER.'">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/font/Pretendard/Pretendard.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/common.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/css/style.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" id="mode_css" href="'.EYOOM_ADMIN_THEME_URL.'/css/'.$modeStyle.'_mode.css?ver='.G5_CSS_VER.'">',0);
