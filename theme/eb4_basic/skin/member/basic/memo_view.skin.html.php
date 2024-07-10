@@ -91,7 +91,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
         <?php } ?>
         <a href="<?php echo $list_link ?>" class="btn-e btn-e-dark">목록보기</a>
         <?php if ($kind == 'recv') { ?>
-        <a href="<?php echo G5_BBS_URL; ?>/memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id']; ?>&amp;me_id=<?php echo $memo['me_id']; ?>" class="btn-e btn-e-red">답장</a>
+        <a href="<?php echo G5_BBS_URL; ?>/memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id']; ?>&amp;me_id=<?php echo $memo['me_id']; ?>" class="btn-e btn-e-navy">답장</a>
         <?php } ?>
         <?php if (G5_IS_MOBILE) { ?>
         <div class="text-center m-t-30">

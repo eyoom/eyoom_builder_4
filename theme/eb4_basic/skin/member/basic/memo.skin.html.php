@@ -86,7 +86,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
                         <?php for ($i=0; $i<count((array)$list); $i++) { ?>
                         <tr class="tr-fixing">
                             <td class="text-center"><strong><?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?></strong></td>
-                            <td class="text-center"><a href="<?php echo $list[$i]['view_href']; ?>" class="btn-e btn-e-xs <?php if ($list[$i]['read_datetime'] == '아직 읽지 않음') { ?>btn-e-red<?php } else { ?>btn-e-gray<?php } ?>">쪽지 보기</a></td>
+                            <td class="text-center"><a href="<?php echo $list[$i]['view_href']; ?>" class="btn-e btn-e-xs <?php if ($list[$i]['read_datetime'] == '아직 읽지 않음') { ?>btn-e-navy<?php } else { ?>btn-e-gray<?php } ?>">쪽지 보기</a></td>
                             <td class="text-center hidden-xs"><a href="<?php echo $list[$i]['view_href']; ?>"><?php echo $list[$i]['send_datetime']; ?></a></td>
                             <td class="text-center hidden-xs"><a href="<?php echo $list[$i]['view_href']; ?>"><span class="<?php if ($list[$i]['read_datetime'] == '아직 읽지 않음') { ?>text-crimson<?php } else { ?>text-black<?php } ?>"><?php echo $list[$i]['read_datetime']; ?></span></a></td>
                             <td class="text-center"><a href="<?php echo $list[$i]['del_href']; ?>" class="btn-e btn-e-xs btn-e-dark memo-del-btn" onclick="del(this.href); return false;">삭제</a></td>

@@ -36,21 +36,21 @@ if (!defined('_EYOOM_')) exit;
                 <tr>
                     <th>회원가입일</th>
                     <td>
-                      <?php if ($member['mb_level'] >= $mb['mb_level']) { ?>
-                      <?php echo substr($mb['mb_datetime'],0,10); ?> (<?php echo number_format($mb_reg_after); ?>일)
-                      <?php } else { ?>
-                      알 수 없음
-                      <?php } ?>
+                        <?php if ($member['mb_level'] >= $mb['mb_level']) { ?>
+                        <?php echo substr($mb['mb_datetime'],0,10); ?> (<?php echo number_format($mb_reg_after); ?>일)
+                        <?php } else { ?>
+                        알 수 없음
+                        <?php } ?>
                     </td>
                 </tr>
                 <tr>
                     <th>최종접속일</th>
                     <td>
-                      <?php if ($member['mb_level'] >= $mb['mb_level']) { ?>
-                      <?php echo $mb['mb_today_login']; ?>
-                      <?php } else { ?>
-                      알 수 없음
-                      <?php } ?>
+                        <?php if ($member['mb_level'] >= $mb['mb_level']) { ?>
+                        <?php echo $mb['mb_today_login']; ?>
+                        <?php } else { ?>
+                        알 수 없음
+                        <?php } ?>
                     </td>
                 </tr>
             </tbody>

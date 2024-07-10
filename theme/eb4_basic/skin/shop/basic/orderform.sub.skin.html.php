@@ -92,32 +92,32 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-calc-box strong {color:#000}
 .shop-order-form .payment-calc-box:before {content:"";width:1px;height:100%;background:#f0f0f0;position:absolute;top:0;right:0}
 .shop-order-form .payment-calc-box:last-child:before {display:none}
-.shop-order-form .payment-calc-box:nth-child(1):after {font-family:'Font Awesome\ 5 Free';content:"\f068";font-weight:900;color:#cc2300;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
-.shop-order-form .payment-calc-box:nth-child(2):after {font-family:'Font Awesome\ 5 Free';content:"\f067";font-weight:900;color:#cc2300;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
+.shop-order-form .payment-calc-box:nth-child(1):after {font-family:'Font Awesome\ 5 Free';content:"\f068";font-weight:900;color:#ab0000;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
+.shop-order-form .payment-calc-box:nth-child(2):after {font-family:'Font Awesome\ 5 Free';content:"\f067";font-weight:900;color:#ab0000;font-size:.8125rem;text-align:center;width:24px;height:24px;line-height:24px;border:1px solid #e5e5e5;background:#fff;position:absolute;top:50%;right:-12px;margin-top:-12px;z-index:1}
 .shop-order-form .payment-point-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;color:#757575}
 .shop-order-form .payment-point-box span {float:left}
 .shop-order-form .payment-point-box strong {color:#000}
 .shop-order-form .payment-total-box {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;border-top:0;background:#fff;text-align:right;color:#757575}
 .shop-order-form .payment-total-box span {float:left}
-.shop-order-form .payment-total-box strong {color:#cc2300}
+.shop-order-form .payment-total-box strong {color:#ab0000}
 .shop-order-form .order-payment-info {margin-bottom:20px}
 .shop-order-form .order-payment-info h2 {position:absolute;border:0;font-size:0;line-height:0;content:""}
 .shop-order-form .payment-info-box {position:relative;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;text-align:right;color:#757575}
-.shop-order-form .payment-info-box.border-color-red {border-color:#cc2300}
+.shop-order-form .payment-info-box.border-color-red {border-color:#ab0000}
 .shop-order-form .payment-info-box span {float:left}
 .shop-order-form .payment-info-box strong {color:#000}
 .shop-order-form .payment-info-box .cp_cancel {margin-left:3px;height:inherit;}
 .shop-order-form #od_tot_price {position:relative;overflow:hidden;clear:both;padding:10px 15px;margin:0;text-align:right;line-height:inherit;background:#fff}
 .shop-order-form #od_tot_price span {line-height:30px}
-.shop-order-form #od_tot_price .print_price {color:#cc2300;font-size:1.25rem}
+.shop-order-form #od_tot_price .print_price {color:#ab0000;font-size:1.25rem}
 .shop-order-form .payment-select-wrap {position:relative;margin-top:20px}
 .shop-order-form .payment-select-title {margin:0 0 10px;font-size:1.125rem}
 .shop-order-form .payment-select-wrap #sod_frm_paysel {padding:0 0 0 2px;background:none;border:0 none}
 .shop-order-form .payment-select-wrap input[type="radio"] {position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;text-indent:-999px;left:0;z-index:-1px}
 .shop-order-form .payment-select-wrap .payment-select-box {position:relative;overflow:hidden;float:left;width:50% !important;background:#fff;cursor:pointer;font-size:.875rem;height:60px;box-sizing:border-box;border:1px solid #e5e5e5;margin:-1px 0 0 -1px;padding:20px 5px 0 70px !important;text-indent:inherit !important}
 .shop-order-form .payment-select-wrap .payment-select-box.inicis_kakaopay {padding:9px 5px 0 70px !important}
-.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #cc2300;z-index:3}
-.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:2px;right:5px;color:#cc2300;font-size:1rem}
+.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #ab0000;z-index:3}
+.shop-order-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:2px;right:5px;color:#ab0000;font-size:1rem}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .bank_icon {background:#fff}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .bank_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f53c";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .vbank_icon {background:#fff}
@@ -136,14 +136,14 @@ if($is_kakaopay_use) {
 .shop-order-form .payment-select-wrap #sod_frm_paysel .inicis_kakaopay {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/kakaopay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 .shop-order-form .payment-select-wrap #sod_frm_paysel .naverpay_icon {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/naverpay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px}
 #display_pay_button {background:none;padding:0;border:0 none}
-.shop-order-form #display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#cc2300;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin-bottom:15px}
+.shop-order-form #display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#3f4678;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin-bottom:15px}
 .shop-order-form #display_pay_button a.btn01 {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5}
 #settle_bank label {float:none;width:auto;line-height:inherit}
 .shop-order-form .payment-point-use-box {margin-top:20px}
 .shop-order-form .payment-point-use {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;color:#757575}
 .shop-order-form .payment-point-use label {line-height:30px;margin-bottom:0}
 .shop-order-form .payment-point-use .input {margin-bottom:0}
-.shop-order-form #settle_bank {position:relative;padding:15px;border:1px solid #cc2300;margin:20px 0 0;display:none}
+.shop-order-form #settle_bank {position:relative;padding:15px;border:1px solid #ab0000;margin:20px 0 0;display:none}
 .shop-order-form #settle_bank .select {margin-bottom:10px}
 #settle_bank select {width:100%;border:1px solid #ccc}
 .shop-order-form #settle_bank .input {margin-bottom:0}
@@ -335,7 +335,7 @@ if($is_kakaopay_use) {
                                         <input type="text" name="od_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="required" size="8" maxlength="6" placeholder="우편번호">
                                         <b class="tooltip tooltip-top-right">우편번호 (주소 검색 버튼을 클릭하여 조회)</b>
                                     </label>
-                                    <button type="button" class="btn-e btn-e-lg btn-e-red" onclick="win_zip('forderform', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button>
+                                    <button type="button" class="btn-e btn-e-lg btn-e-navy" onclick="win_zip('forderform', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button>
                                     <div class="clearfix m-b-10"></div>
                                     <label for="od_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label>
                                     <label class="input required-mark">
@@ -475,7 +475,7 @@ if($is_kakaopay_use) {
                                         <input type="text" name="od_b_zip" id="od_b_zip" required class="required" size="8" maxlength="6" placeholder="우편번호">
                                         <b class="tooltip tooltip-top-right">우편번호 (주소 검색 버튼을 클릭하여 조회)</b>
                                     </label>
-                                    <button type="button" class="btn-e btn-e-lg btn-e-red" onclick="win_zip('forderform', 'od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon');">주소 검색</button>
+                                    <button type="button" class="btn-e btn-e-lg btn-e-navy" onclick="win_zip('forderform', 'od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon');">주소 검색</button>
                                     <div class="clearfix m-b-10"></div>
                                     <label for="od_b_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label>
                                     <label class="input required-mark">
@@ -558,7 +558,7 @@ if($is_kakaopay_use) {
                 <div class="payment-info-box">
                     <span>추가배송비</span>
                     <strong id="od_send_cost2">0</strong>원
-                    <div class="f-s-13r text-gray m-t-10"><b class="text-red">*</b> 지역에 따라 추가되는 도선료 등의 배송비입니다.</div>
+                    <div class="f-s-13r text-gray m-t-10"><b class="text-crimson">*</b> 지역에 따라 추가되는 도선료 등의 배송비입니다.</div>
                 </div>
                 <div class="m-b-20"></div>
                 <div id="od_tot_price" class="payment-info-box border-color-red">
@@ -569,7 +569,7 @@ if($is_kakaopay_use) {
                 <div class="payment-select-wrap">
                     <h5 class="payment-select-title"><strong>결제수단</strong></h5>
                     <?php if (!$default['de_card_point']) { ?>
-                    <p class="text-gray f-s-13r m-b-15"><b class="text-red">*</b> <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 포인트를 적립해드리지 않습니다.</p>
+                    <p class="text-gray f-s-13r m-b-15"><b class="text-crimson">*</b> <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 포인트를 적립해드리지 않습니다.</p>
                     <?php } ?>
 
                     <?php if ($is_kakaopay_use || $default['de_bank_use'] || $default['de_vbank_use'] || $default['de_iche_use'] || $default['de_card_use'] || $default['de_hp_use'] || $default['de_easy_pay_use'] || $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use']) { ?>
@@ -623,17 +623,41 @@ if($is_kakaopay_use) {
                         }
                         $multi_settle++;
 
-                        if($default['de_pg_service'] === 'kcp' && isset($default['de_easy_pay_services']) && $default['de_easy_pay_services']){
+                        if(in_array($default['de_pg_service'], array('kcp', 'nicepay')) && isset($default['de_easy_pay_services']) && $default['de_easy_pay_services']) {
                             $de_easy_pay_service_array = explode(',', $default['de_easy_pay_services']);
-                            if( in_array('nhnkcp_payco', $de_easy_pay_service_array) ){
-                                $easypay_prints['nhnkcp_payco'] = '<input type="radio" id="od_settle_nhnkcp_payco" name="od_settle_case" data-pay="payco" value="간편결제"> <label for="od_settle_nhnkcp_payco" class="payment-select-box PAYCO nhnkcp_payco lb_icon" title="NHN_KCP - PAYCO">PAYCO</label>';
-                            }
-                            if( in_array('nhnkcp_naverpay', $de_easy_pay_service_array) ){
-                                $easypay_prints['nhnkcp_naverpay'] = '<input type="radio" id="od_settle_nhnkcp_naverpay" name="od_settle_case" data-pay="naverpay" value="간편결제" > <label for="od_settle_nhnkcp_naverpay" class="payment-select-box naverpay_icon nhnkcp_naverpay lb_icon" title="NHN_KCP - 네이버페이">네이버페이</label>';
-                            }
-                            if( in_array('nhnkcp_kakaopay', $de_easy_pay_service_array) ){
-                                $easypay_prints['nhnkcp_kakaopay'] = '<input type="radio" id="od_settle_nhnkcp_kakaopay" name="od_settle_case" data-pay="kakaopay" value="간편결제" > <label for="od_settle_nhnkcp_kakaopay" class="payment-select-box kakaopay_icon nhnkcp_kakaopay lb_icon" title="NHN_KCP - 카카오페이">카카오페이</label>';
-                            }
+                            if ($default['de_pg_service'] === 'kcp') {
+                                if( in_array('nhnkcp_payco', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nhnkcp_payco'] = '<input type="radio" id="od_settle_nhnkcp_payco" name="od_settle_case" data-pay="payco" value="간편결제"> <label for="od_settle_nhnkcp_payco" class="PAYCO nhnkcp_payco lb_icon" title="NHN_KCP - PAYCO">PAYCO</label>';
+                                }
+                                if( in_array('nhnkcp_naverpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nhnkcp_naverpay'] = '<input type="radio" id="od_settle_nhnkcp_naverpay" name="od_settle_case" data-pay="naverpay" value="간편결제" > <label for="od_settle_nhnkcp_naverpay" class="naverpay_icon nhnkcp_naverpay lb_icon" title="NHN_KCP - 네이버페이">네이버페이</label>';
+                                }
+                                if( in_array('nhnkcp_kakaopay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nhnkcp_kakaopay'] = '<input type="radio" id="od_settle_nhnkcp_kakaopay" name="od_settle_case" data-pay="kakaopay" value="간편결제" > <label for="od_settle_nhnkcp_kakaopay" class="kakaopay_icon nhnkcp_kakaopay lb_icon" title="NHN_KCP - 카카오페이">카카오페이</label>';
+                                }
+                            } else if ($default['de_pg_service'] === 'nicepay') {
+                                if( in_array('nicepay_samsungpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_samsungpay'] = '<input type="radio" id="od_settle_nicepay_samsungpay" name="od_settle_case" data-pay="nice_samsungpay" value="간편결제"> <label for="od_settle_nicepay_samsungpay" class="samsungpay_icon nicepay_samsungpay lb_icon" title="NICEPAY - 삼성페이">삼성페이</label>';
+                                }
+                                if( in_array('nicepay_naverpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_naverpay'] = '<input type="radio" id="od_settle_nicepay_naverpay" name="od_settle_case" data-pay="nice_naverpay" value="간편결제" > <label for="od_settle_nicepay_naverpay" class="naverpay_icon nicepay_naverpay lb_icon" title="NICEPAY - 네이버페이">네이버페이</label>';
+                                }
+                                if( in_array('nicepay_kakaopay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_kakaopay'] = '<input type="radio" id="od_settle_nicepay_kakaopay" name="od_settle_case" data-pay="nice_kakaopay" value="간편결제" > <label for="od_settle_nicepay_kakaopay" class="kakaopay_icon nicepay_kakaopay lb_icon" title="NICEPAY - 카카오페이">카카오페이</label>';
+                                }
+                                if( in_array('nicepay_paycopay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_paycopay'] = '<input type="radio" id="od_settle_nicepay_paycopay" name="od_settle_case" data-pay="nice_paycopay" value="간편결제" > <label for="od_settle_nicepay_paycopay" class="paycopay_icon nicepay_paycopay lb_icon" title="NICEPAY - 페이코">페이코</label>';
+                                }
+                                if( in_array('nicepay_skpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_skpay'] = '<input type="radio" id="od_settle_nicepay_skpay" name="od_settle_case" data-pay="nice_skpay" value="간편결제" > <label for="od_settle_nicepay_skpay" class="skpay_icon nicepay_skpay lb_icon" title="NICEPAY - SK페이">SK페이</label>';
+                                }
+                                if( in_array('nicepay_ssgpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_ssgpay'] = '<input type="radio" id="od_settle_nicepay_ssgpay" name="od_settle_case" data-pay="nice_ssgpay" value="간편결제" > <label for="od_settle_nicepay_ssgpay" class="ssgpay_icon nicepay_ssgpay lb_icon" title="NICEPAY - SSGPAY">SSGPAY</label>';
+                                }
+                                if( in_array('nicepay_lpay', $de_easy_pay_service_array) ){
+                                    $easypay_prints['nicepay_lpay'] = '<input type="radio" id="od_settle_nicepay_lpay" name="od_settle_case" data-pay="nice_lpay" value="간편결제" > <label for="od_settle_nicepay_lpay" class="lpay_icon nicepay_lpay lb_icon" title="NICEPAY - LPAY">LPAY</label>';
+                                }
+                            }    
                         } else {
                             $easypay_prints[strtolower($pg_easy_pay_name)] = '<input type="radio" id="od_settle_easy_pay" name="od_settle_case" value="간편결제"> <label for="od_settle_easy_pay" class="payment-select-box '.$pg_easy_pay_name.' lb_icon">'.$pg_easy_pay_name.'</label>';
                         }
@@ -1509,7 +1533,7 @@ function forderform_check(f)
                 f.LGD_CUSTOM_FIRSTPAY.value = "무통장";
                 break;
         }
-        <?php }  else if($default['de_pg_service'] == 'inicis') { ?>
+        <?php } else if($default['de_pg_service'] == 'inicis') { ?>
         switch(settle_method)
         {
             case "계좌이체":
@@ -1538,6 +1562,66 @@ function forderform_check(f)
                 break;
             default:
                 f.gopaymethod.value = "무통장";
+                break;
+        }
+        <?php } else if($default['de_pg_service'] == 'nicepay') { ?>
+        f.DirectShowOpt.value = "";     // 간편결제 요청 값 초기화
+        f.DirectEasyPay.value = "";     // 간편결제 요청 값 초기화
+        f.NicepayReserved.value = "";   // 간편결제 요청 값 초기화
+        f.EasyPayMethod.value = "";   // 간편결제 요청 값 초기화
+
+            <?php if ($default['de_escrow_use']) {  // 간편결제시 에스크로값이 0이 되므로 기본설정값을 지정 ?>
+            f.TransType.value = "1";
+            <?php } ?>
+        switch(settle_method)
+        {
+            case "계좌이체":
+                f.PayMethod.value = "BANK";
+                break;
+            case "가상계좌":
+                f.PayMethod.value = "VBANK";
+                break;
+            case "휴대폰":
+                f.PayMethod.value = "CELLPHONE";
+                break;
+            case "신용카드":
+                f.PayMethod.value = "CARD";
+                break;
+            case "간편결제":
+                f.PayMethod.value = "CARD";
+                f.DirectShowOpt.value = "CARD";
+                f.TransType.value = "0";    // 간편결제의 경우 에스크로를 사용할수 없다.
+
+                var nicepay_easy_pay = jQuery("input[name='od_settle_case']:checked" ).attr("data-pay");
+
+                if(nicepay_easy_pay === "nice_naverpay"){
+                    if(typeof f.DirectEasyPay !== "undefined") f.DirectEasyPay.value = "E020";
+                    
+                    <?php 
+                        // * 카드 선택 시 전액 카드로 결제, 포인트 선택 시 전액 포인트로 결제.
+                        // (카드와 포인트를 같이 사용하는 복합결제 형태의 결제는 불가함.)
+                        // - 카드: EasyPayMethod=”E020=CARD”, 포인트: EasyPayMethod=”E020=POINT”
+                    ?>
+                    
+                    if(typeof f.EasyPayMethod !== "undefined") f.EasyPayMethod.value = "E020=CARD";
+
+                } else if(nicepay_easy_pay === "nice_kakaopay"){
+                    if(typeof f.NicepayReserved !== "undefined") f.NicepayReserved.value = "DirectKakao=Y";
+                } else if(nicepay_easy_pay === "nice_samsungpay"){
+                    if(typeof f.DirectEasyPay !== "undefined") f.DirectEasyPay.value = "E021";
+                } else if(nicepay_easy_pay === "nice_paycopay"){
+                    if(typeof f.NicepayReserved !== "undefined") f.NicepayReserved.value = "DirectPayco=Y";
+                } else if(nicepay_easy_pay === "nice_skpay"){
+                    if(typeof f.NicepayReserved !== "undefined") f.NicepayReserved.value = "DirectPay11=Y";
+                } else if(nicepay_easy_pay === "nice_ssgpay"){
+                    if(typeof f.DirectEasyPay !== "undefined") f.DirectEasyPay.value = "E007";
+                } else if(nicepay_easy_pay === "nice_lpay"){
+                    if(typeof f.DirectEasyPay !== "undefined") f.DirectEasyPay.value = "E018";
+                }
+
+                break;
+            default:
+                f.PayMethod.value = "무통장";
                 break;
         }
         <?php } ?>
@@ -1626,6 +1710,46 @@ function forderform_check(f)
         } else {
             f.submit();
         }
+        <?php } ?>
+        <?php if($default['de_pg_service'] == 'nicepay') { ?>
+        f.Amt.value       = f.good_mny.value;
+        <?php if($default['de_tax_flag_use']) { ?>
+        f.SupplyAmt.value         = f.comm_tax_mny.value;
+        f.GoodsVat.value     = f.comm_vat_mny.value;
+        f.TaxFreeAmt.value     = f.comm_free_mny.value;
+        <?php } ?>
+        f.BuyerName.value   = f.od_name.value;
+        f.BuyerEmail.value  = f.od_email.value;
+        f.BuyerTel.value    = f.od_hp.value ? f.od_hp.value : f.od_tel.value;
+
+        if(f.PayMethod.value != "무통장") {
+            // 주문정보 임시저장
+            var order_data = $(f).serialize();
+            var save_result = "";
+            $.ajax({
+                type: "POST",
+                data: order_data,
+                url: g5_url+"/shop/ajax.orderdatasave.php",
+                cache: false,
+                async: false,
+                success: function(data) {
+                    save_result = data;
+                }
+            });
+
+            if(save_result) {
+                alert(save_result);
+                return false;
+            }
+
+            if(!nicepay_create_signdata(f))
+                return false;
+            
+            nicepayStart(f);
+        } else {
+            f.submit();
+        }
+
         <?php } ?>
     }
 

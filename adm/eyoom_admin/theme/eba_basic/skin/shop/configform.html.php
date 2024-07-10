@@ -437,6 +437,15 @@ $frm_submit .= $frm_eba_submit;
                         <div class="note"><strong>Note:</strong> KG이니시스 가상계좌 사용시 위 주소를 <strong><a href="https://iniweb.inicis.com/" target="_blank">KG이니시스 관리자</a> &gt; 거래조회 &gt; 가상계좌 &gt; 입금통보방식선택 &gt; URL 수신 설정</strong>에 넣으셔야 상점에 자동으로 입금 통보됩니다.</div>
                     </div>
                 </div>
+                <div class="adm-form-tr pg_vbank_url" id="nicepay_vbank_url">
+                    <div class="adm-form-td td-l">
+                        <label class="label">NICEPAY 가상계좌 입금통보 URL</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <?php echo G5_SHOP_URL; ?>/settle_nicepay_common.php<br>
+                        <div class="note"><strong>Note:</strong> NICEPAY 가상계좌 사용시 다음 주소를 <strong><a href="https://npg.nicepay.co.kr/" target="_blank">NICEPAY 관리자</a> &gt; 가맹점관리자페이지 설정 (메인화면 → 가맹점정보 클릭)</strong>에 넣으셔야 상점에 자동으로 입금 통보됩니다.</div>
+                    </div>
+                </div>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
                         <label for="de_hp_use" class="label">휴대폰결제사용</label>
@@ -602,10 +611,11 @@ $frm_submit .= $frm_eba_submit;
                     </div>
                     <div class="adm-form-td td-r">
                         <input type="hidden" name="de_pg_service" id="de_pg_service" value="<?php echo $default['de_pg_service']; ?>" >
-                        <div class="m-b-5">
+                        <div class="m-b-5 de_pg_tab">
                             <span class="<?php if($default['de_pg_service'] == 'kcp') echo 'tab-current'; ?>"><a href="#kcp_info_anchor" class="btn-e btn-e-lg btn-e-dark btn-e-brd m-b-5" data-value="kcp" title="NHN KCP 선택하기" >NHN KCP</a></span>
                             <span class="<?php if($default['de_pg_service'] == 'lg') echo 'tab-current'; ?>"><a href="#lg_info_anchor" class="btn-e btn-e-lg btn-e-dark btn-e-brd m-b-5" data-value="lg" title="토스페이먼츠 선택하기">토스페이먼츠</a></span>
                             <span class="<?php if($default['de_pg_service'] == 'inicis') echo 'tab-current'; ?>"><a href="#inicis_info_anchor" class="btn-e btn-e-lg btn-e-dark btn-e-brd m-b-5" data-value="inicis" title="KG이니시스 선택하기">KG이니시스</a></span>
+                            <span class="<?php if($default['de_pg_service'] == 'nicepay') echo 'tab-current'; ?>"><a href="#nicepay_info_anchor" class="btn-e btn-e-lg btn-e-dark btn-e-brd m-b-5" data-value="nicepay" title="NICEPAY 선택하기">NICEPAY</a></span>
                         </div>
                         <div class="note margin-bottom-10"><strong>Note:</strong> 쇼핑몰에서 사용할 결제대행사를 선택합니다.</div>
                     </div>
@@ -802,7 +812,7 @@ $frm_submit .= $frm_eba_submit;
                         <label for="de_kakaopay_key" class="input">
                             <input type="text" name="de_kakaopay_key" value="<?php echo get_sanitize_input($default['de_kakaopay_key']); ?>" id="de_kakaopay_key">
                         </label>
-                        <div class="note"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 웹결제 사인키를 입력합니다.\nKG이니시스 상점관리자 > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
+                        <div class="note"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 웹결제 사인키를 입력합니다<br>KG이니시스 상점관리자 > 상점정보 > 계약정보 > 부가정보의 웹결제 signkey생성 조회 버튼 클릭, 팝업창에서 생성 버튼 클릭 후 해당 값을 입력합니다.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr kakao_info_fld">
@@ -813,12 +823,12 @@ $frm_submit .= $frm_eba_submit;
                         <label for="de_kakaopay_enckey" class="input max-width-250px">
                             <input type="text" name="de_kakaopay_cancelpwd" value="<?php echo get_sanitize_input($default['de_kakaopay_cancelpwd']); ?>" id="de_kakaopay_cancelpwd">
                         </label>
-                        <div class="note"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 4자리 상점 키패스워드를 입력합니다.\nKG이니시스 상점관리자 패스워드와 관련이 없습니다.\n키패스워드 값을 확인하시려면 상점측에 발급된 키파일 안의 readme.txt 파일을 참조해 주십시오</div>
+                        <div class="note"><strong>Note:</strong> SIRK****** 아이디로 KG이니시스에서 발급받은 4자리 상점 키패스워드를 입력합니다.<br>KG이니시스 상점관리자 패스워드와 관련이 없습니다<br>키패스워드 값을 확인하시려면 상점측에 발급된 키파일 안의 readme.txt 파일을 참조해 주십시오</div>
                     </div>
                 </div>
                 <div class="adm-form-tr kakao_info_fld">
                     <div class="adm-form-td td-l">
-                        <label for="de_kakaopay_enckey" class="label">카카오페이 사용</label>
+                        <label for="de_kakaopay_enckey" class="label">KG이니시스<br>카카오페이 사용</label>
                     </div>
                     <div class="adm-form-td td-r">
                         <label for="de_kakaopay_enckey" class="checkbox">
@@ -836,6 +846,47 @@ $frm_submit .= $frm_eba_submit;
                             <input type="text" name="de_kakaopay_hashkey" value="<?php echo get_sanitize_input($default['de_kakaopay_hashkey']); ?>" id="de_kakaopay_hashkey">
                         </label>
                         <div class="note"><strong>Note:</strong> 카카오페이로 부터 발급 받으신 상점 인증 전용 HashKey를 입력합니다.</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr pg_info_fld nicepay_info_fld" id="nicepay_info_anchor">
+                    <div class="adm-form-td td-l">
+                        <label for="de_nicepay_mid" class="label"><strong class="text-indigo">NICEPAY MID</strong></label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <a href="https://sir.kr/main/service/nicepayments_pg.php" target="_blank" id="scf_nicepay_reg" class="btn-e btn-e-lg btn-e-indigo width-250px m-b-10">NICEPAY 신청하기</a>
+                        <label for="de_nicepay_mid" class="input max-width-250px">
+                            <i class="icon-prepend">SR</i>
+                            <input type="text" name="de_nicepay_mid" value="<?php echo get_sanitize_input($default['de_nicepay_mid']); ?>" id="de_nicepay_mid">
+                        </label>
+                        <div class="note"><strong>Note:</strong> NICEPAY로 부터 발급 받으신 상점MID를 SR 을 제외한 나머지 자리를 입력 합니다.<br>NICEPAY 상점관리자 > 가맹점정보 > KEY관리에서 확인 할수 있습니다.<br>만약, 상점아이디가 SR로 시작하지 않는다면 계약담당자에게 변경 요청을 해주시기 바랍니다. 예) SRpaytestm</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr pg_info_fld nicepay_info_fld">
+                    <div class="adm-form-td td-l">
+                        <label for="de_nicepay_key" class="label">NICEPAY KEY</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label for="de_nicepay_key" class="input max-width-250px">
+                            <input type="text" name="de_nicepay_key" value="<?php echo get_sanitize_input($default['de_nicepay_key']); ?>" id="de_nicepay_key">
+                        </label>
+                    </div>
+                </div>
+                <div class="adm-form-tr pg_info_fld nicepay_info_fld">
+                    <div class="adm-form-td td-l">
+                        <label for="de_nicepay_easy_pays" class="label">NICEPAY 간편결제</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <div class="inline-group">
+                            <label class="checkbox" for="de_easy_nicepay_samsungpay" disabled><input type="checkbox" id="de_easy_nicepay_samsungpay" name="de_easy_pays[]" value="nicepay_samsungpay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_samsungpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> 삼성페이</label>
+                            <label class="checkbox" for="de_easy_nicepay_naverpay"><input type="checkbox" id="de_easy_nicepay_naverpay" name="de_easy_pays[]" value="nicepay_naverpay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_naverpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> NAVERPAY (네이버페이)</label>
+                            <label class="checkbox" for="de_easy_nicepay_kakaopay"><input type="checkbox" id="de_easy_nicepay_kakaopay" name="de_easy_pays[]" value="nicepay_kakaopay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_kakaopay') !== false){ echo 'checked="checked"'; } ?> ><i></i> KAKAOPAY (카카오페이)</label>
+                            <label class="checkbox" for="de_easy_nicepay_applepay"><input type="checkbox" id="de_easy_nicepay_applepay" name="de_easy_pays[]" value="nicepay_applepay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_applepay') !== false){ echo 'checked="checked"'; } ?> ><i></i> APPLEPAY (애플페이)</label>
+                            <label class="checkbox" for="de_easy_nicepay_paycopay"><input type="checkbox" id="de_easy_nicepay_paycopay" name="de_easy_pays[]" value="nicepay_paycopay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_paycopay') !== false){ echo 'checked="checked"'; } ?> ><i></i> 페이코</label>
+                            <label class="checkbox" for="de_easy_nicepay_skpay"><input type="checkbox" id="de_easy_nicepay_skpay" name="de_easy_pays[]" value="nicepay_skpay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_skpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> SK페이</label>
+                            <label class="checkbox" for="de_easy_nicepay_ssgpay"><input type="checkbox" id="de_easy_nicepay_ssgpay" name="de_easy_pays[]" value="nicepay_ssgpay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_ssgpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> SSG페이</label>
+                            <label class="checkbox" for="de_easy_nicepay_lpay"><input type="checkbox" id="de_easy_nicepay_lpay" name="de_easy_pays[]" value="nicepay_lpay" <?php if(stripos($default['de_easy_pay_services'], 'nicepay_lpay') !== false){ echo 'checked="checked"'; } ?> ><i></i> LPAY</label>
+                        </div>
+                        <div class="note"><strong>Note:</strong> 체크시 NICEPAY 간편결제들을 활성화 합니다.<br>NICEPAY > 간편결제는 테스트결제가 되지 않습니다. 실결제에만 정상작동 합니다.<br>애플페이는 IOS 기기에 모바일결제만 가능합니다.</div>
                     </div>
                 </div>
                 <?php if (defined('G5_SHOP_DIRECT_NAVERPAY') && G5_SHOP_DIRECT_NAVERPAY) { ?>
@@ -1819,6 +1870,10 @@ function fconfig_check(f)
         if( f.de_inicis_mid.value && f.de_inicis_sign_key.value && parseInt(f.de_card_test.value) > 0 ){
             pg_msg = "KG이니시스";
         }
+    } else if ( f.de_pg_service.value == "nicepay" ) {
+        if( f.de_nicepay_mid.value && f.de_nicepay_key.value && parseInt(f.de_card_test.value) > 0 ){
+            pg_msg = "NICEPAY";
+        }
     }
 
     if( pg_msg ){
@@ -1886,7 +1941,7 @@ $(function() {
             class_name = "tab-current";
 
         $("#de_pg_service").val(pg);
-        $(this).parent("li").addClass(class_name).siblings().removeClass(class_name);
+        $(this).parent("span").addClass(class_name).siblings().removeClass(class_name);
 
         //$(".pg_info_fld:visible").hide();
         $(".pg_vbank_url:visible").hide();

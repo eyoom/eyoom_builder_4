@@ -12,7 +12,6 @@ if (!defined('_EYOOM_')) exit;
 			</div><?php /* End .container */ ?>
 		</main>
         <?php } ?>
-
 	</div><?php /* End .basic-body */ ?>
 
 	<?php /*----- footer 시작 -----*/ ?>
@@ -67,14 +66,16 @@ if (!defined('_EYOOM_')) exit;
 					</div>
 				</div>
 				<?php } ?>
-				<span class="text-black"><?php echo $bizinfo['bi_company_name']; ?></span>
+				<strong class="text-black"><?php echo $bizinfo['bi_company_name']; ?></strong>
 				<span class="info-divider">|</span>
 				<span>대표 : <?php echo $bizinfo['bi_company_ceo']; ?></span>
 				<span class="info-divider">|</span>
 				<span>사업자등록번호 : <?php echo $bizinfo['bi_company_bizno']; ?></span>
 				<span class="info-divider">|</span>
+				<?php if($bizinfo['bi_company_sellno']) { ?>
 				<span>통신판매업번호 : <?php echo $bizinfo['bi_company_sellno']; ?></span>
 				<span class="info-divider">|</span>
+				<?php } ?>
 				<span>주소 : <?php echo $bizinfo['bi_company_zip']; ?> <?php echo $bizinfo['bi_company_addr1']; ?> <?php echo $bizinfo['bi_company_addr2']; ?> <?php echo $bizinfo['bi_company_addr3']; ?></span><br>
 				<span>E-mail : <a href="mailto:<?php echo $bizinfo['bi_cs_email']; ?>"><?php echo $bizinfo['bi_cs_email']; ?></a></span>
 				<span class="info-divider">|</span>
@@ -100,8 +101,8 @@ if (!defined('_EYOOM_')) exit;
 		<form name="frmsearch1" action="<?php echo G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
 		<input type="hidden" name="sfl" value="wr_subject||wr_content">
 		<input type="hidden" name="sop" value="and">
-		<label for="head_sch_str" class="sound_only">검색어 입력 필수</strong></label>
-		<input type="text" name="q" value="<?php echo stripslashes(get_text(get_search_string($q))); ?>" id="search_input" class="sch_stx" placeholder="상품 검색어 입력">
+		<label for="mobile_search_input" class="sound_only">검색어 입력 필수</strong></label>
+		<input type="text" name="q" value="<?php echo stripslashes(get_text(get_search_string($q))); ?>" id="mobile_search_input" class="sch_stx" placeholder="상품 검색어 입력">
 		<button type="submit" class="search-btn" value="검색"><i class="fas fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
 		</form>
 
@@ -121,9 +122,9 @@ if (!defined('_EYOOM_')) exit;
 <?php /*----- 전체 검색 입력창 끝 -----*/ ?>
 
 <?php /*----- 쇼핑몰 회원 사이드바 시작 -----*/ ?>
-<button type="button" class="sidebar-shop-trigger sidebar-shop-member-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShopRight" aria-controls="offcanvasShopRight"><i class="fas fa-user-alt"></i></button>
+<button type="button" class="sidebar-shop-trigger sidebar-shop-member-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShopRight" aria-controls="offcanvasShopRight"><i class="fas fa-shopping-cart"></i></button>
 <div class="sidebar-shop-member-wrap">
-    <button type="button" class="sidebar-shop-trigger sidebar-shop-member-btn pc-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShopRight" aria-controls="offcanvasShopRight"><i class="fas fa-user-alt"></i><span class="direction-icon"><i class="fas fa-outdent"></i></span></button>
+    <button type="button" class="sidebar-shop-trigger sidebar-shop-member-btn pc-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShopRight" aria-controls="offcanvasShopRight"><i class="fas fa-shopping-cart"></i><span class="direction-icon"><i class="fas fa-outdent"></i></span></button>
     <div class="sidebar-shop-member offcanvas offcanvas-end" tabindex="-1" id="offcanvasShopRight" aria-labelledby="offcanvasShopRightLabel">
 		<div class="offcanvas-header">
             <h5 class="offcanvas-title f-s-16r" id="offcanvasShopRightLabel"><i class="fas fa-boxes text-gray"></i> 나의 쇼핑 박스</h5>
@@ -158,6 +159,9 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 <?php /*----- 쇼핑몰 회원 사이드바 끝 -----*/ ?>
+
+<?php /* Side Nav Mobile Toggler */ ?>
+<button type="button" class="navbar-mobile-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft"><i class="fas fa-bars"></i></button>
 
 <?php /* Back To Top */ ?>
 <div class="eb-backtotop">

@@ -19,7 +19,7 @@ if (!defined('_EYOOM_')) exit;
 .relation-10 .product-description .product-name {position:relative;overflow:hidden;margin:5px 0;height:50px;line-height:1}
 .relation-10 .product-description .product-name a {font-size:1rem;font-weight:700;color:#000}
 .relation-10 .product-description .product-name a:hover {text-decoration:underline}
-.relation-10 .product-description .title-price {font-size:1rem;font-weight:700;color:#cc2300}
+.relation-10 .product-description .title-price {font-size:1rem;font-weight:700;color:#ab0000}
 .relation-10 .product-description .line-through {font-size:.875rem;color:#959595;text-decoration:line-through;margin-left:7px;font-weight:400}
 .relation-10 .item-relation-10:hover .product-name a {text-decoration:underline}
 .relation-10 .slick-next, .relation-10 .slick-prev {width:30px;height:60px;margin-top:-30px;text-align:center;background:rgba(0, 0, 0, 0.7)}

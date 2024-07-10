@@ -12,7 +12,7 @@ if (!defined('_EYOOM_')) exit;
 .shop-personalpay .personalpay-box-in {position:relative;border:1px solid #e5e5e5;padding:10px;background:#fff}
 .shop-personalpay .personalpay-box .personalpay-img {margin-bottom:15px}
 .shop-personalpay .personalpay-box h5 {font-size:1.125rem;margin:0 0 10px}
-.shop-personalpay .personalpay-box .personalpay-cost {font-size:1.125rem;color:#cc2300;font-weight:700}
+.shop-personalpay .personalpay-box .personalpay-cost {font-size:1.125rem;color:#ab0000;font-weight:700}
 @media (max-width:1199px) {
     .shop-personalpay .personalpay-box {width:33.33333%}
 }

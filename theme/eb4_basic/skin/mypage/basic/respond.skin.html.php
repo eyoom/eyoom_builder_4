@@ -16,7 +16,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
 .respond-list {font-size:.9375rem}
 .respond-list .rl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .respond-list .rl-wrap > div:nth-last-child(1), .respond-list .rl-wrap > div:nth-last-child(2) {border-bottom:0}
-.respond-list .rl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.respond-list .rl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .respond-list .rl-head > div {position:relative}
 .respond-list .rl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .respond-list .rl-head > div:last-child:before {display:none}
@@ -41,6 +41,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
 .respond-list .rl-list .rl-subj {display:table-cell;vertical-align:middle}
 .respond-list .rl-list .rl-subj a {position:relative;display:inline-block;padding:0 10px}
 .respond-list .rl-list .rl-subj a:hover {color:#000;text-decoration:underline}
+.respond-list .rl-list .rl-subj .subj {font-weight:500}
 .respond-list .rl-list .rl-subj .mention {color:#757575;margin-top:5px}
 .respond-list .rl-list .rl-subj .mention-photo {display:inline-block;margin-right:2px}
 .respond-list .rl-list .rl-subj .mention-photo img {width:17px;height:17px;border-radius:50%}
@@ -252,7 +253,7 @@ function frespond_submit(f) {
         Swal.fire({
             title: "중요!",
             html: "<span class='text-crimson'>" + document.pressed + "</span> 할 반응글을 하나 이상 선택하세요.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -263,7 +264,7 @@ function frespond_submit(f) {
         html: "선택한 내글반응 항목을 정말 <span class='text-crimson'>" + document.pressed + "</span> 하시겠습니까?<br>한번 삭제한 자료는 복구할 수 없습니다.",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#e53935",
+        confirmButtonColor: "#ab0000",
         confirmButtonText: "삭제",
         cancelButtonText: "취소"
     }).then((result) => {
@@ -283,7 +284,7 @@ function delete_all() {
         text: "내글반응 기록을 모두 삭제하시겠습니까?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#e53935",
+        confirmButtonColor: "#ab0000",
         confirmButtonText: "전체 삭제",
         cancelButtonText: "취소"
     }).then((result) => {
@@ -309,7 +310,7 @@ function check_read() {
         Swal.fire({
             title: "중요!",
             text: "반응글을 하나 이상 선택하세요.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -320,7 +321,7 @@ function check_read() {
         text: "선택한 내글반응을 읽음표시로 처리하시겠습니까?",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#e53935",
+        confirmButtonColor: "#ab0000",
         confirmButtonText: "읽음",
         cancelButtonText: "취소"
     }).then((result) => {
@@ -346,7 +347,7 @@ $(function() {
             text: "정말로 이 내글반응을 삭제하시겠습니까?",
             icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             confirmButtonText: "삭제",
             cancelButtonText: "취소"
         }).then((result) => {

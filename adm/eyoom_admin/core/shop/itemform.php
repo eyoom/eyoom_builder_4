@@ -136,9 +136,9 @@ else
     alert();
 }
 
-$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags(trim($_GET['cate_a'])) : '';
-$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags(trim($_GET['cate_b'])) : '';
-$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags(trim($_GET['cate_c'])) : '';
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
 
 $sdt = isset($_GET['sdt']) ? clean_xss_tags(trim($_GET['sdt'])) : '';
 $fr_date = isset($_GET['fr_date']) ? trim($_GET['fr_date']) : '';
@@ -162,19 +162,26 @@ if ($itype) $qstr .= "&amp;itype={$itype}";
 
 // 분류리스트
 $category = $shop->get_category();
-if(is_array($category)) {
-    $i=0;
-    $cate_sel_option = array();
-    foreach($category as $key => $val) {
-        $ca_order = $val['ca_order'].$i;
-        if ($val['ca_id'] != '0' && !$val['ca_id']) continue;
-        $cate_sel_option[$ca_order]['ca_id'] = $val['ca_id'];
-        $cate_sel_option[$ca_order]['ca_use'] = $val['ca_use'];
-        $cate_sel_option[$ca_order]['ca_name'] = trim($val['ca_name']);
-        $cate_sel_option[$ca_order]['ca_stock_qty'] = $val['ca_stock_qty'];
-        $cate_sel_option[$ca_order]['ca_sell_email'] = $val['ca_sell_email'];
-        if(is_array($val) && count((array)$val)>3) $cate_sel_option[$ca_order]['ca_sub'] = $shop->category_array_sort($val);
-        $i++;
+$category = $shop->sort_category($category);
+
+$cate_sel_option = array();
+if (is_array($category)) {
+    $i = 0;
+    foreach ($category as $val) {
+        if (isset($val['ca_id'])) {
+            $ca_order = $val['ca_order'] . $i;
+            $cate_sel_option[$ca_order] = array(
+                'ca_id' => $val['ca_id'],
+                'ca_use' => $val['ca_use'],
+                'ca_name' => trim($val['ca_name']),
+                'ca_stock_qty' => $val['ca_stock_qty'],
+                'ca_sell_email' => $val['ca_sell_email'],
+            );
+            if (isset($val['children']) && is_array($val['children']) && !empty($val['children'])) {
+                $cate_sel_option[$ca_order]['ca_sub'] = $shop->category_array_sort($val['children']);
+            }
+            $i++;
+        }
     }
     ksort($cate_sel_option);
 }

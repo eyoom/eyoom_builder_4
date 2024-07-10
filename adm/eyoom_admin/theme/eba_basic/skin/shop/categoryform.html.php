@@ -432,7 +432,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="subca_img_width" class="input width-150px">
                                 <i class="icon-prepend">폭</i>
                                 <i class="icon-append">px</i>
-                                <input type="text" name="subca_img_width" id="subca_img_width" value="600" class="text-end">
+                                <input type="text" name="subca_img_width" id="subca_img_width" value="500" class="text-end">
                             </label>
                         </span>
                         <span> x </span>
@@ -456,7 +456,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="subca_mobile_img_width" class="input width-150px">
                                 <i class="icon-prepend">폭</i>
                                 <i class="icon-append">px</i>
-                                <input type="text" name="subca_mobile_img_width" id="subca_mobile_img_width" value="600" class="text-end">
+                                <input type="text" name="subca_mobile_img_width" id="subca_mobile_img_width" value="500" class="text-end">
                             </label>
                         </span>
                         <span> x </span>
@@ -482,7 +482,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="subca_list_mod" class="input width-150px">
                                 <i class="icon-prepend">가로</i>
                                 <i class="icon-append">개</i>
-                                <input type="text" name="subca_list_mod" id="subca_list_mod" value="4" class="text-end">
+                                <input type="text" name="subca_list_mod" id="subca_list_mod" value="5" class="text-end">
                             </label>
                         </span>
                         <span> x </span>
@@ -515,7 +515,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                             <label for="subca_mobile_list_row" class="input width-150px">
                                 <i class="icon-prepend">세로</i>
                                 <i class="icon-append">줄</i>
-                                <input type="text" name="subca_mobile_list_row" id="subca_mobile_list_row" value="6" class="text-end">
+                                <input type="text" name="subca_mobile_list_row" id="subca_mobile_list_row" value="8" class="text-end">
                             </label>
                         </span>
                     </div>

@@ -46,7 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
 .board-view .board-view-star .star-ratings-view {display:inline-block;margin-bottom:0;margin-right:15px;float:left}
 .board-view .board-view-star .star-ratings-view li {padding:0;float:left;margin-right:0}
 .board-view .board-view-star .star-ratings-view li .rating {color:#a5a5a5;line-height:normal}
-.board-view .board-view-star .star-ratings-view li .rating-selected {color:#e53935}
+.board-view .board-view-star .star-ratings-view li .rating-selected {color:#ab0000}
 .board-view .board-view-star .collapse-rating-result-panel {position:relative;border:1px solid #d5d5d5;background:#fff;padding:10px;margin:7px 0 3px}
 .board-view .board-view-star .collapse-rating-result-panel > span:after {content:"|";margin:0 3px;color:#d5d5d5}
 .board-view .board-view-star .collapse-rating-result-panel > span:last-child:after {display:none}
@@ -427,7 +427,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             <li><a href="<?php echo $reply_href; ?>" class="btn-e btn-e-dark" type="button">답변</a></li>
                 <?php } ?>
                 <?php if ($write_href) { ?>
-            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-indigo" type="button">글쓰기</a></li>
+            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-navy" type="button">글쓰기</a></li>
                 <?php } ?>
             <?php } ?>
         </ul>
@@ -614,7 +614,7 @@ button.mfp-close {position:fixed;color:#fff !important}
                     </div>
 
                     <div class="text-center m-t-20">
-                        <button type="button" class="btn-e btn-e-lg btn-e-red">신고하기</button>
+                        <button type="button" class="btn-e btn-e-lg btn-e-crimson">신고하기</button>
                     </div>
 
                     </form>
@@ -668,7 +668,7 @@ $(window).load(function() {
             Swal.fire({
                 title: "알림!",
                 text: "다운로드 권한이 없습니다. 로그인 후 이용 가능합니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -731,7 +731,7 @@ $(window).load(function() {
         Swal.fire({
             title: "알림!",
             text: "이미 블라인드 처리된 글은 신고 처리하실 수 없습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -744,7 +744,7 @@ $(window).load(function() {
             Swal.fire({
                 title: "알림!",
                 text: "'신고사유'를 선택해 주세요.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -757,7 +757,7 @@ $(window).load(function() {
                 Swal.fire({
                     title: "알림!",
                     text: "정상적으로 신고처리 하였습니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "success",
                     confirmButtonText: "확인"
                 }).then(() => {
@@ -773,7 +773,7 @@ $(window).load(function() {
         Swal.fire({
             title: "알림!",
             text: "이미 블라인드 처리된 글은 신고취소 처리하실 수 없습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -820,7 +820,7 @@ $(window).load(function() {
                     text: "본 게시물을 바로 블라인드 처리합니다. 계속 진행하시겠습니까?",
                     icon: "question",
                     showCancelButton: true,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     confirmButtonText: "확인",
                     cancelButtonText: "취소"
                 }).then((result) => {
@@ -842,7 +842,7 @@ $(window).load(function() {
                     text: "본 게시물을 블라인드 취소처리합니다. 계속 진행하시겠습니까?",
                     icon: "question",
                     showCancelButton: true,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     confirmButtonText: "확인",
                     cancelButtonText: "취소"
                 }).then((result) => {
@@ -864,7 +864,7 @@ $(window).load(function() {
                     text: "본 댓글을 바로 블라인드 처리합니다. 계속 진행하시겠습니까?",
                     icon: "question",
                     showCancelButton: true,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     confirmButtonText: "확인",
                     cancelButtonText: "취소"
                 }).then((result) => {
@@ -885,7 +885,7 @@ $(window).load(function() {
                     text: "본 댓글을 블라인드 취소처리합니다. 계속 진행하시겠습니까?",
                     icon: "question",
                     showCancelButton: true,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     confirmButtonText: "확인",
                     cancelButtonText: "취소"
                 }).then((result) => {
@@ -991,7 +991,7 @@ $(window).load(function() {
                             Swal.fire({
                                 title: "알림!",
                                 text: str,
-                                confirmButtonColor: "#e53935",
+                                confirmButtonColor: "#ab0000",
                                 icon: "success",
                                 confirmButtonText: "확인"
                             });
@@ -999,7 +999,7 @@ $(window).load(function() {
                             Swal.fire({
                                 title: "알림!",
                                 text: "핀 처리하지 못하였습니다.",
-                                confirmButtonColor: "#e53935",
+                                confirmButtonColor: "#ab0000",
                                 icon: "error",
                                 confirmButtonText: "확인"
                             });
@@ -1020,7 +1020,7 @@ function excute_good(href, $el, $tx, $good) {
                 Swal.fire({
                     title: "알림",
                     text: data.error,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     confirmButtonText: "닫기"
                 });
                 return false;
@@ -1033,7 +1033,7 @@ function excute_good(href, $el, $tx, $good) {
                         title: "비추천 완료",
                         text: "이 글을 비추천하였습니다.",
                         icon: "success",
-                        confirmButtonColor: "#e53935",
+                        confirmButtonColor: "#ab0000",
                         confirmButtonText: "닫기"
                     });
                 } else if ($good == 'good') {
@@ -1041,7 +1041,7 @@ function excute_good(href, $el, $tx, $good) {
                         title: "추천 완료",
                         text: "이 글을 추천하였습니다.",
                         icon: "success",
-                        confirmButtonColor: "#e53935",
+                        confirmButtonColor: "#ab0000",
                         confirmButtonText: "닫기"
                     });
                 }
@@ -1058,7 +1058,7 @@ $(window).load(function() {
             Swal.fire({
                 title: "알림",
                 text: '스킨을 선택해 주세요.',
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });

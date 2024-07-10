@@ -13,13 +13,13 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .shop-product-qa-list .panel-group .panel {margin-bottom:15px}
 .shop-product-qa-list .panel-heading {min-height:100px;padding:15px;border:1px solid #d5d5d5}
 .shop-product-qa-list .panel-heading .label {display:inline-block;width:64px;text-align:center}
-.shop-product-qa-list .panel-heading .sit_qaa_yet {background:#cc2300}
+.shop-product-qa-list .panel-heading .sit_qaa_yet {background:#ab0000}
 .shop-product-qa-list .product-use-img {position:absolute;top:15px;left:15px;width:70px;height:70px;overflow:hidden}
 .shop-product-qa-list .product-use-img img {display:block;max-width:100%;height:auto}
 .shop-product-qa-list .product-use-img span {position:absolute;font-size:0;line-height:0;overflow:hidden}
 .shop-product-qa-list .heading-content {margin-left:85px}
 .shop-product-qa-list .panel-title {font-size:1rem;font-weight:700;line-height:1.4}
-.shop-product-qa-list .panel-title i {color:#cc2300;margin-left:5px}
+.shop-product-qa-list .panel-title i {color:#ab0000;margin-left:5px}
 .shop-product-qa-list .panel-title a:hover {text-decoration:underline;color:#000}
 .shop-product-qa-list .panel-title > a:before {top:15px;margin-top:inherit;font-size:1rem}
 .shop-product-qa-list .panel-body {padding:0}

@@ -137,7 +137,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
         </div>
     </section>
     <div class="text-center">
-        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xl btn-e-crimson">
+        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xl btn-e-navy">
         <a href="<?php echo $list_href; ?>" class="btn-e btn-e-xl btn-e-dark">목록</a>
     </div>
     </form>

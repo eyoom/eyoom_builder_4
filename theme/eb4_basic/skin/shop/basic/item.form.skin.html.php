@@ -16,7 +16,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
 <div class="shop-product">
     <?php if ($is_admin) { ?>
     <div class="text-end m-b-10">
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemform&amp;w=u&amp;it_id=<?php echo $it_id; ?>&amp;wmode=1"  onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-red btn-edit-mode">상품 관리</a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&amp;pid=itemform&amp;w=u&amp;it_id=<?php echo $it_id; ?>&amp;wmode=1"  onclick="eb_admset_modal(this.href); return false;" class="btn-e btn-e-crimson btn-edit-mode">상품 관리</a>
     </div>
     <?php }?>
 
@@ -117,7 +117,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fotoram
                             상품 선택옵션 <?php echo $option_count; ?> 개, 추가옵션 <?php echo $supply_count; ?> 개
                         </p>
                         <?php } ?>
-                        <div class="shop-description-box">
+                        <div class="shop-description-box table-list-eb">
                             <table class="table">
                                 <tbody>
                                     <?php if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>

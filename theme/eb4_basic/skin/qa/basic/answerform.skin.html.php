@@ -85,7 +85,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
     </section>
 
     <section class="text-center m-t-30">
-        <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-crimson btn-e-xl">
+        <input type="submit" value="답변쓰기" id="btn_submit" accesskey="s" class="btn-e btn-e-navy btn-e-xl">
     </section>
     </form>
     <?php } else { //#1 ?>

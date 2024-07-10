@@ -128,7 +128,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
             <?php } ?>
             <li><a href="<?php echo $list_href; ?>" class="btn-e btn-e-dark" type="button">목록</a></li>
             <?php if ($write_href) { ?>
-            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-red" type="button">글쓰기</a></li>
+            <li><a href="<?php echo $write_href; ?>" class="btn-e btn-e-navy" type="button">글쓰기</a></li>
             <?php } ?>
         </ul>
         <div class="clearfix"></div>

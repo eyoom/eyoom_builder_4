@@ -8,23 +8,26 @@ if (!defined('_EYOOM_')) exit;
 <?php if ($ev_count > 0) { ?>
 <style>
 .shop-boxevent-wrap {position:relative;margin-bottom:40px}
-.shop-boxevent .boxevent-box {position:relative;border:1px solid #e5e5e5;padding:10px;margin-bottom:20px}
+.shop-boxevent .boxevent-box {position:relative;margin-bottom:20px}
 .shop-boxevent .boxevent-box:after {display:block;visibility:hidden;clear:both;content:""}
-.shop-boxevent .boxevent-box-title {position:absolute;overflow:hidden;top:10px;left:10px;width:400px;height:292px}
+.shop-boxevent .boxevent-box-title {position:absolute;overflow:hidden;top:0;left:0;width:400px;height:292px;border-radius:7px}
 .shop-boxevent .boxevent-box-title .box-title-txt {display:table-cell;vertical-align:middle;width:400px;height:292px;color:#fff;text-align:center;font-size:1.0625rem;background:#656565}
 .shop-boxevent .boxevent-item-wrap {position:relative;margin-left:420px;height:250px}
 .shop-boxevent .boxevent-item {margin-left:-5px;margin-right:-5px}
 .shop-boxevent .boxevent-item:after {display:block;visibility:hidden;clear:both;content:""}
 .shop-boxevent .boxevent-item-box {float:left;width:25%}
+.shop-boxevent .boxevent-item-box:nth-child(4n+1) {clear:left}
 .shop-boxevent .boxevent-item-box-in {position:relative;padding:0 5px 5px}
-.shop-boxevent .boxevent-item-box-in .boxevent-item-img {position:relative;overflow:hidden;margin-bottom:10px}
+.shop-boxevent .boxevent-item-box-in .boxevent-item-img {position:relative;overflow:hidden;border-radius:7px;margin-bottom:10px}
 .shop-boxevent .boxevent-item-box-in .boxevent-item-img img {display:block;max-width:100%;height:auto}
 .shop-boxevent .boxevent-item-box-in .boxevent-item-desc h5 {position:relative;overflow:hidden;margin:10px 0 5px;font-size:1rem;font-weight:700;line-height:1.4;height:42px;color:#000}
-.shop-boxevent .boxevent-item-box-in .boxevent-item-desc span {font-size:1rem;font-weight:700;color:#cc2300}
+.shop-boxevent .boxevent-item-box-in .boxevent-item-desc span {font-size:1rem;font-weight:700;color:#ab0000}
 .shop-boxevent .boxevent-item-box-in:hover h5 {text-decoration:underline}
 .shop-boxevent .boxevent-no-item {text-align:center;height:250px;line-height:250px;color:#959595}
 @media (max-width:1199px) {
     .shop-boxevent .boxevent-item-box {width:50%}
+    .shop-boxevent .boxevent-item-box:nth-child(4n+1) {clear:none}
+    .shop-boxevent .boxevent-item-box:nth-child(2n+1) {clear:left}
     .shop-boxevent .boxevent-item-box-in {padding:0 5px 10px}
 }
 @media (max-width:991px) {

@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
 .goodpost-list {font-size:.9375rem}
 .goodpost-list .gl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .goodpost-list .gl-wrap > div:nth-last-child(1), .goodpost-list .gl-wrap > div:nth-last-child(2) {border-bottom:0}
-.goodpost-list .gl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.goodpost-list .gl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .goodpost-list .gl-head > div {position:relative}
 .goodpost-list .gl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .goodpost-list .gl-head > div:last-child:before {display:none}
@@ -26,7 +26,7 @@ if (!defined('_EYOOM_')) exit;
 .goodpost-list .gl-list .gl-num {width:90px}
 .goodpost-list .gl-list .gl-num-short {width:80px}
 .goodpost-list .gl-list .gl-author {width:150px;padding:0 10px;text-align:left}
-.goodpost-list .gl-list .gl-subj {display:table-cell;vertical-align:middle}
+.goodpost-list .gl-list .gl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .goodpost-list .gl-list .gl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .goodpost-list .gl-list .gl-subj a:hover {color:#000;text-decoration:underline}
 .goodpost-list .gl-list .gl-subj .gl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 

@@ -18,7 +18,7 @@ if (!defined('_EYOOM_')) exit;
 .my-timeline .timeline > li > .timeline-panel {position:relative;width:94%;float:left;border:1px solid #d5d5d5}
 .my-timeline .timeline > li > .timeline-panel:before {position: absolute;top:33px;right:-8px;display:inline-block;border-top:8px solid transparent;border-left:8px solid #c5c5c5;border-right:0 solid #c5c5c5;border-bottom:8px solid transparent;content:""}
 .my-timeline .timeline > li > .timeline-panel:after {position:absolute;top:34px;right:-7px;display:inline-block;border-top:7px solid transparent;border-left:7px solid #fff;border-right:0 solid #fff;border-bottom:7px solid transparent;content:""}
-.my-timeline .timeline > li > .timeline-badge {width:14px;height:14px;position:absolute;background:#e53935;margin:0;border:2px solid #fff;box-shadow:0 0 0 1px #b5b5b5;border-radius:50%;top:35px;right:-6px;z-index:9}
+.my-timeline .timeline > li > .timeline-badge {width:14px;height:14px;position:absolute;background:#ab0000;margin:0;border:2px solid #fff;box-shadow:0 0 0 1px #b5b5b5;border-radius:50%;top:35px;right:-6px;z-index:9}
 .my-timeline .timeline > li.timeline-inverted > .timeline-panel {float:right}
 .my-timeline .timeline > li.timeline-inverted > .timeline-panel:before {border-left-width:0;border-right-width:8px;left:-8px;right:auto}
 .my-timeline .timeline > li.timeline-inverted > .timeline-panel:after {border-left-width:0;border-right-width:7px;left:-7px;right:auto}

@@ -10,7 +10,7 @@ if (!defined('_EYOOM_')) exit;
 .favorite-list .favorite-select {position:absolute;top:7px;right:7px;width:250px}
 .favorite-list .fl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .favorite-list .fl-wrap > div:nth-last-child(1), .favorite-list .fl-wrap > div:nth-last-child(2) {border-bottom:0}
-.favorite-list .fl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.favorite-list .fl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .favorite-list .fl-head > div {position:relative}
 .favorite-list .fl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .favorite-list .fl-head > div:last-child:before {display:none}
@@ -27,7 +27,7 @@ if (!defined('_EYOOM_')) exit;
 .favorite-list .fl-list .fl-num {width:90px}
 .favorite-list .fl-list .fl-num-short {width:80px}
 .favorite-list .fl-list .fl-author {width:150px;padding:0 10px;text-align:left}
-.favorite-list .fl-list .fl-subj {display:table-cell;vertical-align:middle}
+.favorite-list .fl-list .fl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .favorite-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .favorite-list .fl-list .fl-subj a:hover {color:#000;text-decoration:underline}
 .favorite-list .fl-list .fl-subj .fl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 

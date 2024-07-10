@@ -293,17 +293,17 @@ if ($is_member && $config['cf_use_point']) {
  * 무통장 결제은행
  */
 if ($default['de_bank_use']) {
-	// 은행계좌를 배열로 만든후
-	$bank_str = explode("\n", trim($default['de_bank_account']));
-	if (count($bank_str) <= 1) {
-		$bank_account = $bank_str[0];
-	} else {
+    // 은행계좌를 배열로 만든후
+    $bank_str = explode("\n", trim($default['de_bank_account']));
+    if (count($bank_str) <= 1) {
+         $bank_account = $bank_str[0];
+    } else {
         $bank_account = array();
-		for ($i=0; $i<count((array)$bank_str); $i++) {
-			$bank_str[$i] = trim($bank_str[$i]);
-			$bank_account[$i]['bank'] = $bank_str[$i];
-		}
-	}
+        for ($i=0; $i<count((array)$bank_str); $i++) {
+            $bank_str[$i] = trim($bank_str[$i]);
+            $bank_account[$i]['bank'] = $bank_str[$i];
+        }
+    }
 }
 
 /**

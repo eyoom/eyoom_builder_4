@@ -44,7 +44,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
 
     <div class="text-center">
-        <input type="submit" id="btn_submit" value="보내기" class="btn-e btn-e-lg btn-e-red">
+        <input type="submit" id="btn_submit" value="보내기" class="btn-e btn-e-lg btn-e-navy">
         <button type="button" onclick="self.close();" class="btn-e btn-e-lg btn-e-dark">닫기</button>
     </div>
     </form>

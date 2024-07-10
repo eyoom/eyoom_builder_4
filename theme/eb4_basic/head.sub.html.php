@@ -26,7 +26,8 @@ if ($config['cf_add_meta']) echo $config['cf_add_meta'];
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/bootstrap/css/bootstrap.min.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/fontawesome5/css/fontawesome-all.min.css?ver='.G5_CSS_VER.'">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/eyoom-form/css/eyoom-form.min.css?ver='.G5_CSS_VER.'">',0);
-add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/font/S-Core_Dream/s-core-dream.css?ver='.G5_CSS_VER.'">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/font/Pretendard/Pretendard.css?ver='.G5_CSS_VER.'">',0);
+add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/swiper/swiper-bundle.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/css/common.css?ver='.G5_CSS_VER.'">',0);
 ?>
 <!--[if lte IE 8]>
@@ -61,6 +62,7 @@ if (G5_IS_MOBILE) {
 }
 add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/popper/popper.min.js"></script>', 0);
 add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/bootstrap/js/bootstrap.min.js"></script>', 0);
+add_javascript('<script src="'.EYOOM_THEME_URL.'/plugins/swiper/swiper-bundle.min.js"></script>', 0);
 if (!defined('G5_IS_ADMIN')) echo $config['cf_add_script'];
 ?>
 </head>

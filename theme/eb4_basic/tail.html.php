@@ -76,12 +76,16 @@ if (!defined('_EYOOM_')) exit;
 					</div>
 				</div>
 				<?php } ?>
-				<span class="text-black"><?php echo $bizinfo['bi_company_name']; ?></span>
+				<strong class="text-black"><?php echo $bizinfo['bi_company_name']; ?></strong>
 				<span class="info-divider">|</span>
 				<span>대표 : <?php echo $bizinfo['bi_company_ceo']; ?></span>
 				<span class="info-divider">|</span>
 				<span>사업자등록번호 : <?php echo $bizinfo['bi_company_bizno']; ?></span>
 				<span class="info-divider">|</span>
+				<?php if($bizinfo['bi_company_sellno']) { ?>
+				<span>통신판매업번호 : <?php echo $bizinfo['bi_company_sellno']; ?></span>
+				<span class="info-divider">|</span>
+				<?php } ?>
 				<span>주소 : <?php echo $bizinfo['bi_company_zip']; ?> <?php echo $bizinfo['bi_company_addr1']; ?> <?php echo $bizinfo['bi_company_addr2']; ?> <?php echo $bizinfo['bi_company_addr3']; ?></span><br>
 				<span>E-mail : <a href="mailto:<?php echo $bizinfo['bi_cs_email']; ?>"><?php echo $bizinfo['bi_cs_email']; ?></a></span>
 				<span class="info-divider">|</span>
@@ -107,7 +111,7 @@ if (!defined('_EYOOM_')) exit;
 		<form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
 		<input type="hidden" name="sfl" value="wr_subject||wr_content">
 		<input type="hidden" name="sop" value="and">
-		<label for="sch_stx" class="sound_only">검색어 입력 필수</label>
+		<label for="search_input" class="sound_only">검색어 입력 필수</label>
 		<input type="text" name="stx" id="search_input" maxlength="20" placeholder="검색어 입력 [ 전체 게시판 검색 ]">
 		<button type="submit" class="search-btn" value="검색"><i class="fas fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
 		</form>
@@ -146,6 +150,9 @@ if (!defined('_EYOOM_')) exit;
 
 <?php /* 사이드바 회원 버튼 */ ?>
 <button type="button" class="sidebar-user-trigger sidebar-user-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserRight" aria-controls="offcanvasUserRight"><i class="fas fa-user-alt"></i></button>
+
+<?php /* Side Nav Mobile Toggler */ ?>
+<button type="button" class="navbar-mobile-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft"><i class="fas fa-bars"></i></button>
 
 <?php /* Back To Top */ ?>
 <div class="eb-backtotop">

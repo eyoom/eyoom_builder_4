@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .favorite-setup .toggle {padding-right:45px}
 .board-list .bl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .board-list .bl-wrap > div:nth-last-child(1), .board-list .bl-wrap > div:nth-last-child(2) {border-bottom:0}
-.board-list .bl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.board-list .bl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .board-list .bl-head > div {position:relative}
 .board-list .bl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .board-list .bl-head > div:last-child:before {display:none}
@@ -42,7 +42,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .bl-list .bl-num-short {width:80px}
 .board-list .bl-list .bl-num-checkbox {width:110px}
 .board-list .bl-list .bl-author {width:150px;padding:0 10px;text-align:left}
-.board-list .bl-list .bl-subj {display:table-cell;vertical-align:middle}
+.board-list .bl-list .bl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .board-list .bl-list .bl-subj a {position:relative;display:inline-block;padding:0 10px}
 .board-list .bl-list .bl-subj a:hover {color:#000;text-decoration:underline}
 .board-list .bl-list .bl-subj .reply-indication {display:inline-block;width:7px;height:10px;border-left:1px dotted #b5b5b5;border-bottom:1px dotted #b5b5b5}
@@ -145,7 +145,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <?php if ($write_href) { ?>
         <div class="float-end">
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-indigo" type="button">글쓰기</a>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-navy" type="button">글쓰기</a>
         </div>
         <?php } ?>
         <div class="clearfix"></div>
@@ -457,7 +457,7 @@ function fboardlist_submit(f) {
             title: '중요!',
             html: "<span class='text-crimson'>" + document.pressed + "</span> 할 게시물을 하나 이상 선택하세요.",
             icon: 'error',
-            confirmButtonColor: '#e53935',
+            confirmButtonColor: '#ab0000',
             confirmButtonText: '확인'
         });
         return false;
@@ -506,7 +506,7 @@ $(function() {
                 title: '알림',
                 html: '스킨을 선택해 주세요.',
                 icon: 'warning',
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 confirmButtonText: "확인"
             });
         } else {
@@ -534,7 +534,7 @@ $(function() {
                 title: '알림',
                 html: '관심게시판에서 <span class="text-crimson">해제</span>하였습니다.',
                 icon: 'success',
-                confirmButtonColor: '#e53935',
+                confirmButtonColor: '#ab0000',
                 confirmButtonText: '확인'
             });
         } else if (favorite == 'n') {
@@ -543,7 +543,7 @@ $(function() {
                 title: '알림',
                 html: '관심게시판으로 <span class="text-crimson">등록</span>하였습니다.',
                 icon: 'success',
-                confirmButtonColor: '#e53935',
+                confirmButtonColor: '#ab0000',
                 confirmButtonText: '확인'
             });
         }

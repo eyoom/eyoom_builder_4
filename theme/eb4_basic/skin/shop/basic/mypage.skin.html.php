@@ -40,7 +40,7 @@ if (!defined('_EYOOM_')) exit;
 <div id="smb_my" class="shop-mypage">
     <div class="text-end m-b-20">
         <?php if ($is_admin == 'super') { ?>
-        <a href="<?php echo G5_ADMIN_URL; ?>/" class="btn-e btn-e-red">관리자</a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/" class="btn-e btn-e-crimson">관리자</a>
         <?php } ?>
         <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="memo_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/memo.php" target="_blank"<?php } ?> class="btn-e btn-e-dark">쪽지함</a>
         <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php" class="btn-e btn-e-dark">회원정보수정</a>
@@ -59,11 +59,11 @@ if (!defined('_EYOOM_')) exit;
                 </h4>
                 <div class="m-t-10">
                     <span>보유포인트</span>
-                    <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u class="color-red"><strong><?php echo number_format($member['mb_point']); ?></strong></u></a> 점
+                    <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?>><u class="text-crimson"><strong><?php echo number_format($member['mb_point']); ?></strong></u></a> 점
                     <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="point_modal();"<?php } else { ?>href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank"<?php } ?> class="btn-e btn-e-xxs btn-e-gray m-l-5 hidden-xs">상세보기</a>
                     <span class="m-l-10 m-r-10 text-light-gray">/</span>
                     <span>보유쿠폰</span>
-                    <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="coupon_modal();"<?php } else { ?>href="<?php echo G5_SHOP_URL; ?>/coupon.php" target="_blank"<?php } ?>><u class="color-red"><strong><?php echo number_format($cp_count); ?></strong></u></a> 개
+                    <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="coupon_modal();"<?php } else { ?>href="<?php echo G5_SHOP_URL; ?>/coupon.php" target="_blank"<?php } ?>><u class="text-crimson"><strong><?php echo number_format($cp_count); ?></strong></u></a> 개
                     <a <?php if ( !G5_IS_MOBILE ) { ?>href="javascript:void(0);" onclick="coupon_modal();"<?php } else { ?>href="<?php echo G5_SHOP_URL; ?>/coupon.php" target="_blank"<?php } ?> class="btn-e btn-e-xxs btn-e-gray m-l-5 hidden-xs">상세보기</a>
                 </div>
             </div>

@@ -10,12 +10,12 @@ if (!defined('_EYOOM_')) exit;
 .board-view-ans h4 {font-size:1.25rem}
 .board-view-ans .ans-datetime {margin:15px 0 0;padding:8px 0;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;color:#757575}
 .board-view-ans .ans-con {position:relative;margin:20px 0}
-.board-view-ans #bo_v_file {margin-top: 15px;padding: 10px;background-color: #f8f8f8;border-top:1px solid #999;border-bottom:1px solid #999;}
-.board-view-ans #bo_v_file h2 {margin: 0 0 10px;padding: 5px 0 10px;font-size: 14px;font-weight: 700;border-bottom:1px solid #ddd;}
-.board-view-ans #bo_v_file ul {list-style:none;margin: 0;padding: 0;}
-.board-view-ans #bo_v_file ul li {margin-bottom: 5px;font-size: 13px;}
-.board-view-ans #bo_v_file ul li i {margin-right: 5px;color: #999;}
-.board-view-ans #bo_v_file ul li a:hover {text-decoration:underline;}
+.board-view-ans #bo_v_file {margin-top:15px;padding:10px 0;background-color:#fafafa;border-top:1px solid #959595;border-bottom:1px solid #959595}
+.board-view-ans #bo_v_file h2 {margin:0 0 10px;padding:5px 0 10px;font-size:1.0625rem;font-weight:700;border-bottom:1px solid #d5d5d5}
+.board-view-ans #bo_v_file ul {list-style:none;margin:0;padding:0}
+.board-view-ans #bo_v_file ul li {margin-bottom:5px;font-size:.9375rem}
+.board-view-ans #bo_v_file ul li i {margin-right:5px;color:#959595}
+.board-view-ans #bo_v_file ul li a:hover {text-decoration:underline}
 </style>
 
 <div class="board-view-ans">
@@ -52,7 +52,6 @@ if (!defined('_EYOOM_')) exit;
 
     <div id="ans_con" class="ans-con">
         <?php
-        // 파일 출력
         if(isset($answer['img_count']) && $answer['img_count']) {
             echo "<div id=\"bo_v_img\">\n";
 
@@ -67,18 +66,16 @@ if (!defined('_EYOOM_')) exit;
         <?php echo get_view_thumbnail(conv_content($answer['qa_content'], $answer['qa_html']), $qaconfig['qa_image_width']); ?>
 
         <?php if(isset($answer['download_count']) && $answer['download_count']) { ?>
-        <!-- 첨부파일 시작 { -->
         <section id="bo_v_file">
             <h2>첨부파일</h2>
             <ul>
             <?php
-            // 가변 파일
             for ($i=0; $i<$answer['download_count']; $i++) {
             ?>
                 <li>
                     <i class="fa fa-download" aria-hidden="true"></i>
                     <a href="<?php echo $answer['download_href'][$i];  ?>" class="view_file_download" download>
-                        <strong><?php echo $answer['download_source'][$i] ?></strong>
+                        <?php echo $answer['download_source'][$i] ?>
                     </a>
                 </li>
             <?php
@@ -86,7 +83,6 @@ if (!defined('_EYOOM_')) exit;
             ?>
             </ul>
         </section>
-        <!-- } 첨부파일 끝 -->
         <?php } ?>
     </div>
     <?php echo $config['cf_editor'] == 'tuieditor' ? $bbs->tuieditor_viewer("ans_con"): ''; ?>

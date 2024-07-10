@@ -34,7 +34,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="tag-list-tab m-b-20">
         <ul class="list-inline">
             <?php for ($i=0; $i<count((array)$fccate); $i++) { ?>
-            <li class="<?php echo $sca == $fccate[$i]['fccate_no'] ? 'active': '';?>"><a href="javascript:;" onclick="set_fccate('<?php echo $fccate[$i]['fccate_no']; ?>');" class="btn-e btn-e-xs btn-e-<?php echo $sca == $fccate[$i]['fccate_no'] ? 'red': 'dark';?>"><?php echo $fccate[$i]['fccate_name']; ?></a></li>
+            <li class="<?php echo $sca == $fccate[$i]['fccate_no'] ? 'active': '';?>"><a href="javascript:;" onclick="set_fccate('<?php echo $fccate[$i]['fccate_no']; ?>');" class="btn-e btn-e-xs btn-e-<?php echo $sca == $fccate[$i]['fccate_no'] ? 'crimson': 'dark';?>"><?php echo $fccate[$i]['fccate_name']; ?></a></li>
             <?php } ?>
         </ul>
     </div>

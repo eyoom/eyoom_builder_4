@@ -22,8 +22,8 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
 .shop-personalpay-form .payment-select-wrap fieldset {padding:0 0 0 2px;background:none}
 .shop-personalpay-form .payment-select-wrap input[type="radio"] {position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;text-indent:-999px;left:0;z-index:-1px}
 .shop-personalpay-form .payment-select-wrap .payment-select-box {position:relative;overflow:hidden;float:left;width:50%;background:#fff;cursor:pointer;height:60px;box-sizing:border-box;border:1px solid #e5e5e5;margin:-1px 0 0 -1px;padding:20px 0 0 80px !important;text-indent:inherit !important}
-.shop-personalpay-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #FF7070;z-index:3}
-.shop-personalpay-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:5px;right:10px;color:#FF4848;font-size:16px}
+.shop-personalpay-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box {border:1px solid #ab0000;z-index:3}
+.shop-personalpay-form .payment-select-wrap input[type="radio"]:checked+.payment-select-box:after {font-family:'Font Awesome\ 5 Free';content:"\f00c";font-weight:900;position:absolute;top:5px;right:10px;color:#ab0000;font-size:16px}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .bank_icon {background:#fff}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .bank_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f53c";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .vbank_icon {background:#fff}
@@ -35,7 +35,7 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon {background:#fff}
 .shop-personalpay-form .payment-select-wrap #sod_frm_paysel .card_icon:before {font-family:'Font Awesome\ 5 Free';content:"\f09d";font-weight:900;position:absolute;top:5px;left:5px;width:48px;height:48px;line-height:48px;text-align:center;color:#b5b5b5;font-size:20px}
 #display_pay_button {background:none;padding:0;border:0 none}
-#display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#cc2300;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin:15px 0;border-radius:3px}
+#display_pay_button .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#3f4678;color:#fff;font-size:.9375rem;font-weight:700;letter-spacing:0;border:0;margin:15px 0;border-radius:3px}
 #display_pay_button a.btn_cancel {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;margin:15px 0;border-radius:3px}
 #display_pay_button a.btn01 {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;margin:15px 0;border-radius:3px}
 @media (max-width:991px) {
@@ -78,7 +78,7 @@ $tablet_size = "1.0"; // 화면 사이즈 조정 - 기기화면에 맞게 수정
                                 <td>
                                     <label class="hidden-lg hidden-md">결제금액</strong></label>
                                     <div class="td-box width-200px">
-                                        <strong class="color-red"><?php echo display_price($pp['pp_price']); ?></strong>
+                                        <strong class="text-crimson"><?php echo display_price($pp['pp_price']); ?></strong>
                                     </div>
                                 </td>
                             </tr>
@@ -251,6 +251,51 @@ function pay_approval()
     <?php } ?>
     f.P_RETURN_URL.value = "<?php echo $return_url.$pp_id; ?>";
     f.action = "https://mobile.inicis.com/smart/" + paymethod + "/";
+    <?php } else if($default['de_pg_service'] == 'nicepay') { ?>
+
+    f.Amt.value       = f.good_mny.value;
+    f.BuyerName.value   = pf.pp_name.value;
+    f.BuyerEmail.value  = pf.pp_email.value;
+    f.BuyerTel.value    = pf.pp_hp.value;
+
+    f.DirectShowOpt.value = "";     // 간편결제 요청 값 초기화
+    f.DirectEasyPay.value = "";     // 간편결제 요청 값 초기화
+    f.NicepayReserved.value = "";   // 간편결제 요청 값 초기화
+    f.EasyPayMethod.value = "";   // 간편결제 요청 값 초기화
+
+        <?php if ($default['de_escrow_use']) {  // 간편결제시 에스크로값이 0이 되므로 기본설정값을 지정 ?>
+        f.TransType.value = "1";
+        <?php } ?>
+
+    switch(settle_method) {
+        case "계좌이체":
+            paymethod = "BANK";
+            break;
+        case "가상계좌":
+            paymethod = "VBANK";
+            break;
+        case "휴대폰":
+            paymethod = "CELLPHONE";
+            break;
+        case "신용카드":
+            paymethod = "CARD";
+            break;
+        default:
+            paymethod = "무통장";
+            break;
+    }
+
+    f.PayMethod.value = paymethod;
+
+    <?php if($default['de_tax_flag_use']) { ?>
+    f.SupplyAmt.value = pf.comm_tax_mny.value;
+    f.GoodsVat.value = pf.comm_vat_mny.value;
+    f.TaxFreeAmt.value = pf.comm_free_mny.value;
+    <?php } ?>
+
+    if (! nicepay_create_signdata(f)) {
+        return false;
+    }
     <?php } ?>
 
     //var new_win = window.open("about:blank", "tar_opener", "scrollbars=yes,resizable=yes");
@@ -274,6 +319,12 @@ function pay_approval()
         alert(save_result);
         return false;
     }
+
+    <?php if($default['de_pg_service'] == 'nicepay') { ?>
+        nicepayStart(f);
+
+        return;
+    <?php } ?>
 
     f.submit();
 }

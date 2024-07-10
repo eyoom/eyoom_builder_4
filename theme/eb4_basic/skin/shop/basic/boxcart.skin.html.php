@@ -28,7 +28,7 @@ if (!defined('_EYOOM_')) exit;
     </ul>
 
     <?php if ($ct_count > 0) { ?>
-    <button type="submit" class="btn-e btn-e-lg btn-e-block btn-e-crimson m-b-5">바로구매</button>
+    <button type="submit" class="btn-e btn-e-lg btn-e-block btn-e-navy m-b-5">바로구매</button>
     <?php } ?>
     <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="btn-e btn-e-lg btn-e-block btn-e-dark btn-e-brd">장바구니 바로가기<i class="far fa-arrow-alt-circle-right m-l-5"></i></a>
     </form>

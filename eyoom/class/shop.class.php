@@ -23,7 +23,7 @@ class shop extends eyoom
             /**
              * 2단계 분류 판매 가능한 것만
              */
-            $sql2 = " select ca_id, ca_name from {$this->g5['g5_shop_category_table']} where LENGTH(ca_id) = '4' and SUBSTRING(ca_id,1,2) = '{$row['ca_id']}' and ca_use = '1' order by ca_order, ca_id ";
+            $sql2 = " select ca_id, ca_name from {$this->g5['g5_shop_category_table']} where LENGTH(ca_id) = '4' and substring(ca_id,1,2) = '{$row['ca_id']}' and ca_use = '1' order by ca_order, ca_id ";
             $result2 = sql_query($sql2);
             $count = sql_num_rows($result2);
 
@@ -226,68 +226,116 @@ class shop extends eyoom
         }
     }
 
-    public function get_category($depth='', $pr_code='') {
+    public function get_category($depth = '', $pr_code = '') {
         global $admin_mode;
-
-        if(!$admin_mode) $addwhere = " and ca_use = '1' ";
-        if($depth) {
+    
+        $addwhere = "";
+        if (!$admin_mode) {
+            $addwhere .= " AND ca_use = '1' ";
+        }
+        if ($depth) {
             $length = $depth * 2;
-            $addwhere .= " and length(ca_id) = $length ";
+            $addwhere .= " AND LENGTH(ca_id) = $length ";
             if ($pr_code) {
-                $addwhere .= " and ca_id like '{$pr_code}%' ";
+                $addwhere .= " AND ca_id LIKE '{$pr_code}%' ";
             }
         }
-        $sql = " select ca_id, ca_name, ca_order, ca_use, ca_stock_qty, ca_sell_email
-                    from {$this->g5['g5_shop_category_table']}
-                    where (1) {$addwhere}
-                    order by
-                    case
-                        when length(ca_id) = 2 then cast(ca_order as signed)
-                        when length(ca_id) = 4 then cast(concat(left(ca_id, 2), lpad('', 2, '0'), ca_order) as signed)
-                        when length(ca_id) = 6 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), lpad('', 2, '0'), ca_order) as signed)
-                        when length(ca_id) = 8 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), lpad('', 2, '0'), ca_order) as signed)
-                        when length(ca_id) = 10 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), substring(ca_id, 7, 2), lpad('', 2, '0'), ca_order) as signed)
-                        else cast(ca_order as signed)
-                    end
+        
+        $sql = "
+            select ca_id, ca_name, ca_order, ca_use, ca_stock_qty, ca_sell_email
+            from {$this->g5['g5_shop_category_table']}
+            where (1) {$addwhere}
+            order by
+                case
+                    when length(ca_id) = 2 then 1
+                    when length(ca_id) = 4 then 2
+                    when length(ca_id) = 6 then 3
+                    when length(ca_id) = 8 then 4
+                    when length(ca_id) = 10 then 5
+                    ELSE 6
+                END,
+                case
+                    when length(ca_id) = 2 then cast(ca_order as signed)
+                    when length(ca_id) = 4 then cast(concat(left(ca_id, 2), lpad(ca_order, 2, '0')) as signed)
+                    when length(ca_id) = 6 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), lpad(ca_order, 2, '0')) as signed)
+                    when length(ca_id) = 8 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), lpad(ca_order, 2, '0')) as signed)
+                    when length(ca_id) = 10 then cast(concat(left(ca_id, 2), substring(ca_id, 3, 2), substring(ca_id, 5, 2), substring(ca_id, 7, 2), lpad(ca_order, 2, '0')) as signed)
+                    ELSE cast(ca_order as signed)
+                END
         ";
+        
         $res = sql_query($sql, false);
         $category = array();
-        for($i=0;$row=sql_fetch_array($res);$i++) {
-            $split = str_split($row['ca_id'],2);
-            $depth = count((array)$split);
-
-            if($depth==1) $category[$split[0]] = $row;
-            if($depth==2) $category[$split[0]][$split[1]] = $row;
-            if($depth==3) $category[$split[0]][$split[1]][$split[2]] = $row;
-            if($depth==4) $category[$split[0]][$split[1]][$split[2]][$split[3]] = $row;
-            if($depth==5) $category[$split[0]][$split[1]][$split[2]][$split[3]][$split[4]] = $row;
+        
+        while ($row = sql_fetch_array($res)) {
+            $split = str_split($row['ca_id'], 2);
+            $depth = count($split);
+            
+            switch ($depth) {
+                case 1:
+                    $category[$split[0]] = $row;
+                    $category[$split[0]]['children'] = array();
+                    break;
+                case 2:
+                    $category[$split[0]]['children'][$split[1]] = $row;
+                    $category[$split[0]]['children'][$split[1]]['children'] = array();
+                    break;
+                case 3:
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]] = $row;
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]]['children'] = array();
+                    break;
+                case 4:
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]]['children'][$split[3]] = $row;
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]]['children'][$split[3]]['children'] = array();
+                    break;
+                case 5:
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]]['children'][$split[3]]['children'][$split[4]] = $row;
+                    $category[$split[0]]['children'][$split[1]]['children'][$split[2]]['children'][$split[3]]['children'][$split[4]]['children'] = array();
+                    break;
+            }
         }
+        
+        return $category;
+    }      
+
+    // 카테고리를 정렬하는 메소드
+    public function sort_category($category) {
+        foreach ($category as &$cat) {
+            if (isset($cat['children']) && is_array($cat['children'])) {
+                $cat['children'] = $this->sort_category($cat['children']);
+            }
+        }
+    
+        uasort($category, function ($a, $b) {
+            return $a['ca_order'] - $b['ca_order'];
+        });
+    
         return $category;
     }
 
     // 이윰배열을 JSON 형식으로 변환
     public function category_json($arr) {
         $output = '';
-        if(is_array($arr)) {
+        if (is_array($arr) && !empty($arr)) {
             $output .= ',"children":[';
-            $_output=array();
-            $i=0;
-            foreach($arr as $key => $val) {
-                if(is_array($val)) {
-                    if(strlen($val['ca_id'])<2) continue;
-                    unset($blind);
+            $_output = array();
+            foreach ($arr as $val) {
+                if (isset($val['ca_id'])) {
+                    $blind = '';
                     $ca_order = $val['ca_order'];
-                    if($val['ca_use'] != '1') $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
-                    $_output[$key] .= '{';
-                    $_output[$key] .= '"id":"'.$val['ca_id'].'",';
-                    $_output[$key] .= '"order":"'.$ca_order.'",';
-                    $_output[$key] .= '"text":"'.trim($val['ca_name']).$blind.'"';
-                    if(is_array($val) && count((array)$val)>3) $_output[$key] .= $this->category_json($val);
-                    $_output[$key] .= '}';
+                    if ($val['ca_use'] != '1') {
+                        $blind = " <span style='color:#f30;'><i class='fa fa-eye-slash'></i></span>";
+                    }
+                    $children_json = $this->category_json($val['children']);
+                    $_output[] = '{' .
+                                 '"id":"' . $val['ca_id'] . '",' .
+                                 '"order":"' . $ca_order . '",' .
+                                 '"text":"' . trim($val['ca_name']) . $blind . '"' .
+                                 $children_json .
+                                 '}';
                 }
-                $i++;
             }
-            $output .= @implode(',',$_output);
+            $output .= implode(',', $_output);
             $output .= ']';
         }
         return $output;
@@ -295,24 +343,26 @@ class shop extends eyoom
 
     // 상품분류 소팅하기
     public function category_array_sort($arr) {
-        if(is_array($arr)) {
-            $_output=array();
-            $i=0;
-            foreach($arr as $key => $val) {
-                if(is_array($val)) {
-                    if(strlen($val['ca_id'])<2) continue;
-                    $ca_order = $val['ca_order'].$i;
-                    $_output[$ca_order]['ca_id'] = $val['ca_id'];
-                    $_output[$ca_order]['ca_name'] = trim($val['ca_name']);
-                    $_output[$ca_order]['ca_stock_qty'] = $val['ca_stock_qty'];
-                    $_output[$ca_order]['ca_sell_email'] = $val['ca_sell_email'];
-                    if(is_array($val) && count((array)$val)>3) $_output[$ca_order]['ca_sub'] = $this->category_array_sort($val);
+        $cate_sel_option = array();
+        if (is_array($arr)) {
+            foreach ($arr as $val) {
+                if (isset($val['ca_id'])) {
+                    $ca_order = $val['ca_order'];
+                    $cate_sel_option[$ca_order] = array(
+                        'ca_id' => $val['ca_id'],
+                        'ca_use' => $val['ca_use'],
+                        'ca_name' => trim($val['ca_name']),
+                        'ca_stock_qty' => $val['ca_stock_qty'],
+                        'ca_sell_email' => $val['ca_sell_email'],
+                    );
+                    if (isset($val['children']) && is_array($val['children']) && !empty($val['children'])) {
+                        $cate_sel_option[$ca_order]['ca_sub'] = $this->category_array_sort($val['children']);
+                    }
                 }
-                $i++;
             }
-            @ksort($_output);
+            ksort($cate_sel_option);
         }
-        return $_output;
+        return $cate_sel_option;
     }
 
     // 카테고리 순서데로 뽑아오기

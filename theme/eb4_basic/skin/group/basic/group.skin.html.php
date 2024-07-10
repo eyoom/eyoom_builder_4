@@ -11,7 +11,7 @@ if (!defined('_EYOOM_')) exit;
 .group-latest li {position:relative;padding:3px 0}
 .group-latest li:after {content:"";display:block;clear:both}
 .group-latest .group-subj {position:relative;width:70%;padding-right:40px;padding-left:0;display:block;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
-.group-latest .group-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
+.group-latest .group-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#ab0000;margin-right:2px}
 .group-latest .group-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .group-latest .group-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
 .group-latest .group-new-icon b {position:absolute;top:3px;left:8px;width:2px;height:8px;background-color:#fff;transform:rotate(-60deg)}
@@ -20,7 +20,7 @@ if (!defined('_EYOOM_')) exit;
 .group-latest .group-time i {color:#b5b5b5}
 .group-latest a:hover .group-subj {color:#000;text-decoration:underline}
 .group-latest a:hover .group-time {color:#000}
-.group-latest a:hover .group-time i {color:#cc2300}
+.group-latest a:hover .group-time i {color:#ab0000}
 </style>
 
 <div class="basic-group-skin">

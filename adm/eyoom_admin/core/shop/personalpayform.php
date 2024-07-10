@@ -50,6 +50,12 @@ if($wmode) { // 팝업창일 때
         $pp['pp_price'] = $od['od_misu'];
     $wrp_tag_st = '<div class="new_win">'.PHP_EOL.'<h1 id="new_win_title">'.$html_title.'</h1>';
     $wrp_tag_end = '</div>';
+
+    echo '<script>
+        if (typeof g5_admin_csrf_token_key === "undefined") {
+            var g5_admin_csrf_token_key = "' . (function_exists('admin_csrf_token_key') ? admin_csrf_token_key() : '') . '";
+        }
+    </script>';
 }
 
 /**

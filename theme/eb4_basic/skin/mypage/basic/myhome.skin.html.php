@@ -99,8 +99,8 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <button type="button" class="btn-e btn-gray follow_<?php echo $user['mb_id']; ?>" name="<?php echo $user['mb_id']; ?>" value="unfollow" title="친구관계를 해제합니다."><i class="fas fa-times"></i> 언팔로우</button>
                     <?php } ?>
                 <?php } else { ?>
-                    <a href="#" class="btn-e btn-e-md btn-e-indigo bd-r-0" data-bs-toggle="modal" data-bs-target=".my-home-wallpaper" title="배경 이미지 변경">배경변경</a>
-                    <a href="<?php echo G5_URL; ?>/mypage/" class="btn-e btn-e-md btn-crimson bd-r-0">마이페이지<i class="fas fa-caret-right m-l-5"></i></a>
+                    <a href="#" class="btn-e btn-e-sm btn-e-navy" data-bs-toggle="modal" data-bs-target=".my-home-wallpaper" title="배경 이미지 변경">배경변경</a>
+                    <a href="<?php echo G5_URL; ?>/mypage/" class="btn-e btn-e-sm btn-crimson">마이페이지<i class="fas fa-caret-right m-l-5"></i></a>
                 <?php } ?>
                 </div>
                 <?php } ?>
@@ -199,7 +199,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-e btn-e-lg btn-red" type="submit" value="저장하기">저장하기</button>
+                <button class="btn-e btn-e-lg btn-navy" type="submit" value="저장하기">저장하기</button>
                 <button data-bs-dismiss="modal" class="btn-e btn-e-lg btn-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
             </div>
             </form>
@@ -251,7 +251,7 @@ $(function(){
                 Swal.fire({
                     title: "OK!",
                     text: "'좋아요 추천'이 되었습니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "success",
                     confirmButtonText: "확인"
                 });
@@ -261,7 +261,7 @@ $(function(){
                 Swal.fire({
                     title: "알림!",
                     text: "이미 '좋아요 추천'을 하였습니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "warning",
                     confirmButtonText: "확인"
                 });
@@ -289,7 +289,7 @@ $(".profile-btns button").click(function(){
                 Swal.fire({
                     title: "알림",
                     text: '해당 회원을 팔로우하였습니다.',
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "success",
                     confirmButtonText: "확인"
                 });
@@ -303,7 +303,7 @@ $(".profile-btns button").click(function(){
                 Swal.fire({
                     title: "알림",
                     text: '해당 회원을 팔로우 해제하였습니다.',
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "success",
                     confirmButtonText: "확인"
                 });
@@ -312,7 +312,7 @@ $(".profile-btns button").click(function(){
             Swal.fire({
                 title: "알림",
                 text: '소셜기능을 Off 시켜놓은 회원입니다.',
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });

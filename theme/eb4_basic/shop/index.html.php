@@ -5,16 +5,9 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<?php /*----- Preloader 시작 -----*/ ?>
-<div class="loader-wrap">
-    <div class="loader"></div>
-    <div class="loader-section-left"></div>
-    <div class="loader-section-right"></div>
-</div>
-<?php /*----- Preloader 끝 -----*/ ?>
-
 <?php /* ---------- 쇼핑몰 메인 EB 슬라이더 시작 ---------- */ ?>
-<div class="shop-main-slider">
+<div class="shop-main-slider-top">
+    <?php /* EB슬라이더 - basic */ ?>
     <?php echo eb_slider('1526428620'); ?>
 </div>
 <?php /* ---------- 쇼핑몰 메인 EB 슬라이더 끝 ---------- */ ?>
@@ -25,7 +18,7 @@ if (!defined('_EYOOM_')) exit;
     <div class="main-heading">
         <h2><strong>브랜드</strong></h2>
     </div>
-    <div class="m-b-30">
+    <div class="m-b-40">
         <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
         <div class="adm-edit-btn btn-edit-mode" style="margin-top:-30px;">
             <div class="btn-group">
@@ -43,6 +36,10 @@ if (!defined('_EYOOM_')) exit;
 <?php /* ---------- 쇼핑몰 브랜드 끝 ---------- */ ?>
 
 <div class="container">
+    <?php /* ---------- 이벤트박스 시작 ---------- */ ?>
+    <?php include_once(EYOOM_THEME_SHOP_SKIN_PATH.'/boxevent.skin.html.php'); // 이벤트 ?>
+    <?php /* ---------- 이벤트박스 끝 ---------- */ ?>
+
     <?php /* ---------- 히트상품 시작 ---------- */ ?>
     <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
     <div class="adm-edit-btn btn-edit-mode" style="margin-top:-25px;">
@@ -56,7 +53,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php if($default['de_type1_list_use']) { ?>
-    <section class="m-b-30">
+    <section class="m-b-40">
         <div class="main-heading">
             <h2><a href="<?php echo shop_type_url(1); ?>"><strong>히트<span class="text-gray">상품</span></strong></a></h2>
         </div>
@@ -91,7 +88,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php if($default['de_type2_list_use']) { ?>
-    <section class="m-b-30">
+    <section class="m-b-40">
         <div class="main-heading">
             <h2><a href="<?php echo shop_type_url(2); ?>"><strong>추천<span class="text-gray">상품</span></strong></strong></a></h2>
         </div>
@@ -112,10 +109,6 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
     <?php /* ---------- 추천상품 끝 ---------- */ ?>
 
-    <?php /* ---------- 이벤트박스 시작 ---------- */ ?>
-    <?php include_once(EYOOM_THEME_SHOP_SKIN_PATH.'/boxevent.skin.html.php'); // 이벤트 ?>
-    <?php /* ---------- 이벤트박스 끝 ---------- */ ?>
-
     <?php /* ---------- 최신상품 시작 ---------- */ ?>
     <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
     <div class="adm-edit-btn btn-edit-mode" style="margin-top:-25px;">
@@ -129,7 +122,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php if($default['de_type3_list_use']) { ?>
-    <section class="m-b-30">
+    <section class="m-b-40">
         <div class="main-heading">
             <h2><a href="<?php echo shop_type_url(3); ?>"><strong>최신<span class="text-gray">상품</span></strong></strong></a></h2>
         </div>
@@ -163,7 +156,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php if($default['de_type4_list_use']) { ?>
-    <section class="m-b-30">
+    <section class="m-b-40">
         <div class="main-heading">
             <h2><a href="<?php echo shop_type_url(4); ?>"><strong>인기<span class="text-gray">상품</span></strong></strong></a></h2>
         </div>
@@ -197,7 +190,7 @@ if (!defined('_EYOOM_')) exit;
     <?php } ?>
 
     <?php if($default['de_type5_list_use']) { ?>
-    <section class="m-b-30">
+    <section>
         <div class="main-heading">
             <h2><a href="<?php echo shop_type_url(5); ?>"><strong>할인<span class="text-gray">상품</span></strong></strong></a></h2>
         </div>

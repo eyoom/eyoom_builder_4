@@ -60,7 +60,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-cart .shop-cart-li-wrap .prqty-sc, .shop-cart .shop-cart-li-wrap .prqty-price {border-right:1px solid #e5e5e5}
 .shop-cart .shop-cart-li-wrap .total-price {background:#f5f5f5;border:1px solid #d5d5d5;display:block;clear:both;margin:0 15px 15px;text-align:right;padding:15px}
 .shop-cart .shop-cart-li-wrap .total-price span {float:left;font-weight:700}
-.shop-cart .shop-cart-li-wrap .total-price strong {color:#cc2300}
+.shop-cart .shop-cart-li-wrap .total-price strong {color:#ab0000}
 <?php } // if (!G5_IS_MOBILE) END ?>
 .shop-cart .shop-cart-total {position:relative;overflow:hidden;clear:both;background:#f2f2f2;border:2px solid #454545;margin-bottom:30px}
 .shop-cart .shop-cart-total .cart-total-box {position:relative;float:left;width:33.33333%;height:94px;text-align:center;padding:20px 0;font-size:.9375rem}
@@ -68,7 +68,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .shop-cart .shop-cart-total .cart-total-box:last-child:after {display:none}
 .shop-cart .shop-cart-total .cart-total-box span {display:block;margin-bottom:10px}
 .shop-cart .shop-cart-total .cart-total-box strong {color:#000}
-.shop-cart .shop-cart-total .cart-total-box .cart-total-price {color:#cc2300;font-size:1.125rem}
+.shop-cart .shop-cart-total .cart-total-box .cart-total-price {color:#ab0000;font-size:1.125rem}
 .shop-cart .cart-act-btn {margin-top:30px;text-align:center}
 /* 영카트 모바일 css 관련 */
 #mod_option_frm {position:relative;top:inherit;left:inherit;width:100%;border:0 none}
@@ -226,7 +226,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <?php if ($count > 0) { ?>
     <div class="m-b-30">
         <button type="button" onclick="return form_check('seldelete');" class="btn-e btn-e-dark">선택삭제</button>
-        <button type="button" onclick="return form_check('alldelete');" class="btn-e btn-e-red">전체삭제</button>
+        <button type="button" onclick="return form_check('alldelete');" class="btn-e btn-e-crimson">전체삭제</button>
     </div>
     <?php } ?>
 
@@ -255,7 +255,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         <input type="hidden" name="records" value="<?php echo $i; ?>">
         <input type="hidden" name="act" value="">
         <a href="<?php echo shop_category_url($continue_ca_id); ?>" class="btn-e btn-e-brd btn-e-xl btn-e-dark">쇼핑 계속하기</a>
-        <button type="button" onclick="return form_check('buy');" class="btn-e btn-e-xl btn-e-red"><i class="fas fa-credit-card m-r-5"></i>주문하기</button>
+        <button type="button" onclick="return form_check('buy');" class="btn-e btn-e-xl btn-e-navy"><i class="fas fa-credit-card m-r-5"></i>주문하기</button>
 
         <?php if ($naverpay_button_js) { ?>
         <div class="cart-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
@@ -325,7 +325,7 @@ function fsubmit_check(f) {
         Swal.fire({
             title: "중요!",
             text: "구매하실 상품을 하나이상 선택해 주십시오.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -344,7 +344,7 @@ function form_check(act) {
             Swal.fire({
                 title: "중요!",
                 text: "주문하실 상품을 하나이상 선택해 주십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -361,7 +361,7 @@ function form_check(act) {
             Swal.fire({
                 title: "중요!",
                 text: "삭제하실 상품을 하나이상 선택해 주십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });

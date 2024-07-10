@@ -89,7 +89,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                     </label>
                 </section>
                 <section class="col-lg-6">
-                    <label for="wr_password" class="label">비밀번호 확인<strong class="sound_only"> 필수</strong></label>
+                    <label for="reg_mb_password_re" class="label">비밀번호 확인<strong class="sound_only"> 필수</strong></label>
                     <label class="input required-mark">
                         <i class="icon-prepend fas fa-lock"></i>
                         <input type="password" name="mb_password_re" id="reg_mb_password_re" <?php if ($w!='') { ?>required<?php } ?> minlength="4" maxlength="20">
@@ -187,7 +187,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                         <i class="icon-prepend far fa-smile"></i>
                         <input type="text" name="mb_nick" value="<?php if (isset($member['mb_nick'])) { ?><?php echo $member['mb_nick']; ?><?php } ?>" id="reg_mb_nick" required size="10" maxlength="100">
                         <?php if ($w=='') { ?>
-                        <div class="button" onclick="check_duplication('mb_nick');"><input type="button"><i class="fas fa-check color-red"></i> 중복체크</div>
+                        <div class="button" onclick="check_duplication('mb_nick');"><input type="button"><i class="fas fa-check text-crimson"></i> 중복체크</div>
                         <?php } ?>
                         <?php if ($w=='') { ?><input type="hidden" name="mb_nick_duplicated" id="mb_nick_duplicated"><?php } ?>
                         <span id="msg_mb_nick"></span>
@@ -423,7 +423,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
             <?php if ($w=='u') { ?>
             <button type="button" value="회원탈퇴" id="btn_remove" class="btn-e btn-e-xl btn-e-gray" onclick="member_leave();">회원탈퇴</button>
             <?php } ?>
-            <button type="submit" value="<?php if ($w=='') { ?>회원가입<?php } else { ?>정보수정<?php } ?>" id="btn_submit" class="btn-e btn-e-xl btn-e-crimson" accesskey="s"><?php if ($w=='') { ?>회원가입<?php } else { ?>정보수정<?php } ?></button>
+            <button type="submit" value="<?php if ($w=='') { ?>회원가입<?php } else { ?>정보수정<?php } ?>" id="btn_submit" class="btn-e btn-e-xl btn-e-navy" accesskey="s"><?php if ($w=='') { ?>회원가입<?php } else { ?>정보수정<?php } ?></button>
         </footer>
     </div>
     </form>
@@ -531,7 +531,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: msg,
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -544,7 +544,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "아이디 중복검사를 하셔야 합니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -558,7 +558,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: "비밀번호를 4글자 이상 입력하십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -571,7 +571,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "비밀번호가 같지 않습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             type: "error",
             confirmButtonText: "확인"
         });
@@ -584,7 +584,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: "비밀번호를 4글자 이상 입력하십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -599,7 +599,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "비밀번호의 강도는 '보통' 이상이여야 합니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -613,7 +613,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: "이름을 입력하십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -643,7 +643,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "회원가입을 위해서는 본인확인을 해주셔야 합니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -658,7 +658,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: msg,
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -671,7 +671,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "닉네임 중복검사를 하셔야 합니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -688,7 +688,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: msg,
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -702,7 +702,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: "이메일 중복검사를 하셔야 합니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -718,7 +718,7 @@ function fregisterform_submit(f)
         Swal.fire({
             title: "중요!",
             text: msg,
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -732,7 +732,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: "본인을 추천할 수 없습니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -745,7 +745,7 @@ function fregisterform_submit(f)
             Swal.fire({
                 title: "중요!",
                 text: msg,
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -774,7 +774,7 @@ function check_duplication(target) {
                 Swal.fire({
                     title: "중요!",
                     text: msg,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -805,7 +805,7 @@ function check_duplication(target) {
                 Swal.fire({
                     title: "중요!",
                     text: msg,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -836,7 +836,7 @@ function check_duplication(target) {
                 Swal.fire({
                     title: "중요!",
                     text: msg,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -865,7 +865,7 @@ function member_leave() {  // 회원 탈퇴 tto
         html: "<div class='alert alert-warning'>회원 탈퇴를 하시면 모든 포인트와 경험치가 삭제되며, 복구할 수 없습니다.</div><span>정말로 회원 탈퇴를 하시겠습니까?</span>",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#e53935",
+        confirmButtonColor: "#ab0000",
         confirmButtonText: "탈퇴",
         cancelButtonText: "취소"
     }).then((result) => {
@@ -896,4 +896,41 @@ function initializeStrengthMeter() {
         blackList : []
     });
 }
+
+<?php
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$is_iphone = (strpos($user_agent, 'iPhone') !== false);
+$is_ipad = (strpos($user_agent, 'iPad') !== false);
+
+if ($is_iphone || $is_ipad) {
+?>
+$(document).ready(function(){
+    var touchStartTimestamp = 0;
+    
+    $("input, textarea, select").on('touchstart', function(event) {
+        zoomDisable();
+        touchStartTimestamp = event.timeStamp;
+    });
+
+    $("input, textarea, select").on('touchend', function(event) {
+        var touchEndTimestamp = event.timeStamp;
+        if (touchEndTimestamp - touchStartTimestamp > 500) {
+            setTimeout(zoomEnable, 500);
+        } else {
+            zoomDisable();
+            setTimeout(zoomEnable, 500);
+        }
+    });
+
+    function zoomDisable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
+    }
+
+    function zoomEnable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
+    }
+});
+<?php } ?>
 </script>

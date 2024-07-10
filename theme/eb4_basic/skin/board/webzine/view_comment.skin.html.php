@@ -278,7 +278,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                         <?php if ($cmt[$i]['is_reply'] || $cmt[$i]['is_edit'] || $cmt[$i]['is_del'] || $cmt[$i]['c_good_href'] || $cmt[$i]['c_nogood_href']) { ?>
                         <div class="comment-btn-right">
                             <?php if ($cmt[$i]['is_reply']) { ?>
-                            <a href="<?php echo $cmt[$i]['c_reply_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'c'); return false;" class="comment-btn bg-indigo">댓글쓰기</a>
+                            <a href="<?php echo $cmt[$i]['c_reply_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'c'); return false;" class="comment-btn bg-navy">댓글쓰기</a>
                             <?php } ?>
                             <?php if ($cmt[$i]['is_edit']) { ?>
                             <a href="<?php echo $cmt[$i]['c_edit_href']; ?>" onclick="comment_box('<?php echo $cmt[$i]['comment_id']; ?><?php if ($cmt[$i]['is_cmt_best']) { ?>_<?php echo $cmt[$i]['cmt_depth']; ?><?php } ?>', 'cu'); return false;" class="comment-btn">수정</a>
@@ -321,7 +321,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
     </div>
     <?php if (count((array)$cmt_list) > 20 ) { ?>
     <div class="view-comment-more">
-        <a id="view-comment-more" href="#" class="btn-e btn-e-indigo btn-e-xlg">댓글 더보기</a>
+        <a id="view-comment-more" href="#" class="btn-e btn-e-navy btn-e-xlg">댓글 더보기</a>
     </div>
     <?php } ?>
     <?php } ?>
@@ -603,7 +603,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <?php } ?>
             </div>
             <div class="comment-write-submit">
-                <button type="submit" id="btn_submit" class="btn-e btn-e-xlg btn-e-indigo" value="댓글등록">댓글등록</button>
+                <button type="submit" id="btn_submit" class="btn-e btn-e-xlg btn-e-navy" value="댓글등록">댓글등록</button>
             </div>
         </form>
     </div>
@@ -742,7 +742,7 @@ function set_map_google_address(map_type, map_addr1, map_addr2, map_name) {
             Swal.fire({
                 title: "알림!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -762,7 +762,7 @@ function set_map_naver_address(map_type, map_addr1, map_addr2, map_name) {
             Swal.fire({
                 title: "알림!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -864,7 +864,7 @@ function fviewcomment_submit(f) {
         Swal.fire({
             title: "알림!",
             html: "내용에 금지단어 '<strong class='text-crimson'>"+content+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -882,7 +882,7 @@ function fviewcomment_submit(f) {
             Swal.fire({
                 title: "알림!",
                 html: "댓글은 <strong class='text-crimson'>"+char_min+"</strong> 글자 이상 쓰셔야 합니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -891,7 +891,7 @@ function fviewcomment_submit(f) {
             Swal.fire({
                 title: "알림!",
                 html: "댓글은 <strong class='text-crimson'>"+char_max+"</strong> 글자 이하로 쓰셔야 합니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -902,7 +902,7 @@ function fviewcomment_submit(f) {
         Swal.fire({
             title: "알림!",
             text: "댓글을 입력하여 주십시오.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -915,7 +915,7 @@ function fviewcomment_submit(f) {
             Swal.fire({
                 title: "알림!",
                 text: "이름이 입력되지 않았습니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -930,7 +930,7 @@ function fviewcomment_submit(f) {
             Swal.fire({
                 title: "알림!",
                 text: "비밀번호가 입력되지 않았습니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -1017,7 +1017,7 @@ function comment_box(comment_id, work) {
                 Swal.fire({
                     title: "알림!",
                     text: "동영상 주소를 입력해 주세요.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -1044,7 +1044,7 @@ function comment_box(comment_id, work) {
                 Swal.fire({
                     title: "알림!",
                     text: "사운드클라우드 음원주소를 입력해 주세요.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -1086,7 +1086,7 @@ $(function() {
             text: "정말로 이 댓글을 삭제하시겠습니까?",
             icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             confirmButtonText: "삭제",
             cancelButtonText: "취소"
         }).then((result) => {
@@ -1147,7 +1147,7 @@ function excute_goodcmt(href, $el, $tx, $good) {
                 Swal.fire({
                     title: "알림",
                     text: data.error,
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "warning",
                     confirmButtonText: "확인"
                 });
@@ -1160,7 +1160,7 @@ function excute_goodcmt(href, $el, $tx, $good) {
                     Swal.fire({
                         title: "알림",
                         text: "이 댓글을 비추천하셨습니다.",
-                        confirmButtonColor: "#e53935",
+                        confirmButtonColor: "#ab0000",
                         icon: "warning",
                         confirmButtonText: "확인"
                     });
@@ -1168,7 +1168,7 @@ function excute_goodcmt(href, $el, $tx, $good) {
                     Swal.fire({
                         title: "알림",
                         text: "이 댓글을 추천하셨습니다.",
-                        confirmButtonColor: "#e53935",
+                        confirmButtonColor: "#ab0000",
                         icon: "warning",
                         confirmButtonText: "확인"
                     });

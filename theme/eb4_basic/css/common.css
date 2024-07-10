@@ -3,7 +3,7 @@
 --------------------------------------*/
 
 /*---------- Font ----------*/
-body, h1, h2, h3, h4, h5, h6, label, input, button, textarea, select, img {font-family:'s-core-dream', sans-serif}
+body, h1, h2, h3, h4, h5, h6, label, input, button, textarea, select, img {font-family:'Pretendard', sans-serif}
 
 /*---------- Reset ----------*/
 html {overflow-y:scroll;min-width:320px}
@@ -542,10 +542,11 @@ a.btn, .btn {width:inherit;height:inherit}
 /*----- Colors -----*/
 /* Text Colors */
 .text-red {color:#e53935 !important}
-.text-crimson {color:#cc2300 !important}
+.text-crimson {color:#ab0000 !important}
 .text-pink {color:#d81b60 !important}
 .text-purple {color:#8e24aa !important}
 .text-deep-purple {color:#5e35b1 !important}
+.text-navy {color:#3f4678 !important}
 .text-indigo {color:#3949ab !important}
 .text-blue {color:#1e88e5 !important}
 .text-light-blue {color:#039be5 !important}
@@ -565,10 +566,11 @@ a.btn, .btn {width:inherit;height:inherit}
 .text-white {color:#fff !important}
 /* EyoomBuilder bs3 text colors compatible */
 .color-red {color:#e53935 !important}
-.color-crimson {color:#cc2300 !important}
+.color-crimson {color:#ab0000 !important}
 .color-pink {color:#d81b60 !important}
 .color-purple {color:#8e24aa !important}
 .color-deep-purple {color:#5e35b1 !important}
+.color-navy {color:#3f4678 !important}
 .color-indigo {color:#3949ab !important}
 .color-blue {color:#1e88e5 !important}
 .color-light-blue {color:#039be5 !important}
@@ -589,10 +591,11 @@ a.btn, .btn {width:inherit;height:inherit}
 
 /* Background Colors */
 .bg-red {background-color:#e53935 !important}
-.bg-crimson {background-color:#cc2300 !important}
+.bg-crimson {background-color:#ab0000 !important}
 .bg-pink {background-color:#d81b60 !important}
 .bg-purple {background-color:#8e24aa !important}
 .bg-deep-purple {background-color:#5e35b1 !important}
+.bg-navy {background-color:#3f4678 !important}
 .bg-indigo {background-color:#3949ab !important}
 .bg-blue {background-color:#1e88e5 !important}
 .bg-light-blue {background-color:#039be5 !important}
@@ -620,14 +623,16 @@ a.btn, .btn {width:inherit;height:inherit}
 .btn-e.disabled {cursor:not-allowed;opacity:0.65;filter: alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none}
 .btn-red {background-color:#e53935;border-color:#e53935}
 .btn-red:hover {background-color:#ef5350;border-color:#ef5350}
-.btn-crimson {background-color:#cc2300;border-color:#cc2300}
-.btn-crimson:hover {background-color:#e52700;border-color:#e52700}
+.btn-crimson {background-color:#ab0000;border-color:#ab0000}
+.btn-crimson:hover {background-color:#d80000;border-color:#d80000}
 .btn-pink {background-color:#d81b60;border-color:#d81b60}
 .btn-pink:hover {background-color:#ec407a;border-color:#ec407a}
 .btn-purple {background-color:#8e24aa;border-color:#8e24aa}
 .btn-purple:hover {background-color:#ab47bc;border-color:#ab47bc}
 .btn-deep-purple {background-color:#5e35b1;border-color:#5e35b1}
 .btn-deep-purple:hover {background-color:#7e57c2;border-color:#7e57c2}
+.btn-navy {background-color:#3f4678;border-color:#3f4678}
+.btn-navy:hover {background-color:#4b5390;border-color:#4b5390}
 .btn-indigo {background-color:#3949ab;border-color:#3949ab}
 .btn-indigo:hover {background-color:#5c6bc0;border-color:#5c6bc0}
 .btn-blue {background-color:#1e88e5;border-color:#1e88e5}
@@ -662,14 +667,16 @@ a.btn, .btn {width:inherit;height:inherit}
 .btn-dark:hover {background-color:#656565;border-color:#656565}
 .btn-e-brd.btn-red {color:#e53935 !important;background-color:transparent;border-color:#e53935}
 .btn-e-brd.btn-red:hover {color:#ef5350 !important;background-color:transparent;border-color:#ef5350}
-.btn-e-brd.btn-crimson {color:#cc2300 !important;background-color:transparent;border-color:#cc2300}
-.btn-e-brd.btn-crimson:hover {color:#e52700 !important;background-color:transparent;border-color:#e52700}
+.btn-e-brd.btn-crimson {color:#ab0000 !important;background-color:transparent;border-color:#ab0000}
+.btn-e-brd.btn-crimson:hover {color:#d80000 !important;background-color:transparent;border-color:#d80000}
 .btn-e-brd.btn-pink {color:#d81b60 !important;background-color:transparent;border-color:#d81b60}
 .btn-e-brd.btn-pink:hover {color:#ec407a !important;background-color:transparent;border-color:#ec407a}
 .btn-e-brd.btn-purple {color:#8e24aa !important;background-color:transparent;border-color:#8e24aa}
 .btn-e-brd.btn-purple:hover {color:#ab47bc !important;background-color:transparent;border-color:#ab47bc}
 .btn-e-brd.btn-deep-purple {color:#5e35b1 !important;background-color:transparent;border-color:#5e35b1}
 .btn-e-brd.btn-deep-purple:hover {color:#7e57c2 !important;background-color:transparent;border-color:#7e57c2}
+.btn-e-brd.btn-navy {color:#3f4678 !important;background-color:transparent;border-color:#3f4678}
+.btn-e-brd.btn-navy:hover {color:#4b5390 !important;background-color:transparent;border-color:#4b5390}
 .btn-e-brd.btn-indigo {color:#3949ab !important;background-color:transparent;border-color:#3949ab}
 .btn-e-brd.btn-indigo:hover {color:#5c6bc0 !important;background-color:transparent;border-color:#5c6bc0}
 .btn-e-brd.btn-blue {color:#1e88e5 !important;background-color:transparent;border-color:#1e88e5}
@@ -702,15 +709,15 @@ a.btn, .btn {width:inherit;height:inherit}
 .btn-e-brd.btn-light-gray:hover {color:#d5d5d5 !important;background-color:transparent;border-color:#d5d5d5}
 .btn-e-brd.btn-dark {color:#353535 !important;background-color:transparent;border-color:#353535}
 .btn-e-brd.btn-dark:hover {color:#656565 !important;background-color:transparent;border-color:#656565}
-.btn-e-xxs {padding:2px 8px;font-size:.6875rem;line-height:1.5;border-radius:2px}
-.btn-e-xs {padding:3px 10px;font-size:.75rem;line-height:1.5;border-radius:2px}
-.btn-e-sm {padding:4px 13px;font-size:.75rem;line-height:1.5;border-radius:2px}
-.btn-e-md {padding:5px 15px;font-size:.8125rem;line-height:1.5;border-radius:3px}
-.btn-e-lg {padding:7px 20px;font-size:.875rem;line-height:1.5;border-radius:3px}
-.btn-e-xl {padding:10px 25px;font-size:.9375rem;line-height:1.5;border-radius:3px}
-.btn-e-xxl {padding:15px 30px;font-size:1rem;line-height:1.5;border-radius:3px}
-.btn-e-xlg {padding:10px 25px;font-size:.9375rem;line-height:1.5;border-radius:3px}
-.btn-e-xxlg {padding:15px 30px;font-size:1rem;line-height:1.5;border-radius:3px}
+.btn-e-xxs {padding:2px 8px;font-size:.6875rem;line-height:1.5;border-radius:3px}
+.btn-e-xs {padding:3px 10px;font-size:.75rem;line-height:1.5;border-radius:3px}
+.btn-e-sm {padding:4px 13px;font-size:.75rem;line-height:1.5;border-radius:3px}
+.btn-e-md {padding:5px 15px;font-size:.8125rem;line-height:1.5;border-radius:4px}
+.btn-e-lg {padding:7px 20px;font-size:.875rem;line-height:1.5;border-radius:5px}
+.btn-e-xl {padding:10px 25px;font-size:.9375rem;line-height:1.5;border-radius:5px}
+.btn-e-xxl {padding:15px 30px;font-size:1rem;line-height:1.5;border-radius:5px}
+.btn-e-xlg {padding:10px 25px;font-size:.9375rem;line-height:1.5;border-radius:5px}
+.btn-e-xxlg {padding:15px 30px;font-size:1rem;line-height:1.5;border-radius:5px}
 .btn-e-block {display:block;width:100%;padding-left:0;padding-right:0;text-align:center}
 .btn-e-block + .btn-e-block {margin-top:5px}
 .btn-block {display:block;width:100%;padding-left:0;padding-right:0;text-align:center}
@@ -724,14 +731,16 @@ a.btn, .btn {width:inherit;height:inherit}
 /* EyoomBuilder bs3 btn compatible */
 .btn-e-red {background-color:#e53935;border-color:#e53935}
 .btn-e-red:hover {background-color:#ef5350;border-color:#ef5350}
-.btn-e-crimson {background-color:#cc2300;border-color:#cc2300}
-.btn-e-crimson:hover {background-color:#e52700;border-color:#e52700}
+.btn-e-crimson {background-color:#ab0000;border-color:#ab0000}
+.btn-e-crimson:hover {background-color:#d80000;border-color:#d80000}
 .btn-e-pink {background-color:#d81b60;border-color:#d81b60}
 .btn-e-pink:hover {background-color:#ec407a;border-color:#ec407a}
 .btn-e-purple {background-color:#8e24aa;border-color:#8e24aa}
 .btn-e-purple:hover {background-color:#ab47bc;border-color:#ab47bc}
 .btn-e-deep-purple {background-color:#5e35b1;border-color:#5e35b1}
 .btn-e-deep-purple:hover {background-color:#7e57c2;border-color:#7e57c2}
+.btn-e-navy {background-color:#3f4678;border-color:#3f4678}
+.btn-e-navy:hover {background-color:#4b5390;border-color:#4b5390}
 .btn-e-indigo {background-color:#3949ab;border-color:#3949ab}
 .btn-e-indigo:hover {background-color:#5c6bc0;border-color:#5c6bc0}
 .btn-e-blue {background-color:#1e88e5;border-color:#1e88e5}
@@ -766,14 +775,16 @@ a.btn, .btn {width:inherit;height:inherit}
 .btn-e-dark:hover {background-color:#656565;border-color:#656565}
 .btn-e-brd.btn-e-red {color:#e53935 !important;background-color:transparent;border-color:#e53935}
 .btn-e-brd.btn-e-red:hover {color:#ef5350 !important;background-color:transparent;border-color:#ef5350}
-.btn-e-brd.btn-e-crimson {color:#cc2300 !important;background-color:transparent;border-color:#cc2300}
-.btn-e-brd.btn-e-crimson:hover {color:#e52700 !important;background-color:transparent;border-color:#e52700}
+.btn-e-brd.btn-e-crimson {color:#ab0000 !important;background-color:transparent;border-color:#ab0000}
+.btn-e-brd.btn-e-crimson:hover {color:#d80000 !important;background-color:transparent;border-color:#d80000}
 .btn-e-brd.btn-e-pink {color:#d81b60 !important;background-color:transparent;border-color:#d81b60}
 .btn-e-brd.btn-e-pink:hover {color:#ec407a !important;background-color:transparent;border-color:#ec407a}
 .btn-e-brd.btn-e-purple {color:#8e24aa !important;background-color:transparent;border-color:#8e24aa}
 .btn-e-brd.btn-e-purple:hover {color:#ab47bc !important;background-color:transparent;border-color:#ab47bc}
 .btn-e-brd.btn-e-deep-purple {color:#5e35b1 !important;background-color:transparent;border-color:#5e35b1}
 .btn-e-brd.btn-e-deep-purple:hover {color:#7e57c2 !important;background-color:transparent;border-color:#7e57c2}
+.btn-e-brd.btn-e-navy {color:#3f4678 !important;background-color:transparent;border-color:#3f4678}
+.btn-e-brd.btn-e-navy:hover {color:#4b5390 !important;background-color:transparent;border-color:#4b5390}
 .btn-e-brd.btn-e-indigo {color:#3949ab !important;background-color:transparent;border-color:#3949ab}
 .btn-e-brd.btn-e-indigo:hover {color:#5c6bc0 !important;background-color:transparent;border-color:#5c6bc0}
 .btn-e-brd.btn-e-blue {color:#1e88e5 !important;background-color:transparent;border-color:#1e88e5}
@@ -952,12 +963,12 @@ blockquote.hero .p-li i {position:absolute;top:3px;left:0}
 
 /*---------- Headline ----------*/
 .headline {display:block;margin:0 0 30px;border-bottom:1px solid #e5e5e5}
-.headline h1,.headline h2,.headline h3,.headline h4,.headline h5,.headline h6 {margin:0 0 -1px;padding:5px 2px;display:inline-block;border-bottom:2px solid #cc2300}
+.headline h1,.headline h2,.headline h3,.headline h4,.headline h5,.headline h6 {margin:0 0 -1px;padding:5px 2px;display:inline-block;border-bottom:2px solid #ab0000}
 
 /*---------- Headline Short ----------*/
 .headline-short {position:relative}
 .headline-short h1,.headline-short h2,.headline-short h3,.headline-short h4,.headline-short h5,.headline-short h6 {position:relative;margin:0 0 30px}
-.headline-short h1:after,.headline-short h2:after,.headline-short h3:after,.headline-short h4:after,.headline-short h5:after,.headline-short h6:after {content:"";display:block;position:absolute;bottom:-10px;left:0;width:15px;height:2px;background:#cc2300}
+.headline-short h1:after,.headline-short h2:after,.headline-short h3:after,.headline-short h4:after,.headline-short h5:after,.headline-short h6:after {content:"";display:block;position:absolute;bottom:-10px;left:0;width:15px;height:2px;background:#ab0000}
 .headline-short .headline-btn {position:absolute;top:0;right:0}
 @media (max-width:500px) {
     .headline-short.headline-btn h1,.headline-short.headline-btn h2,.headline-short.headline-btn h3,.headline-short.headline-btn h4,.headline-short.headline-btn h5,.headline-short.headline-btn h6 {width:200px}
@@ -970,7 +981,7 @@ span.label-light,span.badge-light {background:#D6D6D6;color:#4B4B4D}
 span.label-default,span.badge-default {background:#B5B5B5}
 span.label-dark,span.badge-dark {background:#4B4B4D}
 span.label-red,span.badge-red {background:#e53935}
-span.label-crimson,span.badge-crimson {background:#cc2300}
+span.label-crimson,span.badge-crimson {background:#ab0000}
 span.label-pink,span.badge-pink {background:#d81b60}
 span.label-purple,span.badge-purple {background:#8e24aa}
 span.label-deep-purple,span.badge-deep-purple {background:#5e35b1}
@@ -1008,8 +1019,8 @@ span.label-light-gray,span.badge-light-gray {background:#d5d5d5}
 
 .panel-red>.panel-heading {background-color:#e53935;border-color:#e53935;color:#FFF}
 .panel-red>.panel-body {border-color:#e53935}
-.panel-crimson>.panel-heading {background-color:#cc2300;border-color:#cc2300;color:#FFF}
-.panel-crimson>.panel-body {border-color:#cc2300}
+.panel-crimson>.panel-heading {background-color:#ab0000;border-color:#ab0000;color:#FFF}
+.panel-crimson>.panel-body {border-color:#ab0000}
 .panel-pink>.panel-heading {background-color:#d81b60;border-color:#d81b60;color:#FFF}
 .panel-pink>.panel-body {border-color:#d81b60}
 .panel-purple>.panel-heading {background-color:#8e24aa;border-color:#8e24aa;color:#FFF}
@@ -1066,7 +1077,7 @@ span.label-light-gray,span.badge-light-gray {background:#d5d5d5}
 /*Social Icons*/
 .social-icons {margin:0;padding:0}
 .social-icons li {list-style:none;margin-right:3px;margin-bottom:3px;text-indent:-9999px;display:inline-block}
-.social-icons li a {width:30px;height:30px;display:block;background-position:0 0;background-repeat:no-repeat;opacity:1}
+.social-icons li a {width:30px;height:30px;border-radius:3px;display:block;background-position:0 0;background-repeat:no-repeat;opacity:1}
 .social-icons li a:hover {opacity:0.7}
 .social_facebook {background:url("../image/social/facebook.png") no-repeat;background-size:30px 30px}
 .social_twitter {background:url("../image/social/twitter.png") no-repeat;background-size:30px 30px}
@@ -1105,7 +1116,7 @@ span.label-light-gray,span.badge-light-gray {background:#d5d5d5}
 .progress {background:#eaecee}
 .progress-bar-default {background:#959595}
 .progress-bar-red {background:#e53935}
-.progress-bar-crimson {background:#cc2300}
+.progress-bar-crimson {background:#ab0000}
 .progress-bar-pink {background:#d81b60}
 .progress-bar-purple {background:#8e24aa}
 .progress-bar-deep-purple {background:#5e35b1}
@@ -1139,14 +1150,14 @@ span.label-light-gray,span.badge-light-gray {background:#d5d5d5}
 .sidebar-nav-e1 li ul a {color:#656565;border-top:solid 1px #e5e5e5;padding:10px 30px 10px 20px}
 .sidebar-nav-e1 li ul a:before {content:"";display:block;position:absolute;top:10px;left:10px;width:6px;height:12px;border-left:1px dotted #a5a5a5;border-bottom:1px dotted #a5a5a5}
 .sidebar-nav-e1 ul li a:hover {color:#000}
-.sidebar-nav-e1 ul li.active > a {color:#cc2300}
-.sidebar-nav-e1 ul li a.active {color:#cc2300}
+.sidebar-nav-e1 ul li.active > a {color:#ab0000}
+.sidebar-nav-e1 ul li a.active {color:#ab0000}
 .sidebar-nav-e1 ul li ul a {color:#959595;padding:10px 30px 10px 30px}
 .sidebar-nav-e1 ul li ul a:before {left:20px}
 .sidebar-nav-e1 .sidebar-nav-item.submenu:after {position:absolute;top:10px;right:10px;color:#656565;font-family:'Font Awesome\ 5 Free';content:"\f0d7";font-weight:900;display:inline-block}
-.sidebar-nav-e1 .sidebar-nav-item.active:after {color:#cc2300}
+.sidebar-nav-e1 .sidebar-nav-item.active:after {color:#ab0000}
 .sidebar-nav-e1 li ul .sidebar-nav-item.submenu:after {color:#b5b5b5;content:"\f0d7"}
-.sidebar-nav-e1 li ul .sidebar-nav-item.active:after {color:#cc2300}
+.sidebar-nav-e1 li ul .sidebar-nav-item.active:after {color:#ab0000}
 
 /*---------- Image & Video ----------*/
 /*Thumbnail*/
@@ -1274,10 +1285,10 @@ img.img-circle {border-radius:50% !important}
 .eb-hidden-space {height:50px;margin-bottom:30px;border:1px dashed #e5e5e5;background:#fafafa}
 .eb-hidden-space:before {content:"해당 스킨은 숨기기 설정되었습니다.";color:#b5b5b5;font-size:.9375rem;text-align:center;line-height:50px;position:absolute;top:0;right:10px}
 .adm-edit-btn {position:absolute;left:0;width:100%;text-align:center;z-index:1}
-.ae-btn-l {display:inline-block;padding:5px 10px;background:#000;font-size:.6875rem;color:#fff !important;border-left:3px solid #cc2300}
-.ae-btn-r {display:inline-block;padding:5px 10px;background:#cc2300;font-size:.6875rem;color:#fff !important}
+.ae-btn-l {display:inline-block;padding:5px 10px;background:#000;font-size:.6875rem;color:#fff !important;border-left:3px solid #ab0000}
+.ae-btn-r {display:inline-block;padding:5px 10px;background:#ab0000;font-size:.6875rem;color:#fff !important}
 .ae-btn-info {display:inline-block;padding:5px 10px;background:#3c3c3e;font-size:.6875rem;color:#fff !important;border:1px solid transparent;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-.ae-item-btn {display:inline-block;padding:5px 10px;background:#3c3c3e;font-size:.6875rem;color:#fff !important;border-left:3px solid #cc2300;border-right:3px solid #000}
+.ae-item-btn {display:inline-block;padding:5px 10px;background:#3c3c3e;font-size:.6875rem;color:#fff !important;border-left:3px solid #ab0000;border-right:3px solid #000}
 .btn-edit-mode {display:none}
 .btn-edit-mode .btn-e-dark {background:RGBA(75, 75, 77, 0.8)}
 .btn-edit-mode .btn-e-dark:hover {background:RGBA(75, 75, 77, 1)}
@@ -1307,7 +1318,7 @@ img.img-circle {border-radius:50% !important}
 fieldset legend {border-bottom:0}
 label, input, button, select {vertical-align:inherit}
 input[type=text]:focus,input[type=password]:focus,  textarea:focus,select:focus {border-color:#A0B3F0 !important}
-.sch_word {padding:0;color:#cc2300;background:none}
+.sch_word {padding:0;color:#ab0000;background:none}
 #ctt {padding:0 !important}
 .cke_dialog_tab {color:#252525 !important}
 pre[class*="language-"] {border-radius:0 !important}

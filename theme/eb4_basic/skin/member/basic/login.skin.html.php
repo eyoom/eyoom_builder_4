@@ -10,7 +10,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 
 <style>
 .eb-login .login-btn {text-align:center;position:relative;overflow:hidden;width:100%;padding:0}
-.eb-login .login-btn .btn-e-lg {width:100%;padding:10px 0;border-radius:3px !important;font-weight:bold;font-size:16px;background:#2d2d38}
+.eb-login .login-btn .btn-e-lg {width:100%;padding:10px 0;border-radius:5px !important;font-weight:bold;font-size:1rem;background:#2d2d38}
 .eb-login .login-btn .btn-e-lg:hover {background:#43434d;border:1px solid #43434d}
 .login-box {position:relative;padding:30px 20px}
 .login-box a:hover {text-decoration:underline}
@@ -60,15 +60,15 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <form name="flogin" action="<?php echo $login_action_url;?>" onsubmit="return flogin_submit(this);" method="post" class="eyoom-form">
                     <input type="hidden" name="url" value='<?php echo $login_url; ?>'>
                     <section>
-                        <label class="label">아이디</label>
+                        <label for="mb_id" class="label">아이디</label>
                         <label class="input">
                             <i class="icon-append fas fa-user"></i>
-                            <input type="text" class="form-control" name="mb_id" placeholder="ID" required class="frm_input required" size="20" maxLength="20">
+                            <input type="text" class="form-control" id="mb_id" name="mb_id" placeholder="ID" required class="frm_input required" size="20" maxLength="20">
                         </label>
                     </section>
                     <div class="login-form-margin-bottom"></div>
                     <section>
-                        <label class="label">비밀번호</label>
+                        <label for="mb_password" class="label">비밀번호</label>
                         <label class="input">
                             <i class="icon-append fas fa-lock"></i>
                             <input type="password" class="form-control" id="mb_password" name="mb_password" placeholder="Password" required class="frm_input required" size="20" maxLength="20">
@@ -207,23 +207,6 @@ $(document).ready(function(){
 });
 <?php } ?>
 
-$(document).ready(function(){
-    $("input, textarea, select").on({ 'touchstart' : function() {
-        zoomDisable();
-    }});
-    $("input, textarea, select").on({ 'touchend' : function() {
-        setTimeout(zoomEnable, 500);
-    }});
-    function zoomDisable(){
-        $('head meta[name=viewport]').remove();
-        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
-    }
-    function zoomEnable(){
-        $('head meta[name=viewport]').remove();
-        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
-    }
-});
-
 document.querySelectorAll('[data-toggle="password"]').forEach(function (el) {
     el.addEventListener("click", function (e) {
         e.preventDefault();
@@ -249,7 +232,7 @@ jQuery(function($){
                 html: "<div class='alert alert-info text-start f-s-13r'>자동로그인을 사용하시면 다음부터 회원아이디와 비밀번호를 입력하실 필요가 없습니다.<br><br>공공장소에서는 개인정보가 유출될 수 있으니 사용을 자제하여 주십시오.</div><span>자동로그인을 사용하시겠습니까?</span>",
                 icon: "info",
                 showCancelButton: true,
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 confirmButtonText: "확인",
                 cancelButtonText: "취소"
             }).then((result) => {
@@ -269,4 +252,41 @@ function flogin_submit(f) {
     }
     return false;
 }
+
+<?php
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$is_iphone = (strpos($user_agent, 'iPhone') !== false);
+$is_ipad = (strpos($user_agent, 'iPad') !== false);
+
+if ($is_iphone || $is_ipad) {
+?>
+$(document).ready(function(){
+    var touchStartTimestamp = 0;
+    
+    $("input, textarea, select").on('touchstart', function(event) {
+        zoomDisable();
+        touchStartTimestamp = event.timeStamp;
+    });
+
+    $("input, textarea, select").on('touchend', function(event) {
+        var touchEndTimestamp = event.timeStamp;
+        if (touchEndTimestamp - touchStartTimestamp > 500) {
+            setTimeout(zoomEnable, 500);
+        } else {
+            zoomDisable();
+            setTimeout(zoomEnable, 500);
+        }
+    });
+
+    function zoomDisable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
+    }
+
+    function zoomEnable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
+    }
+});
+<?php } ?>
 </script>

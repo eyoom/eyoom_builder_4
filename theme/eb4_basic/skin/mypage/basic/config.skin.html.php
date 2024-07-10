@@ -25,7 +25,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
     <div class="config-box">
         <header>
             <h5><strong>기본설정</strong></h5>
-            <input type="submit" class="btn-e btn-e-sm btn-e-crimson" value="적용하기">
+            <input type="submit" class="btn-e btn-e-sm btn-e-navy" value="적용하기">
         </header>
         <fieldset>
             <label class="label">마이홈</label>
@@ -38,7 +38,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
 
         <header class="config-b-t">
             <h5><strong>On-Off 설정</strong></h5>
-            <input type="submit" class="btn-e btn-e-sm btn-e-crimson" value="적용하기">
+            <input type="submit" class="btn-e btn-e-sm btn-e-navy" value="적용하기">
         </header>
         <fieldset>
             <label class="toggle small-toggle green-toggle"><input type="checkbox" class="onoff_social" value="on" <?php echo $eyoomer['onoff_social'] == 'on' ? 'checked': ''; ?>><i class="rounded-4x"></i>소셜기능</label>
@@ -79,7 +79,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
         
         <header class="config-b-t">
             <h5><strong>게시글 출력설정</strong></h5>
-            <input type="submit" class="btn-e btn-e-sm btn-e-crimson" value="적용하기">
+            <input type="submit" class="btn-e btn-e-sm btn-e-navy" value="적용하기">
         </header>
         <fieldset>
             <label class="label">내타임라인</label>
@@ -110,7 +110,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
 
         <header class="config-b-t">
             <h5><strong>관심게시판 설정</strong></h5>
-            <input type="submit" class="btn-e btn-e-sm btn-e-crimson" value="적용하기">
+            <input type="submit" class="btn-e btn-e-sm btn-e-navy" value="적용하기">
         </header>
         <fieldset>
             <?php for($i=0; $i<count((array)$bolist); $i++) { ?>
@@ -122,7 +122,7 @@ include_once($eyoom_skin_path['mypage'] . '/tabmenu.skin.html.php');
     </div>
 
     <div class="text-center m-t-30">
-        <input type="submit" class="btn-e btn-e-xl btn-e-crimson" value="적용하기">
+        <input type="submit" class="btn-e btn-e-xl btn-e-navy" value="적용하기">
     </div>
 
     </form>

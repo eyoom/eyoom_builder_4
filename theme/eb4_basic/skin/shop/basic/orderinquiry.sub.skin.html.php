@@ -7,13 +7,13 @@ if (!defined('_EYOOM_')) exit;
 
 <style>
 .table-list-eb thead th {min-width:100px}
-.od-num:hover {color:#cc2300}
+.od-num:hover {color:#ab0000}
 .state-label {display:inline-block;color:#fff;padding:5px 7px;line-height:1;font-size:.75rem;min-width:70px;text-align:center}
-.state-01 {background:#cc2300}
-.state-02 {background:#00897b}
-.state-03 {background:#5e35b1}
-.state-04 {background:#ff9500}
-.state-05 {background:#3949ab}
+.state-01 {background:#ab0000}
+.state-02 {background:#0d7368}
+.state-03 {background:#533889}
+.state-04 {background:#db9532}
+.state-05 {background:#394488}
 .state-06 {background:#757575}
 </style>
 

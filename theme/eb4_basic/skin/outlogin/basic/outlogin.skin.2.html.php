@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
 .ol-after .profile .links,.ol-after .profile .links a,.ol-after .profile .toggle {bottom:-16px;z-index:8;right:15px;width:34px;height:34px;border-radius:50%;position:absolute}
 .ol-after .profile .links {bottom:-16px}
 .ol-after .profile .plus {display:none}
-.ol-after .profile .toggle {z-index:9;background:#3949ab;cursor:pointer;-webkit-transition:all 0.2s ease-in-out 0s;transition:all 0.2s ease-in-out 0s}
+.ol-after .profile .toggle {z-index:9;background:#3f4678;cursor:pointer;-webkit-transition:all 0.2s ease-in-out 0s;transition:all 0.2s ease-in-out 0s}
 .ol-after .profile .toggle:after,.ol-after .profile .toggle:before {top:50%;left:50%;content:'';background:#eee;position:inherit}
 .ol-after .profile .toggle:before {width:12px;height:1px;margin-top:-0.5px;margin-left:-6px}
 .ol-after .profile .toggle:after {width:1px;height:12px;margin-top:-6px;margin-left:-0.5px}
@@ -54,7 +54,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
 .ol-after .member-info-wrap .member-info {position:relative;border:1px solid #e5e5e5;border-top:0;background:#fff;padding:10px}
 .ol-after .member-info-wrap.community-no .member-info {border:1px solid #e5e5e5}
 .ol-after .member-info-btn {position:relative}
-.ol-after .member-info-btn .info-btn {display:inline-block;width:52px;height:48px;padding:6px 0;background:#656565;color:#fff;text-align:center;-webkit-transition:all 0.2s ease;-moz-transition:all 0.2s ease;transition:all 0.2s ease}
+.ol-after .member-info-btn .info-btn {display:inline-block;width:52px;height:48px;padding:6px 0;background:#353535;color:#fff;text-align:center;border-radius:5px;-webkit-transition:all 0.2s ease;-moz-transition:all 0.2s ease;transition:all 0.2s ease}
 .ol-after .member-info-btn .info-btn:hover {opacity:0.8}
 .ol-after .member-info-btn .info-btn i {font-size:.9375rem;line-height:1.4}
 .ol-after .member-info-btn .info-btn span {display:block;line-height:1;font-size:.6875rem}
@@ -174,7 +174,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/scroll-
                 </div>
                 <div class="clearfix"></div>
                 <?php if ($is_admin == 'super' || $is_auth) { ?>
-                <a href="<?php echo G5_ADMIN_URL; ?>" class="btn-e btn-e-lg btn-e-indigo btn-e-block m-t-10">관리자</a>
+                <a href="<?php echo G5_ADMIN_URL; ?>" class="btn-e btn-e-lg btn-e-navy btn-e-block m-t-10">관리자</a>
                 <?php } ?>
             </div>
             

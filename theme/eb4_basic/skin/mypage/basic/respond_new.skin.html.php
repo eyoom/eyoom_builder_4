@@ -22,7 +22,7 @@ if (!defined('_EYOOM_')) exit;
 .my-respond .timeline > li .timeline-content:before {content:"";width:0px;height:0px;position:absolute;border-left:8px solid transparent;border-right:8px solid #c5c5c5;border-top:8px solid transparent;border-bottom:8px solid transparent;left:-16px;top:30px}
 .my-respond .timeline > li .timeline-content:after {content:"";width:0px;height:0px;position:absolute;border-left:8px solid transparent;border-right:8px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;left:-15px;top:30px}
 .my-respond .timeline > li .timeline-content:hover h6 a {text-decoration:underline}
-.my-respond .timeline > li .timeline-icon {top:21px;left:3px;width:14px;height:14px;position:absolute;background:#e53935;margin:0;border:2px solid #fff;box-shadow:0 0 0 1px #b5b5b5;border-radius:50%}
+.my-respond .timeline > li .timeline-icon {top:21px;left:3px;width:14px;height:14px;position:absolute;background:#ab0000;margin:0;border:2px solid #fff;box-shadow:0 0 0 1px #b5b5b5;border-radius:50%}
 .my-respond .timeline > li .timeline-mention .mention-photo {display:inline-block;margin-right:2px}
 .my-respond .timeline > li .timeline-mention .mention-photo img {width:17px;height:17px;border-radius:50%}
 @media (max-width:576px) {

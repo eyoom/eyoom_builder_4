@@ -63,13 +63,12 @@ $item_view = 'zoom';
                         <ul class="top-header-nav list-unstyled thn-end">
                             <?php if ($is_member) {  ?>
                                 <?php if ($is_admin) {  ?>
-                            <li><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>"><i class="fas fa-cog text-red"></i>관리자</a></li>
+                            <li><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>"><i class="fas fa-cog text-crimson"></i>관리자</a></li>
                                 <?php }  ?>
-                            <li><a href="<?php echo G5_SHOP_URL; ?>/mypage.php"><i class="far fa-user-circle"></i>마이쇼핑</a></li>
                             <li><a href="<?php echo G5_BBS_URL ?>/logout.php"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
                             <?php } else {  ?>
-                            <li><a href="<?php echo G5_BBS_URL ?>/register.php"><i class="fas fa-user-plus"></i>회원가입</a></li>
                             <li><a href="<?php echo G5_BBS_URL ?>/login.php"><i class="fas fa-unlock-alt"></i>로그인</a></li>
+                            <li><a href="<?php echo G5_BBS_URL ?>/register.php"><i class="fas fa-user-plus"></i>회원가입</a></li>
                             <?php }  ?>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -95,13 +94,13 @@ $item_view = 'zoom';
             </div>
         </div>
         <div class="header-title">
-            <div class="container position-relative">
+            <div class="container">
                 <?php /* ===== 사이트 로고 시작 ===== */ ?>
                 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-                <div class="adm-edit-btn btn-edit-mode" style="top:0">
+                <div class="adm-edit-btn btn-edit-mode" style="top:0;left:12px;text-align:left">
                     <div class="btn-group">
-                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=shoplogo&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 로고 설정</a>
-                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=shoplogo&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
+                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=logo&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 로고 설정</a>
+                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=biz_info&amp;amode=logo&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
@@ -128,6 +127,37 @@ $item_view = 'zoom';
                 </a>
                 <?php /* ===== 사이트 로고 끝 ===== */ ?>
 
+                <div class="header-title-search d-none d-lg-block">
+                    <form name="frmsearch1" action="<?php echo G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);" class="eyoom-form">
+                    <input type="hidden" name="sfl" value="wr_subject||wr_content">
+                    <input type="hidden" name="sop" value="and">
+                    <label for="search_input" class="sound_only">검색어 입력 필수</strong></label>
+                    <div class="input input-button">
+                        <input type="text" name="q" value="<?php echo stripslashes(get_text(get_search_string($q))); ?>" id="search_input" class="sch_stx" placeholder="상품 검색어 입력">
+                        <div class="button"><input type="submit"><i class="fas fa-search"></i></div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="header-title-btn">
+                    <div class="title-btn">
+                        <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php">
+                            <div class="title-btn-in">
+                                <span class="title-btn-text">위시리스트</span>
+                                <span class="badge badge-indigo rounded"><?php echo get_wishlist_datas_count(); ?></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="title-btn">
+                        <a href="<?php echo G5_SHOP_URL; ?>/cart.php">
+                            <div class="title-btn-in title-btn-navy">
+                                <span class="title-btn-text">장바구니</span>
+                                <span class="badge badge-dark rounded"><?php echo get_boxcart_datas_count(); ?></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="header-title-mobile-btn">
                     <button type="button" class="navbar-toggler search-toggle mobile-search-btn">
                         <span class="sr-only">검색 버튼</span>
@@ -150,13 +180,14 @@ $item_view = 'zoom';
                                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <?php /* ---------- 모바일용 컨텐츠 시작 // 991픽셀 이하에서만 출력 ---------- */ ?>
+                            <?php if ($eyoom['is_shop_theme'] == 'y' || $is_member) { ?>
                             <div class="sidebar-member-menu">
                                 <?php if ($eyoom['is_shop_theme'] == 'y') { ?>
-                                <a href="<?php echo G5_URL; ?>" class="btn-e btn-e-md btn-e-crimson btn-e-block m-t-10 m-b-10">
+                                <a href="<?php echo G5_URL; ?>" class="btn-e btn-e-md btn-e-navy btn-e-block m-t-10 m-b-10">
                                     커뮤니티<i class="far fa-caret-square-right m-l-5"></i>
                                 </a>
                                 <?php } ?>
-                                <div class="m-t-10 m-b-10">
+                                <div class="m-t-10">
                                     <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="sidebar-member-btn-box">
                                         <div class="sidebar-member-btn">
                                             장바구니
@@ -183,52 +214,23 @@ $item_view = 'zoom';
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <?php } ?>
                             <?php /* ---------- 모바일용 컨텐츠 끝 ---------- */ ?>
                             <ul class="navbar-nav">
                                 <?php if ($is_admin == 'super' && !G5_IS_MOBILE) { ?>
-                                <div class="adm-edit-btn btn-edit-mode" style="top:0;text-align:right">
+                                <div class="adm-edit-btn btn-edit-mode" style="top:0;text-align:left">
                                     <div class="btn-group">
-                                        <a href="<?php echo $shopmenu_link; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 쇼핑몰 메뉴 설정</a>
-                                        <a href="<?php echo $shopmenu_link; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
+                                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=menu_list&amp;thema=<?php echo $theme; ?>&amp;wmode=1" onclick="eb_admset_modal(this.href); return false;" class="ae-btn-l"><i class="far fa-edit"></i> 메뉴 설정</a>
+                                        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=theme&amp;pid=menu_list&amp;thema=<?php echo $theme; ?>" target="_blank" class="ae-btn-r" title="새창 열기">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <?php } ?>
                                 <li class="navbar-nav-home">
-                                    <a href="<?php echo G5_SHOP_URL; ?>" class="nav-link">HOME</a>
+                                    <a href="<?php echo G5_URL ?>" class="nav-link">HOME</a>
                                 </li>
-                                
-                            <?php if ($eyoom['use_eyoom_shopmenu'] == 'n') { // 영카트 분류가 쇼핑몰 메뉴 출력 ?>
-                                <?php if (isset($menu) && is_array($menu)) { ?>
-                                <?php foreach ($menu as $key => $menu_1) { ?>
-                                <li class="dropdown">
-                                    <a href="<?php echo $menu_1['href']; ?>" class="dropdown-toggle nav-link">
-                                        <?php echo $menu_1['ca_name']; ?>
-                                    </a>
-                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { ?>
-                                    <a href="#" class="cate-dropdown-open" data-bs-toggle="dropdown"></a>
-                                    <?php } ?>
-                                    <?php $index2 = $size2 = 0; ?>
-                                    <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { $size2 = count($menu_1['submenu']); ?>
-                                    <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
-                                    <?php if ($index2 == 0) { ?>
-                                    <div class="dropdown-menu">
-                                        <ul>
-                                        <?php } ?>
-                                            <li class="dropdown-submenu">
-                                                <a href="<?php echo $menu_2['href']; ?>" class="dropdown-item nav-link"><?php echo $menu_2['ca_name']; ?></a>
-                                            </li>
-                                        <?php if ($index2 == $size2 - 1) { ?>
-                                        </ul>
-                                    </div>
-                                    <?php } ?>
-                                    <?php $index2++; } ?>
-                                    <?php } ?>
-                                </li>
-                                <?php } ?>
-                                <?php } ?>
-                            <?php } else if ($eyoom['use_eyoom_shopmenu'] == 'y') { // 이윰 쇼핑몰 메뉴 출력 ?>
+
                                 <?php if (isset($menu) && is_array($menu)) { ?>
                                 <?php foreach ($menu as $key => $menu_1) { ?>
                                 <li class="dropdown">
@@ -254,7 +256,7 @@ $item_view = 'zoom';
                                                 <?php } ?>
                                                 <?php echo $menu_2['me_name']; ?>
                                                 <?php if ($menu_2['new']) { ?>
-                                                <i class="far fa-check-circle text-red m-r-5"></i>
+                                                <i class="far fa-check-circle text-indigo"></i>
                                                 <?php } ?>
                                                 <?php if (isset($menu_2['sub']) && $menu_2['sub'] == 'on') { ?>
                                                 <i class="fas fa-angle-right sub-caret hidden-sm hidden-xs"></i><i class="fas fa-angle-down sub-caret hidden-md hidden-lg"></i>
@@ -274,7 +276,7 @@ $item_view = 'zoom';
                                                         <?php } ?>
                                                         <?php echo $menu_3['me_name']; ?>
                                                         <?php if ($menu_3['new']) { ?>
-                                                        <i class="far fa-check-circle text-red m-r-5"></i>
+                                                        <i class="far fa-check-circle text-indigo"></i>
                                                         <?php } ?>
                                                         <?php if (isset($menu_3['sub']) && $menu_3['sub'] == 'on') { ?>
                                                         <i class="fas fa-angle-right sub-caret hidden-sm hidden-xs"></i><i class="fas fa-angle-down sub-caret hidden-md hidden-lg"></i>
@@ -299,13 +301,13 @@ $item_view = 'zoom';
                                         
                                 <?php if ($is_megamenu == 'yes') { ?>
                                 <li class="dropdown dropdown-mega-menu d-none d-lg-block">
-                                    <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="#">전체메뉴</a>
+                                    <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fas fa-bars"></i></a>
                                     <div class="dropdown-menu">
                                         <ul class="mega-menu d-lg-flex">
                                         <?php if (is_array($menu)) { ?>
                                             <?php foreach ($menu as $key => $menu_1) { ?>
                                             <li class="mega-menu-col">
-                                                <h5><a href="<?php echo $menu_1['me_link']; ?>" target="_<?php echo $menu_1['me_target']; ?>" class="<?php if ($menu_1['active']) echo 'active';?>"><?php echo $menu_1['me_name']?></a></h5>
+                                            <h5><a href="<?php echo $menu_1['me_link']; ?>" target="_<?php echo $menu_1['me_target']; ?>" class="<?php if ($menu_1['active']) echo 'active';?>"><?php echo $menu_1['me_name']?></a></h5>
                                                 <?php $index2 = $size2 = 0; ?>
                                                 <?php if (isset($menu_1['submenu']) && is_array($menu_1['submenu'])) { $size2 = count($menu_1['submenu']); ?>
                                                 <?php foreach ($menu_1['submenu'] as $subkey => $menu_2) { ?>
@@ -341,10 +343,6 @@ $item_view = 'zoom';
                                     </div>
                                 </li>
                                 <?php } ?>
-                            <?php } // 영카트 분류 / 이윰 쇼핑몰 메뉴 출력 끝 ?>
-                                <li class="search-menu d-none d-lg-block">
-                                    <a href="javascript:void(0);" class="nav-link search-toggle pc-search-btn" title="전체 게시글 검색"><i class="fas fa-search"></i></a>
-                                </li>
                             </ul>
                             <?php /* ---------- 모바일용 컨텐츠 시작 // 991픽셀 이하에서만 출력 ---------- */ ?>
                             <div class="sidebar-mobile-menu">

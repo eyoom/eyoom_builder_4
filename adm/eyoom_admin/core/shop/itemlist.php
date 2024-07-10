@@ -53,9 +53,9 @@ if ($sdt_target && $fr_date && $to_date) {
  * 서브 카테고리
  */
 $cate2 = $cate3 = $cate4 = array();
-$cate_a = isset($_GET['cate_a']) ? (int) clean_xss_tags(trim($_GET['cate_a'])) : '';
-$cate_b = isset($_GET['cate_b']) ? (int) clean_xss_tags(trim($_GET['cate_b'])) : '';
-$cate_c = isset($_GET['cate_c']) ? (int) clean_xss_tags(trim($_GET['cate_c'])) : '';
+$cate_a = isset($_GET['cate_a']) ? clean_xss_tags(trim($_GET['cate_a'])) : '';
+$cate_b = isset($_GET['cate_b']) ? clean_xss_tags(trim($_GET['cate_b'])) : '';
+$cate_c = isset($_GET['cate_c']) ? clean_xss_tags(trim($_GET['cate_c'])) : '';
 $ituse = isset($_GET['ituse']) ? (int) clean_xss_tags(trim($_GET['ituse'])) : '';
 $itsoldout = isset($_GET['itsoldout']) ? (int) clean_xss_tags(trim($_GET['itsoldout'])) : '';
 $itype = isset($_GET['itype']) ? (int) clean_xss_tags(trim($_GET['itype'])) : '';

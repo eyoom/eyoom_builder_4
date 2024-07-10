@@ -57,7 +57,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
     <div class="text-center">
-        <button type="button" class="btn-e btn-e-lg btn-e-red rounded" id="btn_map" onclick="return false;"><i class="fa fa-hand-pointer-o margin-right-5"></i>적용하기</button>
+        <button type="button" class="btn-e btn-e-lg btn-e-navy rounded" id="btn_map" onclick="return false;"><i class="fa fa-hand-pointer-o margin-right-5"></i>적용하기</button>
     </div>
 </div>
 

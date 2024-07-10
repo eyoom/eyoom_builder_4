@@ -107,7 +107,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                 </section>
                 <?php } ?>
                 <div class="text-center m-b-10 m-t-20">
-                    <input type="submit" class="btn-e btn-e-lg btn-e-red" value="의견남기기">
+                    <input type="submit" class="btn-e btn-e-lg btn-e-navy" value="의견남기기">
                 </div>
             </div>
             </form>

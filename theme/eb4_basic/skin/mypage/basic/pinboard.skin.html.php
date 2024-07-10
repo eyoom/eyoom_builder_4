@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .pinboard-list .pinboard-select {position:absolute;top:7px;right:7px;width:250px}
 .pinboard-list .pl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .pinboard-list .pl-wrap > div:nth-last-child(1), .pinboard-list .pl-wrap > div:nth-last-child(2) {border-bottom:0}
-.pinboard-list .pl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.pinboard-list .pl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .pinboard-list .pl-head > div {position:relative}
 .pinboard-list .pl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .pinboard-list .pl-head > div:last-child:before {display:none}
@@ -29,7 +29,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .pinboard-list .pl-list .pl-num {width:90px}
 .pinboard-list .pl-list .pl-num-short {width:80px}
 .pinboard-list .pl-list .pl-author {width:150px;padding:0 10px;text-align:left}
-.pinboard-list .pl-list .pl-subj {display:table-cell;vertical-align:middle}
+.pinboard-list .pl-list .pl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .pinboard-list .pl-list .pl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pinboard-list .pl-list .pl-subj a:hover {color:#000;text-decoration:underline}
 .pinboard-list .pl-list .pl-subj .pl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
@@ -233,7 +233,7 @@ function pin_cancel(bo_table, wr_id, key) {
                 Swal.fire({
                     title: "알림!",
                     text: '정상적으로 핀을 해제하였습니다.',
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "success",
                     confirmButtonText: "확인"
                 });

@@ -9,22 +9,22 @@ if (!defined('_EYOOM_')) exit;
 .product-main-10 {font-size:.9375rem}
 .product-main-10 {margin-left:-10px;margin-right:-10px}
 .product-main-10:after {content:"";display:block;clear:both}
-.product-main-10 .item-main-wrap {padding:10px;width:25%;float:left}
-.product-main-10 .item-main-10 {position:relative;border:1px solid #e5e5e5;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
-.product-main-10 .product-img {position:relative;overflow:hidden;margin:10px;background:#fff}
+.product-main-10 .item-main-wrap {padding:10px;width:20%;float:left}
+.product-main-10 .item-main-wrap:nth-child(5n+1) {clear:left}
+.product-main-10 .item-main-10 {position:relative;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
+.product-main-10 .product-img {position:relative;overflow:hidden;border-radius:7px;margin-bottom:10px;background:#fff}
 .product-main-10 .product-img-in {position:relative;overflow:hidden;width:100%}
 .product-main-10 .product-img-in:before {content:"";display:block;padding-top:100%;background:#fff}
 .product-main-10 .product-img-in .first-img {display:block}
 .product-main-10 .product-img-in .second-img {display:none}
-.product-main-10 .item-main-10:hover {border-color:rgba(0,0,0,0.7)}
 .product-main-10 .item-main-10:hover .product-img-in .second-img {display:block}
 .product-main-10 .product-img-in img {display:block;max-width:100% !important;height:auto !important;position:absolute;top:0;left:0;right:0;bottom:0}
-.product-main-10 .product-img-in .discount-percent {position:absolute;top:-40px;left:-40px;width:80px;height:80px;padding-top:57px;text-align:center;background:#cc2300;color:#fff;font-style:italic;font-size:.75rem;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);transform:rotate(-45deg)}
-.product-main-10 .product-description .product-description-in {position:relative;overflow:hidden;padding:0 10px 10px}
+.product-main-10 .product-img-in .discount-percent {position:absolute;top:-40px;left:-40px;width:80px;height:80px;padding-top:57px;text-align:center;background:#ab0000;color:#fff;font-style:italic;font-size:.75rem;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);transform:rotate(-45deg)}
+.product-main-10 .product-description .product-description-in {position:relative;overflow:hidden;padding:0 0 10px}
 .product-main-10 .product-description .product-name {position:relative;overflow:hidden;margin:10px 0 5px;font-size:1.125rem;font-weight:700;line-height:1.4;height:48px}
 .product-main-10 .product-description .product-name a {color:#000}
 .product-main-10 .product-description .product-name a:hover {text-decoration:underline}
-.product-main-10 .product-description .title-price {font-size:1.125rem;font-weight:700;color:#cc2300;margin-right:7px}
+.product-main-10 .product-description .title-price {font-size:1.125rem;font-weight:700;color:#ab0000;margin-right:7px}
 .product-main-10 .product-description .line-through {font-size:.9375rem;color:#959595;text-decoration:line-through;font-weight:400;white-space:nowrap}
 .product-main-10 .product-description .product-id {color:#757575;display:block;font-size:.8125rem;margin-top:10px}
 .product-main-10 .product-description .product-info {position:relative;overflow:hidden;height:38px;color:#959595;font-size:.8125rem;margin-top:10px}
@@ -32,17 +32,18 @@ if (!defined('_EYOOM_')) exit;
 .product-main-10 .product-description .product-sns ul {position:absolute;top:0;right:0;margin:0;padding:0;list-style:none}
 .product-main-10 .product-description .product-sns ul:after {content:"";display:block;clear:both}
 .product-main-10 .product-description .product-sns ul li {float:left;margin-left:1px}
-.product-main-10 .product-description .product-sns ul li a {display:block;width:30px;height:30px;line-height:30px;text-align:center;background:#b5b5b5;color:#fff;font-size:.75rem}
-.product-main-10 .product-description .product-sns ul li:hover .wish-icon {background:#cc2300}
+.product-main-10 .product-description .product-sns ul li a {display:block;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:#a5a5a5}
+.product-main-10 .product-description .product-sns ul li img {width:12px;height:12px}
+.product-main-10 .product-description .product-sns ul li:hover .wish-icon {background:#ab0000}
 .product-main-10 .product-description .product-sns ul li:hover .facebook-icon {background:#39558f}
-.product-main-10 .product-description .product-sns ul li:hover .twitter-icon {background:#4698e0}
-.product-main-10 .product-description-bottom {position:relative;overflow:hidden;padding:12px 10px;border-top:1px solid #e5e5e5}
+.product-main-10 .product-description .product-sns ul li:hover .twitter-icon {background:#252525}
+.product-main-10 .product-description-bottom {position:relative;overflow:hidden;padding:12px 0;border-top:1px solid #e5e5e5}
 .product-main-10 .product-description-bottom a:hover {text-decoration:underline;color:#000}
 .product-main-10 .product-ratings {width:75px;margin:0;padding:0}
 .product-main-10 .product-ratings li {padding:0;float:left;margin-right:0}
 .product-main-10 .product-ratings li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
-.product-main-10 .product-ratings li .rating-selected {color:#cc2300;font-size:.8125rem}
-.product-main-10 .shop-rgba-red {background:#cc2300}
+.product-main-10 .product-ratings li .rating-selected {color:#ab0000;font-size:.8125rem}
+.product-main-10 .shop-rgba-red {background:#ab0000}
 .product-main-10 .shop-rgba-yellow {background:#ff9500}
 .product-main-10 .shop-rgba-green {background:#00897b}
 .product-main-10 .shop-rgba-purple {background:#8e24aa}
@@ -52,21 +53,27 @@ if (!defined('_EYOOM_')) exit;
 .product-main-10 .rgba-banner-area {position:absolute;top:0;right:0}
 .product-main-10 .rgba-banner {height:18px;width:70px;line-height:18px;color:#fff;font-size:.6875rem;text-align:center;font-weight:400;position:relative;text-transform:uppercase;margin-bottom:1px}
 .product-main-10 .item-main-10:hover .product-name a {text-decoration:underline}
+@media (max-width:1399px) {
+    .product-main-10 .item-main-wrap {width:25%}
+    .product-main-10 .item-main-wrap:nth-child(5n+1) {clear:none}
+    .product-main-10 .item-main-wrap:nth-child(4n+1) {clear:left}
+}
 @media (max-width:1199px) {
     .product-main-10 {margin-left:-5px;margin-right:-5px}
-    .product-main-10 .item-main-wrap {width:33.33333%;padding:5px}
+    .product-main-10 .item-main-wrap {padding:10px 5px}
 }
 @media (max-width:991px) {
-    .product-main-10 .item-main-wrap {width:50%}
+    .product-main-10 .item-main-wrap {width:33.33333%}
+    .product-main-10 .item-main-wrap:nth-child(4n+1) {clear:none}
+    .product-main-10 .item-main-wrap:nth-child(3n+1) {clear:left}
+    .product-main-10 .item-main-wrap:last-child {display:none}
 }
 @media (max-width:767px) {
     .product-main-10 {margin-left:-2px;margin-right:-2px}
-    .product-main-10 .item-main-wrap {padding:5px 2px}
-}
-@media (max-width:576px) {
-    .product-main-10 .product-img {margin:5px}
-    .product-main-10 .product-description .product-description-in {padding:0 5px 5px}
-    .product-main-10 .product-description-bottom {padding:12px 5px}
+    .product-main-10 .item-main-wrap {width:50%;padding:10px 2px}
+    .product-main-10 .item-main-wrap:nth-child(3n+1) {clear:none}
+    .product-main-10 .item-main-wrap:nth-child(2n+1) {clear:left}
+    .product-main-10 .item-main-wrap:last-child {display:block}
 }
 </style>
 
@@ -133,9 +140,9 @@ if (!defined('_EYOOM_')) exit;
                     <?php if ($this->view_sns) { ?>
                     <div class="product-sns">
                         <ul>
-                            <li><a href="javascript:void(0);" class="wish-icon" onclick="item_wish_for_list(<?php echo $list[$i]['it_id']; ?>);" title="위시리스트"><i class="far fa-heart"></i></a></li>
-                            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $list[$i]['sns_url']; ?>&amp;p=<?php echo $list[$i]['sns_title']; ?>" target="_blank" class="facebook-icon" title="페이스북"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://twitter.com/share?url=<?php echo $list[$i]['sns_url']; ?>&amp;text=<?php echo $list[$i]['sns_title']; ?>" target="_blank" class="twitter-icon" title="트위터"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="javascript:void(0);" class="wish-icon" onclick="item_wish_for_list(<?php echo $list[$i]['it_id']; ?>);" title="위시리스트"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/heart-regular.svg" alt=""></a></li>
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $list[$i]['sns_url']; ?>&amp;p=<?php echo $list[$i]['sns_title']; ?>" target="_blank" class="facebook-icon" title="페이스북"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/facebook-f.svg" alt=""></a></li>
+                            <li><a href="https://twitter.com/share?url=<?php echo $list[$i]['sns_url']; ?>&amp;text=<?php echo $list[$i]['sns_title']; ?>" target="_blank" class="twitter-icon" title="엑스(트위터)"><img src="<?php echo EYOOM_THEME_URL; ?>/image/social/x-twitter.svg" alt=""></a></li>
                         </ul>
                     </div>
                     <?php } ?>

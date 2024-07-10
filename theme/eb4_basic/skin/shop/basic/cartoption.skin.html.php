@@ -21,11 +21,11 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 #sit_opt_added button:hover {color:#000}
 #sit_opt_added .num_input {float:left;border:1px solid #a5a5a5;width:45px;height:30px;text-align:center;margin:0 -1px}
 #sit_opt_added .sit_opt_del {position:relative;border:0;font-size:.9375rem}
-#sit_opt_added .sit_opt_del:hover {color:#cc2300}
+#sit_opt_added .sit_opt_del:hover {color:#ab0000}
 #sit_opt_added .sit_opt_prc {display:inline-block;float:left;width:140px;padding:0 3px;text-align:right;line-height:30px;font-size:.9375rem;font-weight:700}
 #mod_option_frm #sit_sel_option {margin:0 0 20px}
 #mod_option_frm #sit_tot_price {display:block;float:none;margin:0 0 20px;text-align:right;color:#252525}
-#mod_option_frm #sit_tot_price strong {color:#cc2300;font-size:1.25rem;margin-left:10px}
+#mod_option_frm #sit_tot_price strong {color:#ab0000;font-size:1.25rem;margin-left:10px}
 @media (max-width:576px) {
     #sit_opt_added li {padding-right:0}
     #sit_opt_added li .opt_name {min-width:inherit;width:100%;padding:0}
@@ -116,7 +116,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     <div id="sit_tot_price"></div>
 
     <div class="option-act-btn">
-        <input type="submit" value="확인" class="btn-e btn-e-xl btn-e-red">
+        <input type="submit" value="확인" class="btn-e btn-e-xl btn-e-navy">
     </div>
     </form>
 </div>
@@ -143,7 +143,7 @@ function formcheck(f) {
             Swal.fire({
                 title: "중요!",
                 text: "수량을 입력해 주십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -155,7 +155,7 @@ function formcheck(f) {
             Swal.fire({
                 title: "중요!",
                 text: "수량은 숫자로 입력해 주십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -167,7 +167,7 @@ function formcheck(f) {
             Swal.fire({
                 title: "중요!",
                 text: "수량은 1이상 입력해 주십시오.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "error",
                 confirmButtonText: "확인"
             });
@@ -188,7 +188,7 @@ function formcheck(f) {
         Swal.fire({
             title: "알림!",
             text: "선택옵션 개수 총합 " + number_format(String(min_qty)) + "개 이상 주문해 주십시오.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -199,7 +199,7 @@ function formcheck(f) {
         Swal.fire({
             title: "알림!",
             text: "선택옵션 개수 총합 " + number_format(String(max_qty)) + "개 이하로 주문해 주십시오.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -209,18 +209,40 @@ function formcheck(f) {
     return true;
 }
 
-$("input, textarea, select").on({ 'touchstart' : function() {
-	zoomDisable();
-}});
-$("input, textarea, select").on({ 'touchend' : function() {
-	setTimeout(zoomEnable, 500);
-}});
-function zoomDisable(){
-	$('head meta[name=viewport]').remove();
-	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
-}
-function zoomEnable(){
-	$('head meta[name=viewport]').remove();
-	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
-}
+<?php
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$is_iphone = (strpos($user_agent, 'iPhone') !== false);
+$is_ipad = (strpos($user_agent, 'iPad') !== false);
+
+if ($is_iphone || $is_ipad) {
+?>
+$(document).ready(function(){
+    var touchStartTimestamp = 0;
+    
+    $("input, textarea, select").on('touchstart', function(event) {
+        zoomDisable();
+        touchStartTimestamp = event.timeStamp;
+    });
+
+    $("input, textarea, select").on('touchend', function(event) {
+        var touchEndTimestamp = event.timeStamp;
+        if (touchEndTimestamp - touchStartTimestamp > 500) {
+            setTimeout(zoomEnable, 500);
+        } else {
+            zoomDisable();
+            setTimeout(zoomEnable, 500);
+        }
+    });
+
+    function zoomDisable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
+    }
+
+    function zoomEnable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
+    }
+});
+<?php } ?>
 </script>

@@ -50,10 +50,10 @@ if (!defined('_EYOOM_')) exit;
                     </div>
                 </div>
                 <?php if ($eyoomer['photo']) { ?><label class="checkbox"><input type="checkbox" name="del_photo" value="1"><i></i>프로필사진 삭제</label><?php } ?>
-                <label class="checkbox"><input type="checkbox" name="apply_icon" value="1"><i></i>회원 아이콘 자동생성 <span class="text-light-gray">(권장 | 동일한 이미지의 아이콘 생성)</span></label>
+                <label class="checkbox"><input type="checkbox" name="apply_icon" value="1" checked><i></i>회원 아이콘 자동생성 <span class="text-light-gray">(권장 | 동일한 이미지의 아이콘 생성)</span></label>
             </div>
             <div class="modal-footer">
-                <button class="btn-e btn-e-lg btn-red" type="submit" value="저장하기">저장하기</button>
+                <button class="btn-e btn-e-lg btn-navy" type="submit" value="저장하기">저장하기</button>
                 <button data-bs-dismiss="modal" class="btn-e btn-e-lg btn-dark" type="button"><i class="fas fa-times"></i> 닫기</button>
             </div>
             </form>
@@ -529,7 +529,7 @@ function poll_result(url) {
     Swal.fire({
         title: "중요!",
         html: "권한 <strong class='text-crimson'><?php echo $po['po_level']; ?></strong> 이상의 회원만 결과를 볼 수 있습니다.",
-        confirmButtonColor: "#e53935",
+        confirmButtonColor: "#ab0000",
         icon: "error",
         confirmButtonText: "확인"
     });

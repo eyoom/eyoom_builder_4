@@ -17,7 +17,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 <div class="faq-wrap">
     <?php if ($admin_href) { ?>
     <div class="text-end m-b-10">
-        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqmasterform&amp;w=u&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-red">FAQ 수정</a>
+        <a href="<?php echo G5_ADMIN_URL; ?>/?dir=board&amp;pid=faqmasterform&amp;w=u&amp;fm_id=<?php echo $fm_id; ?>" class="btn-e btn-e-crimson">FAQ 수정</a>
     </div>
     <?php } ?>
 

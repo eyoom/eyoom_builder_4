@@ -9,7 +9,7 @@ if (!defined('_EYOOM_')) exit;
 .starpost-list {font-size:.9375rem}
 .starpost-list .sl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .starpost-list .sl-wrap > div:nth-last-child(1), .starpost-list .sl-wrap > div:nth-last-child(2) {border-bottom:0}
-.starpost-list .sl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.starpost-list .sl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .starpost-list .sl-head > div {position:relative}
 .starpost-list .sl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .starpost-list .sl-head > div:last-child:before {display:none}
@@ -26,7 +26,7 @@ if (!defined('_EYOOM_')) exit;
 .starpost-list .sl-list .sl-num {width:90px}
 .starpost-list .sl-list .sl-num-short {width:80px}
 .starpost-list .sl-list .sl-author {width:150px;padding:0 10px;text-align:left}
-.starpost-list .sl-list .sl-subj {display:table-cell;vertical-align:middle}
+.starpost-list .sl-list .sl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .starpost-list .sl-list .sl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .starpost-list .sl-list .sl-subj a:hover {color:#000;text-decoration:underline}
 .starpost-list .sl-list .sl-subj .sl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 
@@ -42,7 +42,7 @@ if (!defined('_EYOOM_')) exit;
 .starpost-list .star-ratings-list {width:75px}
 .starpost-list .star-ratings-list li {padding:0;float:left;margin-right:0}
 .starpost-list .star-ratings-list li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
-.starpost-list .star-ratings-list li .rating-selected {color:#cc2300;font-size:.8125rem}
+.starpost-list .star-ratings-list li .rating-selected {color:#ab0000;font-size:.8125rem}
 .starpost-list .sl-mobile {position:relative;border-bottom:1px solid #eaeaea;padding:0 0 8px;color:#959595;display:none}
 .starpost-list .sl-mobile .sl-photo {display:inline-block;margin-right:2px}
 .starpost-list .sl-mobile .sl-photo img {width:17px;height:17px;border-radius:50%}

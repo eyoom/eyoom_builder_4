@@ -5,10 +5,6 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<style>
-
-</style>
-
 <div class="mbmemo-write">
     <div class="mbmemo-content">
         <form name="fmbmemoform" action="<?php echo $mbmemo_action_url; ?>" onsubmit="return fmbmemoform_submit(this);" method="post" autocomplete="off" class="eyoom-form">
@@ -30,7 +26,7 @@ if (!defined('_EYOOM_')) exit;
             <div class="note"><strong>Note:</strong> 메모는 반드시 입력하실 필요 없습니다.</div>
         </section>
         <div class="text-center m-t-30 m-b-30">
-            <input type="submit" value="저장하기" id="btn_submit" class="btn-e btn-e-xl btn-e-crimson">
+            <input type="submit" value="저장하기" id="btn_submit" class="btn-e btn-e-xl btn-e-navy">
         </div>
         </form>
     </div>

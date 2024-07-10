@@ -34,11 +34,19 @@ if (($is_member && $member['mb_id'] == $wr_data['mb_id']) || $is_admin) {
         if (isset($eb_6['adopt_point']) && $eb_6['adopt_point'] > 0) {
 
             // 수수료률
-            $ratio = $eyoom_board['bo_adopt_ratio']? $eyoom_board['bo_adopt_ratio']:20;
+            $ratio = $eyoom_board['bo_adopt_ratio']? $eyoom_board['bo_adopt_ratio']:0;
 
-            // 채택 포인트
-            $cmt_point = ceil($eb_6['adopt_point']*(1-($ratio/100)));
-            $wr_point = $eb_6['adopt_point'] - $cmt_point;
+            /**
+             * 채택 포인트 설정
+             * 자신의 댓글을 채택할 경우 수수료없이 환급
+             */
+            if ($cmt_data['mb_id'] == $member['mb_id']) {
+                $cmt_point = 0;
+                $wr_point = $eb_6['adopt_point'];
+            } else {
+                $cmt_point = ceil($eb_6['adopt_point']*(1-($ratio/100)));
+                $wr_point = $eb_6['adopt_point'] - $cmt_point;
+            }
 
             // 채택된 회원에게 차액 포인트 적립
             if ($cmt_point > 0) {

@@ -20,7 +20,7 @@ if (!defined('_EYOOM_')) exit;
 
 <?php if (isset($el_master) && $el_master['el_state'] == '1') { // 보이기 상태에서만 출력 ?>
 <style>
-.gallery-latest {font-size:.9375rem}
+.gallery-latest {font-size:.9375rem;margin-bottom:30px}
 .gallery-latest .nav-tabs {border:1px solid #e5e5e5;border-bottom:0;margin-bottom:20px}
 .gallery-latest .nav-tabs li:first-child:nth-last-child(1) {width:100%;display:none}
 .gallery-latest .nav-tabs li:first-child:nth-last-child(2), .gallery-latest .nav-tabs li:first-child:nth-last-child(2) ~ li {width:50%}
@@ -30,7 +30,7 @@ if (!defined('_EYOOM_')) exit;
 .gallery-latest .nav-tabs li:first-child:nth-last-child(6), .gallery-latest .nav-tabs li:first-child:nth-last-child(6) ~ li {width:16.6666666667%}
 .gallery-latest .nav-tabs li:first-child:nth-last-child(7), .gallery-latest .nav-tabs li:first-child:nth-last-child(7) ~ li {width:14.2857142857%}
 .gallery-latest .nav-tabs li:first-child:nth-last-child(8), .gallery-latest .nav-tabs li:first-child:nth-last-child(8) ~ li {width:12.5%}
-.gallery-latest .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:8px 5px;font-size:.9375rem;border-top:0}
+.gallery-latest .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:8px 5px;font-size:.9375rem;font-weight:500;border-top:0}
 .gallery-latest .nav-tabs li:first-child a {margin-left:0;border-left:0}
 .gallery-latest .nav-tabs li:last-child a {border-right:0}
 .gallery-latest .nav-tabs li a:hover {background:#fff;border-bottom:1px solid #e5e5e5}
@@ -39,7 +39,7 @@ if (!defined('_EYOOM_')) exit;
 .gallery-latest .tab-content {position:relative;padding:0}
 .gallery-latest .tab-pane {margin-left:-6px;margin-right:-6px}
 .gallery-item {position:relative;width:25%;padding-left:6px;padding-right:6px;float:left}
-.gallery-latest .gallery-img {position:relative;overflow:hidden;margin-bottom:15px}
+.gallery-latest .gallery-img {position:relative;overflow:hidden;border-radius:5px;margin-bottom:15px}
 .gallery-latest .img-box {position:relative;overflow:hidden;width:100%;background:#e5e5e5}
 .gallery-latest .img-box:before {content:"";display:block;padding-top:55%}
 .gallery-latest .img-box img {position:absolute;top:0;left:0;right:0;bottom:0}
@@ -51,7 +51,7 @@ if (!defined('_EYOOM_')) exit;
 .gallery-latest .img-caption span i {color:#a5a5a5}
 .gallery-latest .gallery-txt {position:relative;margin-bottom:25px}
 .gallery-latest .txt-subj {position:relative;margin-bottom:10px}
-.gallery-latest .txt-subj h5 {color:#000;font-size:1rem;margin:0}
+.gallery-latest .txt-subj h5 {color:#000;font-size:1rem;font-weight:600;margin:0}
 .gallery-latest .txt-subj h5 .gallery-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .gallery-latest .txt-subj h5 .gallery-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .gallery-latest .txt-subj h5 .gallery-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
@@ -75,7 +75,7 @@ if (!defined('_EYOOM_')) exit;
 <div class="headline-short">
     <h4>
         <?php if ($el_master['el_link']) { ?>
-        <a href="<?php echo $el_master['el_link']; ?>" target="<?php echo $el_master['el_target']; ?>"><?php echo $el_master['el_subject']; ?></a>
+        <a href="<?php echo $el_master['el_link']; ?>" target="<?php echo $el_master['el_target']; ?>" class="text-black"><?php echo $el_master['el_subject']; ?></a>
         <?php } else { ?>
         <?php echo $el_master['el_subject']; ?>
         <?php } ?>
@@ -195,6 +195,13 @@ if (!defined('_EYOOM_')) exit;
 
 <script>
 $(document).ready(function() {
+    $('.eblatest-gallery-tabs').each(function() {
+        var childCount = $(this).find('li').length;
+        if (childCount <= 1) {
+            $(this).addClass('d-none');
+        }
+    });
+
     $('.eblatest-gallery-tabs li a').hover(function (e) {
         e.preventDefault()
         $(this).tab('show');

@@ -34,7 +34,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 .shop-search .search-cate ul:after {display:block;visibility:hidden;clear:both;content:""}
 .shop-search .search-cate li {float:left;width:20%;border:1px solid #757575;margin-left:-1px;margin-top:-1px}
 .shop-search .search-cate a {display:block;padding:0 5px;line-height:40px;font-size:.8125rem;text-align:center}
-.shop-search .search-cate a:hover {background:#fafafa;color:#cc2300}
+.shop-search .search-cate a:hover {background:#fafafa;color:#ab0000}
 .shop-search #sct_lst {position:absolute;top:6px;right:0;margin-bottom:0;z-index:1;list-style:none}
 .shop-search #sct_lst li {position:relative;float:left}
 .shop-search #sct_lst button {position:relative;margin:0;padding:0;width:40px;height:40px;border:1px solid #d5d5d5;cursor:pointer;background:#fff;font-size:.9375rem;color:#454545}
@@ -55,7 +55,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sly/tab
 
 <?php if ($is_admin) { ?>
 <div class="text-end m-b-10">
-    <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=configform#anc_scf_etc" class="btn-e btn-e-red">검색 설정</a>
+    <a href="<?php echo G5_ADMIN_URL; ?>/?dir=shop&pid=configform#anc_scf_etc" class="btn-e btn-e-crimson">검색 설정</a>
 </div>
 <?php } ?>
 

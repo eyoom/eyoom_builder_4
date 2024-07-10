@@ -25,7 +25,7 @@ if (!defined('_EYOOM_')) exit;
 .newpost-latest .nav-tabs li:first-child:nth-last-child(1) {width:100%;display:none}
 .newpost-latest .nav-tabs li:first-child:nth-last-child(2), .newpost-latest .nav-tabs li:first-child:nth-last-child(2) ~ li {width:50%}
 .newpost-latest .nav-tabs li:first-child:nth-last-child(3), .newpost-latest .nav-tabs li:first-child:nth-last-child(3) ~ li {width:33.3333%}
-.newpost-latest .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:8px 5px;font-size:.9375rem;border-top:0}
+.newpost-latest .nav-tabs li a {display:block;text-align:center;margin-right:0;margin-left:-1px;background:#f5f5f5;color:#959595;border:1px solid #e5e5e5;padding:8px 5px;font-size:.9375rem;font-weight:500;border-top:0}
 .newpost-latest .nav-tabs li:first-child a {margin-left:0;border-left:0}
 .newpost-latest .nav-tabs li:last-child a {border-right:0}
 .newpost-latest .nav-tabs li a:hover {background:#fff;border-bottom:1px solid #e5e5e5}
@@ -35,7 +35,7 @@ if (!defined('_EYOOM_')) exit;
 .newpost-latest .tab-content ul {margin-bottom:0}
 .newpost-latest .tab-content li {position:relative;padding:3px 0}
 .newpost-latest .tab-content li.no-latest {width:100%}
-.newpost-latest .tab-content .newpost-subj {position:relative;width:65%;padding-right:5px;padding-left:0;display:block;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
+.newpost-latest .tab-content .newpost-subj {position:relative;width:65%;padding-right:5px;padding-left:0;display:block;font-size:1rem;font-weight:500;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
 .newpost-latest .tab-content .newpost-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .newpost-latest .tab-content .newpost-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .newpost-latest .tab-content .newpost-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}

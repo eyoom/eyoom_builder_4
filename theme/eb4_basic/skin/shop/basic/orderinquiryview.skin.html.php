@@ -67,7 +67,7 @@ if($od['od_pg'] == 'lg') {
 .shop-order-inquiry-view .payment-info-total-box:last-child {border-bottom:0}
 .shop-order-inquiry-view .payment-info-total-box span {float:left}
 .shop-order-inquiry-view .payment-info-total-box strong {color:#fff}
-.shop-order-inquiry-view .total-box-in-wrap {position:relative;border:1px solid #cc2300;background:#fff;padding:5px 0;margin-top:5px}
+.shop-order-inquiry-view .total-box-in-wrap {position:relative;border:1px solid #ab0000;background:#fff;padding:5px 0;margin-top:5px}
 .shop-order-inquiry-view .total-box-in-box {position:relative;overflow:hidden;clear:both;padding:5px 10px;text-align:right;color:#757575}
 .shop-order-inquiry-view .total-box-in-box span {float:left}
 .shop-order-inquiry-view .total-box-in-box strong {color:#000}
@@ -228,7 +228,7 @@ if($od['od_pg'] == 'lg') {
                                 <td><?php echo $od['od_receipt_time']; ?></td>
                             </tr>
                             <?php } ?>
-                            <?php if($app_no_subj && $app_no) { // 승인번호, 휴대폰번호, 거래번호 ?>
+                            <?php if($app_no_subj && trim($app_no)) { // 승인번호, 휴대폰번호, 거래번호 ?>
                             <tr>
                                 <th class="tbd-r"><?php echo $app_no_subj; ?></th>
                                 <td><?php echo $app_no; ?></td>
@@ -277,7 +277,7 @@ if($od['od_pg'] == 'lg') {
                                 <td>
                                     <?php if ($od['od_cash']) { ?>
                                     <a href="javascript:;" onclick="<?php echo $cash_receipt_script; ?>" class="btn_frmline">현금영수증 확인하기</a>
-                                    <?php } else { ?>
+                                    <?php } else if (shop_is_taxsave($od)) { ?>
                                     <a href="javascript:;" onclick="window.open('<?php echo G5_SHOP_URL; ?>/taxsave.php?od_id=<?php echo $od_id; ?>', 'taxsave', 'width=550,height=400,scrollbars=1,menus=0');" class="btn_frmline">현금영수증을 발급하시려면 클릭하십시오.</a>
                                     <?php } ?>
                                 </td>
@@ -533,7 +533,7 @@ if($od['od_pg'] == 'lg') {
                 <input type="text" name="noti_url" value="<?php echo G5_SHOP_URL; ?>/settle_kcp_common.php">
             </label>
             <div id="sod_fin_test" class="btn_confirm">
-                <input type="submit" value="입금통보 테스트" class="btn-e btn-e-xl btn-e-red btn-e-block">
+                <input type="submit" value="입금통보 테스트" class="btn-e btn-e-xl btn-e-navy btn-e-block">
             </div>
             </form>
             <?php } ?>

@@ -19,7 +19,7 @@ if (!defined('_EYOOM_')) exit;
 .ranking-content li {padding:7px 0;border-bottom:1px dotted #e5e5e5}
 .ranking-content li:last-child {border-bottom:0}
 .ranking-content .ranking-num {position:absolute;top:0;left:0;display:block;width:18px;height:18px;line-height:18px;background:#4B4B4D;text-align:center;color:#fff;font-size:10px;margin-right:5px;border-radius:50%}
-.ranking-content .ranking-num-1 {background:#cc2300}
+.ranking-content .ranking-num-1 {background:#ab0000}
 .ranking-content .ranking-num-2 {background:#f4511e}
 .ranking-content .ranking-num-3 {background:#f4511e}
 .ranking-content .ranking-photo img {width:17px;height:17px;display:inline-block}

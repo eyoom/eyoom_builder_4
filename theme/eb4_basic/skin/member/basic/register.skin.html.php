@@ -86,7 +86,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
     </div>
 
     <div class="register-btn-box text-center">
-        <button class="btn-e btn-e-xl btn-crimson" type="submit" value="회원가입"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
+        <button class="btn-e btn-e-xl btn-navy" type="submit" value="회원가입"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
     </div>
 
     </form>
@@ -105,7 +105,7 @@ function fregister_submit(f) {
         Swal.fire({
             title: "중요!",
             text: "회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });
@@ -116,7 +116,7 @@ function fregister_submit(f) {
         Swal.fire({
             title: "중요!",
             text: "개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "warning",
             confirmButtonText: "확인"
         });

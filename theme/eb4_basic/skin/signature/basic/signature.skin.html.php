@@ -32,7 +32,7 @@ if (!defined('_EYOOM_')) exit;
 .member-signature-latest .nav-tabs li a.active {z-index:1;background:#fff;color:#000;border-bottom:1px solid transparent}
 .member-signature-latest .tab-content ul {margin:0;font-size:.9375rem;padding:0 20px}
 .member-signature-latest .tab-content ul li {position:relative;margin:0 0 6px}
-.member-signature-latest .tab-content ul li.active .signature-latest-subj {color:#cc2300}
+.member-signature-latest .tab-content ul li.active .signature-latest-subj {color:#ab0000}
 .member-signature-latest .signature-latest-li {position:relative;margin-right:135px}
 .member-signature-latest .signature-latest-boname {color:#959595;margin-right:3px}
 .member-signature-latest .signature-latest-subj {color:#252525}

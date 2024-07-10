@@ -32,7 +32,7 @@ if (!defined('_EYOOM_')) exit;
         </label>
     </section>
     <div class="text-center m-t-20 m-b-20">
-        <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-red btn-e-lg btn-e-block">
+        <input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-navy btn-e-lg btn-e-block">
     </div>
     </form>
 </div>
@@ -48,18 +48,40 @@ function fmemberconfirm_submit(f) {
     return true;
 }
 
-$("input, textarea, select").on({ 'touchstart' : function() {
-    zoomDisable();
-}});
-$("input, textarea, select").on({ 'touchend' : function() {
-    setTimeout(zoomEnable, 500);
-}});
-function zoomDisable(){
-    $('head meta[name=viewport]').remove();
-    $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
-}
-function zoomEnable(){
-    $('head meta[name=viewport]').remove();
-    $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
-}
+<?php
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$is_iphone = (strpos($user_agent, 'iPhone') !== false);
+$is_ipad = (strpos($user_agent, 'iPad') !== false);
+
+if ($is_iphone || $is_ipad) {
+?>
+$(document).ready(function(){
+    var touchStartTimestamp = 0;
+    
+    $("input, textarea, select").on('touchstart', function(event) {
+        zoomDisable();
+        touchStartTimestamp = event.timeStamp;
+    });
+
+    $("input, textarea, select").on('touchend', function(event) {
+        var touchEndTimestamp = event.timeStamp;
+        if (touchEndTimestamp - touchStartTimestamp > 500) {
+            setTimeout(zoomEnable, 500);
+        } else {
+            zoomDisable();
+            setTimeout(zoomEnable, 500);
+        }
+    });
+
+    function zoomDisable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
+    }
+
+    function zoomEnable(){
+        $('head meta[name=viewport]').remove();
+        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
+    }
+});
+<?php } ?>
 </script>

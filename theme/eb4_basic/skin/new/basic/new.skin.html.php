@@ -11,7 +11,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list {font-size:.9375rem}
 .new-list .nl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .new-list .nl-wrap > div:nth-last-child(1), .new-list .nl-wrap > div:nth-last-child(2) {border-bottom:0}
-.new-list .nl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.new-list .nl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .new-list .nl-head > div {position:relative}
 .new-list .nl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .new-list .nl-head > div:last-child:before {display:none}
@@ -28,16 +28,16 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .nl-list > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#dadada;transform:translateY(-50%)}
 .new-list .nl-list > div:last-child:before {display:none}
 .new-list .nl-list .nl-item {display:table-cell;vertical-align:middle;width:120px;text-align:center}
-.new-list .nl-list .nl-author {display:table-cell;vertical-align:middle;width:120px;padding-left:10px;}
+.new-list .nl-list .nl-author {display:table-cell;vertical-align:middle;width:120px;padding-left:10px}
 .new-list .nl-list .nl-num {width:90px}
 .new-list .nl-list .nl-num-short {width:80px}
 .new-list .nl-list .nl-num-checkbox {width:110px}
 .new-list .nl-list .nl-author {width:150px;padding:0 10px;text-align:left}
-.new-list .nl-list .nl-subj {display:table-cell;vertical-align:middle}
+.new-list .nl-list .nl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .new-list .nl-list .nl-subj a {position:relative;display:inline-block;padding:0 10px}
 .new-list .nl-list .nl-subj a:hover {color:#000;text-decoration:underline}
 .new-list .nl-list .nl-subj .reply-indication {display:inline-block;width:7px;height:10px;border-left:1px dotted #b5b5b5;border-bottom:1px dotted #b5b5b5}
-.new-list .nl-list .nl-new {display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;color:#fff;font-size:10px;font-weight:700;background-color:#cc2300}
+.new-list .nl-list .nl-new {display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;color:#fff;font-size:10px;font-weight:700;background-color:#ab0000}
 .new-list .nl-list .nl-comment {color:#959595}
 .new-list .nl-list .nl-comment strong {color:#f4511e}
 .new-list .nl-list .blind-subject {color:#b5b5b5;cursor:not-allowed}
@@ -49,7 +49,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .new-list .star-ratings-list {width:75px;margin:0 auto}
 .new-list .star-ratings-list li {padding:0;float:left;margin-right:0}
 .new-list .star-ratings-list li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
-.new-list .star-ratings-list li .rating-selected {color:#cc2300;font-size:.8125rem}
+.new-list .star-ratings-list li .rating-selected {color:#ab0000;font-size:.8125rem}
 .new-list .nl-no-list {text-align:center;color:#959595;padding:70px 0}
 .new-list .new-list-footer {margin-top:15px}
 .new-list .new-list-footer:after {content:"";display:block;clear:both}

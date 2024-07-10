@@ -123,6 +123,8 @@ $check_sanitize_keys = array(
     'de_inicis_lpay_use',           //KG이니시스 Lpay 사용
     'de_inicis_kakaopay_use',       //KG이니시스 카카오페이 사용
     'de_inicis_cartpoint_use',      //KG이니시스 신용카드 포인트 결제
+    'de_nicepay_mid',               //NICEPAY 상점아이디
+    'de_nicepay_key',               //NICEPAY 상점키
     'de_kakaopay_mid',              //카카오페이 상점MID
     'de_kakaopay_key',              //카카오페이 상점키
     'de_kakaopay_enckey',           //카카오페이 상점 EncKey
@@ -278,8 +280,8 @@ if ($_POST['amode'] == 'ittype') {
 } else {
     
     // 대표전화번호 유효성 체크
-    if(! (isset($_POST['de_admin_company_tel']) && check_vaild_callback($_POST['de_admin_company_tel'])) )
-        alert('테마설정관리 > 기본정보에서 사업자 정보를 입력해 주세요.');
+    if(! (isset($_POST['de_admin_company_tel']) && $_POST['de_admin_company_tel']) )
+        alert('테마설정관리 > 기본정보에서 대표전화번호를 올바르게 입력해 주세요.');
 
     // 로그인을 바로 이 주소로 하는 경우 쇼핑몰설정값이 사라지는 현상을 방지
     if (!$_POST['de_admin_company_owner'])
@@ -397,6 +399,8 @@ if ($_POST['amode'] == 'ittype') {
                     de_inicis_lpay_use            = '{$de_inicis_lpay_use}',
                     de_inicis_kakaopay_use        = '{$de_inicis_kakaopay_use}',
                     de_inicis_cartpoint_use       = '{$de_inicis_cartpoint_use}',
+                    de_nicepay_mid                = '{$de_nicepay_mid}',
+                    de_nicepay_key                = '{$de_nicepay_key}',
                     de_card_noint_use             = '{$de_card_noint_use}',
                     de_card_point                 = '{$de_card_point}',
                     de_settle_min_point           = '{$de_settle_min_point}',

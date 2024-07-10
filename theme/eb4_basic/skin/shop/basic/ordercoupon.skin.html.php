@@ -26,7 +26,7 @@ if (!defined('_EYOOM_')) exit;
                         <?php echo get_text($list[$i]['cp_subject']); ?>
                     </td>
                     <td class="text-center"><strong class="text-crimson"><?php echo number_format($list[$i]['dc']); ?></strong></td>
-                    <td class="text-center"><button type="button" class="btn-e btn-e-red od_cp_apply">적용</button></td>
+                    <td class="text-center"><button type="button" class="btn-e btn-e-navy od_cp_apply">적용</button></td>
                 </tr>
                 <?php } ?>
             </tbody>

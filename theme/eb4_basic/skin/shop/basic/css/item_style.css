@@ -156,12 +156,12 @@
 #sit_ov_btn {margin-top:20px}
 #sit_ov_btn:after {display:block;visibility:hidden;clear:both;content:""}
 #sit_ov_btn button {width:230px;float:left;margin-right:5px;height:50px;margin-bottom:10px;font-weight:700;font-size:16px}
-#sit_btn_buy {background:#3949ab;color:#fff;border:0}
-#sit_btn_buy:hover {background:#495bd0}
-#sit_btn_cart {border:1px solid #3949ab;background:#fff;color:#3949ab}
+#sit_btn_buy {background:#3f4678;color:#fff;border:0}
+#sit_btn_buy:hover {background:#4b5390}
+#sit_btn_cart {border:1px solid #3f4678;background:#fff;color:#3f4678}
 #sit_btn_cart:hover {background:#f5f5f5}
 #sit_btn_wish {display:inline-block;margin-bottom:10px;text-align:center;font-size:16px;float:right;width:70px;height:50px;line-height:48px;height:50px;border:1px solid #c5c5c5;color:#656565;font-weight:700}
-#sit_btn_wish:hover {color:#3949ab}
+#sit_btn_wish:hover {color:#3f4678}
 #sit_btn_alm {display:inline-block;width:215px;float:left;margin-right:5px;height:50px;line-height:50px;margin-bottom:10px;font-weight:700;font-size:16px;background:#d50c0c;color:#fff;border:0;text-align:center}
 @media (max-width:1199px) {
     #sit_ov_btn button {width:170px}
@@ -184,8 +184,8 @@
 #sit_ov.fixed {position:fixed;top:10px;left:50%;width:600px;margin:0;padding:0;margin-left:-300px;max-height:600px;background:transparent;z-index:1100}
 #sit_ov.fixed #btn_buy_back {display:none;position:fixed;top:0;bottom:0;left:0;right:0;z-index:1099;background:rgba(0, 0, 0, 0.7);z-index:1}
 #sit_ov.fixed .buy-btn-wr {position:relative;display:block;text-align:center;padding-bottom:10px;z-index:2}
-#sit_ov.fixed .buy-btn-wr button {position:relative;width:260px;padding:0 15px;padding-right:55px;background:#3949ab;border:0;height:50px;line-height:50px;border-radius:50px !important;color:#fff;font-size:1rem;font-weight:700;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
-#sit_ov.fixed .buy-btn-wr button:hover {background:#495bd0}
+#sit_ov.fixed .buy-btn-wr button {position:relative;width:260px;padding:0 15px;padding-right:55px;background:#3f4678;border:0;height:50px;line-height:50px;border-radius:50px !important;color:#fff;font-size:1rem;font-weight:700;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
+#sit_ov.fixed .buy-btn-wr button:hover {background:#4b5390}
 #sit_ov.fixed .buy-btn-wr button i {position:absolute;top:0;right:0;background:#2B2B2E;border-radius:0 25px 25px 0 !important;width:60px;line-height:50px;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
 #sit_ov.fixed .buy-btn-wr button:hover i {background:#3c3c3e}
 #sit_ov.fixed .scroll-no {display:none}

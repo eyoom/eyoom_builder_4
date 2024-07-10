@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .qa-list {font-size:.9375rem}
 .qa-list .ql-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .qa-list .ql-wrap > div:nth-last-child(1), .qa-list .ql-wrap > div:nth-last-child(2) {border-bottom:0}
-.qa-list .ql-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.qa-list .ql-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .qa-list .ql-head > div {position:relative}
 .qa-list .ql-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .qa-list .ql-head > div:last-child:before {display:none}
@@ -33,7 +33,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .qa-list .ql-list .ql-num-short {width:80px}
 .qa-list .ql-list .ql-num-checkbox {width:110px}
 .qa-list .ql-list .ql-author {width:150px;padding:0 10px;text-align:left}
-.qa-list .ql-list .ql-subj {display:table-cell;vertical-align:middle}
+.qa-list .ql-list .ql-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .qa-list .ql-list .ql-subj a {position:relative;display:inline-block;padding:0 10px}
 .qa-list .ql-list .ql-subj a:hover {color:#000;text-decoration:underline}
 .qa-list .ql-mobile {display:none}
@@ -85,7 +85,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
             <a href="<?php echo $admin_href; ?>" class="btn-e btn-e-lg btn-dark" type="button">관리자</a>
             <?php } ?>
             <?php if ($write_href) { ?>
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-indigo" type="button">문의등록</a>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-navy" type="button">문의등록</a>
             <?php } ?>
         </div>
         <?php } ?>
@@ -207,7 +207,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <div class="qlf-right">
             <?php if ($write_href) { ?>
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-sm btn-indigo" type="button">문의등록</a>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-sm btn-navy" type="button">문의등록</a>
             <?php } ?>
         </div>
     </div>

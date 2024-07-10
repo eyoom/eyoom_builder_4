@@ -152,7 +152,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <?php if ($write_href) { ?>
         <div class="float-end">
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-indigo" type="button">글쓰기</a>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-lg btn-navy" type="button">글쓰기</a>
         </div>
         <?php } ?>
         <div class="clearfix"></div>
@@ -344,7 +344,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
         </div>
         <div class="blbw-right">
             <?php if ($write_href) { ?>
-            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-sm btn-indigo" type="button">글쓰기</a>
+            <a href="<?php echo $write_href; ?>" class="btn-e btn-e-sm btn-navy" type="button">글쓰기</a>
             <?php } ?>
         </div>
     </div>
@@ -607,7 +607,7 @@ function fboardlist_submit(f) {
             title: '<strong class="f-s-20r">중요!</strong>',
             html: "<strong class='text-crimson'>" + document.pressed + "</strong> 할 게시물을 하나 이상 선택하세요.",
             icon: 'error',
-            confirmButtonColor: '#e53935',
+            confirmButtonColor: '#ab0000',
             confirmButtonText: '확인'
         });
         return false;
@@ -656,7 +656,7 @@ $(function() {
                 title: '<strong class="f-s-20r">알림</strong>',
                 html: '<span class="f-s-15r">스킨을 선택해 주세요.</span>',
                 icon: 'warning',
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 confirmButtonText: "확인"
             });
         } else {
@@ -684,7 +684,7 @@ $(function() {
                 title: '<strong class="f-s-20r">알림</strong>',
                 html: '<span class="f-s-15r">관심게시판에서 <strong class="text-crimson">해제</strong>하였습니다.</span>',
                 icon: 'success',
-                confirmButtonColor: '#e53935',
+                confirmButtonColor: '#ab0000',
                 confirmButtonText: '확인'
             });
         } else if (favorite == 'n') {
@@ -693,7 +693,7 @@ $(function() {
                 title: '<strong class="f-s-20r">알림</strong>',
                 html: '<span class="f-s-15r">관심게시판으로 <strong class="text-crimson">등록</strong>하였습니다.</span>',
                 icon: 'success',
-                confirmButtonColor: '#e53935',
+                confirmButtonColor: '#ab0000',
                 confirmButtonText: '확인'
             });
         }

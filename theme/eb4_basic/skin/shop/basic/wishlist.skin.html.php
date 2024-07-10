@@ -92,7 +92,7 @@ if (!defined('_EYOOM_')) exit;
 
     <div class="wishlist-act-btn">
         <button type="submit" class="btn-e btn-e-brd btn-e-xl btn-e-dark" onclick="return fwishlist_check(document.fwishlist,'');"><i class="fas fa-shopping-cart m-r-5"></i>장바구니 담기</button>
-        <button type="submit" class="btn-e btn-e-xl btn-e-red" onclick="return fwishlist_check(document.fwishlist,'direct_buy');"><i class="fas fa-credit-card m-r-5"></i>주문하기</button>
+        <button type="submit" class="btn-e btn-e-xl btn-e-navy" onclick="return fwishlist_check(document.fwishlist,'direct_buy');"><i class="fas fa-credit-card m-r-5"></i>주문하기</button>
     </div>
     </form>
 </div>

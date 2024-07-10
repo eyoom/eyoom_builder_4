@@ -86,7 +86,7 @@ if (!defined('_EYOOM_')) exit;
                         <div id="follow_<?php echo $list[$i]['mb_id']; ?>" class="profile-btns">
                             <a href="javascript:;">
                             <?php if ($list[$i]['mb_id'] == $member['mb_id']) { ?>
-                                <button type="button" class="btn-e btn-e-red">It's Me!<i class="fa fa-child m-l-5"></i></button>
+                                <button type="button" class="btn-e btn-e-crimson">It's Me!<i class="fa fa-child m-l-5"></i></button>
                             <?php } else { ?>
                                 <?php if (!$eb->follow_check($list[$i]['mb_id'])) { ?>
                                 <button type="button" class="btn-e btn-e-teal follow_<?php echo $list[$i]['mb_id']; ?>" name="<?php echo $list[$i]['mb_id']; ?>" value="follow" title="친구맺기를 신청합니다."><i class="fa fa-check m-r-5"></i>팔로우</button>

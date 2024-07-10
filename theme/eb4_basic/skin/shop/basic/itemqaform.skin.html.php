@@ -67,7 +67,7 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
         </div>
 
         <div class="text-center">
-            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-indigo">
+            <input type="submit" value="작성완료" class="btn-e btn-e-xlg btn-e-navy">
         </div>
     </div>
 

@@ -214,6 +214,14 @@ if( ! isset($default['de_inicis_iniapi_key']) ){
     sql_query($sql, false);
 }
 
+// NICEPAY mid, key 추가
+if (! isset($default['de_nicepay_mid'])) {
+    $sql = "ALTER TABLE `{$g5['g5_shop_default_table']}` 
+            ADD COLUMN `de_nicepay_mid` VARCHAR(20) NOT NULL DEFAULT '' AFTER `de_inicis_cartpoint_use`,
+            ADD COLUMN `de_nicepay_key` VARCHAR(150) NOT NULL DEFAULT '' AFTER `de_nicepay_mid`; ";
+    sql_query($sql, false);
+}
+
 if( function_exists('pg_setting_check') ){
     pg_setting_check(true);
 }

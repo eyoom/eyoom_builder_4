@@ -39,7 +39,7 @@ if (!defined('_EYOOM_')) exit;
         </label>
     </section>
     <div class="text-center m-t-20">
-        <button type="submit" value="확인" class="btn-e btn-e-crimson btn-e-lg btn-block">확인</button>
+        <button type="submit" value="확인" class="btn-e btn-e-navy btn-e-lg btn-block">확인</button>
     </div>
     </form>
 </div>

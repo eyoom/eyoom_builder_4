@@ -263,7 +263,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
 					<b><?php echo $od['od_settle_case']; ?> 입금액</b><?php echo display_price($od['od_receipt_price']); ?>
 				</p>
 				<p class="li-p">
-					<b>입금자</b><?php echo get_text($od['od_deposit_name']); ?>
+					<b>입금자</b><?php echo get_text($print_od_deposit_name); ?>
 				</p>
 				<p class="li-p">
 					<b>입금확인일시</b><?php if ($od['od_receipt_time'] == 0) { ?>입금 확인일시를 체크해 주세요.<?php } else { ?><?php echo $od['od_receipt_time']; ?> (<?php echo get_yoil($od['od_receipt_time']); ?>)<?php } ?>
@@ -1013,7 +1013,7 @@ function form_submit(f)
 
     var msg = "";
 
-    <?php if($od['od_settle_case'] == '신용카드' || $od['od_settle_case'] == 'KAKAOPAY' || $od['od_settle_case'] == '간편결제' || ($od['od_pg'] == 'inicis' && is_inicis_order_pay($od['od_settle_case']) )) { ?>
+    <?php if (is_cancel_shop_pg_order($od)) { ?>
     if(status == "취소" || status == "반품" || status == "품절") {
         var $ct_chk = $("input[name^=ct_chk]");
         var chk_cnt = $ct_chk.size();

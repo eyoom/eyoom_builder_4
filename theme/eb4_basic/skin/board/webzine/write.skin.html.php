@@ -496,7 +496,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
     <?php } ?>
 
     <div class="text-center">
-        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xlg btn-e-indigo">
+        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn-e btn-e-xlg btn-e-navy">
         <a href="<?php echo $infinite_wmode ? "javascript:history.go(-1)": get_eyoom_pretty_url($bo_table, '', $qstr); ?>" class="btn-e btn-e-xlg btn-e-dark">취소</a>
     </div>
     </form>
@@ -535,7 +535,7 @@ $(document).ready(function(){
             Swal.fire({
                 title: "중요!",
                 text: "동영상 주소를 입력해 주세요.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -554,7 +554,7 @@ $(document).ready(function(){
             Swal.fire({
                 title: "중요!",
                 text: "사운드클라우드 주소를 입력해 주세요.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -623,7 +623,7 @@ function set_map_google_address(map_type, map_addr1, map_addr2, map_name) {
             Swal.fire({
                 title: "중요!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -643,7 +643,7 @@ function set_map_naver_address(map_type, map_addr1, map_addr2, map_name) {
             Swal.fire({
                 title: "중요!",
                 text: "잘못된 주소입니다.",
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });
@@ -776,7 +776,7 @@ function fwrite_submit(f) {
         Swal.fire({
             title: "알림!",
             html: "제목에 금지단어 '<strong class='text-crimson'>"+subject+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -788,7 +788,7 @@ function fwrite_submit(f) {
         Swal.fire({
             title: "알림!",
             text: "내용에 금지단어 '<strong class='text-crimson'>"+content+"</strong>' 단어가 포함되어있습니다.",
-            confirmButtonColor: "#e53935",
+            confirmButtonColor: "#ab0000",
             icon: "error",
             confirmButtonText: "확인"
         });
@@ -806,7 +806,7 @@ function fwrite_submit(f) {
                 Swal.fire({
                     title: "알림!",
                     html: "내용은 <strong class='text-crimson'>"+char_min+"</strong> 글자 이상 쓰셔야 합니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -816,7 +816,7 @@ function fwrite_submit(f) {
                 Swal.fire({
                     title: "알림!",
                     html: "내용은 <strong class='text-crimson'>"+char_max+"</strong> 글자 이하로 쓰셔야 합니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -857,7 +857,7 @@ $(function(){
                 Swal.fire({
                     title: "알림!",
                     html: "태그는 <strong class='text-crimson'>"+limit+"</strong> 개까지 등록가능합니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "warning",
                     confirmButtonText: "확인"
                 });
@@ -876,7 +876,7 @@ $(function(){
                 Swal.fire({
                     title: "알림!",
                     text: "중복된 태그입니다.",
-                    confirmButtonColor: "#e53935",
+                    confirmButtonColor: "#ab0000",
                     icon: "error",
                     confirmButtonText: "확인"
                 });
@@ -921,7 +921,7 @@ $(function() {
             Swal.fire({
                 title: "알림",
                 text: '스킨을 선택해 주세요.',
-                confirmButtonColor: "#e53935",
+                confirmButtonColor: "#ab0000",
                 icon: "warning",
                 confirmButtonText: "확인"
             });

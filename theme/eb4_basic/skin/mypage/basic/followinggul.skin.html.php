@@ -12,7 +12,7 @@ if (!defined('_EYOOM_')) exit;
 .followinggul-list .followinggul-select .followinggul-select-right {width:150px}
 .followinggul-list .fl-wrap {position:relative;border-top:2px solid #757575;border-bottom:1px solid #757575}
 .followinggul-list .fl-wrap > div:nth-last-child(1), .followinggul-list .fl-wrap > div:nth-last-child(2) {border-bottom:0}
-.followinggul-list .fl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2}
+.followinggul-list .fl-head {position:relative;display:table;width:100%;height:50px;border-bottom:1px solid #757575;background-color:#f2f2f2;font-weight:500}
 .followinggul-list .fl-head > div {position:relative}
 .followinggul-list .fl-head > div:before {content:"";position:absolute;top:50%;right:0;width:1px;height:13px;background-color:#cacaca;transform:translateY(-50%)}
 .followinggul-list .fl-head > div:last-child:before {display:none}
@@ -29,7 +29,7 @@ if (!defined('_EYOOM_')) exit;
 .followinggul-list .fl-list .fl-num {width:90px}
 .followinggul-list .fl-list .fl-num-short {width:80px}
 .followinggul-list .fl-list .fl-author {width:150px;padding:0 10px;text-align:left}
-.followinggul-list .fl-list .fl-subj {display:table-cell;vertical-align:middle}
+.followinggul-list .fl-list .fl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .followinggul-list .fl-list .fl-subj a {position:relative;padding:0 10px 0 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .followinggul-list .fl-list .fl-subj a:hover {color:#000;text-decoration:underline}
 .followinggul-list .fl-list .fl-subj .fl-img {position:absolute;top:0;left:0;width:50px;height:50px;overflow:hidden} 

@@ -52,7 +52,7 @@ if (!defined('_EYOOM_')) exit;
                         </td>
                         <td class="copy-move-list">
                             <label for="chk<?php echo $i; ?>">
-                                <span><?php echo $list[$i]['gr_subject']; ?> / <?php echo $list[$i]['bo_subject']; ?></span><span class="color-grey">(<?php echo $list[$i]['bo_table']; ?>)</span><span><?php echo $list[$i]['atc_mark']; ?></span>
+                                <span><?php echo $list[$i]['gr_subject']; ?> / <?php echo $list[$i]['bo_subject']; ?></span><span class="text-gray">(<?php echo $list[$i]['bo_table']; ?>)</span><span><?php echo $list[$i]['atc_mark']; ?></span>
                             </label>
                         </td>
                     </tr>
@@ -62,7 +62,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
     </div>
     <div class="win-btn text-center">
-        <input type="submit" value="<?php echo $act; ?>" id="btn_submit" class="btn-e btn-e-lg btn-e-red">
+        <input type="submit" value="<?php echo $act; ?>" id="btn_submit" class="btn-e btn-e-lg btn-e-navy">
     </div>
     <div class="m-b-20"></div>
     </form>

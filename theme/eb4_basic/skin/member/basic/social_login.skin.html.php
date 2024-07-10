@@ -22,26 +22,20 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
 
 <style>
 #sns_login {margin-top:15px;padding:15px 0 0;border-top:0}
-#sns_login h5 {text-align:center;color:#959595;font-size:13px;margin-bottom:15px}
-#sns_login .social-login {list-style:none;margin:0 -3px;padding:0}
+#sns_login h5 {text-align:center;color:#959595;font-size:.8125rem;margin-bottom:15px}
+#sns_login .social-login {list-style:none;padding:0;display:flex;justify-content:center}
 #sns_login .social-login:after {content:"";display:block;clear:both}
-#sns_login .social-login li {position:relative;overflow:hidden;float:left;width:50%;height:35px;padding:0 3px;margin-bottom:6px;box-sizing:border-box}
+#sns_login .social-login li {position:relative;overflow:hidden;width:35px;height:35px;border-radius:5px;margin:0 5px 6px}
 #sns_login .social-login li a {display:block;color:#fff;font-size:.75rem}
 #sns_login .social-login li a:hover {text-decoration:none}
-#sns_login .social-login li img {width:35px;height:35px;border-right:1px solid rgba(255, 255, 255, 0.2)}
-#sns_login .social-login li span {margin-left:10px}
+#sns_login .social-login li img {width:35px;height:35px}
+#sns_login .social-login li span {margin-left:10px;display:none}
 #sns_login .social-login li .naver-sl-btn {background:#03C73C}
 #sns_login .social-login li .kakao-sl-btn {background:#FFEB04}
-#sns_login .social-login li .kakao-sl-btn span {color:#3C1E1D}
-#sns_login .social-login li .kakao-sl-btn img {border-right:1px solid rgba(0, 0, 0, 0.1)}
 #sns_login .social-login li .facebook-sl-btn {background:#5E82D1}
 #sns_login .social-login li .google-sl-btn {background:#EA5E4C}
 #sns_login .social-login li .twitter-sl-btn {background:#40BFF5}
 #sns_login .social-login li .payco-sl-btn {background:#FA2829}
-@media (max-width: 500px) {
-    #sns_login .social-login {margin:0}
-    #sns_login .social-login li {width:100%;padding:0}
-}
 </style>
 
 <div id="sns_login">
@@ -83,7 +77,7 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
                 );
 
                 if(!newWin || newWin.closed || typeof newWin.closed=='undefined')
-                     alert('브라우저에서 팝업이 차단되어 있습니다. 팝업 활성화 후 다시 시도해 주세요.');
+                    alert('브라우저에서 팝업이 차단되어 있습니다. 팝업 활성화 후 다시 시도해 주세요.');
 
                 return false;
             });
