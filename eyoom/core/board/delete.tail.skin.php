@@ -16,6 +16,11 @@ sql_query(" delete from {$g5['eyoom_tag_write']} where tw_theme = '" . sql_real_
 sql_query(" delete from {$g5['eyoom_wrfixed']} where bo_table = '{$bo_table}' and wr_id = '{$write['wr_id']}' ", false);
 
 /**
+ * 인기게시물 테이블에서 해당 글 삭제
+ */
+sql_query(" delete from {$g5['eyoom_best']} where bo_table = '{$bo_table}' and wr_id = '{$write['wr_id']}' ", false);
+
+/**
  * 게시판 스킨파일
  */
 @include_once($eyoom_skin_path['board'].'/delete.tail.skin.php');

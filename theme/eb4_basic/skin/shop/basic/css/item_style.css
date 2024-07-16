@@ -181,7 +181,7 @@
 .buy-btn-wr {display:none}
 #sit_ov.static .scroll-show {display:block !important}
 #sit_ov.scroll-no {display:block}
-#sit_ov.fixed {position:fixed;top:10px;left:50%;width:600px;margin:0;padding:0;margin-left:-300px;max-height:600px;background:transparent;z-index:1100}
+#sit_ov.fixed {position:fixed;top:10px;left:50%;width:600px;margin:0;padding:0;margin-left:-300px;max-height:600px;background:transparent;z-index:1050}
 #sit_ov.fixed #btn_buy_back {display:none;position:fixed;top:0;bottom:0;left:0;right:0;z-index:1099;background:rgba(0, 0, 0, 0.7);z-index:1}
 #sit_ov.fixed .buy-btn-wr {position:relative;display:block;text-align:center;padding-bottom:10px;z-index:2}
 #sit_ov.fixed .buy-btn-wr button {position:relative;width:260px;padding:0 15px;padding-right:55px;background:#3f4678;border:0;height:50px;line-height:50px;border-radius:50px !important;color:#fff;font-size:1rem;font-weight:700;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out}
@@ -242,6 +242,7 @@
 .product-qa-title .sit_qaa_done:after {content:"";position:absolute;top:3px;right:0;width:2px;height:16px;background-color:#d5d5d5}
 .product-qa-title .sit_qaa_yet {display:inline-block;width:72px;position:relative;font-weight:normal;color:#3949ab;margin-right:8px}
 .product-qa-title .sit_qaa_yet:after {content:"";position:absolute;top:3px;right:0;width:2px;height:16px;background-color:#d5d5d5}
+.product-qa-title .fa-lock.color-red {margin-left:5px;color:#ab0000 !important}
 .product-qa-dl {color:#757575;margin:0;float:left;width:20%;text-align:right;zoom:1}
 .product-qa-dl:after {display:block;visibility:hidden;clear:both;content:""}
 .product-qa-dl dt {position:absolute;font-size:0;line-height:0;content:""}
@@ -258,3 +259,6 @@
     .product-qa-dl {float:inherit;width:inherit;padding-top:15px;margin-top:15px;border-top:1px solid #eaeaea}
     .product-qa-dl dd {float:left;display:inline-block;margin-left:0;margin-right:10px}
 }
+
+/*---------- Item Use, Item Qa Paging ----------*/
+.pg_current {background-color:#3f4678;border-color:#3f4678}

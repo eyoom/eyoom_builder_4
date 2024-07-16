@@ -17,8 +17,8 @@ if (!defined('_EYOOM_')) exit;
         총 <strong><?php echo $total_count; ?></strong> 건 사용후기
         <?php } ?>
         <div class="product-use-btn">
-            <a href="<?php echo $itemuse_form; ?>" onclick="itemuse_modal(this.href); return false;" class="btn-e btn-e-md btn-e-navy bd-r-0">사용후기 쓰기</a>
-            <a href="<?php echo $itemuse_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
+            <a href="<?php echo $itemuse_form; ?>" onclick="itemuse_modal(this.href); return false;" class="btn-e btn-e-md btn-e-navy">사용후기 쓰기</a>
+            <a href="<?php echo $itemuse_list; ?>" class="btn-e btn-e-md btn-e-dark">더보기</a>
         </div>
         <div class="clearfix"></div>
     </div>

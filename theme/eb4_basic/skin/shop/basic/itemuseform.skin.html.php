@@ -105,22 +105,42 @@ function fitemuse_submit(f) {
     return true;
 }
 
-$(function(){
-    $("input, textarea, select, button, i, div.note-editing-area, span.select2-selection, .calendar-time, ul.tag-editor, div.asSpinner-control").on({ 'touchstart' : function() {
+<?php
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$is_iphone = (strpos($user_agent, 'iPhone') !== false);
+$is_ipad = (strpos($user_agent, 'iPad') !== false);
+
+if ($is_iphone || $is_ipad) {
+?>
+$(document).ready(function(){
+    var touchStartTimestamp = 0;
+    
+    $("input, textarea, select").on('touchstart', function(event) {
         zoomDisable();
-    }});
-    $("input, textarea, select, button, i, div.note-editing-area, span.select2-selection, .calendar-time, ul.tag-editor, div.asSpinner-control").on({ 'touchend' : function() {
-        setTimeout(zoomEnable, 500);
-    }});
-    function zoomDisable() {
+        touchStartTimestamp = event.timeStamp;
+    });
+
+    $("input, textarea, select").on('touchend', function(event) {
+        var touchEndTimestamp = event.timeStamp;
+        if (touchEndTimestamp - touchStartTimestamp > 500) {
+            setTimeout(zoomEnable, 500);
+        } else {
+            zoomDisable();
+            setTimeout(zoomEnable, 500);
+        }
+    });
+
+    function zoomDisable(){
         $('head meta[name=viewport]').remove();
         $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">');
     }
-    function zoomEnable() {
+
+    function zoomEnable(){
         $('head meta[name=viewport]').remove();
         $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">');
     }
 });
+<?php } ?>
 
 <?php /* 다크모드 JS 시작 */ ?>
 const currentMode = localStorage.getItem("mode");

@@ -447,6 +447,38 @@ if (!isset($config['cf_map_google_id'])) {
                 ADD `cf_map_daum_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_map_naver_id` ", true);
 }
 
+// 상담신청
+if (!sql_query(" DESC {$g5['eyoom_counsel']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_counsel']}` (
+                `cs_id` int(11) UNSIGNED NOT NULL auto_increment,
+                `mb_id` varchar(30) NOT NULL,
+                `cs_part` varchar(20) NOT NULL,
+                `cs_company` varchar(50) NOT NULL,
+                `cs_name` varchar(30) NOT NULL,
+                `cs_tel` varchar(20) NOT NULL,
+                `cs_email` varchar(255) NOT NULL,
+                `cs_subject` varchar(255) NOT NULL,
+                `cs_content` text NOT NULL,
+                `cs_file1` text NOT NULL,
+                `cs_file2` text NOT NULL,
+                `cs_memo` text NOT NULL,
+                `cs_status` varchar(20) NOT NULL DEFAULT,
+                `cs_ip` varchar(255) NOT NULL,
+                `cs_update` datetime NOT NULL,
+                `cs_regdt` datetime NOT NULL,
+                PRIMARY KEY  (`cs_id`)
+                ) ",
+        true
+    );
+}
+if (!isset($config['cf_counsel_part'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_counsel_part` VARCHAR(255) NOT NULL DEFAULT '견적요청, 제품상담, 제휴상담, 기타' AFTER `cf_eyoom_admin_theme`,
+                ADD `cf_counsel_status` VARCHAR(255) NOT NULL DEFAULT '대기, 접수, 진행, 완료' AFTER `cf_counsel_part`,
+                ADD `cf_counsel_view` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_counsel_status` ", true);
+}
+
 if(!$config['cf_faq_skin']) $config['cf_faq_skin'] = "basic";
 if(!$config['cf_mobile_faq_skin']) $config['cf_mobile_faq_skin'] = "basic";
 
@@ -458,6 +490,7 @@ $pg_anchor = array(
     'anc_cf_board' => '게시판기본',
     'anc_cf_join' => '회원가입',
     'anc_cf_cert' => '본인확인',
+    'anc_cf_counsel' => '상담신청',
     'anc_cf_url' => '짧은주소',
     'anc_cf_mail' => '메일환경설정',
     'anc_cf_sns' => 'SNS&amp;지도',

@@ -1,6 +1,8 @@
 <?php
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
+include_once(G5_ADMIN_PATH.'/shop_admin/admin.shop.lib.php');
+
 // 주문상태에 따른 합계 금액
 function get_order_status_sum() {
     global $g5;

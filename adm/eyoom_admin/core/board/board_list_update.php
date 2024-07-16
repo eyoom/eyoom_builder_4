@@ -116,6 +116,9 @@ if ($act_button == "선택수정") {
 
             // 이윰게시판 확장 정보 삭제
             sql_query("delete from {$g5['eyoom_board']} where bo_table = '" . sql_real_escape_string($tmp_bo_table) . "' ");
+
+            // 인기게시글 삭제
+            sql_query(" delete from {$g5['eyoom_best']} where bo_table = '{$tmp_bo_table}' ");
         }
     }
     $msg = "선택한 게시판을 삭제하였습니다.";

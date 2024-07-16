@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-webzine .webzine-item:hover .webzine-img-box-in:after {opacity:1}
 .board-webzine .webzine-item .webzine-desc h4 {font-size:1.125rem;color:#252525;margin-top:0;margin-bottom:15px;line-height:1.4;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .board-webzine .webzine-item .webzine-desc h4 .wl-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5}
-.board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
+.board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#ab0000;margin-right:2px}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon b {position:absolute;top:3px;left:8px;width:2px;height:8px;background-color:#fff;transform:rotate(-60deg)}
@@ -48,7 +48,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-webzine .webzine-ratings .star-ratings-list {width:80px;height:18px}
 .board-webzine .webzine-ratings .star-ratings-list li {padding:0;float:left;margin-right:0}
 .board-webzine .webzine-ratings .star-ratings-list li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
-.board-webzine .webzine-ratings .star-ratings-list li .rating-selected {color:#cc2300;font-size:.8125rem}
+.board-webzine .webzine-ratings .star-ratings-list li .rating-selected {color:#ab0000;font-size:.8125rem}
 .board-webzine .webzine-item-notice {position:relative;overflow:hidden;border:1px solid #757575;padding:12px 15px;margin-bottom:20px}
 .board-webzine .webzine-item-notice .label {font-size:.8125rem;font-weight:normal;margin-bottom:0}
 .board-list .view-infinite-more {margin-top:30px;margin-bottom:40px}

@@ -10,8 +10,8 @@ if (!defined('_EYOOM_')) exit;
     <h3 class="h-hidden">등록된 상품문의</h3>
 
     <div class="product-qa-btn">
-        <a href="<?php echo $itemqa_form; ?>" onclick="itemqa_modal(this.href); return false;" class="btn-e btn-e-md btn-e-navy bd-r-0">상품문의 쓰기</a>
-        <a href="<?php echo $itemqa_list; ?>" class="btn-e btn-e-md btn-e-dark bd-r-0">더보기</a>
+        <a href="<?php echo $itemqa_form; ?>" onclick="itemqa_modal(this.href); return false;" class="btn-e btn-e-md btn-e-navy">상품문의 쓰기</a>
+        <a href="<?php echo $itemqa_list; ?>" class="btn-e btn-e-md btn-e-dark">더보기</a>
     </div>
     <div class="clearfix"></div>
 

@@ -148,6 +148,9 @@ if (!defined('_EYOOM_')) exit;
 </div>
 <?php /*----- 전체 검색 입력창 끝 -----*/ ?>
 
+<?php /* 상담 신청 버튼 */ ?>
+<a <?php if ( !G5_IS_MOBILE ) { ?>href="#" onclick="counsel_modal();"<?php } else { ?>href="<?php echo G5_URL; ?>/page/?pid=counsel"<?php } ?> class="counsel-btn"><i class="fas fa-headset"></i></a>
+
 <?php /* 사이드바 회원 버튼 */ ?>
 <button type="button" class="sidebar-user-trigger sidebar-user-btn mo-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserRight" aria-controls="offcanvasUserRight"><i class="fas fa-user-alt"></i></button>
 

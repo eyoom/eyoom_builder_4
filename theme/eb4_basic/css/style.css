@@ -315,6 +315,12 @@
 	.search-field form {width:80%}
 }
 
+/*---------- Counsel Btn ----------*/
+.counsel-btn {display:block;position:fixed;bottom:70px;right:15px;width:45px;height:45px;line-height:45px;text-align:center;background:#3f4678;font-size:1.125rem;color:#fff !important;border:0;border-radius:50%;z-index:1000}
+@media (max-width:991px) {
+	.counsel-btn {bottom:15px;right:70px}
+}
+
 /*---------- Offcanvas ----------*/
 .offcanvas-backdrop {z-index:1003}
 

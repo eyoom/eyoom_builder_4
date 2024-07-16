@@ -38,6 +38,9 @@ for ($i=count((array)$tmp_array)-1; $i>=0; $i--) {
      * 태그 사용여부와 상관없이 처리 - 태그사용 후, 사용안한 게시물들의 태그글도 삭제하기 위함
      */
     sql_query(" delete from {$g5['eyoom_tag_write']} where tw_theme = '" . sql_real_escape_string($theme) . "' and bo_table = '{$bo_table}' and wr_id = '{$tmp_array[$i]}' ", false);
+
+    // 인기게시물 삭제
+    sql_query(" delete from {$g5['eyoom_best']} where bo_table = '$bo_table' and wr_id = '{$tmp_array[$i]}' ");
 }
 
 /**

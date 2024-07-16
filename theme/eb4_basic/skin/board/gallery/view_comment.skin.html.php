@@ -58,7 +58,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .view-comment .comment-dropdown .dropdown-menu {left:inherit !important;right:0 !important;background-color:#fff;padding:5px 0;border:1px solid rgba(0,0,0,0.7);box-shadow:none;border-radius:0;margin:0}
 .view-comment .comment-dropdown .dropdown-menu a {display:block;padding:5px 10px;color:#151515}
 .view-comment .comment-dropdown .dropdown-menu a small {font-size:.6875rem;color:#a5a5a5}
-.view-comment .comment-dropdown .dropdown-menu a:hover {background-color:transparent;color:#cc2300}
+.view-comment .comment-dropdown .dropdown-menu a:hover {background-color:transparent;color:#ab0000}
 .view-comment .comment-dropdown:hover .dropdown-menu {display:block}
 .view-comment .comment-item-content {position:relative;padding-left:20px}
 .view-comment .comment-item-content .comment-file-item {position:relative;border:1px solid #d5d5d5;background:#fafafa;padding:10px;margin-bottom:15px}
@@ -173,13 +173,13 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                             <?php if (!$cmt[$i]['mb_ycard']['mb_id'] ) { ?>
                                 <li id="cmt_yellow_card_li_<?php echo $cmt[$i]['comment_id']; ?>">
                                     <a href="javascript:void(0);" id="cmt_yellow_card_<?php echo $cmt[$i]['comment_id']; ?>" class="cmt_yellow_card" data-bs-toggle="modal" data-bs-target=".yellowcard-modal" data-cmt-id="<?php echo $cmt[$i]['comment_id']; ?>">
-                                        신고하기 <?php if ($cmt[$i]['yc_count']) { ?><small>(누적 : <span class="text-red"><?php echo number_format($cmt[$i]['yc_count']); ?></span>)</small><?php } ?>
+                                        신고하기 <?php if ($cmt[$i]['yc_count']) { ?><small>(누적 : <span class="text-crimson"><?php echo number_format($cmt[$i]['yc_count']); ?></span>)</small><?php } ?>
                                     </a>
                                 </li>
                             <?php } else { ?>
                                 <li id="cancel_cmt_yellow_card_li_<?php echo $cmt[$i]['comment_id']; ?>">
                                     <a href="javascript:void(0);" id="cancel_cmt_yellow_card_<?php echo $cmt[$i]['comment_id']; ?>" class="cancel_cmt_yellow_card" data-cmt-id="<?php echo $cmt[$i]['comment_id']; ?>">
-                                        신고취소 <small>(누적 : <span class="text-red"><?php echo number_format($cmt[$i]['yc_count']); ?></span>)</small>
+                                        신고취소 <small>(누적 : <span class="text-crimson"><?php echo number_format($cmt[$i]['yc_count']); ?></span>)</small>
                                     </a>
                                 </li>
                             <?php } ?>
@@ -225,7 +225,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                             <?php if ($cmt[$i]['yc_blind']) { ?>
                             <p class="m-t-10 m-b-10"><span class="text-pink">----- <i class="fas fa-exclamation-circle"></i> 블라인드 처리된 댓글입니다. -----</span></p>
                             <?php } ?>
-                            <?php if (strstr($cmt[$i]['wr_option'], 'secret')) { ?><i class="fas fa-lock text-red m-r-10"></i> <?php } ?>
+                            <?php if (strstr($cmt[$i]['wr_option'], 'secret')) { ?><i class="fas fa-lock text-crimson m-r-10"></i> <?php } ?>
                             
                             <?php if ($cmt[$i]['count_cmtimg'] > 0) { ?>
                             <div class="comment-cont-img">
@@ -443,7 +443,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                                     <div class="button"><input type="button" id="btn_video" onclick="return false;">적용하기</div>
                                 </div>
                                 <div class="note">
-                                    <span class="text-red">*</span> <a href="#" data-bs-toggle="modal" data-bs-target="#modal_comment_video_note"><u>지원 동영상 서비스 목록 보기</u></a>
+                                    <span class="text-crimson">*</span> <a href="#" data-bs-toggle="modal" data-bs-target="#modal_comment_video_note"><u>지원 동영상 서비스 목록 보기</u></a>
                                 </div>
                                 <div id="modal_comment_video_note" class="modal fade" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -554,7 +554,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                                         <input type="hidden" name="map_addr3" id="map_addr3" value="">
                                         <input type="hidden" name="map_addr_jibeon" value="">
                                         <div class="text-center">
-                                            <button type="button" class="btn-e btn-e-lg btn-e-red" id="btn_map" onclick="return false;">적용하기</button>
+                                            <button type="button" class="btn-e btn-e-lg btn-e-crimson" id="btn_map" onclick="return false;">적용하기</button>
                                         </div>
                                     </div>
                                 </div>

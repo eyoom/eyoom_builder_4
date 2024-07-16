@@ -2,7 +2,7 @@
 $sub_menu = '400400';
 
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
-include_once(G5_ADMIN_PATH.'/shop_admin/admin.shop.lib.php');
+
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 
 check_admin_token();

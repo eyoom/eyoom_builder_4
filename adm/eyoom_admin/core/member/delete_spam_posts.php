@@ -105,6 +105,12 @@ $sql = " delete from {$g5['board_new_table']} where {$sql_where} and (bn_datetim
 sql_query($sql, false);
 
 /**
+ * 최신글에서 삭제
+ */
+$sql = " delete from {$g5['eyoom_best']} where {$sql_where} and (bb_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59')  ";
+sql_query($sql, false);
+
+/**
  * 스크랩에서 삭제
  */
 $sql = " delete from {$g5['scrap_table']} where {$sql_where} and (ms_datetime between '{$fr_date} 00:00:00' and '{$to_date} 23:59:59')  ";

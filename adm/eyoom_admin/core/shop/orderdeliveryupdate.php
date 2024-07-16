@@ -6,7 +6,6 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 $sub_menu = "400400";
 
-include_once(G5_ADMIN_PATH.'/shop_admin/admin.shop.lib.php');
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 
 auth_check_menu($auth, $sub_menu, "w");

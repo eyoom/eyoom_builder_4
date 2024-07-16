@@ -18,6 +18,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .login-box .login-box-in .login-form {padding:30px 50px;color:#171C29}
 .login-box .login-box-in .login-form-margin-bottom {margin-bottom:20px}
 .login-box .login-box-in .login-form h1 {font-size:30px;font-weight:700;text-align:center;margin:0 0 30px}
+.login-box .login-box-in .login-form .input input::placeholder {color:#b5b5b5}
 .login-box .login-box-in .login-form .input .pv-icon {position:absolute;top:8px;right:45px;cursor:pointer}
 .login-box .login-box-in .login-form .input .pv-icon.is-active i {display:none}
 .login-box .login-box-in .login-form .input .pv-icon.is-active:after {font-family:'Font Awesome\ 5 Free';content:"\f070";font-weight:900}
@@ -82,7 +83,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <div class="m-b-20"></div>
                     <div class="login-link m-b-10">
                         <a href="<?php echo G5_BBS_URL; ?>/register.php">회원가입</a>
-                        <a href="<?php echo G5_BBS_URL; ?>/password_lost.php">아이디/비밀번호찾기</a>
+                        <a href="<?php echo G5_BBS_URL; ?>/password_lost.php?wmode=1" id="ol_password_lost">아이디/비밀번호찾기</a>
                     </div>
                     <div class="login-btn">
                         <button type="submit" value="로그인" class="btn-e btn-e-dark btn-e-lg btn-block">로그인</button>

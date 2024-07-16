@@ -1244,6 +1244,56 @@ $frm_submit .= $frm_eba_submit;
         </div>
         <?php /* 본인확인 설정 : 끝 */ ?>
 
+        <?php /* 상담신청 설정 : 시작 */ ?>
+        <div class="tab-pane" id="anc_cf_counsel" role="tabpanel" aria-labelledby="anc_cf_counsel_tab">
+            <div class="adm-form-table m-b-20">
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>상담신청 설정</strong></div>
+                <div class="adm-form-info">
+                    <div class="cont-text-bg m-b-10">
+                        <p class="bg-info">
+                            <i class="fas fa-info-circle"></i> <span class="m-r-10">상담 분야 및 상담 단계를 설정해 주세요.</span><br>
+                            <i class="fas fa-info-circle"></i> <span class="m-r-10">상담 분야 및 상담 단계를 수정하시면 기존에 접수된 상담신청건에 영향을 미칩니다.</span>
+                        </p>
+                    </div>
+                    <p class="m-b-5"><strong>관리자 - 회원관리 - 상담신청관리에서 '상담 신청 관리'를 할수 있습니다.</strong></p>
+                    <p><a href="<?php echo G5_ADMIN_URL; ?>/?dir=member&pid=counsel_list"><u class="text-blue">[상담 신청 관리 바로가기]</u></a></p>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label class="label">상담 분야 설정</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="input">
+                            <input type="text" name="cf_counsel_part" value="<?php echo get_sanitize_input($config['cf_counsel_part']); ?>" id="cf_counsel_part">
+                        </label>
+                        <div class="note"><strong>Note:</strong> 상담 분야를 쉼표(,)로 구분하여 입력해 주세요. </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label class="label">상담 단계 설정</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="input">
+                            <input type="text" name="cf_counsel_status" value="<?php echo get_sanitize_input($config['cf_counsel_status']); ?>" id="cf_counsel_status">
+                        </label>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label class="label">설정 변경 내역 보이기</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="checkbox">
+                            <input type="checkbox" name="cf_counsel_view" id="cf_counsel_view" value="1" <?php echo $config['cf_counsel_view']?'checked':''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 체크시 위 '상담 분야 설정' 및 '상담 단계 설정' 내용을 변경하였을 경우, 변경 전 설정 내역을 '상담 신청 관리'에서 확인할 수 있습니다. </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php /* 상담신청 설정 : 끝 */ ?>
+
         <?php /* 짧은주소 설정 : 시작 */ ?>
         <div class="tab-pane" id="anc_cf_url" role="tabpanel" aria-labelledby="anc_cf_url_tab">
             <div class="adm-form-table m-b-20">

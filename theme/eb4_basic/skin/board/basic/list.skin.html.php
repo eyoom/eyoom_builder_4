@@ -47,7 +47,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .bl-list .bl-subj a:hover {color:#000;text-decoration:underline}
 .board-list .bl-list .bl-subj .reply-indication {display:inline-block;width:7px;height:10px;border-left:1px dotted #b5b5b5;border-bottom:1px dotted #b5b5b5}
 .board-list .bl-list .bl-subj .bl-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5;margin-left:10px;margin-top:3px;margin-bottom:3px}
-.board-list .bl-list .bl-subj .bl-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
+.board-list .bl-list .bl-subj .bl-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#ab0000;margin-right:2px}
 .board-list .bl-list .bl-subj .bl-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .board-list .bl-list .bl-subj .bl-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
 .board-list .bl-list .bl-subj .bl-new-icon b {position:absolute;top:3px;left:8px;width:2px;height:8px;background-color:#fff;transform:rotate(-60deg)}
@@ -61,7 +61,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .star-ratings-list {width:75px;margin:0 auto}
 .board-list .star-ratings-list li {padding:0;float:left;margin-right:0}
 .board-list .star-ratings-list li .rating {color:#a5a5a5;font-size:.8125rem;line-height:normal}
-.board-list .star-ratings-list li .rating-selected {color:#cc2300;font-size:.8125rem}
+.board-list .star-ratings-list li .rating-selected {color:#ab0000;font-size:.8125rem}
 .board-list .bl-no-list {text-align:center;color:#959595;padding:70px 0}
 @media (max-width:991px) {
     .board-list .bl-head {display:none}

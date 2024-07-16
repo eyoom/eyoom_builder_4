@@ -32,6 +32,13 @@ if($config['cf_new_del'] > 0) {
     sql_query(" OPTIMIZE TABLE `{$g5['eyoom_activity']}` ");
 }
 
+// 설정일이 지난 인기게시물 삭제
+if($config['cf_new_del'] > 0) {
+    $sql = " delete from {$g5['eyoom_best']} where (TO_DAYS('".G5_TIME_YMDHIS."') - TO_DAYS(bb_datetime)) > '{$config['cf_new_del']}' ";
+    sql_query($sql);
+    sql_query(" OPTIMIZE TABLE `{$g5['eyoom_best']}` ");
+}
+
 /**
  * 이윰멤버 테이블 자동정리
  */

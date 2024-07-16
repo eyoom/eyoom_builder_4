@@ -241,7 +241,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php if ($is_member) { //임시 저장된 글 기능 ?>
                     <span class="autosave-btn">
                         <script src="<?php echo G5_URL; ?>/js/autosave.js"></script>
-                        <button type="button" id="btn_autosave" class="btn-e btn-dark position-relative">임시 저장된 글 <span id="autosave_count" class="badge badge-red rounded"><?php echo $autosave_count; ?></span></button>
+                        <button type="button" id="btn_autosave" class="btn-e btn-dark position-relative">임시 저장된 글 <span id="autosave_count" class="badge badge-crimson rounded"><?php echo $autosave_count; ?></span></button>
                         <div id="autosave_pop">
                             <div class="autosave_heading">
                                 <strong>임시 저장된 글 목록</strong>
@@ -410,7 +410,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                                     <input type="hidden" name="map_addr3" id="map_addr3" value="">
                                     <input type="hidden" name="map_addr_jibeon" value="">
                                     <div class="text-center">
-                                        <button type="button" class="btn-e btn-e-lg btn-e-red" id="btn_map" onclick="return false;">적용하기</button>
+                                        <button type="button" class="btn-e btn-e-lg btn-e-crimson" id="btn_map" onclick="return false;">적용하기</button>
                                     </div>
                                 </div>
                             </div>

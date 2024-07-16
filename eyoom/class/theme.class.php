@@ -1299,6 +1299,7 @@ class theme extends qfile
                 if ($pid == 'provision') { $title = '이용약관'; }
                 if ($pid == 'privacy') { $title = '개인정보취급방침'; }
                 if ($pid == 'noemail') { $title = '이메일무단수집거부'; }
+                if ($pid == 'counsel') { $title = '상담 신청'; }
                 break;
         }
 

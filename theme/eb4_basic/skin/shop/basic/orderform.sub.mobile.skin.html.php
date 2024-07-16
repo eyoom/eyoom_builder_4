@@ -127,7 +127,7 @@ set_session('ss_personalpay_hash', '');
 .shop-order-form .payment-select-wrap #m_sod_frm_paysel .inicis_kakaopay {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/kakaopay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px;height:60px}
 .shop-order-form .payment-select-wrap #m_sod_frm_paysel .naverpay_icon {background:#fff;background-image:url("<?php echo EYOOM_THEME_URL .'/skin/shop/'.$eyoom['shop_skin']; ?>/img/naverpay.jpg");background-repeat:no-repeat;background-position:5px 5px;background-size:48px 48px;height:60px}
 #display_pay_button {padding:0;border:0}
-.shop-order-form .btn_confirm .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#ab0000;color:#fff;font-size:.9375rem !important;font-weight:700 !important;letter-spacing:0;border:0 !important;margin-bottom:15px}
+.shop-order-form .btn_confirm .btn_submit {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#3f4678;color:#fff;font-size:.9375rem !important;font-weight:700 !important;letter-spacing:0;border:0 !important;margin-bottom:15px}
 .shop-order-form .btn_confirm a.btn_cancel {display:block;width:100%;height:46px;line-height:46px;padding:0;background:#fff;color:#757575;font-size:.9375rem;font-weight:700;letter-spacing:0;border:1px solid #d5d5d5;border-radius:3px;box-sizing:border-box}
 .shop-order-form .payment-point-use-box {margin-top:20px}
 .shop-order-form .payment-point-use {position:relative;overflow:hidden;clear:both;padding:10px 15px;border:1px solid #e5e5e5;margin-top:-1px;background:#fff;color:#757575}

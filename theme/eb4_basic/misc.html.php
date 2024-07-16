@@ -66,7 +66,7 @@ function set_member_icon (icon) {
     var selected_icon_html = '<img src="'+icon_url+'">';
     $("#selected_icon").val(icon);
     $("#default-photo-img").empty().html(selected_icon_html);
-     $('.profile-default-img-modal').modal('hide');
+    $('.profile-default-img-modal').modal('hide');
 }
 </script>
 <?php /* 프로필 사진 모달 끝 */ ?>
@@ -105,7 +105,7 @@ function set_member_icon (icon) {
 
 <?php /* 스크랩 목록 모달 시작 */ ?>
 <div class="modal fade scrap-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-list-alt text-gray m-r-7"></i><strong>스크랩 목록</strong></h5>
@@ -121,7 +121,7 @@ function set_member_icon (icon) {
 
 <?php /* 포인트 모달 시작 */ ?>
 <div class="modal fade point-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="fas fa-chart-line text-gray m-r-7"></i><strong>포인트 내역</strong></h5>
@@ -137,7 +137,7 @@ function set_member_icon (icon) {
 
 <?php /* 폼메일 발송 모달 시작 */ ?>
 <div class="modal fade formmail-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-envelope text-gray m-r-7"></i><strong>메일 보내기</strong></h5>
@@ -153,7 +153,7 @@ function set_member_icon (icon) {
 
 <?php /* 쪽지 모달 시작 */ ?>
 <div class="modal fade memo-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-paper-plane text-gray m-r-7"></i><strong>내 쪽지함</strong></h5>
@@ -169,7 +169,7 @@ function set_member_icon (icon) {
 
 <?php /* 쪽지 보내기 모달 시작 */ ?>
 <div class="modal fade memo-send-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-paper-plane text-gray m-r-7"></i><strong>내 쪽지함</strong></h5>
@@ -185,7 +185,7 @@ function set_member_icon (icon) {
 
 <?php /* 쪽지 보기  모달 시작 */ ?>
 <div class="modal fade memo-view-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-paper-plane text-gray m-r-7"></i><strong>내 쪽지함</strong></h5>
@@ -202,7 +202,7 @@ function set_member_icon (icon) {
 <?php /* 회원메모 모달 시작 */ ?>
 <?php if ($config['cf_use_mbmemo'] == '1' && $is_member) { ?>
 <div class="modal fade mbmemo-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="far fa-sticky-note text-gray m-r-7"></i><strong>회원메모</strong></h5>
@@ -277,7 +277,7 @@ function scrap_modal() {
     });
     $('.scrap-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#scrap-iframe").attr("src", "<?php echo G5_BBS_URL; ?>/scrap.php");
-        $('#scrap-iframe').height(parseInt($(window).height() * 0.8));
+        $('#scrap-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -290,7 +290,7 @@ function point_modal() {
     });
     $('.point-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#point-iframe").attr("src", "<?php echo G5_BBS_URL; ?>/point.php");
-        $('#point-iframe').height(parseInt($(window).height() * 0.8));
+        $('#point-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -303,7 +303,7 @@ function formmail_modal(href) {
     });
     $('.formmail-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#formmail-iframe").attr("src", href);
-        $('#formmail-iframe').height(parseInt($(window).height() * 0.8));
+        $('#formmail-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -319,7 +319,7 @@ function memo_modal() {
     });
     $('.memo-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#memo-iframe").attr("src", "<?php echo G5_BBS_URL; ?>/memo.php");
-        $('#memo-iframe').height(parseInt($(window).height() * 0.8));
+        $('#memo-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -332,7 +332,7 @@ function memo_send_modal(href) {
     });
     $('.memo-send-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#memo-send-iframe").attr("src", href);
-        $('#memo-send-iframe').height(parseInt($(window).height() * 0.8));
+        $('#memo-send-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -345,7 +345,7 @@ function memo_view_modal(href) {
     });
     $('.memo-view-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#memo-view-iframe").attr("src", href);
-        $('#memo-view-iframe').height(parseInt($(window).height() * 0.8));
+        $('#memo-view-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -374,7 +374,7 @@ function eb_admset_modal(href) {
     });
     $('.admset-iframe-modal').modal('show').on('shown.bs.modal', function () {
         $("#admset-iframe").attr("src", href);
-        $('#admset-iframe').height(parseInt($(window).height() * 0.8));
+        $('#admset-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -387,6 +387,21 @@ window.closeModal = function(url){
 <?php } ?>
 </script>
 <?php } ?>
+
+<?php /* 상담 신청 모달 시작 */ ?>
+<div class="modal fade counsel-iframe-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="counsel-iframe" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<?php /* 상담 신청 모달 끝 */ ?>
 
 <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
 <?php /* 상품 사용후기 모달 시작 */ ?>
@@ -433,7 +448,7 @@ window.closeModal = function(url){
 
 <?php /* 상품 쿠폰 모달 시작 */ ?>
 <div class="modal fade coupon-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="fas fa-ticket-alt text-gray m-r-7"></i><strong>쿠폰 내역</strong></h5>
@@ -448,6 +463,19 @@ window.closeModal = function(url){
 <?php /* 상품 쿠폰 모달 끝 */ ?>
 
 <script>
+function counsel_modal() {
+    $('.counsel-iframe-modal').modal('show').on('hidden.bs.modal', function() {
+        $("#counsel-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.counsel-iframe-modal').modal('show').on('shown.bs.modal', function() {
+        $("#counsel-iframe").attr("src", "<?php echo G5_URL; ?>/page/?pid=counsel&wmode=1");
+        $('#counsel-iframe').height(parseInt($(window).height() * 0.7));
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
+}
+
 function itemuse_modal(href) {
     $('.itemuse-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#itemuse-iframe").attr("src", "");
@@ -489,7 +517,7 @@ function coupon_modal(href) {
     });
     $('.coupon-iframe-modal').modal('show').on('shown.bs.modal', function() {
         $("#coupon-iframe").attr("src", "<?php echo G5_SHOP_URL; ?>/coupon.php");
-        $('#coupon-iframe').height(parseInt($(window).height() * 0.8));
+        $('#coupon-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;
@@ -509,7 +537,7 @@ function close_modal() {
 
 <?php /* 설문 결과보기 모달 시작 */ ?>
 <div class="modal fade poll-result-iframe-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title f-s-20r"><i class="fas fa-chart-bar text-gray m-r-7"></i><strong>투표 결과 보기</strong></h5>
@@ -541,7 +569,7 @@ function poll_result(url) {
     });
     $('.poll-result-iframe-modal').modal('show').on('shown.bs.modal', function () {
         $("#poll-result-iframe").attr("src", url);
-        $('#poll-result-iframe').height(parseInt($(window).height() * 0.8));
+        $('#poll-result-iframe').height(parseInt($(window).height() * 0.7));
         $('html').css({overflow: 'hidden'});
     });
     return false;

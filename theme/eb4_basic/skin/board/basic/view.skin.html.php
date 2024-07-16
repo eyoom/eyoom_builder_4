@@ -51,10 +51,10 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
 .board-view .board-view-star .collapse-rating-result-panel > span:after {content:"|";margin:0 3px;color:#d5d5d5}
 .board-view .board-view-star .collapse-rating-result-panel > span:last-child:after {display:none}
 .board-view .board-view-star .collapse-rating-result-panel span a {color:#252525}
-.board-view .board-view-star .collapse-rating-result-panel span.active .sv_wrap > a {color:#cc2300}
+.board-view .board-view-star .collapse-rating-result-panel span.active .sv_wrap > a {color:#ab0000}
 .board-view .eyoom-form .rating {display:inline-block;float:left;width:160px;margin-top:0px}
 .board-view .eyoom-form .rating label {margin-top:3px;margin-bottom:0}
-.board-view .eyoom-form .rating strong {color:#cc2300}
+.board-view .eyoom-form .rating strong {color:#ab0000}
 .board-view .eyoom-form .rating-mobile {position:absolute;top:10px;left:50%;display:inline-block;float:left;width:160px;margin-top:0;margin-left:-80px}
 .board-view .eyoom-form .rating-mobile label {margin:0;width:32px;height:28px;line-height:28px;padding:0}
 .board-view .eyoom-form .rating-mobile label .fas {font-size:26px}
@@ -69,7 +69,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/prism/p
 .board-view .board-view-btn-right {float:right}
 .board-view .board-view-btn {position:relative;float:left;padding:0 15px;height:35px;line-height:35px;cursor:pointer;background:#fff;font-size:.8125rem;color:#252525;border-left:1px solid #eaeaea}
 .board-view .board-view-btn:last-child {border-right:1px solid #eaeaea}
-.board-view .board-view-btn:hover {color:#cc2300}
+.board-view .board-view-btn:hover {color:#ab0000}
 .board-view .view-top-btn {padding:20px 0}
 .board-view .view-top-btn:after {display:block;visibility:hidden;clear:both;content:""}
 .board-view .view-top-btn .top-btn-left li {float:left;margin-right:1px;margin-bottom:5px}
@@ -348,9 +348,9 @@ button.mfp-close {position:fixed;color:#fff !important}
         <div class="board-view-btn-right">
         <?php if ($eyoom_board['bo_use_yellow_card'] == '1') { ?>
             <?php if (!$mb_ycard['mb_id']) { ?>
-            <span id="yellow_card" class="board-view-btn" data-bs-toggle="modal" data-bs-target=".yellowcard-modal">신고 <span class="badge badge-red"><?php echo number_format($eb_5['yc_count']); ?></span></span>
+            <span id="yellow_card" class="board-view-btn" data-bs-toggle="modal" data-bs-target=".yellowcard-modal">신고 <span class="badge badge-crimson"><?php echo number_format($eb_5['yc_count']); ?></span></span>
             <?php } else { ?>
-            <span id="cancel_yellow_card" class="board-view-btn">신고 취소 <span class="badge badge-red"><?php echo number_format($eb_5['yc_count']); ?></span></span>
+            <span id="cancel_yellow_card" class="board-view-btn">신고 취소 <span class="badge badge-crimson"><?php echo number_format($eb_5['yc_count']); ?></span></span>
             <?php } ?>
             <?php if ($blind_direct) { ?>
                 <?php if ($eb_5['yc_blind'] != 'y') { ?>

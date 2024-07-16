@@ -831,3 +831,30 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_mbmemo` (
     `mm_memo` text NOT NULL,
     PRIMARY KEY  (`mm_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_counsel`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_counsel`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_counsel` (
+    `cs_id` int(11) UNSIGNED NOT NULL auto_increment,
+    `mb_id` varchar(30) NOT NULL,
+    `cs_part` varchar(20) NOT NULL,
+    `cs_company` varchar(50) NOT NULL,
+    `cs_name` varchar(30) NOT NULL,
+    `cs_tel` varchar(20) NOT NULL,
+    `cs_email` varchar(255) NOT NULL,
+    `cs_subject` varchar(255) NOT NULL,
+    `cs_content` text NOT NULL,
+    `cs_file1` text NOT NULL,
+    `cs_file2` text NOT NULL,
+    `cs_memo` text NOT NULL,
+    `cs_status` varchar(20) NOT NULL,
+    `cs_ip` varchar(255) NOT NULL,
+    `cs_update` datetime NOT NULL,
+    `cs_regdt` datetime NOT NULL,
+    PRIMARY KEY  (`cs_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
