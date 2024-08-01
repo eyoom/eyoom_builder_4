@@ -1,6 +1,9 @@
 <?php
 include_once('../../../../common.php');
 
+// 상담 신청 기능 사용유무 체크
+if (!$config['cf_use_counsel']) alert("사용하지 않는 기능입니다.");
+
 include_once(G5_LIB_PATH.'/register.lib.php');
 include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
 include_once(G5_LIB_PATH.'/mailer.lib.php');
@@ -163,7 +166,7 @@ $cs_id = sql_insert_id();
 /**
  * 이메일 발송
  */
-if ($config['cf_admin_email']) {
+if ($config['cf_counsel_sendmail']) {
     $subject = '['.$config['cf_title'].'] '.$cs_name .' 님의 ' . $cs_part . '이(가) 접수되었습니다.';
 
     if (!$cs_email) $cs_email = $config['cf_admin_email'];
@@ -172,8 +175,15 @@ if ($config['cf_admin_email']) {
     include_once (EYOOM_CORE_PATH.'/page/proc/counsel_update.mail.php');
     $content = ob_get_contents();
     ob_end_clean();
-
-    mailer($cs_name, $cs_email, $config['cf_admin_email'], $subject, $content, 1);
+    
+    if (!$config['cf_counsel_email']) {
+        mailer($cs_name, $cs_email, $config['cf_admin_email'], $subject, $content, 1);
+    } else {
+        $cf_counsel_email_arr = explode(',', $config['cf_counsel_email']);
+        foreach ($cf_counsel_email_arr as $k => $counsel_email) {
+            mailer($cs_name, $cs_email, $counsel_email, $subject, $content, 1);
+        }
+    }
 }
 
 alert("정상적으로 문의내용을 등록하였습니다.", G5_URL);

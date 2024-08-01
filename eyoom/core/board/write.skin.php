@@ -38,7 +38,7 @@ if ($w=='' && $eyoom_board['bo_write_limit'] && !$is_admin) {
     if (!$is_member) {
         alert("본 게시판은 하루 글작성 회수제한이 있는 게시판으로 비회원은 글을 작성하실 수 없습니다.");
     } else {
-        $wr_limit = sql_fetch("select count(*) as cnt from {$write_table} where (mb_id = '{$member['mb_id']}' or wr_ip = '" . $_SERVER['REMOTE_ADDR'] . "') and wr_datetime between '" . date('Y-m-d') . " 00:00:00' and '" . date('Y-m-d') . " 23:59:59' ");
+        $wr_limit = sql_fetch("select count(*) as cnt from {$write_table} where wr_id = wr_parent and (mb_id = '{$member['mb_id']}' or wr_ip = '" . $_SERVER['REMOTE_ADDR'] . "') and wr_datetime between '" . date('Y-m-d') . " 00:00:00' and '" . date('Y-m-d') . " 23:59:59' ");
         if ($wr_limit['cnt'] >= $eyoom_board['bo_write_limit']) {
             alert("[{$board['bo_subject']}]에는 하루에 {$eyoom_board['bo_write_limit']}개의 글을 작성하실 수 있습니다.");
         }

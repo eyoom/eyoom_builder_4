@@ -461,6 +461,7 @@ blockquote.hero:hover {background-color:#353535 !important;border-color:#555555 
 .swal2-popup {background-color:#161b22 !important;border:1px solid #30363d !important}
 .swal2-title {color:#b5b5b5 !important}
 .swal2-html-container {color:#858585 !important}
+div:where(.swal2-container) div:where(.swal2-timer-progress-bar) {background:rgba(255,255,255,0.2) !important}
 
 /*---------- pagination ----------*/
 .eb-pagination a {border-color:#30363d !important;color:#858585 !important}

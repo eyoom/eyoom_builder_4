@@ -24,7 +24,7 @@ if ($sfl && $stx) {
     $sql_search .= " and {$sfl} like '%{$stx}%' ";
 }
 
-$scs = (int) clean_xss_tags(trim($_REQUEST['scs']));
+$scs = clean_xss_tags(trim($_REQUEST['scs']));
 if ($scs) {
     $sql_search .= " and cs_status = '{$scs}' ";
     $qstr .= "&amp;scs={$scs}";

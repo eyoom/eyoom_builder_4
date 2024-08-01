@@ -41,16 +41,22 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $tmp_write_table = $g5['write_prefix'].$row['bo_table'];
 
     $row2 = sql_fetch(" select * from {$tmp_write_table} where wr_id = '{$row['wr_id']}' ");
-    $list[$i] = $row2;
+    if (!$row2) {
+        sql_query("delete from {$g5['eyoom_best']} where bo_table='{$row['bo_table']}' and wr_id='{$row['wr_id']}' ");
+        continue;
+    } else {
+        $list[$i] = $row2;
 
-    $list[$i]['bo_table'] = $row['bo_table'];
-    $list[$i]['href'] = get_pretty_url($row['bo_table'], $row2['wr_id'], $comment_link);
-
-    $list[$i]['datetime1'] = substr($row['wr_datetime'],0,10);
-    $list[$i]['datetime2'] = substr($row['bb_datetime'],0,10);
-
-    $list[$i]['bo_subject'] = ((G5_IS_MOBILE && $row['bo_mobile_subject']) ? $row['bo_mobile_subject'] : $row['bo_subject']);
-    $list[$i]['wr_subject'] = $row2['wr_subject'];
+        $list[$i]['bo_table'] = $row['bo_table'];
+        $list[$i]['wr_good'] = $row2['wr_good'];
+        $list[$i]['href'] = get_pretty_url($row['bo_table'], $row2['wr_id'], $comment_link);
+    
+        $list[$i]['datetime1'] = substr($row['wr_datetime'],0,10);
+        $list[$i]['datetime2'] = substr($row['bb_datetime'],0,10);
+    
+        $list[$i]['bo_subject'] = ((G5_IS_MOBILE && $row['bo_mobile_subject']) ? $row['bo_mobile_subject'] : $row['bo_subject']);
+        $list[$i]['wr_subject'] = $row2['wr_subject'];
+    }
 }
 
 $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "?gr_id=$gr_id&amp;view=$view&amp;mb_id=$mb_id&amp;page=");

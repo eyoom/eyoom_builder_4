@@ -42,7 +42,8 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                                 <label class="select width-100px">
                                     <select name="sfl" id="sfl">
                                         <option value="cs_subject"<?php echo get_selected($sfl, "cs_subject"); ?>>제목</option>
-                                        <option value="cs_manager"<?php echo get_selected($sfl, "cs_manager"); ?>>회사명</option>
+                                        <option value="cs_company"<?php echo get_selected($sfl, "cs_company"); ?>>회사명</option>
+                                        <option value="cs_name"<?php echo get_selected($sfl, "cs_name"); ?>>담당자</option>
                                         <option value="cs_tel"<?php echo get_selected($sfl, "cs_tel"); ?>>연락처</option>
                                         <option value="cs_email"<?php echo get_selected($sfl, "cs_email"); ?>>이메일</option>
                                     </select><i></i>
@@ -65,7 +66,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <select name="scs" id="scs">
                                 <option value="">:: 선택 ::</option>
                                 <?php foreach ($counsel_status as $k => $status_string) { ?>
-                                <option value="<?php echo $k; ?>" <?php echo $scs == $k ? 'selected': ''; ?>><?php echo $status_string; ?></option>
+                                <option value="<?php echo $status_string; ?>" <?php echo $scs == trim($status_string) ? 'selected': ''; ?>><?php echo $status_string; ?></option>
                                 <?php } ?>
                             </select><i></i>
                         </label>

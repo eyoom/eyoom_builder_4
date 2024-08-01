@@ -86,23 +86,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['es_image']) && $_FIL
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     $uploaded_file = $_FILES['es_image']['tmp_name'];
-    $file_mimetype = mime_content_type($uploaded_file);
-    $file_ext = $qfile->get_file_ext($_FILES['es_image']['name']);
-    if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
-        if (is_uploaded_file($uploaded_file)) {
-            $file_name = md5(time().$_FILES['es_image']['name']).".".$file_ext;
-            $dest_path = G5_DATA_PATH.'/ebslider/'.$es_master['es_theme'].'/img/'.$file_name;
-
-            move_uploaded_file($uploaded_file, $dest_path);
-
-            if (file_exists($dest_path)) {
-                chmod($dest_path, G5_FILE_PERMISSION);
-                $es_image = $file_name;
+    if ($uploaded_file) {
+        $file_mimetype = mime_content_type($uploaded_file);
+        $file_ext = $qfile->get_file_ext($_FILES['es_image']['name']);
+        if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+            if (is_uploaded_file($uploaded_file)) {
+                $file_name = md5(time().$_FILES['es_image']['name']).".".$file_ext;
+                $dest_path = G5_DATA_PATH.'/ebslider/'.$es_master['es_theme'].'/img/'.$file_name;
+    
+                move_uploaded_file($uploaded_file, $dest_path);
+    
+                if (file_exists($dest_path)) {
+                    chmod($dest_path, G5_FILE_PERMISSION);
+                    $es_image = $file_name;
+                }
             }
+        } else {
+            $file_upload_msg .= $_FILES['es_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+            alert($file_upload_msg);
         }
-    } else {
-        $file_upload_msg .= $_FILES['es_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
-        alert($file_upload_msg);
     }
 }
 

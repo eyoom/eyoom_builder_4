@@ -139,6 +139,25 @@ class eyoom extends qfile
     }
 
     /**
+     * 이윰빌더 최신 배포버전 가져오기
+     */
+    public function get_eyoom_version($eb_season='4') {
+        $ch = curl_init();
+        $url = "https://raw.githubusercontent.com/eyoom/";
+        $url .= "eyoom_builder_{$eb_season}/master/eyoom/extend/eyoom{$eb_season}.version.php";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        if(!curl_errno($ch)) {
+            if (preg_match('/define\s*\(\s*\'EYOOM_VERSION\'\s*,\s*\'([0-9]+\.[0-9]+\.[0-9]+)\'\s*\)\s*;/', $result, $matches)) {
+                return $matches[1];
+            }
+        } else {
+            return EYOOM_VERSION;
+        }
+    }
+
+    /**
      * 읽지 않은 쪽지수
      */
     public function check_memo_auth($member) {
@@ -1289,15 +1308,8 @@ class eyoom extends qfile
                         /**
                         * 스킨정보
                         */
-                        if (G5_IS_MOBILE) {
-                            $countdown_skin_path = EYOOM_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/countdown/'.$countdown['cd_skin'];
-                            if (!is_dir($countdown_skin_path))
-                                $countdown_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/countdown/'.$countdown['cd_skin'];
-                            $countdown_skin_url = str_replace(G5_PATH, G5_URL, $countdown_skin_path);
-                        } else {
-                            $countdown_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/countdown/'.$countdown['cd_skin'];
-                            $countdown_skin_url = str_replace(G5_PATH, G5_URL, $countdown_skin_path);
-                        }
+                        $countdown_skin_path = EYOOM_THEME_PATH.'/'.G5_SKIN_DIR.'/countdown/'.$countdown['cd_skin'];
+                        $countdown_skin_url = str_replace(G5_PATH, G5_URL, $countdown_skin_path);
 
                         /**
                          * 공사중 스킨 페이지 출력

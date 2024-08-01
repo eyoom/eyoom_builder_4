@@ -108,7 +108,7 @@ foreach ($amenu as $key => $value) {
             if (in_array($menu[$subkey][$j][3], $except_menu)) continue;
 
             if ($member['mb_id'] != $config['cf_admin'] && $menu[$subkey][$j][3] == 'cf_manager') continue;
-
+            if (!$config['cf_use_counsel'] && $menu[$subkey][$j][3] == 'cs_list') continue;
             $subtmp  = explode('/',$menu[$subkey][$j][2]);
             $subfile = $subtmp[count($subtmp)-1];
             $_subpid = substr($subfile, 0, -4);

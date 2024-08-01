@@ -131,18 +131,20 @@ for ($i=0; $i<count((array)$_FILES['ci_img']['name']); $i++) {
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     $uploaded_file = $_FILES['ci_img']['tmp_name'][$i];
-    $file_mimetype = mime_content_type($uploaded_file);
-    $file_ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
-    if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
-        if (is_uploaded_file($uploaded_file)) {
-            $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$file_ext;
-            $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$file_name;
-
-            move_uploaded_file($uploaded_file, $dest_path);
-            
-            if (file_exists($dest_path)) {
-                chmod($dest_path, G5_FILE_PERMISSION);
-                $ci_img[$i] = $file_name;
+    if ($uploaded_file) {
+        $file_mimetype = mime_content_type($uploaded_file);
+        $file_ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
+        if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+            if (is_uploaded_file($uploaded_file)) {
+                $file_name = md5(time().$_FILES['ci_img']['name'][$i]).".".$file_ext;
+                $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ci_theme.'/img/'.$file_name;
+    
+                move_uploaded_file($uploaded_file, $dest_path);
+                
+                if (file_exists($dest_path)) {
+                    chmod($dest_path, G5_FILE_PERMISSION);
+                    $ci_img[$i] = $file_name;
+                }
             }
         }
     }

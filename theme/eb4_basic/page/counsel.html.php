@@ -4,6 +4,9 @@
  */
 if (!defined('_EYOOM_')) exit;
 
+// 상담 신청 기능 사용유무 체크
+if (!$config['cf_use_counsel']) alert("사용하지 않는 기능입니다.");
+
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css" type="text/css" media="screen">',0);
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
 
@@ -126,7 +129,7 @@ $counsel_part = explode(',', $config['cf_counsel_part']);
                 <div class="col col-12">
                     <label class="input required-mark">
                         <i class="icon-append far fa-envelope"></i>
-                        <input type="text" name="cs_email" placeholder="이메일" value="<?php echo $ss_reg_email; ?>" required>
+                        <input type="text" name="cs_email" placeholder="이메일" required>
                     </label>
                 </div>
             </div>

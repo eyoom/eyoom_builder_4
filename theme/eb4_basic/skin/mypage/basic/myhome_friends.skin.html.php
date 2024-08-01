@@ -18,7 +18,7 @@ if (!defined('_EYOOM_')) exit;
 .myhome-follow .follow-info-heading {margin-left:90px;margin-bottom:15px}
 .myhome-follow .follow-info-content {position:relative}
 .myhome-follow .follow-info-content .margin-hr-15 {border-top:1px dotted #f2f2f2}
-.myhome-follow .follow-name {fline-height:20px}
+.myhome-follow .follow-name {line-height:20px}
 .myhome-follow .follow-name a {color:#252525}
 .myhome-follow .follow-lp {line-height:20px}
 .myhome-follow .follow-sign {position:relative;color:#757575}
@@ -26,7 +26,6 @@ if (!defined('_EYOOM_')) exit;
 .myhome-follow .follow-introduce {position:relative;color:#757575}
 .myhome-follow .follow-introduce strong {color:#252525}
 .myhome-follow .profile-btns {position:absolute;top:0;right:0}
-.myhome-follow .follow-item-box:hover .follow-name a {text-decoration:underline}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
 @media (max-width:767px) {
     .myhome-follow .follow-item {width:100%}
@@ -55,9 +54,7 @@ if (!defined('_EYOOM_')) exit;
                 <div class="follow-info">
                     <div class="follow-info-heading">
                         <span class="follow-name float-start">
-                            <a href="<?php echo G5_URL; ?>/?<?php echo $list[$i]['mb_id']; ?>" target="_blank">
-                                <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?>
-                            </a>
+                            <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?>
                         </span>
                         <span class="follow-lp float-end">
                             레벨 : <span class="m-r-10"><?php echo $list[$i]['level']; ?></span>
@@ -75,11 +72,11 @@ if (!defined('_EYOOM_')) exit;
 
                         <?php if ($config['cf_use_signature'] == '1') { ?>
                         <div class="margin-hr-15"></div>
-                        <div class="follow-sign ellipsis">서명 : <?php echo stripslashes($list[$i]['mb_signature']); ?></div>
+                        <div class="follow-sign ellipsis">서명 : <?php if($list[$i]['mb_signature']) { ?><?php echo stripslashes($list[$i]['mb_signature']); ?><?php } else { ?><span class="text-light-gray">입력한 서명이 없습니다.</span><?php } ?></div>
                         <?php } ?>
                         <?php if ($config['cf_use_profile'] == '1') { ?>
                         <div class="margin-hr-15"></div>
-                        <div class="follow-introduce ellipsis">소개 : <?php echo stripslashes($list[$i]['mb_profile']); ?></div>
+                        <div class="follow-introduce ellipsis">소개 : <?php if($list[$i]['mb_profile']) { ?><?php echo stripslashes($list[$i]['mb_profile']); ?><?php } else { ?><span class="text-light-gray">입력한 소개가 없습니다.</span><?php } ?></div>
                         <?php } ?>
 
                         <?php if ($is_member) { ?>
@@ -115,7 +112,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/infinite-scroll/jquery.infinitescroll.min.js"></script>
 <script>
 $(function(){
@@ -133,9 +130,13 @@ $(function(){
 
     function( newElements ) {
         var $newElems = $( newElements ).css({ opacity: 0 });
-        $newElems.imagesLoaded(function(){
-            $newElems.animate({ opacity: 1 });
-        });
+        $newElems.animate({ opacity: 1 });
+        $container.masonry( 'appended', $newElems, true );
+    });
+
+    $container.masonry({
+        itemSelector: '.follow-item',
+        percentPosition: true
     });
 });
 </script>

@@ -271,21 +271,20 @@ $(function(){
 });
 
 // 팔로우
-$(".profile-btns button").click(function(){
+$(document).on('click', '.profile-btns button', function() {
     var action = $(this).attr('value');
     var target = $(this).attr('name');
     if (!target) return;
 
     var url = "<?php echo EYOOM_CORE_URL; ?>/mypage/follow.ajax.php";
-    $.post(url, {'action':action,'user':target}, function(data) {
-        if(data.result == 'yes') {
-            var botton = $(".follow_"+target);
+    $.post(url, {'action': action, 'user': target}, function(data) {
+        if (data.result == 'yes') {
+            var button = $(".follow_" + target);
             if (action == 'follow') {
-                botton.removeClass('btn-e-teal');
-                botton.addClass('btn-e-gray');
-                botton.attr('title','팔로우를 해제합니다.');
-                botton.html('<i class="fas fa-times text-white m-r-5"></i>팔로우 해제');
-                botton.attr('value','unfollow');
+                button.removeClass('btn-e-teal').addClass('btn-e-gray')
+                    .attr('title', '팔로우를 해제합니다.')
+                    .html('<i class="fas fa-times text-white m-r-5"></i>팔로우 해제')
+                    .attr('value', 'unfollow');
                 Swal.fire({
                     title: "알림",
                     text: '해당 회원을 팔로우하였습니다.',
@@ -293,13 +292,11 @@ $(".profile-btns button").click(function(){
                     icon: "success",
                     confirmButtonText: "확인"
                 });
-            }
-            if (action == 'unfollow') {
-                botton.removeClass('btn-e-gray');
-                botton.addClass('btn-e-teal');
-                botton.attr('title','팔로우를 신청합니다.');
-                botton.html('<i class="fas fa-check text-white m-r-5"></i>팔로우');
-                botton.attr('value','follow');
+            } else if (action == 'unfollow') {
+                button.removeClass('btn-e-gray').addClass('btn-e-teal')
+                    .attr('title', '팔로우를 신청합니다.')
+                    .html('<i class="fas fa-check text-white m-r-5"></i>팔로우')
+                    .attr('value', 'follow');
                 Swal.fire({
                     title: "알림",
                     text: '해당 회원을 팔로우 해제하였습니다.',
@@ -308,7 +305,7 @@ $(".profile-btns button").click(function(){
                     confirmButtonText: "확인"
                 });
             }
-        } else if (data.result == 'no'){
+        } else if (data.result == 'no') {
             Swal.fire({
                 title: "알림",
                 text: '소셜기능을 Off 시켜놓은 회원입니다.',
@@ -317,6 +314,6 @@ $(".profile-btns button").click(function(){
                 confirmButtonText: "확인"
             });
         }
-    },"json");
+    }, "json");
 });
 </script>

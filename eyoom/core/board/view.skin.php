@@ -169,6 +169,11 @@ if ($bo_use_anonymous == '1') {
     $is_anonymous = false;
 }
 
+/**
+ * 익명게시판에서 글작성자의 실제 아이디를 사용함
+ */
+$view['wr_mb_id'] = $view['mb_id'];
+
 if ($is_anonymous) {
     $view['mb_photo'] = '';
     $view['mb_id'] = 'anonymous';

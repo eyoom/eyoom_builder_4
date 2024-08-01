@@ -43,7 +43,7 @@ a.btn, .btn {width:inherit;height:inherit}
 #hd_pop {z-index:9999}
 /* 화면낭독기 사용자용 */
 #hd_login_msg {position:absolute;top:0;left:0;width:0;height:0;overflow:hidden}
-.msg_sound_only, .sound_only, .sound-only {display:inline-block;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;width:1px !important;height:1px !important;font-size:0 !important;line-height:0 !important;overflow:hidden}
+.msg_sound_only {display:inline-block;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;width:1px !important;height:1px !important;font-size:0 !important;line-height:0 !important;overflow:hidden}
 /* 본문 바로가기 */
 .to_content a {z-index:100000;position:absolute;top:0;left:0;width:0;height:0;font-size:0;line-height:0;overflow:hidden}
 
@@ -1308,8 +1308,7 @@ img.img-circle {border-radius:50% !important}
 .admset-iframe-modal .modal-footer {border-radius:0}
 
 /*---------- Etc ----------*/
-.sound-only {display:inline-block !important;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;font-size:0;line-height:0;border:0 !important;overflow:hidden !important;position:absolute;font-size:0;text-indent:-9999em;line-height:0}
-.sound_only {display:inline-block !important;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;font-size:0;line-height:0;border:0 !important;overflow:hidden !important;position:absolute;font-size:0;text-indent:-9999em;line-height:0}
+.sound-only, .sound_only {display:inline-block !important;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;border:0 !important;overflow:hidden !important;font-size:0 !important;text-indent:-9999em;line-height:0 !important}
 .h-hidden {position:absolute;font-size:0;line-height:0;content:""}
 .img-responsive {max-width:100%;height:auto}
 .sidebar-nav-e1.list-group {margin:0 0 25px}

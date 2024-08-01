@@ -48,6 +48,11 @@ $adminfo = sql_fetch("select * from {$g5['member_table']} where mb_no = '1' limi
 if (!$adminfo) $adminfo = get_member($config['cf_admin']);
 
 /**
+ * 이윰빌더 최신 배포버전
+ */
+$eyoom_latest_version = $eb->get_eyoom_version();
+
+/**
  * 사용자 프로그램
  */
 @include_once(EYOOM_ADMIN_USER_PATH . '/admin.head.php');

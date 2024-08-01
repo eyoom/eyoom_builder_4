@@ -36,9 +36,10 @@ if (!in_array($wr_id, $arr_notice)) {
     switch($good) {
         case 'good' :
             $eb->level_point($levelset['good'], $write['mb_id'], $levelset['regood']);
+            $wr_good = $write['wr_good'] + 1;
 
             // 추천수 게시물 자동 이동/복사
-            if ($eyoom_board['bo_use_automove'] && $bo_automove['count2'] && $bo_automove['target2'] && $bo_automove['action2'] && $bo_automove['count2'] <= $write['wr_good']+1) {
+            if ($eyoom_board['bo_use_automove'] && $bo_automove['count2'] && $bo_automove['target2'] && $bo_automove['action2'] && $bo_automove['count2'] <= $wr_good) {
                 $sw = $bo_automove['action2'];
                 $tg_table = $bo_automove['target2'];
                 $is_automove = true;
@@ -49,27 +50,28 @@ if (!in_array($wr_id, $arr_notice)) {
              * 추천수 조건을 사용하고 원글일 경우만 적용
              * 익명글은 제외
              */
-            if ($eyoom_board['bo_use_best']=='1' && $bo_best['use2'] == '1' && $bo_best['count2'] > 0 && $bo_best['count2'] <= $write['wr_good'] && $wr_id == $write['wr_parent'] && !$write['wr_anonymous']) {
+            if ($eyoom_board['bo_use_best']=='1' && $bo_best['use2'] == '1' && $bo_best['count2'] > 0 && $bo_best['count2'] <= $wr_good && $wr_id == $write['wr_parent'] && !$write['wr_anonymous']) {
                 $row = sql_fetch("select count(*) as cnt from {$g5['eyoom_best']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
                 $chk_cnt = (int) $row['cnt'];
+                
                 if (!$chk_cnt) {
                     $sql = "insert into {$g5['eyoom_best']} set 
                                 bo_table='{$bo_table}',
                                 wr_id='{$wr_id}',
-                                wr_good='{$write['wr_good']}',
+                                wr_good='{$wr_good}',
                                 wr_hit='{$write['wr_hit']}',
                                 mb_id='{$write['mb_id']}',
                                 wr_datetime='{$write['wr_datetime']}',
                                 bb_datetime='" . G5_TIME_YMDHIS . "'
                             ";
                     sql_query($sql);
+                } else {
+                    /**
+                     * 인기게시글 조회수, 추천수 업데이트
+                     */
+                    $sql = "update {$g5['eyoom_best']} set wr_hit = '{$write['wr_hit']}', wr_good = '{$wr_good}' where bo_table='{$bo_table}' and wr_id = '{$wr_id}'";
+                    sql_query($sql);
                 }
-            } else {
-                /**
-                 * 인기게시글 조회수, 추천수 업데이트
-                 */
-                $sql = "update {$g5['eyoom_best']} set wr_hit = '{$write['wr_hit']}', wr_good = '{$write['wr_good']}' where bo_table='{$bo_table}' and wr_id = '{$wr_id}'";
-                sql_query($sql);
             }
             break;
 

@@ -463,7 +463,7 @@ if (!sql_query(" DESC {$g5['eyoom_counsel']} ", false)) {
                 `cs_file1` text NOT NULL,
                 `cs_file2` text NOT NULL,
                 `cs_memo` text NOT NULL,
-                `cs_status` varchar(20) NOT NULL DEFAULT,
+                `cs_status` varchar(20) NOT NULL DEFAULT '',
                 `cs_ip` varchar(255) NOT NULL,
                 `cs_update` datetime NOT NULL,
                 `cs_regdt` datetime NOT NULL,
@@ -476,7 +476,29 @@ if (!isset($config['cf_counsel_part'])) {
     sql_query("ALTER TABLE `{$g5['config_table']}`
                 ADD `cf_counsel_part` VARCHAR(255) NOT NULL DEFAULT '견적요청, 제품상담, 제휴상담, 기타' AFTER `cf_eyoom_admin_theme`,
                 ADD `cf_counsel_status` VARCHAR(255) NOT NULL DEFAULT '대기, 접수, 진행, 완료' AFTER `cf_counsel_part`,
-                ADD `cf_counsel_view` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_counsel_status` ", true);
+                ADD `cf_counsel_view` CHAR(1) NOT NULL DEFAULT '' AFTER `cf_counsel_status` ", true);
+
+    $config['cf_counsel_part']      = '견적요청, 제품상담, 제휴상담, 기타';
+    $config['cf_counsel_status']    = '대기, 접수, 진행, 완료';
+    $config['cf_counsel_view']      = '';
+}
+if (!isset($config['cf_use_counsel'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_use_counsel` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme`,
+                ADD `cf_counsel_sendmail` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_counsel_status`,
+                ADD `cf_counsel_email` VARCHAR(255) NOT NULL DEFAULT '".$config['cf_admin_email']."' AFTER `cf_counsel_sendmail` ", true);
+
+    $config['cf_use_counsel']       = 1;
+    $config['cf_counsel_sendmail']  = 1;
+    $config['cf_counsel_email']     = $config['cf_admin_email'];
+}
+
+/**
+ * 이윰빌더 최신 배포버전 알림 on/off 필드추가
+ */
+if (!isset($config['cf_use_version_alarm'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_use_version_alarm` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme` ", true);
 }
 
 if(!$config['cf_faq_skin']) $config['cf_faq_skin'] = "basic";

@@ -123,17 +123,19 @@ for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
         $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
     
         $uploaded_file = $_FILES['ei_img']['tmp_name'][$i];
-        $file_mimetype = mime_content_type($uploaded_file);
-        $file_ext = $qfile->get_file_ext($_FILES['ei_img']['name'][$i]);
-        if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
-            $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$file_ext;
-            $dest_path = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$file_name;
-
-            move_uploaded_file($uploaded_file, $dest_path);
-
-            if (file_exists($dest_path)) {
-                chmod($dest_path, G5_FILE_PERMISSION);
-                $ei_img[$i] = $file_name;
+        if ($uploaded_file) {
+            $file_mimetype = mime_content_type($uploaded_file);
+            $file_ext = $qfile->get_file_ext($_FILES['ei_img']['name'][$i]);
+            if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+                $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$file_ext;
+                $dest_path = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$file_name;
+    
+                move_uploaded_file($uploaded_file, $dest_path);
+    
+                if (file_exists($dest_path)) {
+                    chmod($dest_path, G5_FILE_PERMISSION);
+                    $ei_img[$i] = $file_name;
+                }
             }
         }
     }

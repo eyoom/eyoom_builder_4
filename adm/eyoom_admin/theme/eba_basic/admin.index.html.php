@@ -4,7 +4,9 @@
  * @file    ~/theme/THEME_NAME/index.html.php
  */
 if (!defined('_EYOOM_IS_ADMIN_')) exit;
-
+if ($config['cf_use_version_alarm'] == '1' && $eyoom_latest_version != EYOOM_VERSION) {
+    add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/sweetalert2/sweetalert2.min.css" type="text/css" media="screen">',0);
+}
 add_stylesheet('<link rel="stylesheet" href="'.EYOOM_ADMIN_THEME_URL.'/plugins/perfect-scrollbar/perfect-scrollbar.min.css" type="text/css" media="screen">',0);
 add_javascript('<script src="'.EYOOM_ADMIN_THEME_URL.'/plugins/apexcharts/apexcharts.min.js"></script>', 0);
 add_javascript('<script id="mode_js" src="'.EYOOM_ADMIN_THEME_URL.'/js/admin-main-'.$modeStyle.'.js"></script>', 0);
@@ -152,6 +154,8 @@ if ($max_regist_count > $max_login_count) {
 .member-chart-wrap .member-rank-list:nth-child(1) .rank-num {background:#ab0000}
 .member-chart-wrap .member-rank-list:nth-child(2) .rank-num {background:#fb8c00}
 .member-chart-wrap .member-rank-list:nth-child(3) .rank-num {background:#fb8c00}
+/*----- Sweetalert2 Toast -----*/
+.swal2-popup.swal2-toast.swal2-show {padding:15px !important}
 </style>
 
 <?php if ($is_youngcart) { // 영카트 쇼핑몰 사용시 ?>
@@ -722,8 +726,11 @@ if ($max_regist_count > $max_login_count) {
 </div>
 
 <script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js"></script>
+<?php if ($config['cf_use_version_alarm'] == '1' && $eyoom_latest_version != EYOOM_VERSION) { ?>
+<script src="<?php echo EYOOM_ADMIN_THEME_URL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
+<?php } ?>
 <script>
-$(document).ready(function(){
+$(function() {
     new PerfectScrollbar('#main_latest_wrap_1');
     <?php if ($is_youngcart) { // 영카트 쇼핑몰 사용시 ?>
     new PerfectScrollbar('#main_latest_wrap_2');
@@ -732,6 +739,24 @@ $(document).ready(function(){
     new PerfectScrollbar('#main_latest_wrap_4');
     new PerfectScrollbar('#main_latest_wrap_5');
     new PerfectScrollbar('#main_latest_wrap_6');
+
+    <?php if ($config['cf_use_version_alarm'] == '1' && $eyoom_latest_version != EYOOM_VERSION) { ?>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: 'warning',
+        html: '<p class="m-b-10">이윰빌더 <span class="text-indigo"><?php echo $eyoom_latest_version; ?></span> 버전으로 업그레이드 하실 수 있습니다.</p><div class="d-flex justify-content-between"><a href="<?php echo EYOOM_SITE; ?>/eb4_download" target="_blank"><u>바로가기</u></a><a href="<?php echo G5_ADMIN_URL; ?>/?dir=config&amp;pid=config_form"><i class="fas fa-cog"></i></a></div>'
+    });
+    <?php } ?>
 });
 
 <?php if ($is_youngcart) { // 영카트 쇼핑몰 사용시 ?>

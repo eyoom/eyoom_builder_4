@@ -6,27 +6,26 @@ if (!defined('_EYOOM_')) exit;
 ?>
 
 <style>
-.myhome-follow .follow-heading {position:relative;height:50px;line-height:50px;background:#959595;color:#fff;font-size:1.125rem;padding:0 0 0 20px;margin-bottom:10px;margin-top:40px}
+.myhome-follow .follow-heading {position:relative;height:60px;line-height:60px;background:#454545;color:#fff;font-size:1.125rem;padding:0 0 0 20px;margin-bottom:20px;margin-top:40px}
 .myhome-follow .follow-heading .owner-photo {position:absolute;top:-30px;right:20px;overflow:hidden;width:60px;height:60px;border:4px solid #fff;border-radius:50%}
 .myhome-follow .follow-heading .owner-photo img {display:block;max-width:100%;height:auto}
 .myhome-follow .infinite-container {position:relative;overflow:hidden;padding-bottom:50px;margin-left:-10px;margin-right:-10px}
 .myhome-follow .follow-item {position:relative;float:left;width:50%;padding-top:40px;padding-left:10px;padding-right:10px}
 .myhome-follow .follow-item-box {position:relative;height:auto;padding:15px;background:#fff;border:1px solid #d5d5d5;margin-bottom:20px}
-.myhome-follow .follow-photo {position:absolute;top:-30px;left:15px;overflow:hidden;width:60px;height:60px;border:5px solid #fff;border-radius:50%;box-shadow:0 0 1px rgba(0, 0, 0, 0.7);z-index:1}
+.myhome-follow .follow-photo {position:absolute;top:-40px;left:15px;overflow:hidden;width:80px;height:80px;border:5px solid #fff;border-radius:50%;box-shadow:0 0 1px rgba(0, 0, 0, 0.7);z-index:1}
 .myhome-follow .follow-photo img {display:block;max-width:100%;height:auto}
 .myhome-follow .follow-info {position:relative}
 .myhome-follow .follow-info-heading {margin-left:90px;margin-bottom:15px}
 .myhome-follow .follow-info-content {position:relative}
-.myhome-follow .follow-info-content .margin-hr-10 {border-top:1px dotted #f2f2f2}
-.myhome-follow .follow-name {fline-height:20px}
+.myhome-follow .follow-info-content .margin-hr-15 {border-top:1px dotted #f2f2f2}
+.myhome-follow .follow-name {line-height:20px}
 .myhome-follow .follow-name a {color:#252525}
 .myhome-follow .follow-lp {line-height:20px}
-.myhome-follow .follow-sign {position:relative;color:#959595}
+.myhome-follow .follow-sign {position:relative;color:#757575}
 .myhome-follow .follow-sign strong {color:#252525}
-.myhome-follow .follow-introduce {position:relative;color:#959595}
+.myhome-follow .follow-introduce {position:relative;color:#757575}
 .myhome-follow .follow-introduce strong {color:#252525}
 .myhome-follow .profile-btns {position:absolute;top:0;right:0}
-.myhome-follow .follow-item-box:hover .follow-name a {text-decoration:underline}
 #infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:8px 0;background:#000;opacity:0.8;color:#fff}
 @media (max-width:767px) {
     .myhome-follow .follow-item {width:100%}
@@ -40,7 +39,7 @@ if (!defined('_EYOOM_')) exit;
         </div>
         <strong>
             구독회원
-            <span class="m-l-5">[ <span class="text-dark"><?php if ($user['cnt_subscriber']) { ?><?php echo number_format($user['cnt_subscriber']); ?><?php } else { ?>0<?php } ?>명</span> ]</span>
+            <span class="m-l-5">[ <span class="text-blue"><?php if ($user['cnt_subscriber']) { ?><?php echo number_format($user['cnt_subscriber']); ?><?php } else { ?>0<?php } ?>명</span> ]</span>
         </strong>
     </div>
     <div class="infinite-container">
@@ -55,7 +54,7 @@ if (!defined('_EYOOM_')) exit;
                 <div class="follow-info">
                     <div class="follow-info-heading">
                         <span class="follow-name float-start">
-                                <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?>
+                            <?php echo eb_nameview($list[$i]['mb_id'], $list[$i]['mb_nick'], $list[$i]['mb_email'], $list[$i]['mb_homepage']); ?>
                         </span>
                         <span class="follow-lp float-end" style="font-size:.875rem">
                             레벨: <span class="m-r-5"><?php echo $list[$i]['level']; ?></span>
@@ -73,11 +72,11 @@ if (!defined('_EYOOM_')) exit;
 
                         <?php if ($config['cf_use_signature'] == '1') { ?>
                         <div class="margin-hr-10"></div>
-                        <div class="follow-sign ellipsis">서명 : <?php echo stripslashes($list[$i]['mb_signature']); ?></div>
+                        <div class="follow-sign ellipsis">서명 : <?php if($list[$i]['mb_signature']) { ?><?php echo stripslashes($list[$i]['mb_signature']); ?><?php } else { ?><span class="text-light-gray">입력한 서명이 없습니다.</span><?php } ?></div>
                         <?php } ?>
                         <?php if ($config['cf_use_profile'] == '1') { ?>
                         <div class="margin-hr-10"></div>
-                        <div class="follow-introduce ellipsis">소개 : <?php echo stripslashes($list[$i]['mb_profile']); ?></div>
+                        <div class="follow-introduce ellipsis">소개 : <?php if($list[$i]['mb_profile']) { ?><?php echo stripslashes($list[$i]['mb_profile']); ?><?php } else { ?><span class="text-light-gray">입력한 소개가 없습니다.</span><?php } ?></div>
                         <?php } ?>
 
                         <?php if ($is_member) { ?>
@@ -113,7 +112,7 @@ if (!defined('_EYOOM_')) exit;
     </div>
 </div>
 
-<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/masonry/masonry.pkgd.min.js"></script>
 <script src="<?php echo EYOOM_THEME_URL; ?>/plugins/infinite-scroll/jquery.infinitescroll.min.js"></script>
 <script>
 $(function(){
@@ -131,9 +130,13 @@ $(function(){
 
     function( newElements ) {
         var $newElems = $( newElements ).css({ opacity: 0 });
-        $newElems.imagesLoaded(function(){
-            $newElems.animate({ opacity: 1 });
-        });
+        $newElems.animate({ opacity: 1 });
+        $container.masonry( 'appended', $newElems, true );
+    });
+
+    $container.masonry({
+        itemSelector: '.follow-item',
+        percentPosition: true
     });
 });
 </script>

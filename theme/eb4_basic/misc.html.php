@@ -389,6 +389,7 @@ window.closeModal = function(url){
 <?php } ?>
 
 <?php /* 상담 신청 모달 시작 */ ?>
+<?php if ($config['cf_use_counsel'] == '1') { ?>
 <div class="modal fade counsel-iframe-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -401,6 +402,7 @@ window.closeModal = function(url){
         </div>
     </div>
 </div>
+<?php } ?>
 <?php /* 상담 신청 모달 끝 */ ?>
 
 <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
@@ -463,6 +465,7 @@ window.closeModal = function(url){
 <?php /* 상품 쿠폰 모달 끝 */ ?>
 
 <script>
+<?php if ($config['cf_use_counsel'] == '1') { ?>
 function counsel_modal() {
     $('.counsel-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#counsel-iframe").attr("src", "");
@@ -475,6 +478,7 @@ function counsel_modal() {
     });
     return false;
 }
+<?php } ?>
 
 function itemuse_modal(href) {
     $('.itemuse-iframe-modal').modal('show').on('hidden.bs.modal', function() {

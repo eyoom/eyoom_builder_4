@@ -103,20 +103,33 @@ $frm_submit .= $frm_eba_submit;
                     </div>
                 </div>
                 <?php if ($is_admin == 'super' && $member['mb_id'] == $config['cf_admin']) { ?>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label for="cf_eyoom_admin_theme" class="label">이윰관리자 테마설정<strong class="sound_only">필수</strong></label>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_eyoom_admin_theme" class="label">이윰관리자 테마설정<strong class="sound_only">필수</strong></label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="select max-width-250px">
+                                <select name="cf_eyoom_admin_theme" id="cf_eyoom_admin_theme" required>
+                                    <option value="">선택</option>
+                                    <?php for ($i=0; $i<count((array)$cf_eyoom_admin_theme); $i++) { ?>
+                                    <option value="<?php echo $cf_eyoom_admin_theme[$i]; ?>" <?php echo get_selected($config['cf_eyoom_admin_theme'], $cf_eyoom_admin_theme[$i])?>><?php echo $cf_eyoom_admin_theme[$i]; ?></option>
+                                    <?php } ?>
+                                </select><i></i>
+                            </label>
+                            <div class="note"><strong>Note:</strong> 이윰 관리자모드의 테마를 설정하합니다.</div>
+                        </div>
                     </div>
-                    <div class="adm-form-td td-r">
-                        <label class="select max-width-250px">
-                            <select name="cf_eyoom_admin_theme" id="cf_eyoom_admin_theme" required>
-                                <option value="">선택</option>
-                                <?php for ($i=0; $i<count((array)$cf_eyoom_admin_theme); $i++) { ?>
-                                <option value="<?php echo $cf_eyoom_admin_theme[$i]; ?>" <?php echo get_selected($config['cf_eyoom_admin_theme'], $cf_eyoom_admin_theme[$i])?>><?php echo $cf_eyoom_admin_theme[$i]; ?></option>
-                                <?php } ?>
-                            </select><i></i>
-                        </label>
-                        <div class="note"><strong>Note:</strong> 이윰 관리자모드의 테마를 설정하합니다.</div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_use_version_alarm" class="label">이윰빌더 배포 버전 알람 사용</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="checkbox">
+                                <input type="checkbox" name="cf_use_version_alarm" value="1" id="cf_use_version_alarm" <?php echo $config['cf_use_version_alarm']?'checked':''; ?>><i></i> 사용
+                            </label>
+                            <div class="note"><strong>Note:</strong> 사용에 체크하시면 이윰빌더 최신 배포버전이 새로 나올경우 관리자모드 메인 우측 상단에 알람이 활성화 됩니다.</div>
+                        </div>
                     </div>
                 </div>
                 <?php } else { ?>
@@ -1260,6 +1273,17 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
+                        <label class="label">상담 신청 사용여부</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="checkbox">
+                            <input type="checkbox" name="cf_use_counsel" id="cf_use_counsel" value="1" <?php echo $config['cf_use_counsel']?'checked':''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 상담 신청 기능의 사용 여부를 설정합니다. </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
                         <label class="label">상담 분야 설정</label>
                     </div>
                     <div class="adm-form-td td-r">
@@ -1277,6 +1301,28 @@ $frm_submit .= $frm_eba_submit;
                         <label class="input">
                             <input type="text" name="cf_counsel_status" value="<?php echo get_sanitize_input($config['cf_counsel_status']); ?>" id="cf_counsel_status">
                         </label>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label class="label">메일 수신 여부</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="checkbox">
+                            <input type="checkbox" name="cf_counsel_sendmail" id="cf_counsel_sendmail" value="1" <?php echo $config['cf_counsel_sendmail']?'checked':''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 사용을 체크하면 상담 신청시, 상담내역이 아래 수신메일 주소로 발송됩니다. </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label class="label">수신 메일 주소</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label class="input">
+                            <input type="text" name="cf_counsel_email" value="<?php echo $config['cf_counsel_email'] ? get_sanitize_input($config['cf_counsel_email']): $config['cf_admin_email']; ?>" id="cf_counsel_email">
+                        </label>
+                        <div class="note"><strong>Note:</strong> 여러명의 메일을 설정하시려면 쉼표(,)로 구분하여 메일을 입력해 주세요. 관리자 메일로 발송을 원할 경우, 이곳에 추가해 주세요.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr">

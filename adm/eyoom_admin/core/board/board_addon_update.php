@@ -179,8 +179,24 @@ if ($bo_use_best) {
     $post_bo_best['use2'] = isset($_POST['bo_best_use2']) ? (int) clean_xss_tags(trim($_POST['bo_best_use2'])) : '';
     $post_bo_best['count2'] = isset($_POST['bo_best_count2']) ? (int) clean_xss_tags(trim($_POST['bo_best_count2'])) : '';
     $bo_best = serialize($post_bo_best);
+
+    // 조건이 바뀌면 기존 인기게시물 중에서 조건이 맞지 않으면 삭제
+    if ($post_bo_best['use1']) {
+        if ($post_bo_best['use2']) {
+            $where = " and (wr_hit < {$post_bo_best['count1']} and wr_good < {$post_bo_best['count2']}) ";
+        } else {
+            $where = " and wr_hit < {$post_bo_best['count1']} ";
+        }
+    } else if ($post_bo_best['use2']) {
+        $where = " and wr_good < {$post_bo_best['count2']}";
+    }
+
+    $sql = "delete from {$g5['eyoom_best']} where bo_table='{$bo_table}' {$where} ";
+    sql_query($sql);
 } else {
     $bo_best = '';
+    $sql = "delete from {$g5['eyoom_best']} where bo_table='{$bo_table}' ";
+    sql_query($sql);
 }
 
 $bo_use_point_explain = isset($_POST['bo_use_point_explain']) ? (int) $_POST['bo_use_point_explain'] : 0;

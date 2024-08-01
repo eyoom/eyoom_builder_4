@@ -534,7 +534,7 @@ button.mfp-close {position:fixed;color:#fff !important}
             $sql = "select count(*) as cnt from {$g5['eyoom_wrfixed']} where bo_table='{$bo_table}' and wr_id='{$wr_id}' and bf_open='y' ";
             $wr_fixed = sql_fetch($sql);
         ?>
-        <?php if ($eyoom_board['bo_use_wrfixed'] == '1' && (isset($member['mb_id']) && $member['mb_id'] == $view['mb_id'] || $is_admin) && !in_array($wr_id, $bo_notice) && $wr_fixed['cnt']==0) { ?>
+        <?php if ($eyoom_board['bo_use_wrfixed'] == '1' && (isset($member['mb_id']) && $member['mb_id'] == $view['wr_mb_id'] || $is_admin) && !in_array($wr_id, $bo_notice) && $wr_fixed['cnt']==0) { ?>
         <div id="wrfixed" class="text-center m-b-10">
             <a href="javascript:void(0);" id="bo_wrfixed" class="btn-e btn-e-deep-purple btn-e-md">게시물 <?php echo $eyoom_board['bo_wrfixed_date']; ?>일간 상단노출 (<?php echo number_format($eyoom_board['bo_wrfixed_point']); ?>포인트 소모)</a>
         </div>

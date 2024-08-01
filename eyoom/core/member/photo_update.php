@@ -93,8 +93,8 @@ if( $config['cf_member_img_size'] && $config['cf_member_img_width'] && $config['
                         @unlink($dest_img_path);
                     } else {
                         $thumb_img = null;
-                        if($size[2] === 2 || $size[2] === 3) {
-                            //jpg 또는 png 파일 적용
+                        if($size[2] === 1 || $size[2] === 2 || $size[2] === 3) {
+                            //gif, jpg, png 파일 적용
                             $thumb_img = thumbnail($mb_photo_img, $mb_img_dir, $mb_img_dir, $config['cf_member_img_width'], $config['cf_member_img_height'], true, true);
 
                             // 회원아이콘 파일 복사
@@ -117,8 +117,8 @@ if( $config['cf_member_img_size'] && $config['cf_member_img_width'] && $config['
                                     @unlink($dest_icon_path);
                                 } else if ($size2[0] > $config['cf_member_icon_width'] || $size2[1] > $config['cf_member_icon_height']) {
                                     $thumb_icon = null;
-                                    if($size2[2] === 2 || $size2[2] === 3) {
-                                        //jpg 또는 png 파일 적용
+                                    if($size2[2] === 1 || $size2[2] === 2 || $size2[2] === 3) {
+                                        // gif, jpg, png 파일 적용
                                         $thumb_icon = thumbnail($mb_photo_img, $mb_icon_dir, $mb_icon_dir, $config['cf_member_icon_width'], $config['cf_member_icon_height'], true, true);
                                         if($thumb_icon) {
                                             @unlink($dest_icon_path);

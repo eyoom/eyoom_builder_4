@@ -852,7 +852,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_counsel` (
     `cs_file1` text NOT NULL,
     `cs_file2` text NOT NULL,
     `cs_memo` text NOT NULL,
-    `cs_status` varchar(20) NOT NULL,
+    `cs_status` varchar(20) NOT NULL DEFAULT '',
     `cs_ip` varchar(255) NOT NULL,
     `cs_update` datetime NOT NULL,
     `cs_regdt` datetime NOT NULL,

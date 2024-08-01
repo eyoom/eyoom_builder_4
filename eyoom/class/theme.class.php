@@ -772,7 +772,7 @@ class theme extends qfile
         $addwhere .= " and me_shop = '".$me_shop."' ";
         $sql = " select *
                     from {$this->g5['eyoom_menu']}
-                    where me_theme='" . sql_real_escape_string($this->theme) . "' {$addwhere}
+                    where me_theme='" . sql_real_escape_string($theme_name) . "' {$addwhere}
                     order by
                     case
                         when length(me_code) = 3 then cast(me_order as signed)
