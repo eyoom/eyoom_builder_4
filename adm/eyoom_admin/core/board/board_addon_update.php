@@ -151,6 +151,37 @@ if(!sql_query(" select bo_use_best from {$g5['eyoom_board']} limit 1 ", false)) 
 }
 
 /**
+ * 투표기능 설정 필드 추가
+ */
+if(!sql_query(" select bo_use_addon_poll from {$g5['eyoom_board']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['eyoom_board']}`
+        add `bo_use_addon_poll` char(1) NOT NULL default '0' after `bo_use_addon_map`,
+        add `bo_addon_poll_point` int(7) NOT NULL default '0' after `bo_use_addon_poll`,
+        add `bo_addon_poll_type` char(1) NOT NULL default '1' after `bo_addon_poll_point`
+    ";
+    sql_query($sql, true);
+}
+
+/*
+ * 투표 테이블 없을 경우 생성
+ */
+if (!sql_query(" DESC {$g5['eyoom_bbspoll']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_bbspoll']}` (
+                    `po_id` int(11) unsigned NOT NULL auto_increment,
+                    `bo_table` varchar(20) NOT NULL DEFAULT '',
+                    `wr_id` int(11) NOT NULL DEFAULT '0',
+                    `mb_id` varchar(20) NOT NULL DEFAULT '',
+                    `po_flag` char(2) NOT NULL DEFAULT '',
+                    `po_point` int(7) NOT NULL DEFAULT '0',
+                    `po_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+                    PRIMARY KEY  (`po_id`)
+                ) ",
+        true
+    );
+}
+
+/**
  * 게시물 자동 이동/복사
  */
 $bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
@@ -237,6 +268,9 @@ $bo_use_addon_video = isset($_POST['bo_use_addon_video']) ? (int) $_POST['bo_use
 $bo_use_addon_coding = isset($_POST['bo_use_addon_coding']) ? (int) $_POST['bo_use_addon_coding'] : 0;
 $bo_use_addon_soundcloud = isset($_POST['bo_use_addon_soundcloud']) ? (int) $_POST['bo_use_addon_soundcloud'] : 0;
 $bo_use_addon_map = isset($_POST['bo_use_addon_map']) ? (int) $_POST['bo_use_addon_map'] : 0;
+$bo_use_addon_poll = isset($_POST['bo_use_addon_poll']) ? (int) $_POST['bo_use_addon_poll'] : 0;
+$bo_addon_poll_point = isset($_POST['bo_addon_poll_point']) ? (int) $_POST['bo_addon_poll_point'] : 0;
+$bo_addon_poll_type = isset($_POST['bo_addon_poll_type']) ? (int) $_POST['bo_addon_poll_type'] : 1;
 $bo_use_addon_cmtfile = isset($_POST['bo_use_addon_cmtfile']) ? (int) $_POST['bo_use_addon_cmtfile'] : 0;
 $bo_count_cmtfile = isset($_POST['bo_count_cmtfile']) ? (int) $_POST['bo_count_cmtfile'] : 1;
 $bo_cmt_best_min = isset($_POST['bo_cmt_best_min']) ? (int) $_POST['bo_cmt_best_min'] : 10;
@@ -301,6 +335,9 @@ $set = "
     bo_use_addon_coding     = '{$bo_use_addon_coding}',
     bo_use_addon_soundcloud = '{$bo_use_addon_soundcloud}',
     bo_use_addon_map        = '{$bo_use_addon_map}',
+    bo_use_addon_poll       = '{$bo_use_addon_poll}',
+    bo_addon_poll_point     = '{$bo_addon_poll_point}',
+    bo_addon_poll_type      = '{$bo_addon_poll_type}',
     bo_use_addon_cmtfile    = '{$bo_use_addon_cmtfile}',
     bo_count_cmtfile        = '{$bo_count_cmtfile}',
     bo_cmt_best_min         = '{$bo_cmt_best_min}',
@@ -316,6 +353,15 @@ $set = "
 
 $sql = "update {$g5['eyoom_board']} set $set where $where";
 sql_query($sql);
+
+/**
+ * 투표기능 활성화에 따라 파일 설명 사용 여부 설정
+ * 투표기능 사용이면 파일 설명 사용 활성
+ */
+if ($bo_use_addon_poll == 1) {
+    $sql = "update {$g5['board_table']} set bo_use_file_content = 1 where $where";
+    sql_query($sql);
+}
 
 /**
  * 같은 그룹내 게시판 동일 옵션 적용
@@ -346,6 +392,11 @@ if (is_checked('chk_grp_addon_video'))      $grp_fields .= " , bo_use_addon_vide
 if (is_checked('chk_grp_addon_coding'))     $grp_fields .= " , bo_use_addon_coding = '{$bo_use_addon_coding}' ";
 if (is_checked('chk_grp_addon_soundcloud')) $grp_fields .= " , bo_use_addon_soundcloud = '{$bo_use_addon_soundcloud}' ";
 if (is_checked('chk_grp_addon_map'))        $grp_fields .= " , bo_use_addon_map = '{$bo_use_addon_map}' ";
+if (is_checked('chk_grp_addon_poll')) {
+    $grp_fields .= " , bo_use_addon_poll    = '{$bo_use_addon_poll}' ";
+    $grp_fields .= " , bo_addon_poll_point  = '{$bo_addon_poll_point}' ";
+    $grp_fields .= " , bo_addon_poll_type   = '{$bo_addon_poll_type}' ";
+}
 if (is_checked('chk_grp_addon_cmtfile'))    $grp_fields .= " , bo_use_addon_cmtfile = '{$bo_use_addon_cmtfile}', bo_count_cmtfile = '{$bo_count_cmtfile}' ";
 if (is_checked('chk_grp_cmtbest_min'))      $grp_fields .= " , bo_cmt_best_min = '{$bo_cmt_best_min}' ";
 if (is_checked('chk_grp_cmtbest_limit'))    $grp_fields .= " , bo_cmt_best_limit = '{$bo_cmt_best_limit}' ";
@@ -378,6 +429,11 @@ if ($grp_fields) {
     sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$grp_fields} where gr_id = '{$gr_id}' ");
 }
 
+if (is_checked('chk_grp_addon_poll') && $bo_use_addon_poll == 1) {
+    $sql = "update {$g5['board_table']} set bo_use_file_content = 1 where gr_id = '{$gr_id}'";
+    sql_query($sql);
+}
+
 // 모든 게시판 동일 옵션 적용
 $all_fields = '';
 if (is_checked('chk_all_hotgul'))           $all_fields .= " , bo_use_hotgul = '{$bo_use_hotgul}' ";
@@ -405,6 +461,11 @@ if (is_checked('chk_all_addon_video'))      $all_fields .= " , bo_use_addon_vide
 if (is_checked('chk_all_addon_coding'))     $all_fields .= " , bo_use_addon_coding = '{$bo_use_addon_coding}' ";
 if (is_checked('chk_all_addon_soundcloud')) $all_fields .= " , bo_use_addon_soundcloud = '{$bo_use_addon_soundcloud}' ";
 if (is_checked('chk_all_addon_map'))        $all_fields .= " , bo_use_addon_map = '{$bo_use_addon_map}' ";
+if (is_checked('chk_all_addon_poll')) {
+    $all_fields .= " , bo_use_addon_poll    = '{$bo_use_addon_poll}' ";
+    $all_fields .= " , bo_addon_poll_point  = '{$bo_addon_poll_point}' ";
+    $all_fields .= " , bo_addon_poll_type   = '{$bo_addon_poll_type}' ";
+}
 if (is_checked('chk_all_addon_cmtfile'))    $all_fields .= " , bo_use_addon_cmtfile = '{$bo_use_addon_cmtfile}', bo_count_cmtfile = '{$bo_count_cmtfile}' ";
 if (is_checked('chk_all_cmtbest_min'))      $all_fields .= " , bo_cmt_best_min = '{$bo_cmt_best_min}' ";
 if (is_checked('chk_all_cmtbest_limit'))    $all_fields .= " , bo_cmt_best_limit = '{$bo_cmt_best_limit}' ";
@@ -435,6 +496,11 @@ if (is_checked('chk_all_lucky_point')) {
 
 if ($all_fields) {
     sql_query(" update {$g5['eyoom_board']} set bo_table = bo_table {$all_fields} where 1 ");
+}
+
+if (is_checked('chk_all_addon_poll') && $bo_use_addon_poll == 1) {
+    $sql = "update {$g5['board_table']} set bo_use_file_content = 1 where 1";
+    sql_query($sql);
 }
 
 $qstr = $wmode ? '&amp;wmode=1':'';

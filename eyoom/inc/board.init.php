@@ -28,6 +28,9 @@ if ($is_admin && $board['bo_table'] == $bo_table) {
 
 	// 최신글 추출 테이블에 카테고리 분류 필드 추가
 	$bbs->add_ca_name_fields();
+
+	// 승인게시물 관련 필드 추가
+	$bbs->add_approval_field($bo_table);
 }
 
 /**

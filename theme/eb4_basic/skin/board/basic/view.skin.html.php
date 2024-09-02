@@ -425,9 +425,12 @@ button.mfp-close {position:fixed;color:#fff !important}
 
     <div class="board-view-atc" id="view_good_nogood">
         <h2 class="board-view-atc-title">본문</h2>
+        <?php if ($eyoom_board['bo_use_addon_poll'] == '1' && $view['wr_poll_use'] == '1') { ?>
+        <?php } else { ?>
         <div class="board-view-file-conts">
             <?php echo $file_conts; ?>
         </div>
+        <?php } ?>
 
         <?php /* 본문 내용 시작 */?>
         <?php if ($eb_5['yc_blind'] == 'y') { ?>
@@ -435,6 +438,13 @@ button.mfp-close {position:fixed;color:#fff !important}
         <?php } ?>
         <div id="board_view_con" class="board-view-con view-content"><?php echo $view_content; ?></div>
         <?php echo $config['cf_editor'] == 'tuieditor' ? $bbs->tuieditor_viewer("board_view_con"): ''; ?>
+
+        <?php
+        /* 투표게시판 */
+        if ($eyoom_board['bo_use_addon_poll'] == '1' && isset($view['wr_poll_use']) && $view['wr_poll_use'] == '1') {
+            @include_once(EYOOM_CORE_PATH.'/board/bbspoll.php');
+        }
+        ?>
         <?php /* 본문 내용 끝 */?>
 
         <?php /* 추천 비추천 시작 */?>

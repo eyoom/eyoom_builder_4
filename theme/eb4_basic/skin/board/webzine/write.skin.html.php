@@ -27,6 +27,10 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 .board-write .write-option-btn:hover {color:#fff;opacity:0.8}
 .board-write .write-collapse-box {margin:10px 0;background:#f8f8f8;border:1px solid #d5d5d5;padding:15px 10px}
 .board-write #modal_video_note .table-list-eb .table thead>tr>th {text-align:left}
+.board-write .l-h-38 {line-height:38px}
+.board-write .poll-tabs .nav-link {padding:10px 20px;border-radius:0;color:#000}
+.board-write .poll-tabs .nav-link.active {font-weight:700}
+.board-write .poll-panel .tab-content {border:1px solid #dee2e6;border-top:0;padding:15px;background-color:#fff}
 /* Auto Save */
 .autosave-btn {position:absolute;top:0;right:0}
 #autosave_wrapper {position:relative}
@@ -292,6 +296,9 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                     <?php if ($eyoom_board['bo_use_addon_map'] == '1') { ?>
                     <a class="write-option-btn" data-bs-toggle="collapse" href="#collapse-map-wr"><i class="fas fa-map-marker-alt"></i> 지도</a>
                     <?php } ?>
+                    <?php if ($eyoom_board['bo_use_addon_poll'] == '1') { ?>
+                    <a class="write-option-btn" data-bs-toggle="collapse" href="#collapse-poll-wr"><i class="fas fa-poll"></i> 투표</a>
+                    <?php } ?>
                     <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>
                     <a class="write-option-btn float-end emoticon" data-vbtype="iframe" title="이모티콘" href="<?php echo EYOOM_CORE_URL;?>/board/emoticon.php"><i class="far fa-smile"></i> 이모티콘</a>
                     <?php } ?>
@@ -423,6 +430,106 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
                         <?php } ?>
                     </div>
                     <?php } ?>
+
+                    <?php if ($eyoom_board['bo_use_addon_poll'] == '1') { // 투표 기능 ?>
+                    <div id="collapse-poll-wr" class="panel-collapse collapse" data-bs-parent="#write_option">
+                        <div class="write-collapse-box">
+                            <input type="hidden" name="wr_poll_result" id="wr_poll_result" value="<?php echo $write['wr_poll_result']; ?>">
+                            <input type="hidden" name="wr_poll_use" id="wr_poll_use" value="">
+                            <label class="label" for="wr_content">투표 종료일</label>
+                            <div class="row m-b-15">
+                                <div class="col col-4">
+                                    <label class="input m-b-0">
+                                        <i class="icon-append far fa-calendar-alt"></i>
+                                        <input type="text" name="poll_limit_date" value="<?php echo $poll_limit_date; ?>" id="poll_limit_date" size="10" placeholder="종료일">
+                                    </label>
+                                </div>
+                                <div class="col col-8">
+                                    <div class="inline-group d-flex">
+                                        <span>
+                                            <label class="select width-80px m-b-0">
+                                                <select name="poll_limit_hour">
+                                                    <?php for ($i=0; $i<=23; $i++) { $hour = (strlen($i) == 1) ? "0".$i: $i; ?>
+                                                    <option value='<?php echo $hour; ?>' <?php echo $hour == $poll_limit_hour ? 'selected': ''; ?>><?php echo $hour; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </span>
+                                        <span class="l-h-38 m-l-5 m-r-10">시</span>
+                                        <span>
+                                            <label class="select width-80px m-b-0">
+                                                <select name="poll_limit_minute">
+                                                    <?php for ($i=0; $i<=59; $i++) { $minute = (strlen($i) == 1) ? "0".$i: $i; ?>
+                                                    <option value='<?php echo $minute; ?>' <?php echo $minute == $poll_limit_minute ? 'selected': ''; ?>><?php echo $minute; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </span>
+                                        <span class="l-h-38 m-l-5 m-r-10">분</span>
+                                        <span>
+                                            <label class="select width-80px m-b-0">
+                                                <select name="poll_limit_second">
+                                                    <?php for ($i=0; $i<=59; $i++) { $second = (strlen($i) == 1) ? "0".$i: $i; ?>
+                                                    <option value='<?php echo $second; ?>' <?php echo $second == $poll_limit_second ? 'selected': ''; ?>><?php echo $second; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </span>
+                                        <span class="l-h-38 m-l-5">초</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="poll-panel">
+                                <ul class="nav nav-tabs poll-tabs">
+                                    <li>
+                                        <a href="#poll_text" data-bs-toggle="tab" class="nav-link <?php if($w=='u') { echo $poll_type == 'text' ? 'active': 'disabled'; } else { echo 'active'; } ?>">텍스트 투표</a>
+                                    </li>
+                                    <li>
+                                        <a href="#poll_image" data-bs-toggle="tab" class="nav-link <?php if($w=='u') { echo $poll_type == 'image' ? 'active': 'disabled'; } ?>">이미지 투표</a>
+                                    </li>
+                                    <li>
+                                        <a href="#poll_video" data-bs-toggle="tab" class="nav-link <?php if($w=='u') { echo $poll_type == 'video' ? 'active': 'disabled'; } ?>">동영상 투표</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane in <?php echo $poll_type == 'text' ? 'active': ''; ?>" id="poll_text">
+                                        <div class="poll-text">
+                                            <div class="cont-text-bg m-b-15">
+                                                <p class="bg-info">텍스트 투표는 아래처럼 입력해주세요.<br>예) 구글,네이버,다음,네이트</p>
+                                            </div>
+                                            <label class="input">
+                                                <input type="text" id="wr_poll_text" name="wr_poll_text" placeholder="투표 항목 ,로 구분" value="<?php echo $write['wr_poll_text']; ?>">
+                                            </label>
+                                            <div class="note"><span class="text-crimson">*</span> <span class="text-black">텍스트 투표는 아래의 첨부 파일 무시하세요!</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane in <?php echo $poll_type == 'image' ? 'active': ''; ?>" id="poll_image">
+                                        <div class="poll-image">
+                                            <div class="cont-text-bg">
+                                                <p class="bg-warning">아래의 파일업로드에 이미지 첨부를 하고 파일 설명에 각 투표 제목을 입력합니다.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane in <?php echo $poll_type == 'video' ? 'active': ''; ?>" id="poll_video">
+                                        <div class="poll-video">
+                                            <div class="cont-text-bg m-b-15">
+                                                <p class="bg-info">동영상 주소를 <span class="text-black">파이프문자(|)</span>로 구분하여 아래 입력란에 입력해 주세요.<br>http(s)://동영상주소1|http(s)://동영상주소2<br>그리고 아래 파일 업로드에 이미지 첨부를 각 동영상에 맞게 차례대로 첨부합니다.<br>첨부 파일 설명에 각 투표 제목을 입력합니다.</p>
+                                            </div>
+                                            <div class="textarea m-b-0">
+                                                <textarea id="wr_poll_video" name="wr_poll_video" placeholder="http://동영상주소|http://동영상주소 <-이런식으로 입력하세요. (이미지만 사용시 여긴 비워두세요.)" class="frm_input full_input"  rows="5" style="resize:vertical;"><?php echo $write['wr_poll_video']; ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 투표 설정 -->
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="m-b-15"></div>
@@ -518,6 +625,36 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<?php echo $config['cf_map_daum_id']; ?>&libraries=services"></script>
 <?php } ?>
 <?php } ?>
+<?php if ($eyoom_board['bo_use_addon_poll'] == '1') { // 투표 ?>
+<script src="<?php echo EYOOM_THEME_URL; ?>/plugins/eyoom-form/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script>
+$(function(){
+    // Bootstrap의 collapse 이벤트를 활용해 클래스 변경을 체크
+    $('#collapse-poll-wr').on('shown.bs.collapse', function () {
+        $('#wr_poll_use').val(1);
+        $('#poll_limit_date').attr('required', 'required');
+    });
+
+    $('#collapse-poll-wr').on('hidden.bs.collapse', function () {
+        $('#wr_poll_use').val(0);
+        $('#poll_limit_date').removeAttr('required');
+    });
+
+    <?php /* 투표 : 달력 */ ?>
+    $('#poll_limit_date').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        prevText: '◁',
+        nextText: '▷',
+        showMonthAfterYear: true,
+        monthNames: ['년 1월','년 2월','년 3월','년 4월','년 5월','년 6월','년 7월','년 8월','년 9월','년 10월','년 11월','년 12월'],
+        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['일','월','화','수','목','금','토'],
+    });
+});
+</script>
+<?php } // 투표 ?>
 <script>
 $(document).ready(function(){
     <?php if ($eyoom_board['bo_use_addon_emoticon'] == '1') { ?>

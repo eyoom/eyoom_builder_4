@@ -141,7 +141,7 @@ function theme_modal(href, title) {
     });
     $('.theme-iframe-modal').modal('show').on('shown.bs.modal', function () {
         $("#theme-iframe").attr("src", href);
-        $('#theme-iframe').height(600);
+        $('#theme-iframe').height(700);
         $('html').css({overflow: 'hidden'});
     });
     $("#modal-title").text(title);

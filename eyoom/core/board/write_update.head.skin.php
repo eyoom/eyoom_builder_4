@@ -33,6 +33,26 @@ if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1' && $w == 'u') {
 }
 
 /**
+ * 투표마감일 설정
+ */
+if ($eyoom_board['bo_use_addon_poll'] == '1') {
+    $wr_poll_use = (int) clean_xss_tags(trim($_POST['wr_poll_use']));
+
+    $wr_poll_limit  = isset($_POST['poll_limit_date']) ? clean_xss_tags(trim($_POST['poll_limit_date'])) : '0000-00-00';
+    if ($wr_poll_use == '1' && $wr_poll_limit == '0000-00-00') {
+        alert("투표 종료일을 설정해 주세요.");
+    } else {
+        $wr_poll_limit .= isset($_POST['poll_limit_hour'])   ? ' '.clean_xss_tags(trim($_POST['poll_limit_hour']))   : ' 00';
+        $wr_poll_limit .= isset($_POST['poll_limit_minute']) ? ':'.clean_xss_tags(trim($_POST['poll_limit_minute'])) : ':00';
+        $wr_poll_limit .= isset($_POST['poll_limit_second']) ? ':'.clean_xss_tags(trim($_POST['poll_limit_second'])) : ':00';
+
+        $wr_poll_result = isset($_POST['wr_poll_result'])   ? clean_xss_tags(trim($_POST['wr_poll_result'])) : '';
+        $wr_poll_text   = isset($_POST['wr_poll_text'])     ? clean_xss_tags(trim($_POST['wr_poll_text']))   : '';
+        $wr_poll_video  = isset($_POST['wr_poll_video'])    ? clean_xss_tags(trim($_POST['wr_poll_video']))  : '';
+    }
+}
+
+/**
  * 게시판 스킨파일
  */
 @include_once($eyoom_skin_path['board'].'/write_update.head.skin.php');

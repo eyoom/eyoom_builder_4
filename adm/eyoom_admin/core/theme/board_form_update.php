@@ -176,6 +176,7 @@ $bo_use_addon_video = isset($_POST['bo_use_addon_video']) ? (int) $_POST['bo_use
 $bo_use_addon_coding = isset($_POST['bo_use_addon_coding']) ? (int) $_POST['bo_use_addon_coding'] : 0;
 $bo_use_addon_soundcloud = isset($_POST['bo_use_addon_soundcloud']) ? (int) $_POST['bo_use_addon_soundcloud'] : 0;
 $bo_use_addon_map = isset($_POST['bo_use_addon_map']) ? (int) $_POST['bo_use_addon_map'] : 0;
+$bo_use_addon_poll = isset($_POST['bo_use_addon_poll']) ? (int) $_POST['bo_use_addon_poll'] : 0;
 $bo_use_addon_cmtfile = isset($_POST['bo_use_addon_cmtfile']) ? (int) $_POST['bo_use_addon_cmtfile'] : 0;
 $bo_count_cmtfile = isset($_POST['bo_count_cmtfile']) ? (int) $_POST['bo_count_cmtfile'] : 1;
 $bo_cmt_best_min = isset($_POST['bo_cmt_best_min']) ? (int) $_POST['bo_cmt_best_min'] : 10;

@@ -434,6 +434,20 @@ if (preg_match("/pointpost/i", $eyoom_board['bo_skin']) && $eyoom_board['bo_use_
 }
 
 /**
+ * 투표 기능을 사용하고 투표가 활성화 된 상태
+ */
+if ($eyoom_board['bo_use_addon_poll'] == '1' && $wr_poll_use == '1') {
+    $sql_poll_set = "
+        wr_poll_use = '1',
+        wr_poll_result = '{$wr_poll_result}',
+        wr_poll_limit = '{$wr_poll_limit}',
+        wr_poll_text = '{$wr_poll_text}',
+        wr_poll_video = '{$wr_poll_video}'
+    ";
+    sql_query("update {$write_table} set {$sql_poll_set} where wr_id='{$wr_id}'");
+}
+
+/**
  * 최신글 캐시 스위치온
  */
 $latest->make_switch_on($bo_table, $theme);

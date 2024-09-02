@@ -953,6 +953,39 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
+                        <label for="bo_use_addon_poll" class="label">투표 기능 사용</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label for="bo_use_addon_poll" class="checkbox">
+                            <input type="checkbox" name="bo_use_addon_poll" id="bo_use_addon_poll" value="1" <?php echo $eyoom_board['bo_use_addon_poll']=='1' ? 'checked': ''; ?>><i></i> 사용
+                        </label>
+                        <div class="inline-group">
+                            <span>
+                                <label for="bo_addon_poll_point" class="input width-150px">
+                                    <i class="icon-append width-70px"><?php echo $levelset['gnu_name']; ?>를</i>
+                                    <input type="text" name="bo_addon_poll_point" id="bo_addon_poll_point" value="<?php echo $eyoom_board['bo_addon_poll_point'] ? $eyoom_board['bo_addon_poll_point']: 0; ?>">
+                                </label>
+                            </span>
+                            <span>
+                                <label for="bo_addon_poll_type" class="select width-250px">
+                                    <select name="bo_addon_poll_type" id="bo_addon_poll_type">
+                                        <option value="1" <?php echo $eyoom_board['bo_addon_poll_type']=='1' ? 'selected': ''; ?>>랜덤으로 지급</option>
+                                        <option value="2" <?php echo $eyoom_board['bo_addon_poll_type']=='2' ? 'selected': ''; ?>>고정으로 지급</option>
+                                    </select><i></i>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="note"><strong>Note:</strong> 게시글에 투표 기능(텍스트 투표, 이미지 투표, 동영상 투표)을 활성화 시킵니다. </div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_addon_poll" class="checkbox"><input type="checkbox" name="chk_grp_addon_poll" value="1" id="chk_grp_addon_poll"><i></i>그룹적용</label>
+                                <label for="chk_all_addon_poll" class="checkbox"><input type="checkbox" name="chk_all_addon_poll" value="1" id="chk_all_addon_poll"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
                         <label for="bo_use_addon_cmtfile" class="label">댓글에 파일 추가 기능 사용</label>
                     </div>
                     <div class="adm-form-td td-r td-rs">

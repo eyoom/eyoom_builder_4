@@ -8,6 +8,13 @@ html {overflow-x:hidden}
 </style>
 <?php } ?>
 
+<?php 
+/**
+ * 후킹 이벤트 실행
+ */
+run_event('tail_sub');
+?>
+
 </body>
 </html>
 <?php echo html_end(); ?>

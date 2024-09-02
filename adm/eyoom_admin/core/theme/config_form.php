@@ -59,6 +59,7 @@ $skins['respond']   = get_skin_dir('respond', G5_PATH.'/theme/'.$this_theme.'/sk
 $skins['push']      = get_skin_dir('push', G5_PATH.'/theme/'.$this_theme.'/skin/');
 $skins['tag']       = get_skin_dir('tagmenu', G5_PATH.'/theme/'.$this_theme.'/skin/');
 $skins['ranking']   = get_skin_dir('ranking', G5_PATH.'/theme/'.$this_theme.'/skin/');
+$skins['bbspoll']   = get_skin_dir('bbspoll', G5_PATH.'/theme/'.$this_theme.'/skin/');
 
 /**
  * 아이콘 폴더

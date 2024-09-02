@@ -160,6 +160,10 @@ function get_pretty_eyoom_menu_url($me_type, $me_pid, $me_link='') {
                 }
                 return $me_link;
             break;
+
+            case 'theme':
+                return G5_URL.$me_link;
+            break;
         }
 
         /**

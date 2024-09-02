@@ -8,16 +8,17 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 
 <style>
 .admin-theme-form .license-scroll-box {position:relative;overflow:hidden;border:1px solid #b5b5b5;padding:10px;margin-bottom:10px}
-.admin-theme-form .license-scroll-box-in {position:relative;overflow:hidden;height:140px}
+.admin-theme-form .license-scroll-box-in {position:relative;overflow:hidden;height:200px}
 .admin-theme-form .license-title {margin:20px 0 10px}
 .admin-theme-form .license-box {position:relative;overflow:hidden;border:1px solid #b5b5b5;padding:10px;margin-bottom:10px}
 .admin-theme-form .license-box p {position:relative;padding-left:13px;margin-bottom:0}
 .admin-theme-form .license-box p:before {content:"";position:absolute;top:6px;left:0;width:5px;height:5px;background:#959595}
+.admin-theme-form .btn-e-red {background-color:#ab0000;border-color:#ab0000}
 </style>
 
 <div class="admin-theme-form">
 	<div class="headline">
-		<h4><strong>[<span class="color-red"><?php echo $theme_name; ?></span>] 테마 설치하기</strong></h4>
+		<h5><strong>[<span class="text-crimson"><?php echo $theme_name; ?></span>] 테마 설치하기</strong></h5>
 	</div>
 
 	<form name="fthemeform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return ftheme_check(this)" class="eyoom-form">
@@ -26,7 +27,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
 	<input type="hidden" name="tm_name" id="tm_name" value="<?php echo $theme_name; ?>">
 	<input type="hidden" name="eyoom_config" id="eyoom_config" value="">
 
-    <div class="margin-bottom-30">
+    <div class="m-b-30">
         <div class="license-scroll-box">
             <div class="license-scroll-box-in">
                 <iframe src="<?php echo EYOOM_SITE; ?>/page/?pid=eb4_license&wmode=1" width="100%" height="100%" frameborder="0"></iframe>
@@ -49,20 +50,20 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
         </label>
         
         <?php if (!$is_cmall) { ?>
-		<label class="label">테마키 입력</label>
+		<label class="label m-t-20">테마키 입력</label>
 		<label for="tm_key" class="input">
 			<input type="text" name="tm_key" id="tm_key" value="">
 		</label>
 
-		<div class="note margin-bottom-10"><strong>Note:</strong> 테마키는 테마를 다운로드받으신 이윰넷(<a href="<?php echo EYOOM_SITE; ?>" target="_blank"><?php echo EYOOM_SITE; ?></a>)의 마이페이지 다운로드 내역에서 확인하실 수 있습니다.</div>
+		<div class="note m-b-10"><strong>Note:</strong> 테마키는 테마를 다운로드받으신 이윰넷(<a href="<?php echo EYOOM_SITE; ?>" target="_blank"><?php echo EYOOM_SITE; ?></a>)의 마이페이지 다운로드 내역에서 확인하실 수 있습니다.</div>
 		<?php } else { ?>
 		<label class="label">주문번호 입력</label>
 		<label for="tm_key" class="input">
 			<input type="text" name="tm_key" id="tm_key" value="">
 		</label>
 
-		<div class="note margin-bottom-10"><strong>Note:</strong> (주)에스아이알소프트(<?php echo GNU_SITE; ?>) 콘텐츠몰에서 구매하신 테마의 주문번호를 입력해 주시기 바랍니다. </div>
-		<div class="note margin-bottom-10"><strong>Note:</strong> 주문번호는 향후 테마키로 활용됩니다. 정확히 입력해 주셔야 합니다.</div>
+		<div class="note m-b-10"><strong>Note:</strong> (주)에스아이알소프트(<?php echo GNU_SITE; ?>) 콘텐츠몰에서 구매하신 테마의 주문번호를 입력해 주시기 바랍니다. </div>
+		<div class="note m-b-10"><strong>Note:</strong> 주문번호는 향후 테마키로 활용됩니다. 정확히 입력해 주셔야 합니다.</div>
 		<?php }?>
     </div>
 
@@ -86,7 +87,7 @@ function ftheme_check(f) {
     
 	var tmkey 	= $("#tm_key").val();
 	if (!tmkey) {
-    	<?php if (!$is_cmall) { ?>
+		<?php if (!$is_cmall) { ?>
 		alert("구매하신 테마의 라이센스키를 입력해 주세요.");
 		<?php } else { ?>
 		alert("(주)에스아이알소프트(<?php echo GNU_SITE; ?>) 콘텐츠몰에서 구매하신 테마의 주문번호를 입력해 주세요.");
@@ -94,7 +95,7 @@ function ftheme_check(f) {
 		$("#tm_key").focus();
 		return false;
 	} else {
-    	var scheme = '<?php echo $hostname['scheme']; ?>';
+		var scheme = '<?php echo $hostname['scheme']; ?>';
 		var host = '<?php echo $hostname['host']; ?>';
 		var wurl = '<?php echo $hostname['host']; ?>';
 		var rurl = '';

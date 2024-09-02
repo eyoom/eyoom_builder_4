@@ -254,6 +254,52 @@ if ($eyoom_board['bo_use_addon_map'] == '1' || (isset($ex_address) && $ex_addres
 }
 
 /**
+ * 투표기능
+ */
+if ($eyoom_board['bo_use_addon_poll'] == '1') {
+    /**
+     * 투표관련 필드 추가
+     */
+    if(!sql_query(" select wr_poll_result from {$write_table} limit 1 ", false)) {
+        sql_query(" ALTER TABLE `{$write_table}`
+                        ADD `wr_poll_use` char(1) NOT NULL DEFAULT '0' AFTER `wr_datetime`,
+                        ADD `wr_poll_result` varchar(255) NOT NULL DEFAULT '' AFTER `wr_poll_use`,
+                        ADD `wr_poll_limit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `wr_poll_result`,
+                        ADD `wr_poll_text` varchar(255) NOT NULL DEFAULT '' AFTER `wr_poll_limit`,
+                        ADD `wr_poll_video` text NOT NULL AFTER `wr_poll_text` ", true);
+    }
+
+    /**
+     * 투표타입 기본값 : text
+     */
+    $poll_type = 'text';
+    if (isset($write['wr_poll_limit']) && $write['wr_poll_limit']) {
+        /**
+         * 투표타입 정의
+         */
+        if ($write['wr_poll_text'] != '') {
+            $poll_type = 'text';
+        } else if ($write['wr_poll_video'] != '') {
+            $poll_type = 'video';
+        } else if ($write['wr_poll_text'] == '' && $write['wr_poll_video'] == '') {
+            $poll_type = 'image';
+        }
+
+        /**
+         * 투표 마감일
+         */
+        list($poll_limit_date, $poll_limit_time) = explode(' ', $write['wr_poll_limit']);
+        list($poll_limit_hour, $poll_limit_minute, $poll_limit_second) = explode(":", $poll_limit_time);
+    } else {
+        $poll_limit_date    = '';
+        $poll_limit_time    = '';
+        $poll_limit_hour    = '';
+        $poll_limit_minute  = '';
+        $poll_limit_second  = '';
+    }
+}
+
+/**
  * 이윰 여분필드 변수값 암호화
  */
 $eb_1 = $eb_1 ? $eb->encrypt_aes($eb_1): '';

@@ -324,6 +324,11 @@ $g5['eyoom_favorite_adm'] = G5_TABLE_PREFIX . 'eyoom_favorite_adm';
 $g5['eyoom_counsel'] = G5_TABLE_PREFIX . 'eyoom_counsel';
 
 /**
+ * 투표 게시물
+ */
+$g5['eyoom_bbspoll'] = G5_TABLE_PREFIX . 'eyoom_bbspoll';
+
+/**
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;

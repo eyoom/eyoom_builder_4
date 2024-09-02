@@ -893,6 +893,38 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php 
+                if ($skins['bbspoll'] && sql_query(" DESC {$g5['eyoom_bbspoll']} ", false)) { 
+                    $eyoom['bbspoll_skin'] = $eyoom['bbspoll_skin'] ? $eyoom['bbspoll_skin']: 'basic';
+                ?>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="bbspoll_skin" class="label">투표게시물 스킨</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <div class="inline-group">
+                                <label class="radio"><input type="radio" name="use_gnu_bbspoll" id="use_gnu_bbspoll" value="n" <?php echo $eyoom['use_gnu_bbspoll'] != 'y' ? 'checked': ''; ?>><i></i>이윰빌더 스킨</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="bbspoll_skin" class="label">투표게시물 이윰빌더 스킨선택</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="select max-width-250px">
+                                <select name="bbspoll_skin" id="bbspoll_skin" required="required">
+                                    <option value="">선택</option>
+                                    <?php for($i=0; $i<count((array)$skins['bbspoll']); $i++) { ?>
+                                    <option value="<?php echo $skins['bbspoll'][$i]; ?>" <?php echo get_selected($eyoom['bbspoll_skin'], $skins['bbspoll'][$i]); ?>><?php echo $skins['bbspoll'][$i]; ?></option>
+                                    <?php } ?>
+                                </select><i></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
         <?php /* 스킨설정 : 끝 */ ?>

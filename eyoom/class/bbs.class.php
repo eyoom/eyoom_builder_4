@@ -58,6 +58,7 @@ class bbs extends eyoom
                 'bo_use_addon_coding'       => 0,
                 'bo_use_addon_soundcloud'   => 0,
                 'bo_use_addon_map'          => 0,
+                'bo_use_addon_poll'         => 0,
                 'bo_use_addon_cmtfile'      => 1,
                 'bo_use_extimg'             => 0,
                 'bo_use_adopt_point'        => 0,
@@ -258,6 +259,25 @@ class bbs extends eyoom
     }
 
     /**
+     * 승인기능을 사용하는 게시판이라면 게시판 테이블에 wr_approval 필드 추가
+     */
+    public function add_approval_field($bo_table) {
+        global $is_admin;
+
+        /**
+         * 최고관리자일 경우만 허용
+         */
+        if ($is_admin != 'super') return;
+
+        $write_table = $this->g5['write_prefix'] . $bo_table;
+
+        if (!sql_query(" select wr_approval from {$write_table} limit 1 ", false)) {
+            $sql = " alter table `{$write_table}` add `wr_approval` tinyint(4) NOT NULL default '1' after `wr_homepage` ";
+            sql_query($sql, true);
+        }
+    }
+
+    /**
      * 익명 게시판 배열로 가져오기
      */
     public function anonymous_table() {
@@ -304,18 +324,6 @@ class bbs extends eyoom
         if (!sql_query(" select bo_wr_eb from {$this->g5['board_table']} limit 1 ", false)) {
             $sql = " alter table `{$this->g5['board_table']}` add `bo_wr_eb` char(1) NOT NULL default '0' after `bo_sort_field` ";
             sql_query($sql, true);
-        }
-
-        /**
-         * 승인기능을 사용하는 게시판이라면 게시판 테이블에 wr_approval 필드 추가
-         */
-        if ($this->board['bo_use_approval']) {
-            $write_table = $this->g5['write_prefix'] . $this->board['bo_table'];
-            
-            if (!sql_query(" select wr_approval from {$write_table} limit 1 ", false)) {
-                $sql = " alter table `{$write_table}` add `wr_approval` tinyint(4) NOT NULL default '1' after `wr_homepage` ";
-                sql_query($sql, true);
-            }
         }
     }
 

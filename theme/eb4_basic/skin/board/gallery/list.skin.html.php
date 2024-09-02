@@ -33,6 +33,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-gallery .gallery-item .gallery-item-image-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;width:50px;height:50px;line-height:50px;text-align:center;color:#fff;font-size:40px;transform:translate(-50%,-50%);z-index:1}
 .board-gallery .gallery-item:hover .gallery-item-image-in:after {opacity:1}
 .board-gallery .gallery-item:hover .gallery-item-image-in {box-shadow:none}
+.board-gallery .gallery-item .gallery-item-info .poll-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.75rem;text-align:center;color:#fff;background-color:#353535;margin-top:3px;margin-bottom:3px}
+.board-gallery .gallery-item .gallery-item-info .poll-label.poll-label-image {background-color:#3949ab}
+.board-gallery .gallery-item .gallery-item-info .poll-label.poll-label-video {background-color:#5e35b1}
 .board-gallery .gallery-item .gallery-item-info {position:relative;padding:15px}
 .board-gallery .gallery-item .gallery-item-info h4 {font-size:1.0625rem;color:#252525;line-height:1.4;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:15px}
 .board-gallery .gallery-item .gallery-item-info h4 .gallery-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#ab0000;margin-right:2px}
@@ -254,6 +257,18 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                             <a href="<?php echo $list[$i]['href']; ?>" <?php echo $infinite_wmode ? 'onclick="eb_modal(this.href); return false;"': ''; ?>>
                                 <?php if ($list[$i]['icon_new']) { ?>
                                 <span class="gallery-new-icon"><b></b></span>
+                                <?php } ?>
+                                <?php if (isset($list[$i]['wr_poll_use']) && $list[$i]['wr_poll_use']) { ?>
+                                <span class="poll-label poll-label-<?php echo $list[$i]['poll_type']; ?>">
+                                    <i class="fa fa-poll text-white m-r-5"></i>
+                                    <?php
+                                    switch ($list[$i]['poll_type']) {
+                                        case 'text': echo '텍스트'; break;
+                                        case 'image': echo '이미지'; break;
+                                        case 'video': echo '비디오'; break;
+                                    }
+                                    ?>
+                                </span>
                                 <?php } ?>
                                 <?php if ($wr_id == $list[$i]['wr_id']) { ?>
                                 <span class="text-crimson m-r-5">열람중</span><?php echo $list[$i]['subject']; ?>

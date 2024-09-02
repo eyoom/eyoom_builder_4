@@ -28,6 +28,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-webzine .webzine-item .webzine-img-box-in:after {content:"";text-align:center;position:absolute;display:block;left:0;top:0;opacity:0;-moz-transition:all 0.2s ease 0s;-webkit-transition:all 0.2s ease 0s;-ms-transition:all 0.2s ease 0s;-o-transition:all 0.2s ease 0s;transition:all 0.2s ease 0s;width:100%;height:100%;background:rgba(0,0,0,0.3)}
 .board-webzine .webzine-item .webzine-img-box-in .movie-icon {display:inline-block;position:absolute;top:50%;left:50%;width:50px;height:50px;line-height:50px;text-align:center;color:#fff;font-size:40px;transform:translate(-50%,-50%);z-index:1}
 .board-webzine .webzine-item:hover .webzine-img-box-in:after {opacity:1}
+.board-webzine .webzine-item .webzine-desc h4 .poll-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.75rem;text-align:center;color:#fff;background-color:#454545;margin-top:3px;margin-bottom:3px}
+.board-webzine .webzine-item .webzine-desc h4 .poll-label.poll-label-image {background-color:#3949ab}
+.board-webzine .webzine-item .webzine-desc h4 .poll-label.poll-label-video {background-color:#5e35b1}
 .board-webzine .webzine-item .webzine-desc h4 {font-size:1.125rem;color:#252525;margin-top:0;margin-bottom:15px;line-height:1.4;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .board-webzine .webzine-item .webzine-desc h4 .wl-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.8125rem;text-align:center;color:#fff;background-color:#a5a5a5}
 .board-webzine .webzine-item .webzine-desc h4 .webzine-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#ab0000;margin-right:2px}
@@ -216,6 +219,18 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                         <?php } ?>
                         <?php if ($is_category && $list[$i]['ca_name']) { ?>
                         <span class="text-gray m-r-7">[<?php echo $list[$i]['ca_name']; ?>]</span>
+                        <?php } ?>
+                        <?php if (isset($list[$i]['wr_poll_use']) && $list[$i]['wr_poll_use']) { ?>
+                        <span class="poll-label poll-label-<?php echo $list[$i]['poll_type']; ?>">
+                            <i class="fa fa-poll text-white m-r-5"></i>
+                            <?php
+                            switch ($list[$i]['poll_type']) {
+                                case 'text': echo '텍스트'; break;
+                                case 'image': echo '이미지'; break;
+                                case 'video': echo '비디오'; break;
+                            }
+                            ?>
+                        </span>
                         <?php } ?>
                         <?php if ($wr_id == $list[$i]['wr_id']) { ?>
                         <span class="text-crimson m-r-5">열람중</span><?php echo $list[$i]['subject']; ?>

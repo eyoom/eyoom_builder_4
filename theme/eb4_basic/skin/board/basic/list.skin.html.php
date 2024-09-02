@@ -42,6 +42,9 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
 .board-list .bl-list .bl-num-short {width:80px}
 .board-list .bl-list .bl-num-checkbox {width:110px}
 .board-list .bl-list .bl-author {width:150px;padding:0 10px;text-align:left}
+.board-list .bl-list .poll-label {display:inline-block;width:70px;height:20px;line-height:20px;font-size:.75rem;text-align:center;color:#fff;background-color:#353535;margin-top:3px;margin-bottom:3px}
+.board-list .bl-list .poll-label.poll-label-image {background-color:#3949ab}
+.board-list .bl-list .poll-label.poll-label-video {background-color:#5e35b1}
 .board-list .bl-list .bl-subj {display:table-cell;vertical-align:middle;font-weight:500}
 .board-list .bl-list .bl-subj a {position:relative;display:inline-block;padding:0 10px}
 .board-list .bl-list .bl-subj a:hover {color:#000;text-decoration:underline}
@@ -246,6 +249,18 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/sweetal
                     <?php } ?>
                     <?php if ($is_category && $list[$i]['ca_name']) { ?>
                     <span class="text-gray m-r-5">[<?php echo $list[$i]['ca_name']; ?>]</span>
+                    <?php } ?>
+                    <?php if (isset($list[$i]['wr_poll_use']) && $list[$i]['wr_poll_use']) { ?>
+                    <span class="poll-label poll-label-<?php echo $list[$i]['poll_type']; ?>">
+                        <i class="fa fa-poll text-white m-r-5"></i>
+                        <?php
+                        switch ($list[$i]['poll_type']) {
+                            case 'text': echo '텍스트'; break;
+                            case 'image': echo '이미지'; break;
+                            case 'video': echo '비디오'; break;
+                        }
+                        ?>
+                    </span>
                     <?php } ?>
                     <?php if ($list[$i]['is_notice']) { ?>
                     <span class="subj"><?php echo $list[$i]['subject']; ?></span>

@@ -122,6 +122,10 @@ if ($li_renew == 'y' && is_array($li_table)) {
     
     foreach ($li_table as $k => $_bo_table) {
         unset($wr_new);
+
+        // 승인게시물 관련 필드 추가
+        $bbs->add_approval_field($_bo_table);
+
         $write_table = $g5['write_prefix'] . $_bo_table;
         $sql = "select wr_id from {$g5['board_new_table']} where bo_table = '{$_bo_table}' ";
         $result = sql_query($sql);

@@ -47,8 +47,10 @@ if (G5_IS_MOBILE) {
     $eyoom_skin_url['newwin']    = $thema->get_skin_url('newwin', $eyoom['mobile_newwin_skin']);
     $eyoom_skin_path['tag']      = $thema->get_skin_path('tag', $eyoom['mobile_tag_skin']);
     $eyoom_skin_url['tag']       = $thema->get_skin_url('tag', $eyoom['mobile_tag_skin']);
-    $eyoom_skin_path['signature']= $thema->get_skin_path('signature', $eyoom['mobile_tag_skin']);
-    $eyoom_skin_url['signature'] = $thema->get_skin_url('signature', $eyoom['mobile_tag_skin']);
+    $eyoom_skin_path['signature']= $thema->get_skin_path('signature', $eyoom['mobile_signature_skin']);
+    $eyoom_skin_url['signature'] = $thema->get_skin_url('signature', $eyoom['mobile_signature_skin']);
+    $eyoom_skin_path['bbspoll']  = $thema->get_skin_path('bbspoll', $eyoom['mobile_bbspoll_skin']);
+    $eyoom_skin_url['bbspoll']   = $thema->get_skin_url('bbspoll', $eyoom['mobile_bbspoll_skin']);
 } else {
     $eyoom_skin_path['board']    = $thema->get_skin_path('board', $eyoom_board['bo_skin']);
     $eyoom_skin_url['board']     = $thema->get_skin_url('board', $eyoom_board['bo_skin']);
@@ -74,6 +76,8 @@ if (G5_IS_MOBILE) {
     $eyoom_skin_url['tag']       = $thema->get_skin_url('tag', $eyoom['tag_skin']);
     $eyoom_skin_path['signature']= $thema->get_skin_path('signature', $eyoom['signature_skin']);
     $eyoom_skin_url['signature'] = $thema->get_skin_url('signature', $eyoom['signature_skin']);
+    $eyoom_skin_path['bbspoll']  = $thema->get_skin_path('bbspoll', $eyoom['bbspoll_skin']);
+    $eyoom_skin_url['bbspoll']   = $thema->get_skin_url('bbspoll', $eyoom['bbspoll_skin']);
 }
 
 /**

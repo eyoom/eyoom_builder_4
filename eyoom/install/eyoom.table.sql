@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_use_addon_coding` char(1) NOT NULL default '0',
   `bo_use_addon_soundcloud` char(1) NOT NULL default '0',
   `bo_use_addon_map` char(1) NOT NULL default '0',
+  `bo_use_addon_poll` char(1) NOT NULL default '0',
   `bo_use_addon_cmtfile` char(1) NOT NULL default '1',
   `bo_count_cmtfile` smallint(2) NOT NULL default '1',
   `bo_use_extimg` char(1) NOT NULL default '0',
@@ -857,4 +858,20 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_counsel` (
     `cs_update` datetime NOT NULL,
     `cs_regdt` datetime NOT NULL,
     PRIMARY KEY  (`cs_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_bbspoll`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_bbspoll`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_bbspoll` (
+    `po_id` int(11) NOT NULL,
+    `bo_table` varchar(20) NOT NULL DEFAULT '',
+    `wr_id` int(11) NOT NULL DEFAULT '0',
+    `mb_id` varchar(20) NOT NULL DEFAULT '',
+    `po_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    PRIMARY KEY  (`po_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

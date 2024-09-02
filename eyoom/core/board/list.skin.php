@@ -218,6 +218,20 @@ foreach ($list as $i => $val) {
             }
         }
     }
+
+    /**
+     * 투표
+     */
+    if ($eyoom_board['bo_use_addon_poll'] == '1' && isset($list[$i]['wr_poll_use']) && $list[$i]['wr_poll_use'] == '1') {
+        $list[$i]['poll_type'] = '';
+        if ($list[$i]['wr_poll_text'] != '') {
+            $list[$i]['poll_type'] = 'text';
+        } else if ($list[$i]['wr_poll_video'] != '') {
+            $list[$i]['poll_type'] = 'video';
+        } else if ($list[$i]['wr_poll_text'] == '' && $list[$i]['wr_poll_video'] == '') {
+            $list[$i]['poll_type'] = 'image';
+        }
+    }
 }
 
 /**
