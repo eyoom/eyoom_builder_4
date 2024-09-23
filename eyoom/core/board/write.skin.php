@@ -314,6 +314,20 @@ $eb_9 = $eb_9 ? $eb->encrypt_aes($eb_9): '';
 $eb_10 = $eb_10 ? $eb->encrypt_aes($eb_10): '';
 
 /**
+ * 예약게시판 공개시간
+ */
+if ($eyoom_board['bo_use_scheduled'] == '1') {
+    if ($write['wr_opendate']) {
+        $wr_scheduled_date = substr($write['wr_opendate'], 0, 10);
+        $wr_scheduled_time = substr($write['wr_opendate'], 11, 5);   
+    }
+
+    if ($eyoom_board['bo_table_scheduled']) {
+        $bo = sql_fetch("select bo_table, bo_subject from {$g5['board_table']} where bo_table = '{$eyoom_board['bo_table_scheduled']}' ");
+    }
+}
+
+/**
  * 게시판 스킨파일
  */
 @include_once($eyoom_skin_path['board'].'/write.skin.php');

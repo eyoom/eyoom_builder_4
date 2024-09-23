@@ -19,7 +19,7 @@ if(isset($ans) && $max_ans) {
     }
 
     if (!$is_admin) {
-        if ($is_member) {
+        if ($member['mb_level'] >= $board['bo_poll_level'] && $is_member) {
             $sql = " select * from {$g5['eyoom_bbspoll']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' and mb_id = '{$member['mb_id']}' ";
             $row = sql_fetch($sql);
     

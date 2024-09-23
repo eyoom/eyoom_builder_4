@@ -501,6 +501,15 @@ if (!isset($config['cf_use_version_alarm'])) {
                 ADD `cf_use_version_alarm` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme` ", true);
 }
 
+/**
+ * 하루 게시물 작성수 제한 필드추가
+ */
+if (!isset($config['cf_write_limit'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_write_limit` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_use_version_alarm`,
+                ADD `cf_write_limit_type` VARCHAR(10) NOT NULL DEFAULT '' AFTER `cf_write_limit` ", true);
+}
+
 if(!$config['cf_faq_skin']) $config['cf_faq_skin'] = "basic";
 if(!$config['cf_mobile_faq_skin']) $config['cf_mobile_faq_skin'] = "basic";
 

@@ -997,8 +997,8 @@ $frm_submit .= $frm_eba_submit;
                             <a href="http://testadmin8.kcp.co.kr/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">테스트 관리자</a>
                         </div>
                         <div class="scf_cardtest lg_cardtest m-b-10">
-                            <a href="https://pgweb.uplus.co.kr/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">실결제 관리자</a>
-                            <a href="https://pgweb.uplus.co.kr/tmert" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">테스트 관리자</a>
+                            <a href="https://pgweb.tosspayments.com/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">실결제 관리자</a>
+                            <a href="https://pgweb.tosspayments.com/tmert" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">테스트 관리자</a>
                         </div>
                         <div class="scf_cardtest inicis_cardtest m-b-10">
                             <a href="https://iniweb.inicis.com/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">상점 관리자</a>

@@ -43,6 +43,7 @@ $rows = array();
 
 $col = 0;
 
+$rows = array();
 for($i=1; $res=sql_fetch_array($qry); $i++)
 {
     //$res = array_map('iconv_euckr', $res);
@@ -51,7 +52,7 @@ for($i=1; $res=sql_fetch_array($qry); $i++)
 
     if ($no_hp && $res['bk_hp'] != '' && !$hp) continue;
 
-    $rows[] = array($res['bk_name'], ' '.$hp);
+    $rows[$i] = array($res['bk_name'], ' '.$hp);
 }
 
 $data = array_merge(array($headers), $rows);

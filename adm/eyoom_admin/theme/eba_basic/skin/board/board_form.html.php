@@ -405,6 +405,23 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_poll_level" class="label">투표하기 권한</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label class="select max-width-250px">
+                            <?php echo get_member_level_select('bo_poll_level', 1, 10, $board['bo_poll_level']) ?><i></i>
+                        </label>
+                        <div class="note"><strong>Note:</strong> 투표하기 기능은 게시판 "확장기능 > 애드온"에서 활성화 하실 수 있습니다.</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_poll_level" class="checkbox"><input type="checkbox" name="chk_grp_poll_level" value="1" id="chk_grp_poll_level"><i></i>그룹적용</label>
+                                <label for="chk_all_poll_level" class="checkbox"><input type="checkbox" name="chk_all_poll_level" value="1" id="chk_all_poll_level"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <?php /* 게시판 권한 설정 : 끝 */ ?>
@@ -875,12 +892,29 @@ $frm_submit .= $frm_eba_submit;
                             <i class="icon-append">건</i>
                             <input type="text" name="bo_write_limit" id="bo_write_limit" value="<?php echo $eyoom_board['bo_write_limit'] ? $eyoom_board['bo_write_limit']: 0 ?>" class="text-end">
                         </label>
-                        <div class="note"><strong>Note:</strong> 회원당 하루에 글쓰기 가능 회수를 지정합니다. 0일 경우는 제한이 없습니다.</div>
+                        <div class="note"><strong>Note:</strong> 본 게시판에 한하여 회원당 하루에 글쓰기 가능 회수를 지정합니다. 0일 경우는 제한이 없습니다.</div>
                         <div class="note"><strong>Note:</strong> 회수 제한을 설정하면 비회원은 글을 작성할 수 없습니다.</div>
                         <div class="adm-form-td-rs">
                             <div class="inline-group">
                                 <label for="chk_grp_write_limit" class="checkbox"><input type="checkbox" name="chk_grp_write_limit" value="1" id="chk_grp_write_limit"><i></i>그룹적용</label>
                                 <label for="chk_all_write_limit" class="checkbox"><input type="checkbox" name="chk_all_write_limit" value="1" id="chk_all_write_limit"><i></i>전체적용</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr adm-sm-100">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_wrlimit" class="label">하루 게시물 작성제한 사용</label>
+                    </div>
+                    <div class="adm-form-td td-r td-rs">
+                        <label class="checkbox">
+                            <input type="checkbox" name="bo_use_wrlimit" value="1" <?php echo $board['bo_use_wrlimit']?'checked':''; ?> id="bo_use_sns"><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 사용에 체크하시면 '환경설정 > 기본환경설정 > 게시판기본 > 게시물 작성수 제한'의 설정한 숫자만큼 게시물 제한 게시판으로 사용이 됩니다.</div>
+                        <div class="adm-form-td-rs">
+                            <div class="inline-group">
+                                <label for="chk_grp_use_wrlimit" class="checkbox"><input type="checkbox" name="chk_grp_use_wrlimit" value="1" id="chk_grp_use_wrlimit"><i></i>그룹적용</label>
+                                <label for="chk_all_use_wrlimit" class="checkbox"><input type="checkbox" name="chk_all_use_wrlimit" value="1" id="chk_all_use_wrlimit"><i></i>전체적용</label>
                             </div>
                         </div>
                     </div>

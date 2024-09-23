@@ -61,7 +61,11 @@ if ($bo_use_anonymous == '1') {
 /**
  * 분류 및 익명글 최신글 적용하기
  */
-$sql = "update {$g5['board_new_table']} set ca_name='{$ca_name}', {$sql_approval} wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' where wr_id='{$wr_id}' ";
+$sql_wrip = '';
+if ($w=='') {
+    $sql_wrip = ", wr_ip='".$_SERVER['REMOTE_ADDR']."' ";
+}
+$sql = "update {$g5['board_new_table']} set ca_name='{$ca_name}', {$sql_approval} wr_anonymous='{$up_set['wr_anonymous']}', wr_bo_anonymous='{$wr_bo_anonymous}' {$sql_wrip} where wr_id='{$wr_id}' ";
 sql_query($sql);
 
 /**
@@ -450,7 +454,24 @@ if ($eyoom_board['bo_use_addon_poll'] == '1' && $wr_poll_use == '1') {
 /**
  * 최신글 캐시 스위치온
  */
-$latest->make_switch_on($bo_table, $theme);
+if (!$eyoom_board['bo_use_scheduled']) {
+    $latest->make_switch_on($bo_table, $theme);
+} else {
+    /**
+     * 게시물 예약기능을 사용한다면
+     */
+    if (isset($_POST['wr_scheduled_date'])) $wr_scheduled_date = clean_xss_tags(trim($_POST['wr_scheduled_date']));
+    if (isset($_POST['wr_scheduled_time'])) $wr_scheduled_time = clean_xss_tags(trim($_POST['wr_scheduled_time']));
+    if ($wr_scheduled_date && $wr_scheduled_time) {
+        sql_query("update {$write_table} set wr_opendate='{$wr_scheduled_date} {$wr_scheduled_time}:00' where wr_id='{$wr_id}'");
+        $row = sql_fetch("select count(*) as cnt from {$g5['eyoom_scheduled']} where bo_table='{$bo_table}' and wr_id='{$wr_id}'");
+        if ($row['cnt'] > 0) {
+            sql_query("update {$g5['eyoom_scheduled']} set wr_opendate='{$wr_scheduled_date} {$wr_scheduled_time}:00' where bo_table='{$bo_table}' and wr_id='{$wr_id}'");
+        } else {
+            sql_query("insert into {$g5['eyoom_scheduled']} set bo_table='{$bo_table}', wr_id='{$wr_id}', wr_opendate='{$wr_scheduled_date} {$wr_scheduled_time}:00', tg_table='{$eyoom_board['bo_table_scheduled']}'");
+        }
+    }
+}
 
 /**
  * 게시판 스킨파일

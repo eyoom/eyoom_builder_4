@@ -182,6 +182,45 @@ if (!sql_query(" DESC {$g5['eyoom_bbspoll']} ", false)) {
 }
 
 /**
+ * 예약게시글 사용여부 필드 추가
+ */
+if(!sql_query(" select bo_use_scheduled from {$g5['eyoom_board']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['eyoom_board']}` 
+        add `bo_use_scheduled` char(1) NOT NULL default '' after `bo_best`, 
+        add `bo_table_scheduled` varchar(30) NOT NULL after `bo_use_scheduled`, 
+        add `bo_scheduled_ip` varchar(20) NOT NULL after `bo_table_scheduled` 
+    ";
+    sql_query($sql, true);
+}
+
+/**
+ * 예약게시글 사용시, 게시글 공개 시간 필드 추가
+ */
+if($eyoom_board['bo_use_scheduled'] && !sql_query(" select wr_opendate from {$write_table} limit 1 ", false)) {
+    $sql = " alter table `{$write_table}` 
+        add `wr_opendate` datetime NOT NULL default '0000-00-00 00:00:00' after `wr_twitter_user`
+    ";
+    sql_query($sql, true);
+}
+
+/*
+ * 예약게시글 테이블 없을 경우 생성
+ */
+if (!sql_query(" DESC {$g5['eyoom_scheduled']} ", false)) {
+    sql_query(
+        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_scheduled']}` (
+                    `sd_id` int(11) unsigned NOT NULL auto_increment,
+                    `bo_table` varchar(20) NOT NULL DEFAULT '',
+                    `wr_id` int(11) NOT NULL DEFAULT '0',
+                    `tg_table` varchar(20) NOT NULL DEFAULT '',
+                    `wr_opendate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+                    PRIMARY KEY  (`sd_id`)
+                ) ",
+        true
+    );
+}
+
+/**
  * 게시물 자동 이동/복사
  */
 $bo_use_automove = isset($_POST['bo_use_automove']) ? (int) $_POST['bo_use_automove'] : 0;
@@ -280,6 +319,9 @@ $bo_tag_limit = isset($_POST['bo_tag_limit']) ? (int) $_POST['bo_tag_limit'] : 1
 $bo_blind_limit = isset($_POST['bo_blind_limit']) ? (int) $_POST['bo_blind_limit'] : 5;
 $bo_blind_view = isset($_POST['bo_blind_view']) ? (int) $_POST['bo_blind_view'] : 10;
 $bo_blind_direct = isset($_POST['bo_blind_direct']) ? (int) $_POST['bo_blind_direct'] : 10;
+$bo_use_scheduled = isset($_POST['bo_use_scheduled']) ? (int) $_POST['bo_use_scheduled'] : 0;
+$bo_table_scheduled = isset($_POST['bo_table_scheduled']) ? clean_xss_tags($_POST['bo_table_scheduled'])  : '';
+$bo_scheduled_ip = isset($_POST['bo_scheduled_ip']) ? clean_xss_tags($_POST['bo_scheduled_ip'])  : '';
 
 $where = " bo_table='{$bo_table}' ";
 
@@ -330,6 +372,9 @@ $set = "
     bo_use_tag              = '{$bo_use_tag}',
     bo_use_automove         = '{$bo_use_automove}',
     bo_use_best             = '{$bo_use_best}',
+    bo_use_scheduled        = '{$bo_use_scheduled}',
+    bo_table_scheduled      = '{$bo_table_scheduled}',
+    bo_scheduled_ip         = '{$bo_scheduled_ip}',
     bo_use_addon_emoticon   = '{$bo_use_addon_emoticon}',
     bo_use_addon_video      = '{$bo_use_addon_video}',
     bo_use_addon_coding     = '{$bo_use_addon_coding}',

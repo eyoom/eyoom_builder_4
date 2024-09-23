@@ -169,6 +169,7 @@ if ($csv == 'xls')
         $header_bgcolor = 'FFABCDEF';
         $last_char = column_char(count($headers) - 1);
 
+        $rows = array();
         for($i=1; $row=sql_fetch_array($result); $i++) {
 
             $pull_address = print_address($row['od_b_addr1'], $row['od_b_addr2'], $row['od_b_addr3'], $row['od_b_addr_jibeon']);
@@ -210,7 +211,7 @@ if ($csv == 'xls')
                 $ct_send_cost = $ct_send_cost;
             }
 
-            $rows[] = array(' '.$row['od_b_zip1'].$row['od_b_zip2'],
+            $rows[$i] = array(' '.$row['od_b_zip1'].$row['od_b_zip2'],
                             $pull_address,
                             $row['od_b_name'], 
                             ' '.conv_telno($row['od_b_tel']), 

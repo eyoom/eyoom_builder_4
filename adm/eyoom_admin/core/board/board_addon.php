@@ -39,6 +39,7 @@ $pg_anchor = array(
     'anc_bo_addon'      => '애드온',
     'anc_bo_exif'       => 'EXIF',
     'anc_bo_adopt'      => '채택',
+    'anc_bo_scheduled'  => '예약게시판',
 );
 
 /**
@@ -67,6 +68,16 @@ foreach($exif_item as $key => $val) {
     $exif_data[$i]['item']      = $exif_detail[$key]['item'];
     $exif_data[$i]['use']       = $exif_detail[$key]['use'];
     $i++;
+}
+
+/**
+ * 예약게시판 대상게시판 추출용
+ */
+$sql = " select bo_table, bo_subject from {$g5['board_table']} where (1) order by bo_table asc ";
+$result = sql_query($sql);
+for ($i=0; $row=sql_fetch_array($result); $i++) {
+    $bo_tables[$i] = $row['bo_table'];
+    $bo_subject[$i] = $row['bo_subject'];
 }
 
 /**

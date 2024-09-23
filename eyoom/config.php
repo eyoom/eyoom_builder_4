@@ -329,6 +329,11 @@ $g5['eyoom_counsel'] = G5_TABLE_PREFIX . 'eyoom_counsel';
 $g5['eyoom_bbspoll'] = G5_TABLE_PREFIX . 'eyoom_bbspoll';
 
 /**
+ * 예약게시물 저장 테이블
+ */
+$g5['eyoom_scheduled'] = G5_TABLE_PREFIX . 'eyoom_scheduled';
+
+/**
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;

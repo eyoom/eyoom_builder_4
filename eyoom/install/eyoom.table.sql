@@ -133,6 +133,8 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_use_addon_soundcloud` char(1) NOT NULL default '0',
   `bo_use_addon_map` char(1) NOT NULL default '0',
   `bo_use_addon_poll` char(1) NOT NULL default '0',
+  `bo_addon_poll_point` int(7) NOT NULL default '0',
+  `bo_addon_poll_type` char(1) NOT NULL default '1',
   `bo_use_addon_cmtfile` char(1) NOT NULL default '1',
   `bo_count_cmtfile` smallint(2) NOT NULL default '1',
   `bo_use_extimg` char(1) NOT NULL default '0',
@@ -140,6 +142,12 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_adopt_minpoint` int(7) NOT NULL default '0',
   `bo_adopt_maxpoint` int(11) NOT NULL default '0',
   `bo_adopt_ratio` smallint(3) NOT NULL default '0',
+  `bo_use_wrfixed` char(1) NOT NULL default '',
+  `bo_wrfixed_type` char(1) NOT NULL default '1',
+  `bo_wrfixed_point` int(7) NOT NULL default '1000',
+  `bo_wrfixed_date` smallint(3) NOT NULL default '5',
+  `bo_use_pointpost` char(1) NOT NULL default '',
+  `bo_pointpost_point` varchar(255) NOT NULL default '',
   `bo_write_limit` smallint(3) NOT NULL default '0',
   `bo_cmt_best_min` tinyint(2) NOT NULL default '10',
   `bo_cmt_best_limit` tinyint(2) NOT NULL default '5',
@@ -147,6 +155,9 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_tag_limit` tinyint(4) NOT NULL default '10',
   `bo_automove` varchar(255) NOT NULL,
   `bo_best` varchar(255) NOT NULL,
+  `bo_use_scheduled` char(1) NOT NULL default '',
+  `bo_table_scheduled` varchar(30) NOT NULL,
+  `bo_scheduled_ip` varchar(20) NOT NULL,
   `bo_exif_detail` text NOT NULL,
   `bo_blind_limit` tinyint(2) NOT NULL default '5',
   `bo_blind_view` tinyint(2) NOT NULL default '10',
@@ -868,10 +879,28 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_counsel` (
 
 DROP TABLE IF EXISTS `g5_eyoom_bbspoll`;
 CREATE TABLE IF NOT EXISTS `g5_eyoom_bbspoll` (
-    `po_id` int(11) NOT NULL,
+    `po_id` int(11) unsigned NOT NULL auto_increment,
     `bo_table` varchar(20) NOT NULL DEFAULT '',
     `wr_id` int(11) NOT NULL DEFAULT '0',
     `mb_id` varchar(20) NOT NULL DEFAULT '',
+    `po_flag` char(2) NOT NULL DEFAULT '',
+    `po_point` int(7) NOT NULL DEFAULT '0',
     `po_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
     PRIMARY KEY  (`po_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `g5_eyoom_scheduled`
+--
+
+DROP TABLE IF EXISTS `g5_eyoom_scheduled`;
+CREATE TABLE IF NOT EXISTS `g5_eyoom_scheduled` (
+    `sd_id` int(11) unsigned NOT NULL auto_increment,
+    `bo_table` varchar(20) NOT NULL DEFAULT '',
+    `wr_id` int(11) NOT NULL DEFAULT '0',
+    `tg_table` varchar(20) NOT NULL DEFAULT '',
+    `wr_opendate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    PRIMARY KEY  (`sd_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

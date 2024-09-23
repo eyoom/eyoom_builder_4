@@ -177,8 +177,9 @@ if (phpversion() >= '5.2.0') {
     for($i=1; $row=sql_fetch_array($result); $i++) {
         $q = "select * from {$g5['g5_shop_cart_table']} where od_id = '{$row['od_id']}' order by ct_id asc ";
         $r = sql_query($q);
+        $rows = array();
         for ($j=0; $ct=sql_fetch_array($r); $j++) {
-            $rows[] = array(
+            $rows[$j] = array(
                 ' ' . $j == 0 ? $k: '',
                 $j == 0 ? $row['od_id']: '',
                 $j == 0 ? $row['od_status']: '',

@@ -110,6 +110,17 @@ if (isset($eyoom_board['bo_use_summernote_mo'])) {
     sql_query(" UPDATE `{$g5['eyoom_board']}` SET `bo_goto_url` = '' ", false);
 }
 
+if (!isset($board['bo_poll_level'])) {
+    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_poll_level` tinyint(4) NOT NULL DEFAULT '1' AFTER `bo_html_level` ", false);
+}
+
+/**
+ * 회원당 하루 게시물 작성회수 설정 필드 추가
+ */
+if(!isset($board['bo_use_wrlimit'])) {
+    sql_query(" ALTER TABLE `{$g5['board_table']}` ADD `bo_use_wrlimit` TINYINT NOT NULL DEFAULT '0' AFTER `bo_use_captcha` ", false);
+}
+
 $board_default = array(
 'bo_mobile_subject'=>'',
 'bo_device'=>'',
@@ -125,6 +136,7 @@ $board_default = array(
 'bo_upload_level'=>0,
 'bo_download_level'=>0,
 'bo_html_level'=>0,
+'bo_poll_level'=>0,
 'bo_use_sideview'=>0,
 'bo_select_editor'=>'',
 'bo_use_rss_view'=>0,
@@ -252,7 +264,8 @@ $board_auth = array(
     'link'      => '링크',
     'upload'    => '업로드',
     'download'  => '다운로드',
-    'html'      => 'HTML 쓰기'
+    'html'      => 'HTML 쓰기',
+    'poll'      => '투표하기'
 );
 $i = 0;
 foreach($board_auth as $key => $val) {

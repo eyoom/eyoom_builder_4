@@ -728,6 +728,35 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_write_limit" class="label">게시물 작성수 제한<strong class="sound_only">필수</strong></label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="input max-width-250px">
+                                <i class="icon-append">건</i>
+                                <input type="text" name="cf_write_limit" id="cf_write_limit" value="<?php echo (int) $config['cf_write_limit'] ?>" class="text-end" required>
+                            </label>
+                            <div class="note"><strong>Note:</strong> 0 은 게시물 작성수 제한을 사용하지 않음</div>
+                        </div>
+                    </div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_write_limit_type" class="label">게시물 작성수 제한방식<strong class="sound_only">필수</strong></label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="select max-width-250px">
+                                <select name="cf_write_limit_type" id="cf_write_limit_type">
+                                    <option value="">선택</option>
+                                    <option value="ip" <?php echo $config['cf_write_limit_type'] == 'ip' ? 'selected': ''; ?>>IP</option>
+                                    <option value="mb_id" <?php echo $config['cf_write_limit_type'] == 'mb_id' ? 'selected': ''; ?>>회원아이디</option>
+                                    <option value="all" <?php echo $config['cf_write_limit_type'] == 'all' ? 'selected': ''; ?>>IP+회원아이디</option>
+                                </select><i></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
                         <label for="cf_image_extension" class="label">이미지 업로드 확장자</label>

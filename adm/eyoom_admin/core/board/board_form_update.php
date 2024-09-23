@@ -113,6 +113,7 @@ $bo_use_list_content = isset($_POST['bo_use_list_content']) ? (int) $_POST['bo_u
 $bo_use_email = isset($_POST['bo_use_email']) ? (int) $_POST['bo_use_email'] : 0;
 $bo_use_sns = isset($_POST['bo_use_sns']) ? (int) $_POST['bo_use_sns'] : 0;
 $bo_use_captcha = isset($_POST['bo_use_captcha']) ? (int) $_POST['bo_use_captcha'] : 0;
+$bo_use_wrlimit = isset($_POST['bo_use_wrlimit']) ? (int) $_POST['bo_use_wrlimit'] : 0;
 $bo_table_width = isset($_POST['bo_table_width']) ? (int) $_POST['bo_table_width'] : 0;
 $bo_subject_len = isset($_POST['bo_subject_len']) ? (int) $_POST['bo_subject_len'] : 0;
 $bo_mobile_subject_len = isset($_POST['bo_mobile_subject_len']) ? (int) $_POST['bo_mobile_subject_len'] : 0;
@@ -134,6 +135,7 @@ $bo_write_level = isset($_POST['bo_write_level']) ? (int) $_POST['bo_write_level
 $bo_reply_level = isset($_POST['bo_reply_level']) ? (int) $_POST['bo_reply_level'] : 0;
 $bo_comment_level = isset($_POST['bo_comment_level']) ? (int) $_POST['bo_comment_level'] : 0;
 $bo_html_level = isset($_POST['bo_html_level']) ? (int) $_POST['bo_html_level'] : 0;
+$bo_poll_level = isset($_POST['bo_poll_level']) ? (int) $_POST['bo_poll_level'] : 0;
 $bo_link_level = isset($_POST['bo_link_level']) ? (int) $_POST['bo_link_level'] : 0;
 $bo_count_modify = isset($_POST['bo_count_modify']) ? (int) $_POST['bo_count_modify'] : 0;
 $bo_count_delete = isset($_POST['bo_count_delete']) ? (int) $_POST['bo_count_delete'] : 0;
@@ -208,6 +210,7 @@ $sql_common = " gr_id               = '{$gr_id}',
                 bo_reply_level      = '{$bo_reply_level}',
                 bo_comment_level    = '{$bo_comment_level}',
                 bo_html_level       = '{$bo_html_level}',
+                bo_poll_level       = '{$bo_poll_level}',
                 bo_link_level       = '{$bo_link_level}',
                 bo_count_modify     = '{$bo_count_modify}',
                 bo_count_delete     = '{$bo_count_delete}',
@@ -239,6 +242,7 @@ $sql_common = " gr_id               = '{$gr_id}',
                 bo_use_cert         = '{$bo_use_cert}',
                 bo_use_sns          = '{$bo_use_sns}',
                 bo_use_captcha      = '{$bo_use_captcha}',
+                bo_use_wrlimit      = '{$bo_use_wrlimit}',
                 bo_table_width      = '{$bo_table_width}',
                 bo_subject_len      = '{$bo_subject_len}',
                 bo_mobile_subject_len      = '{$bo_mobile_subject_len}',
@@ -442,6 +446,7 @@ if (is_checked('chk_grp_link_level'))           $grp_fields .= " , bo_link_level
 if (is_checked('chk_grp_upload_level'))         $grp_fields .= " , bo_upload_level = '{$bo_upload_level}' ";
 if (is_checked('chk_grp_download_level'))       $grp_fields .= " , bo_download_level = '{$bo_download_level}' ";
 if (is_checked('chk_grp_html_level'))           $grp_fields .= " , bo_html_level = '{$bo_html_level}' ";
+if (is_checked('chk_grp_poll_level'))           $grp_fields .= " , bo_poll_level = '{$bo_poll_level}' ";
 if (is_checked('chk_grp_count_modify'))         $grp_fields .= " , bo_count_modify = '{$bo_count_modify}' ";
 if (is_checked('chk_grp_count_delete'))         $grp_fields .= " , bo_count_delete = '{$bo_count_delete}' ";
 if (is_checked('chk_grp_point_target'))         $grp_fields .= " , bo_point_target = '{$bo_point_target}' ";
@@ -472,6 +477,7 @@ if (is_checked('chk_grp_use_email'))            $grp_fields .= " , bo_use_email 
 if (is_checked('chk_grp_use_cert'))             $grp_fields .= " , bo_use_cert = '{$bo_use_cert}' ";
 if (is_checked('chk_grp_use_sns'))              $grp_fields .= " , bo_use_sns = '{$bo_use_sns}' ";
 if (is_checked('chk_grp_use_captcha'))          $grp_fields .= " , bo_use_captcha = '{$bo_use_captcha}' ";
+if (is_checked('chk_grp_use_wrlimit'))          $grp_fields .= " , bo_use_wrlimit = '{$bo_use_wrlimit}' ";
 if (is_checked('chk_grp_skin'))                 $grp_fields .= " , bo_skin = '{$bo_skin}' ";
 if (is_checked('chk_grp_mobile_skin'))          $grp_fields .= " , bo_mobile_skin = '{$bo_mobile_skin}' ";
 if (is_checked('chk_grp_gallery_cols'))         $grp_fields .= " , bo_gallery_cols = '{$bo_gallery_cols}' ";
@@ -562,6 +568,7 @@ if (is_checked('chk_all_link_level'))           $all_fields .= " , bo_link_level
 if (is_checked('chk_all_upload_level'))         $all_fields .= " , bo_upload_level = '{$bo_upload_level}' ";
 if (is_checked('chk_all_download_level'))       $all_fields .= " , bo_download_level = '{$bo_download_level}' ";
 if (is_checked('chk_all_html_level'))           $all_fields .= " , bo_html_level = '{$bo_html_level}' ";
+if (is_checked('chk_all_poll_level'))           $all_fields .= " , bo_poll_level = '{$bo_poll_level}' ";
 if (is_checked('chk_all_count_modify'))         $all_fields .= " , bo_count_modify = '{$bo_count_modify}' ";
 if (is_checked('chk_all_count_delete'))         $all_fields .= " , bo_count_delete = '{$bo_count_delete}' ";
 if (is_checked('chk_all_point_target'))         $all_fields .= " , bo_point_target = '{$bo_point_target}' ";
@@ -592,6 +599,7 @@ if (is_checked('chk_all_use_email'))            $all_fields .= " , bo_use_email 
 if (is_checked('chk_all_use_cert'))             $all_fields .= " , bo_use_cert = '{$bo_use_cert}' ";
 if (is_checked('chk_all_use_sns'))              $all_fields .= " , bo_use_sns = '{$bo_use_sns}' ";
 if (is_checked('chk_all_use_captcha'))          $all_fields .= " , bo_use_captcha = '{$bo_use_captcha}' ";
+if (is_checked('chk_all_use_wrlimit'))          $all_fields .= " , bo_use_wrlimit = '{$bo_use_wrlimit}' ";
 if (is_checked('chk_all_skin'))                 $all_fields .= " , bo_skin = '{$bo_skin}' ";
 if (is_checked('chk_all_mobile_skin'))          $all_fields .= " , bo_mobile_skin = '{$bo_mobile_skin}' ";
 if (is_checked('chk_all_gallery_cols'))         $all_fields .= " , bo_gallery_cols = '{$bo_gallery_cols}' ";

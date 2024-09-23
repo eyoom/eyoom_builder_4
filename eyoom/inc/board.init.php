@@ -10,6 +10,16 @@ if (!defined('_EYOOM_')) exit;
 if (!$bo_table) return;
 
 /**
+ * 예약게시판 접근 제한
+ */
+if (!$is_admin && $eyoom_board['bo_use_scheduled'] && $eyoom_board['bo_scheduled_ip']!='') {
+	$bo_permit_ips = explode(',', $eyoom_board['bo_scheduled_ip']);
+	if (!in_array($_SERVER['REMOTE_ADDR'], $bo_permit_ips)) {
+		alert("존재하지 않은 게시판 입니다.", G5_URL);
+	}
+}
+
+/**
  * DB에 입력된 정보가 없다면, 기본값 가져오기
  */
 if (!$eyoom_board) $eyoom_board = $bbs->board_default($bo_table);
@@ -138,4 +148,28 @@ if (!isset($eyoom_board['bo_count_cmtfile'])) {
 	// 댓글 첨부파일 개수 지정 필드 추가
 	$sql = "alter table `{$g5['eyoom_board']}` add `bo_count_cmtfile` smallint(2) not null default '1' after `bo_use_addon_cmtfile`;";
 	sql_query($sql);
+}
+
+/**
+ * 예약게시물이 있는지 체크
+ */
+$sql = "select * from {$g5['eyoom_scheduled']} where wr_opendate < NOW() ";
+$result = sql_query($sql);
+$sd_list = array();
+for ($i=0; $row=sql_fetch_array($result); $i++) {
+    $sd_list[$i] = $row;
+}
+
+if (count($sd_list)>0) {
+    $sw = 'move';
+    $act = '이동';
+    foreach ($sd_list as $k => $sd) {
+        $sd_bo_table = $sd['bo_table']; // 예약게시판[원본]
+        $sd_chk_bo_table = array($sd['tg_table']); // 타겟게시판 
+        $sd_write_table = $g5['write_prefix'] . $sd_bo_table;
+        $sd_wr_id_list = $sd['wr_id'];
+        $sd_wr_opendate = substr($sd['wr_opendate'],0,-2).date('s');
+        
+        @include_once(EYOOM_CORE_PATH . "/board/move_scheduled.php");
+    }
 }

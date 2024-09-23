@@ -28,6 +28,7 @@ unset($lib_target);
 /**
  * 이윰 라이브러리 함수
  */
+@include_once(EYOOM_LIB_PATH . '/common.lib.php');
 @include_once(EYOOM_LIB_PATH . '/nameview.lib.php');
 @include_once(EYOOM_LIB_PATH . '/tagmenu.lib.php');
 @include_once(EYOOM_LIB_PATH . '/paging.lib.php');

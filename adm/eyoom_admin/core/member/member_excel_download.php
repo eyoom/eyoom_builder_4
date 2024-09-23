@@ -149,10 +149,9 @@ if (phpversion() >= '5.2.0') {
     $widths  = array(8, 15, 15, 15, 8, 8, 30, 15, 15, 8, 25);
     $header_bgcolor = 'FFABCDEF';
     $last_char = column_char(count($headers) - 1);
-
+    $rows = array();
     for($i=1; $row=sql_fetch_array($result); $i++) {
-
-        $rows[] = 
+        $rows[$i] = 
                     array(' '.$i, 
                           $row['mb_id'],
                           $row['mb_name'],

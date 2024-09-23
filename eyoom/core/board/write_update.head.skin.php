@@ -19,6 +19,39 @@ if ($w=='' && $eyoom_board['bo_write_limit'] && !$is_admin) {
 }
 
 /**
+ * 글쓰기 제한이 있는지 체크
+ */
+if ($w=='' && $board['bo_use_wrlimit'] && $config['cf_write_limit'] > 0 && !$is_admin) {
+    if (!$is_member) {
+        alert("본 게시판은 하루 글작성 회수제한이 적용되는 게시판으로 비회원은 글을 작성하실 수 없습니다.");
+    } else {
+        $sql = "select bo_table from {$g5['board_table']} where bo_use_wrlimit = '1' ";
+        $result = sql_query($sql);
+        $bo_limit_table = array();
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
+            $bo_limit_table[$i] = $row['bo_table'];
+        }
+
+        if (count($bo_limit_table) > 0) {
+            if (!$config['cf_write_limit_type']) $config['cf_write_limit_type'] = 'ip';
+            $sql_limit = '';
+            if ($config['cf_write_limit_type'] == 'ip') {
+                $sql_limit = " and wr_ip = '" . $_SERVER['REMOTE_ADDR'] . "' ";
+            } else if ($config['cf_write_limit_type'] == 'mb_id') {
+                $sql_limit = " and mb_id = '" . $member['mb_id'] . "' ";
+            } else if ($config['cf_write_limit_type'] == 'all') {
+                $sql_limit = " and (wr_ip = '" . $_SERVER['REMOTE_ADDR'] . "' or mb_id = '" . $member['mb_id'] . "') ";
+            }
+            $sql = "select count(*) as cnt from {$g5['board_new_table']} where wr_id = wr_parent {$sql_limit} and find_in_set(bo_table, '".implode(',', $bo_limit_table)."') and bn_datetime between '" . date('Y-m-d') . " 00:00:00' and '" . date('Y-m-d') . " 23:59:59' ";
+            $wr_limit = sql_fetch($sql);
+            if ($wr_limit['cnt'] >= $config['cf_write_limit']) {
+                alert("본 게시판은 하루에 작성할 수 있는 게시글수 제한 대상 게시판으로 이미 {$config['cf_write_limit']}개의 글을 작성하셨습니다.");
+            }   
+        }
+    }
+}
+
+/**
  * 한줄게시판 - 비회원 글수정일 경우 비밀번호 확인
  */
 if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1' && $w == 'u') {

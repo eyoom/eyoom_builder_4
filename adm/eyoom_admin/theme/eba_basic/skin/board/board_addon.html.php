@@ -1126,6 +1126,54 @@ $frm_submit .= $frm_eba_submit;
             </div>
         </div>
         <?php /* 채택기능 : 끝 */ ?>
+
+        <?php /* 예약게시판기능 : 시작 */ ?>
+        <div class="tab-pane" id="anc_bo_scheduled" role="tabpanel" aria-labelledby="anc_bo_scheduled_tab">
+            <div class="adm-form-table m-b-20">
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>예약게시판 설정</strong></div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_scheduled" class="label">예약게시판기능 사용여부</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label for="bo_use_scheduled" class="checkbox">
+                            <input type="checkbox" name="bo_use_scheduled" id="bo_use_scheduled" value="1" <?php echo $eyoom_board['bo_use_scheduled'] == '1' ? 'checked': ''; ?>><i></i> 사용
+                        </label>
+                        <div class="note"><strong>Note:</strong> 사용 체크시 예약게시판기능 활성화 됩니다.</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_use_scheduled" class="label">대상 게시판 설정</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label for="bo_table_scheduled" class="select max-width-250px">
+                            <select name="bo_table_scheduled">
+                                <option value="">:: 대상 게시판 선택 ::</option>
+                                <?php foreach($bo_tables as $k => $bo) { if ($bo == $bo_table) continue; ?>
+                                <option value="<?php echo $bo; ?>" <?php echo $eyoom_board['bo_table_scheduled'] == $bo ? 'selected': ''; ?>><?php echo $bo_subject[$k]; ?> [<?php echo $bo; ?>]</option>
+                                <?php } ?>
+                            </select><i></i>
+                        </label>
+                        <div class="note"><strong>Note:</strong> 예약 게시판 기능의 대상이 되는 게시판을 설정하시기 바랍니다.</div>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label for="bo_scheduled_ip" class="label">글작성 가능 아이피</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <label for="bo_scheduled_ip" class="input max-width-250px">
+                            <input type="text" name="bo_scheduled_ip" id="bo_scheduled_ip" value="<?php echo $eyoom_board['bo_scheduled_ip'] ? $eyoom_board['bo_scheduled_ip']: ''; ?>">
+                        </label>
+                        <div class="note"><strong>Note:</strong> 예약 게시판에 접근 가능한 아이피를 쉼표로 구분하여 입력해 주시요. 예) 111.111.111.111, 222.222.222.222</div>
+                        <div class="note"><strong>Note:</strong> 현재 접속하신 아이피는 <strong class="color-red"><?php echo $_SERVER['REMOTE_ADDR']; ?></strong>입니다.</div>
+                        <div class="note"><strong>Note:</strong> 입력하지 않으면 접근제한을 두지 않습니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php /* 예약계시 기능 : 끝 */ ?>
     </div>
 
     <div class="confirm-bottom-btn-alt">

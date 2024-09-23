@@ -26,6 +26,14 @@ if(!sql_query(" select bo_use_approval from {$g5['board_table']} limit 1 ", fals
     sql_query($sql, true);
 }
 
+/**
+ * 게시물 새글 테이블에 아이피 필드 추가
+ */
+if(!sql_query(" select wr_ip from {$g5['board_new_table']} limit 1 ", false)) {
+    $sql = " alter table `{$g5['board_new_table']}` add `wr_ip` varchar(255) NOT NULL after `mb_id` ";
+    sql_query($sql, true);
+}
+
 $sql_common = " from {$g5['board_table']} a ";
 $sql_search = " where (1) ";
 

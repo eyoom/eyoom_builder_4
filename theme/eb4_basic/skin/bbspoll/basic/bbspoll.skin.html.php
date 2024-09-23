@@ -153,7 +153,7 @@ if (!defined('_EYOOM_')) exit;
             echo "<div class='text-center text-gray f-s-13r m-t-20'>";
             echo "<i class='fas fa-exclamation-circle m-r-5'></i>투표에 참여하셨습니다.";
             echo "</div>";
-        } else if($is_member) {
+        } else if($member['mb_level'] >= $board['bo_poll_level']) {
             echo "<input type='hidden' name='max_ans' value='".$i."'>";
             echo "<div class='text-center m-t-20'>";
             echo "<input type='submit' value='투표하기' class='btn-e btn-e-navy btn-e-xl width-150px'>";
@@ -161,7 +161,7 @@ if (!defined('_EYOOM_')) exit;
             echo "</form>";
         } else {
             echo "<div class='text-center text-indigo f-s-13r m-t-20'>";
-            echo "<i class='fas fa-exclamation-circle m-r-5'></i>회원 로그인 후 투표 하실 수 있습니다.";
+            echo "<i class='fas fa-exclamation-circle m-r-5'></i>투표하기 권한이 없습니다.";
             echo "</div>";
             echo "</form>";
         }
