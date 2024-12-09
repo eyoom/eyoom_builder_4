@@ -12,8 +12,8 @@ if (!defined('_GNUBOARD_')) exit;
  * @author      Taeeun Hwang <hte@eyoom.net>
  * @copyright   eyoom
  * @version     Season 4
- * @license     https://eyoom.net/page/?pid=license
- * @link        https://eyoom.net
+ * @license     http://eyoom.net/page/?pid=license
+ * @link        http://eyoom.net
  */
 
 /**

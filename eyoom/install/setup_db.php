@@ -10,9 +10,6 @@ header('Pragma: no-cache');
 @header('X-Robots-Tag: noindex');
 
 $g5_path['path'] = '../..';
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    include_once('../../cloudflare.check.php');    // cloudflare 의 ip 대역인지 체크
-}
 include_once('../../config.php');
 include_once('../../lib/common.lib.php');
 include_once('../../install/install.function.php');    // 인스톨 과정 함수 모음

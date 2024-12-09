@@ -32,22 +32,11 @@ if($config['cf_new_del'] > 0) {
     sql_query(" OPTIMIZE TABLE `{$g5['eyoom_activity']}` ");
 }
 
-/**
- * 설정일이 지난 인기게시물 삭제
- */
+// 설정일이 지난 인기게시물 삭제
 if($config['cf_new_del'] > 0) {
     $sql = " delete from {$g5['eyoom_best']} where (TO_DAYS('".G5_TIME_YMDHIS."') - TO_DAYS(bb_datetime)) > '{$config['cf_new_del']}' ";
     sql_query($sql);
     sql_query(" OPTIMIZE TABLE `{$g5['eyoom_best']}` ");
-}
-
-/**
- * DDOS 공격 IP 저장테이블 정리
- */
-if (isset($config['cf_use_protect_ddos']) && $config['cf_use_protect_ddos'] && isset($config['cf_ddos_prohibit_day']) && $config['cf_ddos_prohibit_day'] > 0) {
-    $sql = " delete from {$g5['eyoom_prohibit']} where (TO_DAYS('".G5_TIME_YMDHIS."') - TO_DAYS(ph_regdt)) > '{$config['cf_ddos_prohibit_day']}' ";
-    sql_query($sql);
-    sql_query(" OPTIMIZE TABLE `{$g5['eyoom_prohibit']}` ");
 }
 
 /**

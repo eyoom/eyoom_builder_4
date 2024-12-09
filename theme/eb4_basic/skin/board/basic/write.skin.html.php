@@ -20,7 +20,6 @@ if ($config['cf_editor'] == 'tuieditor') echo tuieditor_resource();
 .board-write .board-setup-btn:nth-child(even) {background-color:#3c3c3e}
 .board-write .board-setup-btn:hover {opacity:0.8}
 .board-write .board-write-title {position:relative;border-bottom:1px solid #959595;padding-bottom:15px;margin-bottom:15px}
-.board-write .board-write-title .board-reserve-title {display:block;font-size:.9375rem;margin-top:5px}
 .board-write .blind {position:absolute;top:-10px;left:-100000px;display:none}
 .board-write .write-edit-wrap #wr_content {display:block;width:100%;min-height:200px;padding:6px 10px;outline:none;border-width:1px;border-style:solid;border-radius:0;background:#FFF;color:#353535;appearance:normal;-moz-appearance:none;-webkit-appearance:none;resize:vertical}
 .board-write .write-option-btn {float:left;padding:0 15px;margin-bottom:3px;height:32px;line-height:32px;color:#fff;text-align:center;font-size:.8125rem}
@@ -101,8 +100,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
     <?php } ?>
 
     <h5 class="board-write-title">
-        <strong><?php echo $g5['title']; ?></strong>
-        <?php if ($eyoom_board['bo_table_scheduled']) { ?><span class="board-reserve-title text-gray">예약글이 출력될 대상 게시판 : <?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>]</span><?php } ?>
+        <strong><?php echo $g5['title']; ?> <?php if ($eyoom_board['bo_table_scheduled']) { ?><small> - 대상게시판 : <?php echo $bo['bo_subject']; ?> [<?php echo $bo['bo_table']; ?>]</small><?php } ?></strong>
     </h5>
 
     <form name="fwrite" id="fwrite" action="<?php echo $action_url; ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" class="eyoom-form">
@@ -286,21 +284,21 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
         <input type="hidden" name="del_tag" id="del_tag" value="">
     </section>
     <?php } ?>
-    <?php if ($eyoom_board['bo_use_scheduled'] == '1') { // 예약글게시판 사용 ?>
+    <?php if ($eyoom_board['bo_use_scheduled'] == '1') { // 예약게시판 사용 ?>
     <section class="m-b-20">
         <div class="row">
             <div class="col col-6">
-                <label class="label">예약글 노출 날짜</label>
-                <div class="input required-mark">
+                <label class="label">예약 날짜</label>
+                <div class="input">
                     <i class="icon-prepend far fa-calendar-alt"></i>
-                    <input type="text" name="wr_scheduled_date" id="wr_scheduled_date" value="<?php echo $wr_scheduled_date; ?>" maxlength="255">
+                    <input type="text" name="wr_scheduled_date" id="wr_scheduled_date" class="required" value="<?php echo $wr_scheduled_date; ?>" maxlength="255">
                 </div>
             </div>
             <div class="col col-6">
-                <label class="label">예약글 노출 시간</label>
-                <div class="input required-mark">
+                <label class="label">공개 시간</label>
+                <div class="input">
                     <i class="icon-prepend far fa-clock"></i>
-                    <input type="text" name="wr_scheduled_time" id="wr_scheduled_time" class="clockpicker" value="<?php echo $wr_scheduled_time; ?>" maxlength="255">
+                    <input type="text" name="wr_scheduled_time" id="wr_scheduled_time" class="clockpicker required" value="<?php echo $wr_scheduled_time; ?>" maxlength="255">
                 </div>
             </div>
         </div>
@@ -883,11 +881,11 @@ function set_textarea_contents(type,value) {
     } else {
         content = '{code:'+value+'}<br><br>{/code}<br>'
     }
-    if (g5_editor.indexOf('ckeditor')!=-1) {
+    if (g5_editor.indexOf('ckeditor')!=-1 && !g5_is_mobile) {
         CKEDITOR.instances.wr_content.insertHtml(content);
-    } else if (g5_editor.indexOf('smarteditor')!=-1) {
+    } else if (g5_editor.indexOf('smarteditor')!=-1 && !g5_is_mobile) {
         oEditors.getById["wr_content"].exec("PASTE_HTML", [content]);
-    } else if (g5_editor.indexOf('tuieditor')!=-1) {
+    } else if (g5_editor.indexOf('tuieditor')!=-1 && !g5_is_mobile) {
         tui_wr_content.insertText(content);
     } else {
         var wr_html = $("#wr_content").val();

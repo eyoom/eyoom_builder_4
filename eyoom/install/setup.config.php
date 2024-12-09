@@ -9,9 +9,6 @@ header('Pragma: no-cache'); // HTTP/1.0
 @header('X-Robots-Tag: noindex');
 
 $g5_path['path'] = '../..';
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    include_once('../../cloudflare.check.php');    // cloudflare 의 ip 대역인지 체크
-}
 include_once ('../../config.php');
 include_once ('./setup.head.php');
 include_once ('../class/qfile.class.php');

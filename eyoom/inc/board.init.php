@@ -14,7 +14,6 @@ if (!$bo_table) return;
  */
 if (!$is_admin && $eyoom_board['bo_use_scheduled'] && $eyoom_board['bo_scheduled_ip']!='') {
 	$bo_permit_ips = explode(',', $eyoom_board['bo_scheduled_ip']);
-	$bo_permit_ips = array_map('trim', $bo_permit_ips);
 	if (!in_array($_SERVER['REMOTE_ADDR'], $bo_permit_ips)) {
 		alert("존재하지 않은 게시판 입니다.", G5_URL);
 	}
@@ -171,6 +170,6 @@ if (count($sd_list)>0) {
         $sd_wr_id_list = $sd['wr_id'];
         $sd_wr_opendate = substr($sd['wr_opendate'],0,-2).date('s');
         
-        @include(EYOOM_CORE_PATH . "/board/move_scheduled.php");
+        @include_once(EYOOM_CORE_PATH . "/board/move_scheduled.php");
     }
 }

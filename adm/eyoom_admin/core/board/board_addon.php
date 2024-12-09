@@ -39,7 +39,7 @@ $pg_anchor = array(
     'anc_bo_addon'      => '애드온',
     'anc_bo_exif'       => 'EXIF',
     'anc_bo_adopt'      => '채택',
-    'anc_bo_scheduled'  => '예약글게시판',
+    'anc_bo_scheduled'  => '예약게시판',
 );
 
 /**

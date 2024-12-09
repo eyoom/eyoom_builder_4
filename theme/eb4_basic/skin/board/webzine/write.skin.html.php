@@ -839,11 +839,11 @@ function set_textarea_contents(type,value) {
     } else {
         content = '{code:'+value+'}<br><br>{/code}<br>'
     }
-    if (g5_editor.indexOf('ckeditor')!=-1) {
+    if (g5_editor.indexOf('ckeditor')!=-1 && !g5_is_mobile) {
         CKEDITOR.instances.wr_content.insertHtml(content);
-    } else if (g5_editor.indexOf('smarteditor')!=-1) {
+    } else if (g5_editor.indexOf('smarteditor')!=-1 && !g5_is_mobile) {
         oEditors.getById["wr_content"].exec("PASTE_HTML", [content]);
-    } else if (g5_editor.indexOf('tuieditor')!=-1) {
+    } else if (g5_editor.indexOf('tuieditor')!=-1 && !g5_is_mobile) {
         tui_wr_content.insertText(content);
     } else {
         var wr_html = $("#wr_content").val();

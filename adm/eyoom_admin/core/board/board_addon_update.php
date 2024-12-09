@@ -188,7 +188,7 @@ if(!sql_query(" select bo_use_scheduled from {$g5['eyoom_board']} limit 1 ", fal
     $sql = " alter table `{$g5['eyoom_board']}` 
         add `bo_use_scheduled` char(1) NOT NULL default '' after `bo_best`, 
         add `bo_table_scheduled` varchar(30) NOT NULL after `bo_use_scheduled`, 
-        add `bo_scheduled_ip` text NOT NULL after `bo_table_scheduled` 
+        add `bo_scheduled_ip` varchar(20) NOT NULL after `bo_table_scheduled` 
     ";
     sql_query($sql, true);
 }

@@ -186,13 +186,4 @@ if ($config['cf_counsel_sendmail']) {
     }
 }
 
-if (!$wmode) {
-    alert("정상적으로 문의내용을 등록하였습니다.", G5_URL);
-} else {
-    echo "
-    <script>
-    alert('정상적으로 문의내용을 등록하였습니다.');
-    parent.close_modal();
-    </script>
-    ";
-}
+alert("정상적으로 문의내용을 등록하였습니다.", G5_URL);

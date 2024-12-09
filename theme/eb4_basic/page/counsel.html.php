@@ -90,7 +90,7 @@ $counsel_part = explode(',', $config['cf_counsel_part']);
         </div>
         
         <form name="csregister" id="csregister" action="<?php echo $action_url; ?>" onsubmit="return csregister_submit(this);" method="POST" enctype="multipart/form-data" class="eyoom-form">
-        <input type="hidden" name="wmode" value="<?php echo isset($wmode) && $wmode ? $wmode: ''; ?>">
+
         <div class="cs-form-wrap">
             <h5 class="cs-form-title">상담 전 아래 내용을 기입 해 주시기 바랍니다.</h5>
             <div class="row m-b-10">

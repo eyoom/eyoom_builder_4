@@ -61,19 +61,9 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     }
 
     /**
-     * 관리자일 경우, 공사중 & DDOS 공격 차단 예외처리
+     * 공사중으로 설정되어 있다면 공사중 페이지 출력
      */
-    if (!$is_admin) {
-        /**
-         * 공사중으로 설정되어 있다면 공사중 페이지 출력
-         */
-        $eb->under_construction();
-
-        /**
-         * DDOS 공격 차단
-         */
-        $eb->ddos_control($config);
-    }
+    if (!$is_admin) $eb->under_construction();
 
     /**
      * 회원제 사이트인가?

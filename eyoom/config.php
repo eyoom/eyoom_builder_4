@@ -334,11 +334,6 @@ $g5['eyoom_bbspoll'] = G5_TABLE_PREFIX . 'eyoom_bbspoll';
 $g5['eyoom_scheduled'] = G5_TABLE_PREFIX . 'eyoom_scheduled';
 
 /**
- * DDOS 제한내역 저장 테이블
- */
-$g5['eyoom_prohibit'] = G5_TABLE_PREFIX . 'eyoom_prohibit';
-
-/**
  * 윈도우모드 (window mode)
  */
 $wmode = isset($_REQUEST['wmode']) && $_REQUEST['wmode'] ? 1: 0;

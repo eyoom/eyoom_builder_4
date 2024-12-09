@@ -423,14 +423,6 @@ if (!isset($config['cf_cert_use_seed'])) {
             ADD COLUMN `cf_cert_use_seed` TINYINT(4) NOT NULL DEFAULT '1' AFTER `cf_cert_kg_mid`; ";
     sql_query($sql, false);
 }
-if (!isset($config['cf_cert_kcp_enckey'])) {
-    $sql = "ALTER TABLE `{$g5['config_table']}` 
-            ADD COLUMN `cf_cert_kcp_enckey` VARCHAR(100) NOT NULL DEFAULT '' AFTER `cf_cert_kcp_cd`; ";
-    sql_query($sql, false);
-
-    $config['cf_cert_kcp_enckey'] = '';
-}
-
 if (!$config['cf_faq_skin']) {
     $config['cf_faq_skin'] = "basic";
 }
@@ -501,42 +493,6 @@ if (!isset($config['cf_use_counsel'])) {
     $config['cf_counsel_email']     = $config['cf_admin_email'];
 }
 
-// DDOS & SQL Injection 공격 체크 테이블
-if (!sql_query(" DESC {$g5['eyoom_prohibit']} ", false)) {
-    sql_query(
-        " CREATE TABLE IF NOT EXISTS `{$g5['eyoom_prohibit']}` (
-                `ph_id` int(11) UNSIGNED NOT NULL auto_increment,
-                `ph_flag` enum('ddos', 'sql') NOT NULL,
-                `ph_ip` varchar(255) NOT NULL,
-                `ph_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-                PRIMARY KEY  (`ph_id`)
-                ) ",
-        true
-    );
-}
-if (!isset($config['cf_use_protect_ddos'])) {
-    sql_query("ALTER TABLE `{$g5['config_table']}`
-                ADD `cf_use_protect_ddos` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_permit_level`,
-                ADD `cf_ddos_max_request` TINYINT(4) NOT NULL DEFAULT '5' AFTER `cf_use_protect_ddos`,
-                ADD `cf_ddos_time_limit` TINYINT(4) NOT NULL DEFAULT '10' AFTER `cf_ddos_max_request`,
-                ADD `cf_ddos_unblock_time` TINYINT(4) NOT NULL DEFAULT '60' AFTER `cf_ddos_time_limit`,
-                ADD `cf_ddos_prohibit_day` TINYINT(4) NOT NULL DEFAULT '30' AFTER `cf_ddos_unblock_time`,
-                ADD `cf_ddos_prohibit_count` TINYINT(4) NOT NULL DEFAULT '5' AFTER `cf_ddos_prohibit_day`,
-                ADD `cf_use_protect_sqli` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_ddos_prohibit_count`,
-                ADD `cf_sqli_time_limit` TINYINT(4) NOT NULL DEFAULT '60' AFTER `cf_use_protect_sqli`,
-                ADD `cf_sqli_max_write` TINYINT(4) NOT NULL DEFAULT '5' AFTER `cf_sqli_time_limit` ", true);
-
-    $config['cf_use_protect_ddos']      = 1;
-    $config['cf_ddos_max_request']      = 5;
-    $config['cf_ddos_time_limit']       = 10;
-    $config['cf_ddos_unblock_time']     = 60;
-    $config['cf_ddos_prohibit_day']     = 30;
-    $config['cf_ddos_prohibit_count']   = 5;
-    $config['cf_use_protect_sqli']      = 1;
-    $config['cf_sqli_time_limit']       = 60;
-    $config['cf_sqli_max_write']        = 5;
-}
-
 /**
  * 이윰빌더 최신 배포버전 알림 on/off 필드추가
  */
@@ -565,7 +521,6 @@ $pg_anchor = array(
     'anc_cf_board' => '게시판기본',
     'anc_cf_join' => '회원가입',
     'anc_cf_cert' => '본인확인',
-    'anc_cf_security' => '보안설정',
     'anc_cf_counsel' => '상담신청',
     'anc_cf_url' => '짧은주소',
     'anc_cf_mail' => '메일환경설정',

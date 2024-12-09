@@ -1208,7 +1208,7 @@ $frm_submit .= $frm_eba_submit;
                     <div class="adm-form-td td-r">
                         <div class="inline-group">
                             <span>
-                                <label class="input width-250px">
+                                <label class="input max-width-250px">
                                     <i class="icon-prepend">SRA</i>
                                     <input type="text" name="cf_cert_kg_mid" value="<?php echo get_sanitize_input($config['cf_cert_kg_mid']); ?>" id="cf_cert_kg_mid" minlength="7" maxlength="7">
                                 </label>
@@ -1247,7 +1247,7 @@ $frm_submit .= $frm_eba_submit;
                     <div class="adm-form-td td-r">
                         <div class="inline-group">
                             <span>
-                                <label class="input width-250px">
+                                <label class="input max-width-250px">
                                     <i class="icon-prepend">SM</i>
                                     <input type="text" name="cf_cert_kcp_cd" value="<?php echo get_sanitize_input($config['cf_cert_kcp_cd']); ?>" id="cf_cert_kcp_cd">
                                 </label>
@@ -1257,24 +1257,6 @@ $frm_submit .= $frm_eba_submit;
                             </span>
                         </div>
                         <div class="note"><strong>Note:</strong> SM으로 시작하는 5자리 사이트 코드중 뒤의 3자리만 입력해 주십시오.<br>서비스에 가입되어 있지 않다면, 본인확인 서비스 신청페이지에서 서비스 신청 후 사이트코드를 발급 받으실 수 있습니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr cf_cert_service">
-                    <div class="adm-form-td td-l">
-                        <label for="cf_cert_kcp_enckey" class="label">NHN KCP 가맹점 인증키</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <div class="inline-group">
-                            <span>
-                                <label class="input width-250px">
-                                    <input type="text" name="cf_cert_kcp_enckey" value="<?php echo get_sanitize_input($config['cf_cert_kcp_enckey']); ?>" id="cf_cert_kcp_enckey">
-                                </label>
-                            </span>
-                            <span>
-                                <a href="https://partner.kcp.co.kr" target="_blank" class="btn-e btn-e-lg btn-e-dark">NHN KCP 상점관리자</a>
-                            </span>
-                        </div>
-                        <div class="note"><strong>Note:</strong> (선택사항, 추후 NHN_KCP 상점관리자에서 인증키 발급 메뉴 오픈일정 이후부터 적용되는 내용입니다.)<br>NHN_KCP 상점관리자 > 기술관리센터 > 인증센터 > 가맹점 인증키관리 에서 인증키 발급 후에 인증키 정보를 입력</div>
                     </div>
                 </div>
                 <div class="adm-form-tr cf_cert_service">
@@ -1303,137 +1285,6 @@ $frm_submit .= $frm_eba_submit;
             </div>
         </div>
         <?php /* 본인확인 설정 : 끝 */ ?>
-
-        <?php /* 보안설정 : 시작 */ ?>
-        <div class="tab-pane" id="anc_cf_security" role="tabpanel" aria-labelledby="anc_cf_security_tab">
-            <div class="adm-form-table m-b-20">
-                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>DDOS 보안설정</strong></div>
-                <div class="adm-form-info">
-                    <div class="cont-text-bg m-b-10">
-                        <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> <span class="m-r-10">DDOS 공격과 관련된 설정을 하실 수 있습니다.</span><br>
-                        </p>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">DDOS 방어기능 사용여부</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="checkbox">
-                            <input type="checkbox" name="cf_use_protect_ddos" id="cf_use_protect_ddos" value="1" <?php echo $config['cf_use_protect_ddos']?'checked':''; ?>><i></i> 사용
-                        </label>
-                        <div class="note"><strong>Note:</strong> DDOS 방어기능의 사용 여부를 설정합니다. </div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">요청 제한시간</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">초</i>
-                            <input type="text" name="cf_ddos_time_limit" value="<?php echo $config['cf_ddos_time_limit']; ?>" id="cf_ddos_time_limit">
-                        </label>
-                        <div class="note"><strong>Note:</strong> 접속시도를 체크할 범위의 제한시간을 입력해 주세요. </div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">허용된 최대 요청수</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">건</i>
-                            <input type="text" name="cf_ddos_max_request" value="<?php echo $config['cf_ddos_max_request']; ?>" id="cf_ddos_max_request">
-                        </label>
-                        <div class="note"><strong>Note:</strong> [요청 제한시간]동안 허용된 최대 접속수를 입력해 주세요. [요청 제한시간]동안 설정한 [허용된 최대 요청수]를 초과할 경우 [접속제한]이 걸립니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">접속제한 해제시간</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">초</i>
-                            <input type="text" name="cf_ddos_unblock_time" value="<?php echo $config['cf_ddos_unblock_time']; ?>" id="cf_ddos_unblock_time">
-                        </label>
-                        <div class="note"><strong>Note:</strong> [접속제한]이 걸린 후, 설정한 [접속제한 해제시간]이 지나면 자동으로 차단을 해제합니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">[IP제한용] 접속제한 허용횟수</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">건</i>
-                            <input type="text" name="cf_ddos_prohibit_count" value="<?php echo $config['cf_ddos_prohibit_count']; ?>" id="cf_ddos_prohibit_count">
-                        </label>
-                        <div class="note"><strong>Note:</strong> 설정한 [접속제한 허용횟수]를 초과하면 자동으로 접속 아이피를 차단합니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">[IP제한용] 접속제한 체크기간</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">일</i>
-                            <input type="text" name="cf_ddos_prohibit_day" value="<?php echo $config['cf_ddos_prohibit_day']; ?>" id="cf_ddos_prohibit_day">
-                        </label>
-                        <div class="note"><strong>Note:</strong> [접속제한 체크기간]동안 [접속제한 허용횟수]를 초과하면 자동으로 접속 아이피를 차단합니다.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="adm-form-table m-b-20">
-                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>SQL인젝션 보안설정</strong></div>
-                <div class="adm-form-info">
-                    <div class="cont-text-bg m-b-10">
-                        <p class="bg-info">
-                            <i class="fas fa-info-circle"></i> <span class="m-r-10">설정한 시간동안 작성 가능한 글작성수를 제한하여 글작성 아이피를 차단하는 기능입니다.</span><br>
-                        </p>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">SQL인젝션 방어기능 사용여부</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="checkbox">
-                            <input type="checkbox" name="cf_use_protect_sqli" id="cf_use_protect_sqli" value="1" <?php echo $config['cf_use_protect_sqli']?'checked':''; ?>><i></i> 사용
-                        </label>
-                        <div class="note"><strong>Note:</strong> SQL인젝션 방어기능의 사용 여부를 설정합니다. </div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">글작성 제한시간</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">초</i>
-                            <input type="text" name="cf_sqli_time_limit" value="<?php echo $config['cf_sqli_time_limit']; ?>" id="cf_sqli_time_limit">
-                        </label>
-                        <div class="note"><strong>Note:</strong>  글작성 제한시간을 입력해 주세요. 설정한 [글작성 제한시간]동안 [글작성 허용횟수]를 초과할 경우 아이피를 차단합니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label class="label">글작성 허용횟수</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input width-150px">
-                            <i class="icon-append">건</i>
-                            <input type="text" name="cf_sqli_max_write" value="<?php echo $config['cf_sqli_max_write']; ?>" id="cf_sqli_max_write">
-                        </label>
-                        <div class="note"><strong>Note:</strong> [글작성 제한시간]동안 허용할 글작성수를 입력해 주세요. 설정한 [글작성 제한시간]동안 [글작성 허용횟수]를 초과할 경우 아이피를 차단합니다.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php /* 보안설정 : 끝 */ ?>
 
         <?php /* 상담신청 설정 : 시작 */ ?>
         <div class="tab-pane" id="anc_cf_counsel" role="tabpanel" aria-labelledby="anc_cf_counsel_tab">
@@ -2334,16 +2185,13 @@ if($config['cf_cert_use']) {
 
     // kcp일 때
     if($config['cf_cert_hp'] == 'kcp') {
-
-        $bin_path = ((int)$config['cf_cert_use'] === 2 && !$config['cf_cert_kcp_enckey']) ? 'bin_old' : 'bin';
-
         if(strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             if(PHP_INT_MAX == 2147483647) // 32-bit
-                $exe = G5_KCPCERT_PATH . '/'.$bin_path.'/ct_cli';
+                $exe = G5_KCPCERT_PATH . '/bin/ct_cli';
             else
-                $exe = G5_KCPCERT_PATH . '/'.$bin_path.'/ct_cli_x64';
+                $exe = G5_KCPCERT_PATH . '/bin/ct_cli_x64';
         } else {
-            $exe = G5_KCPCERT_PATH . '/'.$bin_path.'/ct_cli_exe.exe';
+            $exe = G5_KCPCERT_PATH . '/bin/ct_cli_exe.exe';
         }
 
         echo module_exec_check($exe, 'ct_cli');

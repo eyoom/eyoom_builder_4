@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_board` (
   `bo_best` varchar(255) NOT NULL,
   `bo_use_scheduled` char(1) NOT NULL default '',
   `bo_table_scheduled` varchar(30) NOT NULL,
-  `bo_scheduled_ip` text NOT NULL,
+  `bo_scheduled_ip` varchar(20) NOT NULL,
   `bo_exif_detail` text NOT NULL,
   `bo_blind_limit` tinyint(2) NOT NULL default '5',
   `bo_blind_view` tinyint(2) NOT NULL default '10',
@@ -903,19 +903,4 @@ CREATE TABLE IF NOT EXISTS `g5_eyoom_scheduled` (
     `tg_table` varchar(20) NOT NULL DEFAULT '',
     `wr_opendate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
     PRIMARY KEY  (`sd_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `g5_eyoom_prohibit`
---
-
-DROP TABLE IF EXISTS `g5_eyoom_prohibit`;
-CREATE TABLE IF NOT EXISTS `g5_eyoom_prohibit` (
-    `ph_id` int(11) unsigned NOT NULL auto_increment,
-    `ph_flag` enum('ddos', 'sql') NOT NULL,
-    `ph_ip` varchar(255) NOT NULL DEFAULT '',
-    `ph_regdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-    PRIMARY KEY  (`ph_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

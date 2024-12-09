@@ -35,7 +35,7 @@ if (!defined('_EYOOM_')) exit;
 .newpost-latest .tab-content ul {margin-bottom:0}
 .newpost-latest .tab-content li {position:relative;padding:3px 0}
 .newpost-latest .tab-content li.no-latest {width:100%}
-.newpost-latest .tab-content .newpost-subj {position:relative;width:100%;padding-right:5px;padding-left:0;display:block;font-size:1rem;font-weight:500;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
+.newpost-latest .tab-content .newpost-subj {position:relative;width:65%;padding-right:5px;padding-left:0;display:block;font-size:1rem;font-weight:500;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
 .newpost-latest .tab-content .newpost-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .newpost-latest .tab-content .newpost-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .newpost-latest .tab-content .newpost-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
@@ -66,7 +66,7 @@ if (!defined('_EYOOM_')) exit;
                 <?php if (count((array)$eb_latest['list']) > 0) { foreach ($eb_latest['list'] as $data) { ?>
                 <li>
                     <a href="<?php echo $data['href']; ?>">
-                        <div class="newpost-subj <?php if ($eb_latest['li_mbname_view'] == 'y' && $data['wr_name']) { ?>width-65<?php } ?> <?php echo !G5_IS_MOBILE ? 'tooltips':''; ?>" <?php if (!G5_IS_MOBILE) { ?>data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $eb_latest['li_date_type'] == '1' ? $eb->date_time("{$eb_latest['li_date_kind']}",$data['wr_datetime']):  $eb->date_format("{$eb_latest['li_date_kind']}",$data['wr_datetime']); ?>"<?php } ?>>
+                        <div class="newpost-subj <?php echo !G5_IS_MOBILE ? 'tooltips':''; ?>" <?php if (!G5_IS_MOBILE) { ?>data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $eb_latest['li_date_type'] == '1' ? $eb->date_time("{$eb_latest['li_date_kind']}",$data['wr_datetime']):  $eb->date_format("{$eb_latest['li_date_kind']}",$data['wr_datetime']); ?>"<?php } ?>>
                             <?php if ($eb_latest['li_bo_subject'] == 'y') { ?>
                             <span class="newpost-bo-subj"><?php echo $data['bo_subject']; ?></span>
                             <?php } ?>
