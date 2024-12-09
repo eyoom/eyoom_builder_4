@@ -1696,4 +1696,105 @@ class eyoom extends qfile
 
         return $meta_tag;
     }
+
+    /**
+     * DDOS 공격 차단 및 제어
+     */
+    public function ddos_control ($config) {
+        // DDOS 방어 사용 체크
+        if (!$config['cf_use_protect_ddos']) return;
+
+        // 허용된 최대 요청 수
+        if (!$config['cf_ddos_max_request']) {
+            $config['cf_ddos_max_request'] = 5;
+        }
+
+        // 요청 제한 시간(초)
+        if (!$config['cf_ddos_time_limit']) {
+            $config['cf_ddos_time_limit'] = 10;
+        }
+
+        // 차단 해제 시간(초)
+        if (!$config['cf_ddos_unblock_time']) {
+            $config['cf_ddos_unblock_time'] = 60;
+        }
+
+        $ss_prohibit = get_session('ss_prohibit');
+        $ss_prohibit_time = get_session('ss_prohibit_time');
+
+        // 차단 해제 처리
+        if ($ss_prohibit && $ss_prohibit_time) {
+            $time_since_block = time() - $ss_prohibit_time;
+            if ($time_since_block >= $config['cf_ddos_unblock_time']) {
+                // 차단 해제
+                set_session('ss_prohibit', false);
+                set_session('ss_prohibit_time', '');
+            } else {
+                // 차단 유지
+                alert("현재 페이지 접속이 제한되었습니다. 잠시 후 다시 시도하세요.", G5_URL);
+                exit;
+            }
+        }
+        
+        $ss_loading_cnt = get_session('ss_loading_cnt');
+        $ss_start_time = get_session('ss_start_time');
+        
+        if (!$ss_loading_cnt || !$ss_start_time) {
+            // 초기화
+            $ss_loading_cnt = 1;
+            $ss_start_time = time();
+            set_session('ss_start_time', $ss_start_time);
+        } else {
+            $ss_loading_cnt++;
+        }
+        
+        $time_interval = time() - $ss_start_time;
+        
+        // DDOS 판단
+        if ($ss_loading_cnt >= $config['cf_ddos_max_request'] && $time_interval <= $config['cf_ddos_time_limit']) {
+            set_session('ss_prohibit', true); // 차단 플래그 설정
+            set_session('ss_prohibit_time', time()); // 차단 시각 저장
+
+            // 접속제한 테이블에 해당 아이피 추가
+            $sql = "insert into {$this->g5['eyoom_prohibit']} set ph_ip = '" . $_SERVER['REMOTE_ADDR'] . "', ph_flag = 'ddos', ph_regdt = '" . G5_TIME_YMDHIS . "' ";
+            sql_query($sql);
+
+            // 접속제한 횟수 체크 및 아이피 제한
+            $row = sql_fetch("select count(*) as cnt from {$this->g5['eyoom_prohibit']} where ph_ip = '" . $_SERVER['REMOTE_ADDR'] . "' and ph_flag = 'ddos' ");
+            if ($row['cnt'] > $config['cf_ddos_prohibit_count']) {
+                $this->add_intercept_ip($config['cf_intercept_ip'], $_SERVER['REMOTE_ADDR']);
+            }
+
+            alert("현재 페이지 접속이 제한되었습니다. ".$config['cf_ddos_unblock_time']."초 후 다시 시도하세요.", G5_URL); // 경고 및 리다이렉트
+            exit;
+        } elseif ($time_interval > $config['cf_ddos_time_limit']) {
+            // 시간 제한을 초과하면 초기화
+            set_session('ss_loading_cnt', 1);
+            set_session('ss_start_time', time());
+        } else {
+            set_session('ss_loading_cnt', $ss_loading_cnt);
+        }
+    }
+
+    /**
+     * 아이피 차단하기
+     */
+    public function add_intercept_ip ($cf_intercept_ip, $remote_ip) {
+        global $is_admin;
+
+        if ($is_admin == 'super') return;
+
+        if (!$cf_intercept_ip) {
+            $cf_intercept_ip = $remote_ip;
+        } else {
+            $cf_intercept_ip .= "\n{$remote_ip}";
+        }
+
+        if (!filter_var($remote_ip, FILTER_VALIDATE_IP)) {
+            return false;  // 잘못된 IP 형식
+        }
+
+        $sql = "update {$this->g5['config_table']} set cf_intercept_ip = '{$cf_intercept_ip}' ";
+        sql_query($sql);
+    }
 }

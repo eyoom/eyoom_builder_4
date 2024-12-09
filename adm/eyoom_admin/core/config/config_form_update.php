@@ -27,7 +27,7 @@ check_admin_token();
 
 $cf_social_servicelist = !empty($_POST['cf_social_servicelist']) ? implode(',', $_POST['cf_social_servicelist']) : '';
 
-$check_keys = array('cf_cert_kcb_cd', 'cf_cert_kcp_cd', 'cf_editor', 'cf_recaptcha_site_key', 'cf_recaptcha_secret_key', 'cf_naver_clientid', 'cf_naver_secret', 'cf_facebook_appid', 'cf_facebook_secret', 'cf_twitter_key', 'cf_twitter_secret', 'cf_google_clientid', 'cf_google_secret', 'cf_googl_shorturl_apikey', 'cf_kakao_rest_key', 'cf_kakao_client_secret', 'cf_kakao_js_apikey', 'cf_payco_clientid', 'cf_payco_secret', 'cf_cert_kg_cd', 'cf_cert_kg_mid');
+$check_keys = array('cf_cert_kcb_cd', 'cf_cert_kcp_cd', 'cf_cert_kcp_enckey', 'cf_editor', 'cf_recaptcha_site_key', 'cf_recaptcha_secret_key', 'cf_naver_clientid', 'cf_naver_secret', 'cf_facebook_appid', 'cf_facebook_secret', 'cf_twitter_key', 'cf_twitter_secret', 'cf_google_clientid', 'cf_google_secret', 'cf_googl_shorturl_apikey', 'cf_kakao_rest_key', 'cf_kakao_client_secret', 'cf_kakao_js_apikey', 'cf_payco_clientid', 'cf_payco_secret', 'cf_cert_kg_cd', 'cf_cert_kg_mid');
 
 foreach ($check_keys as $key) {
     if (isset($_POST[$key]) && $_POST[$key]) {
@@ -161,6 +161,16 @@ $check_keys = array(
     'cf_syndi_except' => '',
     'cf_admin_email_name' => 'char',
     'cf_permit_level' => 'int',
+    'cf_use_protect_ddos' => 'int',
+    'cf_ddos_max_request' => 'int',
+    'cf_ddos_time_limit' => 'int',
+    'cf_ddos_unblock_time' => 'int',
+    'cf_ddos_prohibit_day' => 'int',
+    'cf_ddos_prohibit_count' => 'int',
+    'cf_ddos_return_url' => 'char',
+    'cf_use_protect_sqli' => 'int',
+    'cf_sqli_time_limit' => 'int',
+    'cf_sqli_max_write' => 'int',
     'cf_use_mbmemo' => 'int',
     'cf_map_google_id' => 'char',
     'cf_map_naver_id' => 'char',
@@ -212,6 +222,16 @@ $sql = " update {$g5['config_table']}
                 cf_counsel_email = '{$_POST['cf_counsel_email']}',
                 cf_counsel_view = '{$_POST['cf_counsel_view']}',
                 cf_permit_level = '{$_POST['cf_permit_level']}',
+                cf_use_protect_ddos = '{$_POST['cf_use_protect_ddos']}',
+                cf_ddos_max_request = '{$_POST['cf_ddos_max_request']}',
+                cf_ddos_time_limit = '{$_POST['cf_ddos_time_limit']}',
+                cf_ddos_unblock_time = '{$_POST['cf_ddos_unblock_time']}',
+                cf_ddos_prohibit_day = '{$_POST['cf_ddos_prohibit_day']}',
+                cf_ddos_prohibit_count = '{$_POST['cf_ddos_prohibit_count']}',
+                cf_ddos_return_url = '{$_POST['cf_ddos_return_url']}',
+                cf_use_protect_sqli = '{$_POST['cf_use_protect_sqli']}',
+                cf_sqli_time_limit = '{$_POST['cf_sqli_time_limit']}',
+                cf_sqli_max_write = '{$_POST['cf_sqli_max_write']}',
                 cf_use_mbmemo = '{$_POST['cf_use_mbmemo']}',
                 cf_use_point = '{$_POST['cf_use_point']}',
                 cf_point_term = '{$_POST['cf_point_term']}',
@@ -314,6 +334,7 @@ $sql = " update {$g5['config_table']}
                 cf_cert_kg_mid = '".trim($_POST['cf_cert_kg_mid'])."',
                 cf_cert_kcb_cd = '{$_POST['cf_cert_kcb_cd']}',
                 cf_cert_kcp_cd = '{$_POST['cf_cert_kcp_cd']}',
+                cf_cert_kcp_enckey = '{$_POST['cf_cert_kcp_enckey']}',
                 cf_cert_limit = '{$_POST['cf_cert_limit']}',
                 cf_cert_req = '{$_POST['cf_cert_req']}',
                 cf_sms_use = '{$_POST['cf_sms_use']}',

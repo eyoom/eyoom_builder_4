@@ -478,6 +478,10 @@ function counsel_modal() {
     });
     return false;
 }
+
+function close_counsel_modal() {
+    $('.counsel-iframe-modal').modal('hide');
+}
 <?php } ?>
 
 function itemuse_modal(href) {

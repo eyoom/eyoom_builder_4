@@ -199,7 +199,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                 <div class="clearfix"></div>
                 <section class="col-lg-12">
                     <div class="alert alert-warning m-t-15">
-                        <strong>Note:</strong> 공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상) | 닉네임을 바꾸시면 앞으로 <?php echo $config['cf_nick_modify']*1; ?>일 이내에는 변경 할 수 없습니다.
+                        <strong>Note:</strong> 공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상) | 닉네임을 바꾸시면 앞으로 <?php echo (int) $config['cf_nick_modify']; ?>일 이내에는 변경 할 수 없습니다.
                     </div>
                 </section>
             </div>
@@ -383,7 +383,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                         <input type="checkbox" name="mb_open" value="1" <?php if ($w=='' || $member['mb_open']) { ?>checked<?php } ?> id="reg_mb_open"><i></i>다른분들이 나의 정보를 볼 수 있도록 합니다.
                         <input type="hidden" name="mb_open_default" value="<?php echo $member['mb_open']; ?>">
                     </label>
-                    <div class="note m-b-10"><strong>Note:</strong> 정보공개를 바꾸시면 앞으로 <?php echo $config['cf_open_modify']*1; ?>일 이내에는 변경이 안됩니다.</div>
+                    <div class="note m-b-10"><strong>Note:</strong> 정보공개를 바꾸시면 앞으로 <?php echo (int) $config['cf_open_modify']; ?>일 이내에는 변경이 안됩니다.</div>
                 </section>
                 <?php } else { ?>
                 <section class="col-lg-6">
@@ -391,7 +391,7 @@ if ($config['cf_cert_use'] && ($config['cf_cert_simple'] || $config['cf_cert_ipi
                     <label class="checkbox">
                         <input type="hidden" name="mb_open" value="<?php echo $member['mb_open']; ?>">
                     </label>
-                    <div class="note m-b-10"><strong>Note:</strong> 정보공개는 수정후 <?php $config['cf_open_modify']*1; ?>일 이내, <?php echo $open_day; ?> 까지는 변경이 안됩니다.<br>이렇게 하는 이유는 잦은 정보공개 수정으로 인하여 쪽지를 보낸 후 받지 않는 경우를 막기 위해서 입니다.</div>
+                    <div class="note m-b-10"><strong>Note:</strong> 정보공개는 수정후 <?php (int) $config['cf_open_modify']; ?>일 이내, <?php echo $open_day; ?> 까지는 변경이 안됩니다.<br>이렇게 하는 이유는 잦은 정보공개 수정으로 인하여 쪽지를 보낸 후 받지 않는 경우를 막기 위해서 입니다.</div>
                 </section>
                 <?php } ?>
                 <?php if ($w=='' && $config['cf_use_recommend']) { ?>
