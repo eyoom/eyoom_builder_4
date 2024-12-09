@@ -5,6 +5,13 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * 관리자가 아닐 경우, DDOS공격 방어
+ */
+if (!$is_admin) {
+    $eb->ddos_control($config);
+}
+
+/**
  * 이윰 common.php 파일을 불러오지 못한 경우가 있다면
  * 1:1문의의 경우 이윰 common.php 파일을 한번 더 호출해야 이윰 테마의 스킨이 적용 됨
  */

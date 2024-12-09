@@ -5,6 +5,26 @@
 if (!defined('_EYOOM_')) exit;
 
 /**
+ * SQL injection 방어
+ */
+if (isset($config['cf_use_protect_sqli']) && $config['cf_use_protect_sqli']) {
+    // 접속제한 테이블에 해당 아이피 추가
+    $sql = "insert into {$g5['eyoom_prohibit']} set ph_ip = '" . $_SERVER['REMOTE_ADDR'] . "', ph_flag = 'sql', ph_regdt = '" . G5_TIME_YMDHIS . "' ";
+    sql_query($sql);
+
+    // 글작성 횟수 체크 및 아이피 제한
+    $time_limit = date('Y-m-d H:i:s', time() - $config['cf_sqli_time_limit']);
+    $row = sql_fetch("select count(*) as cnt from {$g5['eyoom_prohibit']} where ph_flag = 'sql' and ph_regdt > '{$time_limit}' ");
+    if ($row['cnt'] > $config['cf_sqli_max_write']) {
+        $eb->add_intercept_ip($config['cf_intercept_ip'], $_SERVER['REMOTE_ADDR']);
+    }
+
+    // 등록일이 오늘이전이면 레코드 삭제
+    $today = date('Y-m-d');
+    sql_query("delete from {$g5['eyoom_prohibit']} where ph_flag = 'sql' and ph_regdt < '{$today}' ");
+}
+
+/**
  * 한줄 게시판이라면 목록으로 이동
  */
 if (isset($_POST['bbs_no_view']) && $_POST['bbs_no_view'] == '1') {

@@ -206,13 +206,13 @@ if ($w == '') {
     sql_query($sql);
 
     // 대상 그누레벨
-    $mb_level = $_POST['mb_level']*1;
+    $mb_level = isset($_POST['mb_level']) ? (int) $_POST['mb_level']: 2;
 
     // 이전 그누레벨
-    $mb_prev_level = $_POST['mb_prev_level']*1;
+    $mb_prev_level = isset($_POST['mb_prev_level']) ? (int) $_POST['mb_prev_level']: 2;;
 
     // 현재 이윰 레벨 경험치
-    $level_point = $_POST['level_point']*1;
+    $level_point = isset($_POST['level_point']) ? (int) $_POST['level_point']: 0;
 
     /**
      * 이전 그누레벨과 대상 그누레벨의 차이

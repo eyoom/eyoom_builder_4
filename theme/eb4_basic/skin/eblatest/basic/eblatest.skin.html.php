@@ -40,7 +40,7 @@ if (!defined('_EYOOM_')) exit;
 .basic-latest .tab-content ul {margin-bottom:0}
 .basic-latest .tab-content li {position:relative;padding:3px 0}
 .basic-latest .tab-content li.no-latest {width:100%}
-.basic-latest .tab-content .basic-subj {position:relative;width:70%;padding-right:40px;padding-left:0;display:block;font-size:1rem;font-weight:500;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
+.basic-latest .tab-content .basic-subj {position:relative;width:100%;padding-right:40px;padding-left:0;display:block;font-size:1rem;font-weight:500;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;float:left}
 .basic-latest .tab-content .basic-new-icon {position:relative;display:inline-block;width:18px;height:14px;background-color:#cc2300;margin-right:2px}
 .basic-latest .tab-content .basic-new-icon:before {content:"";position:absolute;top:4px;left:5px;width:2px;height:6px;background-color:#fff}
 .basic-latest .tab-content .basic-new-icon:after {content:"";position:absolute;top:4px;right:5px;width:2px;height:6px;background-color:#fff}
@@ -87,7 +87,7 @@ if (!defined('_EYOOM_')) exit;
                 <?php } ?>
                         <li>
                             <a href="<?php echo $data['href']; ?>">
-                                <div class="basic-subj <?php echo !G5_IS_MOBILE ? 'tooltips':''; ?>" <?php if (!G5_IS_MOBILE) { ?>data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $eb_latest['li_date_type'] == '1' ? $eb->date_time("{$eb_latest['li_date_kind']}",$data['wr_datetime']):  $eb->date_format("{$eb_latest['li_date_kind']}",$data['wr_datetime']); ?>"<?php } ?>>
+                                <div class="basic-subj <?php if ($eb_latest['li_mbname_view'] == 'y' && $data['wr_name']) { ?>width-70<?php } ?> <?php echo !G5_IS_MOBILE ? 'tooltips':''; ?>" <?php if (!G5_IS_MOBILE) { ?>data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $eb_latest['li_date_type'] == '1' ? $eb->date_time("{$eb_latest['li_date_kind']}",$data['wr_datetime']):  $eb->date_format("{$eb_latest['li_date_kind']}",$data['wr_datetime']); ?>"<?php } ?>>
                                     <?php if ($eb_latest['li_bo_subject'] == 'y') { ?>
                                     <span class="basic-bo-subj"><?php echo $data['bo_subject']; ?></span>
                                     <?php } ?>

@@ -61,9 +61,11 @@ if (file_exists($eyoom_config_file) && !is_dir($eyoom_config_file)) {
     }
 
     /**
-     * 공사중으로 설정되어 있다면 공사중 페이지 출력
+     * 관리자일 경우, 공사중으로 설정되어 있다면 공사중 페이지 출력
      */
-    if (!$is_admin) $eb->under_construction();
+    if (!$is_admin) {
+        $eb->under_construction();
+    }
 
     /**
      * 회원제 사이트인가?
