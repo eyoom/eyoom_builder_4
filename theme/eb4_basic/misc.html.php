@@ -402,6 +402,25 @@ window.closeModal = function(url){
         </div>
     </div>
 </div>
+
+<script>
+function counsel_modal() {
+    $('.counsel-iframe-modal').modal('show').on('hidden.bs.modal', function() {
+        $("#counsel-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.counsel-iframe-modal').modal('show').on('shown.bs.modal', function() {
+        $("#counsel-iframe").attr("src", "<?php echo G5_URL; ?>/page/?pid=counsel&wmode=1");
+        $('#counsel-iframe').height(parseInt($(window).height() * 0.7));
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
+}
+
+function close_counsel_modal() {
+    $('.counsel-iframe-modal').modal('hide');
+}
+</script>
 <?php } ?>
 <?php /* 상담 신청 모달 끝 */ ?>
 
@@ -465,25 +484,6 @@ window.closeModal = function(url){
 <?php /* 상품 쿠폰 모달 끝 */ ?>
 
 <script>
-<?php if ($config['cf_use_counsel'] == '1') { ?>
-function counsel_modal() {
-    $('.counsel-iframe-modal').modal('show').on('hidden.bs.modal', function() {
-        $("#counsel-iframe").attr("src", "");
-        $('html').css({overflow: ''});
-    });
-    $('.counsel-iframe-modal').modal('show').on('shown.bs.modal', function() {
-        $("#counsel-iframe").attr("src", "<?php echo G5_URL; ?>/page/?pid=counsel&wmode=1");
-        $('#counsel-iframe').height(parseInt($(window).height() * 0.7));
-        $('html').css({overflow: 'hidden'});
-    });
-    return false;
-}
-
-function close_counsel_modal() {
-    $('.counsel-iframe-modal').modal('hide');
-}
-<?php } ?>
-
 function itemuse_modal(href) {
     $('.itemuse-iframe-modal').modal('show').on('hidden.bs.modal', function() {
         $("#itemuse-iframe").attr("src", "");

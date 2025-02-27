@@ -18,12 +18,6 @@ $frm_eba_submit .= '</div>';
 $frm_submit .= $frm_eba_submit;
 ?>
 
-<style>
-@media (max-width: 1199px) {
-    .pg-anchor-in .nav-tabs li:nth-child(10) a {border-bottom:0}
-}
-</style>
-
 <div class="admin-board-form">
     <div class="adm-headline">
         <h3>이윰 확장기능 설정 [ <span class="text-crimson"><?php echo $board['bo_table'] . ' : ' . $board['bo_subject']; ?></span> ]</h3>

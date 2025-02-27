@@ -93,7 +93,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $mg_menu = $eb->mb_unserialize($row['mg_menu']);
     $j=0;
-    unset($manager_menu);
+    $manager_menu = array();
     foreach ($mg_menu as $k => $v) {
         $manager_menu[$j] = $dir_menu[$k];
         $j++;

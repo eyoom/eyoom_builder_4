@@ -202,6 +202,9 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
 
     <div class="m-b-5 f-s-13r">
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a><span class="m-l-10 m-r-10 text-light-gray">|</span>전체 주문내역 <?php echo number_format($total_count); ?>건
+        <?php if($od_status == '준비' && $total_count > 0) { ?>
+            <a href="./shop_admin/orderdelivery.php" id="order_delivery" class="ov_a btn-e btn-e-red m-l-10">엑셀배송처리</a>
+        <?php } ?>
     </div>
 
     <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="las la-arrows-alt-h"></i>)</p>

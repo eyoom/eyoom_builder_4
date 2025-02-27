@@ -192,7 +192,7 @@ footer {background-color:var(--tbg-default);border-top-color:var(--tbc-default)}
     .pg-anchor-in {border-color:var(--tbc-higher)}
     .pg-anchor-in .nav-tabs li a {border-color:var(--tbc-default);color:var(--ttc-muted)}
     .pg-anchor-in .nav-tabs li a.active {border-color:var(--tbc-default);background-color:var(--tbg-muteder);color:#ab0000}
-    .pg-anchor-in .nav-tabs li:nth-child(1) a, .pg-anchor-in .nav-tabs li:nth-child(2) a, .pg-anchor-in .nav-tabs li:nth-child(4) a, .pg-anchor-in .nav-tabs li:nth-child(5) a, .pg-anchor-in .nav-tabs li:nth-child(7) a, .pg-anchor-in .nav-tabs li:nth-child(8) a, .pg-anchor-in .nav-tabs li:nth-child(10) a, .pg-anchor-in .nav-tabs li:nth-child(11) a {border-color:var(--tbc-default)}
+    .pg-anchor-in .nav-tabs li:nth-child(1) a, .pg-anchor-in .nav-tabs li:nth-child(2) a, .pg-anchor-in .nav-tabs li:nth-child(4) a, .pg-anchor-in .nav-tabs li:nth-child(5) a, .pg-anchor-in .nav-tabs li:nth-child(7) a, .pg-anchor-in .nav-tabs li:nth-child(8) a, .pg-anchor-in .nav-tabs li:nth-child(10) a, .pg-anchor-in .nav-tabs li:nth-child(11) a, .pg-anchor-in .nav-tabs li:nth-child(13) a, .pg-anchor-in .nav-tabs li:nth-child(14) a, .pg-anchor-in .nav-tabs li:nth-child(16) a, .pg-anchor-in .nav-tabs li:nth-child(17) a {border-color:var(--tbc-default)}
 }
 /* Adm Form Table */
 .adm-form-table {border-color:var(--tbc-default)}

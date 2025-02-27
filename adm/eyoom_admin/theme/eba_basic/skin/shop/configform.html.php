@@ -997,7 +997,7 @@ $frm_submit .= $frm_eba_submit;
                             <a href="http://testadmin8.kcp.co.kr/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">테스트 관리자</a>
                         </div>
                         <div class="scf_cardtest lg_cardtest m-b-10">
-                            <a href="https://pgweb.tosspayments.com/" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">실결제 관리자</a>
+                            <a href="https://app.tosspayments.com/" target="_blank" class="btn_frmline">실결제 관리자</a>
                             <a href="https://pgweb.tosspayments.com/tmert" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5">테스트 관리자</a>
                         </div>
                         <div class="scf_cardtest inicis_cardtest m-b-10">
@@ -1022,7 +1022,7 @@ $frm_submit .= $frm_eba_submit;
                             </div>
 
                             <div id="lg_cardtest_tip" class="scf_cardtest_tip_adm scf_cardtest_tip_adm_hide m-b-20">
-                                <p class="li-p-sq">테스트결제의 <a href="http://pgweb.dacom.net:7085/" target="_blank">상점관리자</a> 로그인 정보는 토스페이먼츠 상점아이디 첫 글자에 t를 추가해서 로그인하시기 바랍니다. 예) tsi_lguplus</p>
+                                <p class="li-p-sq">테스트결제의 <a href="https://pgweb.tosspayments.com/tmert" target="_blank">상점관리자</a> 로그인 정보는 토스페이먼츠 상점아이디 첫 글자에 t를 추가해서 로그인하시기 바랍니다. 예) tsi_lguplus</p>
                             </div>
 
                             <div id="inicis_cardtest_tip" class="scf_cardtest_tip_adm scf_cardtest_tip_adm_hide">

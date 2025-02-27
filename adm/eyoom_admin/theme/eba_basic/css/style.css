@@ -259,7 +259,7 @@ footer {position:absolute;bottom:0;left:0;right:0;height:50px;padding:0 20px;bor
     .pg-anchor-in .nav-tabs li {width:33.33333%;margin:0}
     .pg-anchor-in .nav-tabs li a {display:block;font-size:.875rem;white-space:nowrap;;padding:8px 0;text-align:center;font-weight:400;border-bottom-width:1px;border-bottom-style:solid}
     .pg-anchor-in .nav-tabs li a.active {border:0;border-bottom-width:1px;border-bottom-style:solid;font-weight:700}
-	.pg-anchor-in .nav-tabs li:nth-child(1) a, .pg-anchor-in .nav-tabs li:nth-child(2) a, .pg-anchor-in .nav-tabs li:nth-child(4) a, .pg-anchor-in .nav-tabs li:nth-child(5) a, .pg-anchor-in .nav-tabs li:nth-child(7) a, .pg-anchor-in .nav-tabs li:nth-child(8) a, .pg-anchor-in .nav-tabs li:nth-child(10) a, .pg-anchor-in .nav-tabs li:nth-child(11) a {border-right-width:1px;border-right-style:solid}
+	.pg-anchor-in .nav-tabs li:nth-child(1) a, .pg-anchor-in .nav-tabs li:nth-child(2) a, .pg-anchor-in .nav-tabs li:nth-child(4) a, .pg-anchor-in .nav-tabs li:nth-child(5) a, .pg-anchor-in .nav-tabs li:nth-child(7) a, .pg-anchor-in .nav-tabs li:nth-child(8) a, .pg-anchor-in .nav-tabs li:nth-child(10) a, .pg-anchor-in .nav-tabs li:nth-child(11) a, .pg-anchor-in .nav-tabs li:nth-child(13) a, .pg-anchor-in .nav-tabs li:nth-child(14) a, .pg-anchor-in .nav-tabs li:nth-child(16) a, .pg-anchor-in .nav-tabs li:nth-child(17) a {border-right-width:1px;border-right-style:solid}
     .pg-anchor-in .tab-bottom-line {display:none}
 }
 

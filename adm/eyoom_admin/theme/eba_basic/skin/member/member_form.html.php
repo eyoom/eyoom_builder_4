@@ -455,7 +455,7 @@ $frm_submit .= $frm_eba_submit;
                 <label class="label">추천인</label>
             </div>
             <div class="adm-form-td td-r">
-                <?php echo ($mb['mb_recommend'] ? get_text($mb['mb_recommend']) : '없음'); // 081022 : CSRF 보안 결함으로 인한 코드 수정 ?><i></i>
+                <?php echo ((isset($mb['mb_recommend']) && $mb['mb_recommend']) ? get_text($mb['mb_recommend']) : '없음'); // 081022 : CSRF 보안 결함으로 인한 코드 수정 ?><i></i>
             </div>
         </div>
         <?php } ?>
