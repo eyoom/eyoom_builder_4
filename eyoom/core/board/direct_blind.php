@@ -88,6 +88,11 @@ if ($eyoom_board['bo_use_yellow_card'] != '1') {
     }
 }
 
+/**
+ * 최신글 캐시 스위치온
+ */
+$latest->make_switch_on($bo_table, $theme);
+
 if ($tocken) {
     $_value_array = array();
     $_value_array['error'] = $error;

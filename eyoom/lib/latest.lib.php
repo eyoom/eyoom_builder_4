@@ -242,9 +242,9 @@ function eb_latest ($el_code) {
                      * 블라인드 처리
                      */
                     $loop[$k]['is_blind'] = false;
-                    $eb_4 = $eb->mb_unserialize($row['eb_4']);
-                    if(!$eb_4) $eb_4 = array();
-                    if($eb_4['yc_blind'] == 'y') {
+                    $eb_5 = $eb->mb_unserialize($row['eb_5']);
+                    if(!$eb_5) $eb_5 = array();
+                    if($eb_5['yc_blind'] == 'y') {
                         if (!$is_admin) {
                             $loop[$k]['wr_subject'] = '<span class=\'blind-subj\'>이 게시물은 블라인드 처리된 글입니다.</span>';
                         }

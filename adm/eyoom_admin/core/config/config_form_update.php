@@ -57,6 +57,10 @@ if (isset($_POST['cf_intercept_ip']) && $_POST['cf_intercept_ip']) {
 
 $check_keys = array(
     'cf_use_email_certify' => 'int',
+    'cf_smtp_use' => 'int',
+    'cf_smtp_server' => 'text',
+    'cf_smtp_sender' => 'text',
+    'cf_smtp_apppass' => 'text',
     'cf_use_homepage' => 'int',
     'cf_req_homepage' => 'int',
     'cf_use_tel' => 'int',
@@ -235,6 +239,10 @@ $sql = " update {$g5['config_table']}
                 cf_point_term = '{$_POST['cf_point_term']}',
                 cf_use_copy_log = '{$_POST['cf_use_copy_log']}',
                 cf_use_email_certify = '{$_POST['cf_use_email_certify']}',
+                cf_smtp_use = '{$_POST['cf_smtp_use']}',
+                cf_smtp_server = '{$_POST['cf_smtp_server']}',
+                cf_smtp_sender = '{$_POST['cf_smtp_sender']}',
+                cf_smtp_apppass = '{$_POST['cf_smtp_apppass']}',
                 cf_login_point = '{$_POST['cf_login_point']}',
                 cf_cut_name = '{$_POST['cf_cut_name']}',
                 cf_nick_modify = '{$_POST['cf_nick_modify']}',

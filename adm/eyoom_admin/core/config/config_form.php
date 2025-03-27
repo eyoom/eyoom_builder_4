@@ -554,6 +554,17 @@ if (!isset($config['cf_write_limit'])) {
                 ADD `cf_write_limit_type` VARCHAR(10) NOT NULL DEFAULT '' AFTER `cf_write_limit` ", true);
 }
 
+/**
+ * SMTP 인증메일 보내기 설정
+ */
+if (!isset($config['cf_smtp_use'])) {
+    sql_query("ALTER TABLE `{$g5['config_table']}`
+                ADD `cf_smtp_use` TINYINT(4) NOT NULL DEFAULT '0' AFTER `cf_use_email_certify`,
+                ADD `cf_smtp_server` VARCHAR(20) NOT NULL DEFAULT '' AFTER `cf_smtp_use`,
+                ADD `cf_smtp_sender` VARCHAR(255) NOT NULL DEFAULT '' AFTER `cf_smtp_server`,
+                ADD `cf_smtp_apppass` VARCHAR(20) NOT NULL DEFAULT '' AFTER `cf_smtp_sender` ", true);
+}
+
 if(!$config['cf_faq_skin']) $config['cf_faq_skin'] = "basic";
 if(!$config['cf_mobile_faq_skin']) $config['cf_mobile_faq_skin'] = "basic";
 

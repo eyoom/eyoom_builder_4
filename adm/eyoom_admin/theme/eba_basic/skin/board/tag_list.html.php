@@ -63,17 +63,6 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         </div>
     </div>
 
-    </form>
-
-    <form name="ftaglist" id="ftaglist" action="<?php echo $action_url2; ?>" method="post" onsubmit="return ftaglist_submit(this);" class="eyoom-form">
-    <input type="hidden" name="sst" value="<?php echo $sst; ?>">
-    <input type="hidden" name="sod" value="<?php echo $sod; ?>">
-    <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="tg_dpmenu" value="<?php echo $tg_dpmenu; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
-    <input type="hidden" name="token" value="<?php echo $token; ?>">
-
     <div class="m-b-5">
         <div class="float-start f-s-13r">
             <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a><span class="m-l-10 m-r-10 text-light-gray">|</span>생성된 게시판수 <?php echo number_format($total_count); ?>개
@@ -102,6 +91,17 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         <div class="clearfix"></div>
     </div>
 
+    </form>
+
+    <form name="ftaglist" id="ftaglist" action="<?php echo $action_url2; ?>" method="post" onsubmit="return ftaglist_submit(this);" class="eyoom-form">
+    <input type="hidden" name="sst" value="<?php echo $sst; ?>">
+    <input type="hidden" name="sod" value="<?php echo $sod; ?>">
+    <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
+    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
+    <input type="hidden" name="tg_dpmenu" value="<?php echo $tg_dpmenu; ?>">
+    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="token" value="<?php echo $token; ?>">
+    
     <p class="text-end f-s-13r m-b-5 text-gray visible-xs">Note! 좌우 스크롤 (<i class="las la-arrows-alt-h"></i>)</p>
 
     <div class="table-list-eb">

@@ -95,3 +95,8 @@ if ($eyoom_board['bo_use_yellow_card'] != '1') {
         sql_query("update {$g5['eyoom_tag_write']} set eb_5 = '{$eb_5}' where  bo_table = '{$bo_table}' and {$wrid} and tw_theme='" . sql_real_escape_string($theme) . "' ");
     }
 }
+
+/**
+ * 최신글 캐시 스위치온
+ */
+$latest->make_switch_on($bo_table, $theme);

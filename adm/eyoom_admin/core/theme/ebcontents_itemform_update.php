@@ -96,7 +96,9 @@ for ($i=0; $i<$upload_count; $i++) {
  */
 if ($iw == 'u') {
     $ci = sql_fetch("select ci_img from {$g5['eyoom_contents_item']} where ci_no = '{$ci_no}' ");
-    $ci_img = $eb->mb_unserialize($ci['ci_img']);
+    $ci_img = ($ci && isset($ci['ci_img'])) ? $eb->mb_unserialize($ci['ci_img']): array();
+} else {
+    $ci_img = array();
 }
 
 /**
@@ -126,13 +128,17 @@ if ($iw == 'u') {
  * 이미지 업로드
  */
 $file_upload_msg = '';
-for ($i=0; $i<count((array)$_FILES['ci_img']['name']); $i++) {
+$file_count = isset($_FILES['ci_img']['name']) ? count((array)$_FILES['ci_img']['name']) : 0;
+for ($i = 0; $i < $file_count; $i++) { 
     $allowed_mimetype = ['image/jpeg', 'image/png', 'image/gif'];
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     $uploaded_file = $_FILES['ci_img']['tmp_name'][$i];
     if ($uploaded_file) {
         $file_mimetype = mime_content_type($uploaded_file);
+        if ($file_mimetype === false) {
+            continue; // 또는 오류 처리
+        }
         $file_ext = $qfile->get_file_ext($_FILES['ci_img']['name'][$i]);
         if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
             if (is_uploaded_file($uploaded_file)) {

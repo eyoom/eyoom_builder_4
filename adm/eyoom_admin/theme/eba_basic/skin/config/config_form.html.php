@@ -1634,7 +1634,7 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_use_email_certify" class="label">메일인증 사용<strong class="sound_only">필수</strong></label>
+                            <label for="cf_use_email_certify" class="label">회원 메일인증 사용<strong class="sound_only">필수</strong></label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="checkbox">
@@ -1652,6 +1652,63 @@ $frm_submit .= $frm_eba_submit;
                                 <input type="checkbox" name="cf_formmail_is_member" id="cf_formmail_is_member" value="1" <?php echo $config['cf_formmail_is_member']?'checked':''; ?>><i></i> 회원만 사용
                             </label>
                             <div class="note"><strong>Note:</strong> 체크하지 않으면 비회원도 사용 할 수 있습니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adm-form-table m-b-20">
+                <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>SMTP 인증메일 보내기 설정</strong></div>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_smtp_use" class="label">외부 SMTP 사용</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="checkbox">
+                                <input type="checkbox" name="cf_smtp_use" id="cf_smtp_use" value="1" <?php echo $config['cf_smtp_use']?'checked':''; ?>><i></i> 사용
+                            </label>
+                            <div class="note"><strong>Note:</strong> 체크시 외부에서 제공하는 SMTP 메일서버를 사용하여 메일을 발송합니다.</div>
+                        </div>
+                    </div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_smtp_server" class="label">SMTP 서버 선택</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="select max-width-250px">
+                                <select name="cf_smtp_server" id="cf_smtp_server">
+                                    <option value="">:: 선택하기 ::</option>
+                                    <option value="smtp.gmail.com" <?php echo $config['cf_smtp_server'] == 'smtp.gmail.com' ? 'selected': ''; ?>>구글메일 SMTP</option>
+                                    <option value="smtp.naver.com" <?php echo $config['cf_smtp_server'] == 'smtp.naver.com' ? 'selected': ''; ?>>네이버메일 SMTP</option>
+                                </select><i></i>
+                            </label>
+                            <div class="note"><strong>Note:</strong> 사용을 원하는 [보내는 메일 서버]를 선택해 주세요.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adm-form-tr-wrap">
+                    <div class="adm-form-tr tr-l">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_smtp_sender" class="label">보내는 메일주소</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="input max-width-250px">
+                                <input type="text" name="cf_smtp_sender" id="cf_smtp_sender" value="<?php echo $config['cf_smtp_sender']; ?>">
+                            </label>
+                            <div class="note"><strong>Note:</strong> 위 SMTP 서버에 로그인 가능한 이메일 주소를 입력해 주세요. 예) abc@gmail.com, abc@naver.com</div>
+                        </div>
+                    </div>
+                    <div class="adm-form-tr tr-r">
+                        <div class="adm-form-td td-l">
+                            <label for="cf_smtp_apppass" class="label">앱 비밀번호</label>
+                        </div>
+                        <div class="adm-form-td td-r">
+                            <label class="input max-width-250px">
+                                <input type="text" name="cf_smtp_apppass" id="cf_smtp_apppass" value="<?php echo $config['cf_smtp_apppass']; ?>">
+                            </label>
+                            <div class="note"><strong>Note:</strong> 앱 비밀번호는 각 메일서비스별로 2단계 인증을 활성화한 후에 생성하실 수 있습니다.</div>
+                            <div class="note"><a href="https://support.google.com/accounts/answer/185833?hl=ko" target="_blank" class="btn-e btn-e-sm btn-e-dark">구글 앱 비밀번호 생성하기</a> <a href="https://help.naver.com/service/5640/contents/8584?lang=ko" target="_blank" class="btn-e btn-e-sm btn-e-dark">네이버 앱 비밀번호 생성하기</a></div>
                         </div>
                     </div>
                 </div>

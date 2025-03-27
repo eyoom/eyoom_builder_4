@@ -185,9 +185,7 @@ function no_hp_click(val) {
     </form>
     
     <?php /* 페이지 */ ?>
-    <div class="m-t-20">
-        <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, G5_ADMIN_URL."/?dir=sms&amp;pid=num_book&amp;bg_no=$bg_no&amp;st=$st&amp;sv=$sv&amp;ap=$ap&amp;page="); ?>
-    </div>
+    <?php echo eb_paging($eyoom['paging_skin']);?>
 </div>
 
 <script>

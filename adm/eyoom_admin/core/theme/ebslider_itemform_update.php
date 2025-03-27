@@ -87,7 +87,9 @@ for ($i=0; $i<$upload_count; $i++) {
  */
 if ($iw == 'u') {
     $ei = sql_fetch("select ei_img from {$g5['eyoom_slider_item']} where ei_no = '{$ei_no}' ");
-    $ei_img = isset($ei['ei_img']) ? $eb->mb_unserialize($ei['ei_img']): array();
+    $ei_img = ($ei && isset($ei['ei_img'])) ? $eb->mb_unserialize($ei['ei_img']) : array();
+} else {
+    $ei_img = array();
 }
 
 /**
@@ -102,6 +104,7 @@ $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
  * 이미지 삭제
  */
 if ($iw == 'u') {
+    $ei_img_del = $ei_img_del ? $ei_img_del: array();
     if(is_array($ei_img_del)) {
         foreach ($ei_img_del as $i => $chk) {
             $ebslider_file = G5_DATA_PATH.'/ebslider/'.$ei_theme.'/img/'.$del_img_name[$i];
@@ -117,7 +120,8 @@ if ($iw == 'u') {
  * 이미지 업로드
  */
 $file_upload_msg = '';
-for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
+$file_count = isset($_FILES['ei_img']['name']) ? count((array)$_FILES['ei_img']['name']) : 0;
+for ($i = 0; $i < $file_count; $i++) {
     if (is_uploaded_file($_FILES['ei_img']['tmp_name'][$i])) {
         $allowed_mimetype = ['image/jpeg', 'image/png', 'image/gif'];
         $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
@@ -125,6 +129,9 @@ for ($i=0; $i<count((array)$_FILES['ei_img']['name']); $i++) {
         $uploaded_file = $_FILES['ei_img']['tmp_name'][$i];
         if ($uploaded_file) {
             $file_mimetype = mime_content_type($uploaded_file);
+            if ($file_mimetype === false) {
+                continue; // 또는 오류 처리
+            }
             $file_ext = $qfile->get_file_ext($_FILES['ei_img']['name'][$i]);
             if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
                 $file_name = md5(time().$_FILES['ei_img']['name'][$i]).".".$file_ext;

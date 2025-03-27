@@ -22,10 +22,12 @@ $st = isset($_REQUEST['st']) ? preg_replace('/[^a-z0-9]/i', '', $_REQUEST['st'])
 
 $sql_korean = $sql_group = $sql_search = $sql_no_hp = '';
 
-if (is_numeric($bg_no) && $bg_no)
+if (is_numeric($bg_no) && $bg_no) {
     $sql_group = " and bg_no='$bg_no' ";
-else
+    $qstr .= "&amp;bg_no={$bg_no}";
+} else {
     $sql_group = "";
+}
 
 if ($st == 'all') {
     $sql_search = "and (bk_name like '%{$sv}%' or bk_hp like '%{$sv}%')";
@@ -99,9 +101,13 @@ for ($i=0; $res = sql_fetch_array($qry); $i++)
     $list[$i]['vnum'] = $vnum;
     $list[$i]['group_name'] = $group_name;
     $vnum--;
-    $i++;
 }
 $count = is_array($list) ? count($list): 0;
+
+/**
+ * 페이징
+ */
+$paging = $eb->set_paging('admin', $dir, $pid, $qstr);
 
 /**
  * 검색버튼

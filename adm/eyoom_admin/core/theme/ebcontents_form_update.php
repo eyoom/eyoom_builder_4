@@ -61,9 +61,13 @@ if (empty($_POST)) {
 if ($w == 'u') {
     $sql = "select ec_image, ec_file, ec_filename from {$g5['eyoom_contents']} where ec_code = '{$ec_code}' {$sql_me_id} limit 1";
     $ec = sql_fetch($sql);
-    $ec_image = $ec['ec_image'];
-    $ec_file = $ec['ec_file'];
-    $ec_filename = $ec['ec_filename'];
+    $ec_image = $ec !== false && isset($ec['ec_image']) ? $ec['ec_image'] : '';
+    $ec_file = $ec !== false && isset($ec['ec_file']) ? $ec['ec_file'] : '';
+    $ec_filename = $ec !== false && isset($ec['ec_filename']) ? $ec['ec_filename'] : '';
+} else {
+    $ec_image = '';
+    $ec_file = '';
+    $ec_filename = '';
 }
 
 /**
@@ -95,29 +99,33 @@ if ($w == 'u') {
  * 이미지 업로드
  */
 $file_upload_msg = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['ec_image']) && $_FILES['ec_image']['tmp_name']) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['ec_image']) && !empty($_FILES['ec_image']['tmp_name']) && $_FILES['ec_image']['error'] === UPLOAD_ERR_OK) {
     $allowed_mimetype = ['image/jpeg', 'image/png', 'image/gif'];
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     $uploaded_file = $_FILES['ec_image']['tmp_name'];
     if ($uploaded_file) {
-        $file_mimetype = mime_content_type($uploaded_file);
-        $file_ext = $qfile->get_file_ext($_FILES['ec_image']['name']);
-        if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
-            if (is_uploaded_file($uploaded_file)) {
-                $file_name = md5(time().$_FILES['ec_image']['name']).".".$file_ext;
-                $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/'.$file_name;
-    
-                move_uploaded_file($uploaded_file, $dest_path);
-    
-                if (file_exists($dest_path)) {
-                    chmod($dest_path, G5_FILE_PERMISSION);
-                    $ec_image = $file_name;
-                }
-            }
-        } else {
-            $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+        if ($file_mimetype === false) {
+            $file_upload_msg = "파일 타입을 확인할 수 없습니다.\\n";
             alert($file_upload_msg);
+        } else {
+            $file_ext = $qfile->get_file_ext($_FILES['ec_image']['name']);
+            if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+                if (is_uploaded_file($uploaded_file)) {
+                    $file_name = md5(time().$_FILES['ec_image']['name']).".".$file_ext;
+                    $dest_path = G5_DATA_PATH.'/ebcontents/'.$post_ec_theme.'/img/'.$file_name;
+        
+                    move_uploaded_file($uploaded_file, $dest_path);
+        
+                    if (file_exists($dest_path)) {
+                        chmod($dest_path, G5_FILE_PERMISSION);
+                        $ec_image = $file_name;
+                    }
+                }
+            } else {
+                $file_upload_msg .= $_FILES['ec_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+                alert($file_upload_msg);
+            }
         }
     }
 }

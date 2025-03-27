@@ -10,7 +10,7 @@ auth_check_menu($auth, $sub_menu, 'w');
 
 check_demo();
 
-$es_master['es_code'] = $es_code = isset($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
+$es_master['es_code'] = $es_code = isset($_POST['es_code']) && is_string($_POST['es_code']) ? clean_xss_tags(trim($_POST['es_code'])) : '';
 $es_master['es_theme']      = isset($_POST['theme']) ? clean_xss_tags(trim($_POST['theme'])) : '';
 $es_master['es_state']      = isset($_POST['es_state']) ? clean_xss_tags(trim($_POST['es_state'])) : '';
 $es_master['es_subject']    = isset($_POST['es_subject']) ? clean_xss_tags(trim($_POST['es_subject'])) : '';
@@ -52,7 +52,9 @@ if (empty($_POST)) {
  */
 if ($w == 'u') {
     $es = sql_fetch("select es_image from {$g5['eyoom_slider']} where es_no = '{$es_no}' ");
-    $es_image = $es['es_image'];
+    $es_image = $es !== false && isset($es['es_image']) ? $es['es_image'] : '';
+} else {
+    $es_image = '';
 }
 
 /**
@@ -81,29 +83,34 @@ if ($w == 'u') {
  * 이미지 업로드
  */
 $file_upload_msg = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['es_image']) && $_FILES['es_image']['tmp_name']) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['es_image']) && !empty($_FILES['es_image']['tmp_name']) && $_FILES['es_image']['error'] === UPLOAD_ERR_OK) {
     $allowed_mimetype = ['image/jpeg', 'image/png', 'image/gif'];
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     $uploaded_file = $_FILES['es_image']['tmp_name'];
     if ($uploaded_file) {
         $file_mimetype = mime_content_type($uploaded_file);
-        $file_ext = $qfile->get_file_ext($_FILES['es_image']['name']);
-        if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
-            if (is_uploaded_file($uploaded_file)) {
-                $file_name = md5(time().$_FILES['es_image']['name']).".".$file_ext;
-                $dest_path = G5_DATA_PATH.'/ebslider/'.$es_master['es_theme'].'/img/'.$file_name;
-    
-                move_uploaded_file($uploaded_file, $dest_path);
-    
-                if (file_exists($dest_path)) {
-                    chmod($dest_path, G5_FILE_PERMISSION);
-                    $es_image = $file_name;
-                }
-            }
-        } else {
-            $file_upload_msg .= $_FILES['es_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+        if ($file_mimetype === false) {
+            $file_upload_msg = "파일 타입을 확인할 수 없습니다.\\n";
             alert($file_upload_msg);
+        } else {
+            $file_ext = $qfile->get_file_ext($_FILES['es_image']['name']);
+            if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
+                if (is_uploaded_file($uploaded_file)) {
+                    $file_name = md5(time().$_FILES['es_image']['name']).".".$file_ext;
+                    $dest_path = G5_DATA_PATH.'/ebslider/'.$es_master['es_theme'].'/img/'.$file_name;
+        
+                    move_uploaded_file($uploaded_file, $dest_path);
+        
+                    if (file_exists($dest_path)) {
+                        chmod($dest_path, G5_FILE_PERMISSION);
+                        $es_image = $file_name;
+                    }
+                }
+            } else {
+                $file_upload_msg = $_FILES['es_image']['name'] . '은(는) jpg/gif/png 파일이 아닙니다.\\n';
+                alert($file_upload_msg);
+            }
         }
     }
 }
