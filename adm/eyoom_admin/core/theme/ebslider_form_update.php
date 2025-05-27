@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['es_image']) && !empt
 
     $uploaded_file = $_FILES['es_image']['tmp_name'];
     if ($uploaded_file) {
-        $file_mimetype = mime_content_type($uploaded_file);
+        $file_mimetype = get_mime_content_type($_FILES['es_image']['name']);
         if ($file_mimetype === false) {
             $file_upload_msg = "파일 타입을 확인할 수 없습니다.\\n";
             alert($file_upload_msg);

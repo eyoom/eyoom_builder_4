@@ -318,15 +318,11 @@ if ($w == '' || $w == 'r') {
             sql_query(" update {$g5['board_table']} set bo_notice = '{$bo_notice}' where bo_table = '{$bo_table}' ");
         }
 
-        if (isset($board['bo_point_target']) && ($board['bo_point_target'] == 'gnu' || $board['bo_point_target'] == 'all')) {
-            insert_point($member['mb_id'], $board['bo_write_point'], "{$board['bo_subject']} {$wr_id} 글쓰기", $bo_table, $wr_id, '쓰기');
-        }
+        insert_point($member['mb_id'], $board['bo_write_point'], "{$board['bo_subject']} {$wr_id} 글쓰기", $bo_table, $wr_id, '쓰기');
     } else {
         // 답변은 코멘트 포인트를 부여함
         // 답변 포인트가 많은 경우 코멘트 대신 답변을 하는 경우가 많음
-        if (isset($board['bo_point_target']) && ($board['bo_point_target'] == 'gnu' || $board['bo_point_target'] == 'all')) {
-            insert_point($member['mb_id'], $board['bo_comment_point'], "{$board['bo_subject']} {$wr_id} 글답변", $bo_table, $wr_id, '쓰기');
-        }
+        insert_point($member['mb_id'], $board['bo_comment_point'], "{$board['bo_subject']} {$wr_id} 글답변", $bo_table, $wr_id, '쓰기');
     }
 }  else if ($w == 'u') {
     if (get_session('ss_bo_table') != $_POST['bo_table'] || get_session('ss_wr_id') != $_POST['wr_id']) {
@@ -689,7 +685,7 @@ sql_query(" delete from {$g5['autosave_table']} where as_uid = '{$uid}' ");
 
 // 비밀글이라면 세션에 비밀글의 아이디를 저장한다. 자신의 글은 다시 비밀번호를 묻지 않기 위함
 if ($secret) {
-    if (! $wr_num) {
+    if (!(isset($wr_num) && $wr_num)) {
         $write = get_write($write_table, $wr_id, true);
         $wr_num = $write['wr_num'];
     }

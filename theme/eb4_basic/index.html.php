@@ -5,32 +5,28 @@
 if (!defined('_EYOOM_')) exit;
 ?>
 
-<?php /*----- Preloader 시작 -----*/ ?>
-<div class="loader-wrap">
-    <div class="loader"></div>
-    <div class="loader-section-left"></div>
-    <div class="loader-section-right"></div>
-</div>
-<?php /*----- Preloader 끝 -----*/ ?>
-
 <div class="main-contents">
-    <div class="main-slider">
-        <?php echo eb_slider('1516512257'); ?>
-    </div>
+    <?php /* EB배너 - basic */ ?>
+    <?php echo eb_banner('1669280887'); ?>
 
-    <div class="m-b-30">
-        <?php echo eb_latest('1517122147'); ?>
-    </div>
+    <?php /* EB최신글 - bestset */ ?>
+    <?php echo eb_latest('1517122147'); ?>
 
-    <div class="m-b-30">
-        <?php echo eb_latest('1518393947'); ?>
-    </div>
+    <?php /* EB최신글 - basic */ ?>
+    <?php echo eb_latest('1720392562'); ?>
 
-    <div class="m-b-10">
-        <?php echo eb_latest('1518503581'); ?>
-    </div>
+    <?php /* EB최신글 - basic */ ?>
+    <?php echo eb_latest('1518393947'); ?>
 
-    <div class="m-b-10">
-        <?php echo eb_latest('1519114252'); ?>
-    </div>
+    <?php /* EB최신글 - gallery */ ?>
+    <?php echo eb_latest('1720392389'); ?>
+
+    <?php /* EB최신글 - gallery */ ?>
+    <?php echo eb_latest('1518503581'); ?>
+
+    <?php /* EB최신글 - webzine */ ?>
+    <?php echo eb_latest('1720392143'); ?>
+
+    <?php /* EB최신글 - webzine */ ?>
+    <?php echo eb_latest('1519114252'); ?>
 </div>

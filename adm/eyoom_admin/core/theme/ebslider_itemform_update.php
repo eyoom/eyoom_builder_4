@@ -128,7 +128,7 @@ for ($i = 0; $i < $file_count; $i++) {
     
         $uploaded_file = $_FILES['ei_img']['tmp_name'][$i];
         if ($uploaded_file) {
-            $file_mimetype = mime_content_type($uploaded_file);
+            $file_mimetype = get_mime_content_type($_FILES['ei_img']['name'][$i]);
             if ($file_mimetype === false) {
                 continue; // 또는 오류 처리
             }

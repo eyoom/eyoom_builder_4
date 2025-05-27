@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['bn_image']) && $_FIL
 
     $uploaded_file = $_FILES['bn_image']['tmp_name'];
     if ($uploaded_file) {
-        $file_mimetype = mime_content_type($uploaded_file);
+        $file_mimetype = get_mime_content_type($_FILES['bn_image']['name']);
         $file_ext = $qfile->get_file_ext($_FILES['bn_image']['name']);
         if (in_array($file_mimetype, $allowed_mimetype) && in_array($file_ext, $allowed_ext)) {
             if (is_uploaded_file($uploaded_file)) {

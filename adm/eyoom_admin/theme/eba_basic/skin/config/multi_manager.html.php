@@ -221,6 +221,12 @@ function sorting_list(f, str) {
 }
 
 function fmanager_add_submit(f){
+    const checkboxes = document.querySelectorAll('input[name^="mg_menu"]:checked');
+    if (checkboxes.length === 0) {
+        alert('권한을 부여 할 메뉴를 적어도 하나 이상을 선택해 주셔야 합니다.');
+        return false;
+    }
+
     <?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
     return true;
 }
@@ -239,3 +245,9 @@ function fmultimanager_submit(f) {
     return true;
 }
 </script>
+
+<script>
+    function validateMenuSelection() {
+
+    }
+    </script>

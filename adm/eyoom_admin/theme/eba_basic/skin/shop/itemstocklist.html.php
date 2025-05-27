@@ -20,11 +20,11 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
 
 <div class="admin-shop-itemstocklist">
     <form id="fsearch" name="fsearch" class="eyoom-form" method="get">
-    <input type="hidden" name="dir" value="<?php echo $dir; ?>" id="dir">
-    <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
-    <input type="hidden" name="sst" id="sst" value="<?php echo $sst; ?>">
-    <input type="hidden" name="sod" id="sod" value="<?php echo $sod; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="dir" value="<?php echo get_sanitize_input($dir); ?>" id="dir">
+    <input type="hidden" name="pid" value="<?php echo get_sanitize_input($pid); ?>" id="pid">
+    <input type="hidden" name="sst" id="sst" value="<?php echo get_sanitize_input($sst); ?>">
+    <input type="hidden" name="sod" id="sod" value="<?php echo get_sanitize_input($sod); ?>">
+    <input type="hidden" name="page" value="<?php echo get_sanitize_input($page);?>">
 
     <?php if (G5_IS_MOBILE) { ?>
     <a class="collapse-search-btn btn-e btn-e-sm btn-e-dark m-b-20" data-bs-toggle="collapse" href="#collapse-search-box"><i class="fas fa-search m-r-7"></i><span>검색 조건 열기</span></a>

@@ -15,8 +15,8 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
 
 <div class="admin-shop-itemstocksms">
     <form id="flist" name="flist" class="eyoom-form" method="get">
-    <input type="hidden" name="dir" value="<?php echo $dir; ?>" id="dir">
-    <input type="hidden" name="pid" value="<?php echo $pid; ?>" id="pid">
+    <input type="hidden" name="dir" value="<?php echo get_sanitize_input($dir); ?>" id="dir">
+    <input type="hidden" name="pid" value="<?php echo get_sanitize_input($pid); ?>" id="pid">
 
     <?php if (G5_IS_MOBILE) { ?>
     <a class="collapse-search-btn btn-e btn-e-sm btn-e-dark m-b-20" data-bs-toggle="collapse" href="#collapse-search-box"><i class="fas fa-search m-r-7"></i><span>검색 조건 열기</span></a>
@@ -55,11 +55,11 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     </form>
 
     <form name="fitemstocksms" action="<?php echo $action_url1; ?>" method="post" onsubmit="return fitemstocksms_submit(this);" class="eyoom-form">
-    <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="fr_date" value="<?php echo $fr_date; ?>">
-    <input type="hidden" name="to_date" value="<?php echo $to_date; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="sfl" value="<?php echo get_sanitize_input($sfl); ?>">
+    <input type="hidden" name="stx" value="<?php echo get_sanitize_input($stx); ?>">
+    <input type="hidden" name="fr_date" value="<?php echo get_sanitize_input($fr_date); ?>">
+    <input type="hidden" name="to_date" value="<?php echo get_sanitize_input($to_date); ?>">
+    <input type="hidden" name="page" value="<?php echo get_sanitize_input($page);?>">
 
     <div class="f-s-13r m-b-5">
         <a href="<?php echo G5_ADMIN_URL; ?>/?dir=<?php echo $dir; ?>&amp;pid=<?php echo $pid; ?>">[전체목록]</a><span class="m-l-10 m-r-10 text-light-gray">|</span>총 <?php echo number_format($total_count); ?>건, 미전송 <?php echo number_format($unsend_count); ?>건

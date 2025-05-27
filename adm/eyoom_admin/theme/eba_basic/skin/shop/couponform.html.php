@@ -25,14 +25,13 @@ $frm_submit .= $frm_eba_submit;
 
 <div class="admin-shop-couponform">
     <form name="fcouponform" method="post" action="<?php echo $action_url1; ?>" onsubmit="return form_check(this);" class="eyoom-form">
-    <input type="hidden" name="w" value="<?php echo $w; ?>">
-    <input type="hidden" name="cp_id" value="<?php echo $cp_id; ?>">
-    <input type="hidden" name="sca" value="<?php echo $sca; ?>">
-    <input type="hidden" name="sst" value="<?php echo $sst; ?>">
-    <input type="hidden" name="sod" value="<?php echo $sod; ?>">
-    <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="w" value="<?php echo get_sanitize_input($w); ?>">
+    <input type="hidden" name="cp_id" value="<?php echo get_sanitize_input($cp_id); ?>">
+    <input type="hidden" name="sst" value="<?php echo get_sanitize_input($sst); ?>">
+    <input type="hidden" name="sod" value="<?php echo get_sanitize_input($sod); ?>">
+    <input type="hidden" name="sfl" value="<?php echo get_sanitize_input($sfl); ?>">
+    <input type="hidden" name="stx" value="<?php echo get_sanitize_input($stx); ?>">
+    <input type="hidden" name="page" value="<?php echo get_sanitize_input($page);?>">
 
     <div class="adm-form-table m-b-20">
         <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i><?php echo $html_title; ?></strong></div>

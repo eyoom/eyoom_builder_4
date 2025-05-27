@@ -26,7 +26,7 @@ $frm_submit .= $frm_eba_submit;
     <input type="hidden" name="token" value="">
 
     <div class="adm-form-table m-b-20">
-        <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>내용 <?php echo $html_title; ?></strong></div>
+        <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i><?php echo $html_title; ?></strong></div>
         <div class="adm-form-tr">
             <div class="adm-form-td td-l">
                 <label for="co_id" class="label">ID<strong class="sound_only">필수</strong></label>

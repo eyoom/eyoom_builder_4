@@ -43,6 +43,11 @@ if (!chk_captcha()) {
  * 즐겨찾기 메뉴 제거
  */
 if (is_array($_POST['mg_menu'])) {
+    if (count($_POST['mg_menu']) == 0) {
+        alert('권한을 부여할 메뉴를 선택하세요.');
+        exit;
+    }
+
     $i=0;
     foreach ($_POST['mg_menu'] as $key => $val) {
         if ($val) {

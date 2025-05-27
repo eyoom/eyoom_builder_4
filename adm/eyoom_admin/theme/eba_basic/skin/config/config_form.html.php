@@ -2170,7 +2170,7 @@ $frm_submit .= $frm_eba_submit;
                                 <option value="LMS" <?php echo get_selected($config['cf_sms_type'], 'LMS'); ?>>LMS</option>
                             </select><i></i>
                         </label>
-                        <div class="note"><strong>Note:</strong> 전송유형을 SMS로 선택하시면 최대 80바이트까지 전송하실 수 있으며<br>LMS로 선택하시면 90바이트 이하는 SMS로, 그 이상은 ".G5_ICODE_LMS_MAX_LENGTH."바이트까지 LMS로 전송됩니다.<br>요금은 건당 SMS는 16원, LMS는 48원입니다.</div>
+                        <div class="note"><strong>Note:</strong> 전송유형을 SMS로 선택하시면 최대 80바이트까지 전송하실 수 있으며<br>LMS로 선택하시면 90바이트 이하는 SMS로, 그 이상은 1500바이트까지 LMS로 전송됩니다.<br>요금은 건당 SMS는 16원, LMS는 48원입니다.</div>
                     </div>
                 </div>
                 <div class="adm-form-tr-wrap icode_old_version">
@@ -2292,6 +2292,16 @@ $frm_submit .= $frm_eba_submit;
         <?php /* 여분필드 기본 설정 : 끝 */ ?>
     </div>
 
+    <div id="config_captcha_wrap" style="display:none">
+        <h2 class="sound_only">캡챠입력</h2>
+        <?php
+        require_once G5_CAPTCHA_PATH . '/captcha.lib.php';
+        $captcha_html = captcha_html();
+        $captcha_js   = chk_captcha_js();
+        echo $captcha_html;
+        ?>
+    </div>
+
     <?php echo $frm_submit; ?>
 
     </form>
@@ -2326,9 +2336,60 @@ $(function() {
     }).trigger("change");
 });
 
+// 각 요소의 초기값 저장
+var initialValues = {
+    cf_admin: $('#cf_admin').val(),
+    cf_analytics: $('#cf_analytics').val(),
+    cf_add_meta: $('#cf_add_meta').val(),
+    cf_add_script: $('#cf_add_script').val()
+};
+
+function check_config_captcha_open() {
+    var isChanged = false;
+
+    // 현재 값이 있는 경우에만 변경 여부 체크
+    if ($('#cf_admin').val()) {
+        isChanged = isChanged || $('#cf_admin').val() !== initialValues.cf_admin;
+    }
+    if ($('#cf_analytics').val()) {
+        isChanged = isChanged || $('#cf_analytics').val() !== initialValues.cf_analytics;
+    }
+    if ($('#cf_add_meta').val()) {
+        isChanged = isChanged || $('#cf_add_meta').val() !== initialValues.cf_add_meta;
+    }
+    if ($('#cf_add_script').val()) {
+        isChanged = isChanged || $('#cf_add_script').val() !== initialValues.cf_add_script;
+    }
+    
+    var $wrap = $("#config_captcha_wrap"),
+        tooptipid = "mp_captcha_tooltip",
+        $p_text = $("<p>", {id:tooptipid, style:"font-size:0.95em;letter-spacing:-0.1em"}).html("중요정보를 수정할 경우 캡챠를 입력해야 합니다."),
+        $children = $wrap.children(':first'),
+        is_invisible_recaptcha = $("#captcha").hasClass("invisible_recaptcha");
+
+    if(isChanged){
+        $wrap.show();
+        if(! is_invisible_recaptcha) {
+            $wrap.css("margin-top","1em");
+            if(! $("#"+tooptipid).length){ $children.after($p_text) }
+        }
+    } else {
+        $wrap.hide();
+        if($("#"+tooptipid).length && ! is_invisible_recaptcha){ $children.next("#"+tooptipid).remove(); }
+    }
+    
+    return isChanged;
+}
+
 function fconfigform_submit(f) {
     var current_user_ip = "<?php echo $_SERVER['REMOTE_ADDR']; ?>";
     var cf_intercept_ip_val = f.cf_intercept_ip.value;
+
+    if (check_config_captcha_open()){
+        jQuery("html, body").scrollTop(jQuery("#config_captcha_wrap").offset().top);
+        
+        <?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함 ?>
+    }
 
     if( cf_intercept_ip_val && current_user_ip ){
         var cf_intercept_ips = cf_intercept_ip_val.split("\n");
@@ -2356,6 +2417,22 @@ function fconfigform_submit(f) {
     f.action = "<?php echo $action_url1; ?>";
     return true;
 }
+
+jQuery(function($){
+    $("#captcha_key").prop('required', false).removeAttr("required").removeClass("required");
+    
+    // 최고관리자 변경시
+    $(document).on('change', '#cf_admin', check_config_captcha_open);
+
+    // 방문자분석 스크립트 변경시
+    $(document).on('input', '#cf_analytics', check_config_captcha_open);
+    
+    // 추가 메타태그 변경시
+    $(document).on('input', '#cf_add_meta', check_config_captcha_open);
+    
+    // 추가 script, css 변경시
+    $(document).on('input', '#cf_add_script', check_config_captcha_open);
+});
 
 <?php if (G5_IS_MOBILE) { ?>
 $(function() {

@@ -348,7 +348,7 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-td td-r">
                     <label class="input">
-                        <input type="text" name="qa_<?php echo $i; ?>_subj" id="qa_<?php echo $i; ?>_subj" value="<?php echo get_text($config['qa_'.$i.'_subj']); ?>">
+                        <input type="text" name="qa_<?php echo $i; ?>_subj" id="qa_<?php echo $i; ?>_subj" value="<?php echo get_text($qaconfig['qa_'.$i.'_subj']); ?>">
                     </label>
                 </div>
             </div>
@@ -358,7 +358,7 @@ $frm_submit .= $frm_eba_submit;
                 </div>
                 <div class="adm-form-td td-r">
                     <label class="input">
-                        <input type="text" name="qa_<?php echo $i; ?>" id="qa_<?php echo $i; ?>" value="<?php echo $config['qa_'. $i]; ?>">
+                        <input type="text" name="qa_<?php echo $i; ?>" id="qa_<?php echo $i; ?>" value="<?php echo get_text($qaconfig['qa_'.$i]) ?>">
                     </label>
                 </div>
             </div>

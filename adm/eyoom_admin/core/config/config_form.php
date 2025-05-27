@@ -542,7 +542,7 @@ if (!isset($config['cf_use_protect_ddos'])) {
  */
 if (!isset($config['cf_use_version_alarm'])) {
     sql_query("ALTER TABLE `{$g5['config_table']}`
-                ADD `cf_use_version_alarm` CHAR(1) NOT NULL DEFAULT '1' AFTER `cf_eyoom_admin_theme` ", true);
+                ADD `cf_use_version_alarm` CHAR(1) NOT NULL DEFAULT '' AFTER `cf_eyoom_admin_theme` ", true);
 }
 
 /**
