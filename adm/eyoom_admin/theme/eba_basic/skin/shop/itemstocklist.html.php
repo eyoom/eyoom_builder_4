@@ -258,8 +258,8 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     </div>
     
     <?php if(!$wmode) { ?>
-    <div class="text-end">
-        <input type="submit" name="act_button" value="일괄수정" class="btn-e btn-e-md btn-e-indigo" onclick="document.pressed=this.value">
+    <div class="text-center m-t-10">
+        <input type="submit" name="act_button" value="일괄수정" class="btn-e btn-e-xlg btn-e-crimson" onclick="document.pressed=this.value">
     </div>
     <?php } ?>
 

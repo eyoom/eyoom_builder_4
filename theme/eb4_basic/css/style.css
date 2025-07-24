@@ -115,7 +115,7 @@
     .navbar-nav {max-height:59px}
 }
 @media (max-width:1199px) {
-    .navbar-nav>li>.nav-link {padding:25px 7px !important}
+    .navbar-nav>li>.nav-link {padding:16px 7px !important}
 }
 @media (max-width:991px) {
     .navbar {height:0}

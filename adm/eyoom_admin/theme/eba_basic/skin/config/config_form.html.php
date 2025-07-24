@@ -1834,7 +1834,7 @@ $frm_submit .= $frm_eba_submit;
                         <label class="checkbox">
                             <input type="checkbox" name="cf_social_login_use" id="cf_social_login_use" value="1" <?php echo (!empty($config['cf_social_login_use']))?'checked':''; ?>><i></i> 사용
                         </label>
-                        <div class="note"><strong>Note:</strong> 소셜로그인을 사용합니다. <a href="https://sir.kr/manual/g5/276" class="btn-e btn-e-xs btn-e-dark" target="_blank">설정 관련 메뉴얼 보기</a></div>
+                        <div class="note"><strong>Note:</strong> 소셜로그인을 사용합니다. <a href="https://eyoom.net/page/eb4_manual_03_1_9" class="btn-e btn-e-xs btn-e-dark" target="_blank">설정 관련 매뉴얼 보기</a></div>
                     </div>
                 </div>
                 <div class="adm-form-tr-wrap">
@@ -1962,18 +1962,18 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-tr-wrap">
                     <div class="adm-form-tr tr-l">
                         <div class="adm-form-td td-l">
-                            <label for="cf_twitter_key" class="label">트위터 컨슈머 Key</label>
+                            <label for="cf_twitter_key" class="label">X(트위터) 컨슈머 Key</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <div class="input input-button">
                                 <input type="text" name="cf_twitter_key" id="cf_twitter_key" value="<?php echo get_sanitize_input($config['cf_twitter_key']); ?>">
-                                <a href="https://developer.twitter.com/en/apps" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                                <a href="https://developer.x.com/en/apps" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="adm-form-tr tr-r">
                         <div class="adm-form-td td-l">
-                            <label for="cf_twitter_secret" class="label">트위터 컨슈머 Secret</label>
+                            <label for="cf_twitter_secret" class="label">X(트위터) 컨슈머 Secret</label>
                         </div>
                         <div class="adm-form-td td-r">
                             <label class="input">
@@ -2024,7 +2024,7 @@ $frm_submit .= $frm_eba_submit;
                         <div class="adm-form-td td-r">
                             <div class="input input-button">
                                 <input type="text" name="cf_kakao_rest_key" id="cf_kakao_rest_key" value="<?php echo get_sanitize_input($config['cf_kakao_rest_key']); ?>">
-                                <a href="https://developers.kakao.com/product/kakaoLogin" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                                <a href="https://developers.kakao.com/console/app" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
                             </div>
                         </div>
                     </div>
@@ -2057,7 +2057,7 @@ $frm_submit .= $frm_eba_submit;
                         <div class="adm-form-td td-r">
                             <div class="input input-button">
                                 <input type="text" name="cf_payco_clientid" id="cf_payco_clientid" value="<?php echo get_sanitize_input($config['cf_payco_clientid']); ?>">
-                                <a href="https://developers.payco.com/guide" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                                <a href="https://developers.payco.com/application" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
                             </div>
                         </div>
                     </div>
@@ -2078,29 +2078,6 @@ $frm_submit .= $frm_eba_submit;
                 <div class="adm-form-header"><strong><i class="las la-caret-right m-r-10"></i>지도 API ID 설정</strong></div>
                 <div class="adm-form-tr">
                     <div class="adm-form-td td-l">
-                        <label for="cf_map_google_id" class="label">구글지도 API KEY</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <div class="input input-button">
-                            <input type="text" name="cf_map_google_id" id="cf_map_google_id" value="<?php echo get_sanitize_input($config['cf_map_google_id']); ?>">
-                            <a href="https://mapsplatform.google.com/" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
-                        </div>
-                        <a href="https://eyoom.net/page/eb4_manual_09_4" target="_blank" class="btn-e btn-e-lg btn-e-crimson m-b-5"><span class="text-white">구글지도 API키 발급 가이드</span></a>
-                        <div class="note"><strong>Note:</strong> 구글 계정으로 로그인 &gt; 키가져오기 버튼 클릭 후, API KEY를 발급받을 수 있습니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
-                        <label for="cf_map_naver_id" class="label">네이버지도 CLIENT ID</label>
-                    </div>
-                    <div class="adm-form-td td-r">
-                        <label class="input"><input type="text" name="cf_map_naver_id" id="cf_map_naver_id" value="<?php echo get_sanitize_input($config['cf_map_naver_id']); ?>"></label>
-                        <a href="https://www.ncloud.com/product/applicationService/maps" target="_blank" class="btn-e btn-e-lg btn-e-teal m-b-5"><span class="text-white">네이버지도 신청 가이드</span></a>
-                        <div class="note"><strong>Note:</strong> 신청 후, 내 애플리케이션 메뉴에서 Client ID를 확인하실 수 있습니다.</div>
-                    </div>
-                </div>
-                <div class="adm-form-tr">
-                    <div class="adm-form-td td-l">
                         <label for="cf_map_daum_id" class="label">카카오지도 APP KEY</label>
                     </div>
                     <div class="adm-form-td td-r">
@@ -2108,8 +2085,31 @@ $frm_submit .= $frm_eba_submit;
                             <input type="text" name="cf_map_daum_id" id="cf_map_daum_id" value="<?php echo get_sanitize_input($config['cf_map_daum_id']); ?>">
                             <a href="https://developers.kakao.com" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
                         </div>
-                        <a href="http://apis.map.daum.net/web/guide/" target="_blank" class="btn-e btn-e-lg btn-e-orange m-b-5"><span class="text-white">카카오지도 API 개발 가이드</span></a>
-                        <div class="note"><strong>Note:</strong> 앱을 만든 후, 내 애플리케이션에서 등록한 앱의 일반 메뉴의 JavaScript키를 입력해 주세요.</div>
+                        <a href="https://eyoom.net/page/eb4_manual_09_3" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5"><span class="text-white">카카오지도 신청 가이드</span></a>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label for="cf_map_google_id" class="label">구글지도 API KEY</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <div class="input input-button">
+                            <input type="text" name="cf_map_google_id" id="cf_map_google_id" value="<?php echo get_sanitize_input($config['cf_map_google_id']); ?>">
+                            <a href="https://mapsplatform.google.com/" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                        </div>
+                        <a href="https://eyoom.net/page/eb4_manual_09_4" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5"><span class="text-white">구글지도 신청 가이드</span></a>
+                    </div>
+                </div>
+                <div class="adm-form-tr">
+                    <div class="adm-form-td td-l">
+                        <label for="cf_map_naver_id" class="label">네이버지도 CLIENT ID</label>
+                    </div>
+                    <div class="adm-form-td td-r">
+                        <div class="input input-button">
+                            <input type="text" name="cf_map_naver_id" id="cf_map_naver_id" value="<?php echo get_sanitize_input($config['cf_map_naver_id']); ?>">
+                            <a href="https://www.ncloud.com/product/applicationService/maps" target="_blank" class="button"><input type="button">등록하기<i class="fas fa-external-link-alt m-l-7"></i></a>
+                        </div>
+                        <a href="https://eyoom.net/page/eb4_manual_09_5" target="_blank" class="btn-e btn-e-md btn-e-dark m-b-5"><span class="text-white">네이버지도 신청 가이드</span></a>
                     </div>
                 </div>
             </div>

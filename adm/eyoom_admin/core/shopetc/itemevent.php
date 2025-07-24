@@ -24,7 +24,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $sql = " select count(ev_id) as cnt from {$g5['g5_shop_event_item_table']} where ev_id = '{$row['ev_id']}' ";
     $ev = sql_fetch($sql);
     if ($ev['cnt']) {
-        $href = "<a href='".G5_ADMIN_URL."/?dir=shopetc&amp;pid=itemeventwin&amp;ev_id={$row['ev_id']}&amp;wmode=1' onclick='eb_modal(this.href); return false;'><b class='color-red'>".$ev['cnt']."</b></a>";
+        $href = "<a href='".G5_ADMIN_URL."/?dir=shopetc&amp;pid=itemeventwin&amp;ev_id={$row['ev_id']}&amp;wmode=1' onclick='eb_modal(this.href); return false;'><u class='text-crimson f-w-700'>".$ev['cnt']."</u></a>";
     }
     if ($row['ev_subject_strong']) $subject = '<strong>'.$row['ev_subject'].'</strong>';
     else $subject = $row['ev_subject'];

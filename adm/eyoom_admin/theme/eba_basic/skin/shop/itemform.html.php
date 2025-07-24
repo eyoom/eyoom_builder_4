@@ -1750,6 +1750,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php if(0) { // 모바일 상품상단내용, 모바일 상품하단내용 불필요 숨김 처리 시작 ?>
                 <div class="adm-form-tr adm-sm-100">
                     <div class="adm-form-td td-l">
                         <label for="it_mobile_head_html" class="label">모바일 상품상단내용</label>
@@ -1784,6 +1785,7 @@ $frm_submit .= $frm_eba_submit;
                         </div>
                     </div>
                 </div>
+                <?php } // 모바일 상품상단내용, 모바일 상품하단내용 불필요 숨김 처리 끝 ?>
             </div>
         </div>
         <?php /* 상세설명설정 : 끝 */ ?>

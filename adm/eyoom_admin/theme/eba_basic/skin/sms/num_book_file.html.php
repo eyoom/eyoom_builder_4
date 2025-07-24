@@ -15,6 +15,11 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
 
 <style>
 .admin-num-book-file .sms_fileup_hide {display:none;border:0}
+.admin-num-book-file  #upload_info {border:1px solid #959595;padding:15px;margin-top:20px}
+.admin-num-book-file .sms5_txt_fail {margin:15px 0}
+.admin-num-book-file #overlap {margin:15px 0}
+.admin-num-book-file .sms5_txt_success {margin:15px 0}
+.admin-num-book-file .sms5_txt_success .btn_submit {position:relative;margin-bottom:0;font-weight:400;text-align:center;cursor:pointer;background-image:none;background-color:#000;color:#fff;border:1px solid transparent;border-color:transparent;white-space:nowrap;padding:7px 20px;border-radius:5px}
 </style>
 
 <div class="admin-num-book-file">

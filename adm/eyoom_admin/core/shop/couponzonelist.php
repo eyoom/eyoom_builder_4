@@ -83,9 +83,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $list[$i] = $row;
 
+    $list[$i]['cz_type'] = $cz_type;
     $list[$i]['cp_method'] = $cp_method;
     $list[$i]['cp_target'] = $cp_target;
     $list[$i]['used_count'] = $used_count;
+    $list[$i]['cp_price'] = $cp_price;
 
     $list_num = $total_count - ($page - 1) * $rows;
     $list[$i]['num'] = $list_num - $k;

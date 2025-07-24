@@ -171,32 +171,6 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             </div>
             <div class="adm-form-tr tr-r">
                 <div class="adm-form-td td-l">
-                    <label class="label">모바일 출력이미지 사이즈</label>
-                </div>
-                <div class="adm-form-td td-r">
-                        <div class="inline-group">
-                        <span>
-                            <label for="ca_mobile_img_width" class="input width-150px">
-                                <i class="icon-prepend">폭</i>
-                                <i class="icon-append">px</i>
-                                <input type="text" name="ca_mobile_img_width" id="ca_mobile_img_width" value="<?php echo $cainfo['ca_img_width']; ?>" class="text-end">
-                            </label>
-                        </span>
-                        <span> x </span>
-                        <span>
-                            <label for="ca_mobile_img_height" class="input width-150px">
-                                <i class="icon-prepend">높이</i>
-                                <i class="icon-append">px</i>
-                                <input type="text" name="ca_mobile_img_height" id="ca_mobile_img_height" value="<?php echo $cainfo['ca_img_height']; ?>" class="text-end">
-                            </label>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="adm-form-tr-wrap">
-            <div class="adm-form-tr tr-l">
-                <div class="adm-form-td td-l">
                     <label class="label">상품 출력수</label>
                 </div>
                 <div class="adm-form-td td-r">
@@ -218,6 +192,33 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </span>
                     </div>
                     <div class="note"><strong>Note:</strong> 사용중인 테마에 따라서 가로 갯수가 입력한 갯수대로 적용이 안될수 있습니다. (테마 최적화 문제)</div>
+                </div>
+            </div>
+        </div>
+        <?php if(0) { // 모바일 출력이미지 사이즈, 모바일 상품 출력수 불필요 숨김 처리 시작 ?>
+        <div class="adm-form-tr-wrap">
+            <div class="adm-form-tr tr-l">
+                <div class="adm-form-td td-l">
+                    <label class="label">모바일 출력이미지 사이즈</label>
+                </div>
+                <div class="adm-form-td td-r">
+                        <div class="inline-group">
+                        <span>
+                            <label for="ca_mobile_img_width" class="input width-150px">
+                                <i class="icon-prepend">폭</i>
+                                <i class="icon-append">px</i>
+                                <input type="text" name="ca_mobile_img_width" id="ca_mobile_img_width" value="<?php echo $cainfo['ca_mobile_img_width']; ?>" class="text-end">
+                            </label>
+                        </span>
+                        <span> x </span>
+                        <span>
+                            <label for="ca_mobile_img_height" class="input width-150px">
+                                <i class="icon-prepend">높이</i>
+                                <i class="icon-append">px</i>
+                                <input type="text" name="ca_mobile_img_height" id="ca_mobile_img_height" value="<?php echo $cainfo['ca_mobile_img_height']; ?>" class="text-end">
+                            </label>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="adm-form-tr tr-r">
@@ -246,6 +247,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 </div>
             </div>
         </div>
+        <?php } // 모바일 출력이미지 사이즈, 모바일 상품 출력수 불필요 숨김 처리 끝 ?>
         <div class="adm-form-tr-wrap">
             <div class="adm-form-tr tr-l">
                 <div class="adm-form-td td-l">
@@ -448,32 +450,6 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
             </div>
             <div class="adm-form-tr tr-r">
                 <div class="adm-form-td td-l">
-                    <label class="label">모바일 출력이미지 사이즈</label>
-                </div>
-                <div class="adm-form-td td-r">
-                    <div class="inline-group">
-                        <span>
-                            <label for="subca_mobile_img_width" class="input width-150px">
-                                <i class="icon-prepend">폭</i>
-                                <i class="icon-append">px</i>
-                                <input type="text" name="subca_mobile_img_width" id="subca_mobile_img_width" value="500" class="text-end">
-                            </label>
-                        </span>
-                        <span> x </span>
-                        <span>
-                            <label for="subca_mobile_img_height" class="input width-150px">
-                                <i class="icon-prepend">높이</i>
-                                <i class="icon-append">px</i>
-                                <input type="text" name="subca_mobile_img_height" id="subca_mobile_img_height" value="0" class="text-end">
-                            </label>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="adm-form-tr-wrap">
-            <div class="adm-form-tr tr-l">
-                <div class="adm-form-td td-l">
                     <label class="label">상품 출력수</label>
                 </div>
                 <div class="adm-form-td td-r">
@@ -495,6 +471,33 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                         </span>
                     </div>
                     <div class="note"><strong>Note:</strong> 사용중인 테마에 따라서 가로 갯수가 입력한 갯수대로 적용이 안될수 있습니다. (테마 최적화 문제)</div>
+                </div>
+            </div>
+        </div>
+        <?php if(0) { // 모바일 출력이미지 사이즈, 모바일 상품 출력수 불필요 숨김 처리 시작 ?>
+        <div class="adm-form-tr-wrap">
+            <div class="adm-form-tr tr-l">
+                <div class="adm-form-td td-l">
+                    <label class="label">모바일 출력이미지 사이즈</label>
+                </div>
+                <div class="adm-form-td td-r">
+                    <div class="inline-group">
+                        <span>
+                            <label for="subca_mobile_img_width" class="input width-150px">
+                                <i class="icon-prepend">폭</i>
+                                <i class="icon-append">px</i>
+                                <input type="text" name="subca_mobile_img_width" id="subca_mobile_img_width" value="500" class="text-end">
+                            </label>
+                        </span>
+                        <span> x </span>
+                        <span>
+                            <label for="subca_mobile_img_height" class="input width-150px">
+                                <i class="icon-prepend">높이</i>
+                                <i class="icon-append">px</i>
+                                <input type="text" name="subca_mobile_img_height" id="subca_mobile_img_height" value="0" class="text-end">
+                            </label>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="adm-form-tr tr-r">
@@ -523,6 +526,7 @@ if (!defined('_EYOOM_IS_ADMIN_')) exit;
                 </div>
             </div>
         </div>
+        <?php } // 모바일 출력이미지 사이즈, 모바일 상품 출력수 불필요 숨김 처리 끝 ?>
         <div class="adm-form-tr-wrap">
             <div class="adm-form-tr tr-l">
                 <div class="adm-form-td td-l">

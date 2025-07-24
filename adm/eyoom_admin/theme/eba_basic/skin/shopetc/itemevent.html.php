@@ -64,10 +64,40 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
     </div>
 </div>
 
+<div class="modal fade admin-iframe-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title f-w-700">이벤트 연결상품</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <iframe id="modal-iframe" width="100%" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-e btn-e-lg btn-e-dark" data-bs-dismiss="modal">닫기<i class="fas fa-times m-l-5"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-function itemeventwin(ev_id) {
-    window.open("<?php echo G5_ADMIN_URL; ?>/?dir=shopetc&pid=itemeventwin&wmode=1&ev_id="+ev_id, "itemeventwin", "left=10,top=10,width=500,height=600,scrollbars=1");
+function eb_modal(href) {
+    $('.admin-iframe-modal').modal('show').on('hidden.bs.modal', function () {
+        $("#modal-iframe").attr("src", "");
+        $('html').css({overflow: ''});
+    });
+    $('.admin-iframe-modal').modal('show').on('shown.bs.modal', function () {
+        $("#modal-iframe").attr("src", href);
+        $('#modal-iframe').height(parseInt($(window).height() * 0.85));
+        $('html').css({overflow: 'hidden'});
+    });
+    return false;
 }
+
+window.closeModal = function(){
+    $('.admin-iframe-modal').modal('hide');
+};
 
 function delete_confirm(href) {
     if (confirm("정말로 해당 이벤트를 삭제하시겠습니까??")) {

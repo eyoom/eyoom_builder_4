@@ -144,11 +144,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $type = '추가옵션';
 
     // 통보수량보다 재고수량이 작을 때
-    $io_stock_qty = number_format($row['io_stock_qty']);
+    $io_stock_qty = number_format((int)$row['io_stock_qty']);
     $io_stock_qty_st = ''; // 스타일 정의
     if($row['io_stock_qty'] <= $row['io_noti_qty']) {
         $io_stock_qty_st = ' sit_stock_qty_alert';
-        $io_stock_qty = ''.$io_stock_qty.' <span class=\"sound_only\"> 재고부족 </span>';
+        $io_stock_qty = ''.$io_stock_qty.' [재고부족]';
     }
 
     $list[$i] = $row;

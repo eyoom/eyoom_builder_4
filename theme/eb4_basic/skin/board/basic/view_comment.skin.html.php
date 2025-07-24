@@ -46,6 +46,7 @@ add_stylesheet('<link rel="stylesheet" href="'.EYOOM_THEME_URL.'/plugins/magnifi
 .view-comment .view-comment-item.cmt-best .view-comment-depth {display:none}
 .view-comment .comment-name .sv_wrap > a {font-weight:400}
 .view-comment .comment-item-info {position:relative;padding:10px 20px 10px 70px;margin-bottom:15px;border:1px solid #eaeaea;background-color:#fafafa}
+.view-comment .comment-item-info.bg-author {border-color:#7ac1f3;background-color:#e3f2fd}
 .view-comment .view-comment-item.cmt-best .comment-item-info {padding:15px 20px 10px 70px;border-color:#757575}
 .view-comment .view-comment-item.cmt-best .comment-item-body-pn .comment-item-info {padding-left:10px}
 .view-comment .comment-item-info > span {margin-right:5px}
@@ -139,7 +140,7 @@ var char_max = parseInt(<?php echo $comment_max; ?>); // 최대
                 <?php } else { ?>
                 <div class="comment-item-body-pn">
                 <?php } ?>
-                    <div class="comment-item-info">
+                    <div class="comment-item-info<?php if ($cmt[$i]['mb_id'] && $cmt[$i]['mb_id'] == $view['mb_id']) { ?> bg-author<?php } ?>">
                         <div class="m-t-3">
                             <span class="comment-name"><?php echo eb_nameview($cmt[$i]['mb_id'], $cmt[$i]['wr_name'], $cmt[$i]['wr_email'], $cmt[$i]['wr_homepage'], $cmt[$i]['mb_id2']); ?></span>
                             <?php if ($cmt[$i]['gnu_icon']) { ?>

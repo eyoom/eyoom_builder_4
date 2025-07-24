@@ -3,7 +3,7 @@
 --------------------------------------*/
 
 /*---------- Item Info ----------*/
-.item-info-table {font-size:12px}
+.item-info-table {font-size:.875rem}
 .item-info-table .width-180px {width:180px}
 #sit_rel {position:relative;border:1px solid #757575;padding:20px 20px 10px;margin:20px 0 40px}
 #sit_rel h2 {margin:0 0 20px;font-size:1.375rem;color:#252525;font-weight:700;text-align:center}

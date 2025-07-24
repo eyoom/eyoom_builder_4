@@ -75,6 +75,7 @@ $item_view = 'zoom';
                                     <i class="fas fa-plus-circle"></i>추가메뉴
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="<?php echo G5_SHOP_URL; ?>/mypage.php">마이페이지</a>
                                     <a href="<?php echo G5_SHOP_URL; ?>/cart.php">장바구니</a>
                                     <a href="<?php echo G5_SHOP_URL; ?>/wishlist.php">위시리스트</a>
                                     <a href="<?php echo G5_SHOP_URL; ?>/orderinquiry.php">주문/배송조회</a>

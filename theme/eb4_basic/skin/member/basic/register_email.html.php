@@ -22,7 +22,7 @@ if (!defined('_EYOOM_')) exit;
     </section>
     <section>
         <label class="label">자동등록방지</label>
-        <div class="vc-captcha"></div>
+        <div class="vc-captcha"><?php echo captcha_html(); ?></div>
     </section>
     <div class="text-center m-b-20">
         <input type="submit" id="btn_submit" value="인증메일변경" class="btn-e btn-e-lg btn-e-navy">

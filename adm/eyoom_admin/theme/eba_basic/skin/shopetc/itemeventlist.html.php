@@ -213,7 +213,7 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         </div>
     </div>
 
-    <div class="cont-text-bg m-b-15">
+    <div class="cont-text-bg m-b-25">
         <p class="bg-info">
             <i class="fas fa-info-circle"></i> 상품을 이벤트별로 일괄 처리합니다.<br>
             <i class="fas fa-info-circle"></i> <?php echo ($ev_title ? '현재 선택된 이벤트는 '.$ev_title.'입니다.' : '상단 이벤트를 선택해 주세요.'); ?><br>
@@ -226,8 +226,8 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
         </p>
     </div>
 
-    <div class="text-start">
-        <input type="submit" value="일괄수정" class="btn-e btn-e-md btn-e-indigo width-120px">
+    <div class="confirm-bottom-btn">
+        <input type="submit" value="일괄수정" class="btn-e btn-e-lg btn-e-crimson">
     </div>
 
     </form>

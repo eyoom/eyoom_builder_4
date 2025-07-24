@@ -268,9 +268,9 @@ $g5_page_path = '<li class="breadcrumb-item"><a href="'.correct_goto_url(G5_ADMI
                             <label class="checkbox adm-table-check"><input type="checkbox" name="chkall" id="chkall" value="1" onclick="check_all(this.form)"><i></i></label>
                         </th>
                         <th class="width-160px">관리</th>
-                        <th>제품코드</th>
+                        <th>상품코드</th>
                         <th>이미지</th>
-                        <th>제품명_유형</th>
+                        <th>상품명/상품유형</th>
                         <th>순서</th>
                         <th>판매수량</th>
                         <th>판매</th>
